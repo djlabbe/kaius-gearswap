@@ -170,29 +170,26 @@ function user_setup()
     send_command('bind @r gs c cycle EnspellMode')
     send_command('bind @s gs c cycle SleepMode')
 
-    sword = 1
-    club = 2
-    dagger = 3
 
     if player.sub_job == 'NIN' then
-        set_macro_page(sword, 5)
+        send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Maxentius; gs c set WeaponLock true;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet Tauret; gs c set WeaponLock true;input /macro set 3')
+        send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet CroceaLight; gs c set WeaponLock true;input /macro set 1')
+        send_command('bind ^numpad5 gs c set WeaponLock false;gs c set WeaponSet CroceaDark; gs c set WeaponLock true;input /macro set 1')
+        set_macro_page(1, 5)
     elseif player.sub_job == 'DNC' then
-        sword = 4
-        club = 5
-        dagger = 6
-        set_macro_page(sword, 5)
+        send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set 4')
+        send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Maxentius; gs c set WeaponLock true;input /macro set 5')
+        send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet Tauret; gs c set WeaponLock true;input /macro set 6')
+        send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet CroceaLight; gs c set WeaponLock true;input /macro set 4')
+        send_command('bind ^numpad5 gs c set WeaponLock false;gs c set WeaponSet CroceaDark; gs c set WeaponLock true;input /macro set 4')
+        set_macro_page(4, 5)
     elseif player.sub_job == 'SCH' then
-        set_macro_page(10, 5)
+        set_macro_page(7, 5)
     else
-        set_macro_page(10, 5)
+        set_macro_page(7, 5)
     end
-
-    send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set ' ..sword)
-    send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Maxentius; gs c set WeaponLock true;input /macro set ' ..club)
-    send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet Tauret; gs c set WeaponLock true;input /macro set ' ..dagger)
-    send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet CroceaLight; gs c set WeaponLock true;input /macro set ' ..sword)
-    send_command('bind ^numpad5 gs c set WeaponLock false;gs c set WeaponSet CroceaDark; gs c set WeaponLock true;input /macro set ' ..sword)
-
 
     send_command('wait 3; input /lockstyleset 5')
 
@@ -832,11 +829,6 @@ function init_gear_sets()
 
     sets.buff.Saboteur = {hands=gear.Empyrean_Hands}
 
-
-    ------------------------------------------------------------------------------------------------
-    ----------------------------------------- Idle Sets --------------------------------------------
-    ------------------------------------------------------------------------------------------------
-
     sets.idle = {
         ammo="Homiliary",
         head=gear.Relic_Head,
@@ -886,10 +878,6 @@ function init_gear_sets()
         waist="Shinjutsu-no-Obi +1",
     })
 
-    ------------------------------------------------------------------------------------------------
-    ---------------------------------------- Defense Sets ------------------------------------------
-    ------------------------------------------------------------------------------------------------
-
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
@@ -913,11 +901,6 @@ function init_gear_sets()
 
     sets.Kiting = {legs=gear.Carmine_D_Legs}
     sets.latent_refresh = {waist="Fucho-no-obi"}
-
-
-    ------------------------------------------------------------------------------------------------
-    ---------------------------------------- Engaged Sets ------------------------------------------
-    ------------------------------------------------------------------------------------------------
 
     -- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
     -- sets if more refined versions aren't defined.
@@ -1025,10 +1008,6 @@ function init_gear_sets()
         waist="Windbuffet Belt +1",
     } --10
 
-    ------------------------------------------------------------------------------------------------
-    ---------------------------------------- Hybrid Sets -------------------------------------------
-    ------------------------------------------------------------------------------------------------
-
     sets.engaged.Hybrid = {
 
     }
@@ -1045,10 +1024,6 @@ function init_gear_sets()
         neck="Dls. Torque +2",
         waist="Orpheus's Sash",
     }
-
-    ------------------------------------------------------------------------------------------------
-    ---------------------------------------- Special Sets ------------------------------------------
-    ------------------------------------------------------------------------------------------------
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -1067,10 +1042,6 @@ function init_gear_sets()
     sets.CroceaDark = { main="Crocea Mors", sub="Bunzi's Rod" }
     sets.CroceaLight = { main="Crocea Mors", sub="Daybreak" }
 end
-
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
--------------------------------------------------------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
 
@@ -1165,10 +1136,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     end
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for non-casting events.
--------------------------------------------------------------------------------------------------------------------
-
 function job_buff_change(buff,gain)
     if buff == "Doom" then
         if gain then
@@ -1190,10 +1157,6 @@ function job_state_change(stateField, newValue, oldValue)
 
     check_weaponset()
 end
-
--------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
--------------------------------------------------------------------------------------------------------------------
 
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
@@ -1253,7 +1216,6 @@ function job_get_spell_map(spell, default_spell_map)
         end
     end
 end
-
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
@@ -1439,68 +1401,6 @@ function job_self_command(cmdParams, eventArgs)
     end
 
     gearinfo(cmdParams, eventArgs)
-end
-
--- General handling of strategems in an Arts-agnostic way.
--- Format: gs c scholar <strategem>
-
-function handle_strategems(cmdParams)
-    -- cmdParams[1] == 'scholar'
-    -- cmdParams[2] == strategem to use
-
-    if not cmdParams[2] then
-        add_to_chat(123,'Error: No strategem command given.')
-        return
-    end
-    local strategem = cmdParams[2]:lower()
-
-    if strategem == 'light' then
-        if buffactive['light arts'] then
-            send_command('input /ja "Addendum: White" <me>')
-        elseif buffactive['addendum: white'] then
-            add_to_chat(122,'Error: Addendum: White is already active.')
-        else
-            send_command('input /ja "Light Arts" <me>')
-        end
-    elseif strategem == 'dark' then
-        if buffactive['dark arts'] then
-            send_command('input /ja "Addendum: Black" <me>')
-        elseif buffactive['addendum: black'] then
-            add_to_chat(122,'Error: Addendum: Black is already active.')
-        else
-            send_command('input /ja "Dark Arts" <me>')
-        end
-    elseif buffactive['light arts'] or buffactive['addendum: white'] then
-        if strategem == 'cost' then
-            send_command('input /ja Penury <me>')
-        elseif strategem == 'speed' then
-            send_command('input /ja Celerity <me>')
-        elseif strategem == 'aoe' then
-            send_command('input /ja Accession <me>')
-        elseif strategem == 'power' then
-            send_command('input /ja Rapture <me>')
-        elseif strategem == 'addendum' then
-            send_command('input /ja "Addendum: White" <me>')
-        else
-            add_to_chat(123,'Error: Unknown strategem ['..strategem..']')
-        end
-    elseif buffactive['dark arts']  or buffactive['addendum: black'] then
-        if strategem == 'cost' then
-            send_command('input /ja Parsimony <me>')
-        elseif strategem == 'power' then
-            send_command('input /ja Ebullience <me>')
-        elseif strategem == 'speed' then
-            send_command('input /ja Alacrity <me>')
-        elseif strategem == 'aoe' then
-            send_command('input /ja Manifestation <me>')
-        elseif strategem == 'addendum' then
-            send_command('input /ja "Addendum: Black" <me>')
-        else
-            add_to_chat(123,'Error: Unknown strategem ['..strategem..']')
-        end
-    else
-        add_to_chat(123,'No arts has been activated yet.')
-    end
 end
 
 function set_sleep_timer(spell)

@@ -38,7 +38,7 @@ function user_setup()
 
     gear.Artifact_Head = { name= "Geomancy Galero +1" }
     gear.Artifact_Body = { name= "Geomancy Tunic +1" }
-    gear.Artifact_Hands = { name= "Geomancy Mitaines +2" }
+    gear.Artifact_Hands = { name= "Geomancy Mitaines +3" }
     gear.Artifact_Legs = { name= "Geomancy Pants +1" }
     gear.Artifact_Feet = { name= "Geomancy Sandals +3" }
 
@@ -64,6 +64,7 @@ function user_setup()
     send_command('bind !F1 input /ja "Bolster" <me>')
     send_command('bind !F2 input /ja "Widened Compass" <me>')
 
+
     send_command('bind !m input /ja "Dematerialize" <me>')
     send_command('bind !n input /ja "Lasting Emanation" <me>')
     send_command('bind !b input /ja "Blaze of Glory" <me>')
@@ -76,7 +77,8 @@ function user_setup()
     end
 
     if player.sub_job == 'RDM' or player.sub_job == 'WHM' then
-         send_command('bind !h input /ma "Haste" <stpc>')
+        send_command('bind !h input /ma "Haste" <stpc>')
+        send_command('bind !u input /ma "Aquaveil" <me>')
     end
 
     if player.sub_job == 'SCH' then
@@ -105,6 +107,7 @@ function user_unload()
     send_command('unbind !f')
     send_command('unbind !t')
     send_command('unbind !y')
+    send_command('unbind !u')
     send_command('unbind !g')
     send_command('unbind !-')
     send_command('unbind !=')
@@ -171,7 +174,21 @@ function init_gear_sets()
         back=gear.GEO_MAB_Cape,
     }
 
-    sets.precast.WS['Exudation'] = sets.precast.WS['Hexastrike']
+    sets.precast.WS['Exudation'] = {
+        ammo="Oshasha's Treatise",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Fotia Gorget",
+        ear1="Moonshade Earring",
+        ear2="Regal Earring",
+        ring1="Epaminondas's Ring",
+        ring2="Hetairoi Ring",
+        waist="Fotia Belt",
+        back=gear.GEO_MAB_Cape,
+    }
 
     sets.precast.WS['Flash Nova'] = {
         head=gear.Relic_Head,
@@ -314,7 +331,12 @@ function init_gear_sets()
         main="Vadose Rod",
         sub="Ammurapi Shield",
         head=gear.Amalric_A_Head,
+        hands="Regal Cuffs",
+        ear1="Halasz Earring",
         ear2="Magnetic Earring",
+        ring1="Freke Ring",
+        ring2="Evanescence Ring",
+        waist="Emphatikos Rope",
     })
 
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring2="Sheltered Ring"})
@@ -479,11 +501,13 @@ function init_gear_sets()
     sets.engaged = {
         main="Idris",
         sub="Genmei Shield",
+        ammo="Hasty Pinion +1",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
+        neck="Rep. Plat. Medal",
         ear1="Cessance Earring",
         ear2="Balder Earring +1",
         ring1=gear.Chirich_1,
@@ -721,64 +745,6 @@ function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
 end
 
-function handle_strategems(cmdParams)
-    -- cmdParams[1] == 'scholar'
-    -- cmdParams[2] == strategem to use
-
-    if not cmdParams[2] then
-        add_to_chat(123,'Error: No strategem command given.')
-        return
-    end
-    local strategem = cmdParams[2]:lower()
-
-    if strategem == 'light' then
-        if buffactive['light arts'] then
-            send_command('input /ja "Addendum: White" <me>')
-        elseif buffactive['addendum: white'] then
-            add_to_chat(122,'Error: Addendum: White is already active.')
-        else
-            send_command('input /ja "Light Arts" <me>')
-        end
-    elseif strategem == 'dark' then
-        if buffactive['dark arts'] then
-            send_command('input /ja "Addendum: Black" <me>')
-        elseif buffactive['addendum: black'] then
-            add_to_chat(122,'Error: Addendum: Black is already active.')
-        else
-            send_command('input /ja "Dark Arts" <me>')
-        end
-    elseif buffactive['light arts'] or buffactive['addendum: white'] then
-        if strategem == 'cost' then
-            send_command('input /ja Penury <me>')
-        elseif strategem == 'power' then
-            send_command('input /ja Rapture <me>')
-        elseif strategem == 'speed' then
-            send_command('input /ja Celerity <me>')
-        elseif strategem == 'aoe' then
-            send_command('input /ja Accession <me>')
-        elseif strategem == 'addendum' then
-            send_command('input /ja "Addendum: White" <me>')
-        else
-            add_to_chat(123,'Error: Unknown strategem ['..strategem..']')
-        end
-    elseif buffactive['dark arts']  or buffactive['addendum: black'] then
-        if strategem == 'cost' then
-            send_command('input /ja Parsimony <me>')
-        elseif strategem == 'power' then
-            send_command('input /ja Ebullience <me>')
-        elseif strategem == 'speed' then
-            send_command('input /ja Alacrity <me>')
-        elseif strategem == 'aoe' then
-            send_command('input /ja Manifestation <me>')
-        elseif strategem == 'addendum' then
-            send_command('input /ja "Addendum: Black" <me>')
-        else
-            add_to_chat(123,'Error: Unknown strategem ['..strategem..']')
-        end
-    else
-        add_to_chat(123,'No arts has been activated yet.')
-    end
-end
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then

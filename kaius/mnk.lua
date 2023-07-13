@@ -72,12 +72,7 @@ function user_setup()
     send_command('wait 3; input /lockstyleset 2')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
-    Haste = 0
-    MA = false
-    MA_needed = 0
     moving = false
-
-    determine_haste_group()
 end
 
 function user_unload()
@@ -560,7 +555,6 @@ end
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    determine_haste_group()
     check_moving()
 end
 
@@ -641,27 +635,13 @@ function customize_melee_set(meleeSet)
     return meleeSet
 end
 
-function determine_haste_group()
-    classes.CustomMeleeGroups:clear()
-    if MA_needed > 12 then
-        classes.CustomMeleeGroups:append('MA')
-    end
-end
 
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
 end
 
--- Normal DW cmdParams is ('gearinfo' <string>, TotalDW <number>, haste <int>, moving <bool>, MA <number>)
--- If not DW then cmdParams is (gearinfo' <string>, DW <bool>, haste <number>, moving <bool> , MA_needed <number>)
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then
-        if type(tonumber(cmdParams[3])) == 'number' then
-            if tonumber(cmdParams[3]) ~= Haste then
-                Haste = tonumber(cmdParams[3])
-            end
-        end
-
         if type(cmdParams[4]) == 'string' then
             if cmdParams[4] == 'true' then
                 moving = true
@@ -669,19 +649,6 @@ function gearinfo(cmdParams, eventArgs)
                 moving = false
             end
         end
-
-        if type(tonumber(cmdParams[5])) == 'number' then
-            if tonumber(cmdParams[5]) ~= MA_needed then
-                MA_needed = tonumber(cmdParams[5])
-                MA = true
-            end
-        elseif type(cmdParams[5]) == 'string' then
-            if cmdParams[5] == 'false' then
-                MA_needed = 0
-                MA = false
-            end
-        end
-
         if not midaction() then
             job_update()
         end
