@@ -20,7 +20,6 @@ end
 
 function job_setup()
     geo_timer = ''
-    indi_timer = ''
     indi_duration = 308
     entrust_timer = ''
     entrust_duration = 344
@@ -48,7 +47,7 @@ function user_setup()
     gear.Relic_Legs = { name= "Bagua Pants +3" }
     gear.Relic_Feet = { name= "Bagua Sandals +3" }
 
-    gear.Empyrean_Head = { name= "Azimuth Hood +2" }
+    gear.Empyrean_Head = { name= "Azimuth Hood +3" }
     gear.Empyrean_Body = { name= "Azimuth Coat +2" }
     gear.Empyrean_Hands = { name= "Azimuth Gloves +2" }
     gear.Empyrean_Legs = { name= "Azimuth Tights +2" }
@@ -445,18 +444,18 @@ function init_gear_sets()
 
     sets.idle = {
         main="Idris",
-        sub="Genmei Shield",
+        sub="Genmei Shield", --10
         ranged="Dunna",
         head=gear.Empyrean_Head,
-        body="Shamash Robe",
+        body="Shamash Robe", --10
         hands=gear.Artifact_Hands,
-        legs=gear.Agwu_Legs,
+        legs=gear.Agwu_Legs, --7
         feet=gear.Relic_Feet,
         neck="Bagua Charm +2",
-        ear1="Lugalbanda Earring",
-        ear2="Etiolation Earring",
+        ear1="Etiolation Earring",
+        ear2="Azimuth Earring +1", --5
         ring1=gear.Stikini_1,
-        ring2="Defending Ring",
+        ring2="Defending Ring", --10
         back=gear.GEO_Idle_Cape,
         waist="Isa Belt",
     }
@@ -481,15 +480,7 @@ function init_gear_sets()
 
     sets.PetHP = { head=gear.Relic_Head }
 
-    sets.idle.Town = set_combine(sets.idle, {
-        main="Idris",
-        sub="Ammurapi Shield",
-        head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet,
-    })
+    sets.idle.Town = sets.idle
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
