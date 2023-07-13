@@ -434,7 +434,7 @@ function init_gear_sets()
         ear1="Lugalbanda Earring",
         ear2="Etiolation Earring",
         ring1=gear.Stikini_1,
-        ring2="Defending",
+        ring2="Defending Ring",
         back=gear.GEO_Idle_Cape,
         waist="Isa Belt",
     }
