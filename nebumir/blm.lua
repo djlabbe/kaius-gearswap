@@ -144,6 +144,7 @@ function init_gear_sets()
     gear.Empyrean_Legs = { name="Wicce Chausses +3" }
     gear.Empyrean_Feet = { name="Wicce Sabots +3" }
 
+    gear.BLM_Death_Cape = { name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10','Mag. Evasion+15',}}
     gear.BLM_MAB_Cape = { name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}}
 
     sets.precast.JA['Mana Wall'] = {

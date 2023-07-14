@@ -51,6 +51,9 @@ function define_global_sets()
     gear.Telchine_ENH_Legs = { name="Telchine Braconi", augments={'Enh. Mag. eff. dur. +9',}}
     gear.Telchine_ENH_Feet = { name="Telchine Pigaches", augments={'Enh. Mag. eff. dur. +10',}}
 
+    gear.Yorium_PHLX_Head = {name="Yorium Barbuta", augments={'Phalanx +3',}}
+    gear.Yorium_PHLX_Body = {name="Yorium Cuirass", augments={'Phalanx +3',}}
+
     -- -- Kaykaus
     gear.Kaykaus_B_Head = { name="Kaykaus Mitra +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
     gear.Kaykaus_B_Feet = { name="Kaykaus Boots +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
@@ -128,6 +131,104 @@ function check_moving()
         elseif state.Auto_Kite.value == true and moving == false then
             state.Auto_Kite:set(false)
         end
+    end
+end
+function handle_strategems(cmdParams)
+    -- cmdParams[1] == 'scholar'
+    -- cmdParams[2] == strategem to use
+
+    if not cmdParams[2] then
+        add_to_chat(123,'Error: No strategem command given.')
+        return
+    end
+    local strategem = cmdParams[2]:lower()
+
+    if strategem == 'light' then
+        if buffactive['light arts'] then
+            send_command('input /ja "Addendum: White" <me>')
+        elseif buffactive['addendum: white'] then
+            add_to_chat(122,'Error: Addendum: White is already active.')
+        else
+            send_command('input /ja "Light Arts" <me>')
+        end
+    elseif strategem == 'dark' then
+        if buffactive['dark arts'] then
+            send_command('input /ja "Addendum: Black" <me>')
+        elseif buffactive['addendum: black'] then
+            add_to_chat(122,'Error: Addendum: Black is already active.')
+        else
+            send_command('input /ja "Dark Arts" <me>')
+        end
+    elseif buffactive['light arts'] or buffactive['addendum: white'] then
+        if strategem == 'cost' then
+            send_command('input /ja Penury <me>')
+        elseif strategem == 'speed' then
+            send_command('input /ja Celerity <me>')
+        elseif strategem == 'aoe' then
+            send_command('input /ja Accession <me>')
+        elseif strategem == 'power' then
+            send_command('input /ja Rapture <me>')
+        elseif strategem == 'duration' then
+            if player.job == 'SCH' then
+                send_command('input /ja Perpetuance <me>')
+            else
+                add_to_chat(122,'Error: ' ..player.job.. ' does not have a Duration strategem.')
+            end
+        elseif strategem == 'accuracy' then
+            if player.job == 'SCH' then
+                send_command('input /ja Altruism <me>')
+            else
+                add_to_chat(122,'Error: ' ..player.job.. ' does not have an Accuracy strategem.')
+            end
+        elseif strategem == 'enmity' then
+            if player.job == 'SCH' then
+                send_command('input /ja Tranquility <me>')
+            else
+                add_to_chat(122,'Error: ' ..player.job.. ' does not have an Enmity strategem.')
+            end
+        elseif strategem == 'skillchain' then
+            add_to_chat(122,'Error: Light Arts does not have a skillchain strategem.')
+        elseif strategem == 'addendum' then
+            send_command('input /ja "Addendum: White" <me>')
+        else
+            add_to_chat(123,'Error: Unknown strategem ['..strategem..']')
+        end
+    elseif buffactive['dark arts']  or buffactive['addendum: black'] then
+        if strategem == 'cost' then
+            send_command('input /ja Parsimony <me>')
+        elseif strategem == 'speed' then
+            send_command('input /ja Alacrity <me>')
+        elseif strategem == 'aoe' then
+            send_command('input /ja Manifestation <me>')
+        elseif strategem == 'power' then
+            send_command('input /ja Ebullience <me>')
+        elseif strategem == 'duration' then
+            add_to_chat(122,'Error: Dark Arts does not have a Duration strategem.')
+        elseif strategem == 'accuracy' then
+            if player.job == 'SCH' then
+                send_command('input /ja Focalization <me>')
+            else
+                add_to_chat(122,'Error: ' ..player.job.. ' does not have a Duration strategem.')
+            end
+        elseif strategem == 'enmity' then
+            if player.job == 'SCH' then
+                send_command('input /ja Equanimity <me>')
+            else
+                add_to_chat(122,'Error: ' ..player.job.. ' does not have a Duration strategem.')
+            end
+        elseif strategem == 'skillchain' then
+            if player.job == 'SCH' then
+                send_command('input /ja Immanence <me>')
+            else
+                add_to_chat(122,'Error: ' ..player.job.. ' does not have a Skillchain strategem.')
+            end
+        elseif strategem == 'addendum' then
+            send_command('input /ja "Addendum: Black" <me>')
+        else
+            add_to_chat(123,'Error: Unknown strategem ['..strategem..']')
+        end
+    else
+        add_to_chat(123,'No arts has been activated yet.')
     end
 end
 

@@ -60,7 +60,6 @@ function define_global_sets()
 
     gear.Yorium_PHLX_Head = {name="Yorium Barbuta", augments={'Phalanx +3',}}
     gear.Yorium_PHLX_Body = {name="Yorium Cuirass", augments={'Phalanx +3',}}
-    gear.Yorium_PHLX_Legs = {name="Yorium Cuisses", augments={'Phalanx +3',}}
 
     --------------------------
     -- ESCHA AUGMENTED GEAR --

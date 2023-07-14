@@ -49,9 +49,9 @@ function user_setup()
 
     gear.Empyrean_Head = { name="Chevalier's Armet +3" }
     gear.Empyrean_Body = { name="Chevalier's Cuirass +3" }
-    gear.Empyrean_Hands = { name="Chevalier's Gauntlets +2" }
-    gear.Empyrean_Legs = { name="Chevaliear's Cuisses +3" }
-    gear.Empyrean_Feet = { name="Chevalier's Sabatons +2" }
+    gear.Empyrean_Hands = { name="Chevalier's Gauntlets +3" }
+    gear.Empyrean_Legs = { name="Chevalier's Cuisses +3" }
+    gear.Empyrean_Feet = { name="Chevalier's Sabatons +3" }
 
     gear.PLD_Idle_Cape = { name="Rudianos's Mantle", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','Enmity+10','Chance of successful block +5',}}
     gear.PLD_FC_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Mag. Evasion+15',}}
@@ -69,13 +69,11 @@ function user_setup()
 
     send_command('bind !c input /ma "Holy Circle" <me>')
 
-    -- Additional local binds
-    include('Global-Binds.lua') -- OK to remove this line
+    include('Global-Binds.lua') 
 
-    -- Default macro set/book
-    if player.sub_job == 'WAR' then
+    if player.sub_job == 'BLU' then
         set_macro_page(1, 7)
-    elseif player.sub_job == 'BLU' then
+    elseif player.sub_job == 'WAR' then
         set_macro_page(2, 7)
     else
         set_macro_page(1, 7)
@@ -266,7 +264,7 @@ function init_gear_sets()
 	
 	 sets.midcast.Phalanx = {
         main="Sakpata's Sword",
-        sub={ name="Priwen", augments={'HP+50','Mag. Evasion+50','Damage Taken -3%',}},
+        sub="Priwen",
         ammo="Staunch Tathlum +1",
         head=gear.Yorium_PHLX_Head,
         body=gear.Yorium_PHLX_Body,
@@ -279,7 +277,7 @@ function init_gear_sets()
         ear2="Andoaa Earring",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
-        -- back={ name="Weard Mantle", augments={'VIT+4','DEX+3','Enmity+3','Phalanx +5',}},
+        back={ name="Weard Mantle", augments={'VIT+1','DEX+3','Enmity+6','Phalanx +5',}},
     }
 
 	sets.precast.JA = {
@@ -323,23 +321,23 @@ function init_gear_sets()
     sets.idle = {
         ammo="Staunch Tathlum +1",
         head=gear.Empyrean_Head,
-        body=gear.Sakpata_Body,
-        hands=gear.Sakpata_Hands,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Sakpata_Feet,
+        feet=gear.Empyrean_Feet,
         neck="Unmoving Collar +1",
         waist="Platinum Moogle Belt",
         ear1="Tuisto Earring",
         ear2="Odnowa Earring +1",
-        ring1="Gurebu's ring",
-        ring2=gear.Moonlight_2,
+        ring1=gear.Moonlight_1,
+        ring2="Gurebu's ring",
         back=gear.PLD_Idle_Cape,
     }
 
     sets.idle.Town = {
         ammo="Staunch Tathlum +1",
         head=gear.Empyrean_Head,
-        body=gear.Sakpata_Body,
+        body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
@@ -352,12 +350,9 @@ function init_gear_sets()
         back=gear.PLD_Idle_Cape,
     }
     
-    
+
     sets.Kiting = { ring1="Shneddick Ring" }
     sets.latent_refresh = {waist="Fucho-no-obi"}
-    --------------------------------------
-    -- Defense sets
-    --------------------------------------
     
     -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here when activating or changing defense mode:
     sets.PhysicalShield = {sub="Duban"}
@@ -419,7 +414,7 @@ function init_gear_sets()
         ear1="Tuisto Earring",
         ear2="Odnowa Earring +1",
         ring1=gear.Moonlight_1,
-        ring2=gear.Moonlight_2,
+        ring2="Petrov Ring",
         back=gear.PLD_Idle_Cape,
     } --49% DT
 

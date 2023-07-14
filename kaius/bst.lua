@@ -1,7 +1,3 @@
----------------------------------------
--- Last Revised: February 23rd, 2021 --
----------------------------------------
--- Added Gleti's Armor Set
 ---------------------------------------------
 -- Gearswap Commands Specific to this File --
 ---------------------------------------------
@@ -37,18 +33,12 @@
 -- Initialization function that defines sets and variables to be used.
 -------------------------------------------------------------------------------------------------------------------
 
--- IMPORTANT: Make sure to also get the Mote-Include.lua file (and its supplementary files) to go with this.
-
--- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-
-    -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
 
 function job_setup()
-    -- Display and Random Lockstyle Generator options
     DisplayPetBuffTimers = 'false'
     DisplayModeInfo = 'false'
 
@@ -60,12 +50,6 @@ function job_setup()
     ReadyMoveThree = 'None';
     ReadyMoveFour = 'None'
     pet_info_update()
-
-    -- Input Pet:TP Bonus values for Skirmish Axes used during Pet Buffs
-    TP_Bonus_Main = 200
-    TP_Bonus_Sub = 200
-    -- 1200 Job Point Gift Bonus (Set equal to 0 if below 1200 Job Points)
-    TP_Gift_Bonus = 40
 
     -- (Adjust Run Wild Duration based on # of Job Points)
     RunWildDuration = 340;RunWildIcon = 'abilities/00121.png'

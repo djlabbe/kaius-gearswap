@@ -12,7 +12,7 @@
 --              [ F12 ]             Update Current Gear / Report Current Status
 --              [ CTRL+F12 ]        Cycle Idle Modes
 --              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
---              [ ALT+` ]           Toggle Magic Burst Mode
+--              [ WIN+Q ]           Toggle Magic Burst Mode
 --
 --  Abilities:  [ CTRL+` ]          Composure
 --              [ CTRL+- ]          Light Arts/Addendum: White
@@ -22,18 +22,6 @@
 --              [ ALT+; ]           Penury/Parsimony
 --
 --  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
---
---              Addendum Commands:
---              Shorthand versions for each strategem type that uses the version appropriate for
---              the current Arts.
---                                          Light Arts                  Dark Arts
---                                          ----------                  ---------
---              gs c scholar light          Light Arts/Addendum
---              gs c scholar dark                                       Dark Arts/Addendum
---              gs c scholar cost           Penury                      Parsimony
---              gs c scholar speed          Celerity                    Alacrity
---              gs c scholar aoe            Accession                   Manifestation
---              gs c scholar addendum       Addendum: White             Addendum: Black
 -------------------------------------------------------------------------------------------------------------------
 
 function get_sets()

@@ -21,9 +21,6 @@ end
 function job_setup()
     geo_timer = ''
     indi_duration = 308
-    entrust_timer = ''
-    entrust_duration = 344
-    entrust = 0
     newLuopan = 0
     state.Buff['Blaze of Glory'] = buffactive['Blaze of Glory'] or false
 end
@@ -69,16 +66,23 @@ function user_setup()
     send_command('bind !b input /ja "Blaze of Glory" <me>')
     send_command('bind !f input /ja "Full Circle" <me>')
     send_command('bind !t input /ja "Theurgic Focus" <me>')
-    send_command('bind !y input /ja "Radial Arcana" <me>')
+    send_command('bind !a input /ja "Radial Arcana" <me>')
+   
 
     if player.sub_job == 'RDM' then
         send_command('bind !g input /ma "Gravity" <t>')
+        send_command('bind !h input /ma "Haste" <stpc>')
+        send_command('bind !u input /ma "Aquaveil" <me>')
+        send_command('bind !i input /ma "Phalanx" <me>')
+        send_command('bind !b input /ma "Bind" <t>')
+        send_command('bind !y input /ma "Refresh" <stpc>')
     end
 
-    if player.sub_job == 'RDM' or player.sub_job == 'WHM' then
+    if player.sub_job == 'WHM' then
         send_command('bind !h input /ma "Haste" <stpc>')
         send_command('bind !u input /ma "Aquaveil" <me>')
     end
+
 
     if player.sub_job == 'SCH' then
         send_command('bind !- gs c scholar light')
@@ -99,6 +103,7 @@ end
 
 function user_unload()
     send_command('unbind @w')
+    send_command('unbind !a')
     send_command('unbind !h')
     send_command('unbind !m')
     send_command('unbind !n')
@@ -106,7 +111,9 @@ function user_unload()
     send_command('unbind !f')
     send_command('unbind !t')
     send_command('unbind !y')
+    send_command('unbind !i')
     send_command('unbind !u')
+    send_command('unbind !b')
     send_command('unbind !g')
     send_command('unbind !-')
     send_command('unbind !=')
@@ -423,15 +430,15 @@ function init_gear_sets()
         ammo="Ghastly Tathlum +1",
         head="Ea Hat +1",
         body=gear.Empyrean_Body,
-        hands=gear.Empyrean_Hands,
+        hands=gear.Agwu_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet,
-        neck="Mizu. Kubikazari",
+        feet=gear.Agwu_Feet,
+        neck="Sibyl Scarf",
         waist="Acuity Belt +1",
         ear1="Malignance Earring",
         ear2="Regal Earring",     
         ring1="Freke Ring",
-        ring2="Metamor. Ring +1",
+        ring2="Metamorph Ring +1",
         back=gear.GEO_MAB_Cape,
     }
 
@@ -579,8 +586,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     elseif spell.skill == 'Geomancy' then
         if buffactive.Entrust and spell.english:startswith('Indi-') then
-            equip({main=gear.Gada_GEO})
-                entrust = 1
+            equip({main="Solstice"})
         end
     end
 end
