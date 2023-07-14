@@ -869,7 +869,7 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.magic_burst = {
+    sets.MagicBurst = {
         main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
@@ -1090,7 +1090,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
     if spell.skill == 'Elemental Magic' then
         if state.MagicBurst.value and spell.english ~= 'Death' then
-            equip(sets.magic_burst)
+            equip(sets.MagicBurst)
             if spell.english == "Impact" then
                 equip(sets.midcast.Impact)
             end

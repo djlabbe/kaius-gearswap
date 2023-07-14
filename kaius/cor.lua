@@ -40,11 +40,8 @@
 --                                  <stnpc> depending on setting.
 --  gs c qd t                       Uses the currently configured shot on the target, but forces use of <t>.
 --
---  gs c cycle mainqd               Cycles through the available steps to use as the primary shot when using
+--  gs c cycle QD               Cycles through the available steps to use as the primary shot when using
 --                                  one of the above commands.
---  gs c cycle altqd                Cycles through the available steps to use for alternating with the
---                                  configured main shot.
---  gs c toggle usealtqd            Toggles whether or not to use an alternate shot.
 --
 --  gs c toggle LuzafRing           Toggles use of Luzaf Ring on and off
 
@@ -60,16 +57,12 @@ function get_sets()
 end
 
 function job_setup()
-    state.Mainqd = M{['description']='Primary Shot', 'Fire Shot', 'Ice Shot', 'Wind Shot', 'Earth Shot', 'Thunder Shot', 'Water Shot'}
-    state.Altqd = M{['description']='Secondary Shot', 'Fire Shot', 'Ice Shot', 'Wind Shot', 'Earth Shot', 'Thunder Shot', 'Water Shot'}
-
-    state.UseAltqd = M(false, 'Use Secondary Shot')
-
+    state.QD = M{['description']='Primary Shot', 'Fire Shot', 'Ice Shot', 'Wind Shot', 'Earth Shot', 'Thunder Shot', 'Water Shot'}
     state.QDMode = M{['description']='Quick Draw Mode', 'Enhance', 'Potency'}
-
     state.Currentqd = M{['description']='Current Quick Draw', 'Main', 'Alt'}
-
     state.LuzafRing = M(true, "Luzaf's Ring")
+    state.Buff.Doom = false
+    state.warned = M(false)  -- Whether a warning has been given for low ammo
 
     state.AutoAmmoMode = M(true,'Auto Ammo Mode')
     tickdelay = os.clock() + 5
@@ -95,14 +88,10 @@ function job_setup()
         ['Fomalhaut'] = 'Chr. Bul. Pouch',
         ['Death Penalty'] = 'Liv. Bul. Pouch',
         ['Armageddon'] = 'Dev. Bul. Pouch',
-        ['Annihilator'] = 'Era. Bul. Pouch'}
+        ['Annihilator'] = 'Era. Bul. Pouch'
+    }
 
-
-    state.warned = M(false)  -- Whether a warning has been given for low ammo
     no_shoot_ammo = S{"Animikii Bullet", "Hauksbok Bullet"}
-
-    state.Buff.Doom = false
-
     define_roll_values()
 end
 
@@ -154,11 +143,8 @@ function user_setup()
 
     send_command ('bind ^` input /ja "Bolter\'s Roll" <me>')
   
-    send_command('bind !insert gs c cycleback mainqd')
-    send_command('bind !delete gs c cycle mainqd')
-    send_command('bind !home gs c cycle altqd')
-    send_command('bind !end gs c cycleback altqd')
-    send_command('bind !pagedown gs c toggle usealtqd')
+    send_command('bind !insert gs c cycleback QD')
+    send_command('bind !delete gs c cycle QD')
 
     send_command('bind @q gs c cycle QDMode')
     send_command('bind @w gs c toggle WeaponLock')
@@ -185,25 +171,28 @@ function user_setup()
     send_command('bind !numpad0 input /ja "Evoker\'s Roll" <me>')
     send_command('bind !numpad+ input /ja "Crooked Cards" <me>')
 
-    sword = 1
-    dagger = 2
     if player.sub_job == 'NIN' then
-        set_macro_page(sword, 17)
+        send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet DeathPenalty_M; gs c set WeaponLock true;input /macro set 2')
+        send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet DeathPenalty_R; gs c set WeaponLock true;input /macro set 2')
+        send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet Armageddon_M; gs c set WeaponLock true;input /macro set 2')
+        send_command('bind ^numpad5 gs c set WeaponLock false;gs c set WeaponSet Armageddon_R; gs c set WeaponLock true;input /macro set 2')
+        send_command('bind ^numpad1 gs c set WeaponLock false;gs c set WeaponSet Fomalhaut_M; gs c set WeaponLock true;input /macro set 2')
+        send_command('bind ^numpad2 gs c set WeaponLock false;gs c set WeaponSet Fomalhaut_R; gs c set WeaponLock true;input /macro set 2')
+        send_command('bind ^numpad0 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set 1')
+        set_macro_page(2, 17)
     elseif player.sub_job == 'DNC' then
-        sword = 3
-        dagger = 4
-        set_macro_page(sword, 17)
+       
+        send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet DeathPenalty_M; gs c set WeaponLock true;input /macro set 3')
+        send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet DeathPenalty_R; gs c set WeaponLock true;input /macro set 3')
+        send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet Armageddon_M; gs c set WeaponLock true;input /macro set 3')
+        send_command('bind ^numpad5 gs c set WeaponLock false;gs c set WeaponSet Armageddon_R; gs c set WeaponLock true;input /macro set 3')
+        send_command('bind ^numpad1 gs c set WeaponLock false;gs c set WeaponSet Fomalhaut_M; gs c set WeaponLock true;input /macro set 3')
+        send_command('bind ^numpad2 gs c set WeaponLock false;gs c set WeaponSet Fomalhaut_R; gs c set WeaponLock true;input /macro set 3')
+        send_command('bind ^numpad0 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set 4')
+        set_macro_page(3, 17)
     else
-        set_macro_page(1, 17)
+        set_macro_page(2, 17)
     end
-
-    send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet DeathPenalty_M; gs c set WeaponLock true;input /macro set ' ..dagger)
-    send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet DeathPenalty_R; gs c set WeaponLock true;input /macro set ' ..dagger)
-    send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet Armageddon_M; gs c set WeaponLock true;input /macro set ' ..dagger)
-    send_command('bind ^numpad5 gs c set WeaponLock false;gs c set WeaponSet Armageddon_R; gs c set WeaponLock true;input /macro set ' ..dagger)
-    send_command('bind ^numpad1 gs c set WeaponLock false;gs c set WeaponSet Fomalhaut_M; gs c set WeaponLock true;input /macro set ' ..dagger)
-    send_command('bind ^numpad2 gs c set WeaponLock false;gs c set WeaponSet Fomalhaut_R; gs c set WeaponLock true;input /macro set ' ..dagger)
-    send_command('bind ^numpad0 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set ' ..sword)
    
     send_command('wait 3; input /lockstyleset 17')
 
@@ -255,7 +244,6 @@ function init_gear_sets()
         waist="Flume Belt +1", --4/0
     }
 
- 
     sets.precast.CorsairRoll.Duration = {main=gear.Rostam_C, range="Compensator"}
 
     sets.precast.JA["Double-Up"] = {main=gear.Rostam_C, range="Compensator"}
@@ -272,7 +260,7 @@ function init_gear_sets()
     sets.precast.Waltz = {
         ammo="Voluspa Tathlum",
         neck="Unmoving Collar +1",
-        -- ear1="Handler's Earring +1",
+        ear1="Handler's Earring +1",
         ear2="Tuisto Earring",
         body="Passion Jacket",
         ring1="Asklepian Ring",
@@ -354,7 +342,7 @@ function init_gear_sets()
         waist="Fotia Belt",
     }
 
-    sets.precast.WS['Wildfire'] = {
+    sets.precast.WS['Wildfire'] = set_combine({
         ammo=gear.MAbullet,
         head=gear.Nyame_Head,
         body=gear.Relic_Body,
@@ -365,13 +353,14 @@ function init_gear_sets()
         ear1="Novio Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
-        ring2="Cornelia's Ring",
-        -- ring2="Epaminondas's Ring",
+        ring2="Epaminondas's Ring",
         back=gear.COR_WS2_Cape,
         waist="Skrymir Cord +1",
-    }
+    }, {
+        ring2="Cornelia's Ring",
+    })
 
-    sets.precast.WS['Hot Shot'] = {
+    sets.precast.WS['Hot Shot'] = set_combine({
         ammo=gear.MAbullet,
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -382,16 +371,17 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
-        ring2="Cornelia's Ring",
+        ring2="Epaminondas's Ring",
         back=gear.COR_WS2_Cape,
         waist="Skrymir Cord +1",
-    }
+    }, {
+        ring2="Cornelia's Ring",
+    })
 
-    sets.precast.WS['Leaden Salute'] = {
+    sets.precast.WS['Leaden Salute'] = set_combine({
         ammo=gear.MAbullet,
         head="Pixie Hairpin +1",
         body=gear.Relic_Body,
-        -- body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Relic_Feet,
@@ -399,11 +389,12 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
-        ring1="Cornelia's Ring",
-        -- ring2="Archon Ring",
+        ring2="Archon Ring",
         back=gear.COR_WS2_Cape,
         waist="Skrymir Cord +1",
-    }
+    }, {
+        ring2="Cornelia's Ring",
+    })
 
     sets.precast.WS['Evisceration'] = {
         head=gear.Adhemar_B_Head,
@@ -421,7 +412,7 @@ function init_gear_sets()
         waist="Fotia Belt",
     }
 
-    sets.precast.WS['Savage Blade'] = {
+    sets.precast.WS['Savage Blade'] = set_combine({
         ammo=gear.WSbullet,
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -431,12 +422,13 @@ function init_gear_sets()
         neck="Rep. Plat. Medal",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        -- ring1="Regal Ring",
-        ring1="Cornelia's Ring",
+        ring1="Regal Ring",
         ring2="Epaminondas's Ring",
         back=gear.COR_WS1_Cape,
         waist="Sailfi Belt +1",
-    }
+    }, {
+        ring1="Cornelia's Ring",
+    })
 
     sets.precast.WS['Aeolian Edge'] = {
         ammo=gear.QDbullet,
@@ -466,8 +458,6 @@ function init_gear_sets()
         ear2="Magnetic Earring", --8
         ring2="Evanescence Ring", --5
     }
-
-    sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
@@ -528,9 +518,9 @@ function init_gear_sets()
     }
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
-        -- head="Meghanada Visor +2",
+        head="Meghanada Visor +2",
         body="Nisroch Jerkin",
-        -- hands="Mummu Wrists +2",
+        hands="Mummu Wrists +2",
         legs="Darraigner's Brais",
         feet="Osh. Leggings +1",
         ear1="Odr Earring",
@@ -695,15 +685,10 @@ function init_gear_sets()
     } --41/31
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-
     sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
-
     sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
-
     sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
-
     sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
-
     sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
 
     
@@ -875,7 +860,6 @@ end
 function job_aftercast(spell, action, spellMap, eventArgs)
     if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") and not spell.interrupted then
         display_roll_info(spell)
-        -- get_roll_duration(spell)
     end
     if spell.english == "Light Shot" then
         send_command('@timers c "Light Shot ['..spell.target.name..']" 60 down abilities/00195.png')
@@ -937,7 +921,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
-    -- handle_equipping_gear(player.status)
+    handle_equipping_gear(player.status)
 end
 
 function update_combat_form()
@@ -986,10 +970,7 @@ function display_current_job_state(eventArgs)
 
     local qd_msg = '(' ..string.sub(state.QDMode.value,1,1).. ')'
 
-    local e_msg = state.Mainqd.current
-    if state.UseAltqd.value == true then
-        e_msg = e_msg .. '/'..state.Altqd.current
-    end
+    local e_msg = state.QD.current
 
     local d_msg = 'None'
     if state.DefenseMode.value ~= 'None' then
@@ -1012,10 +993,6 @@ function display_current_job_state(eventArgs)
 
     eventArgs.handled = true
 end
-
--------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
--------------------------------------------------------------------------------------------------------------------
 
 --Read incoming packet to differentiate between Haste/Flurry I and II
 windower.register_event('action',
@@ -1062,15 +1039,7 @@ end
 
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1] == 'qd' then
-        local doqd = ''
-        if state.UseAltqd.value == true then
-            doqd = state[state.Currentqd.current..'qd'].current
-            state.Currentqd:cycle()
-        else
-            doqd = state.Mainqd.current
-        end
-
-        send_command('@input /ja "'..doqd..'" <t>')
+        send_command('@input /ja "'..state.QD.current..'" <t>')
     end
 
     if cmdParams[1]:lower() == 'forceequip' then

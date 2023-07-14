@@ -9,6 +9,7 @@
 --              [ F12 ]             Update Current Gear / Report Current Status
 --              [ CTRL+F12 ]        Cycle Idle Modes
 --              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ WIN+Q ]           Toggle Magic Burst Mode
 --
 --  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
 -------------------------------------------------------------------------------------------------------------------
@@ -31,6 +32,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
 
     state.WeaponLock = M(false, 'Weapon Lock')
+    state.MagicBurst = M(true, 'Magic Burst')
 
     gear.Artifact_Head = { name= "Geomancy Galero +1" }
     gear.Artifact_Body = { name= "Geomancy Tunic +1" }
@@ -56,10 +58,10 @@ function user_setup()
     include('Global-Binds.lua')
 
     send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind @q gs c toggle MagicBurst')
 
     send_command('bind !F1 input /ja "Bolster" <me>')
     send_command('bind !F2 input /ja "Widened Compass" <me>')
-
 
     send_command('bind !m input /ja "Dematerialize" <me>')
     send_command('bind !n input /ja "Lasting Emanation" <me>')
@@ -103,6 +105,7 @@ end
 
 function user_unload()
     send_command('unbind @w')
+    send_command('unbind @q')
     send_command('unbind !a')
     send_command('unbind !h')
     send_command('unbind !m')
@@ -575,6 +578,12 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
+    if spell.skill == 'Elemental Magic' and state.MagicBurst.value and spell.english ~= 'Death' then
+        equip(sets.MagicBurst)
+        if spell.english == "Impact" then
+            equip(sets.midcast.Impact)
+        end
+    end
     if spell.skill == 'Elemental Magic' then
         if (spell.element == world.day_element or spell.element == world.weather_element) then
             equip(sets.Obi)
@@ -695,6 +704,9 @@ function display_current_job_state(eventArgs)
     local i_msg = state.IdleMode.value
 
     local msg = ''
+    if state.MagicBurst.value then
+        msg = ' Burst: On |'
+    end
     if state.Kiting.value then
         msg = msg .. ' Kiting: On |'
     end

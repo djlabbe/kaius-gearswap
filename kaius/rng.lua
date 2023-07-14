@@ -30,6 +30,33 @@ function job_setup()
     state.Buff.Doom = false
     state.warned = M(false) -- Whether a warning has been given for low ammo
 
+    state.AutoAmmoMode = M(true,'Auto Ammo Mode')
+    tickdelay = os.clock() + 5
+    ammostock = 200
+    useItem = false
+	useItemName = ''
+    prevItemName = ''
+	useItemSlot = ''
+    next_cast = 0
+    delayed_cast = ''
+
+    data.equipment = {}
+    data.equipment.rema_ranged_weapons = S{'Fomalhaut','Gastraphetes', 'Armageddon', 'Annihilator'}
+
+    data.equipment.rema_ranged_weapons_ammo = {
+        ['Fomalhaut'] = 'Chrono Bullet',
+        ['Gastraphetes'] = 'Quelling Bolt',
+        ['Armageddon'] = 'Devastating Bullet',
+        ['Annihilator'] = 'Eradicating Bullet'
+    }
+
+    data.equipment.rema_ranged_weapons_ammo_pouch = {
+        ['Fomalhaut'] = 'Chr. Bul. Pouch',
+        ['Gastraphetes'] = 'Quelling Bolt Quiver',
+        ['Armageddon'] = 'Dev. Bul. Pouch',
+        ['Annihilator'] = 'Era. Bul. Pouch'
+    }
+
     no_shoot_ammo = S{"Animikii Bullet", "Hauksbok Arrow"}
     hybrid_ws = S{'Hot Shot'}
 end
@@ -37,8 +64,8 @@ end
 function user_setup()
     state.OffenseMode:options('Normal')
     state.HybridMode:options('Normal', 'DT')
-    state.RangedMode:options('Normal', 'Acc', 'Critical', 'AttackCap')
-    state.WeaponskillMode:options('Normal', 'Acc', 'Enmity', 'AttackCap')
+    state.RangedMode:options('Normal', 'Acc', 'Critical', 'PDL')
+    state.WeaponskillMode:options('Normal', 'Acc', 'Enmity', 'PDL')
     state.IdleMode:options('Normal', 'DT')
 
     state.WeaponSet = M{['description']='Weapon Set', 'Gastraphetes', 'Fomalhaut', 'Fomalhaut_HS', 'Armageddon', 'Annihilator', 'Savage', 'Aoe'}
@@ -491,7 +518,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
     }
 
-    sets.precast.WS['Jishnu\'s Radiance'].AttackCap ={
+    sets.precast.WS['Jishnu\'s Radiance'].PDL ={
         head="Blistering Sallet +1",
         neck="Scout's Gorget +2",
         ear1="Odr Earring",
@@ -536,7 +563,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet, --8
     }
 
-    sets.precast.WS["Coronach"].AttackCap =  {
+    sets.precast.WS["Coronach"].PDL =  {
         head=gear.Artifact_Head, --10
         neck="Scout's Gorget +2",
         ear1="Ishvara Earring",
@@ -605,7 +632,7 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     }
 
-    sets.precast.WS['Savage Blade'].AttackCap = {
+    sets.precast.WS['Savage Blade'].PDL = {
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
@@ -823,6 +850,14 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     if player.status ~= 'Engaged' and state.WeaponLock.value == false then
         check_weaponset()
     end
+    if spell.action_type == 'Item' and useItem and (spell.english == useItemName) then
+        useItem = false
+        enable(useItemSlot)
+        windower.send_command('gs c forceequip '..useItemSlot..' '..prevItemName..'')
+        useItemName = ''
+        prevItemName = ''
+        useItemSlot = ''
+    end
 end
 
 -- Called when a player gains or loses a buff.
@@ -910,15 +945,15 @@ function get_custom_wsmode(spell, action, spellMap)
         if state.RangedMode.value == 'Acc' then
             wsmode = 'Acc'
         end
-        if state.RangedMode.value == 'AttackCap' then
-            wsmode = 'AttackCap'
+        if state.RangedMode.value == 'PDL' then
+            wsmode = 'PDL'
         end
     elseif (spell.skill ~= 'Marksmanship' and spell.skill ~= 'Archery') then
         if state.OffenseMode.value == 'Acc' then
             wsmode = 'Acc'
         end
-        if state.RangedMode.value == 'AttackCap' then
-            wsmode = 'AttackCap'
+        if state.RangedMode.value == 'PDL' then
+            wsmode = 'PDL'
         end
     end
 
@@ -970,10 +1005,6 @@ function display_current_job_state(eventArgs)
     eventArgs.handled = true
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
--------------------------------------------------------------------------------------------------------------------
-
 --Read incoming packet to differentiate between Haste/Flurry I and II
 windower.register_event('action',
     function(act)
@@ -1018,6 +1049,9 @@ function determine_haste_group()
 end
 
 function job_self_command(cmdParams, eventArgs)
+    if cmdParams[1]:lower() == 'forceequip' then
+        handle_forceequip(cmdParams)
+    end
     gearinfo(cmdParams, eventArgs)
 end
 
@@ -1133,4 +1167,210 @@ function check_weaponset()
     if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
        equip(sets.DefaultShield)
     end
+end
+
+
+------- AUTO AMMO ------
+
+-- This was really the first main chunk I found when trying to reverse engineer Auto-Ammo. There are many references to other data and functions,
+-- but we can see that the idea is:
+--  1. If we have a REMA ranged weapon, we count the available ammo, and compare against some fixed value to see if we are "low".
+--  2. Lookup the appropriate ammo-generating item, set a 'useItem' flag to true, and save the item to use and the slot as variables for use somewhere else.
+--  3. I added the 'prevItemName' myself in order to make this work with the Arislan-based Lua in conjuction with GearInfo. (Since the ammo belts are considered "no-swap" gear, they wouldn't otherwise unequip after use.)
+-- So here we have identified that we need ammo, as well as the item and slot of the ammo-generating item, as well as the item currently equipped in that slot. 
+function check_ammo()
+    if state.AutoAmmoMode.value and player.equipment.range and not player.in_combat and not world.in_mog_house and not useItem then
+		local ammo_to_stock
+		if type(ammostock) == 'table' and ammostock[data.equipment.rema_ranged_weapons_ammo[player.equipment.range]] then
+			ammo_to_stock = ammostock[data.equipment.rema_ranged_weapons_ammo[player.equipment.range]]
+		else
+			ammo_to_stock = ammostock
+		end
+	
+		if data.equipment.rema_ranged_weapons:contains(player.equipment.range) and count_total_ammo(data.equipment.rema_ranged_weapons_ammo[player.equipment.range]) < ammo_to_stock then
+			if get_usable_item(player.equipment.range).usable then
+				windower.chat.input("/item '"..player.equipment.range.."' <me>")
+				add_to_chat(217,"You're low on "..data.equipment.rema_ranged_weapons_ammo[player.equipment.range]..", using "..player.equipment.range..".")
+				tickdelay = os.clock() + 2
+				return true
+			elseif item_available(data.equipment.rema_ranged_weapons_ammo_pouch[player.equipment.range]) then
+				if ((get_usable_item(data.equipment.rema_ranged_weapons_ammo_pouch[player.equipment.range]).next_use_time) + 18000 -os.time()) < 10 then
+					add_to_chat(217,"You're low on "..data.equipment.rema_ranged_weapons_ammo[player.equipment.range]..", using "..data.equipment.rema_ranged_weapons_ammo_pouch[player.equipment.range]..".")
+					useItem = true
+					useItemName = data.equipment.rema_ranged_weapons_ammo_pouch[player.equipment.range]
+                    prevItemName = player.equipment.waist
+					useItemSlot = 'waist'
+					return true
+				end				
+			end
+		end
+	end
+	return false
+end
+
+-- Helper function used by check_ammo(). Simply counts all available ammo. Probably shouldn't include sack and case?
+function count_total_ammo(ammo_name)
+	local ammo_count = 0
+	
+    for _,n in pairs({"inventory","wardrobe","wardrobe2","wardrobe3","wardrobe4","wardrobe5","wardrobe6","wardrobe7","wardrobe8","satchel","sack","case"}) do
+		if player[n][ammo_name] then
+			ammo_count = ammo_count + player[n][ammo_name].count
+		end
+    end
+
+	return ammo_count
+end
+
+-- Helper function used by check_ammo() and elsewhere. Is given item in a usable spot?
+function item_available(item)
+	if player.inventory[item] or player.wardrobe[item] or player.wardrobe2[item] or player.wardrobe3[item] or player.wardrobe4[item] or player.wardrobe5[item] or player.wardrobe6[item] or player.wardrobe7[item] or player.wardrobe8[item] then
+		return true
+	else
+		return false
+	end
+end
+
+-- Now that we have a way to determine whether we need to create ammo and what item and slot creates the ammo, how do we actually use it?
+-- We need a way to do a sequence of actions (equip item, wait, use item, wait, equip previous item)
+-- This code hooks into windower and supplies a function to be executed before every frame ("prerender").
+-- First we just make sure sufficient time has elapsed for our purposes, then we check to make sure we are not incapacitated.
+-- If we are good to go, we execute "pre-tick" and "job_tick". Silindrile has many other functions that get called here, and each is customizable for different purposes.
+windower.raw_register_event('prerender', function()
+    if not (os.clock() > tickdelay) then return end
+    
+    gearswap.refresh_globals(false)
+    
+    if (player ~= nil) and (player.status == 'Idle' or player.status == 'Engaged') and 
+        not (delayed_cast ~= '' or check_midaction() or moving or buffactive['Sneak'] or buffactive['Invisible'] or silent_check_disable()) then
+        if pre_tick() then return end
+        if job_tick() then return end
+    end
+
+    tickdelay = os.clock() + .5
+
+    init_gear_sets()
+end)
+
+-- Helper to determine whether player has some status that prevents action. (True = incapacitated, false = NOT incapacitated)
+function silent_check_disable()
+	if buffactive.terror or buffactive.petrification or buffactive.sleep or buffactive.Lullaby or buffactive.stun then
+		return true
+	else
+		return false
+	end	
+end
+
+-- Helper used to make sure we are not in the middle of some action. May not be needed for COR.
+function check_midaction(spell, spellMap, eventArgs)
+	if os.clock() < next_cast then
+		if eventArgs and not (spell.type:startswith('BloodPact') and state.Buff["Astral Conduit"]) then
+			eventArgs.cancel = true
+			if delayed_cast == '' then
+				windower.send_command:schedule((next_cast - os.clock()),'gs c delayedcast')
+			end
+			delayed_cast = spell.english
+			delayed_target = spell.target.id
+		end
+		return true
+	else
+		return false
+	end
+end
+
+-- Part of the "tick" cycle we setup above when connecting to the windower prerender. For auto-ammo, we
+-- will simply call one function which checks for and handles pending "use items".
+function pre_tick()
+	if check_use_item() then return true end
+	return false
+end
+
+-- Determines whether we have a pending "item to use", and if we do, either use the item, 
+-- or in our case for auto-ammo equip the appropiate gear by issuing a windower command.
+-- It is worth noting that we do not have direct access to gearswap commands here. 
+-- (Eg. I tried using gs equip commands instead of the windoer.send_command(...)), and that does not work,
+-- likely because we are dealing directly with windower only here, it is not really aware of the addon gearswap at this point.
+-- Also, we have to implement the handling for the 'gs c forceequip' command - that is done in the job_self_command function.
+function check_use_item()
+	if useItem then
+		local Offset = 18000-os.time()
+		
+		if time_test then
+			windower.add_to_chat(tostring(seconds_to_clock(get_usable_item('Warp Ring').next_use_time + Offset)))
+		end
+		
+		if useItemSlot == 'item' and (player.inventory[useItemName] or player.temporary[useItemName]) then
+			windower.chat.input('/item "'..useItemName..'" <me>')
+			tickdelay = os.clock() + 3.5
+			return true
+		elseif item_equipped(useItemName) and get_usable_item(useItemName).usable then
+			windower.chat.input('/item "'..useItemName..'" <me>')
+			tickdelay = os.clock() + 3
+			return true
+		elseif item_available(useItemName) and ((get_usable_item(useItemName).next_use_time) + Offset) < 10 then
+			windower.send_command('gs c forceequip '..useItemSlot..' '..useItemName..'')
+			tickdelay = os.clock() + 2
+			return true
+		elseif player.satchel[useItemName] then
+			windower.send_command('get "'..useItemName..'" satchel')
+			tickdelay = os.clock() + 2
+			return true
+		else
+			add_to_chat(123,''..useItemName..' not available or ready for use.')
+			useItem = false
+			return false
+		end
+	else
+		return false
+	end
+	return false
+end
+
+-- The second part of each tick cycle, here we call the check_ammo to see if we need to take any actions.
+function job_tick()
+	if check_ammo() then return true end
+	return false
+end
+
+-- Returns time that you can use the given item again
+function get_usable_item(name) 
+    for _,n in pairs({"inventory","wardrobe","wardrobe2","wardrobe3","wardrobe4","wardrobe5","wardrobe6","wardrobe7","wardrobe8"}) do
+        for _,v in pairs(gearswap.items[n]) do
+            if type(v) == "table" and v.id ~= 0 and res.items[v.id].english:lower() == name:lower() then
+                return extdata.decode(v)
+            end
+        end
+    end
+end
+
+-- Is the given item currently equipped?
+function item_equipped(item)
+	for k, v in pairs(player.equipment) do
+		if v == item then
+			return true
+		end
+	end
+	return false
+end
+
+-- Handles actually equipping the necessary item and ensuring that the slot is disabled so that it stays on long enough to use.
+function handle_forceequip(cmdParams)
+    if type(commandArgs) == 'string' then
+        commandArgs = T(commandArgs:split(' '))
+        if #commandArgs == 0 then
+            return
+        end
+    end
+
+    table.remove(cmdParams, 1)
+
+	if cmdParams[1] ~= nil then
+		local equipslot = (table.remove(cmdParams, 1)):lower()
+        local gear = table.concat(cmdParams, ' ')
+        enable(equipslot)
+        equip({[equipslot]=gear})
+        disable(equipslot)
+		
+	else
+		handle_equipping_gear(player.status)
+	end
 end
