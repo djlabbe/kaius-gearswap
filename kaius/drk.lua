@@ -423,7 +423,7 @@ function init_gear_sets()
     sets.precast.WS['Fimbulvetr'].Acc = set_combine(sets.precast.WS['Fimbulvetr'], {})
     sets.precast.WS['Fimbulvetr'].PDL = set_combine(sets.precast.WS['Fimbulvetr'], {
         head=gear.Empyrean_Head,
-        ear2="Heathen's Earring +1"
+        ear2="Heathen's Earring +1",
         ring1="Ephramad's Ring",
     })
 
@@ -448,7 +448,7 @@ function init_gear_sets()
     sets.precast.WS['Torcleaver'].Acc = set_combine(sets.precast.WS['Torcleaver'], {})
     sets.precast.WS['Torcleaver'].PDL = set_combine(sets.precast.WS['Torcleaver'], {
         head=gear.Empyrean_Head,
-        ear2="Heathen's Earring +1"
+        ear2="Heathen's Earring +1",
         ring1="Ephramad's Ring",
     })
 
@@ -721,11 +721,11 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head=gear.Nyame_Head,
+        head=gear.Sakpata_Head,
         body="Sacro Breastplate",
-        hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Sakpata_Legs,
+        feet=gear.Sakpata_Feet,
         neck="Sibyl Scarf",
         ear1="Infused Earring",
         ear2="Eabani Earring",
