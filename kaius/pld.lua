@@ -28,9 +28,9 @@ function job_setup()
 end
 
 function user_setup()
-    state.OffenseMode:options('Normal', 'Acc')
+    state.OffenseMode:options('Normal')
     state.HybridMode:options('Normal', 'PDT')
-    state.WeaponskillMode:options('Normal', 'Acc')
+    state.WeaponskillMode:options('Normal')
     state.CastingMode:options('Normal', 'Resistant')
     state.PhysicalDefenseMode:options('PDT')
     state.MagicalDefenseMode:options('MDT')
@@ -159,8 +159,6 @@ function init_gear_sets()
         ring2="Regal Ring",
         -- back={ name="Rudianos's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
     }
-
-    sets.precast.WS.Acc = sets.precast.WS
 
     sets.precast.WS['Sanguine Blade'] = {
         ear1="Friomisi Earring",
@@ -406,9 +404,7 @@ function init_gear_sets()
     } --49% DT
 
 
-    sets.engaged.Acc =  sets.engaged
     sets.engaged.PDT = sets.engaged
-    sets.engaged.Acc.PDT = sets.engaged
     
     sets.buff.Cover = {head=gear.Artifact_Head, body=gear.Relic_Body}
 
