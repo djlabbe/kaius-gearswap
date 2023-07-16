@@ -32,8 +32,8 @@ function user_setup()
     state.HybridMode:options('Normal', 'PDT')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
-    state.PhysicalDefenseMode:options('PDT', 'HP')
-    state.MagicalDefenseMode:options('MDT', 'HP')
+    state.PhysicalDefenseMode:options('PDT')
+    state.MagicalDefenseMode:options('MDT')
     
     state.EquipShield = M(true, 'Equip Shield w/Defense')
 
@@ -77,9 +77,9 @@ function user_setup()
 
     include('Global-Binds.lua')
 
-    if player.sub_job == 'WAR' then
+    if player.sub_job == 'BLU' then
         set_macro_page(1, 7)
-    elseif player.sub_job == 'BLU' then
+    elseif player.sub_job == 'WAR' then
         set_macro_page(2, 7)
     else
         set_macro_page(1, 7)
@@ -282,7 +282,7 @@ function init_gear_sets()
         ear2="Andoaa Earring",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
-        -- back={ name="Weard Mantle", augments={'VIT+4','DEX+3','Enmity+3','Phalanx +5',}},
+        back="Weard Mantle",
     }
 
 	sets.precast.JA = {
@@ -314,15 +314,9 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         -- ring1="Weather. Ring",
         ring2="Gelatinous Ring +1",
-        -- back={ name="Rudianos's Mantle", augments={'HP+60','"Fast Cast"+10','Spell interruption rate down-6%',}},
+        back=gear.PLD_FC_Cape,
     }
 
-	
-    --------------------------------------
-    -- Idle/resting/defense/etc sets
-    --------------------------------------
-
-    -- Idle sets
     sets.idle = {
         ammo="Staunch Tathlum +1",
         head=gear.Empyrean_Head,
@@ -358,16 +352,11 @@ function init_gear_sets()
     
     sets.Kiting = {legs=gear.Carmine_D_Legs}
     sets.latent_refresh = {waist="Fucho-no-obi"}
-    --------------------------------------
-    -- Defense sets
-    --------------------------------------
-    
+
     -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here when activating or changing defense mode:
     sets.PhysicalShield = {sub="Ochain"}
     sets.MagicalShield = {sub="Aegis"}
 
-    -- Basic defense sets.
-        
     sets.defense.PDT = {
         ammo="Staunch Tathlum +1",
         head=gear.Sakpata_Head,
@@ -384,11 +373,6 @@ function init_gear_sets()
         back=gear.PLD_Cape,
     }
 
-    sets.defense.HP = {
-
-    }
-
-
     sets.defense.MDT = {
         ammo="Staunch Tathlum +1",
         head=gear.Sakpata_Head,
@@ -404,11 +388,6 @@ function init_gear_sets()
         back=gear.PLD_Cape,
         waist="Asklepian Belt",
     }
-
-
-    --------------------------------------
-    -- Engaged sets
-    --------------------------------------
     
     sets.engaged = {
         ammo="Staunch Tathlum +1", --3
@@ -431,9 +410,6 @@ function init_gear_sets()
     sets.engaged.PDT = sets.engaged
     sets.engaged.Acc.PDT = sets.engaged
     
-    --------------------------------------
-    -- Custom buff sets
-    --------------------------------------
     sets.buff.Cover = {head=gear.Artifact_Head, body=gear.Relic_Body}
 
     sets.buff.Doom = {
@@ -449,9 +425,6 @@ function init_gear_sets()
 end
 
 
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
--------------------------------------------------------------------------------------------------------------------
 
 function job_midcast(spell, action, spellMap, eventArgs)
     -- If DefenseMode is active, apply that gear over midcast
@@ -472,10 +445,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
         check_weaponset()
     end
 end
-
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for non-casting events.
--------------------------------------------------------------------------------------------------------------------
 
 -- Called when the player's status changes.
 function job_state_change(field, new_value, old_value)
@@ -503,10 +472,6 @@ function job_buff_change(buff,gain)
         end
     end
 end
-
--------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
--------------------------------------------------------------------------------------------------------------------
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
@@ -595,10 +560,6 @@ function display_current_job_state(eventArgs)
 
     eventArgs.handled = true
 end
-
-------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
--------------------------------------------------------------------------------------------------------------------
 
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
