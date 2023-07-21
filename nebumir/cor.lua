@@ -24,6 +24,7 @@ end
 
 function job_setup()
     state.QD = M{['description']='Primary Shot', 'Fire Shot', 'Ice Shot', 'Wind Shot', 'Earth Shot', 'Thunder Shot', 'Water Shot'}
+    state.QDMode = M{['description']='Quick Draw Mode', 'Enhance', 'Potency'}
     state.LuzafRing = M(true, "Luzaf's Ring")
     state.Buff.Doom = false
     state.warned = M(false)
