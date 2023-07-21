@@ -23,7 +23,7 @@ function get_sets()
 end
 
 function job_setup()
-    state.Mainqd = M{['description']='Primary Shot', 'Fire Shot', 'Ice Shot', 'Wind Shot', 
+    state.QD = M{['description']='Primary Shot', 'Fire Shot', 'Ice Shot', 'Wind Shot', 'Earth Shot', 'Thunder Shot', 'Water Shot'}
     state.LuzafRing = M(true, "Luzaf's Ring")
     state.Buff.Doom = false
     state.warned = M(false)
