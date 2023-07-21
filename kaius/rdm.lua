@@ -271,19 +271,6 @@ function init_gear_sets()
     sets.precast.FC['Healing Magic'] = sets.precast.FC.Cure
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {})
 
-    -- sets.precast.FC.Impact = set_combine(sets.precast.FC, {
-    --     ammo="Sapience Orb", --2
-    --     head=empty,
-    --     body="Twilight Cloak",
-    --     hands="Gende. Gages +1", --7
-    --     neck="Orunmila's Torque", --5
-    --     ear1="Malignance Earring", --4
-    --     ear2="Enchntr. Earring +1", --2
-    --     ring1="Kishar Ring", --4
-    --     back="Swith Cape +1", --4
-    --     waist="Shinjutsu-no-Obi +1", --5
-    -- })
-
     sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {
         main="Daybreak", 
         sub="Ammurapi Shield", 

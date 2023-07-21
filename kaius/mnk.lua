@@ -145,6 +145,8 @@ function init_gear_sets()
         ring2="Kishar Ring", --4
     } -- 49%
 
+    sets.midcast.FastRecast = sets.precast.FC
+    
     sets.precast.WS = {
         ammo="Knobkierrie",
 		head=gear.Adhemar_B_Head,
@@ -164,8 +166,6 @@ function init_gear_sets()
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         -- TODO
     })
-
-    -- Specific weaponskill sets.
 
     sets.precast.WS["Victory Smite"] = {
         ammo="Coiste Bodhar",
@@ -340,22 +340,7 @@ function init_gear_sets()
         back=gear.MNK_INT_Cape,
         waist="Orpheus's Sash",
     }
-    
-    -- Midcast Sets
-    sets.midcast.FastRecast = {
-        ammo="Sapience Orb", --2
-        head=gear.Herc_WSD_head, --7
-        body=gear.Taeon_FC_body, --9
-        hands="Leyline Gloves", --8
-        legs="Rawhide Trousers", --5
-        neck="Orunmila's Torque", --5
-        ear1="Loquacious Earring", --2
-        ear2="Enchntr. Earring +1", --2
-        ring1="Prolix Ring", --4
-        ring2="Kishar Ring", --4
-    }
 
-    -- Defense sets
     sets.defense.PDT = {
         ammo="Staunch Tathlum +1",
         head=gear.Malignance_Head,
@@ -505,7 +490,6 @@ function init_gear_sets()
     }
 
     sets.Kiting = { feet="Hermes' Sandals" }
-
     sets.Verethragna = { main="Verethragna" }
     sets.Godhands = { main="Godhands" }
     sets.Spharai = { main="Spharai" }

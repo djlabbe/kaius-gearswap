@@ -211,6 +211,7 @@ function init_gear_sets()
         hands=gear.Telchine_ENH_Hands,
         legs=gear.Artifact_Legs,
     }
+    
     sets.precast.FC = {
         main="Musa", --10
         sub="Clerisy Strap +1", --3
