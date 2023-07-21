@@ -767,7 +767,7 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         ring1="Purity Ring",
         ring2=gear.Moonlight_2,
-        back="Moonlight Cape", --6/6
+        back=gear.BRD_Song_Cape, --6/6
         waist="Carrier's Sash",
     }
 

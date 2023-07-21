@@ -54,9 +54,9 @@ function user_setup()
     gear.Empyrean_Legs = { name="Bhikku Hose +2" }
     gear.Empyrean_Feet = { name="Bhikku Gaiters +2" }
 
-    gear.MNK_TP_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+    gear.MNK_DEX_DA_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+    gear.MNK_STR_CRIT_Cape = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}}
     gear.MNK_INT_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
-    gear.MNK_WS_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @e gs c cycle WeaponSet')
@@ -112,10 +112,10 @@ function init_gear_sets()
         hands=gear.Relic_Hands,
         ring1="Niqmaddu Ring",
         ring2="Gelatinous Ring +1",
-        back=gear.MNK_TP_Cape, -- Should be a VIT Cape
-        -- waist="Latria Sash",
+        back="Moonlight Cape",
+        waist="Platinum Moogle Belt",
         legs=gear.Tatenashi_Legs,
-        feet=gear.Tatenashi_Feet
+        feet=gear.Empyrean_Feet
     }
 
     sets.precast.Waltz = {
@@ -161,7 +161,7 @@ function init_gear_sets()
 		ear2="Odr Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_WS_Cape,
+		back=gear.MNK_DEX_DA_Cape,
     }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
@@ -181,7 +181,7 @@ function init_gear_sets()
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_WS_Cape,
+		back=gear.MNK_STR_CRIT_Cape,
     }
 
     sets.precast.WS["Victory Smite"].Acc = set_combine(sets.precast.WS["Victory Smite"], {
@@ -201,7 +201,7 @@ function init_gear_sets()
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_WS_Cape,
+		back=gear.MNK_DEX_DA_Cape,
     }
     sets.precast.WS["Raging Fists"].Acc = set_combine(sets.precast.WS["Raging Fists"], {
         -- TODO
@@ -220,7 +220,7 @@ function init_gear_sets()
 		ear2="Mache Earring +1",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_TP_Cape,
+		back=gear.MNK_DEX_DA_Cape,
     }
 
     sets.precast.WS["Shijin Spiral"].Acc = set_combine(sets.precast.WS["Shijin Spiral"], {
@@ -241,7 +241,7 @@ function init_gear_sets()
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_WS_Cape,
+		back=gear.MNK_DEX_DA_Cape,
     }
 
     sets.precast.WS["Howling Fist"].Acc = set_combine(sets.precast.WS["Howling Fist"], {
@@ -261,7 +261,7 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_WS_Cape,
+		back=gear.MNK_DEX_DA_Cape,
     }
 
     sets.precast.WS["Final Heaven"].Acc = set_combine(sets.precast.WS["Final Heaven"], {
@@ -281,7 +281,7 @@ function init_gear_sets()
 		ear2="Schere Earring",
 		ring1="Cornelia's Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_WS_Cape,
+		back=gear.MNK_DEX_DA_Cape,
     }
 
     sets.precast.WS["Tornado Kick"].Acc = set_combine(sets.precast.WS["Tornado Kick"], {
@@ -302,14 +302,30 @@ function init_gear_sets()
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_WS_Cape,
+		back=gear.MNK_DEX_DA_Cape,
     }
 
     sets.precast.MaxTP = {
 		ear2="Odr Earring",
     }
 
-    ---- Fall back to default WS set for Asuran Fists, Ascetic's Fury, and Spinning Attack ----
+    ---- Fall back to default WS set for Asuran Fists, and Spinning Attack ----
+
+    sets.precast.WS['Ascetic\'s Fury'] = {
+        ammo="Crepuscular Pebble",
+		head=gear.Adhemar_B_Head,
+		body=gear.Empyrean_Body,
+		hands=gear.Empyrean_Hands,
+		legs=gear.Mpaca_Legs,
+		feet=gear.Mpaca_Feet,
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		ear1="Sherida Earring",
+		ear2="Schere Earring",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+		back=gear.MNK_STR_CRIT_Cape,
+    }
     
     sets.precast.WS['Shell Crusher'] = {
         head=gear.Malignance_Head,
@@ -342,38 +358,6 @@ function init_gear_sets()
         waist="Orpheus's Sash",
     }
 
-    sets.defense.PDT = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Malignance_Head,
-        neck="Monk's Nodowa +2",
-        ear1="Sherida Earring",
-        ear2="Schere Earring",
-        body=gear.Malignance_Body,
-        hands=gear.Malignance_Hands,
-        ring1="Gere Ring",
-        ring2="Niqmaddu Ring",
-        back=gear.MNK_TP_Cape,
-        waist="Moonbow Belt +1",
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
-    }
-    
-    sets.defense.MDT = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Nyame_Head,
-        neck="Warder's Charm +1",
-        ear1="Odnowa Earring +1",
-        ear2="Tuisto Earring",
-        body=gear.Nyame_Body,
-        hands=gear.Nyame_Hands,
-        ring1="Defending Ring",
-        ring2="Gelatinous Ring +1",
-        back="Moonlight Cape",
-        waist="Engraved Belt",
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-    }
-
     sets.engaged = {
         ammo="Coiste Bodhar",
 		head=gear.Adhemar_A_Head,
@@ -387,9 +371,9 @@ function init_gear_sets()
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_TP_Cape,
+		back=gear.MNK_DEX_DA_Cape,
     }
-    '
+    
     sets.MacheEar1 = {
         ear1="Mache Earring +1"
     }
@@ -409,7 +393,7 @@ function init_gear_sets()
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_TP_Cape,
+		back=gear.MNK_DEX_DA_Cape,
     }
 
     sets.engaged.Acc.MA = set_combine(sets.engaged.Acc, sets.MacheEar1)
@@ -434,7 +418,7 @@ function init_gear_sets()
 		ear2="Bhikku Earring +1",
 		ring1="Defending Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_TP_Cape,
+		back=gear.MNK_DEX_DA_Cape,
     }
 
     sets.engaged.Counter.MA = set_combine(sets.engaged.Counter, sets.MacheEar1)
@@ -449,13 +433,13 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1",
         head=gear.Mpaca_Head,
         neck="Bathy Choker +1",
-        ear1="Eabani Earring",
-        ear2="Etiolation Earring",
+        ear1="Arete Del Luna +1",
+        ear2="Eabani Earring",
         body=gear.Mpaca_Body,
         hands=gear.Mpaca_Hands,
         ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.MNK_TP_Cape,
+        ring2="Defending Ring",
+        back=gear.MNK_DEX_DA_Cape,
         waist="Moonbow Belt +1",
         legs=gear.Mpaca_Legs,
         feet=gear.Mpaca_Feet,
@@ -474,11 +458,43 @@ function init_gear_sets()
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_TP_Cape,
+		back=gear.MNK_DEX_DA_Cape,
     }
     
     sets.buff.Impetus = { body=gear.Empyrean_Body }
 	sets.buff.Footwork = { feet=gear.Artifact_Feet }
+
+    sets.defense.PDT = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Malignance_Head,
+        neck="Monk's Nodowa +2",
+        ear1="Sherida Earring",
+        ear2="Schere Earring",
+        body=gear.Malignance_Body,
+        hands=gear.Malignance_Hands,
+        ring1="Gere Ring",
+        ring2="Niqmaddu Ring",
+        back=gear.MNK_DEX_DA_Cape,
+        waist="Moonbow Belt +1",
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+    }
+    
+    sets.defense.MDT = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Nyame_Head,
+        neck="Warder's Charm +1",
+        ear1="Odnowa Earring +1",
+        ear2="Tuisto Earring",
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        ring1="Defending Ring",
+        ring2="Gelatinous Ring +1",
+        back=gear.MNK_DEX_DA_Cape,
+        waist="Engraved Belt",
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+    }
 
     sets.buff.Doom = {
         neck="Nicander's Necklace",
@@ -496,7 +512,7 @@ end
 function determine_ma()
     classes.CustomMeleeGroups:clear()
     if player.equipment.Main == "Godhands" then
-        class.CustomMeleeGroups:append("MartialArts")
+        classes.CustomMeleeGroups:append("MA")
     end
 end
 

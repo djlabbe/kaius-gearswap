@@ -27,7 +27,7 @@ function job_setup()
     state.QDMode = M{['description']='Quick Draw Mode', 'Enhance', 'Potency'}
     state.LuzafRing = M(true, "Luzaf's Ring")
     state.Buff.Doom = false
-    state.warned = M(false)  -- Whether a warning has been given for low ammo
+    state.LowAmmoWarned = M(false)
 
     state.AutoAmmoMode = M(true,'Auto Ammo Mode')
     tickdelay = os.clock() + 5
@@ -76,7 +76,7 @@ function user_setup()
     gear.RAccbullet = "Devastating Bullet"
     gear.WSbullet = "Chrono Bullet"
     gear.MAbullet = "Living Bullet"
-    gear.QDbullet = "Living Bullet"COR_SB_Cape
+    gear.QDbullet = "Living Bullet"
     options.ammo_warning_limit = 10
 
     gear.Rostam_A = { name="Rostam", augments={'Path: A',}}
@@ -103,6 +103,7 @@ function user_setup()
     gear.COR_SB_Cape = { name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
     gear.COR_LD_Cape = { name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
     gear.COR_LS_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}} --*
+    gear.COR_RACRIT_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Crit.hit rate+10',}}
 
     send_command ('bind @` gs c toggle LuzafRing')
 
@@ -514,6 +515,7 @@ function init_gear_sets()
         ring1="Begrudging Ring",
         ring2="Mummu Ring",
         waist="K. Kachina Belt +1",
+        back=gear.COR_RACRIT_Cape,
     })
 
 
@@ -1151,7 +1153,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
     end
 
     -- Low ammo warning.
-    if spell.type ~= 'CorsairShot' and state.warned.value == false
+    if spell.type ~= 'CorsairShot' and state.LowAmmoWarned.value == false
         and available_bullets.count > 1 and available_bullets.count <= options.ammo_warning_limit then
         local msg = '*****  LOW AMMO WARNING: '..bullet_name..' *****'
         --local border = string.repeat("*", #msg)
@@ -1164,9 +1166,9 @@ function do_bullet_checks(spell, spellMap, eventArgs)
         add_to_chat(104, msg)
         add_to_chat(104, border)
 
-        state.warned:set()
-    elseif available_bullets.count > options.ammo_warning_limit and state.warned then
-        state.warned:reset()
+        state.LowAmmoWarned:set()
+    elseif available_bullets.count > options.ammo_warning_limit and state.LowAmmoWarned then
+        state.LowAmmoWarned:reset()
     end
 end
 

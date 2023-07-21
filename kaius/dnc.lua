@@ -670,7 +670,7 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         ring1="Purity Ring", --0/4
         ring2="Defending Ring", --10/10
-        back="Moonlight Cape", --6/6
+        back=gear.DNC_TP_Cape,
     })
 
     sets.idle.Town = sets.precast.WS['Rudra\'s Storm']

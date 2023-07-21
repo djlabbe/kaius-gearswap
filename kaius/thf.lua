@@ -61,7 +61,8 @@ function user_setup()
     gear.Empyrean_Feet = { name="Skulker's Poulaines +3" }
 
     gear.THF_TP_Cape = { name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}}
-    gear.THF_WS_Cape = { name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
+    gear.THF_WSD_Cape = { name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+    gear.THF_CRIT_Cape = { name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10','Phys. dmg. taken-10%',}}
 
     include('Global-Binds.lua')
 
@@ -228,7 +229,7 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         ring1="Regal Ring",
         ring2="Epaminondas's Ring",
-        back=gear.THF_WS_Cape,
+        back=gear.THF_WSD_Cape,
         waist="Fotia Belt",
     }, {
         ring1="Cornelia's Ring"
@@ -246,7 +247,7 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         ring1="Regal Ring",
         ring2="Epaminondas's Ring",
-        back=gear.THF_WS_Cape,
+        back=gear.THF_WSD_Cape,
         waist="Sailfi Belt +1",
     },{
         ring1="Cornelia's Ring"
@@ -270,7 +271,7 @@ function init_gear_sets()
         ring1="Regal Ring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
-        back=gear.THF_WS_Cape,
+        back=gear.THF_WSD_Cape,
     },{
         ring1="Cornelia's Ring"
     }) 
@@ -318,7 +319,7 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         ring1="Regal Ring",
         ring2="Begrudging Ring",
-        back=gear.THF_WS_Cape,
+        back=gear.THF_CRIT_Cape,
     }
 
     sets.precast.WS['Exenterator'] = {
@@ -333,7 +334,7 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         ring1="Regal Ring",
         ring2="Epaminondas's Ring",
-        back=gear.THF_WS_Cape,
+        back=gear.THF_WSD_Cape,
         waist="Fotia Belt",
     }
 
