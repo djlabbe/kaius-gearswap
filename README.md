@@ -13,4 +13,4 @@ The gear sets and principles are current as of July 2023, limited of course by m
 ## Credits
 
 Nearly all of my Luas are based on the work of [Arislan](https://github.com/ArislanShiva/luas) and [Mote](https://github.com/Kinematics/Mote-libs/tree/master) before him.
-The Auto-Ammo feature of the Corsair LUA is the work of [Selindrile](https://github.com/mattwells/Selindrile-GearSwap).
+The Auto-Ammo feature of the Corsair + Ranger LUAs is the work of [Selindrile](https://github.com/mattwells/Selindrile-GearSwap).

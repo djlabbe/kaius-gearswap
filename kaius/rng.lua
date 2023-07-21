@@ -18,6 +18,8 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    res = require('resources')
+    extdata = require('extdata')
 end
 
 
@@ -52,7 +54,7 @@ function job_setup()
 
     data.equipment.rema_ranged_weapons_ammo_pouch = {
         ['Fomalhaut'] = 'Chr. Bul. Pouch',
-        ['Gastraphetes'] = 'Quelling Bolt Quiver',
+        ['Gastraphetes'] = 'Quelling B. Quiver',
         ['Armageddon'] = 'Dev. Bul. Pouch',
         ['Annihilator'] = 'Era. Bul. Pouch'
     }

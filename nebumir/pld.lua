@@ -36,7 +36,7 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name="Reverence Coronet +1" }
-    gear.Artifact_Body = { name="Reverence Surcoat +1" }
+    gear.Artifact_Body = { name="Reverence Surcoat +3" }
     gear.Artifact_Hands = { name="Reverence Gauntlets +1" }
     gear.Artifact_Legs = { name="Reverence Breeches +1" }    
     gear.Artifact_Feet = { name="Reverence Leggings +1" }
@@ -66,6 +66,9 @@ function user_setup()
     send_command('bind !` input /ja "Majesty" <me>')
     send_command('bind !p input /ma "Protect V" <stpc>')
     send_command('bind !o input /ma "Shell IV" <stpc>')
+    send_command('bind !i input /ma "Phalanx" <me>')
+    send_command('bind ![ input /ma "Crusade" <me>')
+
 
     send_command('bind !c input /ma "Holy Circle" <me>')
 

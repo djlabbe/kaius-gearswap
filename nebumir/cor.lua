@@ -116,6 +116,19 @@ function job_setup()
     -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
+    elemental_ws = S{"Gust Slash", "Cyclone", "Energy Steal", "Energy Drain", "Aeolian Edge",
+                 "Burning Blade", "Red Lotus Blade", "Shining Blade", "Seraph Blade", "Spirits Within", "Sanguine Blade", "Atonement",
+                 "Frostbite", "Freezebite", "Herculean Slash",
+                 "Cloudsplitter", "Primal Rend",
+                 "Dark Harvest", "Shadow of Death", "Infernal Scythe",
+                 "Thunder Thrust", "Raiden Thrust",
+                 "Blade: Teki", "Blade: To", "Blade: Chi", "Blade: Ei", "Blade: Yu",
+                 "Tachi: Goten", "Tachi: Kagero", "Tachi: Jinpu", "Tachi: Koki",
+                 "Shining Strike", "Seraph Strike", "Flash Nova",
+                 "Rock Crusher", "Earth Crusher", "Starburst", "Sunburst", "Cataclysm", "Vidohunir", "Garland of Bliss", "Omniscience",
+                 "Flaming Arrow",
+                 "Hot Shot", "Wildfire", "Trueflight", "Leaden Salute"}
+                 
     define_roll_values()
 end
 
@@ -165,7 +178,7 @@ function user_setup()
     gear.Empyrean_Body = { name= "Chasseur's Frac +2" }
     gear.Empyrean_Hands = { name= "Chasseur's Gants +2" }
     gear.Empyrean_Legs = { name= "Chasseur's Culottes +2" }
-    gear.Empyrean_Feet = { name= "Chasseur's Bottes +2" }
+    gear.Empyrean_Feet = { name= "Chasseur's Bottes +3" }
 
     gear.COR_SNP_Cape = { name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10','Mag. Evasion+15',}} --Done
     gear.COR_RA_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+10','"Store TP"+10',}} -- 5 Resin ?
@@ -1002,6 +1015,7 @@ function init_gear_sets()
     sets.idle.Refresh = set_combine(sets.idle, {
         head=gear.Herc_Idle_Head,
         --body="Mekosu. Harness",
+        neck="Sibyl Scarf",
         legs="Rawhide Trousers",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,

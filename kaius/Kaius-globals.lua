@@ -283,19 +283,19 @@ function handle_strategems(cmdParams)
         elseif strategem == 'power' then
             send_command('input /ja Rapture <me>')
         elseif strategem == 'duration' then
-            if player.job == 'SCH' then
+            if player.main_job == 'SCH' then
                 send_command('input /ja Perpetuance <me>')
             else
                 add_to_chat(122,'Error: ' ..player.job.. ' does not have a Duration strategem.')
             end
         elseif strategem == 'accuracy' then
-            if player.job == 'SCH' then
+            if player.main_job == 'SCH' then
                 send_command('input /ja Altruism <me>')
             else
                 add_to_chat(122,'Error: ' ..player.job.. ' does not have an Accuracy strategem.')
             end
         elseif strategem == 'enmity' then
-            if player.job == 'SCH' then
+            if player.main_job == 'SCH' then
                 send_command('input /ja Tranquility <me>')
             else
                 add_to_chat(122,'Error: ' ..player.job.. ' does not have an Enmity strategem.')
@@ -319,19 +319,19 @@ function handle_strategems(cmdParams)
         elseif strategem == 'duration' then
             add_to_chat(122,'Error: Dark Arts does not have a Duration strategem.')
         elseif strategem == 'accuracy' then
-            if player.job == 'SCH' then
+            if player.main_job == 'SCH' then
                 send_command('input /ja Focalization <me>')
             else
                 add_to_chat(122,'Error: ' ..player.job.. ' does not have a Duration strategem.')
             end
         elseif strategem == 'enmity' then
-            if player.job == 'SCH' then
+            if player.main_job == 'SCH' then
                 send_command('input /ja Equanimity <me>')
             else
                 add_to_chat(122,'Error: ' ..player.job.. ' does not have a Duration strategem.')
             end
         elseif strategem == 'skillchain' then
-            if player.job == 'SCH' then
+            if player.main_job == 'SCH' then
                 send_command('input /ja Immanence <me>')
             else
                 add_to_chat(122,'Error: ' ..player.job.. ' does not have a Skillchain strategem.')

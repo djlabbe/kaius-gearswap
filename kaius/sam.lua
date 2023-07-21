@@ -243,7 +243,7 @@ function init_gear_sets()
         ring2="Epaminondas's Ring", 
         back=gear.SAM_WS_Cape,
     }, {
-        ring1="Cornlia's Ring",
+        ring1="Cornelia's Ring",
     })
 
     sets.precast.WS["Tachi: Fudo"].PDL = set_combine( sets.precast.WS["Tachi: Fudo"], {

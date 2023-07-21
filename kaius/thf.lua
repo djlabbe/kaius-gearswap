@@ -587,7 +587,14 @@ function init_gear_sets()
         back="Moonlight Cape", --6/6
     })
 
-    sets.idle.Town = sets.engaged.DW.MaxHaste
+    sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
+        sub="Smythe's Shield",
+        body="Blacksmith's Apron",
+        hands="Smithy's Mitts",
+        neck="Smithy's Torque",
+        ring1="Craftkeeper's Ring",
+        ring2="Artificer's Ring",
+    })
 
 end
 

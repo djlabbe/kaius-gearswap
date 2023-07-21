@@ -72,6 +72,9 @@ function user_setup()
     send_command('bind !` input /ja "Majesty" <me>')
     send_command('bind !p input /ma "Protect V" <stpc>')
     send_command('bind !o input /ma "Shell IV" <stpc>')
+    send_command('bind !i input /ma "Phalanx" <me>')
+    send_command('bind ![ input /ma "Crusade" <me>')
+
 
     send_command('bind !c input /ma "Holy Circle" <me>')
 
