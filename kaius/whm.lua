@@ -103,8 +103,8 @@ function user_setup()
 
     send_command('bind @w gs c toggle WeaponLock')
 
-    send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Maxentius; gs c set WeaponLock true;')
-    send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Yagrush; gs c set WeaponLock true;')
+    send_command('bind ^numpad7 gs c set WeaponSet Maxentius;')
+    send_command('bind ^numpad8 gs c set WeaponSet Yagrush;')
 
     set_macro_page(1, 3)
     send_command('wait 3; input /lockstyleset 3')

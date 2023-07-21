@@ -59,10 +59,10 @@ function user_setup()
 
     send_command('bind @w gs c toggle WeaponLock')
     
-    send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set 1')
-    send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set 2')
-    send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet Loxotic; gs c set WeaponLock true;input /macro set 3')
-    send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet ShiningOne; gs c set WeaponLock true;input /macro set 4')
+    send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
+    send_command('bind ^numpad8 gs c set WeaponSet Naegling;input /macro set 2')
+    send_command('bind ^numpad9 gs c set WeaponSet Loxotic;input /macro set 3')
+    send_command('bind ^numpad4 gs c set WeaponSet ShiningOne;input /macro set 4')
     
     if player.sub_job == 'SAM' then
         send_command('bind !` input /ja "Hasso" <me>')

@@ -111,8 +111,8 @@ function user_setup()
     send_command('bind !t input /ja "Animated Flourish" <t>')
     
 
-    send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Twash_TP; gs c set WeaponLock true')
-    send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Twash_Gleti; gs c set WeaponLock true')
+    send_command('bind ^numpad7 gs c set WeaponSet Twash_TP')
+    send_command('bind ^numpad8 gs c set WeaponSet Twash_Gleti')
 
     if player.sub_job == 'SAM' then
         set_macro_page(1, 19)

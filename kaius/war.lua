@@ -57,11 +57,11 @@ function user_setup()
 
     send_command('bind @w gs c toggle WeaponLock')
 
-    send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Chango; gs c set WeaponLock true;input /macro set 1')
-    send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Helheim; gs c set WeaponLock true;input /macro set 5')
-    send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet ShiningOne; gs c set WeaponLock true;input /macro set 4')
-    send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set 2')
-    send_command('bind ^numpad5 gs c set WeaponLock false;gs c set WeaponSet Loxotic; gs c set WeaponLock true;input /macro set 3')
+    send_command('bind ^numpad7 gs c set WeaponSet Chango;input /macro set 1')
+    send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 5')
+    send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 4')
+    send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 2')
+    send_command('bind ^numpad5 gs c set WeaponSet Loxotic;input /macro set 3')
 
     send_command('bind !F1 input /ja "Mighty Strikes" <me>')
     send_command('bind !F2 input /ja "Brazen Rush" <me>')

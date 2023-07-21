@@ -206,12 +206,12 @@ function user_setup()
         set_macro_page(10, 5)
     end
 
-    send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set ' ..sword)
-    send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Maxentius; gs c set WeaponLock true;input /macro set ' ..club)
-    send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet Tauret; gs c set WeaponLock true;input /macro set ' ..dagger)
-    send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet CroceaLight; gs c set WeaponLock true;input /macro set ' ..sword)
-    send_command('bind ^numpad5 gs c set WeaponLock false;gs c set WeaponSet CroceaDark; gs c set WeaponLock true;input /macro set ' ..sword)
-    send_command('bind ^numpad0 gs c set WeaponLock false;gs c set WeaponSet Daybreak; gs c set WeaponLock true;input /macro set ' ..sword)
+    send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set ' ..sword)
+    send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set ' ..club)
+    send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set ' ..dagger)
+    send_command('bind ^numpad4 gs c set WeaponSet CroceaLight;input /macro set ' ..sword)
+    send_command('bind ^numpad5 gs c set WeaponSet CroceaDark;input /macro set ' ..sword)
+    send_command('bind ^numpad0 gs c set WeaponSet Daybreak;input /macro set ' ..sword)
 
 
     send_command('wait 3; input /lockstyleset 5')

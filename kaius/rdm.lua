@@ -160,18 +160,18 @@ function user_setup()
 
 
     if player.sub_job == 'NIN' then
-        send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Maxentius; gs c set WeaponLock true;input /macro set 2')
-        send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet Tauret; gs c set WeaponLock true;input /macro set 3')
-        send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet CroceaLight; gs c set WeaponLock true;input /macro set 1')
-        send_command('bind ^numpad5 gs c set WeaponLock false;gs c set WeaponSet CroceaDark; gs c set WeaponLock true;input /macro set 1')
+        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 3')
+        send_command('bind ^numpad4 gs c set WeaponSet CroceaLight;input /macro set 1')
+        send_command('bind ^numpad5 gs c set WeaponSet CroceaDark;input /macro set 1')
         set_macro_page(1, 5)
     elseif player.sub_job == 'DNC' then
-        send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set 4')
-        send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Maxentius; gs c set WeaponLock true;input /macro set 5')
-        send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet Tauret; gs c set WeaponLock true;input /macro set 6')
-        send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet CroceaLight; gs c set WeaponLock true;input /macro set 4')
-        send_command('bind ^numpad5 gs c set WeaponLock false;gs c set WeaponSet CroceaDark; gs c set WeaponLock true;input /macro set 4')
+        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 4')
+        send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 5')
+        send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 6')
+        send_command('bind ^numpad4 gs c set WeaponSet CroceaLight;input /macro set 4')
+        send_command('bind ^numpad5 gs c set WeaponSet CroceaDark;input /macro set 4')
         set_macro_page(4, 5)
     elseif player.sub_job == 'SCH' then
         set_macro_page(7, 5)

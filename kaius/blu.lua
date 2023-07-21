@@ -185,19 +185,19 @@ function user_setup()
     send_command('bind !h input /ma "Erratic Flutter" <me>')
 
     if player.sub_job == 'RDM' then
-        send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Maxentius; gs c set WeaponLock true;input /macro set 2')
-        send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet Nuking; gs c set WeaponLock true;input /macro set 3')
+        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Nuking;input /macro set 3')
         set_macro_page(1, 16)
     elseif player.sub_job == 'WAR' then
-        send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set 4')
-        send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Maxentius; gs c set WeaponLock true;input /macro set 5')
-        send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet Nuking; gs c set WeaponLock true;input /macro set 6')
+        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 4')
+        send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 5')
+        send_command('bind ^numpad9 gs c set WeaponSet Nuking;input /macro set 6')
         set_macro_page(3, 16)
     else
-        send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Maxentius; gs c set WeaponLock true;input /macro set 2')
-        send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet Nuking; gs c set WeaponLock true;input /macro set 3')
+        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Nuking;input /macro set 3')
         set_macro_page(1, 16)
     end
     

@@ -68,6 +68,10 @@ function user_setup()
         send_command('bind !t input /ja "Provoke" <t>')
     end
 
+    send_command('bind ^numpad7 gs c set WeaponSet Verethragna;input /macro set 1')
+    send_command('bind ^numpad8 gs c set WeaponSet Godhands;input /macro set 1')
+    send_command('bind ^numpad9 gs c set WeaponSet Xoanon;input /macro set 2')
+
     set_macro_page(1, 2)
     send_command('wait 3; input /lockstyleset 2')
 

@@ -173,15 +173,15 @@ function user_setup()
         set_macro_page(1, 11)
     end
 
-    send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Gastraphetes; gs c set WeaponLock true; input //dp xbow; input /macro set ' ..marks)
-    send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Fomalhaut; gs c set WeaponLock true; input //dp gun; input /macro set ' ..marks)
-    send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet Fomalhaut_HS; gs c set WeaponLock true; input //dp gun; input /macro set ' ..marks)
+    send_command('bind ^numpad7 gs c set WeaponSet Gastraphetes; input //dp xbow; input /macro set ' ..marks)
+    send_command('bind ^numpad8 gs c set WeaponSet Fomalhaut; input //dp gun; input /macro set ' ..marks)
+    send_command('bind ^numpad9 gs c set WeaponSet Fomalhaut_HS; input //dp gun; input /macro set ' ..marks)
 
-    send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet Armageddon; gs c set WeaponLock true; input //dp gun; input /macro set ' ..marks)
-    send_command('bind ^numpad5 gs c set WeaponLock false;gs c set WeaponSet Annihilator; gs c set WeaponLock true; input //dp gun; input /macro set ' ..marks)
+    send_command('bind ^numpad4 gs c set WeaponSet Armageddon; input //dp gun; input /macro set ' ..marks)
+    send_command('bind ^numpad5 gs c set WeaponSet Annihilator; input //dp gun; input /macro set ' ..marks)
 
-    send_command('bind ^numpad1 gs c set WeaponLock false;gs c set WeaponSet Savage; gs c set WeaponLock true; input //dp bow; input /macro set ' ..sword)
-    send_command('bind ^numpad2 gs c set WeaponLock false;gs c set WeaponSet Aoe; gs c set WeaponLock true; input //dp bow; input /macro set ' ..marks)
+    send_command('bind ^numpad1 gs c set WeaponSet Savage; input //dp bow; input /macro set ' ..sword)
+    send_command('bind ^numpad2 gs c set WeaponSet Aoe; input //dp bow; input /macro set ' ..marks)
 
     state.Auto_Kite = M(false, 'Auto_Kite')
     Haste = 0

@@ -204,9 +204,9 @@ function user_setup()
         set_macro_page(1, 16)
     end
 
-    send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Naegling; gs c set WeaponLock true;input /macro set ' ..sword)
-    send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Maxentius; gs c set WeaponLock true;input /macro set ' ..club)
-    send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet Nuking; gs c set WeaponLock true;input /macro set ' ..club)
+    send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set ' ..sword)
+    send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set ' ..club)
+    send_command('bind ^numpad4 gs c set WeaponSet Nuking;input /macro set ' ..club)
     
 
     send_command('wait 3; input /lockstyleset 16')

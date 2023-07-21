@@ -102,12 +102,12 @@ function user_setup()
         set_macro_page(1, 6)
     end
 
-    send_command('bind ^numpad7 gs c set WeaponLock false;gs c set WeaponSet Twashtar_Gleti; gs c set WeaponLock true;')
-    send_command('bind ^numpad8 gs c set WeaponLock false;gs c set WeaponSet Twashtar_Crep; gs c set WeaponLock true;')
-    send_command('bind ^numpad9 gs c set WeaponLock false;gs c set WeaponSet Twashtar_TP; gs c set WeaponLock true;')
-    send_command('bind ^numpad4 gs c set WeaponLock false;gs c set WeaponSet Tauret_Gleti; gs c set WeaponLock true;')
-    send_command('bind ^numpad5 gs c set WeaponLock false;gs c set WeaponSet Gandring; gs c set WeaponLock true;')
-    send_command('bind ^numpad6 gs c set WeaponLock false;gs c set WeaponSet Savage; gs c set WeaponLock true;')
+    send_command('bind ^numpad7 gs c set WeaponSet Twashtar_Gleti;')
+    send_command('bind ^numpad8 gs c set WeaponSet Twashtar_Crep;')
+    send_command('bind ^numpad9 gs c set WeaponSet Twashtar_TP;')
+    send_command('bind ^numpad4 gs c set WeaponSet Tauret_Gleti;')
+    send_command('bind ^numpad5 gs c set WeaponSet Gandring;')
+    send_command('bind ^numpad6 gs c set WeaponSet Savage;')
 
     send_command('wait 3; input /lockstyleset 6')
     
