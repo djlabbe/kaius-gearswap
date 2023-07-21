@@ -52,7 +52,6 @@ function define_global_sets()
     gear.Telchine_ENH_Feet = { name="Telchine Pigaches", augments={'Enh. Mag. eff. dur. +10',}}
 
     gear.Yorium_PHLX_Head = {name="Yorium Barbuta", augments={'Phalanx +3',}}
-    gear.Yorium_PHLX_Body = {name="Yorium Cuirass", augments={'Phalanx +3',}}
 
     -- -- Kaykaus
     gear.Kaykaus_B_Head = { name="Kaykaus Mitra +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
@@ -84,6 +83,7 @@ function define_global_sets()
 
     gear.Merl_FC_Body = { name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','"Fast Cast"+7','Mag. Acc.+13',}}
     gear.Chironic_REF_Hands = { name="Chironic Gloves", augments={'Attack+30','"Refresh"+2',}}
+    gear.Valo_PHLX_Body = { name="Valorous Mail", augments={'Crit. hit damage +2%','Pet: INT+5','Phalanx +4','Mag. Acc.+3 "Mag.Atk.Bns."+3',}}
 
     gear.Souveran_C_Head = { name="Souv. Schaller +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}
     gear.Souveran_C_Body = { name="Souv. Cuirass +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}
@@ -91,20 +91,6 @@ function define_global_sets()
     gear.Souveran_C_Legs = { name="Souv. Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}
     gear.Souveran_D_Feet = { name="Souveran Schuhs +1", augments={'HP+65','Attack+25','Magic dmg. taken -4',}}
 
-    -- -- Ambuscade Capes
-
-
-    gear.BLM_MAB_Cape = { name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}}
-    gear.BLM_Death_Cape = { name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}}
-
-    gear.WAR_TP_Cape = { name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
-    gear.WAR_WS1_Cape = { name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}}
-
-    gear.GEO_Idle_Cape = { name="Nantosuelta's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10','Pet: "Regen"+5',}}
-    gear.GEO_MB_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
-
-    gear.THF_TP_Cape = { name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}}
-    gear.THF_EVIS_Cape = { name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}}
 end
 
 
@@ -123,6 +109,18 @@ elemental_degrade_array = {
     ['Lightning'] = {'Thunder','Thunder II','Thunder III','Thunder IV','Thunder V','Thunder VI'},
     ['Sleeps'] = {'Sleep','Sleep II',},
 }
+elemental_ws = S{"Gust Slash", "Cyclone", "Energy Steal", "Energy Drain", "Aeolian Edge",
+                 "Burning Blade", "Red Lotus Blade", "Shining Blade", "Seraph Blade", "Spirits Within", "Sanguine Blade", "Atonement",
+                 "Frostbite", "Freezebite", "Herculean Slash",
+                 "Cloudsplitter", "Primal Rend",
+                 "Dark Harvest", "Shadow of Death", "Infernal Scythe",
+                 "Thunder Thrust", "Raiden Thrust",
+                 "Blade: Teki", "Blade: To", "Blade: Chi", "Blade: Ei", "Blade: Yu",
+                 "Tachi: Goten", "Tachi: Kagero", "Tachi: Jinpu", "Tachi: Koki",
+                 "Shining Strike", "Seraph Strike", "Flash Nova",
+                 "Rock Crusher", "Earth Crusher", "Starburst", "Sunburst", "Cataclysm", "Vidohunir", "Garland of Bliss", "Omniscience",
+                 "Flaming Arrow",
+                 "Hot Shot", "Wildfire", "Trueflight", "Leaden Salute"}
 
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
@@ -133,6 +131,7 @@ function check_moving()
         end
     end
 end
+
 function handle_strategems(cmdParams)
     -- cmdParams[1] == 'scholar'
     -- cmdParams[2] == strategem to use

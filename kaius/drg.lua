@@ -17,10 +17,8 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
-    res = require 'resources'
 end
 
--- Setup vars that are user-independent.
 function job_setup()
     wyv_breath_spells = S{'Dia', 'Poison', 'Blaze Spikes', 'Protect', 'Sprout Smack', 'Head Butt', 'Cocoon',
         'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
@@ -31,15 +29,15 @@ function job_setup()
 end
 
 function user_setup()
+    include('Global-Binds.lua')
+
     state.OffenseMode:options('Normal', 'Acc', 'PDL')
     state.WeaponskillMode:options('Normal', 'Acc', 'PDL')
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal', 'DT')
 
     state.WeaponSet = M{['description']='Weapon Set', 'Trishula', 'ShiningOne', 'Naegling', 'Mafic' }
-    state.WeaponLock = M(false, 'Weapon Lock')
-
-    include('Global-Binds.lua')
+    state.WeaponLock = M(false, 'Weapon Lock')  
 
     -- gear.Artifact_Head = { name="Vishap Armet +1" }
     gear.Artifact_Body = { name="Vishap Mail +1" }

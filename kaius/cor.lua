@@ -12,41 +12,7 @@
 --              [ F12 ]             Update Current Gear / Report Current Status
 --              [ CTRL+F12 ]        Cycle Idle Modes
 --              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
---              [ WIN+C ]           Toggle Capacity Points Mode
---              [ WIN+` ]           Toggle use of Luzaf Ring.
---              [ WIN+Q ]           Quick Draw shot mode selector.
 --
---  Abilities:  [ CTRL+- ]          Quick Draw primary shot element cycle forward.
---              [ CTRL+= ]          Quick Draw primary shot element cycle backward.
---              [ ALT+- ]           Quick Draw secondary shot element cycle forward.
---              [ ALT+= ]           Quick Draw secondary shot element cycle backward.
---              [ CTRL+[ ]          Quick Draw toggle target type.
---              [ CTRL+] ]          Quick Draw toggle use secondary shot.
---
---  Spells:     [ WIN+, ]           Utsusemi: Ichi
---              [ WIN+. ]           Utsusemi: Ni
---
---  Weapons:    [ WIN+E/R ]         Cycles between available Weapon Sets
---              [ WIN+W ]           Toggle Ranged Weapon Lock
---
---  RA:         [ Numpad0 ]         Ranged Attack
---              (Global-Binds.lua contains additional non-job-related keybinds)
-
--------------------------------------------------------------------------------------------------------------------
---  Custom Commands (preface with /console to use these in macros)
--------------------------------------------------------------------------------------------------------------------
-
---  gs c qd                         Uses the currently configured shot on the target, with either <t> or
---                                  <stnpc> depending on setting.
---  gs c qd t                       Uses the currently configured shot on the target, but forces use of <t>.
---
---  gs c cycle QD               Cycles through the available steps to use as the primary shot when using
---                                  one of the above commands.
---
---  gs c toggle LuzafRing           Toggles use of Luzaf Ring on and off
-
--------------------------------------------------------------------------------------------------------------------
--- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
 
 function get_sets()
@@ -59,7 +25,6 @@ end
 function job_setup()
     state.QD = M{['description']='Primary Shot', 'Fire Shot', 'Ice Shot', 'Wind Shot', 'Earth Shot', 'Thunder Shot', 'Water Shot'}
     state.QDMode = M{['description']='Quick Draw Mode', 'Enhance', 'Potency'}
-    state.Currentqd = M{['description']='Current Quick Draw', 'Main', 'Alt'}
     state.LuzafRing = M(true, "Luzaf's Ring")
     state.Buff.Doom = false
     state.warned = M(false)  -- Whether a warning has been given for low ammo
@@ -96,6 +61,8 @@ function job_setup()
 end
 
 function user_setup()
+    include('Global-Binds.lua') 
+
     state.OffenseMode:options('Normal')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('Normal', 'Critical')
@@ -109,7 +76,7 @@ function user_setup()
     gear.RAccbullet = "Devastating Bullet"
     gear.WSbullet = "Chrono Bullet"
     gear.MAbullet = "Living Bullet"
-    gear.QDbullet = "Living Bullet"
+    gear.QDbullet = "Living Bullet"COR_SB_Cape
     options.ammo_warning_limit = 10
 
     gear.Rostam_A = { name="Rostam", augments={'Path: A',}}
@@ -133,11 +100,9 @@ function user_setup()
     gear.COR_SNP_Cape = { name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10','Mag. Evasion+15',}}        
     gear.COR_RA_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10','Phys. dmg. taken-10%',}} --*
     gear.COR_DW_Cape = { name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}} --*
-    gear.COR_WS1_Cape = { name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
-    gear.COR_WS2_Cape = { name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
-    gear.COR_WS3_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}} --*
-
-    include('Global-Binds.lua') 
+    gear.COR_SB_Cape = { name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
+    gear.COR_LD_Cape = { name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
+    gear.COR_LS_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}} --*
 
     send_command ('bind @` gs c toggle LuzafRing')
 
@@ -205,10 +170,18 @@ function user_setup()
     determine_haste_group()
 end
 
-
--- Called when this job file is unloaded (eg: job change)
 function user_unload()
-    send_command ('unbind ^`')
+    send_command('unbind @`')    
+    send_command('unbind ^`')
+    send_command('unbind !insert')
+    send_command('unbind !delete')
+    send_command('unbind @q')
+    send_command('unbind @w')
+    send_command('unbind !F1')
+    send_command('unbind !F2')
+    send_command('unbind !f')
+    send_command('unbind !t')
+
     send_command('unbind !numpad7')
     send_command('unbind !numpad8')
     send_command('unbind !numpad9')  
@@ -220,7 +193,15 @@ function user_unload()
     send_command('unbind !numpad3')
     send_command('unbind !numpad0')
     send_command('unbind !numpad+')
-    send_command('unbind !numpad-')  
+    send_command('unbind !numpad-')
+    
+    send_command('unbind ^numpad7')
+    send_command('unbind ^numpad8') 
+    send_command('unbind ^numpad4')
+    send_command('unbind ^numpad5')
+    send_command('unbind ^numpad1')
+    send_command('unbind ^numpad2')
+    send_command('unbind ^numpad0') 
 end
 
 function init_gear_sets()
@@ -310,7 +291,7 @@ function init_gear_sets()
         feet="Pursuer's Gaiters", --0/10
     }) --32/73
 
-    sets.precast.WS = {
+    sets.precast.WS = set_combine({
         ammo=gear.WSbullet,
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -320,16 +301,18 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Dingir Ring",
+        ring1="Regal Ring",
         ring2="Epaminondas's Ring",
-        back=gear.COR_WS3_Cape,
+        back=gear.COR_LS_Cape,
         waist="Fotia Belt",
-    }
+    }, {
+        ring1="Cornelia's Ring"
+    })
 
-    sets.precast.WS['Last Stand'] = {
+    sets.precast.WS['Last Stand'] = set_combine({
         ammo=gear.WSbullet,
         head=gear.Relic_Head,
-        body=gear.Artifact_Body,
+        body=gear.Ikenga_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Relic_Feet,
@@ -338,9 +321,11 @@ function init_gear_sets()
         ear2="Ishvara Earring",
         ring1="Regal Ring",
         ring2="Dingir Ring",
-        back=gear.COR_WS3_Cape,
+        back=gear.COR_LS_Cape,
         waist="Fotia Belt",
-    }
+    }, {
+        ring1="Cornelia's Ring"
+    })
 
     sets.precast.WS['Wildfire'] = set_combine({
         ammo=gear.MAbullet,
@@ -354,7 +339,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
         ring2="Epaminondas's Ring",
-        back=gear.COR_WS2_Cape,
+        back=gear.COR_LD_Cape,
         waist="Skrymir Cord +1",
     }, {
         ring2="Cornelia's Ring",
@@ -372,7 +357,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
         ring2="Epaminondas's Ring",
-        back=gear.COR_WS2_Cape,
+        back=gear.COR_LD_Cape,
         waist="Skrymir Cord +1",
     }, {
         ring2="Cornelia's Ring",
@@ -390,7 +375,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
         ring2="Archon Ring",
-        back=gear.COR_WS2_Cape,
+        back=gear.COR_LD_Cape,
         waist="Skrymir Cord +1",
     }, {
         ring2="Cornelia's Ring",
@@ -424,13 +409,13 @@ function init_gear_sets()
         ear2="Ishvara Earring",
         ring1="Regal Ring",
         ring2="Epaminondas's Ring",
-        back=gear.COR_WS1_Cape,
+        back=gear.COR_SB_Cape,
         waist="Sailfi Belt +1",
     }, {
         ring1="Cornelia's Ring",
     })
 
-    sets.precast.WS['Aeolian Edge'] = {
+    sets.precast.WS['Aeolian Edge'] = set_combine({
         ammo=gear.QDbullet,
         head=gear.Nyame_Head,
         body=gear.Relic_Body,
@@ -441,10 +426,12 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
-        ring2="Cornelia's Ring",
-        back=gear.COR_WS2_Cape,
+        ring2="Epaminondas's Ring",
+        back=gear.COR_LD_Cape,
         waist="Orpheus's Sash",
-    }
+    }, {
+        ring2="Cornelia's Ring"
+    })
 
     sets.midcast.FastRecast = sets.precast.FC
 
@@ -473,7 +460,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
         ring2="Fenrir Ring +1",
-        back=gear.COR_WS1_Cape,
+        back=gear.COR_SB_Cape,
         waist="Skrymir Cord +1",
     }
 
@@ -489,7 +476,7 @@ function init_gear_sets()
         ear2="Dignitary's Earring",
         ring1="Regal Ring",
         ring2="Dingir Ring",
-        back=gear.COR_WS1_Cape,
+        back=gear.COR_SB_Cape,
         waist="K. Kachina Belt +1",
     }
 
@@ -500,7 +487,6 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet
     }
 
-    -- Ranged gear
     sets.midcast.RA = {
         ammo=gear.RAbullet,
         head=gear.Ikenga_Head,
@@ -548,28 +534,6 @@ function init_gear_sets()
         body="Nisroch Jerkin",
         legs="Osh. Trousers +1",
     }
-
-    sets.resting = {}
-
-
-    sets.defense.PDT = sets.idle.DT
-
-    sets.defense.MDT = {
-        head=gear.Malignance_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
-        neck="Warder's Charm +1",
-        ear1="Etiolation Earring",
-        ear2="Eabani Earring",
-        ring1="Purity Ring", --0/4
-        ring2="Defending Ring", --10/10
-        back=gear.COR_SNP_Cape,
-        waist="Carrier's Sash",
-    }
-
-    sets.Kiting = {legs=gear.Carmine_D_Legs}
 
     sets.engaged = {
         ammo=gear.RAbullet,
@@ -676,13 +640,8 @@ function init_gear_sets()
     } -- 11%
 
     sets.engaged.Hybrid = {
-        head=gear.Malignance_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
-        -- ring2="Defending Ring" --10
-    } --41/31
+        ring2="Defending Ring" --10
+    }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
@@ -691,7 +650,7 @@ function init_gear_sets()
     sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
     sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
 
-    
+
     sets.idle = {
         ammo=gear.MAbullet,
         head=gear.Malignance_Head,
@@ -700,7 +659,7 @@ function init_gear_sets()
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
         neck="Warder's Charm +1",
-        ear1="Etiolation Earring",
+        ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
@@ -709,18 +668,29 @@ function init_gear_sets()
     }
 
     sets.idle.DT = set_combine(sets.idle, {
+        ring1="Purity Ring", --0/4
+        ring2="Defending Ring", --10/10
+    })
+
+    sets.idle.Town = sets.engaged.DW.MaxHaste
+
+    sets.defense.PDT = sets.idle.DT
+    sets.defense.MDT = {
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
         legs=gear.Malignance_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Warder's Charm +1",
+        ear1="Etiolation Earring",
+        ear2="Eabani Earring",
         ring1="Purity Ring", --0/4
         ring2="Defending Ring", --10/10
-        back="Moonlight Cape", --6/6
-    })
+        back=gear.COR_SNP_Cape,
+        waist="Carrier's Sash",
+    }
 
-    sets.idle.Town = sets.engaged.DW.MaxHaste
+    sets.Kiting = {legs=gear.Carmine_D_Legs}
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -970,7 +940,6 @@ function display_current_job_state(eventArgs)
 
     local qd_msg = '(' ..string.sub(state.QDMode.value,1,1).. ')'
 
-    local e_msg = state.QD.current
 
     local d_msg = 'None'
     if state.DefenseMode.value ~= 'None' then
@@ -986,7 +955,7 @@ function display_current_job_state(eventArgs)
 
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,060).. ' QD' ..qd_msg.. ': '  ..string.char(31,001)..e_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,060).. ' QD' ..qd_msg.. ' |'
         ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
         ..string.char(31,002)..msg)

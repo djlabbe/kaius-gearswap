@@ -217,7 +217,7 @@ function init_gear_sets()
         neck="Unmoving Collar +1",
         waist="Platinum Moogle Belt",
         ear1="Nourishing Earring +1", --7/5
-        ear2="Chevalier's Earring +1", --11/0
+        ear2="Mendicant's Earring", --11/0
         ring1="Apeile Ring +1",
         ring2="Gelatinous Ring +1",
         back=gear.PLD_FC_Cape, --0/10
@@ -270,7 +270,7 @@ function init_gear_sets()
         sub="Priwen",
         ammo="Staunch Tathlum +1",
         head=gear.Yorium_PHLX_Head,
-        body=gear.Yorium_PHLX_Body,
+        body=gear.Valo_PHLX_Body,
         hands=gear.Souveran_C_Hands,
         legs=gear.Sakpata_Legs,
         feet=gear.Souveran_D_Feet,

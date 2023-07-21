@@ -26,13 +26,15 @@ function job_setup()
 end
 
 function user_setup()
+    include('Global-Binds.lua')
+
     state.OffenseMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'DT', 'Counter')
     state.PhysicalDefenseMode:options('PDT')
 
     state.WeaponLock = M(true, 'Weapon Lock')
-    state.WeaponSet = M{['description']='Weapon Set', 'Verethragna', 'Godhands', 'Spharai', 'Xoanon'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Verethragna', 'Godhands', 'Xoanon'}
 
     gear.Artifact_Head = { name="Anchorite's Crown +1" }
     gear.Artifact_Body = { name="Anchorite's Cyclas +1" }
@@ -56,8 +58,6 @@ function user_setup()
     gear.MNK_INT_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     gear.MNK_WS_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     
-    include('Global-Binds.lua')
-
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @e gs c cycle WeaponSet')
 
@@ -73,14 +73,15 @@ function user_setup()
 
     state.Auto_Kite = M(false, 'Auto_Kite')
     moving = false
+    determine_ma()
 end
 
 function user_unload()
     send_command('unbind @w')
     send_command('unbind @e')
-    send_command('unbind ^`')
+    send_command('unbind !F1')
+    send_command('unbind !F2')
     send_command('unbind !t')
-    send_command('unbind ^=')
 end
 
 function init_gear_sets()
@@ -388,6 +389,12 @@ function init_gear_sets()
 		ring2="Niqmaddu Ring",
 		back=gear.MNK_TP_Cape,
     }
+    '
+    sets.MacheEar1 = {
+        ear1="Mache Earring +1"
+    }
+
+    sets.engaged.MA = set_combine(sets.engaged, sets.MacheEar1)
     
     sets.engaged.Acc = {
         ammo="Coiste Bodhar",
@@ -399,22 +406,15 @@ function init_gear_sets()
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
-		ear2="Telos Earring",
+		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
 		back=gear.MNK_TP_Cape,
     }
 
-    sets.engaged.MA = set_combine(sets.engaged, {
-        ear2="Mache Earring +1",
-    })
-
-    sets.engaged.Acc.MA = set_combine(sets.engaged.Acc, {
-        ear2="Mache Earring +1",
-    })
+    sets.engaged.Acc.MA = set_combine(sets.engaged.Acc, sets.MacheEar1)
 
     sets.engaged.Hybrid = {
-        ear2="Schere Earring",
         body=gear.Mpaca_Body,
         hands=gear.Malignance_Hands,
         legs=gear.Empyrean_Legs,
@@ -437,15 +437,13 @@ function init_gear_sets()
 		back=gear.MNK_TP_Cape,
     }
 
-    sets.engaged.Acc.Counter = set_combine(sets.engaged.Counter, {
-        ammo="Coiste Bodhar",
-    })
+    sets.engaged.Counter.MA = set_combine(sets.engaged.Counter, sets.MacheEar1)
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
+    sets.engaged.DT.MA = set_combine(sets.engaged.DT, sets.MacheEar1)
 
-    sets.engaged.DT.MA = set_combine(sets.engaged.MA, sets.engaged.Hybrid)
-    sets.engaged.Acc.DT.MA = set_combine(sets.engaged.Acc.MA, sets.engaged.Hybrid)
+    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)  
+    sets.engaged.Acc.DT.MA = set_combine(sets.engaged.Acc.DT, sets.MacheEar1)
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
@@ -483,17 +481,23 @@ function init_gear_sets()
 	sets.buff.Footwork = { feet=gear.Artifact_Feet }
 
     sets.buff.Doom = {
-        neck="Nicander's Necklace", --20
-        ring1="Eshmun's Ring", --20
-        ring2="Purity Ring", --20
-        waist="Gishdubar Sash", --10
+        neck="Nicander's Necklace",
+        ring1="Eshmun's Ring",
+        ring2="Purity Ring",
+        waist="Gishdubar Sash",
     }
 
     sets.Kiting = { feet="Hermes' Sandals" }
     sets.Verethragna = { main="Verethragna" }
     sets.Godhands = { main="Godhands" }
-    sets.Spharai = { main="Spharai" }
     sets.Xoanon = { main="Xoanon", sub="Flanged Grip" }
+end
+
+function determine_ma()
+    classes.CustomMeleeGroups:clear()
+    if player.equipment.Main == "Godhands" then
+        class.CustomMeleeGroups:append("MartialArts")
+    end
 end
 
 function job_state_change(field, new_value, old_value)
@@ -540,6 +544,7 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
     check_moving()
+    determine_ma()
 end
 
 function get_custom_wsmode(spell, action, spellMap)
