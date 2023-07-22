@@ -639,7 +639,6 @@ function init_gear_sets()
         head=gear.Empyrean_Head, 
         body=gear.Agwu_Body,
         ring1="Mujin Band",
-        ring2="Metamorph Ring +1",
     })
 
     sets.MagicBurst_Helix = {
@@ -700,7 +699,7 @@ function init_gear_sets()
         waist="Carrier's Sash",
     })
 
-    sets.idle.Town = sets.idle
+    sets.idle.Town = set_combine(sets.MagicBurst, {waist="Hachirin-no-obi"})
 
     sets.resting = set_combine(sets.idle, {
         main="Chatoyant Staff",
