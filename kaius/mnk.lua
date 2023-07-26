@@ -521,8 +521,14 @@ function determine_ma()
 end
 
 function job_state_change(field, new_value, old_value)
+    if state.WeaponLock.value == true then
+        disable('main','sub')
+    else
+        enable('main','sub')
+    end
     check_weaponset()
 end
+
 
 -- Run after the general precast() is done.
 function job_post_precast(spell, action, spellMap, eventArgs)

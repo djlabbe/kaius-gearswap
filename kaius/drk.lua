@@ -685,9 +685,9 @@ function init_gear_sets()
         ammo="Coiste Bodhar",
         head="Flamma Zucchetto +2", 
         body="Dagon Breastplate", --(10) 
-        hands=gear.Sakpata_Hands,
+        hands=gear.Sakpata_Hands, --8
         legs=gear.Sakpata_Legs, 
-        feet=gear.Sakpata_Feet, 
+        feet=gear.Sakpata_Feet, --13 
         neck="Abyssal Beads +2",
         ear1="Cessance Earring",
         ear2="Digni. Earring", --5
@@ -695,7 +695,9 @@ function init_gear_sets()
         ring2="Chirich Ring +1", --10
         waist="Sailfi Belt +1",
         back=gear.DRK_TP_Cape,
-    } --Auspice = 27 (WHM empy +2) +8 Food = need 15(I) + 15(II) to cap.
+    } 
+    --Auspice = 27 (WHM empy +2) +8 Food = need 15(I) + 15(II) to cap.
+
 
     sets.engaged.Acc = set_combine(sets.engaged, {
         ear2="Heathen's Earring +1"

@@ -409,12 +409,16 @@ function init_gear_sets()
 
     sets.Hybrid = set_combine(sets.engaged, {
         ammo="Coiste Bodhar",
+        head=gear.Adhemar_A_Head,
         neck="Anu Torque",
+        ear1="Sherida Earring",
+        ear2="Cessance Earring",
+        body="Ashera Harness",
+        legs="Volte Tights",
+        feet=gear.Empyrean_Feet,
         waist="Sailfi Belt +1",
         ring1=gear.Moonlight_1,
         ring2=gear.Moonlight_2,
-        ear1="Sherida Earring",
-        ear2="Balder Earring +1",
     })
 
     sets.engaged.DD = set_combine(sets.engaged, sets.Hybrid)

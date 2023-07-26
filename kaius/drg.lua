@@ -586,7 +586,7 @@ function init_gear_sets()
     })
 
     sets.idle.Weak = sets.idle.DT
-    sets.idle.Town = sets.engaged.DT
+    sets.idle.Town = sets.engaged.Naegling
     sets.Kiting = { legs=gear.Carmine_D_Legs }
 
     sets.buff.Doom = {

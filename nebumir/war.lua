@@ -116,7 +116,7 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         ear1="Schere Earring",
         ear2="Boii Earring +1",
-        ring1="Flamma Ring",
+        ring1="Niqmaddu Ring",
         ring2="Petrov Ring",
         back=gear.WAR_TP_Cape,
     }

@@ -83,6 +83,8 @@ function define_global_sets()
 
     gear.Merl_FC_Body = { name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','"Fast Cast"+7','Mag. Acc.+13',}}
     gear.Chironic_REF_Hands = { name="Chironic Gloves", augments={'Attack+30','"Refresh"+2',}}
+    
+    gear.Valo_PHLX_Head = { name="Valorous Mask", augments={'Weapon skill damage +3%','"Fast Cast"+1','Phalanx +4','Mag. Acc.+12 "Mag.Atk.Bns."+12',}}
     gear.Valo_PHLX_Body = { name="Valorous Mail", augments={'Crit. hit damage +2%','Pet: INT+5','Phalanx +4','Mag. Acc.+3 "Mag.Atk.Bns."+3',}}
 
     gear.Souveran_C_Head = { name="Souv. Schaller +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}

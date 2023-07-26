@@ -269,7 +269,7 @@ function init_gear_sets()
         main="Sakpata's Sword",
         sub="Priwen",
         ammo="Staunch Tathlum +1",
-        head=gear.Yorium_PHLX_Head,
+        head=gear.Valo_PHLX_Head,
         body=gear.Valo_PHLX_Body,
         hands=gear.Souveran_C_Hands,
         legs=gear.Sakpata_Legs,

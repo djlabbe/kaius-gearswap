@@ -42,7 +42,6 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
-    res = require 'resources'
 end
 
 function job_setup()
@@ -76,7 +75,7 @@ function user_setup()
         'Spirited Etude', 'Logical Etude', 'Enchanting Etude', 'Bewitching Etude'}
 
     state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Twashtar', 'Tauret', 'Carnwenhan' }
-    state.WeaponLock = M(false, 'Weapon Lock')
+    state.WeaponLock = M(true, 'Weapon Lock')
 
     include('Global-Binds.lua') 
     
@@ -125,23 +124,20 @@ function user_setup()
     send_command('bind !h input /ma "Horde Lullaby II" <t>')
     send_command('bind !g input /ma "Foe Lullaby II" <t>')
 
-    send_command('bind !insert gs c cycleback Etude')
-    send_command('bind !delete gs c cycle Etude')
+    send_command('bind !insert gs c cycleback Threnody')
+    send_command('bind !delete gs c cycle Threnody')
+
+    send_command('bind !pageup gs c cycleback Etude')
+    send_command('bind !pagedown gs c cycle Etude')
 
     send_command('bind !home gs c cycleback Carol')
     send_command('bind !end gs c cycle Carol')
 
-    send_command('bind !pageup gs c cycleback Threnody')
-    send_command('bind !pagedown gs c cycle Threnody')
+   
 
     send_command('bind @` gs c cycle LullabyMode')
     send_command('bind @w gs c toggle WeaponLock')
 
-    send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
-    send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 2')
-    send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 2')
-    send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 2')
-    
     send_command('bind @1  gs c set SongMode Placeholder;pause .1;input /ma "Army\'s Paeon VI" <me>')
     send_command('bind @2  gs c set SongMode Placeholder;pause .1;input /ma "Army\'s Paeon V" <me>')
     send_command('bind @3  gs c set SongMode Placeholder;pause .1;input /ma "Army\'s Paeon IV" <me>')
@@ -166,16 +162,31 @@ function user_setup()
 
     send_command('bind !numpad0 input /ma "Mage\'s Ballad III" <stpc>')
     send_command('bind !numpad. input /ma "Mage\'s Ballad II" <stpc>')
-    send_command('bind !numpad+ input /ma "Sentinel\'s Scherzo" <me>')
 
     if player.sub_job == 'NIN' then
+        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 2')
+        send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 2')
         set_macro_page(1, 10)
     elseif player.sub_job == 'DNC' then
-        set_macro_page(2, 10)
-    elseif player.sub_job == 'WHM' then
+        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 3')
+        send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 4')
+        send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 4')
+        send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 4')
         set_macro_page(3, 10)
+    elseif player.sub_job == 'WHM' then
+        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 5')
+        send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 6')
+        send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 6')
+        send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 6')
+        set_macro_page(5, 10)
     elseif player.sub_job == 'PLD' then
-        set_macro_page(4, 10)
+        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 7')
+        send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 8')
+        send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 8')
+        send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 8')
+        set_macro_page(7, 10)
     else
         set_macro_page(1, 10)
     end
@@ -932,7 +943,7 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1]:lower() == 'carol' then
         send_command('@input /ma '..state.Carol.value..' <stpc>')
     elseif cmdParams[1]:lower() == 'threnody' then
-        send_command('@input /ma '..state.Threnody.value..' <stnpc>')
+        send_command('@input /ma '..state.Threnody.value..' <t>')
     end
 
     gearinfo(cmdParams, eventArgs)

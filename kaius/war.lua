@@ -29,7 +29,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
 
     state.WeaponSet = M{['description']='Weapon Set', 'Chango', 'Helheim', 'ShiningOne', 'Naegling', 'Loxotic' }
-    state.WeaponLock = M(false, 'Weapon Lock')
+    state.WeaponLock = M(true, 'Weapon Lock')
 
     include('Global-Binds.lua')
 

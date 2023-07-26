@@ -51,7 +51,7 @@ function user_setup()
     gear.Artifact_Body = { name="Theophany Bliaut +3" }
     gear.Artifact_Hands = { name="Theophany Mitts +3" }
     gear.Artifact_Legs = { name="Theophany Pantaloons +3" }
-    gear.Artifact_Feet = { name="Theophany Duckbills +2" }
+    gear.Artifact_Feet = { name="Theophany Duckbills +3" }
 
     gear.Relic_Head = { name="Piety Cap +3" }
     gear.Relic_Body = { name="Piety Bliaut +3" }
@@ -191,21 +191,21 @@ function init_gear_sets()
 
     sets.midcast.CureSolace = {
         main="Raetic Rod +1",
-        sub="Genmei Shield",
-        ammo="Staunch Tathlum +1",
+        sub="Genmei Shield", -- 10
+        ammo="Staunch Tathlum +1", -- 3 (11 SIRD)
         head=gear.Kaykaus_B_Head, 
         neck="Clr. Torque +2", 
         ear1="Glorious Earring", 
-        ear2="Magnetic Earring",
+        ear2="Magnetic Earring", -- (8 SIRD)
         body=gear.Empyrean_Body,
         hands=gear.Artifact_Hands,
-        legs=gear.Empyrean_Legs,
+        legs=gear.Empyrean_Legs, -- 13
         feet=gear.Kaykaus_B_Feet, 
         ring1="Janniston Ring",          
-        ring2="Defending Ring",
-        back=gear.WHM_Cure_Cape,
+        ring2="Defending Ring", -- 10
+        back=gear.WHM_Cure_Cape, -- 10
         waist="Shinjutsu-no-Obi +1",
-    }
+    } --46% PDT
 
     sets.midcast.CureSolaceWeather = set_combine(sets.midcast.CureSolace, {
         back="Twilight Cape",
@@ -226,16 +226,14 @@ function init_gear_sets()
 
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
         body=gear.Artifact_Body,
-        hands=gear.Artifact_Hands,
-        ring1="Metamor. Ring +1",
-        ring2="Mephitas's Ring +1",
-        waist="Luminary Sash"
-    })
+        -- ring1="Metamor. Ring +1",
+        feet=gear.Artifact_Feet, -- (29 SIRD)
+    }) --SIRD: 10 (Merit) + 29 + 19 = 58%
 
     sets.midcast.CuragaWeather = set_combine(sets.midcast.CureNormal, {
         body=gear.Artifact_Body,
         hands=gear.Kaykaus_D_Hands,
-        ring1="Metamor. Ring +1",
+        -- ring1="Metamor. Ring +1",
         ring2="Mephitas's Ring +1",
         back="Twilight Cape",
         waist="Hachirin-no-Obi",

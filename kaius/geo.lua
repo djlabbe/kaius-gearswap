@@ -636,6 +636,7 @@ function job_state_change(stateField, newValue, oldValue)
     else
         enable('main','sub')
     end
+    check_weaponset()
 end
 
 -- Called when a player gains or loses a pet.
