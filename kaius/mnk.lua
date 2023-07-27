@@ -384,21 +384,12 @@ function init_gear_sets()
 
     sets.engaged.MA = set_combine(sets.engaged, sets.MacheEar1)
     
-    sets.engaged.Acc = {
-        ammo="Coiste Bodhar",
-		head =gear.Adhemar_A_Head,
-		body=gear.Mpaca_Body,
-		hands=gear.Adhemar_A_Hands,
-		legs=gear.Tatenashi_Legs,
-		feet=gear.Tatenashi_Feet,
-		neck="Mnk. Nodowa +2",
-		waist="Moonbow Belt +1",
-		ear1="Sherida Earring",
-		ear2="Schere Earring",
-		ring1="Gere Ring",
-		ring2="Niqmaddu Ring",
-		back=gear.MNK_DEX_DA_Cape,
-    }
+    sets.engaged.Acc = set_combine(sets.engaged, {
+        head="Ken. Jinpachi +1",
+        hands="Tatenashi gote +1",
+		ring1="Regal Ring",
+		ring2=gear.Chirich_2,
+    })
 
     sets.engaged.Acc.MA = set_combine(sets.engaged.Acc, sets.MacheEar1)
 

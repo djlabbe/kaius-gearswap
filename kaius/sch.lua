@@ -51,7 +51,6 @@ function job_setup()
 
     state.BarElement = M{['description']='BarElement', 'Barfire', 'Barblizzard', 'Baraero', 'Barstone', 'Barthunder', 'Barwater'}
     state.BarStatus = M{['description']='BarStatus', 'Baramnesia', 'Barvirus', 'Barparalyze', 'Barsilence', 'Barpetrify', 'Barpoison', 'Barblind', 'Barsleep'}
-
     state.Buff.Doom = false
 
     update_active_strategems()
@@ -69,7 +68,7 @@ function user_setup()
 
     gear.Artifact_Head = { name= "Academic's Mortarboard +3" }
     gear.Artifact_Body = { name= "Academic's Gown +3" }
-    gear.Artifact_Hands = { name= "Academic's Bracers +2" }
+    gear.Artifact_Hands = { name= "Academic's Bracers +3" }
     gear.Artifact_Legs = { name= "Academic's Pants +3" }
     gear.Artifact_Feet = { name= "Academic's Loafers +3" }
 
@@ -319,7 +318,6 @@ function init_gear_sets()
         back=gear.SCH_MAB_Cape,
         waist="Sacro Cord",
     })
-
 
     sets.precast.WS['Myrkr'] = {
         ammo="Ghastly Tathlum +1",

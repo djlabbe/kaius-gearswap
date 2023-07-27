@@ -248,9 +248,6 @@ function check_moving()
 end
 
 function handle_strategems(cmdParams)
-    -- cmdParams[1] == 'scholar'
-    -- cmdParams[2] == strategem to use
-
     if not cmdParams[2] then
         add_to_chat(123,'Error: No strategem command given.')
         return

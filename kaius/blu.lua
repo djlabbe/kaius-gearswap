@@ -846,6 +846,9 @@ function init_gear_sets()
     } --53/27(+29% ShellV)
 
     sets.engaged.Learning = {
+        body=gear.Gleti_Body,
+        feet=gear.Gleti_Feet,
+        head=gear.Gleti_Head,
         ring1="Epona's Ring",
         ring2="Hetairoi Ring",
         hands=gear.Artifact_Hands,
