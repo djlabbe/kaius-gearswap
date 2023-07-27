@@ -637,7 +637,7 @@ end
 
 function get_combat_weapon()
     state.CombatWeapon:reset()
-    if weapon_list:contains(player.equipment.main) then
+    if custom_weapon_list:contains(player.equipment.main) then
         state.CombatWeapon:set(player.equipment.main)
     end
 end
