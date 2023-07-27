@@ -65,8 +65,8 @@ function define_global_sets()
     -- ESCHA AUGMENTED GEAR --
     --------------------------
 
-    gear.Eschite_A_Feet = {name="Eschite Greaves", augments={'HP+80','Enmity+7','Phys. dmg. taken -4',}}
-    gear.Eschite_C_Feet = {name="Eschite Greaves", augments={'Mag. Evasion+15','Spell interruption rate down +15%','Enmity+7',}}
+    gear.Eschite_C_Feet = {name="Eschite Greaves", augments={'Mag. Evasion+15','Spell interruption rate down +15%','Enmity+7',}, priority=18}
+    gear.Eschite_D_Legs = { name="Eschite Cuisses", augments={'"Mag.Atk.Bns."+25','"Conserve MP"+6','"Fast Cast"+5',}, priority=52}
 
     gear.Rawhide_B_Hands = {name="Rawhide Gloves", augments={'HP+50','Accuracy+15','Evasion+20',}}
 
@@ -127,11 +127,11 @@ function define_global_sets()
     gear.Amalric_A_Legs = {name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
     gear.Amalric_D_Feet = {name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}}
 
-    gear.Souveran_C_Head = {name="Souveran Schaller +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}
-    gear.Souveran_C_Body = {name="Souveran Cuirass +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}
-    gear.Souveran_C_Hands = {name="Souveran Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}
-    gear.Souveran_C_Legs = {name="Souveran Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}
-    gear.Souveran_D_Feet = {name="Souveran Schuhs +1", augments={'HP+65','Attack+25','Magic dmg. taken -4',}}
+    gear.Souveran_C_Head = { name="Souv. Schaller +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=280}
+    gear.Souveran_C_Body = { name="Souv. Cuirass +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=171}
+    gear.Souveran_C_Hands = { name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=239}
+    gear.Souveran_C_Legs = { name="Souv. Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=163}
+    gear.Souveran_D_Feet = { name="Souveran Schuhs +1", augments={'HP+65','Attack+25','Magic dmg. taken -4',}, priority=187}
 
     gear.Ryuo_A_Hands = {name="Ryuo Tekko +1", augments={'STR+12','DEX+12','Accuracy+20',}}
     gear.Ryuo_C_Head = {name="Ryuo Somen +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}}

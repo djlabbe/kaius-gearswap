@@ -1,37 +1,41 @@
 -------------------------------------------------------------------------------------------------------------------
--- Setup functions for this job.  Generally should not be modified.
+--  Keybinds
+-------------------------------------------------------------------------------------------------------------------
+--
+--  Modes:      [ F9 ]              Cycle Offense Modes
+--              [ CTRL+F9 ]         Cycle Hybrid Modes
+--              [ WIN+F9 ]          Cycle Weapon Skill Modes
+--              [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ CTRL+F11 ]        Cycle Casting Modes
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--
 -------------------------------------------------------------------------------------------------------------------
 
--- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-
-    -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
 
--- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
     state.Buff.Sentinel = buffactive.sentinel or false
     state.Buff.Cover = buffactive.cover or false
     state.Buff.Doom = buffactive.Doom or false
 end
 
--------------------------------------------------------------------------------------------------------------------
--- User setup functions for this job.  Recommend that these be overridden in a sidecar file.
--------------------------------------------------------------------------------------------------------------------
-
--- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('Normal', 'Acc')
-    state.HybridMode:options('Normal', 'PDT')
-    state.WeaponskillMode:options('Normal', 'Acc')
-    state.CastingMode:options('Normal', 'Resistant')
-    state.PhysicalDefenseMode:options('PDT', 'HP')
-    state.MagicalDefenseMode:options('MDT', 'HP')
+    state.OffenseMode:options('Normal')
+    state.HybridMode:options('Normal', 'DD')
+    state.WeaponskillMode:options('Normal')
+    state.CastingMode:options('Normal')
+    state.PhysicalDefenseMode:options('PDT')
+    state.MagicalDefenseMode:options('MDT')
     
+    state.PhalanxMode = M(false, 'Equip Phalanx Gear')
     state.EquipShield = M(true, 'Equip Shield w/Defense')
-
     state.WeaponSet = M{['description']='Weapon Set', 'Malignance', 'Sakpata'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
@@ -47,20 +51,26 @@ function user_setup()
     gear.Relic_Legs = { name="Caballarius Breeches +3" }
     gear.Relic_Feet = { name="Caballarius Leggings +3" }
 
-    gear.Empyrean_Head = { name="Chevalier's Armet +3" }
-    gear.Empyrean_Body = { name="Chevalier's Cuirass +3" }
-    gear.Empyrean_Hands = { name="Chevalier's Gauntlets +3" }
-    gear.Empyrean_Legs = { name="Chevalier's Cuisses +3" }
-    gear.Empyrean_Feet = { name="Chevalier's Sabatons +3" }
+    gear.Empyrean_Head = { name="Chevalier's Armet +3", priority=145 }
+    gear.Empyrean_Body = { name="Chevalier's Cuirass +3", priority=151 }
+    gear.Empyrean_Hands = { name="Chevalier's Gauntlets +3", priority=64 }
+    gear.Empyrean_Legs = { name="Chevalier's Cuisses +3", priority=127 }
+    gear.Empyrean_Feet = { name="Chevalier's Sabatons +3", priority=52 }
 
     gear.PLD_Idle_Cape = { name="Rudianos's Mantle", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','Enmity+10','Chance of successful block +5',}}
     gear.PLD_FC_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Mag. Evasion+15',}}
     gear.PLD_SIRD_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Spell interruption rate down-10%',}}
     gear.PLD_CURE_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Cure" potency +10%','Phys. dmg. taken-10%',}}
+    gear.PLD_PHLX_Cape = { name="Weard Mantle", augments={'VIT+1','DEX+3','Enmity+6','Phalanx +5',}}
 
     send_command('bind @f10 gs c toggle EquipShield')
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @e gs c cycle WeaponSet')
+
+    send_command('bind ^p gs c toggle PhalanxMode')
+
+    send_command('bind !F1 input /ja "Invincible" <me>')
+    send_command('bind !F2 input /ja "Intervene" <t>')
 
     send_command('bind !t input /ja "Shield Bash" <t>')
     send_command('bind !` input /ja "Majesty" <me>')
@@ -68,7 +78,6 @@ function user_setup()
     send_command('bind !o input /ma "Shell IV" <stpc>')
     send_command('bind !i input /ma "Phalanx" <me>')
     send_command('bind ![ input /ma "Crusade" <me>')
-
 
     send_command('bind !c input /ma "Holy Circle" <me>')
 
@@ -96,13 +105,7 @@ function user_unload()
 end
 
 
--- Define sets and vars used by this job file.
 function init_gear_sets()
-    --------------------------------------
-    -- Precast sets
-    --------------------------------------
-    
-    -- Precast sets to enhance JAs
     sets.precast.JA['Invincible'] = {legs=gear.Relic_Legs}
     sets.precast.JA['Holy Circle'] = {feet=gear.Artifact_Feet}
     sets.precast.JA['Shield Bash'] = {hands=gear.Relic_Hands}
@@ -112,50 +115,48 @@ function init_gear_sets()
     sets.precast.JA['Divine Emblem'] = {feet=gear.Empyrean_Feet}
     sets.precast.JA['Cover'] = {head=gear.Artifact_Head}
 
-    sets.precast.JA['Chivalry'] = { -- Max MND
+    sets.precast.JA['Chivalry'] = {
         ammo="Sapience Orb",
         head="Hjarrandi Helm",
         body=gear.Souveran_C_Body,
         hands=gear.Souveran_C_Hands,
         legs=gear.Souveran_C_Legs,
-        feet=gear.Eschite_A_Feet,
-        neck="Unmoving Collar +1",
-        waist="Platinum Moogle Belt",
-        ear1="Tuisto Earring",
+        feet=gear.Empyrean_Feet,
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
         ear2="Cryptic Earring",
         ring1="Apeile Ring +1",
         ring2="Eihwaz Ring",
         back=gear.PLD_Idle_Cape,
-    }
+    } --Max MND
 
-
-    sets.precast.FC = { -- FC/SIRD
-        ammo="Staunch Tathlum +1", -- 0/11
-        head=gear.Souveran_C_Head, -- 0/20
-        body=gear.Artifact_Body, -- 5/0 
-        hands="Leyline Gloves", --5/0
-        legs="Founder's Hose",--0/30
-        feet=gear.Empyrean_Feet, -- 12/0
-        neck="Moonlight Necklace", -- 0/15
-        waist="Platinum Moogle Belt",
-        ear1="Tuisto Earring",
-        ear2="Etiolation Earring",
-        ring1="Prolix Ring", --5/0
-        ring2="Gelatinous Ring +1",
-        back=gear.PLD_FC_Cape, --8/10
-    } -- 28% FC, 112% SIRD
-
-    sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
+    sets.precast.FC = {
+        main="Sakpata's Sword", --10
+        ammo="Sapience Orb", --2
+        head=gear.Empyrean_Head, --9 
+        body=gear.Artifact_Body, --10
+        hands="Leyline Gloves", --6
+        legs=gear.Eschite_D_Legs, --5
+        feet=gear.Empyrean_Feet, --13
+        neck="Baetyl Pendant", --4
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
+        ear2={name="Odnowa Earring +1", priority=110},
+        ring1={name="Gelatinous Ring +1", priority=135}, 
+        ring2="Kishar Ring", --4
+        back=gear.PLD_FC_Cape, --10
+    } --73% FC, 3428 HP
 
     sets.precast.WS = {
         ammo="Crepuscular Pebble",
-        head=gear.Sakpata_Head,
-        body=gear.Sakpata_Body,
-        hands=gear.Sakpata_Hands,
-        legs=gear.Sakpata_Legs,
-        feet=gear.Sakpata_Feet,
-        neck="Unmoving Collar +1",
-        waist="Platinum Moogle Belt",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
         ear1="Thrud Earring",
         ear2="Moonshade Earring",
         ring1="Epaminondas's Ring",
@@ -163,136 +164,120 @@ function init_gear_sets()
         -- back={ name="Rudianos's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
     }
 
-    sets.precast.WS.Acc = sets.precast.WS
-
     sets.precast.WS['Sanguine Blade'] = {
         ear1="Friomisi Earring",
         ring1="Shiva Ring +1",
     }
-    
-    --------------------------------------
-    -- Midcast sets
-    --------------------------------------
 
-    sets.Enmity = {
-        ammo="Sapience Orb",
-        head=gear.Souveran_C_Head,
-        body=gear.Souveran_C_Body,
-        hands=gear.Souveran_C_Hands,
-        legs="Founder's Hose",--0/30
-        feet=gear.Eschite_C_Feet,
-        neck="Unmoving Collar +1",
-        waist="Platinum Moogle Belt",
-        ear1="Tuisto Earring",
-        ear2="Knightly Earring",
-        ring1="Apeile Ring +1",
-        ring2="Gelatinous Ring +1",
-        back=gear.PLD_Idle_Cape,
-    }
-
-    sets.midcast.Flash = set_combine(sets.Enmity, {{
+    sets.midcast.Flash = {
+        main="Brilliance",
+        sub="Srivatsa",
+        ammo="Staunch Tathlum +1", -- SIRD 11
         head="Loess Barbuta +1",
-        body=gear.Souveran_C_Body,
+        body=gear.Empyrean_Body, -- SIRD 20
         hands=gear.Souveran_C_Hands,
         legs=gear.Souveran_C_Legs,
-        feet=gear.Eschite_A_Feet,
-        neck="Unmoving Collar +1",
-        waist="Platinum Moogle Belt",
-        ear1="Tuisto Earring",
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
         ear2="Cryptic Earring",
         ring1="Apeile Ring +1",
         ring2="Eihwaz Ring",
-        back=gear.PLD_Idle_Cape,
-    }})
+        back=gear.PLD_SIRD_Cape, -- SIRD 10
+    } --3638 HP
     
     sets.midcast.Stun = sets.midcast.Flash
     
-    sets.midcast.Cure = { -- Cure/SIRD 
-        ammo="Staunch Tathlum +1", -- 0/11
-        head=gear.Souveran_C_Head, --0/20
-        body=gear.Souveran_C_Body, --11/0
-        hands="Macabre Gaunt. +1", --11/0
-        legs="Founder's Hose",--0/30
-        feet=gear.Ody_CURE_Feet, --13/20
-        neck="Unmoving Collar +1",
-        waist="Platinum Moogle Belt",
-        ear1="Nourishing Earring +1", --7/5
-        ear2="Mendicant's Earring", --11/0
-        ring1="Apeile Ring +1",
-        ring2="Gelatinous Ring +1",
-        back=gear.PLD_FC_Cape, --0/10
-    } -- 42/106
+    sets.midcast.Cure = { -- Cure/SIRD/Enmity
+        main="Sakpata's Sword",
+        ammo="Staunch Tathlum +1",      --00/11/00
+        head=gear.Souveran_C_Head,      --00/20/09
+        body=gear.Empyrean_Body,        --11/20/16
+        hands="Macabre Gaunt. +1",      --11/00/07
+        legs="Founder's Hose",          --00/30/00
+        feet=gear.Ody_CURE_Feet,        --13/20/00
+        neck={name="Unmoving Collar +1", priority=200},      --00/00/10
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},          --00/00/00
+        ear2="Nourishing Earring +1",   --07/00/00
+        ring1="Defending Ring",         --Keep DT Up
+        ring2={name="Gelatinous Ring +1", priority=135},     
+        back=gear.PLD_SIRD_Cape,        --00/10/10
+    } --3589 HP 53/111/xx
 
-    sets.midcast.Blue = { --Enm/SIRD
-        ammo="Staunch Tathlum +1", -- 0/11
-        head=gear.Souveran_C_Head, --9/20
-        body=gear.Souveran_C_Body, --20/0
-        hands=gear.Souveran_C_Hands, --9/0
-        legs="Founder's Hose",--0/30
-        feet=gear.Ody_CURE_Feet, --0/20
-        neck="Moonlight Necklace", --15/15
-        waist="Platinum Moogle Belt",
-        ear1="Tuisto Earring",
-        ear2="Odnowa Earring +1",
-        ring1="Apeile Ring +1", --9/0
-        ring2="Gelatinous Ring +1",
-        back=gear.PLD_FC_Cape, --10/0
-    } --115 sird
+    sets.midcast.Blue = { --SIRD/Enmity
+        main="Sakpata's Sword",
+        sub="Srivatsa",
+        ammo="Staunch Tathlum +1",      --11/00
+        head=gear.Souveran_C_Head,      --20/09
+        body=gear.Empyrean_Body,        --20/00
+        hands=gear.Souveran_C_Hands,    --00/09
+        legs="Founder's Hose",          --30/00
+        feet=gear.Ody_CURE_Feet,        --20/00
+        neck="Moonlight Necklace",      --15/15
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
+        ear2={name="Odnowa Earring +1", priority=110},
+        ring1="Apeile Ring +1",         --00/09
+        ring2={name="Gelatinous Ring +1", priority=135},        
+        back=gear.PLD_SIRD_Cape,        --10/10
+    } --3666 HP 136 sird
         
-    
     sets.midcast['Sheep Song'] = sets.midcast.Blue;
     sets.midcast['Geist Wall'] = sets.midcast.Blue;
     sets.midcast['Blank Gaze'] = sets.midcast.Blue;
     sets.midcast['Jettatura'] = sets.midcast.Blue;
-    
 
     sets.midcast['Enhancing Magic'] = {
         ammo="Staunch Tathlum +1",
         head=gear.Souveran_C_Head,
         body=gear.Souveran_C_Body,
-        hands=gear.Souveran_C_Hands,
+        hands={name="Regal Gauntlets", priority=205}, --[10]
         legs="Founder's Hose",--0/30
         feet=gear.Eschite_C_Feet,
-        neck="Unmoving Collar +1",
-        waist="Platinum Moogle Belt",
-        ear1="Tuisto Earring",
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
         ear2="Knightly Earring",
         ring1="Apeile Ring +1",
-        ring2="Gelatinous Ring +1",
-        back=gear.PLD_Idle_Cape,
+        ring2={name="Gelatinous Ring +1", priority=135},
+        back=gear.PLD_SIRD_Cape,
     }
     
-    sets.midcast.Protect = {sub="Priwen"}
-    sets.midcast.Shell = {ring1="Sheltered Ring"}
-	
-	 sets.midcast.Phalanx = {
+    sets.midcast.Protect = set_combine(sets.midcast['Enhancing Magic'], {ring1="Sheltered Ring"})
+    sets.midcast.Shell = set_combine(sets.midcast['Enhancing Magic'], {ring1="Sheltered Ring"})
+
+    sets.Phalanx = {
         main="Sakpata's Sword",
         sub="Priwen",
-        ammo="Staunch Tathlum +1",
         head=gear.Valo_PHLX_Head,
         body=gear.Valo_PHLX_Body,
         hands=gear.Souveran_C_Hands,
         legs=gear.Sakpata_Legs,
         feet=gear.Souveran_D_Feet,
-        -- neck="Incanter's Torque",
-        waist="Platinum Moogle Belt",
-        -- ear1="Mimir Earring",
+        back=gear.PLD_PHLX_Cape,
+    }
+	
+	 sets.midcast.Phalanx = set_combine({
+        ammo="Staunch Tathlum +1",
+        neck={name="Unmoving Collar +1", priority=200},      --00/00/10
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
-        back={ name="Weard Mantle", augments={'VIT+1','DEX+3','Enmity+6','Phalanx +5',}},
-    }
+    }, sets.Phalanx)
 
 	sets.precast.JA = {
         ammo="Sapience Orb",
         head="Loess Barbuta +1",
-        body=gear.Souveran_C_Body,
+        body=gear.Empyrean_Body,
         hands=gear.Souveran_C_Hands,
         legs=gear.Souveran_C_Legs,
-        feet=gear.Eschite_A_Feet,
-        neck="Unmoving Collar +1",
-        waist="Platinum Moogle Belt",
-        ear1="Tuisto Earring",
+        feet=gear.Empyrean_Feet,
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
         ear2="Cryptic Earring",
         ring1="Apeile Ring +1",
         ring2="Eihwaz Ring",
@@ -302,25 +287,19 @@ function init_gear_sets()
 	sets.midcast.Reprisal = {
         ammo="Staunch Tathlum +1",
         head=gear.Souveran_C_Head,
-        -- body="Rev. Surcoat +3",
-        hands="Leyline Gloves",
+        body=gear.Artifact_Body,
+        hands={name="Regal Gauntlets", priority=205}, --[10]
         legs="Founder's Hose",--0/30
-        -- feet={ name="Odyssean Greaves", augments={'"Fast Cast"+6','STR+5','Accuracy+3',}},
-        neck="Unmoving Collar +1",
-        waist="Platinum Moogle Belt",
-        ear1="Tuisto Earring",
+        feet=gear.Ody_CURE_Feet,
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
         ear2="Etiolation Earring",
         -- ring1="Weather. Ring",
-        ring2="Gelatinous Ring +1",
-        -- back={ name="Rudianos's Mantle", augments={'HP+60','"Fast Cast"+10','Spell interruption rate down-6%',}},
+        ring2={name="Gelatinous Ring +1", priority=135},
+        back=gear.PLD_SIRD_Cape,
     }
 
-	
-    --------------------------------------
-    -- Idle/resting/defense/etc sets
-    --------------------------------------
-
-    -- Idle sets
     sets.idle = {
         ammo="Staunch Tathlum +1",
         head=gear.Empyrean_Head,
@@ -328,32 +307,17 @@ function init_gear_sets()
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
-        neck="Unmoving Collar +1",
-        waist="Platinum Moogle Belt",
-        ear1="Tuisto Earring",
-        ear2="Odnowa Earring +1",
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
+        ear2={name="Odnowa Earring +1", priority=110},
         ring1=gear.Moonlight_1,
-        ring2="Gurebu's ring",
+        ring2={name="Gelatinous Ring +1", priority=135},
         back=gear.PLD_Idle_Cape,
-    }
+    } --3594 w/ Schneddick Ring
 
-    sets.idle.Town = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet,
-        neck="Unmoving Collar +1",
-        waist="Platinum Moogle Belt",
-        ear1="Tuisto Earring",
-        ear2="Odnowa Earring +1",
-        ring1="Gurebu's ring",
-        ring2="Gelatinous Ring +1",
-        back=gear.PLD_Idle_Cape,
-    }
+    sets.idle.Town = set_combine(sets.idle, {})
     
-
     sets.Kiting = { ring1="Shneddick Ring" }
     sets.latent_refresh = {waist="Fucho-no-obi"}
     
@@ -370,19 +334,14 @@ function init_gear_sets()
         hands=gear.Sakpata_Hands,
         legs=gear.Sakpata_Legs,
         feet=gear.Sakpata_Feet,
-        neck="Unmoving Collar +1",
-        waist="Platinum Moogle Belt",
-        ear1="Tuisto Earring",
-        ear2="Odnowa Earring +1",
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
+        ear2={name="Odnowa Earring +1", priority=110},
         ring1="Eihwaz Ring",
-        ring2="Gelatinous Ring +1",
+        ring2={name="Gelatinous Ring +1", priority=135},
         back=gear.PLD_Idle_Cape,
     }
-
-    sets.defense.HP = {
-
-    }
-
 
     sets.defense.MDT = {
         ammo="Staunch Tathlum +1",
@@ -392,19 +351,14 @@ function init_gear_sets()
         legs=gear.Sakpata_Legs,
         feet=gear.Sakpata_Feet,
         neck="Moonlight Necklace",
-        ear1="Odnowa Earring +1",
+        ear1={name="Odnowa Earring +1", priority=110},
         ear2="Eabani Earring",      
         ring1="Defending Ring",
         ring2="Purity Ring",
         back=gear.PLD_Idle_Cape,
-        waist="Platinum Moogle Belt",
+        waist={name="Platinum Moogle Belt", priority=999},
     }
 
-
-    --------------------------------------
-    -- Engaged sets
-    --------------------------------------
-    
     sets.engaged = {
         ammo="Staunch Tathlum +1", --3
         head=gear.Empyrean_Head, 
@@ -412,23 +366,18 @@ function init_gear_sets()
         hands=gear.Sakpata_Hands, --8
         legs=gear.Empyrean_Legs, --12
         feet=gear.Sakpata_Feet, --6
-        neck="Unmoving Collar +1",
-        waist="Platinum Moogle Belt",
-        ear1="Tuisto Earring",
-        ear2="Odnowa Earring +1",
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
+        ear2={name="Odnowa Earring +1", priority=110},
         ring1=gear.Moonlight_1,
         ring2="Petrov Ring",
         back=gear.PLD_Idle_Cape,
     } --49% DT
 
 
-    sets.engaged.Acc =  sets.engaged
     sets.engaged.PDT = sets.engaged
-    sets.engaged.Acc.PDT = sets.engaged
     
-    --------------------------------------
-    -- Custom buff sets
-    --------------------------------------
     sets.buff.Cover = {head=gear.Artifact_Head, body=gear.Relic_Body}
 
     sets.buff.Doom = {
@@ -468,9 +417,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     end
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for non-casting events.
--------------------------------------------------------------------------------------------------------------------
 
 -- Called when the player's status changes.
 function job_state_change(field, new_value, old_value)
@@ -508,6 +454,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
     check_moving()
 end
 
+
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
 end
@@ -516,6 +463,9 @@ end
 function customize_idle_set(idleSet)
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
+    end
+    if state.PhalanxMode.value == true then
+        idleSet = set_combine(idleSet, sets.Phalanx)
     end
     if state.Buff.Doom then
         idleSet = set_combine(idleSet, sets.buff.Doom)
@@ -529,9 +479,12 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
+    if state.PhalanxMode then
+        meleeSet = set_combine(idleSet, sets.Phalanx)
+    end
     if state.Buff.Doom then
         meleeSet = set_combine(meleeSet, sets.buff.Doom)
-    end
+    end    
 
     check_weaponset()
     

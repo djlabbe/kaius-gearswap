@@ -50,6 +50,7 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT')
     state.MagicalDefenseMode:options('MDT')
 
+    state.PhalanxMode = M(false, 'Equip Phalanx Gear')
     state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Helheim', 'Lycurgos'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
@@ -109,6 +110,7 @@ function user_setup()
 
     send_command('bind @e gs c cycle WeaponSet')
     send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind ^p gs c toggle PhalanxMode')
 
     set_macro_page(1, 22)
     send_command('wait 3; input /lockstyleset 22')
@@ -346,14 +348,16 @@ function init_gear_sets()
 
     sets.midcast.EnhancingDuration = sets.midcast['Enhancing Magic']
 
-    sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.Phalanx = {
         -- main="Deacon Sword", --4
         head=gear.Relic_Head, --7
         body=gear.Taeon_Phalanx_Body, --3(10)
         hands=gear.Taeon_Phalanx_Hands, --3(10)
         legs=gear.Taeon_Phalanx_Legs, --3(10)
         feet=gear.Taeon_Phalanx_Feet, --3(10)
-    })
+    }
+
+    sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], sets.Phalanx)
 
     sets.midcast.Temper = {
         main="Pukulatmuj +1",
@@ -657,6 +661,9 @@ function customize_idle_set(idleSet)
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
+    if state.PhalanxMode.value == true then
+        idleSet = set_combine(idleSet, sets.Phalanx)
+    end
     if state.Buff.Doom then
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
@@ -669,6 +676,9 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
+    if state.PhalanxMode then
+        meleeSet = set_combine(idleSet, sets.Phalanx)
+    end
     if state.Buff.Doom then
         meleeSet = set_combine(meleeSet, sets.buff.Doom)
     end

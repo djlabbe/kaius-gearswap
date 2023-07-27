@@ -6,7 +6,10 @@
 
 function define_global_sets()
     
-    -- Duplicate Items
+    ---------------------
+    -- DUPLICATE RINGS --
+    ---------------------
+
     gear.Stikini_1 = {name="Stikini Ring +1", bag="wardrobe7"}
     gear.Stikini_2 = {name="Stikini Ring +1", bag="wardrobe8"}
 
@@ -14,36 +17,21 @@ function define_global_sets()
     gear.Chirich_2 = {name="Chirich Ring +1", bag="wardrobe8"}
 
     gear.Moonlight_1 = {name="Moonlight Ring", bag="wardrobe7", priority=110}
-    -- Ody
-    gear.Nyame_Head = {name="Nyame Helm"}
-    gear.Nyame_Body = {name="Nyame Mail"}
-    gear.Nyame_Hands = {name="Nyame Gauntlets"}
-    gear.Nyame_Legs= {name="Nyame Flanchard"}
-    gear.Nyame_Feet = {name="Nyame Sollerets"}
+    gear.Moonlight_2 = {name="Moonlight Ring", bag="wardrobe8", priority=110}
 
-    gear.Sakpata_Head = {name="Sakpata's Helm"}
-    gear.Sakpata_Body = {name="Sakpata's Breastplate"}
-    gear.Sakpata_Hands = {name="Sakpata's Gauntlets"}
-    gear.Sakpata_Legs= {name="Sakpata's Cuisses"}
-    gear.Sakpata_Feet = {name="Sakpata's Leggings"}
-
-    gear.Gleti_Head = {name="Gleti's Mask"}
-    gear.Gleti_Body = {name="Gleti's Cuirass"}
-    gear.Gleti_Hands = {name="Gleti's Gauntlets"}
-    gear.Gleti_Legs= {name="Gleti's Breeches"}
-    gear.Gleti_Feet = {name="Gleti's Boots"}
-
-    ----Weapons
+    -----------------------
+    -- Augmented Weapons --
+    -----------------------
+        
+    gear.Malevolence_A = { name="Malevolence", augments={'INT+2','Mag. Acc.+3','"Mag.Atk.Bns."+3',}}
+    gear.Malevolence_B = { name="Malevolence", augments={'INT+4','Mag. Acc.+10','"Fast Cast"+3',}}
     gear.Gada_FC = { name="Gada", augments={'"Fast Cast"+6','DMG:+5',}}
     gear.Gada_ENH = { name="Gada", augments={'Enh. Mag. eff. dur. +6','"Mag.Atk.Bns."+15',}}
     gear.Colada_ENH = { name="Colada", augments={'Enh. Mag. eff. dur. +4','MND+1','"Mag.Atk.Bns."+13','DMG:+9',}}
 
-    -- Malignance
-    gear.Malignance_Head = {name="Malignance Chapeau"}
-    gear.Malignance_Body = {name="Malignance Tabard"}
-    gear.Malignance_Hands = {name="Malignance Gloves"}
-    gear.Malignance_Legs= {name="Malignance Tights"}
-    gear.Malignance_Feet = {name="Malignance Boots"}
+    -------------------
+    -- SKIRMISH GEAR --
+    -------------------
 
     gear.Telchine_ENH_Head = { name="Telchine Cap", augments={'Enh. Mag. eff. dur. +10',}}
     gear.Telchine_ENH_Body = { name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}}
@@ -51,9 +39,28 @@ function define_global_sets()
     gear.Telchine_ENH_Legs = { name="Telchine Braconi", augments={'Enh. Mag. eff. dur. +9',}}
     gear.Telchine_ENH_Feet = { name="Telchine Pigaches", augments={'Enh. Mag. eff. dur. +10',}}
 
-    gear.Yorium_PHLX_Head = {name="Yorium Barbuta", augments={'Phalanx +3',}}
+    
+    --------------------------
+    -- ESCHA AUGMENTED GEAR --
+    --------------------------
 
-    -- -- Kaykaus
+    gear.Eschite_C_Feet = {name="Eschite Greaves", augments={'Mag. Evasion+15','Spell interruption rate down +15%','Enmity+7',}, priority=18}
+    gear.Eschite_D_Legs = { name="Eschite Cuisses", augments={'"Mag.Atk.Bns."+25','"Conserve MP"+6','"Fast Cast"+5',}, priority=52}
+
+    gear.Herc_WSD_Head = { name="Herculean Helm", augments={'Attack+23','Weapon skill damage +4%','STR+7',}}
+    gear.Herc_WSD_Legs = { name="Herculean Trousers", augments={'Attack+18','Weapon skill damage +4%','STR+5',}}
+
+    gear.Merl_FC_Body = { name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','"Fast Cast"+7','Mag. Acc.+13',}}
+    gear.Chironic_REF_Hands = { name="Chironic Gloves", augments={'Attack+30','"Refresh"+2',}}
+    gear.Ody_CURE_Feet = { name="Odyssean Greaves", augments={'Mag. Acc.+9','"Cure" potency +6%','DEX+1','"Mag.Atk.Bns."+14',}}
+    
+    gear.Valo_PHLX_Head = { name="Valorous Mask", augments={'Weapon skill damage +3%','"Fast Cast"+1','Phalanx +4','Mag. Acc.+12 "Mag.Atk.Bns."+12',}}
+    gear.Valo_PHLX_Body = { name="Valorous Mail", augments={'Crit. hit damage +2%','Pet: INT+5','Phalanx +4','Mag. Acc.+3 "Mag.Atk.Bns."+3',}}
+
+    --------------
+    -- SKY SETS --
+    --------------
+    
     gear.Kaykaus_B_Head = { name="Kaykaus Mitra +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
     gear.Kaykaus_B_Feet = { name="Kaykaus Boots +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
     gear.Kaykaus_D_Hands = { name="Kaykaus Cuffs +1", augments={'MP+80','"Conserve MP"+7','"Fast Cast"+4',}}
@@ -78,20 +85,48 @@ function define_global_sets()
     gear.Adhemar_B_Feet = { name="Adhe. Gamashes +1", augments={'STR+12','DEX+12','Attack+20',}}
     -- gear.Adhemar_D_Feet = {name="Adhe. Gamashes +1", augments={'HP+65','"Store TP"+7','"Snapshot"+10',}}
 
-    gear.Herc_WSD_Head = { name="Herculean Helm", augments={'Attack+23','Weapon skill damage +4%','STR+7',}}
-    gear.Herc_WSD_Legs = { name="Herculean Trousers", augments={'Attack+18','Weapon skill damage +4%','STR+5',}}
+    gear.Souveran_C_Head = { name="Souv. Schaller +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=280}
+    gear.Souveran_C_Body = { name="Souv. Cuirass +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=171}
+    gear.Souveran_C_Hands = { name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=239}
+    gear.Souveran_C_Legs = { name="Souv. Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=163}
+    gear.Souveran_D_Feet = { name="Souveran Schuhs +1", augments={'HP+65','Attack+25','Magic dmg. taken -4',}, priority=187}
 
-    gear.Merl_FC_Body = { name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','"Fast Cast"+7','Mag. Acc.+13',}}
-    gear.Chironic_REF_Hands = { name="Chironic Gloves", augments={'Attack+30','"Refresh"+2',}}
-    
-    gear.Valo_PHLX_Head = { name="Valorous Mask", augments={'Weapon skill damage +3%','"Fast Cast"+1','Phalanx +4','Mag. Acc.+12 "Mag.Atk.Bns."+12',}}
-    gear.Valo_PHLX_Body = { name="Valorous Mail", augments={'Crit. hit damage +2%','Pet: INT+5','Phalanx +4','Mag. Acc.+3 "Mag.Atk.Bns."+3',}}
+    ------------------
+    -- ODYSSEY SETS --
+    ------------------
 
-    gear.Souveran_C_Head = { name="Souv. Schaller +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}
-    gear.Souveran_C_Body = { name="Souv. Cuirass +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}
-    gear.Souveran_C_Hands = { name="Souv. Handsch. +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}
-    gear.Souveran_C_Legs = { name="Souv. Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}}
-    gear.Souveran_D_Feet = { name="Souveran Schuhs +1", augments={'HP+65','Attack+25','Magic dmg. taken -4',}}
+    gear.Nyame_Head = {name="Nyame Helm"}
+    gear.Nyame_Body = {name="Nyame Mail"}
+    gear.Nyame_Hands = {name="Nyame Gauntlets"}
+    gear.Nyame_Legs= {name="Nyame Flanchard"}
+    gear.Nyame_Feet = {name="Nyame Sollerets"}
+
+    gear.Sakpata_Head = {name="Sakpata's Helm", priority=91}
+    gear.Sakpata_Body = {name="Sakpata's Breastplate", priority=136}
+    gear.Sakpata_Hands = {name="Sakpata's Gauntlets", priority=91}
+    gear.Sakpata_Legs= {name="Sakpata's Cuisses", priority=114}
+    gear.Sakpata_Feet = {name="Sakpata's Leggings", priority=68}
+
+    gear.Gleti_Head = {name="Gleti's Mask"}
+    gear.Gleti_Body = {name="Gleti's Cuirass"}
+    gear.Gleti_Hands = {name="Gleti's Gauntlets"}
+    gear.Gleti_Legs= {name="Gleti's Breeches"}
+    gear.Gleti_Feet = {name="Gleti's Boots"}
+
+    ----------------
+    -- MISC. SETS --
+    ----------------
+
+    gear.Malignance_Head = {name="Malignance Chapeau"}
+    gear.Malignance_Body = {name="Malignance Tabard"}
+    gear.Malignance_Hands = {name="Malignance Gloves"}
+    gear.Malignance_Legs= {name="Malignance Tights"}
+    gear.Malignance_Feet = {name="Malignance Boots"}
+
+    gear.Tatenashi_Body = {name="Tatenashi Haramaki +1"}
+    gear.Tatenashi_Hands = {name="Tatenashi Gote +1"}
+    gear.Tatenashi_Legs = {name="Tatenashi Haidate +1"}
+    gear.Tatenashi_Feet = {name="Tatenashi Sune-Ate +1"}
 
 end
 

@@ -506,7 +506,7 @@ function init_gear_sets()
         legs=gear.Mpaca_Legs,
         feet=gear.Mpaca_Feet,
         neck="Ninja Nodowa +2",
-        waist="Sailfi Belt",
+        waist="Sailfi Belt +1",
         ear1="Crepuscular Earring",
         ear2="Telos Earring",
         ring1="Gere Ring",
@@ -552,7 +552,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
-        ring2="Epona's Ring",
+        ring2=gear.Chirich_2,
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
     } -- 30%
@@ -568,7 +568,7 @@ function init_gear_sets()
         body=gear.Adhemar_A_Body, --6
         hands=gear.Adhemar_A_Hands,
         ring1="Gere Ring",
-        ring2="Epona's Ring",
+        ring2=gear.Chirich_2,
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7        
         legs=gear.Malignance_Legs,
@@ -585,7 +585,7 @@ function init_gear_sets()
         body="Tatena. Harama. +1",
         hands=gear.Adhemar_A_Hands,
         ring1="Gere Ring",
-        ring2="Epona's Ring",
+        ring2=gear.Chirich_2,
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7        
         legs=gear.Malignance_Legs,
@@ -602,7 +602,7 @@ function init_gear_sets()
         body=gear.Malignance_Body,
         hands=gear.Adhemar_A_Hands,
         ring1="Gere Ring",
-        ring2="Epona's Ring",
+        ring2=gear.Chirich_2,
         back=gear.NIN_TP_Cape,
         waist="Sailfi Belt +1",        
         legs=gear.Malignance_Legs,
