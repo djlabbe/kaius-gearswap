@@ -4,6 +4,12 @@
 -- include is complete.  It is called at the end of basic initialization in Mote-Include.
 -------------------------------------------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------------------------------------------
+-- Notes: 
+-- Order of states applied:
+--   sets.engaged[state.CombatForm][state.CombatWeapon][state.OffenseMode][state.DefenseMode][classes.CustomMeleeGroups (any number)]
+-------------------------------------------------------------------------------------------------------------------
+
 function define_global_sets()
 
     ---------------------

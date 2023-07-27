@@ -41,14 +41,7 @@ function get_sets()
 end
 
 function job_setup()
-    info.addendumNukes = S{"Stone IV", "Water IV", "Aero IV", "Fire IV", "Blizzard IV", "Thunder IV",
-        "Stone V", "Water V", "Aero V", "Fire V", "Blizzard V", "Thunder V"}
-
     state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
-    state.Weather = M{['description']='Weather',
-    "Aurorastorm II", "Thunderstorm II", "Hailstorm II", 'Firestorm II', 'Windstorm II',
-    "Rainstorm II", "Sandstorm II", "Voidstorm II"}
-
     state.BarElement = M{['description']='BarElement', 'Barfire', 'Barblizzard', 'Baraero', 'Barstone', 'Barthunder', 'Barwater'}
     state.BarStatus = M{['description']='BarStatus', 'Baramnesia', 'Barvirus', 'Barparalyze', 'Barsilence', 'Barpetrify', 'Barpoison', 'Barblind', 'Barsleep'}
     state.Buff.Doom = false
@@ -119,8 +112,6 @@ function user_setup()
     send_command('bind @q gs c toggle MagicBurst')
     send_command('bind @w gs c toggle WeaponLock')
 
-    send_command('bind !insert gs c cycleback Weather')
-    send_command('bind !delete gs c cycle Weather')
     send_command('bind !home gs c cycleback BarElement')
     send_command('bind !end gs c cycle BarElement')
     send_command('bind !pageup gs c cycleback BarStatus')
@@ -1003,8 +994,6 @@ function job_self_command(cmdParams, eventArgs)
         send_command('@input /ma '..state.BarElement.value..' <me>')
     elseif cmdParams[1]:lower() == 'barstatus' then
         send_command('@input /ma '..state.BarStatus.value..' <me>')
-    elseif cmdParams[1]:lower() == 'weather' then
-        send_command('@input /ma "'..state.Weather.value..'" <me>')
     end
 end
 
@@ -1037,7 +1026,6 @@ function update_active_strategems()
     state.Buff['Parsimony'] = buffactive['Parsimony'] or false
     state.Buff['Celerity'] = buffactive['Celerity'] or false
     state.Buff['Alacrity'] = buffactive['Alacrity'] or false
-
     state.Buff['Klimaform'] = buffactive['Klimaform'] or false
 end
 

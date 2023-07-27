@@ -23,6 +23,7 @@ function job_setup()
     state.Buff.Footwork = buffactive.Footwork or false
     state.Buff.Impetus = buffactive.Impetus or false
     state.Buff.Doom = false
+    custom_weapon_list = S{"Godhands"}
 end
 
 function user_setup()
@@ -34,7 +35,7 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT')
 
     state.WeaponLock = M(true, 'Weapon Lock')
-    state.WeaponSet = M{['description']='Weapon Set', 'Verethragna', 'Godhands', 'Xoanon'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Verethragna', 'Godhands'}
 
     gear.Artifact_Head = { name="Anchorite's Crown +1" }
     gear.Artifact_Body = { name="Anchorite's Cyclas +1" }
@@ -70,14 +71,13 @@ function user_setup()
 
     send_command('bind ^numpad7 gs c set WeaponSet Verethragna;input /macro set 1')
     send_command('bind ^numpad8 gs c set WeaponSet Godhands;input /macro set 1')
-    send_command('bind ^numpad9 gs c set WeaponSet Xoanon;input /macro set 2')
 
     set_macro_page(1, 2)
     send_command('wait 3; input /lockstyleset 2')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
     moving = false
-    determine_ma()
+    get_combat_weapon()
 end
 
 function user_unload()
@@ -382,7 +382,7 @@ function init_gear_sets()
         ear1="Mache Earring +1"
     }
 
-    sets.engaged.MA = set_combine(sets.engaged, sets.MacheEar1)
+    sets.engaged.Godhands = set_combine(sets.engaged, sets.MacheEar1)
     
     sets.engaged.Acc = set_combine(sets.engaged, {
         head="Ken. Jinpachi +1",
@@ -391,7 +391,7 @@ function init_gear_sets()
 		ring2=gear.Chirich_2,
     })
 
-    sets.engaged.Acc.MA = set_combine(sets.engaged.Acc, sets.MacheEar1)
+    sets.engaged.Godhands.Acc = set_combine(sets.engaged.Acc, sets.MacheEar1)
 
     sets.engaged.Hybrid = {
         body=gear.Mpaca_Body,
@@ -416,13 +416,13 @@ function init_gear_sets()
 		back=gear.MNK_DEX_DA_Cape,
     }
 
-    sets.engaged.Counter.MA = set_combine(sets.engaged.Counter, sets.MacheEar1)
+    sets.engaged.Godhands.Counter = set_combine(sets.engaged.Counter, sets.MacheEar1)
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-    sets.engaged.DT.MA = set_combine(sets.engaged.DT, sets.MacheEar1)
+    sets.engaged.Godhands.DT = set_combine(sets.engaged.DT, sets.MacheEar1)
 
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)  
-    sets.engaged.Acc.DT.MA = set_combine(sets.engaged.Acc.DT, sets.MacheEar1)
+    sets.engaged.Godhands.Acc.DT = set_combine(sets.engaged.Acc.DT, sets.MacheEar1)
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
@@ -501,15 +501,8 @@ function init_gear_sets()
     sets.Kiting = { feet="Hermes' Sandals" }
     sets.Verethragna = { main="Verethragna" }
     sets.Godhands = { main="Godhands" }
-    sets.Xoanon = { main="Xoanon", sub="Flanged Grip" }
 end
 
-function determine_ma()
-    classes.CustomMeleeGroups:clear()
-    if player.equipment.Main == "Godhands" then
-        classes.CustomMeleeGroups:append("MA")
-    end
-end
 
 function job_state_change(field, new_value, old_value)
     if state.WeaponLock.value == true then
@@ -611,6 +604,7 @@ end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
+    get_combat_weapon()
 end
 
 function customize_idle_set(idleSet)
@@ -639,6 +633,13 @@ function customize_melee_set(meleeSet)
     end
 
     return meleeSet
+end
+
+function get_combat_weapon()
+    state.CombatWeapon:reset()
+    if weapon_list:contains(player.equipment.main) then
+        state.CombatWeapon:set(player.equipment.main)
+    end
 end
 
 
