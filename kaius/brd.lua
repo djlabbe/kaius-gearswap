@@ -133,8 +133,6 @@ function user_setup()
     send_command('bind !home gs c cycleback Carol')
     send_command('bind !end gs c cycle Carol')
 
-   
-
     send_command('bind @` gs c cycle LullabyMode')
     send_command('bind @w gs c toggle WeaponLock')
 
