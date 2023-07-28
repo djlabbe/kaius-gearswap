@@ -475,7 +475,7 @@ function init_gear_sets()
 
     sets.defense.PDT = {
         ammo="Coiste Bodhar",
-        head="Hjarrandi Helm", --10
+        head=gear.Gleti_Head, --10
         body=gear.Gleti_Body, --9
         hands=gear.Empyrean_Hands, --11
         legs=gear.Relic_Legs,
@@ -567,7 +567,7 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
         body="Hjarrandi Breast.", --12/12
-        head="Hjarrandi Helm", --10/10
+        head=gear.Gleti_Head, --10/10
         hands=gear.Gleti_Hands,
         feet=gear.Relic_Feet,
         neck="Loricate Torque +1", --6/6

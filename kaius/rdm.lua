@@ -518,7 +518,7 @@ function init_gear_sets()
 
     sets.midcast.StatusRemoval = {
         head="Vanya Hood",
-        body="Vanya Robe",
+        body=gear.Relic_Body,
         legs=gear.Artifact_Legs,
         feet="Vanya Clogs",
         neck="Incanter's Torque",
@@ -776,8 +776,8 @@ function init_gear_sets()
         main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
-        head="Ea Hat +1",
-        body="Ea Houppe. +1",
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
@@ -788,6 +788,24 @@ function init_gear_sets()
         ring2="Metamor. Ring +1",
         back=gear.RDM_NUKE_Cape,
         waist="Acuity Belt +1",
+    }
+
+    sets.MagicBurst = {
+        main="Bunzi's Rod",
+        sub="Ammurapi Shield",
+        ammo="Ghastly Tathlum +1",
+        head="Ea Hat +1", --7/(7)
+        neck="Sibyl Scarf",
+        ear1="Malignance Earring",
+        ear2="Regal Earring",
+        body="Ea Houppe. +1", --9/(9)
+        hands=gear.Empyrean_Hands, --(6)
+        ring1="Freke Ring",
+        ring2="Mujin Band", --(5)
+        waist="Acuity Belt +1",
+        legs="Ea Slops +1", --8/(8)
+        feet=gear.Bunzi_Feet, --6  
+        back=gear.NUKE_Cape,
     }
 
 
@@ -856,23 +874,6 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.MagicBurst = {
-        main="Bunzi's Rod",
-        sub="Ammurapi Shield",
-        ammo="Ghastly Tathlum +1",
-        head="Ea Hat +1", --7/(7)
-        neck="Sibyl Scarf",
-        ear1="Malignance Earring",
-        ear2="Regal Earring",
-        body="Ea Houppe. +1", --9/(9)
-        hands=gear.Empyrean_Hands, --(6)
-        ring1="Freke Ring",
-        ring2="Mujin Band", --(5)
-        waist="Acuity Belt +1",
-        legs="Ea Slops +1", --8/(8)
-        feet=gear.Bunzi_Feet, --6  
-        back=gear.NUKE_Cape,
-    }
 
     sets.Kiting = {legs=gear.Carmine_D_Legs}
     sets.latent_refresh = {waist="Fucho-no-obi"}

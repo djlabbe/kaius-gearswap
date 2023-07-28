@@ -279,7 +279,7 @@ function init_gear_sets()
     
     sets.precast.FC = {
         main=gear.Grioavolr_FC, -- +10
-        sub="Clerisy Strap +1", -- +3
+        sub="Khonsu",
         ammo="Sapience Orb",
         head="Amalric Coif +1", -- +11
         neck="Orunmila's Torque", --5
@@ -304,7 +304,7 @@ function init_gear_sets()
 
     sets.midcast.Cure = {
         main="Chatoyant Staff",
-        sub="Clerisy Strap +1",
+        sub="Khonsu",
         head="Vanya Hood",
         body="Inyanga Jubbah +2",
         hands="Inyanga Dastanas +2",

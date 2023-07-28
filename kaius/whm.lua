@@ -149,8 +149,6 @@ end
 function init_gear_sets()
 
     sets.precast.FC = {
-        main="C. Palug Hammer", 
-        sub="Chanter's Shield", --3
         ammo="Impatiens", 
         head=gear.Bunzi_Head, --10
         neck="Cleric's Torque +2", --10
@@ -163,8 +161,8 @@ function init_gear_sets()
         back="Fi Follet Cape +1", --10
         waist="Witful Belt", --3
         legs="Pinga Pants +1", --13
-        feet="Regal Pumps +1", 
-    } --94
+        feet="Regal Pumps +1", --7
+    } --96
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
         waist="Siegel Sash",
@@ -241,7 +239,7 @@ function init_gear_sets()
 
     sets.midcast.StatusRemoval = {
         main="Yagrush",
-        sub="Chanter's Shield",
+        sub="Genmei Shield",
         head="Vanya Hood",
         body=gear.Empyrean_Body,
         hands="Fanatic Gloves",
