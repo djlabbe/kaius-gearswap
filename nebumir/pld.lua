@@ -570,3 +570,11 @@ end
 function check_weaponset()
     equip(sets[state.WeaponSet.current])
 end
+
+windower.register_event('gain buff',
+    function(buff_id)
+        if (buff_id == 106) then
+            state.PhalanxMode:unset()
+        end
+    end
+)
