@@ -170,6 +170,18 @@ function init_gear_sets()
         ring2="Defending Ring",       
     })
 
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, {
+        head=empty, 
+        body="Crepuscular Cloak", 
+        waist="Shinjutsu-no-Obi +1"
+    })
+
+    sets.precast.FC.Impact.DeathMode = set_combine(sets.precast.FC.DeathMode, {
+        head=empty, 
+        body="Crepuscular Cloak", 
+        waist="Shinjutsu-no-Obi +1"
+    })
+
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         ear1="Mendi. Earring",
         ring1="Lebeche Ring",
@@ -216,7 +228,7 @@ function init_gear_sets()
         ring1="Mephitas's Ring +1",
         ring2="Fenrir Ring +1",
         back="Bane Cape",
-        waist="Shinjutsu-no-Obi +1",
+        waist="Shinjutsu-no-Obi +1",s
     } -- Max MP
 
     sets.midcast.FastRecast = sets.precast.FC
@@ -438,12 +450,24 @@ function init_gear_sets()
         waist="Acuity Belt +1",
     }
 
+    sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
+        head=empty,
+        body="Crepuscular Cloak",
+        ring2="Archon Ring",
+    })
+    
     sets.midcast['Elemental Magic'].DeathMode = set_combine(sets.midcast['Elemental Magic'], {
         ammo="Ghastly Tathlum +1",
         back=gear.BLM_Death_Cape,
     })
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {})
+
+    sets.midcast.Impact.Resistant = set_combine(sets.midcast['Elemental Magic'].Resistant, {
+        sub="Khonsu",
+        head=empty,
+        body="Crepuscular Cloak",
+    })
 
     sets.midcast.Trust = sets.precast.FC
 

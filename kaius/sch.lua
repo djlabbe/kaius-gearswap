@@ -2,7 +2,7 @@
 --  Keybinds
 -------------------------------------------------------------------------------------------------------------------
 --
---  Modes:      
+--  Modes/Controls:      
 --              [ F10 ]             Emergency -PDT Mode
 --              [ ALT+F10 ]         Toggle Kiting Mode
 --              [ F11 ]             Emergency -MDT Mode
@@ -10,23 +10,43 @@
 --              [ F12 ]             Update Current Gear / Report Current Status
 --              [ CTRL+F12 ]        Cycle Idle Modes
 --              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
---              [ ALT+` ]           Toggle Magic Burst Mode
---              [ WIN+C ]           Toggle Capacity Points Mode
---              [ WIN+H ]           Cycle Helix Mode
---              [ WIN+R ]           Cycle Regen Mode
+--              [ WIN+Q ]           Toggle Magic Burst Mode
+--              [ WIN+W ]           Toggle Weapon Lock
+--              [ ALT+home ]        Cycleback BarElement
+--              [ ALT+end ]         Cycle BarElement
+--              [ ALT+pageup ]      Cycleback BarStatus
+--              [ ALT+pagedown ]    Cycle BarStatus
 --
---  Abilities:  
---              [ CTRL+- ]          Light Arts/Addendum: White
---              [ CTRL+= ]          Dark Arts/Addendum: Black
-
---              [ CTRL+[ ]          Rapture/Ebullience
---              [ CTRL+] ]          Altruism/Focalization
---              [ CTRL+; ]          Celerity/Alacrity
---              [ ALT+[ ]           Accesion/Manifestation
---              [ ALT+] ]           Perpetuance
+--  Abilities + Magic:  
+--              [ ALT+F1 ]          Tabula Rasa
+--              [ ALT+F1 ]          Caper Emissarius <stpc>
+--              [ ALT+S ]           Sublimation
+--              [ ALT+E ]           Enlightenment
+--              [ ALT+M ]           Modus Veritas
+--              [ ALT+P ]           Protect V
+--              [ ALT+O ]           Shell V
+--              [ ALT+I ]           Phalanx
+--              [ ALT+U ]           Aquaveil
+--              [ ALT+Y ]           Convert
+--              [ ALT+H ]           Haste
+--              [ ALT+F ]           Flurry
+--              [ ALT+G ]           Gravity
+--              [ ALT+B ]           Bind
+--              [ ALT+- ]           Light Arts/Addendum: White
+--              [ ALT+= ]           Dark Arts/Addendum: Black
+--              [ ALT+[ ]           Rapture/Ebullience
+--              [ ALT+] ]           Altruism/Focalization
 --              [ ALT+; ]           Penury/Parsimony
---
---  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
+--              [ CTRL+[ ]          Accesion/Manifestation
+--              [ CTRL+] ]          Perpetuance
+--              [ CTRL+; ]          Celerity/Alacrity
+--              [ ALT+numpad7 ]     Paralyze
+--              [ ALT+numpad7 ]     Slow
+--              [ ALT+numpad7 ]     Silence
+--              [ ALT+numpad7 ]     Distract
+--              [ ALT+numpad7 ]     Frazzle
+--              [ ALT+numpad7 ]     Blind II
+--              [ ALT+numpad7 ]     Poison II
 --
 -------------------------------------------------------------------------------------------------------------------
 --  Self Commands:
@@ -102,12 +122,11 @@ function user_setup()
 
     send_command('bind ![ gs c scholar power')
     send_command('bind !] gs c scholar accuracy')
+    send_command('bind !; gs c scholar cost')
 
     send_command('bind ^[ gs c scholar aoe')
     send_command('bind ^] gs c scholar duration')
-
     send_command('bind ^; gs c scholar speed')   
-    send_command('bind !; gs c scholar cost')
 
     send_command('bind @q gs c toggle MagicBurst')
     send_command('bind @w gs c toggle WeaponLock')
@@ -182,8 +201,6 @@ function user_unload()
     send_command('unbind !;') -- cost
 
     send_command('unbind @q') -- MB mode
-    send_command('unbind @h') -- helix mode
-    send_command('unbind @r') -- regen mode
     send_command('unbind @w') -- lock weapon mode
 end
 
@@ -209,7 +226,7 @@ function init_gear_sets()
         head=gear.Amalric_A_Head, --11
         body="Pinga Tunic +1", --15
         hands=gear.Artifact_Hands, --9
-        legs=gear.Agwu_Legs, -- 7
+        legs="Pinga Pants +1", --13
         feet=gear.Relic_Feet, --8
         neck="Orunmila's Torque", --5
         ear1="Malignance Earring", --4
@@ -218,12 +235,13 @@ function init_gear_sets()
         ring2="Prolix Ring", --2
         back="Fi Follet Cape +1", --10
         waist="Embla Sash", --5
-    } --97
+    } --100
 
      sets.precast.FC.Grimoire = {
         head=gear.Relic_Head, --13 
         feet=gear.Artifact_Feet --10
-    } -- 97 - 11 - 8 = 78 + (23) = 101
+    } -- 100 - 11 - 8 = 81
+      -- 80(cap) + (23 Grimoure) = 101
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
         waist="Siegel Sash"
@@ -239,7 +257,7 @@ function init_gear_sets()
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
 
-    -- sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak", waist="Shinjutsu-no-Obi +1"})
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak", waist="Shinjutsu-no-Obi +1"})
     
     sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {
         main="Daybreak", 
@@ -434,7 +452,6 @@ function init_gear_sets()
         hands=gear.Telchine_ENH_Hands,
         legs=gear.Telchine_ENH_Legs,
         feet=gear.Telchine_ENH_Feet,
-        back=gear.SCH_MAB_Cape,
         back=gear.SCH_REG_Cape,
     })
 
@@ -566,7 +583,7 @@ function init_gear_sets()
         head=gear.Agwu_Head,
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
-        legs=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
         neck="Argute Stole +2",
         ear1="Malignance Earring",
@@ -1079,7 +1096,7 @@ function sch_skillchain(cmdParams)
 	elseif sctype == 'doublefire' then
 		send_command('input /p Opening [Liquefaction ==> Fusion][Skillchain];pause .1;input /ja "Immanence" <me>;pause 1.0;input /ma "stone" <t>;pause 4.0;input /ja "Immanence" <me>;pause 1.0;input /p Closing Skillchain #1 [Liquefaction][Fire]; input /ma "Pyrohelix" <t>;pause 9.0;input /ja "Immanence" <me>;pause 1.0;input /p Closing Skillchain #2 [Fusion][Fire][Light]; input /ma "Ionohelix" <t>;')
     elseif sctype == 'doublefire-mb' then
-		send_command('input /p Opening [Liquefaction ==> Fusion][Skillchain];pause .1;input /ja "Immanence" <me>;pause 1.0;input /ma "stone" <t>;pause 4.0;input /ja "Immanence" <me>;pause 1.0;input /p Closing Skillchain #1 [Liquefaction][Fire]; input /ma "Pyrohelix" <t>;pause 3.0;input /ma "Fire V" <t>;pause 2.0;input /ja "Immanence" <me>;pause 1.0;input /p Closing Skillchain #2 [Fusion][Fire][Light]; input /ma "Ionohelix" <t>;')
+		send_command('input /p Opening [Liquefaction ==> Fusion][Skillchain];pause .1;input /ja "Immanence" <me>;pause 1.0;input /ma "stone" <t>;pause 4.0;input /ja "Immanence" <me>;pause 1.0;input /p Closing Skillchain #1 [Liquefaction][Fire]; input /ma "Pyrohelix" <t>;pause 3.5;input /ma "Fire V" <t>;pause 3.0;input /ja "Immanence" <me>;pause 1.0;input /p Closing Skillchain #2 [Fusion][Fire][Light]; input /ma "Ionohelix" <t>;')
     else
 		add_to_chat(123,'Error: Unknown skillchain ['..sctype..']')
 	end

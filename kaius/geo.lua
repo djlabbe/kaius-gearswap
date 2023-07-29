@@ -226,20 +226,6 @@ function init_gear_sets()
         waist="Orpheus's Sash",
     }
 
-    sets.midcast.FastRecast = {
-        main="Sucellus",
-        sub="Genmei Shield",
-        head=gear.Amalric_A_Head,
-        hands=gear.Merl_FC_hands,
-        legs=gear.Artifact_Legs,
-        ear1="Malignance Earring",
-        ear2="Etiolation Earring",
-        ring1="Kishar Ring",
-        ring2="Prolix Ring", 
-        back="Fi Follet Cape +1",
-        waist="Shinjutsu-no-Obi +1",
-    } 
-
    sets.midcast.Geomancy = {
         main="Idris",
         sub="Genmei Shield",
@@ -634,7 +620,6 @@ function job_state_change(stateField, newValue, oldValue)
     else
         enable('main','sub')
     end
-    check_weaponset()
 end
 
 -- Called when a player gains or loses a pet.
@@ -767,4 +752,8 @@ function gearinfo(cmdParams, eventArgs)
             job_update()
         end
     end
+end
+
+function check_weaponset()
+    equip(sets[state.WeaponSet.current])
 end

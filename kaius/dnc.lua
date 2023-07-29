@@ -948,7 +948,4 @@ end
 
 function check_weaponset()
     equip(sets[state.WeaponSet.current])
-    if state.Buff.Doom then
-        meleeSet = set_combine(meleeSet, sets.buff.Doom)
-    end
 end
