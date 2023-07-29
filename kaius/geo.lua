@@ -166,6 +166,7 @@ function init_gear_sets()
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Crepuscular Cloak"})
 
     sets.precast.WS = {
         ammo="Oshasha's Treatise",
@@ -376,7 +377,6 @@ function init_gear_sets()
         waist="Acuity Belt +1",
     }) -- INT/Magic accuracy
 
-
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
 
     sets.midcast['Dark Magic'] = {
@@ -426,6 +426,12 @@ function init_gear_sets()
         ring2="Metamor. Ring +1",
         back=gear.GEO_MAB_Cape,
     }
+
+    sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
+        head=empty,
+        body="Crepuscular Cloak",
+        ring2="Archon Ring",
+    })
 
     sets.MagicBurst = {
         main="Bunzi's Rod",
@@ -546,38 +552,48 @@ function job_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
-    if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
-        equip(sets.midcast.EnhancingDuration)
-        if spellMap == 'Refresh' then
-            equip(sets.midcast.Refresh)
-        end
-    end
-    if spell.skill == 'Elemental Magic' then
-        if spell.english == "Impact" then
-            equip(sets.midcast.Impact)
-        end
-        if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
-            equip(sets.Obi)
-        -- Target distance under 1.7 yalms.
-        elseif spell.target.distance < (1.7 + spell.target.model_size) then
-            equip({waist="Orpheus's Sash"})
-        -- Matching day and weather.
-        elseif spell.element == world.day_element and spell.element == world.weather_element then
-            equip(sets.Obi)
-        -- Target distance under 8 yalms.
-        elseif spell.target.distance < (8 + spell.target.model_size) then
-            equip({waist="Orpheus's Sash"})
-        -- Match day or weather.
-        elseif spell.element == world.day_element or spell.element == world.weather_element then
-            equip(sets.Obi)
-        end
-    end
     if spell.name == 'Impact' then
         equip(sets.precast.FC.Impact)
     end
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
+    if spell.skill == 'Elemental Magic' then
+        if state.MagicBurst.value then
+            equip(sets.MagicBurst)
+            if spell.english == "Impact" then
+                equip(sets.midcast.Impact)
+            end
+            if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
+                equip(sets.Obi)
+            -- Target distance under 1.7 yalms.
+            elseif spell.target.distance < (1.7 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Matching day and weather.
+            elseif spell.element == world.day_element and spell.element == world.weather_element then
+                equip(sets.Obi)
+            -- Target distance under 8 yalms.
+            elseif spell.target.distance < (8 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Match day or weather.
+            elseif spell.element == world.day_element or spell.element == world.weather_element then
+                equip(sets.Obi)
+            end
+        end
+        if (spell.element == world.day_element or spell.element == world.weather_element) then
+            equip(sets.Obi)
+        end
+    elseif spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
+        equip(sets.midcast.EnhancingDuration)
+        if spellMap == 'Refresh' then
+            equip(sets.midcast.Refresh)
+        end
+    elseif spell.skill == 'Geomancy' then
+        if buffactive.Entrust and spell.english:startswith('Indi-') then
+            equip({main=gear.Solstice})
+        end
+    end
+
     if spell.skill == 'Elemental Magic' and state.MagicBurst.value and spell.english ~= 'Death' then
         equip(sets.MagicBurst)
         if spell.english == "Impact" then

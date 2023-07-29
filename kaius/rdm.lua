@@ -277,6 +277,12 @@ function init_gear_sets()
         waist="Shinjutsu-no-Obi +1"
     })
 
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, {
+        head=empty,
+        body="Twilight Cloak",
+        waist="Shinjutsu-no-Obi +1", --5
+    })
+
     sets.precast.Storm = set_combine(sets.precast.FC, {
         ring1=gear.Stikini_1,
     })
@@ -790,6 +796,12 @@ function init_gear_sets()
         waist="Acuity Belt +1",
     }
 
+    sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
+        head=empty,
+        body="Twilight Cloak",
+        ring1="Archon Ring",
+        waist="Shinjutsu-no-Obi +1",
+    })
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 

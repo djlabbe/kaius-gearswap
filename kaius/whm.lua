@@ -187,6 +187,12 @@ function init_gear_sets()
         sub="Ammurapi Shield"
     })
 
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, {
+        head=empty, 
+        body="Crepuscular Cloak", 
+        waist="Shinjutsu-no-Obi +1"
+    })
+
     sets.midcast.FC = sets.precast.FC
 
     sets.midcast.CureSolace = {
@@ -448,6 +454,19 @@ function init_gear_sets()
     })
 
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
+
+    sets.midcast.Impact = {
+        main="Yagrush",
+        sub="Ammurapi Shield",
+        head=empty,
+        body="Crepuscular Cloak",
+        hands=gear.Artifact_Hands,
+        legs=gear.Artifact_Legs,
+        feet=gear.Artifact_Feet,
+        ring1="Freke Ring",
+        ring2="Archon Ring",
+    }
+
     sets.midcast.Trust = sets.precast.FC
 
     sets.engaged = {
@@ -573,12 +592,10 @@ function init_gear_sets()
     sets.Yagrush = { main="Yagrush", sub="Sindri" }
 end
 
--- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
--- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
-function job_precast(spell, action, spellMap, eventArgs)
-end
-
 function job_post_precast(spell, action, spellMap, eventArgs)
+    if spell.name == 'Impact' then
+        equip(sets.precast.FC.Impact)
+    end
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
