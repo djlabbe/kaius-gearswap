@@ -437,7 +437,7 @@ function init_gear_sets()
         ring1="Defending Ring",
         ring2="Purity Ring",
         back=gear.BST_DW_Cape,
-        waist="Asklepian Belt",
+        waist="Carrier's Sash",
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
     }

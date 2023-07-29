@@ -349,6 +349,16 @@ function handle_strategems(cmdParams)
     end
 end
 
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
+    end
+end
+
 function check_gear()
     if no_swap_gear:contains(player.equipment.left_ring) then
         disable("ring1")

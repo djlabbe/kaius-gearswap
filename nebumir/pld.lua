@@ -432,6 +432,9 @@ end
 -- buff == buff gained or lost
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff,gain)
+    if buff == 'Phalanx' and gain then
+        state.PhalanxMode:unset()
+    end
     if buff == 'Majesty' and not gain then
         add_to_chat(167, 'Majesty just expired!')
     end
@@ -570,11 +573,3 @@ end
 function check_weaponset()
     equip(sets[state.WeaponSet.current])
 end
-
-windower.register_event('gain buff',
-    function(buff_id)
-        if (buff_id == 106) then
-            state.PhalanxMode:unset()
-        end
-    end
-)

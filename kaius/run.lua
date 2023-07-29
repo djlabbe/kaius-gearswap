@@ -610,6 +610,10 @@ function job_state_change(field, new_value, old_value)
 end
 
 function job_buff_change(buff,gain)
+    if buff == 'Phalanx' and gain then
+        state.PhalanxMode:unset()
+    end
+
     if buff == "Doom" then
         if gain then
             state.Buff.Doom = true
@@ -676,7 +680,7 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
-    if state.PhalanxMode then
+    if state.PhalanxMode.value == true then
         meleeSet = set_combine(idleSet, sets.Phalanx)
     end
     if state.Buff.Doom then

@@ -554,7 +554,6 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
     check_moving()
-    determine_ma()
 end
 
 function get_custom_wsmode(spell, action, spellMap)

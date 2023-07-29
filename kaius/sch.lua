@@ -204,7 +204,7 @@ function init_gear_sets()
     
     sets.precast.FC = {
         main="Musa", --10
-        sub="Clerisy Strap +1", --3
+        sub="Khonsu",
         ammo="Sapience Orb", --2
         head=gear.Amalric_A_Head, --11
         body="Pinga Tunic +1", --15
@@ -363,7 +363,7 @@ function init_gear_sets()
         main="Musa",
         sub="Khonsu",
         head="Vanya Hood",
-        body="Vanya Robe",
+        body=gear.Relic_Body,
         hands=gear.Relic_Hands,
         legs=gear.Artifact_Legs,
         feet="Vanya Clogs",
@@ -655,14 +655,14 @@ function init_gear_sets()
     sets.midcast.Trust = sets.precast.FC
 
     sets.idle = {
-        main="Malignance Pole",
+        main="Mpaca's Staff",
         sub="Khonsu",
         ammo="Homiliary",
         head=gear.Nyame_Head,
         body=gear.Empyrean_Body,
-        hands="Volte Gloves",
+        hands=gear.Nyame_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet,
+        feet=gear.Nyame_Feet,
         neck="Sibyl Scarf",
         ear1="Etiolation Earring",
         ear2="Lugalbanda Earring",
@@ -673,31 +673,20 @@ function init_gear_sets()
     }
 
     sets.idle.DT = set_combine(sets.idle, {
-        main="Malignance Pole",
-        sub="Khonsu",
         ammo="Staunch Tathlum +1",
-        head=gear.Nyame_Head,
-        body=gear.Empyrean_Body, 
-        hands=gear.Nyame_Hands,
-        feet=gear.Nyame_Feet,
-        neck="Loricate Torque +1",
-        ear1="Etiolation Earring",
-        ring1="Gelatinous Ring +1",
-        ring2="Defending Ring", 
-        back=gear.SCH_MAB_Cape,
-        waist="Carrier's Sash",
+        neck="Warder's Charm +1",
     })
+
+    sets.defense.PDT = sets.idle.DT
+    sets.defense.MDT = sets.idle.DT
 
     sets.idle.Town = set_combine(sets.MagicBurst, {waist="Hachirin-no-obi"})
 
     sets.resting = set_combine(sets.idle, {
         main="Chatoyant Staff",
-        sub="Mensch Strap +1",
         waist="Shinjutsu-no-Obi +1",
     })
 
-    sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT
     sets.Kiting = { feet="Herald's Gaiters" }
     sets.latent_refresh = { waist="Fucho-no-obi" }
 
@@ -756,11 +745,6 @@ function init_gear_sets()
     sets.Obi = { waist="Hachirin-no-Obi" }
 
 end
-
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
--------------------------------------------------------------------------------------------------------------------
-
 function job_precast(spell, action, spellMap, eventArgs)
    if spell.name:startswith('Aspir') then
         refine_various_spells(spell, action, spellMap, eventArgs)
@@ -996,10 +980,6 @@ function job_self_command(cmdParams, eventArgs)
         send_command('@input /ma '..state.BarStatus.value..' <me>')
     end
 end
-
--------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
--------------------------------------------------------------------------------------------------------------------
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then

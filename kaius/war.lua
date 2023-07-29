@@ -360,7 +360,7 @@ function init_gear_sets()
     sets.precast.WS["Resolution"] = {
         ammo="Yetshila +1",
         head=gear.Empyrean_Head,
-        body=gear.Tatenashi_Body,
+        body=gear.Nyame_Body,
         hands=gear.Sakpata_Hands,
         legs=gear.Tatenashi_Legs,
         feet="Flamma Gambieras +2",

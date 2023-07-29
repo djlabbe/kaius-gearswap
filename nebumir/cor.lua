@@ -84,7 +84,7 @@ function user_setup()
     gear.Lanun_B = { name="Lanun Knife", augments={'Path: B',}}
     gear.Lanun_C = { name="Lanun Knife", augments={'Path: C',}}
 
-    gear.Artifact_Head = { name= "Laksamana's Tricorne +2" }
+    gear.Artifact_Head = { name= "Laksamana's Tricorne +3" }
     gear.Artifact_Body = { name= "Laksamana's Frac +3" }
 
     gear.Relic_Head = { name= "Lanun Tricorne +3" }

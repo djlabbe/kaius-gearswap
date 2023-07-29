@@ -135,8 +135,6 @@ function init_gear_sets()
 
     sets.precast.FC = {
         ranged="Dunna", --3
-        main=gear.Grioavolr_FC, --10
-        sub="Clerisy Strap +1", --3
         head=gear.Amalric_A_Head, --11
         body="Zendik Robe", --13
         hands=gear.Agwu_Hands, --6
@@ -149,7 +147,7 @@ function init_gear_sets()
         ring2="Prolix Ring", --2
         back="Fi Follet Cape +1", --10
         waist="Shinjutsu-no-Obi +1", --5
-    }
+    } --91
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
         back="Perimede Cape",
@@ -270,7 +268,7 @@ function init_gear_sets()
         main="Daybreak", 
         sub="Genmei Shield",
         head="Vanya Hood",
-        body="Vanya Robe", 
+        body=gear.Agwu_Body, 
         hands=gear.Telchine_ENH_Hands,
         legs=gear.Nyame_Legs,
         feet="Vanya Clogs",

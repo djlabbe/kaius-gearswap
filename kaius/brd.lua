@@ -524,7 +524,7 @@ function init_gear_sets()
 
     sets.midcast.StatusRemoval = {
         head="Vanya Hood",
-        body="Vanya Robe",
+        body=gear.Nyame_Body,
         legs="Volte Tights",
         feet="Vanya Clogs",
         neck="Incanter's Torque",

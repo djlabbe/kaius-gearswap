@@ -247,7 +247,7 @@ function init_gear_sets()
         main=gear.Gada_ENH,
         sub="Genmei Shield",
         head="Vanya Hood",
-        body="Vanya Robe",
+        body="Shamash Robe",
         -- hands="Hieros Mittens",
         feet="Vanya Clogs",
         neck="Debilis Medallion",
@@ -451,7 +451,7 @@ function init_gear_sets()
         main="Chatoyant Staff",
         waist="Shinjutsu-no-Obi +1",
     }
-]
+
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 

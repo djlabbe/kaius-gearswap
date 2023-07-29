@@ -213,7 +213,7 @@ function init_gear_sets()
         neck="Etoile Gorget +2", --10
         ear1="Handler's Earring +1", --CHR
         ear2="Enchntr. Earring +1", --CHR
-        ring1="Carbuncle Ring", --CHR
+        ring1="Defending Ring",
         ring2="Metamor. Ring +1", --CHR
         -- back=gear.DNC_WTZ_Cape,
         waist="Carrier's Sash",
@@ -364,7 +364,7 @@ function init_gear_sets()
         head="Blistering Sallet +1",
         body=gear.Gleti_Body,
         hands=gear.Adhemar_B_Hands,
-        legs=gear.Lustratio_B_Legs,
+        legs=gear.Gleti_Legs,
         feet=gear.Adhemar_B_Feet,
         neck="Fotia Gorget",
         ear1="Odr Earring",
