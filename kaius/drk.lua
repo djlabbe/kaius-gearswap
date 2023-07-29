@@ -211,6 +211,11 @@ function init_gear_sets()
         head=gear.Relic_Head,
     })
 
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, {
+        head=empty,
+        body="Twilight Cloak",
+    })
+
     sets.precast.WS = {
         ammo="Knobkierrie",
         head=gear.Nyame_Head,
@@ -560,6 +565,12 @@ function init_gear_sets()
 
     sets.midcast.FastRecast = sets.precast.FC
 
+    sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
+        head=empty,
+        body="Twilight Cloak",
+        ring1="Archon Ring",
+    })
+
     sets.midcast['Enfeebling Magic'] = {
         ammo="Pemphredo Tathlum",
         head=gear.Carmine_D_Head,
@@ -771,11 +782,11 @@ function init_gear_sets()
     sets.Loxotic = { main="Loxotic Mace +1", sub="Blurred Shield +1" }
 end
 
--- Run after the default precast() is done.
--- eventArgs is the same one used in job_precast, in case information needs to be persisted.
-function job_precast(spell, action, spellMap, eventArgs)
+function job_post_precast(spell, action, spellMap, eventArgs)
+    if spell.name == 'Impact' then
+        equip(sets.precast.FC.Impact)
+    end
 end
-
 
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.

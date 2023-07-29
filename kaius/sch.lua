@@ -1056,7 +1056,6 @@ function apply_grimoire_bonuses(spell, action, spellMap)
     if state.Buff.Alacrity then equip(sets.buff['Alacrity']) end
 end
 
-
 function sch_skillchain(cmdParams)
     if areas.Cities:contains(world.area) then
         add_to_chat(122, 'You cannot use skillchains in town.')
