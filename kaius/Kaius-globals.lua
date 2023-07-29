@@ -64,6 +64,11 @@ function define_global_sets()
     gear.Telchine_ENH_Legs = {name="Telchine Braconi", augments={'Mag. Evasion+23','"Conserve MP"+5','Enh. Mag. eff. dur. +10',}}
     gear.Telchine_ENH_Feet = {name="Telchine Pigaches", augments={'Mag. Evasion+19','"Conserve MP"+4','Enh. Mag. eff. dur. +10',}}
 
+    gear.Telchine_REGEN_Body = { name="Telchine Chas.", augments={'"Regen" potency+3',}}
+    gear.Telchine_REGEN_Hands = { name="Telchine Gloves", augments={'"Regen" potency+3',}}
+    gear.Telchine_REGEN_Legs = { name="Telchine Braconi", augments={'"Regen" potency+3',}}
+    gear.Telchine_REGEN_Feet = { name="Telchine Pigaches", augments={'Mag. Evasion+25','Song spellcasting time -6%','"Regen" potency+3',}}
+
     gear.Yorium_PHLX_Head = {name="Yorium Barbuta", augments={'Phalanx +3',}}
     gear.Yorium_PHLX_Body = {name="Yorium Cuirass", augments={'Phalanx +3',}}
 

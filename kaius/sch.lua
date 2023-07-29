@@ -64,6 +64,7 @@ function job_setup()
     state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
     state.BarElement = M{['description']='BarElement', 'Barfire', 'Barblizzard', 'Baraero', 'Barstone', 'Barthunder', 'Barwater'}
     state.BarStatus = M{['description']='BarStatus', 'Baramnesia', 'Barvirus', 'Barparalyze', 'Barsilence', 'Barpetrify', 'Barpoison', 'Barblind', 'Barsleep'}
+    state.RegenMode = M{['description']='Regen Mode', 'Potency', 'Duration'}
     state.Buff.Doom = false
 
     update_active_strategems()
@@ -98,7 +99,7 @@ function user_setup()
     gear.Empyrean_Feet = { name= "Arbatel Loafers +3" }
 
     gear.SCH_MAB_Cape = { name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Mag. Evasion+15',}}
-    gear.SCH_REG_Cape = { name="Bookworm's Cape", augments={'INT+1','MND+3','Helix eff. dur. +13','"Regen" potency+10',}}
+    gear.SCH_REGEN_Cape = { name="Bookworm's Cape", augments={'INT+1','MND+3','Helix eff. dur. +13','"Regen" potency+10',}}
 
     send_command('bind !F1 input /ja "Tabula Rasa" <me>')
     send_command('bind !F2 input /ja "Caper Emissarius" <stpc>')
@@ -129,6 +130,7 @@ function user_setup()
     send_command('bind ^; gs c scholar speed')   
 
     send_command('bind @q gs c toggle MagicBurst')
+    send_command('bind @r gs c cycle RegenMode')    
     send_command('bind @w gs c toggle WeaponLock')
 
     send_command('bind !home gs c cycleback BarElement')
@@ -257,7 +259,7 @@ function init_gear_sets()
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
 
-    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak", waist="Shinjutsu-no-Obi +1"})
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Crepuscular Cloak", waist="Shinjutsu-no-Obi +1"})
     
     sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {
         main="Daybreak", 
@@ -448,12 +450,23 @@ function init_gear_sets()
         main="Musa",
         sub="Khonsu",
         head=gear.Empyrean_Head,
-        body=gear.Telchine_ENH_Body,
-        hands=gear.Telchine_ENH_Hands,
-        legs=gear.Telchine_ENH_Legs,
-        feet=gear.Telchine_ENH_Feet,
-        back=gear.SCH_REG_Cape,
-    })
+        body=gear.Telchine_REGEN_Body,
+        hands=gear.Telchine_REGEN_Hands, --X
+        legs=gear.Telchine_REGEN_Legs,
+        feet=gear.Telchine_REGEN_Feet,
+        back=gear.SCH_REGEN_Cape,
+    }) -- Hand slot overwritten by Perp Empy +3 Hands
+    -- Perpetuance Duration 10:20
+    -- 122 HP / Tick 
+
+    sets.midcast.RegenDuration = set_combine(sets.midcast.Regen, {
+        body=gear.Telchine_ENH_Body, -- +3
+        hands=gear.Telchine_ENH_Hands, --X
+        legs=gear.Telchine_ENH_Legs, -- +3
+        feet=gear.Telchine_ENH_Feet, -- +3
+    }) -- Hand slot overwritten by Perp Empy +3 Hands
+    -- Perpetuance Duration 13:25
+    -- 110 / Tick
 
     sets.midcast.Embrava = sets.midcast.EnhancingDuration
     sets.midcast.Haste = sets.midcast.EnhancingDuration
@@ -501,23 +514,32 @@ function init_gear_sets()
         feet=gear.Artifact_Feet,
         neck="Argute Stole +2",
         ear1="Malignance Earring",
-        ear2="Vor Earring",
+        ear2="Regal Earring",
         ring1="Kishar Ring",
-        ring2="Metamor. Ring +1",
+        ring2=gear.Stikini_2,
         back="Aurist's Cape +1",
         waist="Obstinate Sash",
     }
 
-    sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
+    sets.midcast.IntEnfeebles = {
         main="Bunzi's Rod",
         sub="Ammurapi Shield",
+        ammo="Pemphredo Tathlum",
         head=gear.Artifact_Head,
         body=gear.Artifact_Body,
+        hands="Regal Cuffs",
         legs=gear.Empyrean_Legs,
+        feet=gear.Artifact_Feet,
+        neck="Argute Stole +2",
+        ear1="Malignance Earring",
+        ear2="Regal Earring",
+        ring1="Kishar Ring",
+        ring2=gear.Stikini_2,
+        back="Aurist's Cape +1",
         waist="Obstinate Sash",
-    })
+    }
 
-    sets.midcast.ElementalEnfeeble = sets.midcast.Enfeebles
+    sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {
         main="Daybreak", 
@@ -621,6 +643,13 @@ function init_gear_sets()
         main="Daybreak",
         sub="Ammurapi Shield",
         -- ring2="Weather. Ring"
+    })
+
+    sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
+        head=empty,
+        body="Crepuscular Cloak",
+        ring2="Archon Ring",
+        waist="Shinjutsu-no-Obi +1",
     })
 
     sets.MagicBurst = {
@@ -850,6 +879,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             if spellMap == 'Refresh' then
                 equip(sets.midcast.Refresh)
             end
+        end
+        if spellMap == "Regen" and state.RegenMode.value == 'Duration' then
+            equip(sets.midcast.RegenDuration)
         end
         if state.Buff.Perpetuance then
             equip(sets.buff['Perpetuance'])

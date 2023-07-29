@@ -43,7 +43,7 @@ function user_setup()
     gear.Artifact_Body = { name="Reverence Surcoat +3" }
     gear.Artifact_Hands = { name="Reverence Gauntlets +1" }
     gear.Artifact_Legs = { name="Reverence Breeches +1" }    
-    gear.Artifact_Feet = { name="Reverence Leggings +1" }
+    gear.Artifact_Feet = { name="Reverence Leggings +3" }
 
     gear.Relic_Head = { name="Caballarius Coronet +3" }
     gear.Relic_Body = { name="Caballarius Surcoat +3" }
@@ -306,7 +306,7 @@ function init_gear_sets()
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet,
+        feet=gear.Artifact_Feet,
         neck={name="Unmoving Collar +1", priority=200},
         waist={name="Platinum Moogle Belt", priority=999},
         ear1={name="Tuisto Earring", priority=150},
