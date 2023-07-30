@@ -90,9 +90,13 @@ function define_global_sets()
    
     gear.Ody_CURE_Feet = {name="Odyssean Greaves", augments={'Accuracy+29','"Cure" potency +6%','STR+5','Attack+1',}}
 
-    gear.Merl_FC_Feet = {name="Merlinic Crackows", augments={'"Mag.Atk.Bns."+21','"Fast Cast"+7','CHR+6','Mag. Acc.+7',}}
-    gear.Merl_MB_Feet = {name="Merlinic Crackows", augments={'Mag. Acc.+22','Magic burst dmg.+11%','INT+3','"Mag.Atk.Bns."+10',}}
-    gear.Merl_BP_Hands = {name="Merlinic Dastanas", augments={'Pet: Mag. Acc.+13 Pet: "Mag.Atk.Bns."+13','Blood Pact Dmg.+8','Pet: DEX+2','Pet: Mag. Acc.+10','Pet: "Mag.Atk.Bns."+8',}}
+    gear.Merlinic_FC_Feet = {name="Merlinic Crackows", augments={'"Mag.Atk.Bns."+21','"Fast Cast"+7','CHR+6','Mag. Acc.+7',}}
+    gear.Merlinic_MB_Feet = {name="Merlinic Crackows", augments={'Mag. Acc.+22','Magic burst dmg.+11%','INT+3','"Mag.Atk.Bns."+10',}}
+    gear.Merlinic_BP_Hands = {name="Merlinic Dastanas", augments={'Pet: Mag. Acc.+13 Pet: "Mag.Atk.Bns."+13','Blood Pact Dmg.+8','Pet: DEX+2','Pet: Mag. Acc.+10','Pet: "Mag.Atk.Bns."+8',}}
+
+    gear.Merlinic_DRAIN_Head = { name="Merlinic Hood", augments={'Mag. Acc.+30','"Drain" and "Aspir" potency +11','MND+10',}}
+    gear.Merlinic_DRAIN_Body = { name="Merlinic Jubbah", augments={'Mag. Acc.+9 "Mag.Atk.Bns."+9','"Drain" and "Aspir" potency +11','CHR+9','Mag. Acc.+15','"Mag.Atk.Bns."+1',}}
+    gear.Merlinic_Drain_Hands={ name="Merlinic Dastanas", augments={'Mag. Acc.+27','"Drain" and "Aspir" potency +11','CHR+3','"Mag.Atk.Bns."+12',}}
 
     --------------
     -- SKY SETS --

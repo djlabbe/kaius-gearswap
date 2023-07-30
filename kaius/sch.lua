@@ -400,8 +400,8 @@ function init_gear_sets()
         head="Vanya Hood",
         hands="Hieros Mittens",
         neck="Debilis Medallion",
-        ear1="Beatific Earring",
-        ear2="Meili Earring",
+        ear1="Meili Earring",
+        ear2="Lugalbanda Earring",
         body=gear.Relic_Body,
         ring1="Haoma's Ring",
         ring2="Menelaus's Ring",
@@ -583,14 +583,23 @@ function init_gear_sets()
         waist="Acuity Belt +1",
     }
 
-    sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
-        head="Pixie Hairpin +1",
+    sets.midcast.Drain =  {
+        main="Rubicundity",
+        sub="Ammurapi Shield",
+        ammo="Pemphredo Tathlum",
+        head=gear.Merlinic_DRAIN_Head,
+        body=gear.Merlinic_DRAIN_Body,
+        hands=gear.Merlinic_Drain_Hands,
+        legs=gear.Relic_Legs,
+        feet=gear.Agwu_Feet,
+        neck="Erra Pendant",
         ear1="Hirudinea Earring",
+        ear2="Regal Earring",
         ring1="Evanescence Ring",
         ring2="Archon Ring",
-        feet=gear.Agwu_Feet,
+        back="Aurist's Cape +1",
         waist="Fucho-no-obi",
-    })
+    }
 
     sets.midcast.Aspir = sets.midcast.Drain
 

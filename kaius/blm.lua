@@ -120,7 +120,7 @@ function init_gear_sets()
         body="Zendik Robe",
         hands=gear.Agwu_Hands,
         legs=gear.Agwu_Legs,
-        feet=gear.Merl_FC_Feet,
+        feet=gear.Merlinic_FC_Feet,
         neck="Orunmila's Torque",
         ear1="Malignance Earring",
         ear2="Enchntr. Earring +1",
@@ -263,8 +263,8 @@ function init_gear_sets()
         -- hands="Hieros Mittens",
         feet="Vanya Clogs",
         neck="Debilis Medallion",
-        ear1="Beatific Earring",
-        ear2="Meili Earring",
+        ear1="Meili Earring",
+        ear2="Lugalbanda Earring",
         ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
     })
@@ -397,14 +397,23 @@ function init_gear_sets()
         waist="Acuity Belt +1",
     }
 
-    sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
-        head="Pixie Hairpin +1",
+    sets.midcast.Drain = {
+        main="Rubicundity",
+        sub="Ammurapi Shield",
+        ammo="Pemphredo Tathlum",
+        head=gear.Merlinic_DRAIN_Head,
+        body=gear.Merlinic_DRAIN_Body,
+        hands=gear.Merlinic_Drain_Hands,
+        legs=gear.Artifact_Legs,
         feet=gear.Agwu_Feet,
+        neck="Erra Pendant",
         ear1="Hirudinea Earring",
+        ear2="Regal Earring",
         ring1="Evanescence Ring",
         ring2="Archon Ring",
+        back="Aurist's Cape +1",
         waist="Fucho-no-obi",
-    })
+    }
 
     sets.midcast.Aspir = sets.midcast.Drain
 
@@ -413,7 +422,7 @@ function init_gear_sets()
         sub="Khonsu",
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
-        body=gear.Merl_MB_body,
+        body=gear.Merlinic_MB_body,
         hands=gear.Artifact_Hands, 
         legs=gear.Empyrean_Feet,
         feet=gear.Artifact_Feet,
