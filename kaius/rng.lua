@@ -34,7 +34,7 @@ function job_setup()
 
     state.AutoAmmoMode = M(true,'Auto Ammo Mode')
     tickdelay = os.clock() + 5
-    ammostock = 200
+    ammostock = 98
     useItem = false
 	useItemName = ''
     prevItemName = ''
@@ -691,11 +691,11 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
     })
 
-    -- sets.idle.Town = set_combine(sets.precast.WS["Trueflight"], {
-    --     waist="Orpheus's Sash",
-    -- })
+    sets.idle.Town = set_combine(sets.precast.WS["Trueflight"], {
+        waist="Orpheus's Sash",
+    })
     
-    sets.idle.Town = sets.idle
+    -- sets.idle.Town = sets.idle
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT

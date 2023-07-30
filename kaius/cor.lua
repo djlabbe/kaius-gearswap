@@ -31,7 +31,7 @@ function job_setup()
 
     state.AutoAmmoMode = M(true,'Auto Ammo Mode')
     tickdelay = os.clock() + 5
-    ammostock = 200
+    ammostock = 98
     useItem = false
 	useItemName = ''
     prevItemName = ''
