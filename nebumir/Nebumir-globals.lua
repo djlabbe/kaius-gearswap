@@ -50,7 +50,7 @@ function define_global_sets()
     gear.Herc_WSD_Head = { name="Herculean Helm", augments={'Attack+23','Weapon skill damage +4%','STR+7',}}
     gear.Herc_WSD_Legs = { name="Herculean Trousers", augments={'Attack+18','Weapon skill damage +4%','STR+5',}}
 
-    gear.Merl_FC_Body = { name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','"Fast Cast"+7','Mag. Acc.+13',}}
+    gear.Merlinic_FC_Body = { name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+28','"Fast Cast"+7','Mag. Acc.+13',}}
     gear.Chironic_REF_Hands = { name="Chironic Gloves", augments={'Attack+30','"Refresh"+2',}}
     gear.Ody_CURE_Feet = { name="Odyssean Greaves", augments={'Mag. Acc.+9','"Cure" potency +6%','DEX+1','"Mag.Atk.Bns."+14',}}
     

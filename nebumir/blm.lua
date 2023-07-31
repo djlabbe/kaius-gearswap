@@ -156,7 +156,7 @@ function init_gear_sets()
     sets.precast.FC = {
         ammo="Sapience Orb", --2
         head=gear.Amalric_A_Head, --11
-        body=gear.Merl_FC_Body, --13
+        body=gear.Merlinic_FC_Body, --13
         hands=gear.Agwu_Hands, --6
         legs=gear.Agwu_Legs, --7
         feet="Regal Pumps +1", --7
@@ -178,7 +178,7 @@ function init_gear_sets()
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
         ammo="Impatiens",
         head=gear.Empyrean_Head,
-        body=gear.Merl_FC_Body, --13
+        body=gear.Merlinic_FC_Body, --13
         hands=gear.Agwu_Hands, --6
         legs=gear.Agwu_Legs, --7
         feet=gear.Empyrean_Feet,

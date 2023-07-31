@@ -502,8 +502,8 @@ function init_gear_sets()
         legs=gear.Kaykaus_A_Legs, --11/(+2)/(-6)
         feet=gear.Kaykaus_B_Feet, --11(+2)/(-12)
         neck="Incanter's Torque",
-        ear1="Beatific Earring",
-        ear2="Meili Earring",
+        ear1="Meili Earring",
+        ear2="Fili Earring +1",
         ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
         back="Oretania's Cape +1", --6
@@ -523,7 +523,8 @@ function init_gear_sets()
         legs="Volte Tights",
         feet="Vanya Clogs",
         neck="Incanter's Torque",
-        ear2="Meili Earring",
+        ear1="Meili Earring",
+        ear2="Fili Earring +1",
         ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
         back=gear.BRD_Song_Cape,
@@ -533,7 +534,6 @@ function init_gear_sets()
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
         -- hands="Hieros Mittens",
         neck="Debilis Medallion",
-        ear1="Beatific Earring",
         back="Oretan. Cape +1",
     })
 

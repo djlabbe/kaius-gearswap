@@ -95,8 +95,8 @@ function user_setup()
 
     gear.Empyrean_Head = { name= "Chasseur's Tricorne +2" }
     gear.Empyrean_Body = { name= "Chasseur's Frac +2" }
-    gear.Empyrean_Hands = { name= "Chasseur's Gants +2" }
-    gear.Empyrean_Legs = { name= "Chasseur's Culottes +2" }
+    gear.Empyrean_Hands = { name= "Chasseur's Gants +3" }
+    gear.Empyrean_Legs = { name= "Chasseur's Culottes +3" }
     gear.Empyrean_Feet = { name= "Chasseur's Bottes +3" }
 
     gear.COR_SNP_Cape = { name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10','Mag. Evasion+15',}} --Done
@@ -489,7 +489,7 @@ function init_gear_sets()
         head=gear.Malignance_Head,
         body=gear.Malignance_Body,
         hands=gear.Malignance_Hands,
-        legs=gear.Malignance_Legs,
+        legs=gear.Empyrean_Legs,
         feet=gear.Malignance_Feet,
         neck="Iskur Gorget",
         ear1="Crepuscular Earring",
@@ -533,7 +533,7 @@ function init_gear_sets()
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
         ear1="Cessance Earring",
@@ -554,7 +554,7 @@ function init_gear_sets()
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
         ear1="Dedition Earring",
@@ -571,7 +571,7 @@ function init_gear_sets()
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
         ear1="Dedition Earring",
@@ -588,7 +588,7 @@ function init_gear_sets()
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
         ear1="Dedition Earring",
@@ -605,7 +605,7 @@ function init_gear_sets()
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
         ear1="Dedition Earring",
@@ -622,7 +622,7 @@ function init_gear_sets()
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
         ear1="Dedition Earring",
@@ -665,7 +665,11 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
     })
 
-    sets.idle.Town = sets.engaged.DW.MaxHaste
+    sets.idle.Town = set_combine(sets.engaged.DW.MaxHaste, {
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        hands=gear.Empyrean_Hands,
+    })
 
     sets.defense.PDT = sets.idle.DT
 

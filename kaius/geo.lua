@@ -139,7 +139,7 @@ function init_gear_sets()
         body="Zendik Robe", --13
         hands=gear.Agwu_Hands, --6
         legs=gear.Artifact_Legs, --15
-        feet=gear.Merl_FC_Feet, --12
+        feet=gear.Merlinic_FC_Feet, --12
         neck="Orunmila's Torque", --5
         ear1="Malignance Earring", --4
         ear2="Etiolation Earring", --1
@@ -259,8 +259,8 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet="Vanya Clogs",
         neck="Incanter's Torque",
-        ear1="Beatific Earring",
-        ear2="Meili Earring",
+        ear1="Meili Earring",
+        ear2="Azimuth Earring +1",
         ring1="Janniston Ring",
         ring2="Haoma's Ring",
         back="Solemnity Cape",

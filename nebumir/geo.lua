@@ -141,8 +141,8 @@ function init_gear_sets()
         main=gear.GADA_FC, --6
         -- sub="Chanter's Shield", --3
         head=gear.Amalric_A_Head, --11
-        body=gear.Merl_MB_body, --6
-        hands=gear.Merl_FC_hands, --7
+        body=gear.Merlinic_MB_body, --6
+        hands=gear.Merlinic_FC_hands, --7
         legs=gear.Artifact_Legs, --15
         feet="Regal Pumps +1", --4
         neck="Baetyl Pendant", --4
@@ -218,7 +218,7 @@ function init_gear_sets()
         main="Sucellus",
         sub="Chanter's Shield",
         head=gear.Amalric_A_Head,
-        hands=gear.Merl_FC_hands,
+        hands=gear.Merlinic_FC_hands,
         legs=gear.Artifact_Legs,
         ear1="Malignance Earring",
         ear2="Etiolation Earring",
@@ -370,7 +370,7 @@ function init_gear_sets()
         body=gear.Artifact_Body,
         hands=gear.Artifact_Hands,
         legs=gear.Artifact_Legs,
-        feet=gear.Merl_MAB_feet,
+        feet=gear.Merlinic_MAB_feet,
         neck="Erra Pendant",
         ear1="Malignance Earring",
         ear2="Regal Earring",

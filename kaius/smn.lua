@@ -292,7 +292,7 @@ function init_gear_sets()
         back="Fi Follet Cape +1",
         waist="Witful Belt", -- +3
         -- legs={ name="Merlinic Shalwar", augments={'"Fast Cast"+6','CHR+6','Mag. Acc.+14','"Mag.Atk.Bns."+14',}},
-        feet=gear.Merl_FC_Feet --12
+        feet=gear.Merlinic_FC_Feet --12
     }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"}) 
@@ -366,7 +366,7 @@ function init_gear_sets()
         ear1="Lugalbanda Earring",
         ear2="Beckoner's Earring +1",
         body=gear.Apogee_A_Body,
-        hands=gear.Merl_BP_Hands,
+        hands=gear.Merlinic_BP_Hands,
         ring1=gear.Varar_1,
         ring2=gear.Varar_2,
         waist="Regal Belt",
@@ -384,7 +384,7 @@ function init_gear_sets()
         ear1="Lugalbanda Earring",
         ear2="Beckoner's Earring +1",
         body=gear.Artifact_Body,
-        hands=gear.Merl_BP_Hands,
+        hands=gear.Merlinic_BP_Hands,
         ring1="Cath Palug Ring",
         ring2=gear.Varar_2,
         waist="Incarnation Sash",
@@ -401,7 +401,7 @@ function init_gear_sets()
         ear1="Lugalbanda Earring",
         ear2="Beckoner's Earring +1",
         body=gear.Artifact_Body,
-        hands=gear.Merl_BP_Hands,
+        hands=gear.Merlinic_BP_Hands,
         ring1=gear.Varar_1,
         ring2=gear.Varar_2,
         waist="Regal Belt",
