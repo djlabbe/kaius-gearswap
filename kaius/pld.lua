@@ -393,11 +393,6 @@ function init_gear_sets()
 
 end
 
-
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
--------------------------------------------------------------------------------------------------------------------
-
 function job_midcast(spell, action, spellMap, eventArgs)
     -- If DefenseMode is active, apply that gear over midcast
     -- choices.  Precast is allowed through for fast cast on
@@ -444,10 +439,6 @@ function job_buff_change(buff,gain)
         end
     end
 end
-
--------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
--------------------------------------------------------------------------------------------------------------------
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
@@ -543,10 +534,6 @@ function display_current_job_state(eventArgs)
     eventArgs.handled = true
 end
 
-------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
--------------------------------------------------------------------------------------------------------------------
-
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
 end
@@ -569,11 +556,3 @@ end
 function check_weaponset()
     equip(sets[state.WeaponSet.current])
 end
-
-windower.register_event('gain buff',
-    function(buff_id)
-        if (buff_id == 106) then
-            state.PhalanxMode:unset()
-        end
-    end
-)

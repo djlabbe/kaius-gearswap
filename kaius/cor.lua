@@ -147,7 +147,6 @@ function user_setup()
         send_command('bind ^numpad0 gs c set WeaponSet Naegling;input /macro set 1')
         set_macro_page(2, 17)
     elseif player.sub_job == 'DNC' then
-       
         send_command('bind ^numpad7 gs c set WeaponSet DeathPenalty_M;input /macro set 3')
         send_command('bind ^numpad8 gs c set WeaponSet DeathPenalty_R;input /macro set 3')
         send_command('bind ^numpad4 gs c set WeaponSet Armageddon_M;input /macro set 3')

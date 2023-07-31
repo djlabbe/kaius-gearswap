@@ -154,9 +154,9 @@ function user_setup()
     send_command('bind !numpad5 input /ma "Honor March" <stpc>')
     send_command('bind !numpad6 input /ma "Blade Madrigal" <stpc>')
 
-    send_command('bind !numpad1 input /ma "Herculean Etude" <stpc>')
-    send_command('bind !numpad2 input /ma "Knight\'s Minne V" <stpc>')
-    send_command('bind !numpad3 input /ma "Knight\'s Minne IV" <stpc>')
+    send_command('bind !numpad1 input /ma "Knight\'s Minne V" <stpc>')
+    send_command('bind !numpad2 input /ma "Knight\'s Minne IV" <stpc>')
+    send_command('bind !numpad3 input /ma "Herculean Etude" <stpc>')
 
     send_command('bind !numpad0 input /ma "Mage\'s Ballad III" <stpc>')
     send_command('bind !numpad. input /ma "Mage\'s Ballad II" <stpc>')
@@ -201,8 +201,6 @@ function user_setup()
     determine_haste_group()
 end
 
-
--- Called when this job file is unloaded (eg: job change)
 function user_unload()
     send_command('unbind ^`')
     send_command('unbind !`')
@@ -236,10 +234,7 @@ function user_unload()
     send_command('unbind @5')
 end
 
-
--- Define sets and vars used by this job file.
 function init_gear_sets()
-
     sets.precast.FC = {
         head="Vanya Hood", --10
         body="Zendik Robe", --13
@@ -402,7 +397,7 @@ function init_gear_sets()
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
-  -- Gear to enhance certain classes of songs.
+    -- Gear to enhance certain classes of songs.
     -- sets.midcast.Ballad = { legs=gear.Empyrean_Legs }
     sets.midcast.Carol = { hands="Mousai Gages +1" }
     sets.midcast.Etude = { head="Mousai Turban +1" }
@@ -1021,10 +1016,6 @@ function display_current_job_state(eventArgs)
 
     eventArgs.handled = true
 end
-
--------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
--------------------------------------------------------------------------------------------------------------------
 
 -- Determine the custom class to use for the given song.
 function get_song_class(spell)
