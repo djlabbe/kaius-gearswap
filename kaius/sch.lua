@@ -64,7 +64,7 @@ function job_setup()
     state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
     state.BarElement = M{['description']='BarElement', 'Barfire', 'Barblizzard', 'Baraero', 'Barstone', 'Barthunder', 'Barwater'}
     state.BarStatus = M{['description']='BarStatus', 'Baramnesia', 'Barvirus', 'Barparalyze', 'Barsilence', 'Barpetrify', 'Barpoison', 'Barblind', 'Barsleep'}
-    state.RegenMode = M{['description']='Regen Mode', 'Potency', 'Duration'}
+    state.RegenMode = M{['description']='Regen Mode', 'Duration', 'Potency'}
     state.Buff.Doom = false
 
     update_active_strategems()
@@ -446,24 +446,25 @@ function init_gear_sets()
         waist="Embla Sash",
     }
 
+    -- Start with ENH Dura. Set. Then layer on Potency Telchine, but just in case those are in storage, layer on Duration Telchine as a fallback.
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Musa",
         sub="Khonsu",
         head=gear.Empyrean_Head,
+        back=gear.SCH_REGEN_Cape,
         body=gear.Telchine_REGEN_Body,
-        hands=gear.Telchine_REGEN_Hands, --X
+        hands=gear.Telchine_REGEN_Hands,
         legs=gear.Telchine_REGEN_Legs,
         feet=gear.Telchine_REGEN_Feet,
-        back=gear.SCH_REGEN_Cape,
     }) -- Hand slot overwritten by Perp Empy +3 Hands
     -- Perpetuance Duration 10:20
     -- 122 HP / Tick 
 
     sets.midcast.RegenDuration = set_combine(sets.midcast.Regen, {
-        body=gear.Telchine_ENH_Body, -- +3
-        hands=gear.Telchine_ENH_Hands, --X
-        legs=gear.Telchine_ENH_Legs, -- +3
-        feet=gear.Telchine_ENH_Feet, -- +3
+        body=gear.Telchine_ENH_Body, 
+        hands=gear.Telchine_ENH_Hands,
+        legs=gear.Telchine_ENH_Legs,
+        feet=gear.Telchine_ENH_Feet,
     }) -- Hand slot overwritten by Perp Empy +3 Hands
     -- Perpetuance Duration 13:25
     -- 110 / Tick

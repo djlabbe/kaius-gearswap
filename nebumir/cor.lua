@@ -665,7 +665,11 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
     })
 
-    sets.idle.Town = sets.engaged.DW.MaxHaste
+    sets.idle.Town = set_combine(sets.engaged.DW.MaxHaste, {
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        hands=gear.Empyrean_Hands,
+    })
 
     sets.defense.PDT = sets.idle.DT
 
