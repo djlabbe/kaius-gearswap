@@ -26,10 +26,12 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
     state.DeathMode = M(false, 'Death Mode')
     state.WeaponLock = M(false, 'Weapon Lock')
+    state.MagicBurst = M(true, 'Magic Burst')
 
     include('Global-Binds.lua')
 
     send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind @q gs c toggle MagicBurst')
     send_command('bind @d gs c toggle DeathMode')
 
     send_command('bind !p input /ma "Protect III" <stpc>')
@@ -442,6 +444,24 @@ function init_gear_sets()
     })
 
     sets.midcast['Elemental Magic'] = {
+        main="Marin Staff +1",
+        sub="Enki Strap",
+        ammo="Sroda Tathlum",
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Sorcerer's Stole +2",
+        ear1="Malignance Earring",
+        ear2="Regal Earring",
+        ring1="Freke Ring",
+        ring2="Metamorph Ring +1",
+        back=gear.BLM_MAB_Cape,
+        waist="Acuity Belt +1",
+    }
+
+    sets.MagicBurst = {
         main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
@@ -632,8 +652,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         equip(sets.DarkAffinity)
     end
     if spell.skill == 'Elemental Magic' then
-        if spell.english == "Impact" then
-            equip(sets.midcast.Impact)
+        if state.MagicBurst.value and spell.english ~= 'Death' then
+            equip(sets.MagicBurst)
+            if spell.english == "Impact" then
+                equip(sets.midcast.Impact)
+            end
         end
         if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
             equip(sets.Obi)
