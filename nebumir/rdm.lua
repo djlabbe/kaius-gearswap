@@ -103,10 +103,10 @@ function user_setup()
     state.EnspellMode = M(false, 'Enspell Melee Mode')
 
     gear.Artifact_Head = { name= "Atrophy Chapeau +3" }
-    -- gear.Artifact_Body = { name="Atrophy Tabard +2" }
+    gear.Artifact_Body = { name="Atrophy Tabard +3" }
     gear.Artifact_Hands = { name="Atrophy Gloves +3" }
     gear.Artifact_Legs = { name="Atrophy Tights +3" }
-    gear.Artifact_Legs = { name="Atrophy Boots +2" }
+    gear.Artifact_Legs = { name="Atrophy Boots +3" }
 
     gear.Relic_Head = { name="Vitiation Chapeau +3" }
     gear.Relic_Body = { name="Vitiation Tabard +3" }

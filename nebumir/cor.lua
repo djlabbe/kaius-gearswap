@@ -86,6 +86,7 @@ function user_setup()
 
     gear.Artifact_Head = { name= "Laksamana's Tricorne +3" }
     gear.Artifact_Body = { name= "Laksamana's Frac +3" }
+    gear.Artifact_Feet = { name= "Laksamana's Bottes +3" }
 
     gear.Relic_Head = { name= "Lanun Tricorne +3" }
     gear.Relic_Body = { name= "Lanun Frac +3" }
@@ -148,7 +149,7 @@ function user_setup()
         send_command('bind ^numpad7 gs c set WeaponSet Fomalhaut_M;input /macro set 2')
         send_command('bind ^numpad8 gs c set WeaponSet Fomalhaut_R;input /macro set 2')
         send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 1')
-        set_macro_page(2, 17)
+        set_macro_page(1, 17)
     elseif player.sub_job == 'DNC' then       
         -- send_command('bind ^numpad7 gs c set WeaponSet DeathPenalty_M;input /macro set 3')
         -- send_command('bind ^numpad8 gs c set WeaponSet DeathPenalty_R;input /macro set 3')
@@ -157,9 +158,9 @@ function user_setup()
         send_command('bind ^numpad7 gs c set WeaponSet Fomalhaut_M;input /macro set 3')
         send_command('bind ^numpad8 gs c set WeaponSet Fomalhaut_R;input /macro set 3')
         send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 4')
-        set_macro_page(3, 17)
+        set_macro_page(4, 17)
     else
-        set_macro_page(2, 17)
+        set_macro_page(1, 17)
     end
    
     send_command('wait 3; input /lockstyleset 17')
@@ -292,7 +293,7 @@ function init_gear_sets()
         feet="Pursuer's Gaiters", --0/10
     }) --32/73
 
-    sets.precast.WS = set_combine({
+    sets.precast.WS = {
         ammo=gear.WSbullet,
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -306,12 +307,10 @@ function init_gear_sets()
         ring2="Epaminondas's Ring",
         back=gear.COR_LS_Cape,
         waist="Fotia Belt",
-    }, {
-        ring1="Cornelia's Ring"
-    })
+    }
 
 
-    sets.precast.WS['Last Stand'] = set_combine({
+    sets.precast.WS['Last Stand'] = {
         ammo=gear.WSbullet,
         head=gear.Nyame_Head,
         body=gear.Artifact_Body,
@@ -325,9 +324,7 @@ function init_gear_sets()
         ring2="Dingir Ring",
         back=gear.COR_WS3_Cape,
         waist="Fotia Belt",
-    }, {
-        ring1="Cornelia's Ring"
-    })
+    }
 
     sets.precast.WS['Wildfire'] = {
         ammo=gear.MAbullet,
@@ -345,7 +342,7 @@ function init_gear_sets()
         waist="Eschan Stone",
     }
 
-    sets.precast.WS['Hot Shot'] = set_combine({
+    sets.precast.WS['Hot Shot'] = {
         ammo=gear.MAbullet,
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -359,27 +356,24 @@ function init_gear_sets()
         ring2="Epaminondas's Ring",
         back=gear.COR_LD_Cape,
         waist="Skrymir Cord +1",
-    }, {
-        ring2="Cornelia's Ring",
-    })
+    }
 
-    sets.precast.WS['Leaden Salute'] = set_combine({
+
+    sets.precast.WS['Leaden Salute'] = {
         ammo=gear.MAbullet,
         head="Pixie Hairpin +1",
         body=gear.Relic_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Relic_Feet,
-        neck="Comm. Charm +2",
+        neck="Comm. Charm +1",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
         ring2="Archon Ring",
         back=gear.COR_LD_Cape,
         waist="Skrymir Cord +1",
-    }, {
-        ring2="Cornelia's Ring",
-    })
+    }
 
     sets.precast.WS['Evisceration'] = {
         head=gear.Adhemar_A_Head,
@@ -396,8 +390,7 @@ function init_gear_sets()
         waist="Fotia Belt",
     }
 
-
-    sets.precast.WS['Savage Blade'] = set_combine({
+    sets.precast.WS['Savage Blade'] = {
         ammo=gear.WSbullet,
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -411,11 +404,9 @@ function init_gear_sets()
         ring2="Epaminondas's Ring",
         back=gear.COR_SB_Cape,
         waist="Sailfi Belt +1",
-    }, {
-        ring1="Cornelia's Ring",
-    })
+    }
 
-    sets.precast.WS['Aeolian Edge'] = set_combine({
+    sets.precast.WS['Aeolian Edge'] = {
         ammo=gear.QDbullet,
         head=gear.Nyame_Head,
         body=gear.Relic_Body,
@@ -429,9 +420,7 @@ function init_gear_sets()
         ring2="Epaminondas's Ring",
         back=gear.COR_LD_Cape,
         waist="Orpheus's Sash",
-    }, {
-        ring2="Cornelia's Ring"
-    })
+    }
 
     sets.midcast.FastRecast = sets.precast.FC
 
@@ -510,13 +499,13 @@ function init_gear_sets()
         waist="K. Kachina Belt +1",
     })
 
-    sets.TripleShot = {
-        head="Oshosi Mask +1", --5
-        body=gear.Empyrean_Body, --12
-        hands=gear.Relic_Hands,
-        legs="Osh. Trousers +1", --6
-        feet="Osh. Leggings +1", --3
-    } --27
+    -- sets.TripleShot = {
+    --     head="Oshosi Mask +1", --5
+    --     body=gear.Empyrean_Body, --12
+    --     hands=gear.Relic_Hands,
+    --     legs="Osh. Trousers +1", --6
+    --     feet="Osh. Leggings +1", --3
+    -- } --27
 
     sets.TripleShotCritical = {
         head="Meghanada Visor +2",

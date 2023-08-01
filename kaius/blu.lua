@@ -321,7 +321,7 @@ function init_gear_sets()
 
     sets.precast.WS['Vorpal Blade'] = sets.precast.WS['Chant du Cygne']
 
-    sets.precast.WS['Savage Blade'] = set_combine({
+    sets.precast.WS['Savage Blade'] = {
         ammo="Coiste Bodhar",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -332,18 +332,14 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
         ring1="Epaminondas's Ring",
-        ring2="Regal Ring",
+        ring2="Cornelia's Ring",
         back=gear.BLU_WS1_Cape,
         waist="Sailfi Belt +1",
-    }, {
-        ring2="Cornelia's Ring"
-    })
+    }
 
     sets.precast.WS["Savage Blade"].PDL = set_combine(sets.precast.WS["Savage Blade"], {
         ammo="Crepuscular Pebble",
         body=gear.Gleti_Body,
-    }, {
-        ring1="Ephramad's Ring",
     })
 
     sets.precast.WS['True Strike'] = sets.precast.WS['Savage Blade']
@@ -357,7 +353,7 @@ function init_gear_sets()
         ear2="Regal Earring",
     })
 
-    sets.precast.WS['Requiescat'] = set_combine({
+    sets.precast.WS['Requiescat'] = {
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
@@ -366,19 +362,15 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Regal Earring",
-        ring1="Sroda Ring",
+        ring1="Cornelia's Ring",
         ring2="Epaminondas's Ring",
         back=gear.BLU_WS1_Cape,
         waist="Fotia Belt",
-    }, {
-        ring1="Cornelia's Ring"
-    })
+    }
 
     sets.precast.WS["Requiescat"].PDL = set_combine(sets.precast.WS["Requiescat"], {
         ammo="Crepuscular Pebble",
         body=gear.Gleti_Body,
-    }, {
-        ring1="Ephramad's Ring",
     })
 
     sets.precast.WS['Expiacion'] = sets.precast.WS['Savage Blade']
