@@ -174,7 +174,19 @@ function init_gear_sets()
     -- 52% PDT
 
     sets.engaged.Acc = {
-        -- TODO
+        ammo="Coiste Bodhar", --3
+        head=gear.Empyrean_Head, --7
+        body=gear.Empyrean_Body,
+        hands=gear.Sakpata_Hands, --6
+        legs=gear.Artifact_Legs, --7
+        feet=gear.Artifact_Feet, --9
+        neck="Warrior's bead necklace +2", --7
+        ear1="Schere Earring", --6
+        ear2="Boii Earring +1", --8
+        ring1="Regal Ring",
+        ring2=gear.Chirich_2,
+        waist="Sailfi Belt +1", --5
+        back=gear.WAR_TP_Cape, --10
     }
 
     sets.engaged.SingleWield = {

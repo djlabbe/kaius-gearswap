@@ -233,6 +233,22 @@ function init_gear_sets()
         waist="Shinjutsu-no-Obi +1",s
     } -- Max MP
 
+    sets.precast.WS['Vidohunir'] = {
+        ammo="Ghastly Tathlum +1",
+        head="Pixie Hairpin +1",
+        body=gear.Nyame_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Src. Stole +2",
+        waist="Orpheus's Sash",
+        left_ear="Malignance Earring",
+        right_ear="Regal Earring",
+        left_ring="Archon Ring",
+        right_ring="Cornelia's Ring",
+        back=gear.BLM_MAB_Cape, --WSD Better
+    }
+
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.Cure = {

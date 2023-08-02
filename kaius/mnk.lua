@@ -602,8 +602,8 @@ function display_current_job_state(eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
     get_combat_weapon()
+    handle_equipping_gear(player.status)
 end
 
 function customize_idle_set(idleSet)
