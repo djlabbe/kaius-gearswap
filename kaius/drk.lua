@@ -52,11 +52,12 @@ function user_setup()
     gear.Relic_Feet = { name= "Fallen's Sollerets +3" }
 
     gear.Empyrean_Head = { name= "Heathen's Burgeonet +3" }
-    gear.Empyrean_Body = { name= "Heathen's Cuirass +1" }
-    gear.Empyrean_Hands = { name= "Heathen's Gauntlets +1" }
-    gear.Empyrean_Legs = { name= "Heathen's Flanchard +1" }
+    gear.Empyrean_Body = { name= "Heathen's Cuirass +2" }
+    gear.Empyrean_Hands = { name= "Heathen's Gauntlets +2" }
+    gear.Empyrean_Legs = { name= "Heathen's Flanchard +2" }
     gear.Empyrean_Feet = { name= "Heathen's Sollerets +3" }
 
+    gear.Valo_QA_Body = { name="Valorous Mail", augments={'Crit.hit rate+5','STR+8','Quadruple Attack +2','Accuracy+19 Attack+19',}}
     gear.Valo_STP_Body = { name="Valorous Mail", augments={'Mag. Acc.+12','"Store TP"+8','AGI+3','Accuracy+8','Attack+5',}}
     gear.Valo_STP_Feet = { name="Valorous Greaves", augments={'Attack+28','"Store TP"+7',}}
     gear.Ody_STP_Legs = { name="Odyssean Cuisses", augments={'"Store TP"+7','STR+7','Accuracy+10','Attack+15',}}
@@ -408,7 +409,7 @@ function init_gear_sets()
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Body,
+        legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
         neck="Abyssal Beads +2",
         waist="Sailfi Belt +1",
@@ -738,9 +739,6 @@ function init_gear_sets()
         ear2="Heathen's Earring +1"
     })
 
-
-
-
     sets.engaged.Hybrid = {
         head=gear.Sakpata_Head,
         body=gear.Sakpata_Body, --10
@@ -781,7 +779,7 @@ function init_gear_sets()
         back="Moonlight Cape", --6/6
     })
 
-    sets.idle.Town = set_combine(sets.engaged.Liberator, sets.engaged.Liberator.Aftermath)
+    sets.idle.Town = sets.precast.WS['Fimbulvetr']
 
     sets.idle.Weak = set_combine(sets.idle, {})
 
