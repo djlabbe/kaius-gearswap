@@ -237,23 +237,21 @@ function init_gear_sets()
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
 
-    sets.precast.WS = set_combine({
+    sets.precast.WS = {
         head=gear.Relic_Head,
         body=gear.Nyame_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Fotia Gorget",
-        ring1="Niqmaddu Ring",
+        ring1="Cornelia's Ring"
         ring2="Epaminondas's Ring",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
         waist="Sailfi Belt +1",
         ammo="Knobkierrie",
         back=gear.WAR_WS1_Cape,
-    }, {
-        ring2="Cornelia's Ring"
-    })
+    }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         -- TODO
@@ -267,7 +265,7 @@ function init_gear_sets()
     ---------------------- GREAT AXE -----------------------
     --------------------------------------------------------
 
-    sets.precast.WS["Upheaval"] = set_combine({
+    sets.precast.WS["Upheaval"] = {
         ammo="Knobkierrie",
         head=gear.Relic_Head,
         body=gear.Nyame_Body,
@@ -277,33 +275,26 @@ function init_gear_sets()
         neck="Warrior's bead necklace +2",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
-        ring1="Niqmaddu Ring",
+        ring1="Cornelia's Ring",
         ring2="Gelatinous Ring +1",
         waist="Sailfi Belt +1",
         back=gear.WAR_WS2_Cape,
-    }, {
-        ring1="Cornelia's Ring",
-    })
+    }
 
     sets.precast.WS["Upheaval"].Acc = set_combine(sets.precast.WS["Upheaval"], {})
-    sets.precast.WS["Upheaval"].PDL = set_combine(sets.precast.WS["Upheaval"], {
-        ring1="Ephramad's Ring",
-    })
+    sets.precast.WS["Upheaval"].PDL = set_combine(sets.precast.WS["Upheaval"], {})
 
-    sets.precast.WS["Upheaval"].MightyStrikes = set_combine({ 
+    sets.precast.WS["Upheaval"].MightyStrikes = { 
         ammo="Yetshila +1",
         head=gear.Relic_Head,
         neck="Fotia Gorget",
         body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
+        ring1="Cornelia's Ring"
         ring2="Epaminondas's Ring",
         legs=gear.Sakpata_Legs,
         feet=gear.Empyrean_Feet,
-    }, {
-        ring1="Cornelia's Ring",
-    }, {
-        ring1="Ephramad's Ring",
-    })
+    }
 
     sets.precast.WS["Ukko's Fury"] = {
         ammo="Yetshila +1",
@@ -322,32 +313,26 @@ function init_gear_sets()
     }
 
     sets.precast.WS["Ukko's Fury"].Acc = set_combine(sets.precast.WS["Ukko's Fury"], {})
-    sets.precast.WS["Ukko's Fury"].PDL = set_combine(sets.precast.WS["Ukko's Fury"], {
-        ring2="Ephramad's Ring",
-    })
+    sets.precast.WS["Ukko's Fury"].PDL = set_combine(sets.precast.WS["Ukko's Fury"], {})
 
-    sets.precast.WS["Fel Cleave"] = set_combine({
+    sets.precast.WS["Fel Cleave"] = {
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Nyame_Feet,
         neck="Warrior's bead necklace +2",
-        ring1="Niqmaddu Ring",
+        ring1="Cornelia's Ring",
         ring2="Epaminondas's Ring",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
         waist="Sailfi Belt +1",
         ammo="Knobkierrie",
         back=gear.WAR_WS1_Cape,
-    }, {
-        ring1="Cornelia's Ring",
-    })
+    }
 
     sets.precast.WS["Fel Cleave"].Acc = set_combine(sets.precast.WS["Fel Cleave"], {})
-    sets.precast.WS["Fel Cleave"].PDL = set_combine(sets.precast.WS["Fel Cleave"], {
-        ring2="Ephramad's Ring",
-    })
+    sets.precast.WS["Fel Cleave"].PDL = set_combine(sets.precast.WS["Fel Cleave"], {})
 
     sets.precast.WS["Armor Break"] = {
         ammo="Pemphredo Tathlum",
@@ -392,10 +377,9 @@ function init_gear_sets()
         body=gear.Sakpata_Body,
         legs=gear.Sakpata_Legs,
         feet=gear.Sakpata_Feet,
-        ring2="Ephramad's Ring",
     })
 
-    sets.precast.WS["Fimbulvetr"] = set_combine({
+    sets.precast.WS["Fimbulvetr"] = {
         ammo="Knobkierrie",
         head=gear.Relic_Head,
         body=gear.Nyame_Body,
@@ -405,13 +389,11 @@ function init_gear_sets()
         neck="Warrior's bead necklace +2",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
-        ring1="Niqmaddu Ring",
+        ring1="Cornelia's Ring",
         ring2="Regal Ring",
         waist="Sailfi Belt +1",
         back=gear.WAR_WS1_Cape,
-    },{
-        ring1="Cornelia's Ring",
-    })
+    }
 
     sets.precast.WS["Fimbulvetr"].Acc = set_combine(sets.precast.WS["Fimbulvetr"], {})
 
@@ -419,7 +401,6 @@ function init_gear_sets()
         body=gear.Sakpata_Body,
         legs=gear.Sakpata_Legs,
         feet=gear.Sakpata_Feet,
-        ring2="Ephramad's Ring",
     })
 
     --------------------------------------------------------
@@ -449,8 +430,6 @@ function init_gear_sets()
         body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
         ring2="Sroda Ring",
-    }, {
-        ring2="Ephramad's Ring",
     })
 
     sets.precast.WS["Impulse Drive"] = {
@@ -476,15 +455,13 @@ function init_gear_sets()
         body=gear.Sakpata_Body,
         legs=gear.Empyrean_Legs,
         ring2="Sroda Ring",
-    }, {
-        ring2="Ephramad's Ring",
     })
 
     --------------------------------------------------------
     ------------------------ SWORD -------------------------
     --------------------------------------------------------
 
-    sets.precast.WS['Savage Blade'] = set_combine({
+    sets.precast.WS['Savage Blade'] = {
         ammo="Knobkierrie",
         head=gear.Relic_Head,
         body=gear.Nyame_Body, 
@@ -495,17 +472,14 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring", 
         ear2="Thrud Earring",
-        ring1="Niqmaddu Ring",
+        ring1="Cornelia's Ring"
         ring2="Regal Ring",       
         back=gear.WAR_WS1_Cape,
-    }, {
-        ring1="Cornelia's Ring"
-    }) 
+    }
 
     sets.precast.WS["Savage Blade"].Acc = set_combine(sets.precast.WS["Savage Blade"], {})
     sets.precast.WS['Savage Blade'].PDL = set_combine(sets.precast.WS['Savage Blade'], {
         body=gear.Sakpata_Body,
-        ring1="Ephramad's Ring",
         ring2="Sroda Ring",
     })
 
@@ -513,7 +487,7 @@ function init_gear_sets()
     ------------------------ CLUB --------------------------
     --------------------------------------------------------
 
-    sets.precast.WS['Judgment'] = set_combine({
+    sets.precast.WS['Judgment'] = {
         ammo="Knobkierrie",
         head=gear.Relic_Head,
         body=gear.Nyame_Body, 
@@ -523,18 +497,15 @@ function init_gear_sets()
         neck="Warrior's Bead Necklace +2",
         ear1="Moonshade Earring", 
         ear2="Thrud Earring",
-        ring1="Sroda Ring",
+        ring1="Cornelia's Ring"
         ring2="Regal Ring",       
         waist="Sailfi Belt +1",
         back=gear.WAR_WS1_Cape,
-    }, {
-        ring1="Cornelia's Ring"
-    }) 
+    }
 
     sets.precast.WS["Judgment"].Acc = set_combine(sets.precast.WS["Judgment"], {})
     sets.precast.WS['Judgment'].PDL = set_combine(sets.precast.WS['Savage Blade'], {
         body=gear.Sakpata_Body,
-        ring2="Ephramad's Ring",
     })
    
     --------------------------------------------------------
