@@ -556,8 +556,8 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
         neck="Dgn. Collar +2",
-        ear1="Etiolation Earring",
-        ear2="Arete Del Luna +1",
+        ear1="Arete Del Luna +1",
+        ear2="Sanare Earring",
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
         back=gear.DRG_TP_Cape, --6/6

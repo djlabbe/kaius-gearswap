@@ -62,7 +62,7 @@ function user_setup()
     gear.Valo_STP_Feet = { name="Valorous Greaves", augments={'Attack+28','"Store TP"+7',}}
     gear.Ody_STP_Legs = { name="Odyssean Cuisses", augments={'"Store TP"+7','STR+7','Accuracy+10','Attack+15',}}
 
-    gear.DRK_TP_Cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --*
+    gear.DRK_TP_Cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}} 
     gear.DRK_WS1_Cape = { name="Ankou's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
     gear.DRK_WS2_Cape = { name="Ankou's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
     gear.DRK_DRK_Cape = { name="Niht Mantle", augments={'Attack+15','Dark magic skill +10','"Drain" and "Aspir" potency +23',}}
@@ -101,7 +101,7 @@ function user_setup()
         send_command('bind ^numpad5 gs c set WeaponSet Lycurgos;input /macro set 3')
         send_command('bind ^numpad6 gs c set WeaponSet Naegling;input /macro set 4')
         send_command('bind ^numpad1 gs c set WeaponSet Loxotic;input /macro set 5')
-        set_macro_page(1, 8)
+        set_macro_page(2, 8)
     elseif player.sub_job == 'DRG' then   
         send_command('bind ^numpad7 gs c set WeaponSet Caladbolg;input /macro set 6')
         send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 6')
@@ -110,7 +110,7 @@ function user_setup()
         send_command('bind ^numpad5 gs c set WeaponSet Lycurgos;input /macro set 8')
         send_command('bind ^numpad6 gs c set WeaponSet Naegling;input /macro set 9')
         send_command('bind ^numpad1 gs c set WeaponSet Loxotic;input /macro set 10')
-        set_macro_page(6, 8)
+        set_macro_page(7, 8)
     else
         send_command('bind ^numpad7 gs c set WeaponSet Caladbolg;input /macro set 6')
         send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 6')
@@ -119,7 +119,7 @@ function user_setup()
         send_command('bind ^numpad5 gs c set WeaponSet Lycurgos;input /macro set 8')
         send_command('bind ^numpad6 gs c set WeaponSet Naegling;input /macro set 9')
         send_command('bind ^numpad5 gs c set WeaponSet Loxotic;input /macro set 10')
-        set_macro_page(6, 8)
+        set_macro_page(7, 8)
     end
 
     send_command('bind @1 input /ma "Stone II" <t>')
@@ -183,7 +183,7 @@ function init_gear_sets()
         head={name="Halitus Helm", priority=88}, --8
         neck="Moonlight Necklace",
         ear1={name="Cryptic Earring", priority=40},
-        ear2={name="Odnowa Earring +1", priority=110},
+        ear2={name="Trux Earring", priority=1},
         body={name="Emet Harness +1", priority=61}, --10
         hands={name="Kurys Gloves", priority=25}, --9
         ring2={name="Eihwaz Ring", priority=70}, --5 
@@ -279,15 +279,15 @@ function init_gear_sets()
 
      sets.precast.WS['Cross Reaper'] = {
         ammo="Knobkierrie",
-        head=gear.Nyame_Head,
+        head=gear.Empyrean_Head,
         body=gear.Nyame_Legs,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
-        ear2="Heathen's Earring +1",
-        ring1="Epaminondas's Ring",
+        ear2="Thrud Earring",
+        ring1="Cornelia's Ring",
         ring2="Niqmaddu Ring",
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
@@ -295,7 +295,7 @@ function init_gear_sets()
 
     sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS['Cross Reaper'], {})
     sets.precast.WS['Cross Reaper'].PDL = set_combine(sets.precast.WS['Cross Reaper'], {
-        head=gear.Empyrean_Head,
+        ear2="Heathen's Earring +1",
         ring1="Sroda Ring",
     })
 
@@ -327,24 +327,23 @@ function init_gear_sets()
         ammo="Knobkierrie",
         head=gear.Empyrean_Head,
         body=gear.Nyame_Body,
-        hands=gear.Sakpata_Hands,
-        legs=gear.Artifact_Legs,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
         ear2="Heathen's Earring +1",
-        ring1="Regal Ring",
-        ring2="Cornelia's Ring",
+        ring1="Cornelia's Ring",
+        ring2="Niqmaddu Ring",
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
     }
 
     sets.precast.WS['Insurgency'].Acc = set_combine(sets.precast.WS['Insurgency'], {})
     sets.precast.WS['Insurgency'].PDL = set_combine(sets.precast.WS['Insurgency'], {
-        ammo="Crepuscular Pebble",
+        hands=gear.Sakpata_Hands,
         body=gear.Sakpata_Body,
         legs=gear.Sakpata_Legs,
-        ring2="Sroda Ring",
     })
 
     sets.precast.WS['Quietus'] = {
@@ -406,6 +405,7 @@ function init_gear_sets()
     -- GREAT SWORD WS --
     --------------------
     sets.precast.WS['Fimbulvetr'] = {
+        ammo="Knobierrie",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
@@ -759,12 +759,12 @@ function init_gear_sets()
         legs=gear.Sakpata_Legs,
         feet=gear.Sakpata_Feet,
         neck="Sibyl Scarf",
-        ear1="Infused Earring",
+        ear1="Sanare Earring",
         ear2="Eabani Earring",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back=gear.DRK_TP_Cape,
-        waist="Flume Belt +1",
+        waist="Carrier's Sash",
     }
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -779,7 +779,8 @@ function init_gear_sets()
         back="Moonlight Cape", --6/6
     })
 
-    sets.idle.Town = sets.precast.WS['Fimbulvetr']
+    sets.idle.Town = sets.precast.WS['Fimbulvetr'].PDL
+    -- sets.idle.Town = sets.precast.WS['Insurgency']
 
     sets.idle.Weak = set_combine(sets.idle, {})
 

@@ -136,7 +136,7 @@ function init_gear_sets()
         feet="Mochi. Kyahan +3", --8
         neck="Moonlight Necklace", --15
         ear1="Cryptic Earring", --4
-        -- ear2="Trux Earring", --5
+        ear2="Trux Earring", --5
         -- ring1="Pernicious Ring", --5
         ring2="Eihwaz Ring", --5
         waist="Kasiri Belt", --3

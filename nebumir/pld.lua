@@ -482,7 +482,7 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
-    if state.PhalanxMode then
+    if state.PhalanxMode.value == true then
         meleeSet = set_combine(idleSet, sets.Phalanx)
     end
     if state.Buff.Doom then

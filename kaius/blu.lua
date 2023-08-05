@@ -244,7 +244,7 @@ function init_gear_sets()
         -- feet="Ahosi Leggings", --7
         neck="Unmoving Collar +1", --10
         ear1="Cryptic Earring", --4
-        -- ear2="Trux Earring", --5
+        ear2="Trux Earring", --5
         -- ring1="Pernicious Ring", --5
         ring2="Eihwaz Ring", --5
         waist="Kasiri Belt", --3
@@ -869,7 +869,7 @@ function init_gear_sets()
         feet=gear.Malignance_Feet,
         neck="Sibyl Scarf",
         ear1="Eabani Earring",
-        ear2="Etiolation Earring",
+        ear2="Sanare Earring",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back="Shadow Mantle",

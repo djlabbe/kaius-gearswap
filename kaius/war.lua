@@ -111,7 +111,7 @@ function init_gear_sets()
         legs=gear.Souveran_C_Legs,
         feet=gear.Souveran_D_Feet,
         ear1={name="Cryptic Earring", priority=40},
-        ear2={name="Odnowa Earring +1", priority=110},
+        ear2={name="Trux Earring", priority=1},
         body={name="Emet Harness +1", priority=61}, --10
         hands={name="Kurys Gloves", priority=25}, --9
         ring1="Apeile Ring +1",
@@ -244,7 +244,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Fotia Gorget",
-        ring1="Cornelia's Ring"
+        ring1="Cornelia's Ring",
         ring2="Epaminondas's Ring",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
@@ -290,7 +290,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
-        ring1="Cornelia's Ring"
+        ring1="Cornelia's Ring",
         ring2="Epaminondas's Ring",
         legs=gear.Sakpata_Legs,
         feet=gear.Empyrean_Feet,
@@ -472,7 +472,7 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring", 
         ear2="Thrud Earring",
-        ring1="Cornelia's Ring"
+        ring1="Cornelia's Ring",
         ring2="Regal Ring",       
         back=gear.WAR_WS1_Cape,
     }
@@ -497,7 +497,7 @@ function init_gear_sets()
         neck="Warrior's Bead Necklace +2",
         ear1="Moonshade Earring", 
         ear2="Thrud Earring",
-        ring1="Cornelia's Ring"
+        ring1="Cornelia's Ring",
         ring2="Regal Ring",       
         waist="Sailfi Belt +1",
         back=gear.WAR_WS1_Cape,
