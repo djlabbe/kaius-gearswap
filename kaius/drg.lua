@@ -203,9 +203,7 @@ function init_gear_sets()
     })
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
-    sets.precast.WS.PDL = set_combine(sets.precast.WS, {
-        ring2="Ephramad's Ring",
-    })
+    sets.precast.WS.PDL = set_combine(sets.precast.WS, {})
 
     ------------------
     -- Savage Blade --
@@ -233,7 +231,6 @@ function init_gear_sets()
         body=gear.Empyrean_Body,
         neck="Dragoon's Collar +2",
         ear1="Peltast's Earring +1",
-        ring1="Ephramad's Ring",
     })
 
     sets.precast.WS["Judgment"] = sets.precast.WS["Savage Blade"]
@@ -263,7 +260,6 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
         ear1="Peltast's Earring +1",
-        ring2="Ephramad's Ring",
     })
 
     sets.precast.WS['Camlann\'s Torment'] = set_combine({
@@ -292,8 +288,6 @@ function init_gear_sets()
         ring1="Sroda Ring",
         ring2="Epaminondas's Ring",
         waist="Fotia Belt"
-    }, {
-        ring1="Ephramad's Ring",
     })
 
     sets.precast.WS['Sonic Thrust'] = set_combine({
@@ -318,7 +312,6 @@ function init_gear_sets()
     sets.precast.WS['Sonic Thrust'].PDL = set_combine(sets.precast.WS['Sonic Thrust'], {
         head=gear.Relic_Head,
         feet=gear.Relic_Feet,
-        ring1="Ephramad's Ring",
     })
 
     sets.precast.WS['Impulse Drive'] = {
@@ -382,8 +375,6 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         ear1="Thrud Earring",
         ring2="Sroda Ring",
-    }, {
-        ring1="Ephramad's Ring",
     })
 
     sets.precast.WS["Wheeling Thrust"] = set_combine({
@@ -425,8 +416,6 @@ function init_gear_sets()
     sets.precast.WS['Geirskogul'].PDL = set_combine(sets.precast.WS['Geirskogul'], {
         ear1="Peltast's Earring +1", 
         ring2="Epaminondas's Ring",
-    }, {
-        ring2="Ephramad's Ring",
     })
 
     sets.precast.WS['Leg Sweep'] = set_combine(sets.precast.WS, {

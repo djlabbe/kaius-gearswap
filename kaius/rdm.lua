@@ -81,10 +81,10 @@ function user_setup()
     gear.Relic_Legs = { name="Vitiation Tights +3" }
     gear.Relic_Feet = { name="Vitiation Boots +3" }
 
-    gear.Empyrean_Head = { name="Lethargy Chappel +2" }
-    gear.Empyrean_Body = { name="Lethargy Sayon +2" }
-    gear.Empyrean_Hands = { name="Lethargy Gantherots +2" }
-    gear.Empyrean_Legs = { name="Lethargy Fuseau +2" }
+    gear.Empyrean_Head = { name="Lethargy Chappel +3" }
+    gear.Empyrean_Body = { name="Lethargy Sayon +3" }
+    gear.Empyrean_Hands = { name="Lethargy Gantherots +3" }
+    gear.Empyrean_Legs = { name="Lethargy Fuseau +3" }
     gear.Empyrean_Feet = { name="Lethargy Houseaux +3" }
 
     gear.RDM_DW_Cape = { name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
@@ -190,7 +190,6 @@ function user_setup()
     determine_haste_group()
 end
 
--- Called when this job file is unloaded (eg: job change)
 function user_unload()
     send_command('unbind ^=')
     send_command('unbind !~')
@@ -279,7 +278,7 @@ function init_gear_sets()
 
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {
         head=empty,
-        body="Twilight Cloak",
+        body="Crepuscular Cloak",
         waist="Shinjutsu-no-Obi +1", --5
     })
 
@@ -337,6 +336,13 @@ function init_gear_sets()
         back=gear.RDM_WS1_Cape,
         waist="Sailfi Belt +1",
     }
+
+    sets.precast.WS['Savage Blade'].PDL = set_combine(sets.precast.WS['Savage Blade'], {
+        ammo="Crepuscular Pebble",
+        neck="Duelist's Torque +2",
+        ear1="Ishvara Earring",
+        hands=gear.Malignance_Hands,
+    })
 
     sets.precast.WS['Death Blossom'] = {
         ammo="Coiste Bodhar",
@@ -463,16 +469,22 @@ function init_gear_sets()
         ear1="Regal Earring",
         ear2="Moonshade Earring",
         ring1="Metamorph Ring +1",
-        ring2="Epaminondas's Ring",
+        ring2="Cornelia's Ring",
         back=gear.RDM_WS1_Cape,
         waist="Sailfi Belt +1",
     }
+
+    sets.precast.WS['Black Halo'].PDL = set_combine(sets.precast.WS['Black Halo'], {
+        ammo="Crepuscular Pebble",
+        neck="Duelist's Torque +2",
+        ring1="Sroda Ring",
+    })
 
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
         ammo="Staunch Tathlum +1", --11
-        --body="Ros. Jaseran +1", --25
+        body="Ros. Jaseran +1", --25
         -- hands=gear.Chironic_WSD_Hands, --20
         legs="Carmine Cuisses +1", --20
         neck="Loricate Torque +1", --5
@@ -798,7 +810,7 @@ function init_gear_sets()
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
         head=empty,
-        body="Twilight Cloak",
+        body="Crepuscular Cloak",
         ring1="Archon Ring",
         waist="Shinjutsu-no-Obi +1",
     })

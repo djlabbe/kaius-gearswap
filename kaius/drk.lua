@@ -405,7 +405,7 @@ function init_gear_sets()
     -- GREAT SWORD WS --
     --------------------
     sets.precast.WS['Fimbulvetr'] = {
-        ammo="Knobierrie",
+        ammo="Knobkierrie",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
@@ -719,21 +719,22 @@ function init_gear_sets()
 
     sets.engaged.Subtle = {
         ammo="Coiste Bodhar",
-        head="Flamma Zucchetto +2", 
+        head=gear.Sakpata_Head, 
         body="Dagon Breastplate", --(10) 
         hands=gear.Sakpata_Hands, --8
         legs=gear.Sakpata_Legs, 
         feet=gear.Sakpata_Feet, --13 
         neck="Abyssal Beads +2",
-        ear1="Cessance Earring",
-        ear2="Digni. Earring", --5
+        ear1="Telos Earring",      
+        ear2="Dedition Earring",
         ring1="Niqmaddu Ring", --(5)
-        ring2="Chirich Ring +1", --10
+        ring2=gear.Chirich_2, --10
         waist="Sailfi Belt +1",
         back=gear.DRK_TP_Cape,
-    } 
-    --Auspice = 27 (WHM empy +2) +8 Food = need 15(I) + 15(II) to cap.
-
+    }  --Auspice = 27 (WHM empy +2) +8 Food = need 15(I) + 15(II) to cap.
+    -- DT = 8 + 9 + 6 + 7 + 10P
+    
+    sets.engaged.Caladbolg.Subtle = sets.engaged.Subtle
 
     sets.engaged.Acc = set_combine(sets.engaged, {
         ear2="Heathen's Earring +1"
@@ -741,12 +742,12 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         head=gear.Sakpata_Head,
-        body=gear.Sakpata_Body, --10
-        hands=gear.Sakpata_Hands, --8
-        legs=gear.Sakpata_Legs, --9
+        body=gear.Sakpata_Body,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Sakpata_Legs,
         feet=gear.Sakpata_Feet,
-        ring2=gear.Moonlight_2, --5
-    } --33
+        ring2=gear.Moonlight_2,
+    }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
@@ -781,8 +782,6 @@ function init_gear_sets()
 
     sets.idle.Town = sets.precast.WS['Fimbulvetr'].PDL
     -- sets.idle.Town = sets.precast.WS['Insurgency']
-
-    sets.idle.Weak = set_combine(sets.idle, {})
 
     sets.latent_refresh = { waist="Fucho-no-obi" }
     sets.Kiting = { legs="Carmine Cuisses +1" }

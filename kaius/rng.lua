@@ -314,9 +314,9 @@ function init_gear_sets()
     })
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
-        -- head=gear.Relic_Head,
+        head=gear.Relic_Head,
         -- body=gear.Empyrean_Body,
-        head="Meghanada Visor +2",
+        -- head="Meghanada Visor +2",
         body="Nisroch Jerkin",
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,

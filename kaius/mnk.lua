@@ -24,6 +24,9 @@ function job_setup()
     state.Buff.Impetus = buffactive.Impetus or false
     state.Buff.Doom = false
     custom_weapon_list = S{"Godhands"}
+    include('Mote-TreasureHunter')
+    info.default_ja_ids = S{35, 204}  -- JA IDs for actions that always have TH: Provoke, Animated Flourish
+    info.default_u_ja_ids = S{201, 202, 203, 205, 207} -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
 end
 
 function user_setup()
@@ -59,6 +62,7 @@ function user_setup()
     gear.MNK_STR_CRIT_Cape = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}}
     gear.MNK_INT_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     
+    send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @e gs c cycle WeaponSet')
 
@@ -498,6 +502,13 @@ function init_gear_sets()
         waist="Gishdubar Sash",
     }
 
+    sets.TreasureHunter = {
+        ammo="Perfect Lucky Egg",
+        waist="Chaac Belt",
+        hands="Volte Bracers",
+        head="Volte Cap",
+    }
+
     sets.Kiting = { feet="Hermes' Sandals" }
     sets.Verethragna = { main="Verethragna" }
     sets.Godhands = { main="Godhands" }
@@ -627,6 +638,10 @@ function customize_melee_set(meleeSet)
         meleeSet = set_combine(meleeSet, sets.buff.Footwork)
     end
 
+    if state.TreasureMode.value == 'Fulltime' then
+        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
+    end
+
     if state.Buff.Doom then
         meleeSet = set_combine(meleeSet, sets.buff.Doom)
     end
@@ -658,6 +673,19 @@ function gearinfo(cmdParams, eventArgs)
         if not midaction() then
             job_update()
         end
+    end
+end
+
+-- Check for various actions that we've specified in user code as being used with TH gear.
+-- This will only ever be called if TreasureMode is not 'None'.
+-- Category and Param are as specified in the action event packet.
+function th_action_check(category, param)
+    if category == 2 or -- any ranged attack
+        --category == 4 or -- any magic action
+        (category == 3 and param == 30) or -- Aeolian Edge
+        (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
+        (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
+        then return true
     end
 end
 
