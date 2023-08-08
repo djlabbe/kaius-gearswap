@@ -593,8 +593,8 @@ function init_gear_sets()
         body="Blacksmith's Apron",
         hands="Smithy's Mitts",
         neck="Smithy's Torque",
-        ring1="Craftkeeper's Ring",
-        ring2="Artificer's Ring",
+        ring1="Craftmaster's Ring",
+        ring2="Confectioner's Ring",
     })
 
 end
