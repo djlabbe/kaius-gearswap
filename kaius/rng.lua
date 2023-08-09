@@ -459,7 +459,6 @@ function init_gear_sets()
     sets.precast.WS.Enmity = set_combine(sets.precast.WS, {
         hands=gear.Relic_Hands,
         feet=gear.Relic_Feet,
-        neck="Yngvi Choker",
         ear1="Beyla Earring",
     })
 

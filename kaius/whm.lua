@@ -199,11 +199,11 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1", -- 3 (11 SIRD)
         head=gear.Kaykaus_B_Head, 
         neck="Clr. Torque +2", 
-        ear1="Glorious Earring", 
-        ear2="Magnetic Earring", -- (8 SIRD)
+        ear1="Magnetic Earring", -- (8 SIRD)
+        ear2="Glorious Earring", 
         body=gear.Empyrean_Body,
         hands=gear.Artifact_Hands,
-        legs=gear.Empyrean_Legs, -- 13
+        legs=gear.Empyrean_Legs, --13
         feet=gear.Kaykaus_B_Feet, 
         ring1="Janniston Ring",          
         ring2="Defending Ring", -- 10
@@ -229,10 +229,13 @@ function init_gear_sets()
     })
 
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
+        ear1="Odnowa Earring +1", --3DT
+        ear2="Ebers Earring +1", -- 5DT
         body=gear.Artifact_Body,
-        -- ring1="Metamor. Ring +1",
+        legs=gear.Bunzi_Legs, -- 9DT (20 SIRD)
         feet=gear.Artifact_Feet, -- (29 SIRD)
-    }) --SIRD: 10 (Merit) + 29 + 19 = 58%
+    }) --SIRD: 10 (Merit) + 54 + 19 = 83%
+    -- 46 Base DT + 4 = 50%
 
     sets.midcast.CuragaWeather = set_combine(sets.midcast.CureNormal, {
         body=gear.Artifact_Body,
