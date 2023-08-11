@@ -287,7 +287,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
-        ring1="Epaminondas's Ring",
+        ring1="Corenelia's Ring",
         ring2="Ilabrat Ring",
         back=gear.BRD_WS1_Cape,
         waist="Fotia Belt",
@@ -300,7 +300,7 @@ function init_gear_sets()
         body=gear.Relic_Body,
         hands=gear.Nyame_Hands,
         legs="Zoar Subligar +1",
-        feet=gear.Lustratio_D_Feet,
+        feet=gear.Nyame_Feet,
         ear1="Mache Earring +1",
         ear2="Moonshade Earring",
         ring1="Begrudging Ring",
@@ -312,7 +312,6 @@ function init_gear_sets()
         range=gear.Linos_TP,
         body=gear.Relic_Body,
         hands=gear.Relic_Hands,
-        ring1="Shukuyu Ring",
         back=gear.BRD_WS1_Cape,
     })
 

@@ -310,7 +310,7 @@ function init_gear_sets()
         body=gear.Malignance_Body,
         hands=gear.Nyame_Hands,
         legs="Zoar Subligar +1",
-        feet="Thereoid Greaves",
+        feet=gear.Nyame_Feet,
         neck="Fotia Gorget",
         ear1="Sherida Earring",
         ear2="Mache Earring +1",
@@ -506,7 +506,7 @@ function init_gear_sets()
         legs=gear.Kaykaus_A_Legs, --11(+2)/(-6)
         feet=gear.Kaykaus_B_Feet, --11(+2)/(-12)
         neck="Incanter's Torque",
-        ear1="Mendicant's Earring",
+        ear1="Beatific Earring",
         ear2="Meili Earring",
         ring1="Haoma's Ring",
         ring2="Menelaus's Ring",

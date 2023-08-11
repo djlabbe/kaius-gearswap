@@ -62,8 +62,9 @@ function user_setup()
     gear.Valo_STP_Feet = { name="Valorous Greaves", augments={'Attack+28','"Store TP"+7',}}
     gear.Ody_STP_Legs = { name="Odyssean Cuisses", augments={'"Store TP"+7','STR+7','Accuracy+10','Attack+15',}}
 
-    gear.DRK_TP_Cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}} 
-    gear.DRK_WS1_Cape = { name="Ankou's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+    gear.DRK_TP_Cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}}
+    gear.DRK_DA_Cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+    gear.DRK_WS1_Cape = { name="Ankou's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
     gear.DRK_WS2_Cape = { name="Ankou's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
     gear.DRK_DRK_Cape = { name="Niht Mantle", augments={'Attack+15','Dark magic skill +10','"Drain" and "Aspir" potency +23',}}
 
@@ -180,7 +181,7 @@ function init_gear_sets()
 
     sets.Enmity = {
         ammo="Sapience Orb",
-        head={name="Halitus Helm", priority=88}, --8
+        head={name="Loess Barbuta +1", priority=105}, --24
         neck="Moonlight Necklace",
         ear1={name="Cryptic Earring", priority=40},
         ear2={name="Trux Earring", priority=1},
@@ -676,7 +677,7 @@ function init_gear_sets()
         ear2="Dedition Earring",
         ring1="Niqmaddu ring",
         ring2=gear.Chirich_2,
-        back= gear.DRK_TP_Cape,
+        back=gear.DRK_DA_Cape,
     }
 
     sets.engaged.Caladbolg = sets.engaged

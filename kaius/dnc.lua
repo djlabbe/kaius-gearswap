@@ -110,7 +110,6 @@ function user_setup()
     send_command('bind @2 gs c step2')
     send_command('bind !t input /ja "Animated Flourish" <t>')
     
-
     send_command('bind ^numpad7 gs c set WeaponSet Twash_TP')
     send_command('bind ^numpad8 gs c set WeaponSet Twash_Gleti')
 

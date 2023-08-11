@@ -212,7 +212,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Telos Earring",
         ring1="Epaminondas's Ring",
-        ring2="Shukuyu Ring",
+        ring2="Cornelia's Ring",
         back=gear.BLM_MAB_Cape,
         waist="Fotia Belt",
     }

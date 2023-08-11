@@ -281,7 +281,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Regal Earring",
         ring1="Epaminondas's Ring",
-        ring2="Shukuyu Ring",
+        ring2="Cornelia's Ring",
         back=gear.SCH_MAB_Cape,
         waist="Orpheus's Sash",
     }
@@ -358,7 +358,7 @@ function init_gear_sets()
         legs=gear.Kaykaus_A_Legs,
         feet=gear.Kaykaus_B_Feet,
         neck="Loricate Torque +1",
-        ear1="Mendicant's Earring",
+        ear1="Meili Earring",
         ear2="Magnetic Earring",
         ring1="Mephitas's Ring +1",
         ring2="Gelatinous Ring +1",

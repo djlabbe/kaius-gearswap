@@ -736,7 +736,7 @@ function init_gear_sets()
         back=gear.BST_WS1_Cape,
         waist="Fotia Belt",
         legs="Zoar Subligar +1",
-        feet="Thereoid Greaves",
+        feet=gear.Nyame_Feet,
     }
 
     sets.precast.WS['Aeolian Edge'] = {

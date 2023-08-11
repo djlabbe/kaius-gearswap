@@ -58,11 +58,11 @@ function user_setup()
     gear.Empyrean_Legs = { name="Chevalier's Cuisses +2", priority=127 }
     gear.Empyrean_Feet = { name="Chevalier's Sabatons +2", priority=52 }
 
-    gear.PLD_Idle_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Damage taken-5%',}}
-    gear.PLD_FC_Cape = { name="Rudianos's Mantle", augments={'"Fast Cast"+10','Spell interruption rate down -10%',}}
-    gear.PLD_SIRD_Cape = { name="Rudianos's Mantle", augments={'"Fast Cast"+10','Spell interruption rate down -10%',}}
-    gear.PLD_CURE_Cape = { name="Rudianos's Mantle", augments={'"Fast Cast"+10','Spell interruption rate down -10%',}}
-    gear.PLD_PHLX_Cape = { name="Weard Mantle", augments={'VIT+1','DEX+3','Enmity+6','Phalanx +5',}}
+    gear.PLD_Idle_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Damage taken-5%',}, priority=60}
+    gear.PLD_FC_Cape = { name="Rudianos's Mantle", augments={'HP+60','"Fast Cast"+10','Spell interruption rate down-10%',}, priority=60}
+    gear.PLD_SIRD_Cape = { name="Rudianos's Mantle", augments={'HP+60','"Fast Cast"+10','Spell interruption rate down-10%',}, priority=60}
+    gear.PLD_CURE_Cape = { name="Rudianos's Mantle", augments={'HP+60','"Fast Cast"+10','Spell interruption rate down-10%',}, priority=60}
+    gear.PLD_PHLX_Cape = { name="Weard Mantle", augments={'VIT+1','DEX+3','Enmity+6','Phalanx +5',}, priority=1}
 
     send_command('bind @f10 gs c toggle EquipShield')
     send_command('bind @w gs c toggle WeaponLock')
@@ -250,8 +250,8 @@ function init_gear_sets()
     sets.Phalanx = {
         main="Sakpata's Sword",
         sub="Priwen",
-        head=gear.Valo_PHLX_Head,
-        body=gear.Valo_PHLX_Body,
+        head=gear.Yorium_PHLX_Head,
+        body=gear.Yorium_PHLX_Body,
         hands=gear.Souveran_C_Hands,
         legs=gear.Sakpata_Legs,
         feet=gear.Souveran_D_Feet,

@@ -349,7 +349,7 @@ function init_gear_sets()
     sets.Phalanx = {
         -- main="Deacon Sword", --4
         head=gear.Relic_Head, --7
-        body=gear.Taeon_Phalanx_Body, --3(10)
+        body=gear.Herc_PHLX_Body, --4
         hands=gear.Taeon_Phalanx_Hands, --3(10)
         legs=gear.Taeon_Phalanx_Legs, --3(10)
         feet=gear.Taeon_Phalanx_Feet, --3(10)

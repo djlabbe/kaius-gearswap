@@ -188,7 +188,7 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')
 
     include('Global-Binds.lua') 
-
+SMN_Magic_Cape
     gear.perp_staff = {name="Gridarvor"}
 
     gear.Artifact_Head = { name="Convoker's Horn +1" }
@@ -209,7 +209,8 @@ function user_setup()
     gear.Empyrean_Legs = { name="Beckoner's Spats +1" }
     gear.Empyrean_Feet = { name="Beckoner's Pigaches +1" }
 
-    gear.SMN_Cape = { name="Campestres's Cape", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20',}}
+    gear.SMN_Magic_Cape = { name="Campestres's Cape", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: Damage taken -5%',}}
+    gear.SMN_Physical_Cape = { name="Campestres's Cape", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: Damage taken -5%',}}
     
     set_macro_page(1, 15)
     send_command('wait 3; input /lockstyleset 15')
@@ -313,7 +314,7 @@ function init_gear_sets()
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         ear1="Meili Earring",
-        ear2="Mendicant's Earring",
+        ear2="Beatific Earring",
         back="Fi Follet Cape +1",
         waist="Luminary Sash",
     }
@@ -407,7 +408,7 @@ function init_gear_sets()
         waist="Regal Belt",
         legs=gear.Apogee_D_Legs,
         feet=gear.Apogee_B_Feet,
-        back=gear.SMN_Cape,
+        back=gear.SMN_Magic_Cape,
     }
 
     sets.midcast.Pet.PhysicalBloodPactRage.Acc = sets.midcast.Pet.PhysicalBloodPactRage

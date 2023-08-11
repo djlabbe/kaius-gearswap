@@ -105,9 +105,9 @@ function init_gear_sets()
     
     sets.Enmity = {
         ammo="Sapience Orb",
-        head={name="Halitus Helm", priority=88}, --8
+        head={name="Halitus Helm", priority=88},
         neck="Moonlight Necklace",
-        body=gear.Souveran_C_Body,
+        body=gear.Souveran_C_Body, --20
         legs=gear.Souveran_C_Legs,
         feet=gear.Souveran_D_Feet,
         ear1={name="Cryptic Earring", priority=40},
@@ -300,7 +300,7 @@ function init_gear_sets()
         ammo="Yetshila +1",
         head=gear.Empyrean_Head,
         body="Hjarrandi Breastplate",
-        hands="Flamma Manopolas +2",
+        hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
         neck="Warrior's bead necklace +2",
@@ -313,7 +313,9 @@ function init_gear_sets()
     }
 
     sets.precast.WS["Ukko's Fury"].Acc = set_combine(sets.precast.WS["Ukko's Fury"], {})
-    sets.precast.WS["Ukko's Fury"].PDL = set_combine(sets.precast.WS["Ukko's Fury"], {})
+    sets.precast.WS["Ukko's Fury"].PDL = set_combine(sets.precast.WS["Ukko's Fury"], {
+        hands=gear.Sakpata_Hands,
+    })
 
     sets.precast.WS["Fel Cleave"] = {
         head=gear.Nyame_Head,
@@ -411,7 +413,7 @@ function init_gear_sets()
         ammo="Yetshila +1",
         head=gear.Empyrean_Head,
         body="Hjarrandi Breastplate",
-        hands="Flamma Manopolas +2",
+        hands=gear.Sakpata_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
         neck="Fotia Gorget",
@@ -426,9 +428,7 @@ function init_gear_sets()
     sets.precast.WS["Stardiver"].Acc = set_combine(sets.precast.WS["Stardiver"], {})
 
     sets.precast.WS["Stardiver"].PDL = set_combine(sets.precast.WS["Stardiver"], {
-        head="Blistering Sallet +1",
         body=gear.Sakpata_Body,
-        hands=gear.Sakpata_Hands,
         ring2="Sroda Ring",
     })
 

@@ -84,7 +84,8 @@ function define_global_sets()
     gear.Chironic_ENF_Legs = {name="Chironic Hose", augments={'Mag. Acc.+29','"Cure" spellcasting time -9%','MND+10','"Mag.Atk.Bns."+15',}}
     gear.Chironic_PHLX_Legs = {name="Chironic Hose", augments={'Attack+7','Crit.hit rate+1','Phalanx +5','Mag. Acc.+12 "Mag.Atk.Bns."+12',}}
 
-    gear.Herc_WSD_Head ={name="Herculean Helm", augments={'Accuracy+14','Weapon skill damage +3%','STR+7','Attack+10',}}
+    gear.Herc_WSD_Head = {name="Herculean Helm", augments={'Accuracy+14','Weapon skill damage +3%','STR+7','Attack+10',}}
+    gear.Herc_PHLX_Body = { name="Herculean Vest", augments={'CHR+9','AGI+3','Phalanx +4','Mag. Acc.+3 "Mag.Atk.Bns."+3',}}
 
     gear.Valo_PET_Body = {name="Valorous Mail", augments={'Pet: Mag. Acc.+24','Pet: "Dbl.Atk."+4 Pet: Crit.hit rate +4','Pet: MND+8','Pet: Accuracy+12 Pet: Rng. Acc.+12',}}
    

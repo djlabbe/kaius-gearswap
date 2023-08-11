@@ -438,7 +438,7 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Relic_Feet,
         neck="Mirage Stole +2",
-        ring1="Shukuyu Ring",
+        ring1="Regal Ring",
         ring2="Ilabrat Ring",
         back=gear.BLU_WS1_Cape,
         waist="Sailfi Belt +1",
