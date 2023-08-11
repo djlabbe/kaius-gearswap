@@ -36,11 +36,10 @@ function job_setup()
     state.Buff.Stymie = buffactive.Stymie or false
     state.Buff.Doom = false
 
-    enfeebling_magic_acc = S{'Break', 'Dispel', 'Distract', 'Distract II', 'Frazzle',
-        'Frazzle II',  'Gravity', 'Gravity II', 'Silence'}
+    enfeebling_magic_acc = S{'Bind', 'Break', 'Dispel', 'Distract', 'Distract II', 'Frazzle', 'Frazzle II', 'Gravity', 'Gravity II', 'Silence'}
 
     enfeebling_magic_skill = S{'Distract III', 'Frazzle III', 'Poison II'}
-    enfeebling_magic_effect = S{'Dia', 'Dia II', 'Dia III', 'Diaga', 'Blind', 'Blind II'}
+    enfeebling_magic_potency = S{'Dia', 'Dia II', 'Dia III', 'Diaga', 'Blind', 'Blind II'}
     enfeebling_magic_sleep = S{'Sleep', 'Sleep II', 'Sleepga'}
 
     skill_spells = S{
@@ -625,7 +624,6 @@ function init_gear_sets()
 
     sets.midcast.RefreshSelf = {
         waist="Gishdubar Sash",
-        -- back="Grapevine Cape"
     }
 
     sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {
@@ -663,12 +661,93 @@ function init_gear_sets()
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Shell
 
-
-     -- Custom spell classes
-
+    -- MND + Accuracy + Duration
+    -- Paralyze, Paralyze II, Slow, Slow II, Indundation
     sets.midcast.MndEnfeebles = {
+        main="Daybreak",
+        sub="Ammurapi Shield",
+        ammo="Regal Gem",
+        head=gear.Relic_Head,
+        body=gear.Empyrean_Body,
+        hands="Regal Cuffs",
+        legs=gear.Empyrean_Legs,
+        feet=gear.Relic_Feet,
+        neck="Dls. Torque +2",
+        ear1="Malignance Earring",
+        ear2="Snotra Earring",
+        ring1=gear.Stikini_1,
+        ring2="Metamor. Ring +1",
+        back=gear.RDM_ENF_Cape,
+        waist="Obstinate Sash",
+    } --587 skill
+
+    -- MND + Accuracy + Duration
+    -- Silence
+    sets.midcast.MndEnfeeblesAcc =  {
+        main="Daybreak",
+        sub="Ammurapi Shield",
+        range="Ullr",
+        ammo=empty,
+        head=gear.Relic_Head, -- TODO Should be AF
+        body=gear.Artifact_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Dls. Torque +2",
+        ear1="Malignance Earring",
+        ear2="Snotra Earring",
+        ring1=gear.Stikini_1,
+        ring2=gear.Stikini_2,
+        back="Aurist's Cape +1",
+        waist="Acuity Belt +1",
+    }
+
+    -- Duration + Potency
+    -- Dia, Dia II, Dia III, Diaga
+    sets.midcast.MndEnfeeblesEffect =  {
+        main="Daybreak",
+        sub="Ammurapi Shield", -- TODO: Sacro
+        ammo="Regal Gem",
+        head=gear.Relic_Head,
+        body=gear.Empyrean_Body,
+        hands="Regal Cuffs",
+        legs=gear.Empyrean_Legs,
+        feet=gear.Relic_Feet,
+        neck="Dls. Torque +2",
+        ear1="Etiolation Earring",
+        ear2="Snotra Earring",
+        ring1="Kishar Ring",
+        ring2="Metamor. Ring +1",
+        back=gear.RDM_ENF_Cape,
+        waist="Obstinate Sash",
+    }
+
+    -- Duration + Skill
+    -- Distract III, Frazzle III, Poison II
+    -- Frazzle cap 625, Distract Cap 610, poison unknown/no cap
+    sets.midcast.SkillEnfeebles = {
         main="Contemplator +1",
-        sub="Enki Strap",
+        sub="Mephitas Grip",
+        ammo="Regal Gem",
+        head=gear.Relic_Head,
+        body=gear.Artifact_Body,
+        hands="Regal Cuffs",
+        legs=gear.Empyrean_Legs,
+        feet=gear.Relic_Feet,
+        neck="Incanter's Torque",
+        ear1="Vor Earring",
+        ear2="Snotra Earring",
+        ring1=gear.Stikini_1,
+        ring2=gear.Stikini_2,
+        back=gear.RDM_ENF_Cape,
+        waist="Obstinate Sash",
+    } --644
+
+    -- INT + Accuracy + Duration
+    -- Addle, Addle II, Break
+    sets.midcast.IntEnfeebles = {
+        main="Maxentius",
+        sub="Ammurapi Shield",
         ammo="Regal Gem",
         head=gear.Relic_Head,
         body=gear.Empyrean_Body,
@@ -680,85 +759,92 @@ function init_gear_sets()
         ear2="Snotra Earring",
         ring1="Kishar Ring",
         ring2="Metamor. Ring +1",
-        back="Aurist's Cape +1",
-        waist="Obstinate Sash",
+        back=gear.RDM_ENF_Cape,
+        waist="Acuity Belt +1",
     }
 
-    sets.midcast.MndEnfeeblesAcc = set_combine(sets.midcast.MndEnfeebles, {
+    -- INT + Accuracy + Duration
+    -- Bind, Break, Dispel, Distract, Distract II, Frazzle, Frazzle II,  Gravity, Gravity II
+    sets.midcast.IntEnfeeblesAcc = {
         main="Crocea Mors",
         sub="Ammurapi Shield",
-        ammo="Regal Gem",
-        head=gear.Artifact_Head,
-        body=gear.Artifact_Body,
-        hands=gear.Kaykaus_D_Hands,
-        ring1=gear.Stikini_1,
-        waist="Acuity Belt +1",
-    })
-
-    sets.midcast.MndEnfeeblesEffect = set_combine(sets.midcast.MndEnfeebles, {
-        ammo="Regal Gem",
-        body=gear.Empyrean_Body,
-        feet=gear.Relic_Feet,
-        neck="Dls. Torque +2",
-    })
-
-    sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-        main="Maxentius",
-        sub="Ammurapi Shield",
-        waist="Acuity Belt +1",
-    })
-
-    sets.midcast.IntEnfeeblesAcc = set_combine(sets.midcast.IntEnfeebles, {
-        main="Crocea Mors",
-        sub="Ammurapi Shield",
-        -- range="Ullr",
-        -- ammo=empty,
-        body=gear.Artifact_Body,
-        hands=gear.Kaykaus_D_Hands,
-        ring1=gear.Stikini_1,
-        waist="Acuity Belt +1",
-    })
-
-    sets.midcast.IntEnfeeblesEffect = set_combine(sets.midcast.IntEnfeebles, {
-        ammo="Regal Gem",
-        body=gear.Empyrean_Body,
-        feet=gear.Relic_Feet,
-        neck="Dls. Torque +2",
-    })
-
-    sets.midcast.SkillEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-        main="Contemplator +1",
-        sub="Enki Strap",
+        range="Ullr",
+        ammo=empty,
         head=gear.Relic_Head,
         body=gear.Artifact_Body,
         hands=gear.Empyrean_Hands,
+        legs=gear.Chironic_ENF_Legs,
         feet=gear.Relic_Feet,
-        neck="Incanter's Torque",
-        ring1=gear.Stikini_1,
-        ring2=gear.Stikini_2,
-        ear1="Vor Earring",
-        ear2="Snotra Earring",
-        waist="Rumination Sash",
-    })
-
-    sets.midcast.Sleep = set_combine(sets.midcast.IntEnfeeblesAcc, {
-        head=gear.Relic_Head,
         neck="Dls. Torque +2",
+        ear1="Malignance Earring",
+        ear2="Snotra Earring",
+        ring1=gear.Stikini_1,
+        ring2="Metamor. Ring +1",
+        back=gear.RDM_ENF_Cape,
+        waist="Acuity Belt +1",
+    }
+
+    -- Blind, Blind II
+    sets.midcast.IntEnfeeblesEffect = {
+        main="Maxentius",
+        sub="Ammurapi Shield",
+        ammo="Regal Gem",
+        head=gear.Relic_Head,
+        body=gear.Empyrean_Body,
+        hands="Regal Cuffs",
+        legs=gear.Chironic_ENF_Legs,
+        feet=gear.Relic_Feet,
+        neck="Dls. Torque +2",
+        ear1="Malignance Earring",
         ear2="Snotra Earring",
         ring1="Kishar Ring",
-    })
+        ring2="Metamor. Ring +1",
+        back=gear.RDM_ENF_Cape,
+        waist="Acuity Belt +1",
+    }
 
-    sets.midcast.SleepMaxDuration = set_combine(sets.midcast.Sleep, {
+    sets.midcast.Sleep = {
+        main="Crocea Mors",
+        sub="Ammurapi Shield",
+        range="Ullr",
+        ammo=empty,
+        head=gear.Relic_Head,
+        body=gear.Artifact_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Chironic_ENF_Legs,
+        feet=gear.Relic_Feet,
+        neck="Dls. Torque +2",
+        ear1="Malignance Earring",
+        ear2="Snotra Earring",
+        ring1="Kishar Ring",
+        ring2="Metamor. Ring +1",
+        back=gear.RDM_NUKE_Cape,
+        waist="Acuity Belt +1",
+    }
+
+    sets.midcast.SleepMaxDuration = {
+        main="Crocea Mors",
+        sub="Ammurapi Shield",
+        range="Ullr",
+        ammo=empty,
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands="Regal Cuffs",
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
-    })
+        neck="Dls. Torque +2",
+        ear1="Malignance Earring",
+        ear2="Snotra Earring",
+        ring1="Kishar Ring",
+        ring2="Metamor. Ring +1",
+        back=gear.RDM_NUKE_Cape,
+        waist="Acuity Belt +1",
+    }
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeeblesAcc, {main="Daybreak", sub="Ammurapi Shield", waist="Shinjutsu-no-Obi +1"})
 
+    -- Stun (not drain/aspir)
     sets.midcast['Dark Magic'] = {
         main="Rubicundity",
         sub="Ammurapi Shield",
@@ -770,15 +856,17 @@ function init_gear_sets()
         -- feet="Merlinic Crackows",
         neck="Erra Pendant",
         ear1="Malignance Earring",
-        -- ear2="Mani Earring",
-         ring1=gear.Stikini_1,
+        ear2="Mani Earring",
+        ring1=gear.Stikini_1,
         ring2="Evanescence Ring",
         back="Aurist's Cape +1",
         waist="Acuity Belt +1",
     }
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
-        head="Pixie Hairpin +1",
+        head=gear.Merlinic_DRAIN_Head,
+        body=gear.Merlinic_DRAIN_Body,
+        hands=gear.Merlinic_DRAIN_Hands,
         -- feet="Merlinic Crackows",
         ear1="Hirudinea Earring",
         ring1="Archon Ring",
@@ -824,11 +912,11 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Regal Earring",
         body="Ea Houppe. +1", --9/(9)
-        hands=gear.Empyrean_Hands, --(6)
+        hands=gear.Bunzi_Hands, --(6)
         ring1="Freke Ring",
         ring2="Mujin Band", --(5)
         waist="Acuity Belt +1",
-        legs="Ea Slops +1", --8/(8)
+        legs=gear.Empyrean_Legs, --8/(8)
         feet=gear.Bunzi_Feet, --6  
         back=gear.NUKE_Cape,
     }
@@ -1193,7 +1281,7 @@ function job_get_spell_map(spell, default_spell_map)
             elseif spell.type == "WhiteMagic" then
                 if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
                     return "MndEnfeeblesAcc"
-                elseif enfeebling_magic_effect:contains(spell.english) then
+                elseif enfeebling_magic_potency:contains(spell.english) then
                     return "MndEnfeeblesEffect"
                 else
                     return "MndEnfeebles"
@@ -1201,7 +1289,7 @@ function job_get_spell_map(spell, default_spell_map)
             elseif spell.type == "BlackMagic" then
                 if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
                     return "IntEnfeeblesAcc"
-                elseif enfeebling_magic_effect:contains(spell.english) then
+                elseif enfeebling_magic_potency:contains(spell.english) then
                     return "IntEnfeeblesEffect"
                 elseif enfeebling_magic_sleep:contains(spell.english) and ((buffactive.Stymie and buffactive.Composure) or state.SleepMode.value == 'MaxDuration') then
                     return "SleepMaxDuration"

@@ -590,7 +590,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head=gear.Merlinic_DRAIN_Head,
         body=gear.Merlinic_DRAIN_Body,
-        hands=gear.Merlinic_Drain_Hands,
+        hands=gear.Merlinic_DRAIN_Hands,
         legs=gear.Relic_Legs,
         feet=gear.Agwu_Feet,
         neck="Erra Pendant",

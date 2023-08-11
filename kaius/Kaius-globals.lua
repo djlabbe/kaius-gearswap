@@ -97,7 +97,7 @@ function define_global_sets()
 
     gear.Merlinic_DRAIN_Head = { name="Merlinic Hood", augments={'Mag. Acc.+30','"Drain" and "Aspir" potency +11','MND+10',}}
     gear.Merlinic_DRAIN_Body = { name="Merlinic Jubbah", augments={'Mag. Acc.+9 "Mag.Atk.Bns."+9','"Drain" and "Aspir" potency +11','CHR+9','Mag. Acc.+15','"Mag.Atk.Bns."+1',}}
-    gear.Merlinic_Drain_Hands={ name="Merlinic Dastanas", augments={'Mag. Acc.+27','"Drain" and "Aspir" potency +11','CHR+3','"Mag.Atk.Bns."+12',}}
+    gear.Merlinic_DRAIN_Hands = { name="Merlinic Dastanas", augments={'Mag. Acc.+27','"Drain" and "Aspir" potency +11','CHR+3','"Mag.Atk.Bns."+12',}}
 
     --------------
     -- SKY SETS --

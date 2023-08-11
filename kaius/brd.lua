@@ -77,8 +77,7 @@ function user_setup()
     state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Twashtar', 'Tauret', 'Carnwenhan' }
     state.WeaponLock = M(true, 'Weapon Lock')
 
-    include('Global-Binds.lua') 
-    
+ 
     info.ExtraSongInstrument = 'Daurdabla'
     info.ExtraSongs = 2
 
@@ -113,6 +112,8 @@ function user_setup()
     gear.BRD_DW_Cape = { name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
     gear.BRD_WS1_Cape = { name="Intarabus's Cape", augments={'CHR+20','Accuracy+20 Attack+20','CHR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
     gear.BRD_WS2_Cape = { name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}} --*
+
+    include('Global-Binds.lua')
 
     send_command('bind !` gs c cycle SongMode')
     send_command('bind ^` input /ma "Chocobo Mazurka" <me>')
