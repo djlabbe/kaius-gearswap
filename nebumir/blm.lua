@@ -95,7 +95,9 @@ function user_setup()
     send_command('bind !numpad5 input /macro set 5')
     send_command('bind !numpad6 input /macro set 6')
 
-    
+    send_command('bind !F1 input /ja "Manafont" <me>')
+    send_command('bind !F2 input /ja "Subtle Sorcery" <me>')
+
     if player.sub_job == 'RDM' then
         send_command('bind !g input /ma "Gravity" <t>')
     end

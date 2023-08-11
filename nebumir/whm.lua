@@ -92,6 +92,9 @@ function user_setup()
 
     include('Global-Binds.lua')
 
+    send_command('bind !F1 input /ja "Benediction" <me>')
+    send_command('bind !F2 input /ja "Asylum" <me>')
+
     send_command('bind !` input /ja "Afflatus Solace" <me>')
     send_command('bind ^` input /ja "Afflatus Misery" <me>')
 

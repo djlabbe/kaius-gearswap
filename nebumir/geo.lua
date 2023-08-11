@@ -91,6 +91,10 @@ function user_setup()
     include('Global-Binds.lua')
 
     send_command('bind @w gs c toggle WeaponLock')
+
+    send_command('bind !F1 input /ja "Bolster" <me>')
+    send_command('bind !F2 input /ja "Widened Compass" <me>')
+
     send_command('bind ^insert gs c cycleback Element')
     send_command('bind ^delete gs c cycle Element')
     send_command('bind !h input /ma "Haste" <stpc>')

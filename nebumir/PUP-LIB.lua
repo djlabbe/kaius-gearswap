@@ -229,12 +229,6 @@ function validateTextInformation()
         main_text_hub.toggle_weaponskill_ftp = const_off
     end
 
-    if state.CustomGearLock.value then
-        main_text_hub.toggle_custom_gear_lock =  const_on
-    else
-        main_text_hub.toggle_custom_gear_lock =  const_off
-    end
-
     if state.AutoDeploy.value then
         main_text_hub.toggle_auto_deploy = const_on
     else

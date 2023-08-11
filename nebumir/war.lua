@@ -65,6 +65,10 @@ function user_setup()
         send_command('bind !` input /ja "Hasso" <me>')
         send_command('bind ^` input /ja "Seigan" <me>')
     end
+
+    send_command('bind !F1 input /ja "Mighty Strikes" <me>')
+    send_command('bind !F2 input /ja "Brazen Rush" <me>')
+    
     send_command('bind !t input /ja "Provoke" <t>')
 
     -- Set macros and style

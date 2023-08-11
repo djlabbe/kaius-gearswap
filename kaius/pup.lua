@@ -1,719 +1,620 @@
-----------------------------------------------------------------------------------------
---  __  __           _                     __   _____                        _
--- |  \/  |         | |                   / _| |  __ \                      | |
--- | \  / | __ _ ___| |_ ___ _ __    ___ | |_  | |__) |   _ _ __  _ __   ___| |_ ___
--- | |\/| |/ _` / __| __/ _ \ '__|  / _ \|  _| |  ___/ | | | '_ \| '_ \ / _ \ __/ __|
--- | |  | | (_| \__ \ ||  __/ |    | (_) | |   | |   | |_| | |_) | |_) |  __/ |_\__ \
--- |_|  |_|\__,_|___/\__\___|_|     \___/|_|   |_|    \__,_| .__/| .__/ \___|\__|___/
---                                                         | |   | |
---                                                         |_|   |_|
------------------------------------------------------------------------------------------
---[[
+-------------------------------------------------------------------------------------------------------------------
+--  Keybinds
+-------------------------------------------------------------------------------------------------------------------
 
-    Originally Created By: Faloun
-    Programmers: Arrchie, Kuroganashi, Byrne, Tuna
-    Testers:Arrchie, Kuroganashi, Haxetc, Patb, Whirlin, Petsmart
-    Contributors: Xilkk, Byrne, Blackhalo714
+--  Modes:      [ F9 ]              Cycle Offense Modes
+--              [ CTRL+F9 ]         Cycle Hybrid Modes
+--              [ WIN+F9 ]          Cycle Weapon Skill Modes
+--              [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--
+-------------------------------------------------------------------------------------------------------------------
 
-    ASCII Art Generator: http://www.network-science.de/ascii/
-    
-]]
-
--- Initialization function for this job file.
--- IMPORTANT: Make sure to also get the Mote-Include.lua file (and its supplementary files) to go with this.
 function get_sets()
     mote_include_version = 2
+    include('Mote-Include.lua')
+end
 
-    -- Load and initialize the include file.
-    include("Mote-Include.lua")
+function job_setup()
+    state.Buff.Doom = false
+    custom_weapon_list = S{"Godhands"}
 end
 
 function user_setup()
-    -- Alt-F10 - Toggles Kiting Mode.
+    include('Global-Binds.lua')
 
-    --[[
-        F9 - Cycle Offense Mode (the offensive half of all 'hybrid' melee modes).
-        
-        These are for when you are fighting with or without Pet
-        When you are IDLE and Pet is ENGAGED that is handled by the Idle Sets
-    ]]
-    state.OffenseMode:options("MasterPet", "Master", "Trusts")
+    state.OffenseMode:options('Normal', 'Acc')
+    state.WeaponskillMode:options('Normal', 'Acc')
+    state.HybridMode:options('Normal', 'DT', 'Counter')
+    state.PhysicalDefenseMode:options('PDT')
 
-    --[[
-        Ctrl-F9 - Cycle Hybrid Mode (the defensive half of all 'hybrid' melee modes).
-        
-        Used when you are Engaged with Pet
-        Used when you are Idle and Pet is Engaged
-    ]]
-    state.HybridMode:options("Normal", "Acc", "TP", "DT", "Regen", "Ranged")
+    state.WeaponLock = M(true, 'Weapon Lock')
+    state.WeaponSet = M{['description']='Weapon Set', 'Verethragna', 'Godhands'}
 
-    --[[
-        Alt-F12 - Turns off any emergency mode
-        
-        Ctrl-F10 - Cycle type of Physical Defense Mode in use.
-        F10 - Activate emergency Physical Defense Mode. Replaces Magical Defense Mode, if that was active.
-    ]]
-    state.PhysicalDefenseMode:options("PetDT", "MasterDT")
+    gear.Artifact_Head = { name="Foire Taj +1" }
+    gear.Artifact_Body = { name="Foire Tobe +1" }
+    gear.Artifact_Hands = { name="Foire Dastanas +1" }
+    gear.Artifact_Legs = { name="Foire Churidars +1" }    
+    gear.Artifact_Feet = { name="Foire Babouches +1" }
 
-    --[[
-        Alt-F12 - Turns off any emergency mode
+    gear.Relic_Head = { name="Pitre Taj +3" }
+    gear.Relic_Body = { name="Pitre Tobe +3" }
+    gear.Relic_Hands = { name="Pitre Dastanas +3" }
+    gear.Relic_Legs = { name="Pitre Churidars +3" }
+    gear.Relic_Feet = { name="Pitre Babouches +3" }
 
-        F11 - Activate emergency Magical Defense Mode. Replaces Physical Defense Mode, if that was active.
-    ]]
-    state.MagicalDefenseMode:options("PetMDT")
+    gear.Empyrean_Head = { name="Karagoz Cappello +2" }
+    gear.Empyrean_Body = { name="Karagoz Farsetto +2" }
+    gear.Empyrean_Hands = { name="Karagoz Guanti +2" }
+    gear.Empyrean_Legs = { name="Karagoz Pantaloni +2" }
+    gear.Empyrean_Feet = { name="Karagoz Scarpe +2" }
 
-    --[[ IDLE Mode Notes:
-
-        F12 - Update currently equipped gear, and report current status.
-        Ctrl-F12 - Cycle Idle Mode.
-        
-        Will automatically set IdleMode to Idle when Pet becomes Engaged and you are Idle
-    ]]
-    state.IdleMode:options("Idle", "MasterDT")
-
-    --Various Cycles for the different types of PetModes
-    state.PetStyleCycleTank = M {"NORMAL", "DD", "MAGIC", "SPAM"}
-    state.PetStyleCycleMage = M {"NORMAL", "HEAL", "SUPPORT", "MB", "DD"}
-    state.PetStyleCycleDD = M {"NORMAL", "BONE", "SPAM", "OD", "ODACC"}
-
-    --The actual Pet Mode and Pet Style cycles
-    --Default Mode is Tank
-    state.PetModeCycle = M {"TANK", "DD", "MAGE"}
-    --Default Pet Cycle is Tank
-    state.PetStyleCycle = state.PetStyleCycleTank
-
-    --Toggles
-    --[[
-        Alt + E will turn on or off Auto Maneuver
-    ]]
-    state.AutoMan = M(false, "Auto Maneuver")
-
-    --[[
-        //gs c toggle autodeploy
-    ]]
-    state.AutoDeploy = M(false, "Auto Deploy")
-
-    --[[
-        Alt + D will turn on or off Lock Pet DT
-        (Note this will block all gearswapping when active)
-    ]]
-    state.LockPetDT = M(false, "Lock Pet DT")
-
-    --[[
-        Alt + (tilda) will turn on or off the Lock Weapon
-    ]]
-    state.LockWeapon = M(false, "Lock Weapon")
-
-    --[[
-        //gs c toggle setftp
-    ]]
-    state.SetFTP = M(false, "Set FTP")
-
-   --[[
-        This will hide the entire HUB
-        //gs c hub all
-    ]]
-    state.textHideHUB = M(false, "Hide HUB")
-
-    --[[
-        This will hide the Mode on the HUB
-        //gs c hub mode
-    ]]
-    state.textHideMode = M(false, "Hide Mode")
-
-    --[[
-        This will hide the State on the HUB
-        //gs c hub state
-    ]]
-    state.textHideState = M(false, "Hide State")
-
-    --[[
-        This will hide the Options on the HUB
-        //gs c hub options
-    ]]
-    state.textHideOptions = M(false, "Hide Options")
-
-    --[[
-        This will toggle the HUB lite mode
-        //gs c hub lite
-    ]]  
-    state.useLightMode = M(false, "Toggles Lite mode")
-
-    --[[
-        This will toggle the default Keybinds set up for any changeable command on the window
-        //gs c hub keybinds
-    ]]
-    state.Keybinds = M(false, "Hide Keybinds")
-
-    --[[ 
-        This will toggle the CP Mode 
-        //gs c toggle CP 
-    ]] 
-    state.CP = M(false, "CP") 
-    CP_CAPE = "Aptitude Mantle +1" 
-
-    --[[
-        Enter the slots you would lock based on a custom set up.
-        Can be used in situation like Salvage where you don't want
-        certain pieces to change.
-
-        //gs c toggle customgearlock
-        ]]
-    state.CustomGearLock = M(false, "Custom Gear Lock")
-    --Example customGearLock = T{"head", "waist"}
-    customGearLock = T{}
-
-    send_command("bind !f7 gs c cycle PetModeCycle")
-    send_command("bind ^f7 gs c cycleback PetModeCycle")
-    send_command("bind !f8 gs c cycle PetStyleCycle")
-    send_command("bind ^f8 gs c cycleback PetStyleCycle")
-    send_command("bind !e gs c toggle AutoMan")
-    send_command("bind !d gs c toggle LockPetDT")
-    send_command("bind !f6 gs c predict")
-    send_command("bind ^` gs c toggle LockWeapon")
-    send_command("bind home gs c toggle setftp")
-    send_command("bind PAGEUP gs c toggle autodeploy")
-    send_command("bind PAGEDOWN gs c hide keybinds")
-    send_command("bind end gs c toggle CP") 
-    send_command("bind = gs c clear")
+    gear.PUP_Cape = { name="Shadow Mantle" }
+    gear.PUP_WS_Cape = { name = "Visucius's Mantle" }
+    
+    send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind @e gs c cycle WeaponSet')
 
     send_command('bind !F1 input /ja "Overdrive" <me>')
     send_command('bind !F2 input /ja "Heady Artifice" <me>')
 
-    set_macro_page(1, 18)
+    if player.sub_job == 'WAR' then
+        send_command('bind !t input /ja "Provoke" <t>')
+    end
+
+    send_command('bind ^numpad7 gs c set WeaponSet Verethragna;input /macro set 1')
+    send_command('bind ^numpad8 gs c set WeaponSet Godhands;input /macro set 1')
+
+    set_macro_page(1, 2)
     send_command('wait 3; input /lockstyleset 18')
 
-    -- Adjust the X (horizontal) and Y (vertical) position here to adjust the window
-    pos_x = 2100 
-    pos_y = 200
-    setupTextWindow(pos_x, pos_y)
-    
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    moving = false
+    get_combat_weapon()
 end
 
-function file_unload()
-    send_command("unbind !f7")
-    send_command("unbind ^f7")
-    send_command("unbind !f8")
-    send_command("unbind ^f8")
-    send_command("unbind !e")
-    send_command("unbind !d")
-    send_command("unbind !f6")
-    send_command("unbind ^`")
-    send_command("unbind home")
-    send_command("unbind PAGEUP")
-    send_command("unbind PAGEDOWN")       
-    send_command("unbind end")
-    send_command("unbind =")
-end
-
-function job_setup()
-    include("PUP-LIB.lua")
+function user_unload()
+    send_command('unbind @w')
+    send_command('unbind @e')
+    send_command('unbind !F1')
+    send_command('unbind !F2')
+    send_command('unbind !t')
 end
 
 function init_gear_sets()
-    --Table of Contents
-    ---Gear Variables
-    ---Master Only Sets
-    ---Hybrid Only Sets
-    ---Pet Only Sets
-    ---Misc Sets
 
-    -------------------------------------------------------------------------
-    --  _____                  __      __        _       _     _
-    -- / ____|                 \ \    / /       (_)     | |   | |
-    --| |  __  ___  __ _ _ __   \ \  / /_ _ _ __ _  __ _| |__ | | ___  ___
-    --| | |_ |/ _ \/ _` | '__|   \ \/ / _` | '__| |/ _` | '_ \| |/ _ \/ __|
-    --| |__| |  __/ (_| | |       \  / (_| | |  | | (_| | |_) | |  __/\__ \
-    -- \_____|\___|\__,_|_|        \/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
-    -------------------------------------------------------------------------
-    --[[
-        This section is best ultilized for defining gear that is used among multiple sets
-        You can simply use or ignore the below
-    ]]
-    Animators = {}
-    Animators.Range = "Animator P II"
-    Animators.Melee = "Animator P +1"
-
-    --Adjust to your reforge level
-    --Sets up a Key, Value Pair
-    Artifact_Foire = {}
-    Artifact_Foire.Head_PRegen = "Foire Taj +1"
-    Artifact_Foire.Body_WSD_PTank = "Foire Tobe +1"
-    Artifact_Foire.Hands_Mane_Overload = "Foire Dastanas +1"
-    Artifact_Foire.Legs_PCure = "Foire Churidars +1"
-    Artifact_Foire.Feet_Repair_PMagic = "Foire Babouches +1"
-
-    Relic_Pitre = {}
-    Relic_Pitre.Head_PRegen = "Pitre Taj +2" --Enhances Optimization
-    Relic_Pitre.Body_PTP = "Pitre Tobe +2" --Enhances Overdrive
-    Relic_Pitre.Hands_WSD = "Pitre Dastanas +2" --Enhances Fine-Tuning
-    Relic_Pitre.Legs_PMagic = "Pitre Churidars +2" --Enhances Ventriloquy
-    Relic_Pitre.Feet_PMagic = "Pitre Babouches +1" --Role Reversal
-
-    Empy_Karagoz = {}
-    Empy_Karagoz.Head_PTPBonus = "Karagoz Capello"
-    Empy_Karagoz.Body_Overload = "Karagoz Farsetto"
-    Empy_Karagoz.Hands = "Karagoz Guanti"
-    Empy_Karagoz.Legs_Combat = "Karagoz Pantaloni +1"
-    Empy_Karagoz.Feet_Tatical = "Karagoz Scarpe +1"
-
-    Visucius = {}
-    Visucius.PetDT = {
-        name = "Visucius's Mantle",
-        augments = {
-            "Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20",
-            "Accuracy+20 Attack+20",
-            "Pet: Accuracy+4 Pet: Rng. Acc.+4",
-            'Pet: "Regen"+10',
-            "Pet: Damage taken -5%"
-        }
-    }
-    Visucius.PetMagic = {
-        name = "Visucius's Mantle",
-        augments = {
-            "Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20",
-            "Accuracy+20 Attack+20",
-            "Pet: Accuracy+4 Pet: Rng. Acc.+4",
-            'Pet: "Regen"+10',
-            "Pet: Damage taken -5%"
-        }
-    }
-
-    --------------------------------------------------------------------------------
-    --  __  __           _               ____        _          _____      _
-    -- |  \/  |         | |             / __ \      | |        / ____|    | |
-    -- | \  / | __ _ ___| |_ ___ _ __  | |  | |_ __ | |_   _  | (___   ___| |_ ___
-    -- | |\/| |/ _` / __| __/ _ \ '__| | |  | | '_ \| | | | |  \___ \ / _ \ __/ __|
-    -- | |  | | (_| \__ \ ||  __/ |    | |__| | | | | | |_| |  ____) |  __/ |_\__ \
-    -- |_|  |_|\__,_|___/\__\___|_|     \____/|_| |_|_|\__, | |_____/ \___|\__|___/
-    --                                                  __/ |
-    --                                                 |___/
-    ---------------------------------------------------------------------------------
-    --This section is best utilized for Master Sets
-    --[[
-        Will be activated when Pet is not active, otherwise refer to sets.idle.Pet
-    ]]
-    sets.idle = {}
-
-    -------------------------------------Fastcast
-    sets.precast.FC = {
-        neck="Orunmila's Torque", --5
-    }
-
-    -------------------------------------Midcast
-    sets.midcast = {} --Can be left empty
-
-    sets.midcast.FastRecast = {
-       -- Add your set here 
-    }
-
-    -------------------------------------Kiting
-    sets.Kiting = {feet = "Hermes' Sandals"}
-
-    -------------------------------------JA
-    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {neck = "Magoraga Beads", body = "Passion Jacket"})
-
-    -- Precast sets to enhance JAs
-    sets.precast.JA = {} -- Can be left empty
-
-    sets.precast.JA["Tactical Switch"] = {feet = Empy_Karagoz.Feet_Tatical}
-
-    sets.precast.JA["Ventriloquy"] = {legs = Relic_Pitre.Legs_PMagic}
-
-    sets.precast.JA["Role Reversal"] = {feet = Relic_Pitre.Feet_PMagic}
-
-    sets.precast.JA["Overdrive"] = {body = Relic_Pitre.Body_PTP}
-
-    sets.precast.JA["Repair"] = {
-        ammo = "Automat. Oil +3",
-        feet = Artifact_Foire.Feet_Repair_PMagic
-    }
-
-    sets.precast.JA["Maintenance"] = set_combine(sets.precast.JA["Repair"], {})
-
-    sets.precast.JA.Maneuver = {
-        neck = "Buffoon's Collar +1",
-        body = "Karagoz Farsetto",
-        hands = Artifact_Foire.Hands_Mane_Overload,
-        back = "Visucius's Mantle",
-        ear1 = "Burana Earring"
-    }
-
-    sets.precast.JA["Activate"] = {back = "Visucius's Mantle"}
-
-    sets.precast.JA["Deus Ex Automata"] = sets.precast.JA["Activate"]
-
-    sets.precast.JA["Provoke"] = {}
-
-    --Waltz set (chr and vit)
     sets.precast.Waltz = {
-       -- Add your set here 
+        ammo="Voluspa Tathlum",
+        head="Kendatsuba Jinpachi +1",
+        neck="Unmoving Collar +1",
+        ear1="Handler's Earring +1",
+        ear2="Tuisto Earring",
+        body="Passion Jacket",
+        hands=gear.Relic_Hands,
+        waist="Gishdubar Sash",
+        ring1="Asklepian Ring",
+        ring2="Gelatinous Ring +1",
     }
+        
+    sets.precast.Waltz['Healing Waltz'] = {}
 
-    sets.precast.Waltz["Healing Waltz"] = {}
+    sets.precast.FC = {
+        ammo="Sapience Orb", --2
+        head=gear.Herc_WSD_head, --7
+        body=gear.Taeon_FC_body, --9
+        hands="Leyline Gloves", --8
+        legs="Rawhide Trousers", --5
+        neck="Orunmila's Torque", --5
+        ear1="Loquacious Earring", --2
+        ear2="Enchntr. Earring +1", --2
+        ring1="Prolix Ring", --2
+        ring2="Kishar Ring", --4
+    } -- 49%
 
-    -------------------------------------WS
-    -- Weaponskill sets
-    -- Default set for any weaponskill that isn't any more specifically defined
+    sets.midcast.FastRecast = sets.precast.FC
+    
     sets.precast.WS = {
-       -- Add your set here 
-    }
-
-    -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
-    sets.precast.WS["Stringing Pummel"] = set_combine(sets.precast.WS, {})
-
-    sets.precast.WS["Stringing Pummel"].Mod = set_combine(sets.precast.WS, {})
-
-    sets.precast.WS["Victory Smite"] = {
         ammo="Knobkierrie",
-		head=gear.Mpaca_Head,
+		head=gear.Nyame_Head,
 		body=gear.Nyame_Body,
-		hands=gear.Ryuo_A_Hands,
-		legs=gear.Mpaca_Legs,
-		feet=gear.Mpaca_Feet,
-		neck="Puppetmaster's Collar +2",
+		hands=gear.Nyame_Hands,
+		legs=gear.Nyame_Legs,
+		feet=gear.Nyame_Feet,
+		neck="Fotia Gorget",
 		waist="Moonbow Belt +1",
-		ear1="Sherida Earring",
-		ear2="Odr Earring",
-		ring1="Gere Ring",
-		ring2="Niqmaddu Ring",
-    }
-
-    sets.precast.WS["Shijin Spiral"] =
-        set_combine(
-        sets.precast.WS, {
-            -- Add your set here
-        }
-
-    )
-
-    sets.precast.WS["Howling Fist"] = set_combine(sets.precast.WS, {})
-
-    -------------------------------------Idle
-    --[[
-        Pet is not active
-        Idle Mode = MasterDT
-    ]]
-    sets.idle.MasterDT = {
-       -- Add your set here 
-    }
-
-    -------------------------------------Engaged
-    --[[
-        Offense Mode = Master
-        Hybrid Mode = Normal
-    ]]
-    sets.engaged.Master = {
-        head=gear.Mpaca_Head,
-		body=gear.Mpaca_Body,
-		hands=gear.Mpaca_Hands,
-		legs=gear.Mpaca_Legs,
-		feet=gear.Mpaca_Feet,
-		neck="Puppetmaster's Collar +2",
-		waist="Moonbow Belt +1",
-        ear1="Mache Earring +1",
+		ear1="Moonshade Earring",
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_TP_Cape,
+		back=gear.PUP_Cape,
     }
 
-    -------------------------------------Acc
-    --[[
-        Offense Mode = Master
-        Hybrid Mode = Acc
-    ]]
-    sets.engaged.Master.Acc = {
-       -- Add your set here 
+    sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+        -- TODO
+    })
+
+    sets.precast.WS["Victory Smite"] = {
+        ammo="Coiste Bodhar",
+		head=gear.Mpaca_Head,
+		body=gear.Empyrean_Body,
+		hands=gear.Ryuo_A_Hands,
+		legs=gear.Mpaca_Legs,
+		feet=gear.Mpaca_Feet,
+		neck="Mnk. Nodowa +2",
+		waist="Moonbow Belt +1",
+		ear1="Sherida Earring",
+		ear2="Schere Earring",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+		back=gear.MNK_STR_CRIT_Cape,
     }
 
-    -------------------------------------TP
-    --[[
-        Offense Mode = Master
-        Hybrid Mode = TP
-    ]]
-    sets.engaged.Master.TP = {
-       -- Add your set here
+    sets.precast.WS["Victory Smite"].Acc = set_combine(sets.precast.WS["Victory Smite"], {
+        -- TODO
+    })
+
+    sets.precast.WS['Raging Fists'] = {
+        ammo="Knobkierrie",
+		head=gear.Mpaca_Head,
+		body=gear.Mpaca_Body,
+		hands=gear.Tatenashi_Hands,
+		legs=gear.Tatenashi_Legs,
+		feet=gear.Artifact_Feet,
+		neck="Mnk. Nodowa +2",
+		waist="Moonbow Belt +1",
+		ear1="Moonshade Earring",
+		ear2="Schere Earring",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+		back=gear.PUP_Cape,
+    }
+    sets.precast.WS["Raging Fists"].Acc = set_combine(sets.precast.WS["Raging Fists"], {
+        -- TODO
+    })
+   
+    sets.precast.WS['Shijin Spiral'] = {
+        ammo="Knobkierrie",
+		head="Adhemar Bonnet +1",
+		body="Kendatsuba Samue +1",
+		hands=gear.Malignance_Hands,
+		legs=gear.Tatenashi_Legs,
+		feet=gear.Tatenashi_Feet,
+		neck="Mnk. Nodowa +2",
+		waist="Moonbow Belt +1",
+		ear1="Sherida Earring",
+		ear2="Mache Earring +1",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+		back=gear.PUP_Cape,
     }
 
-    -------------------------------------DT
-    --[[
-        Offense Mode = Master
-        Hybrid Mode = DT
-    ]]
-    sets.engaged.Master.DT = {
-       -- Add your set here 
+    sets.precast.WS["Shijin Spiral"].Acc = set_combine(sets.precast.WS["Shijin Spiral"], {
+        head=gear.Malignance_Head,
+        legs=gear.Relic_Legs,
+    })
+
+    sets.precast.WS['Howling Fist'] =  {
+        ammo="Knobkierrie",
+		head=gear.Mpaca_Head,
+		body=gear.Nyame_Body,
+		hands=gear.Tatenashi_Hands,
+		legs=gear.Nyame_Legs,
+		feet=gear.Nyame_Feet,
+		neck="Mnk. Nodowa +2",
+		waist="Moonbow Belt +1",
+		ear1="Moonshade Earring",
+		ear2="Schere Earring",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+		back=gear.PUP_Cape,
     }
 
-    ----------------------------------------------------------------------------------
-    --  __  __         _           ___     _     ___      _
-    -- |  \/  |__ _ __| |_ ___ _ _| _ \___| |_  / __| ___| |_ ___
-    -- | |\/| / _` (_-<  _/ -_) '_|  _/ -_)  _| \__ \/ -_)  _(_-<
-    -- |_|  |_\__,_/__/\__\___|_| |_| \___|\__| |___/\___|\__/__/
-    -----------------------------------------------------------------------------------
+    sets.precast.WS["Howling Fist"].Acc = set_combine(sets.precast.WS["Howling Fist"], {
+        -- TODO
+    })
 
-    --[[
-        These sets are designed to be a hybrid of player and pet gear for when you are
-        fighting along side your pet. Basically gear used here should benefit both the player
-        and the pet.
-    ]]
-    --[[
-        Offense Mode = MasterPet
-        Hybrid Mode = Normal
-    ]]
-    sets.engaged.MasterPet = {
-       -- Add your set here 
+    sets.precast.WS['Final Heaven'] =  {
+        ammo="Knobkierrie",
+		head=gear.Mpaca_Head,
+		body=gear.Empyrean_Body,
+		hands=gear.Tatenashi_Hands,
+		legs=gear.Tatenashi_Legs,
+		feet=gear.Nyame_Feet,
+		neck="Mnk. Nodowa +2",
+		waist="Moonbow Belt +1",
+		ear1="Sherida Earring",
+		ear2="Ishvara Earring",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+		back=gear.PUP_Cape,
     }
 
-    -------------------------------------Acc
-    --[[
-        Offense Mode = MasterPet
-        Hybrid Mode = Acc
-    ]]
-    sets.engaged.MasterPet.Acc = {
-       -- Add your set here 
+    sets.precast.WS["Final Heaven"].Acc = set_combine(sets.precast.WS["Final Heaven"], {
+        -- TODO
+    })
+
+    sets.precast.WS['Tornado Kick'] = {
+        ammo="Coiste Bodhar",
+		head=gear.Mpaca_Head,
+		body=gear.Nyame_Body,
+		hands=gear.Nyame_Hands,
+		legs=gear.Nyame_Legs,
+		feet=gear.Artifact_Feet,
+		neck="Mnk. Nodowa +2",
+		waist="Moonbow Belt +1",
+		ear1="Moonshade Earring",
+		ear2="Schere Earring",
+		ring1="Cornelia's Ring",
+		ring2="Niqmaddu Ring",
+		back=gear.PUP_Cape,
     }
 
-    -------------------------------------TP
-    --[[
-        Offense Mode = MasterPet
-        Hybrid Mode = TP
-    ]]
-    sets.engaged.MasterPet.TP = {
-       -- Add your set here 
+    sets.precast.WS["Tornado Kick"].Acc = set_combine(sets.precast.WS["Tornado Kick"], {
+        -- TODO
+    })
+    
+    sets.precast.WS['Dragon Kick'] = {
+        ammo="Knobkierrie",
+		head=gear.Mpaca_Head,
+		body=gear.Nyame_Body,
+		hands=gear.Nyame_Hands,
+		legs=gear.Nyame_Legs,
+		feet=gear.Artifact_Feet,
+		neck="Mnk. Nodowa +2",
+		waist="Moonbow Belt +1",
+		ear1="Moonshade Earring",
+		ear2="Schere Earring",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+		back=gear.PUP_Cape,
     }
 
-    -------------------------------------DT
-    --[[
-        Offense Mode = MasterPet
-        Hybrid Mode = DT
-    ]]
-    sets.engaged.MasterPet.DT = {
-       -- Add your set here 
+    sets.precast.MaxTP = {
+		ear2="Odr Earring",
     }
 
-    -------------------------------------Regen
-    --[[
-        Offense Mode = MasterPet
-        Hybrid Mode = Regen
-    ]]
-    sets.engaged.MasterPet.Regen = {
-       -- Add your set here 
+    ---- Fall back to default WS set for Asuran Fists, and Spinning Attack ----
+
+    sets.precast.WS['Ascetic\'s Fury'] = {
+        ammo="Crepuscular Pebble",
+		head=gear.Adhemar_B_Head,
+		body=gear.Empyrean_Body,
+		hands=gear.Empyrean_Hands,
+		legs=gear.Mpaca_Legs,
+		feet=gear.Mpaca_Feet,
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
+		ear1="Sherida Earring",
+		ear2="Schere Earring",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+		back=gear.MNK_STR_CRIT_Cape,
+    }
+    
+    sets.precast.WS['Shell Crusher'] = {
+        head=gear.Malignance_Head,
+        neck="Moonlight Necklace",
+        ear1="Dignitary's Earring",
+        ear2="Crepuscular Earring",
+        body=gear.Malignance_Body,
+        hands=gear.Malignance_Hands,
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+        ring1=gear.Stikini_1,
+        ring2="Metamorph Ring +1",
+        back=gear.MNK_INT_Cape,
+        waist="Acuity Belt +1",
     }
 
-    ----------------------------------------------------------------
-    --  _____     _      ____        _          _____      _
-    -- |  __ \   | |    / __ \      | |        / ____|    | |
-    -- | |__) |__| |_  | |  | |_ __ | |_   _  | (___   ___| |_ ___
-    -- |  ___/ _ \ __| | |  | | '_ \| | | | |  \___ \ / _ \ __/ __|
-    -- | |  |  __/ |_  | |__| | | | | | |_| |  ____) |  __/ |_\__ \
-    -- |_|   \___|\__|  \____/|_| |_|_|\__, | |_____/ \___|\__|___/
-    --                                  __/ |
-    --                                 |___/
-    ----------------------------------------------------------------
-
-    -------------------------------------Magic Midcast
-    sets.midcast.Pet = {
-       -- Add your set here 
+    sets.precast.WS['Cataclysm'] = {
+        head="Pixie Hairpin +1",
+        neck="Sibyl Scarf",
+        ear1="Friomisi Earring",
+        ear2="Moonshade Earring",
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        ring1="Archon Ring",
+        ring2="Metamorph Ring +1",
+        back=gear.MNK_INT_Cape,
+        waist="Orpheus's Sash",
     }
 
-    sets.midcast.Pet.Cure = {
-       -- Add your set here 
+    sets.engaged = {
+        ammo="Coiste Bodhar",
+		head=gear.Adhemar_A_Head,
+		body=gear.Mpaca_Body,
+		hands=gear.Adhemar_A_Hands,
+		legs=gear.Empyrean_Legs,
+		feet=gear.Artifact_Feet,
+		neck="Mnk. Nodowa +2",
+		waist="Moonbow Belt +1",
+        ear1="Sherida Earring",
+		ear2="Schere Earring",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+		back=gear.PUP_Cape,
+    }
+    
+    sets.MacheEar1 = {
+        ear1="Mache Earring +1"
     }
 
-    sets.midcast.Pet["Healing Magic"] = {
-       -- Add your set here 
+    sets.engaged.Godhands = set_combine(sets.engaged, sets.MacheEar1)
+    
+    sets.engaged.Acc = set_combine(sets.engaged, {
+        head="Ken. Jinpachi +1",
+        hands="Tatenashi gote +1",
+		ring1="Regal Ring",
+		ring2=gear.Chirich_2,
+    })
+
+    sets.engaged.Godhands.Acc = set_combine(sets.engaged.Acc, sets.MacheEar1)
+
+    sets.engaged.Hybrid = {
+        body=gear.Mpaca_Body,
+        hands=gear.Malignance_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Malignance_Feet,
+    }
+   
+    sets.engaged.Counter = {
+        ammo="Coiste Bodhar",
+		head=gear.Empyrean_Head,
+		body=gear.Mpaca_Body,
+		hands=gear.Malignance_Hands,
+		legs=gear.Empyrean_Legs,
+		feet=gear.Empyrean_Feet,
+		neck="Bathy Choker +1",
+		waist="Moonbow Belt +1",
+		ear1="Sherida Earring",
+		ear2="Bhikku Earring +1",
+		ring1="Defending Ring",
+		ring2="Niqmaddu Ring",
+		back=gear.PUP_Cape,
     }
 
-    sets.midcast.Pet["Elemental Magic"] = {
-       -- Add your set here 
+    sets.engaged.Godhands.Counter = set_combine(sets.engaged.Counter, sets.MacheEar1)
+
+    sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+    sets.engaged.Godhands.DT = set_combine(sets.engaged.DT, sets.MacheEar1)
+
+    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)  
+    sets.engaged.Godhands.Acc.DT = set_combine(sets.engaged.Acc.DT, sets.MacheEar1)
+
+    sets.idle = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Mpaca_Head,
+        neck="Bathy Choker +1",
+        ear1="Arete Del Luna +1",
+        ear2="Eabani Earring",
+        body=gear.Mpaca_Body,
+        hands=gear.Mpaca_Hands,
+        ring1=gear.Chirich_1,
+        ring2="Defending Ring",
+        back=gear.PUP_Cape,
+        waist="Moonbow Belt +1",
+        legs=gear.Mpaca_Legs,
+        feet=gear.Mpaca_Feet,
     }
 
-    sets.midcast.Pet["Enfeebling Magic"] = {
-       -- Add your set here 
+    sets.idle.Town ={
+        range="Animator P +1",
+        ammo="Automat. Oil +3",
+		head=gear.Mpaca_Head,
+		body=gear.Mpaca_Body_Body,
+		hands=gear.Mpaca_Hands_Hands,
+		legs=gear.Mpaca_Legs,
+		feet=gear.Mpaca_Feet,
+		neck="Puppetmaster's Collar +2",
+		waist="Moonbow Belt +1",
+		ear1="Schere Earring",
+		ear2="Karagoz Earring +1",
+		ring1="Gere Ring",
+		ring2="Niqmaddu Ring",
+		back=gear.PUP_Cape,
+    }
+    
+    sets.defense.PDT = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Malignance_Head,
+        neck="Monk's Nodowa +2",
+        ear1="Sherida Earring",
+        ear2="Schere Earring",
+        body=gear.Malignance_Body,
+        hands=gear.Malignance_Hands,
+        ring1="Gere Ring",
+        ring2="Niqmaddu Ring",
+        back=gear.PUP_Cape,
+        waist="Moonbow Belt +1",
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+    }
+    
+    sets.defense.MDT = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Nyame_Head,
+        neck="Warder's Charm +1",
+        ear1="Odnowa Earring +1",
+        ear2="Tuisto Earring",
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        ring1="Defending Ring",
+        ring2="Gelatinous Ring +1",
+        back=gear.PUP_Cape,
+        waist="Engraved Belt",
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
     }
 
-    sets.midcast.Pet["Dark Magic"] = {
-       -- Add your set here 
+    sets.buff.Doom = {
+        neck="Nicander's Necklace",
+        ring1="Eshmun's Ring",
+        ring2="Purity Ring",
+        waist="Gishdubar Sash",
     }
 
-    sets.midcast.Pet["Divine Magic"] = {
-       -- Add your set here 
-    }
-
-    sets.midcast.Pet["Enhancing Magic"] = {
-       -- Add your set here 
-    }
-
-    -------------------------------------Idle
-    --[[
-        This set will become default Idle Set when the Pet is Active 
-        and sets.idle will be ignored
-        Player = Idle and not fighting
-        Pet = Idle and not fighting
-
-        Idle Mode = Idle
-    ]]
-    sets.idle.Pet = {
-       -- Add your set here 
-    }
-
-    --[[
-        If pet is active and you are idle and pet is idle
-        Player = idle and not fighting
-        Pet = idle and not fighting
-
-        Idle Mode = MasterDT
-    ]]
-    sets.idle.Pet.MasterDT = {
-       -- Add your set here 
-    }
-
-    -------------------------------------Enmity
-    sets.pet = {} -- Not Used
-
-    --Equipped automatically
-    sets.pet.Enmity = {
-       -- Add your set here 
-    }
-
-    --[[
-        Activated by Alt+D or
-        F10 if Physical Defense Mode = PetDT
-    ]]
-    sets.pet.EmergencyDT = {
-       -- Add your set here 
-    }
-
-    -------------------------------------Engaged for Pet Only
-    --[[
-      For Technical Users - This is layout of below
-      sets.idle[idleScope][state.IdleMode][ Pet[Engaged] ][CustomIdleGroups] 
-
-      For Non-Technical Users:
-      If you the player is not fighting and your pet is fighting the first set that will activate is sets.idle.Pet.Engaged
-      You can further adjust this by changing the HyrbidMode using Ctrl+F9 to activate the Acc/TP/DT/Regen/Ranged sets
-    ]]
-    --[[
-        Idle Mode = Idle
-        Hybrid Mode = Normal
-    ]]
-    sets.idle.Pet.Engaged = {
-       -- Add your set here 
-    }
-
-    --[[
-        Idle Mode = Idle
-        Hybrid Mode = Acc
-    ]]
-    sets.idle.Pet.Engaged.Acc = {
-       -- Add your set here 
-    }
-
-    --[[
-        Idle Mode = Idle
-        Hybrid Mode = TP
-    ]]
-    sets.idle.Pet.Engaged.TP = {
-       -- Add your set here 
-    }
-
-    --[[
-        Idle Mode = Idle
-        Hybrid Mode = DT
-    ]]
-    sets.idle.Pet.Engaged.DT = {
-       -- Add your set here 
-    }
-
-    --[[
-        Idle Mode = Idle
-        Hybrid Mode = Regen
-    ]]
-    sets.idle.Pet.Engaged.Regen = {
-       -- Add your set here 
-    }
-
-    --[[
-        Idle Mode = Idle
-        Hybrid Mode = Ranged
-    ]]
-    sets.idle.Pet.Engaged.Ranged =
-        set_combine(
-        sets.idle.Pet.Engaged,
-        {
-            legs = Empy_Karagoz.Legs_Combat
-        }
-    )
-
-    -------------------------------------WS
-    --[[
-        WSNoFTP is the default weaponskill set used
-    ]]
-    sets.midcast.Pet.WSNoFTP = {
-        head = Empy_Karagoz.Head_PTPBonus,
-       -- Add your set here
-    }
-
-    --[[
-        If we have a pet weaponskill that can benefit from WSFTP
-        then this set will be equipped
-    ]]
-    sets.midcast.Pet.WSFTP = {
-        head = Empy_Karagoz.Head_PTPBonus,
-       -- Add your set here
-    }
-
-    --[[
-        Base Weapon Skill Set
-        Used by default if no modifier is found
-    ]]
-    sets.midcast.Pet.WS = {}
-
-    --Chimera Ripper, String Clipper
-    sets.midcast.Pet.WS["STR"] = set_combine(sets.midcast.Pet.WSNoFTP, {})
-
-    -- Bone crusher, String Shredder
-    sets.midcast.Pet.WS["VIT"] =
-        set_combine(
-        sets.midcast.Pet.WSNoFTP,
-        {
-            -- Add your gear here that would be different from sets.midcast.Pet.WSNoFTP
-            head = Empy_Karagoz.Head_PTPBonus
-        }
-    )
-
-    -- Cannibal Blade
-    sets.midcast.Pet.WS["MND"] = set_combine(sets.midcast.Pet.WSNoFTP, {})
-
-    -- Armor Piercer, Armor Shatterer
-    sets.midcast.Pet.WS["DEX"] = set_combine(sets.midcast.Pet.WSNoFTP, {})
-
-    -- Arcuballista, Daze
-    sets.midcast.Pet.WS["DEXFTP"] =
-        set_combine(
-        sets.midcast.Pet.WSFTP,
-        {
-            -- Add your gear here that would be different from sets.midcast.Pet.WSFTP
-            head = Empy_Karagoz.Head_PTPBonus
-        }
-    )
-
-    -- Town Set
-    sets.idle.Town = {
-       -- Add your set here
-    }
-
-    -- Resting sets
-    sets.resting = {
-       -- Add your set here
-    }
-
-    sets.defense.MasterDT = sets.idle.MasterDT
-
-    sets.defense.PetDT = sets.pet.EmergencyDT
-
-    sets.defense.PetMDT = set_combine(sets.pet.EmergencyDT, {})
+    sets.Kiting = { feet="Hermes' Sandals" }
+    sets.Verethragna = { main="Verethragna" }
+    sets.Godhands = { main="Godhands" }
 end
 
 
+function job_state_change(field, new_value, old_value)
+    if state.WeaponLock.value == true then
+        disable('main','sub')
+    else
+        enable('main','sub')
+    end
+    check_weaponset()
+end
+
+
+-- Run after the general precast() is done.
+function job_post_precast(spell, action, spellMap, eventArgs)
+
+    if spell.type == 'WeaponSkill' then
+        -- Replace Moonshade Earring if we're at cap TP
+        if player.tp == 3000 then
+            equip(sets.precast.MaxTP)
+        end
+    end
+end
+
+-- Called when a player gains or loses a buff.
+-- buff == buff gained or lost
+-- gain == true if the buff was gained, false if it was lost.
+function job_buff_change(buff,gain)
+    if buff == "Doom" then
+        if gain then
+            state.Buff.Doom = true
+            send_command('@input /p Doomed.')
+           
+        else
+            state.Buff.Doom = false
+        end
+    end
+end
+
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
+    check_moving()
+end
+
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if state.OffenseMode.value == 'Acc' then
+        wsmode = 'Acc'
+    end
+
+    return wsmode
+end
+
+
+-- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
+function display_current_job_state(eventArgs)
+    local cf_msg = ''
+    if state.CombatForm.has_value then
+        cf_msg = ' (' ..state.CombatForm.value.. ')'
+    end
+
+    local m_msg = state.OffenseMode.value
+    if state.HybridMode.value ~= 'Normal' then
+        m_msg = m_msg .. '/' ..state.HybridMode.value
+    end
+
+    local ws_msg = state.WeaponskillMode.value
+
+    local d_msg = 'None'
+    if state.DefenseMode.value ~= 'None' then
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
+    end
+
+    local i_msg = state.IdleMode.value
+
+    local msg = ''
+    if state.Kiting.value then
+        msg = msg .. ' Kiting: On |'
+    end
+
+    add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
+
+    eventArgs.handled = true
+end
+
+function job_update(cmdParams, eventArgs)
+    get_combat_weapon()
+    handle_equipping_gear(player.status)
+end
+
+function customize_idle_set(idleSet)
+    if state.Buff.Doom then
+        idleSet = set_combine(idleSet, sets.buff.Doom)
+    end
+    if state.Auto_Kite.value == true then
+        idleSet = set_combine(idleSet, sets.Kiting)
+    end
+
+    return idleSet
+end
+
+function customize_melee_set(meleeSet)
+    if state.Buff.Doom then
+        meleeSet = set_combine(meleeSet, sets.buff.Doom)
+    end
+
+    return meleeSet
+end
+
+function get_combat_weapon()
+    state.CombatWeapon:reset()
+    if custom_weapon_list:contains(player.equipment.main) then
+        state.CombatWeapon:set(player.equipment.main)
+    end
+end
+
+
+function job_self_command(cmdParams, eventArgs)
+    gearinfo(cmdParams, eventArgs)
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
+
+-- Check for various actions that we've specified in user code as being used with TH gear.
+-- This will only ever be called if TreasureMode is not 'None'.
+-- Category and Param are as specified in the action event packet.
+function th_action_check(category, param)
+    if category == 2 or -- any ranged attack
+        --category == 4 or -- any magic action
+        (category == 3 and param == 30) or -- Aeolian Edge
+        (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
+        (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
+        then return true
+    end
+end
+
+function check_weaponset()
+    equip(sets[state.WeaponSet.current])
+end

@@ -172,8 +172,8 @@ function init_gear_sets()
 
     sets.precast.JA['Lunge'] = {
         ammo="Seething Bomblet +1",
-        head=empty,
-        body="Cohort Cloak +1",
+        head=gear.Agwu_Head,
+        body=gear.Agwu_Body,
         hands=gear.Agwu_Hands,
         legs=gear.Agwu_Legs,
         feet=gear.Agwu_Feet,
@@ -222,7 +222,7 @@ function init_gear_sets()
         legs=gear.Relic_Legs,
      })
 
-    sets.precast.WS = set_combine({
+    sets.precast.WS = {
         ammo="Knobkierrie",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -233,12 +233,10 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
         ring1="Regal Ring",
-        ring2="Niqmaddu Ring",
+        ring2="Cornelia's Ring",
         back=gear.RUN_WS1_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
-    }, {
-        ring2="Cornelia's Ring",
-    })
+    }
 
     sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
         ammo="Coiste Bodhar",
@@ -257,15 +255,15 @@ function init_gear_sets()
     })
 
     sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS, {
-        ammo="Knobkierrie",
+        ammo="Seething Bomblet +1", --13 acc
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck={name="Unmoving Collar +1", priority=200},
-        ear1="Odr Earring",
-        ear2="Moonshade Earring",
+        ear1="Moonshade Earring",
+        ear2="Erilaz Earring +1", --15 acc
         ring1="Regal Ring",
         ring2="Niqmaddu Ring",
         back=gear.RUN_WS1_Cape,
