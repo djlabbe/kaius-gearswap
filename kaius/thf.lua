@@ -202,7 +202,7 @@ function init_gear_sets()
 
     sets.precast.FC = {
         ammo="Sapience Orb",
-        head=gear.Herc_WSD_Head, --7
+        head=gear.Herc_FC_Head, --13
         body=gear.Taeon_FC_Body, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
@@ -550,10 +550,10 @@ function init_gear_sets()
 
     sets.Twashtar_Gleti = {main="Twashtar", sub="Gleti's Knife"}
     sets.Twashtar_Crep = {main="Twashtar", sub="Crepuscular Knife"}
-    sets.Twashtar_TP = {main="Twashtar", sub="Fusetto +3"}
+    sets.Twashtar_TP = {main="Twashtar", sub="Centovente"}
     sets.Tauret_Gleti = {main="Tauret", sub="Gleti's Knife"}
     sets.Gandring = {main="Gandring", sub="Gleti's Knife"}
-    sets.Savage = {main="Naegling", sub="Fusetto +3"}
+    sets.Savage = {main="Naegling", sub="Centovente"}
 
     sets.resting = {}
 
@@ -803,7 +803,7 @@ function determine_haste_group()
 end
 
 function check_gear_haste()
-    if player.equipment.sub == "Fusetto +3" then
+    if player.equipment.sub == "Centovente" then
         classes.CustomMeleeGroups:append('ExtraHaste')
     end
 end

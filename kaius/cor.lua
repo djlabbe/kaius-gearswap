@@ -716,7 +716,7 @@ function init_gear_sets()
     sets.Armageddon_R = {main=gear.Rostam_A, sub="Kustawi +1", ranged="Armageddon"}
     sets.Fomalhaut_M = {main=gear.Rostam_B, sub="Crepuscular Knife", ranged="Fomalhaut"}
     sets.Fomalhaut_R = {main=gear.Rostam_A, sub="Kustawi +1", ranged="Fomalhaut"}
-    sets.Naegling = {main="Naegling", sub="Crepuscular Knife", ranged="Anarchy +2"}
+    sets.Naegling = {main="Naegling", sub="Crepuscular Knife", ranged="Anarchy +3"}
 
     sets.DefaultShield = {sub="Nusku Shield"}
 

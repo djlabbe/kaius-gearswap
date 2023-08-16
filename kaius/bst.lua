@@ -158,8 +158,8 @@ function user_setup()
     enmity_plus_moves = S{'Provoke','Berserk','Warcry','Aggressor','Holy Circle','Sentinel','Last Resort',
         'Souleater','Vallation','Swordplay'}
 
-    -- gear.Artifact_Head = { name= "Totemic Helm +1" }
-    gear.Artifact_Body = { name= "Totemic Jackcoat +1" }
+    gear.Artifact_Head = { name= "Totemic Helm +2" }
+    gear.Artifact_Body = { name= "Totemic Jackcoat +2" }
     gear.Artifact_Hands = { name= "Totemic Gloves +3" }
     -- gear.Artifact_Legs = { name= "Totemic Trousers +1" }
     -- gear.Artifact_Feet = { name= "Totemic Gaiters +1" }
@@ -424,8 +424,6 @@ function init_gear_sets()
         feet=gear.Gleti_Feet
     }
 
-
-
     sets.defense.MDT = {
         ammo="Staunch Tathlum +1",
         head=gear.Malignance_Head,
@@ -437,7 +435,7 @@ function init_gear_sets()
         ring1="Defending Ring",
         ring2="Purity Ring",
         back=gear.BST_DW_Cape,
-        waist="Carrier's Sash",
+        waist="Engraved Belt",
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
     }

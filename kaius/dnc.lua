@@ -287,7 +287,7 @@ function init_gear_sets()
 
     sets.precast.FC = {
         ammo="Sapience Orb",
-        head=gear.Herc_WSD_head, --7
+        head=gear.Herc_FC_Head, --13
         body=gear.Taeon_FC_body, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
@@ -691,7 +691,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
-    sets.Twash_TP = { main="Twashtar", sub="Fusetto +3" }
+    sets.Twash_TP = { main="Twashtar", sub="Centovente" }
     sets.Twash_Gleti = { main="Twashtar", sub="Gleti's Knife" }
 
 end

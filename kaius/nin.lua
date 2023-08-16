@@ -52,13 +52,13 @@ function user_setup()
 
     gear.Relic_Head = { name= "Mochizuki Hatsuburi +3" }
     gear.Relic_Body = { name= "Mochizuki Chainmail +3" }
-    gear.Relic_Legs = { name= "Mochizuki Hakama +3" }
+    -- gear.Relic_Legs = { name= "Mochizuki Hakama +3" }
     gear.Relic_Hands = { name = "Mochizuki Tekko +3" }
     gear.Relic_Feet = { name = "Mochizuki Kyahan +3" }
 
-    gear.Empyrean_Body = { name = "Hattori Ningi" }
-    gear.Empyrean_Hands = { name = "Hattori Tekko +1" }
-    gear.Empyrean_Feet = { name = "Hattori Kyahan +1" }
+    -- gear.Empyrean_Body = { name = "Hattori Ningi +1" }
+    gear.Empyrean_Hands = { name = "Hattori Tekko +2" }
+    gear.Empyrean_Feet = { name = "Hattori Kyahan +2" }
 
     gear.NIN_TP_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}}
     gear.NIN_WS_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}}
@@ -130,7 +130,7 @@ end
 
 function init_gear_sets()
     sets.Enmity = {
-        -- ammo="Sapience Orb", --2
+        ammo="Sapience Orb", --2
         body="Emet Harness +1", --10
         hands="Kurys Gloves", --9
         feet="Mochi. Kyahan +3", --8
@@ -143,7 +143,7 @@ function init_gear_sets()
     }
 
     sets.precast.JA['Provoke'] = sets.Enmity
-    sets.precast.JA['Mijin Gakure'] = { legs=gear.Relic_Legs }
+    -- sets.precast.JA['Mijin Gakure'] = { legs=gear.Relic_Legs }
     sets.precast.JA['Futae'] = { hands=gear.Empyrean_Hands }
     sets.precast.JA['Sange'] = { body=gear.Relic_Body }
     sets.precast.JA['Innin'] = { head=gear.Relic_Head }
@@ -160,8 +160,8 @@ function init_gear_sets()
     sets.precast.Waltz['Healing Waltz'] = {}
 
     sets.precast.FC = {
-        -- ammo="Sapience Orb", --2
-        -- head=gear.Herc_WSD_Head, --7
+        ammo="Sapience Orb", --2
+        head=gear.Herc_FC_Head, --13
         body=gear.Taeon_FC_Body, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
@@ -183,12 +183,12 @@ function init_gear_sets()
 
     sets.precast.WS = {
         ammo="Coiste Bodhar",
-        head=gear.Artifact_Head,
-        body="Kendatsuba Samue +1",
-        hands=gear.Adhemar_B_Hands,
-        legs=gear.Relic_Legs,
-        feet=gear.Relic_Feet,
-        neck="Fotia Gorget",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Ninja Nodowa +2",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
         ring1="Epaminondas's Ring",
@@ -197,54 +197,7 @@ function init_gear_sets()
         waist="Fotia Belt",
     }
 
-    sets.precast.WS['Blade: Hi'] = set_combine(sets.precast.WS, {
-        ammo="Yetshila +1",
-        head="Blistering Sallet +1",
-        body="Kendatsuba Samue +1",
-        hands=gear.Ryuo_A_Hands,
-        feet=gear.Adhemar_D_Feet,
-        neck="Ninja Nodowa +2",
-        waist="Sailfi Belt +1",
-        ear1="Odr Earring",
-        ear2="Lugra Earring +1",
-        ring1="Gere Ring",
-        ring2="Regal Ring",
-        back=gear.NIN_WS_Cape,
-    })
-
-    sets.precast.WS['Blade: Metsu'] = set_combine(sets.precast.WS, {
-        ammo="Coiste Bodhar",
-        head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-        neck="Ninja Nodowa +2",
-        waist="Sailfi Belt +1",
-        ear1="Odr Earring",
-        ear2="Lugra Earring +1",
-        ring1="Gere Ring",
-        ring2="Cornelia's Ring",
-        back=gear.NIN_WS_Cape,
-    })
-
-    sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS, {
-        ammo="Coiste Bodhar",
-        head=gear.Mpaca_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-        neck="Rep. Plat. Medal",
-        waist="Sailfi Belt +1",
-        ear1="Moonshade Earring",
-        ear2="Lugra Earring +1",
-        ring1="Gere Ring",
-        ring2="Cornelia's Ring",
-        back=gear.NIN_WS_Cape,
-    })
-
-    sets.precast.WS['Blade: Shun'] = set_combine(sets.precast.WS, {
+    sets.precast.WS['Blade: Shun'] = {
         ammo="Coiste Bodhar",
         head="Mpaca's Cap",
         body=gear.Malignance_Body,
@@ -258,7 +211,54 @@ function init_gear_sets()
         ring1="Gere Ring",
         ring2="Cornelia's Ring",
         back=gear.NIN_DA_Cape,
-    })
+    }
+
+    sets.precast.WS['Blade: Ten'] = {
+        ammo="Coiste Bodhar",
+        head=gear.Mpaca_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Rep. Plat. Medal",
+        waist="Sailfi Belt +1",
+        ear1="Moonshade Earring",
+        ear2="Lugra Earring +1",
+        ring1="Gere Ring",
+        ring2="Cornelia's Ring",
+        back=gear.NIN_WS_Cape,
+    }
+
+    sets.precast.WS['Blade: Hi'] = {
+        ammo="Yetshila +1",
+        head=gear.Relic_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        feet=gear.Nyame_Feet,
+        neck="Ninja Nodowa +2",
+        waist="Sailfi Belt +1",
+        ear1="Odr Earring",
+        ear2="Lugra Earring +1",
+        ring1="Gere Ring",
+        ring2="Cornelia's Ring",
+        back=gear.NIN_WS_Cape,
+    }
+
+    sets.precast.WS['Blade: Metsu'] = {
+        ammo="Coiste Bodhar",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Ninja Nodowa +2",
+        waist="Sailfi Belt +1",
+        ear1="Odr Earring",
+        ear2="Lugra Earring +1",
+        ring1="Gere Ring",
+        ring2="Cornelia's Ring",
+        back=gear.NIN_WS_Cape,
+    }
 
   sets.precast.WS['Blade: Ku'] = {
         ammo="Seeth. Bomblet +1",
@@ -266,7 +266,7 @@ function init_gear_sets()
         body=gear.Nyame_Body,
         hands=gear.Relic_Hands,
         legs=gear.Nyame_Legs,
-        feet=gear.Relic_Feet,
+        feet=gear.Nyame_Feet,
         neck="Fotia Gorget",
         waist="Fotia Belt",
         ear1="Mache Earring +1",
@@ -277,18 +277,18 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Blade: Kamu'] = {
-        ammo="Seeth. Bomblet +1",
-        head=gear.Artifact_Head,
-        body="Tatena. Harama. +1",
-        hands=gear.Relic_Hands,
-        legs=gear.Nyame_Legs,
-        feet="Tatena. Sune. +1",
-        neck="Ninja Nodowa +2",
+        ammo="Crepuscular Pebble",
+        head=gear.Mpaca_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Mpaca_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Rep. Plat. Medal",
         waist="Sailfi Belt +1", 
-        ear1="Odr Earring",
+        ear1="Moonshade Earring",
         ear2="Lugra Earring +1",
         ring1="Gere Ring",
-        ring2="Epona's Ring",
+        ring2="Cornelia's Ring",
         back=gear.NIN_TP_Cape,
     }
 
@@ -312,13 +312,13 @@ function init_gear_sets()
     sets.precast.WS['Blade: To'] = sets.precast.Hybrid
     sets.precast.WS['Blade: Chi'] = sets.precast.Hybrid
 
-    sets.precast.WS['Blade: Yu'] = set_combine(sets.precast.WS, {
+    sets.precast.WS['Blade: Yu'] = {
         ammo="Seeth. Bomblet +1",
         head="Hachiya Hatsu. +3",
-        -- body="Samnuha Coat",
-        hands="Leyline Gloves",
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
-        -- feet=TODO
+        feet=gear.Nyame_Feet,
         neck="Baetyl Pendant",
         -- ear1="Crematio Earring",
         ear2="Friomisi Earring",
@@ -326,7 +326,7 @@ function init_gear_sets()
         ring2="Cornelia's Ring",
         back=gear.NIN_MAB_Cape,
         waist="Skrymir Cord +1",
-    })
+    }
 
     sets.precast.WS['Blade: Ei'] = {
         ammo="Seeth. Bomblet +1",
@@ -348,34 +348,32 @@ function init_gear_sets()
         ammo="Seething Bomblet +1",
         head=gear.Mpaca_Head,
         body=gear.Nyame_Body,
-        hands=gear.Relic_Hands,
-        legs=gear.Relic_Legs,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck="Ninja Nodowa +2",
+        neck="Rep. Plat. Medal",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
         ear2="Lugra Earring +1",
         ring1="Gere Ring",
         ring2="Cornelia's Ring",
         back=gear.NIN_WS_Cape,
-    } 
-
-    sets.precast.WS['Savage Blade'] = sets.engaged.DW
+    }
 
     sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS, {
-        ammo="Ghastly Tathlum +1",
-        head=gear.Nyame_Head,
+        ammo="Seeth. Bomblet +1",
+        head="Pixie Hairpin +1",
+        neck="Sibyl Scarf",
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Legs,
-        neck="Baetyl Pendant",
+        feet=gear.Nyame_Feet,
+        legs=gear.Nyame_Legs,        
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1="Metamor. Ring +1",
+        ring1="Cornelia's Ring",
         ring2="Epaminondas's Ring",
-        -- back="Argocham. Mantle",
         waist="Orpheus's Sash",
+        back=gear.NIN_WS_Cape,
     })
 
     sets.Lugra = { ear2="Lugra Earring +1" }
@@ -414,7 +412,7 @@ function init_gear_sets()
         head=gear.Relic_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
-        legs="Nyame Flanchard",
+        legs=gear.Nyame_Legs,
         feet=gear.Relic_Feet,
         neck="Sibyl Scarf",
         waist="Skrymir Cord +1",
@@ -469,67 +467,14 @@ function init_gear_sets()
         waist="Yemaya Belt",
     }
 
-    sets.idle = {
-        ammo="Date Shuriken",
-        head=gear.Malignance_Head,
-        body=gear.Malignance_Body,
-        hands=gear.Malignance_Hands,
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
-        neck="Bathy Choker +1",
-        ear1="Eabani Earring",
-        ear2="Cessance Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.NIN_TP_Cape,
-        waist="Engraved Belt",
-    }
-
-    sets.idle.DT = set_combine(sets.idle, {
-        head=gear.Malignance_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
-        neck="Warder's Charm +1",
-        ear2="Etiolation Earring",
-        ring1="Purity Ring", --0/4
-        ring2="Defending Ring", --10/10
-        back="Moonlight Cape", --6/6
-    })
-
-    sets.idle.Town = set_combine(sets.idle, {
-        ammo="Date Shuriken",
-        head=gear.Mpaca_Head,
-        body=gear.Mpaca_Body,
-        hands=gear.Mpaca_Hands,
-        legs=gear.Mpaca_Legs,
-        feet=gear.Mpaca_Feet,
-        neck="Ninja Nodowa +2",
-        waist="Sailfi Belt +1",
-        ear1="Crepuscular Earring",
-        ear2="Telos Earring",
-        ring1="Gere Ring",
-        ring2="Regal Ring",
-        back=gear.NIN_TP_Cape,
-    })
-
-    sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT
-
-    sets.Kiting = { feet="Danzo sune-ate" }
-
-    sets.DayMovement = { feet="Danzo sune-ate" }
-    sets.NightMovement = { feet="Hachiya Kyahan +3" }
-
     -- * NIN Native DW Trait: 35% DW
     -- No Magic Haste (74% DW to cap)
     sets.engaged = {
         ammo="Date Shuriken",
         head=gear.Ryuo_C_Head, --9
         neck="Ninja Nodowa +2",
-        ear1="Telos Earring",
-        ear2="Suppanomimi", --5
+        ear1="Dedition Earring",
+        ear2="Hattori Earring +1",
         body=gear.Relic_Body, --10
         hands=gear.Malignance_Hands,
         ring1="Gere Ring",
@@ -549,8 +494,8 @@ function init_gear_sets()
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
         neck="Ninja Nodowa +2",
-        ear1="Cessance Earring",
-        ear2="Suppanomimi", --5
+        ear1="Dedition Earring",
+        ear2="Hattori Earring +1",
         ring1="Gere Ring",
         ring2=gear.Chirich_2,
         back=gear.NIN_TP_Cape,
@@ -563,8 +508,8 @@ function init_gear_sets()
         ammo="Date Shuriken",
         head=gear.Ryuo_C_Head, --9
         neck="Ninja Nodowa +2",
-        ear1="Telos Earring",
-        ear2="Dedition Earring",
+        ear1="Dedition Earring",
+        ear2="Hattori Earring +1",
         body=gear.Adhemar_A_Body, --6
         hands=gear.Adhemar_A_Hands,
         ring1="Gere Ring",
@@ -580,9 +525,9 @@ function init_gear_sets()
         ammo="Date Shuriken",
         head=gear.Ryuo_C_Head, --9
         neck="Ninja Nodowa +2",
-        ear1="Telos Earring",
-        ear2="Dedition Earring",
-        body="Tatena. Harama. +1",
+        ear1="Dedition Earring",
+        ear2="Hattori Earring +1",
+        body=gear.Malignance_Body,
         hands=gear.Adhemar_A_Hands,
         ring1="Gere Ring",
         ring2=gear.Chirich_2,
@@ -597,8 +542,8 @@ function init_gear_sets()
         ammo="Date Shuriken",
         head=gear.Malignance_Head,
         neck="Ninja Nodowa +2",
-        ear1="Telos Earring",
-        ear2="Dedition Earring",
+        ear1="Dedition Earring",
+        ear2="Hattori Earring +1",
         body=gear.Malignance_Body,
         hands=gear.Adhemar_A_Hands,
         ring1="Gere Ring",
@@ -640,6 +585,45 @@ function init_gear_sets()
         ring2="Purity Ring",
         waist="Gishdubar Sash",
     }
+
+    sets.idle = {
+        ammo="Date Shuriken",
+        head=gear.Malignance_Head,
+        body=gear.Malignance_Body,
+        hands=gear.Malignance_Hands,
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+        neck="Warder's Charm +1",
+        ear1="Arete Del Luna +1",
+        ear2="Sanare Earring",
+        ring1=gear.Chirich_1,
+        ring2="Shadow Ring",
+        back=gear.NIN_TP_Cape,
+        waist="Engraved Belt",
+    }
+
+    sets.idle.DT = set_combine(sets.idle, {
+        head=gear.Malignance_Head, --6/6
+        body=gear.Malignance_Body, --9/9
+        hands=gear.Malignance_Hands, --5/5
+        legs=gear.Malignance_Legs, --7/7
+        feet=gear.Malignance_Feet, --4/4
+        neck="Warder's Charm +1",
+        ear2="Etiolation Earring",
+        ring1="Purity Ring", --0/4
+        ring2="Defending Ring", --10/10
+        back="Moonlight Cape", --6/6
+    })
+    
+    sets.idle.Town = sets.engaged.MaxHaste
+
+    sets.defense.PDT = sets.idle.DT
+    sets.defense.MDT = sets.idle.DT
+
+    sets.Kiting = { feet="Danzo sune-ate" }
+
+    sets.DayMovement = { feet="Danzo sune-ate" }
+    sets.NightMovement = { feet="Hachiya Kyahan +3" }
 
     sets.Kikoku = {main="Kikoku", sub="Gleti's Knife"}
     sets.Heishi = {main="Heishi Shorinken", sub="Gleti's Knife"}

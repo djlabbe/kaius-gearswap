@@ -143,8 +143,8 @@ function init_gear_sets()
 
     sets.precast.FC = {
         ammo="Sapience Orb", --2
-        head=gear.Herc_WSD_head, --7
-        body=gear.Taeon_FC_body, --9
+        head=gear.Herc_FC_Head, --13
+        body=gear.Taeon_FC_Body, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
         neck="Orunmila's Torque", --5

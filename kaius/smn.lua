@@ -188,7 +188,7 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')
 
     include('Global-Binds.lua') 
-SMN_Magic_Cape
+    
     gear.perp_staff = {name="Gridarvor"}
 
     gear.Artifact_Head = { name="Convoker's Horn +1" }

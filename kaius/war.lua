@@ -525,7 +525,7 @@ function init_gear_sets()
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
         back="Shadow Mantle",
-        waist="Carrier's Sash"
+        waist="Engraved Belt",
     }
 
     sets.idle.Town = sets.engaged;

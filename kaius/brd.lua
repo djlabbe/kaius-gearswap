@@ -288,7 +288,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
-        ring1="Corenelia's Ring",
+        ring1="Cornelia's Ring",
         ring2="Ilabrat Ring",
         back=gear.BRD_WS1_Cape,
         waist="Fotia Belt",
@@ -363,23 +363,21 @@ function init_gear_sets()
         back=gear.BRD_WS2_Capem
     }
 
-    sets.precast.WS['Savage Blade'] = set_combine({
+    sets.precast.WS['Savage Blade'] = {
         range=gear.Linos_WS,
         head=gear.Nyame_Head,
         body=gear.Relic_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck="Rep. Plat. Medal",
+        neck="Bard's Charm +2",
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
         ring1="Epaminondas's Ring",
-        ring2="Sroda Ring",
+        ring2="Cornelia's Ring",
         waist="Sailfi Belt +1",
         back=gear.BRD_WS2_Cape,
-    }, {
-        ring2="Cornelia's Ring",
-    })
+    }
 
 
     -- General set for recast times.
@@ -787,8 +785,8 @@ function init_gear_sets()
     }
 
     sets.Obi = { waist="Hachirin-no-Obi" }
-    sets.Naegling = { main="Naegling", sub="Fusetto +3" }
-    sets.Twashtar = { main="Twashtar", sub="Fusetto +3" }
+    sets.Naegling = { main="Naegling", sub="Centovente" }
+    sets.Twashtar = { main="Twashtar", sub="Centovente" }
     sets.Carnwenhan = { main="Carnwenhan", sub="Crepuscular Knife" }
     sets.Tauret = { main="Tauret", sub="Gleti's Knife" }
     sets.DefaultShield = { sub="Genmei Shield" }

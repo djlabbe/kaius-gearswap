@@ -59,6 +59,12 @@ function job_setup()
         ['Lightning'] = {'Thunder','Thunder II','Thunder III','Thunder IV','Thunder V','Thunder VI'}
     }
 
+    Elemental_Aja = S{'Stoneja', 'Waterja', 'Aeroja', 'Firaja', 'Blizzaja', 'Thundaja', 'Comet'}
+    state.Aja_Duration_Boost = false
+    Aja_Table = {} -- List of -ja debuffed mobs
+    Aja_Table_ind = 0 --Used to create "uniqueness" for each mob in queue
+    Aja_Current_Boost = "" -- Stores current cumulative magic effect.
+
     state.Buff.Doom = false
     state.Auto_Kite = M(false, 'Auto_Kite')
     moving = false
@@ -590,7 +596,20 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
+    
     if not spell.interrupted then
+        if spell.action_type == 'Magic' then
+            if Elemental_Aja:contains(spell.english) then	
+                if (state.Aja_Duration_Boost == false or Aja_Current_Boost ~= spell.english) then
+                    Aja_Current_Boost = spell.english
+                    Aja_Table_ind = Aja_Table_ind + 1
+                    table.insert(Aja_Table, tostring(spell.target.name .. " #" .. Aja_Table_ind))
+                    send_command('timers create "'.. spell.english .. ': ' .. Aja_Table[Aja_Table_ind] .. '" 110 down spells/01015.png')
+                    state.Aja_Duration_Boost = true
+                    send_command('wait 105;input //gs c reset Aja_Duration Timer')
+                end
+            end
+        end
         if spell.english == "Sleep II" or spell.english == "Sleepga II" then
             send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
         elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
@@ -767,6 +786,19 @@ function job_self_command(cmdParams, eventArgs)
         handle_strategems(cmdParams)
         eventArgs.handled = true
     end
+    if cmdParams[1]:lower() == "reset" then
+        if cmdParams[2]:lower() == "aja_duration" then
+            if (cmdParams[3]:lower() == "timer") then
+                send_command("@input /echo <----- ".. Aja_Table[1] ..": Cumulative Magic Effect Has Worn Off ----->")
+                table.remove(Aja_Table,1)
+                Aja_Table_ind = Aja_Table_ind - 1
+                if Aja_Table[1] == nil then
+                    state.Aja_Duration_Boost = false
+                end
+                eventArgs.handled = true
+            end
+        end
+	end
     gearinfo(cmdParams, eventArgs)
 end
 

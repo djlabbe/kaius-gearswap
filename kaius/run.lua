@@ -422,6 +422,7 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         ring1=gear.Moonlight_1,
         ring2=gear.Moonlight_2,
+        back=gear.RUN_TP_Cape,
     })
 
     sets.engaged.DD = set_combine(sets.engaged, sets.Hybrid)

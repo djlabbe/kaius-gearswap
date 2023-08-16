@@ -924,8 +924,8 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
-    sets.Naegling = {main="Naegling", sub="Machaera +3"}
-    sets.Maxentius = {main="Maxentius", sub="Machaera +3"}
+    sets.Naegling = {main="Naegling", sub="Thibron"}
+    sets.Maxentius = {main="Maxentius", sub="Thibron"}
     sets.Nuking = {main="Maxentius", sub="Bunzi's Rod"}
 end
 

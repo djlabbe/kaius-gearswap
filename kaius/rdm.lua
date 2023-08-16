@@ -69,7 +69,7 @@ function user_setup()
     state.SleepMode = M{['description']='Sleep Mode', 'Normal', 'MaxDuration'}
     state.EnspellMode = M(false, 'Enspell Melee Mode')
 
-    -- gear.Artifact_Head = { name= "Atrophy Chapeau +1" }
+    gear.Artifact_Head = { name= "Atrophy Chapeau +2" }
     gear.Artifact_Body = { name="Atrophy Tabard +3" }
     gear.Artifact_Hands = { name="Atrophy Gloves +3" }
     gear.Artifact_Legs = { name="Atrophy Tights +3" }
@@ -175,7 +175,12 @@ function user_setup()
     elseif player.sub_job == 'SCH' then
         set_macro_page(7, 5)
     else
-        set_macro_page(7, 5)
+        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 3')
+        send_command('bind ^numpad4 gs c set WeaponSet CroceaLight;input /macro set 1')
+        send_command('bind ^numpad5 gs c set WeaponSet CroceaDark;input /macro set 1')
+        set_macro_page(1, 5)
     end
 
     send_command('wait 3; input /lockstyleset 5')
@@ -664,7 +669,7 @@ function init_gear_sets()
     -- MND + Accuracy + Duration
     -- Paralyze, Paralyze II, Slow, Slow II, Indundation
     sets.midcast.MndEnfeebles = {
-        main="Daybreak",
+        main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Regal Gem",
         head=gear.Relic_Head,
@@ -684,7 +689,7 @@ function init_gear_sets()
     -- MND + Accuracy + Duration
     -- Silence
     sets.midcast.MndEnfeeblesAcc =  {
-        main="Daybreak",
+        main="Bunzi's Rod",
         sub="Ammurapi Shield",
         range="Ullr",
         ammo=empty,
@@ -727,7 +732,7 @@ function init_gear_sets()
     -- Frazzle cap 625, Distract Cap 610, poison unknown/no cap
     sets.midcast.SkillEnfeebles = {
         main="Contemplator +1",
-        sub="Mephitas Grip",
+        sub="Mephitis Grip",
         ammo="Regal Gem",
         head=gear.Relic_Head,
         body=gear.Artifact_Body,
@@ -746,7 +751,7 @@ function init_gear_sets()
     -- INT + Accuracy + Duration
     -- Addle, Addle II, Break
     sets.midcast.IntEnfeebles = {
-        main="Maxentius",
+        main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Regal Gem",
         head=gear.Relic_Head,
@@ -766,7 +771,7 @@ function init_gear_sets()
     -- INT + Accuracy + Duration
     -- Bind, Break, Dispel, Distract, Distract II, Frazzle, Frazzle II,  Gravity, Gravity II
     sets.midcast.IntEnfeeblesAcc = {
-        main="Crocea Mors",
+        main="Bunzi's Rod",
         sub="Ammurapi Shield",
         range="Ullr",
         ammo=empty,
@@ -968,7 +973,7 @@ function init_gear_sets()
         ammo="Regal Gem",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
-        hands="Regal Cuffs",
+        hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
         neck="Dls. Torque +2",
@@ -1008,7 +1013,7 @@ function init_gear_sets()
         ring1="Ilabrat Ring",
         ring2=gear.Chirich_2,
         back=gear.RDM_DW_Cape,
-        waist="Windbuffet Belt +1",
+        waist="Sailfi Belt +1",
     }
 
     -- No Magic Haste (74% DW to cap) (49% DW Needed)
@@ -1017,7 +1022,7 @@ function init_gear_sets()
         head=gear.Bunzi_Head,
         body=gear.Malignance_Body,
         hands=gear.Malignance_Hands,
-        legs=gear.Carmine_D_Legs,
+        legs=gear.Carmine_D_Legs, --6
         feet=gear.Malignance_Feet,
         neck="Anu Torque",
         ear1="Sherida Earring",
@@ -1025,7 +1030,7 @@ function init_gear_sets()
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         back=gear.RDM_DW_Cape, --10
-        waist="Reiki Yotai", --7
+        waist="Sailfi Belt +1",
     } --41
 
     -- 15% Magic Haste (67% DW to cap) (42% DW Needed)
@@ -1034,7 +1039,7 @@ function init_gear_sets()
         head=gear.Bunzi_Head,
         body=gear.Malignance_Body,
         hands=gear.Malignance_Hands,
-        legs=gear.Carmine_D_Legs,
+        legs=gear.Carmine_D_Legs, --6
         feet=gear.Malignance_Feet,
         neck="Anu Torque",
         ear1="Sherida Earring",
@@ -1042,16 +1047,17 @@ function init_gear_sets()
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         back=gear.RDM_DW_Cape, --10
-        waist="Reiki Yotai", --7
+        waist="Sailfi Belt +1",
     }) --41
 
     -- 30% Magic Haste (56% DW to cap) (31% DW Needed)
+    -- This is self haste II only, no external buffs.
     sets.engaged.DW.MidHaste = set_combine(sets.engaged.DW, {
         ammo="Coiste Bodhar",
         head=gear.Bunzi_Head,
         body=gear.Malignance_Body,
         hands=gear.Malignance_Hands,
-        legs=gear.Carmine_D_Legs,
+        legs=gear.Carmine_D_Legs, --6
         feet=gear.Malignance_Feet,
         neck="Anu Torque",
         ear1="Sherida Earring",
@@ -1059,7 +1065,7 @@ function init_gear_sets()
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         back=gear.RDM_DW_Cape, --10
-        waist="Reiki Yotai", --7
+        waist="Sailfi Belt +1",
     }) --31
 
     -- 35% Magic Haste (51% DW to cap)
@@ -1076,28 +1082,28 @@ function init_gear_sets()
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         back=gear.RDM_DW_Cape, --10
-        waist="Reiki Yotai", --7
+        waist="Sailfi Belt +1",
     } --22
 
     -- 45% Magic Haste (36% DW to cap) (11% DW Needed)
     sets.engaged.DW.MaxHaste = {
         ammo="Coiste Bodhar",
-        head=gear.Bunzi_Head,
-        body=gear.Malignance_Body,
-        hands=gear.Malignance_Hands,
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
+        head=gear.Bunzi_Head, --7DT
+        body=gear.Malignance_Body, --9DT
+        hands=gear.Malignance_Hands, --5DT
+        legs=gear.Malignance_Legs, --7DT
+        feet=gear.Malignance_Feet, --4DT
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Dedition Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
-        back=gear.RDM_DW_Cape, --10
-        waist="Windbuffet Belt +1",
-    } --10
+        back=gear.RDM_DW_Cape, --10DW 10PDT
+        waist="Sailfi Belt +1",
+    } --42% PDT
 
     sets.engaged.Hybrid = {
-
+        ring2="Defending Ring",
     }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
@@ -1124,8 +1130,8 @@ function init_gear_sets()
 
     sets.DefaultShield = { sub="Genmei Shield" }
     
-    sets.Naegling = {main="Naegling", sub="Machaera +3"}
-    sets.Maxentius = { main="Maxentius", sub="Machaera +3" }
+    sets.Naegling = {main="Naegling", sub="Thibron"}
+    sets.Maxentius = { main="Maxentius", sub="Thibron" }
     sets.Tauret = { main="Tauret", sub="Gleti's Knife" }
     sets.CroceaDark = { main="Crocea Mors", sub="Bunzi's Rod" }
     sets.CroceaLight = { main="Crocea Mors", sub="Daybreak" }
@@ -1394,9 +1400,9 @@ function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
         -- add_to_chat(123,'DW NEEDED: '.. DW_needed)
-        if DW_needed <= 14 then
+        if DW_needed <= 11 then
             classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 15 and DW_needed <= 26 then
+        elseif DW_needed > 11 and DW_needed <= 26 then
             classes.CustomMeleeGroups:append('HighHaste')
         elseif DW_needed > 26 and DW_needed <= 32 then
             classes.CustomMeleeGroups:append('MidHaste')
