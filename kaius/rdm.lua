@@ -216,16 +216,6 @@ function user_unload()
     send_command('unbind !k')
     send_command('unbind !l')
 
-    send_command('unbind !numpad7')
-    send_command('unbind !numpad8')
-    send_command('unbind !numpad9')  
-    send_command('unbind !numpad4')
-    send_command('unbind !numpad5')
-    send_command('unbind !numpad6')
-    send_command('unbind !numpad1')
-    send_command('unbind !numpad2')
-    send_command('unbind !numpad3')
-    
     send_command('unbind !insert')
     send_command('unbind !delete')
     send_command('unbind ^insert')
@@ -240,6 +230,8 @@ function user_unload()
     send_command('unbind @e')
     send_command('unbind @w')
     send_command('unbind @r')
+
+    unbind_numpad()
 end
 
 function init_gear_sets()

@@ -83,6 +83,7 @@ function user_unload()
     send_command('unbind !F1')
     send_command('unbind !F2')
     send_command('unbind !t')
+    unbind_numpad()
 end
 
 function init_gear_sets()
@@ -113,7 +114,7 @@ function init_gear_sets()
         ear2="Enchntr. Earring +1", --2
         ring1="Prolix Ring", --2
         ring2="Kishar Ring", --4
-    } -- 49%
+    } -- 53%
 
     sets.midcast.FastRecast = sets.precast.FC
     

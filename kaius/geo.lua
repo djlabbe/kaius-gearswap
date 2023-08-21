@@ -124,6 +124,7 @@ function user_unload()
     send_command('unbind ^[')
     send_command('unbind !;')
     send_command('unbind ![')
+    unbind_numpad()
 end
 
 

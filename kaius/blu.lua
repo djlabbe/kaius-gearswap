@@ -226,10 +226,7 @@ function user_unload()
     send_command('unbind !h')
     send_command('unbind !i')
     send_command('unbind !j')
-    send_command('unbind ^numpad7')
-    send_command('unbind ^numpad8')
-    send_command('unbind ^numpad9')
-
+    unbind_numpad()
     send_command('lua u azureSets')
     send_command('lua u bluguide')
 end

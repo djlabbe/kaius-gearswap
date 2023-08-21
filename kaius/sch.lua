@@ -204,6 +204,8 @@ function user_unload()
 
     send_command('unbind @q') -- MB mode
     send_command('unbind @w') -- lock weapon mode
+
+    unbind_numpad()
 end
 
 

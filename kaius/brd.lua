@@ -103,14 +103,14 @@ function user_setup()
     gear.Relic_Feet = { name= "Bihu Slippers +3" }
 
     gear.Empyrean_Head = { name= "Fili Calot +2" }
-    gear.Empyrean_Body = { name= "Fili Hongreline +2" }
-    gear.Empyrean_Hands = { name= "Fili Manchettes +2" }
+    gear.Empyrean_Body = { name= "Fili Hongreline +3" }
+    gear.Empyrean_Hands = { name= "Fili Manchettes +3" }
     gear.Empyrean_Legs = { name= "Fili Rhingrave +2" }
     gear.Empyrean_Feet = { name= "Fili Cothurnes +2" }
 
     gear.BRD_Song_Cape = { name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}} --*
     gear.BRD_DW_Cape = { name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
-    gear.BRD_WS1_Cape = { name="Intarabus's Cape", augments={'CHR+20','Accuracy+20 Attack+20','CHR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
+    gear.BRD_KITE_Cape = { name="Intarabus's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','CHR+10','Enmity+10','DEF+50',}} --*
     gear.BRD_WS2_Cape = { name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}} --*
 
     include('Global-Binds.lua')
@@ -216,10 +216,6 @@ function user_unload()
     send_command('unbind @w')
     send_command('unbind @e')
     send_command('unbind @r')
-    send_command('unbind ^numpad7')
-    send_command('unbind ^numpad4')
-    send_command('unbind ^numpad5')
-    send_command('unbind ^numpad1')
     send_command('unbind !t')
     send_command('unbind ^t')
     send_command('unbind !n')
@@ -227,12 +223,12 @@ function user_unload()
     send_command('unbind !p')
     send_command('unbind !h')
     send_command('unbind !g')
-
     send_command('unbind @1')
     send_command('unbind @2')
     send_command('unbind @3')
     send_command('unbind @4')
     send_command('unbind @5')
+    unbind_numpad()
 end
 
 function init_gear_sets()
@@ -255,7 +251,7 @@ function init_gear_sets()
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         feet="Kaykaus Boots +1", --0/7
-        ear2="Mendi. Earring", --0/5
+        -- ear2="Mendi. Earring", --0/5
     })
 
     sets.precast.FC.BardSong = set_combine(sets.precast.FC, {
@@ -290,7 +286,7 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         ring1="Cornelia's Ring",
         ring2="Ilabrat Ring",
-        back=gear.BRD_WS1_Cape,
+        back=gear.BRD_WS2_Cape,
         waist="Fotia Belt",
     }
 
@@ -313,7 +309,7 @@ function init_gear_sets()
         range=gear.Linos_TP,
         body=gear.Relic_Body,
         hands=gear.Relic_Hands,
-        back=gear.BRD_WS1_Cape,
+        back=gear.BRD_WS2_Cape,
     })
 
     sets.precast.WS['Mordant Rime'] = {
@@ -328,10 +324,10 @@ function init_gear_sets()
         ring1="Epaminondas's Ring",
         ring2="Metamorph Ring +1",
         waist="Sailfi Belt +1",
-        back=gear.BRD_WS1_Cape,
+        back=gear.BRD_WS2_Cape,
     }
 
-    sets.precast.WS['Rudra\'s Storm'] = set_combine({
+    sets.precast.WS['Rudra\'s Storm'] = {
         head=gear.Nyame_Head,
         body=gear.Relic_Body,
         hands=gear.Nyame_Hands,
@@ -341,12 +337,10 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         neck="Bard's Charm +2",
         ring1="Epaminondas's Ring",
-        ring2="Ilabrat Ring",
+        ring2="Cornelia's Ring",
         waist="Kentarch Belt +1",
         back=gear.BRD_WS2_Cape,
-    }, {
-        ring2="Cornelia's Ring",
-    })
+    }
 
     sets.precast.WS['Aeolian Edge'] = {
         head=gear.Nyame_Head,
@@ -396,7 +390,7 @@ function init_gear_sets()
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
     -- Gear to enhance certain classes of songs.
-    -- sets.midcast.Ballad = { legs=gear.Empyrean_Legs }
+    sets.midcast.Ballad = { legs=gear.Empyrean_Legs }
     sets.midcast.Carol = { hands="Mousai Gages +1" }
     sets.midcast.Etude = { head="Mousai Turban +1" }
     sets.midcast.HonorMarch = { range="Marsyas", hands=gear.Empyrean_Hands }

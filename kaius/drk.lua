@@ -57,11 +57,6 @@ function user_setup()
     gear.Empyrean_Legs = { name= "Heathen's Flanchard +2" }
     gear.Empyrean_Feet = { name= "Heathen's Sollerets +3" }
 
-    gear.Valo_QA_Body = { name="Valorous Mail", augments={'Crit.hit rate+5','STR+8','Quadruple Attack +2','Accuracy+19 Attack+19',}}
-    gear.Valo_STP_Body = { name="Valorous Mail", augments={'Mag. Acc.+12','"Store TP"+8','AGI+3','Accuracy+8','Attack+5',}}
-    gear.Valo_STP_Feet = { name="Valorous Greaves", augments={'Attack+28','"Store TP"+7',}}
-    gear.Ody_STP_Legs = { name="Odyssean Cuisses", augments={'"Store TP"+7','STR+7','Accuracy+10','Attack+15',}}
-
     gear.DRK_TP_Cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}}
     gear.DRK_DA_Cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     gear.DRK_WS1_Cape = { name="Ankou's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
@@ -167,14 +162,7 @@ function user_unload()
     send_command('unbind @5')
     send_command('unbind @6')
 
-    send_command('unbind !numpad7')
-    send_command('unbind !numpad8')
-    send_command('unbind !numpad9')  
-    send_command('unbind !numpad4')
-    send_command('unbind !numpad5')
-    send_command('unbind !numpad6')
-    send_command('unbind !numpad1')
-    send_command('unbind !numpad2')
+    unbind_numpad()
 end
 
 function init_gear_sets()

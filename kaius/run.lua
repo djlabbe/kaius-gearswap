@@ -108,11 +108,21 @@ function user_setup()
     send_command('bind !insert gs c cycleback Runes')
     send_command('bind !delete gs c cycle Runes')
 
-    send_command('bind @e gs c cycle WeaponSet')
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind ^p gs c toggle PhalanxMode')
 
-    set_macro_page(1, 22)
+    if player.sub_job == 'SAM' then
+        send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 2')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 2')
+        set_macro_page(2, 22)
+    else   
+        send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 1')
+        set_macro_page(1, 22)
+    end
+
     send_command('wait 3; input /lockstyleset 22')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
@@ -138,6 +148,7 @@ function user_unload()
     send_command('unbind !delete')
     send_command('unbind @e')
     send_command('unbind @w')
+    unbind_numpad()
 
 end
 

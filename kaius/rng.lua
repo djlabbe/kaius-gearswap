@@ -197,6 +197,7 @@ function user_unload()
     send_command('unbind @w')
     send_command('unbind @e')
     send_command('unbind @r')
+    unbind_numpad()
 end
 
 

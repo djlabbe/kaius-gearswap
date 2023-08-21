@@ -22,10 +22,9 @@ end
 function job_setup()
     wyv_breath_spells = S{'Dia', 'Poison', 'Blaze Spikes', 'Protect', 'Sprout Smack', 'Head Butt', 'Cocoon',
         'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
-
     wyv_elem_breath = S{'Flame Breath', 'Frost Breath', 'Sand Breath', 'Hydro Breath', 'Gust Breath', 'Lightning Breath'}
-
     state.Buff.Doom = false
+    custom_weapon_list = S{"Naegling", "Mafic Cudgel"}
 end
 
 function user_setup()
@@ -109,8 +108,8 @@ function user_setup()
 
     state.Auto_Kite = M(false, 'Auto_Kite')
     moving = false
-
     send_command('wait 3; input /lockstyleset 14')
+    get_combat_weapon()
 end
 
 function user_unload()
@@ -123,10 +122,7 @@ function user_unload()
     send_command('unbind !F2')
     send_command('unbind !a')
     send_command('unbind !c')
-    send_command('unbind numpad7')
-    send_command('unbind numpad8')
-    send_command('unbind numpad9')
-    send_command('unbind numpad4')
+    unbind_numpad()
 end
 
 function init_gear_sets()
@@ -515,11 +511,23 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     }
 
-    sets.engaged.Naegling = set_combine(sets.engaged, {
-        body=gear.Empyrean_Body, 
-        hands=gear.Empyrean_Hands, --11
-        legs=gear.Gleti_Legs, --8
-    }) --34% DT
+    sets.engaged.Naegling = {
+        ammo="Aurgelmir Orb +1",
+        head="Hjarrandi Helm",
+        body=gear.Empyrean_Body,
+        hands=gear.Gleti_Hands,
+        legs="Volte Tights",
+        feet=gear.Valo_STP_Feet,
+        neck="Vim Torque +1",
+        ear1="Sherida Earring",
+        ear2="Telos Earring",
+        ring1=gear.Moonlight_1,
+        ring2=gear.Moonlight_2,
+        back=gear.DRG_STP_Cape,
+        waist="Ioskeha Belt +1",
+    } --34% DT
+
+    sets.engaged['Mafic Cudgel'] = sets.engaged.Naegling
 
     sets.engaged.Pet = {
         ear2="Sroda Earring",
@@ -529,6 +537,13 @@ function init_gear_sets()
         ear2="Cessance Earring",
         neck="Dragoon's Collar +2",
     })
+
+    sets.engaged.Naegling.Acc = set_combine(sets.engaged.Naegling, {
+        ear2="Cessance Earring",
+        neck="Dragoon's Collar +2",
+    })
+
+    sets.engaged['Mafic Cudgel'].Acc = sets.engaged.Naegling.Acc
 
     sets.engaged.Hybrid = {
         neck="Dgn. Collar +2",
@@ -540,7 +555,12 @@ function init_gear_sets()
     } --48% Physical, 21% MDT (50% w/ Shell V)
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+    sets.engaged.Naegling.DT = set_combine(sets.engaged.Naegling, sets.engaged.Hybrid)
+    sets.engaged['Mafic Cudgel'].DT =  sets.engaged.Naegling.DT
+
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
+    sets.engaged.Naegling.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
+    sets.engaged['Mafic Cudgel'].Acc.DT = sets.engaged.Naegling.Acc.DT
 
     sets.idle = {
         ammo="Staunch Tathlum +1", --3/3
@@ -592,8 +612,8 @@ function init_gear_sets()
 
     sets.Trishula = { main="Trishula", sub="Utu Grip" }
     sets.ShiningOne = { main="Shining One", sub="Utu Grip" }
-    sets.Naegling = { main="Naegling" }
-    sets.Mafic = { main="Mafic Cudgel" }
+    sets.Naegling = { main="Naegling", sub="Kraken Club" }
+    sets.Mafic = { main="Mafic Cudgel", sub="Kraken Club" }
 
 end
 
@@ -660,6 +680,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
+    get_combat_weapon()
     handle_equipping_gear(player.status)
 end
 
@@ -736,6 +757,14 @@ function display_current_job_state(eventArgs)
 
     eventArgs.handled = true
 end
+
+function get_combat_weapon()
+    state.CombatWeapon:reset()
+    if custom_weapon_list:contains(player.equipment.main) then
+        state.CombatWeapon:set(player.equipment.main)
+    end
+end
+
 
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)

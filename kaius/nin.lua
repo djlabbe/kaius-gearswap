@@ -22,12 +22,17 @@ function get_sets()
 end
 
 function job_setup()
+    info.default_ja_ids = S{35, 204}
+    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
     state.Buff.Migawari = buffactive.migawari or false
     state.Buff.Doom = false
     state.Buff.Yonin = buffactive.Yonin or false
     state.Buff.Innin = buffactive.Innin or false
     state.Buff.Futae = buffactive.Futae or false
     state.Buff.Sange = buffactive.Sange or false
+    include('Mote-TreasureHunter')
+    info.default_ja_ids = S{35, 204}
+    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
     lugra_ws = S{'Blade: Kamu', 'Blade: Shun', 'Blade: Ten'}
 end
 
@@ -45,8 +50,8 @@ function user_setup()
 
     options.ninja_tool_warning_limit = 10
 
-    include('Global-Binds.lua') 
-
+    include('Global-Binds.lua')
+   
     gear.Artifact_Head = { name= "Hachiya Hatsu. +3" }
     gear.Artifact_Feet = { name= "Hachiya Kyahan +3" }
 
@@ -71,30 +76,32 @@ function user_setup()
     send_command('bind ^` input /ja "Yonin" <me>')
     send_command('bind !t input /ja "Provoke" <t>')
 
+    send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @e gs c cycle WeaponSet')
     send_command('bind @q gs c toggle MagicBurst')
 
-    -- send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad9 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad4 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad1 input /equip Main "Lament";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad2 input /equip Main "Profane Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad3 input /equip Main "Profane Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad7 input /ma "Jubaku: Ichi" <t>')
+    -- send_command('bind !numpad8 input /ma "Hojo: Ni" <t>')
+    -- send_command('bind !numpad9 input /ma "Aisha: Ichi" <t>')  
+    -- send_command('bind !numpad1 input /ma "Yurin Ichi" <t>')
+    -- send_command('bind !numpad2 input /ma "Kurayami: Ni" <t>')
+    -- send_command('bind !numpad3 input /ma "Dokumori: Ichi" <t>')   
 
-    send_command('bind !numpad7 input /ma "Jubaku: Ichi" <t>')
-    send_command('bind !numpad8 input /ma "Hojo: Ni" <t>')
-    send_command('bind !numpad9 input /ma "Aisha: Ichi" <t>')  
-    send_command('bind !numpad1 input /ma "Yurin Ichi" <t>')
-    send_command('bind !numpad2 input /ma "Kurayami: Ni" <t>')
-    send_command('bind !numpad3 input /ma "Dokumori: Ichi" <t>')   
+    send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad9 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad4 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad1 input /equip Main "Lament";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad2 input /equip Main "Profane Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad3 input /equip Main "Profane Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
+
 
     -- Whether a warning has been given for low ninja tools
     state.warned = M(false)
@@ -120,12 +127,7 @@ function user_unload()
     send_command('unbind @w')
     send_command('unbind @e')
     send_command('unbind @q')
-    send_command('unbind !numpad7')
-    send_command('unbind !numpad8')
-    send_command('unbind !numpad9')  
-    send_command('unbind !numpad4')
-    send_command('unbind !numpad2')
-    send_command('unbind !numpad3')    
+    unbind_numpad()
 end
 
 function init_gear_sets()
@@ -378,10 +380,6 @@ function init_gear_sets()
 
     sets.Lugra = { ear2="Lugra Earring +1" }
 
-    --------------------------------------
-    -- Midcast sets
-    --------------------------------------
-
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
@@ -617,6 +615,13 @@ function init_gear_sets()
     
     sets.idle.Town = sets.engaged.MaxHaste
 
+    sets.TreasureHunter = {
+        ammo="Perfect Lucky Egg",
+        head="Volte Cap",
+        hands="Volte Bracers",
+        waist="Chaac Belt",
+    }
+
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
@@ -740,6 +745,7 @@ end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
+    th_update(cmdParams, eventArgs)
 end
 
 function update_combat_form()
@@ -778,12 +784,13 @@ function customize_melee_set(meleeSet)
     if state.Buff.Sange then
         meleeSet = set_combine(meleeSet, sets.buff.Sange)
     end
+    if state.TreasureMode.value == 'Fulltime' then
+        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
+    end
     if state.Buff.Doom then
         meleeSet = set_combine(meleeSet, sets.buff.Doom)
     end
-
     check_weaponset()
-
     return meleeSet
 end
 
@@ -926,6 +933,19 @@ function do_ninja_tool_checks(spell, spellMap, eventArgs)
         state.warned:set()
     elseif available_ninja_tools.count > options.ninja_tool_warning_limit and state.warned then
         state.warned:reset()
+    end
+end
+
+-- Check for various actions that we've specified in user code as being used with TH gear.
+-- This will only ever be called if TreasureMode is not 'None'.
+-- Category and Param are as specified in the action event packet.
+function th_action_check(category, param)
+    if category == 2 or -- any ranged attack
+        --category == 4 or -- any magic action
+        (category == 3 and param == 30) or -- Aeolian Edge
+        (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
+        (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
+        then return true
     end
 end
 

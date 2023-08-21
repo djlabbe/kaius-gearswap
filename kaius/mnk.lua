@@ -90,6 +90,7 @@ function user_unload()
     send_command('unbind !F1')
     send_command('unbind !F2')
     send_command('unbind !t')
+    unbind_numpad()
 end
 
 function init_gear_sets()

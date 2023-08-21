@@ -319,7 +319,6 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {})
     
     sets.Kiting = { ring1="Shneddick Ring" }
-    sets.latent_refresh = {waist="Fucho-no-obi"}
     
     -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here when activating or changing defense mode:
     sets.PhysicalShield = {sub="Duban"}
@@ -464,9 +463,6 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if player.mpp < 51 then
-        idleSet = set_combine(idleSet, sets.latent_refresh)
-    end
     if state.PhalanxMode.value == true then
         idleSet = set_combine(idleSet, sets.Phalanx)
     end

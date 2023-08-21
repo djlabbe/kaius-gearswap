@@ -144,6 +144,7 @@ function user_unload()
 
     send_command('unbind @r')
     send_command('unbind @w')
+    unbind_numpad()
 end
 
 function init_gear_sets()
@@ -470,20 +471,21 @@ function init_gear_sets()
 
     sets.midcast.Trust = sets.precast.FC
 
-    sets.engaged = {
-        head=gear.Bunzi_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Bunzi_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Bunzi_Feet,
-        neck="Rep. Plat. Medal",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
-        ring1="Ilabrat Ring",
-        ring2=gear.Chirich_2,
-        back=gear.WHM_DA_Cape,
-        waist="Windbuffet Belt +1",
-    }
+    -- sets.engaged = {
+    --     head=gear.Bunzi_Head,
+    --     body=gear.Nyame_Body,
+    --     hands=gear.Bunzi_Hands,
+    --     legs=gear.Nyame_Legs,
+    --     feet=gear.Bunzi_Feet,
+    --     neck="Rep. Plat. Medal",
+    --     ear1="Dedition Earring",
+    --     ear2="Telos Earring",
+    --     ring1="Ilabrat Ring",
+    --     ring2=gear.Chirich_2,
+    --     back=gear.WHM_DA_Cape,
+    --     waist="Windbuffet Belt +1",
+    -- }
+
 
     sets.engaged.DW = {
         ammo="Hasty Pinion +1",
@@ -581,6 +583,9 @@ function init_gear_sets()
         main="Yagrush",
         sub="Ammurapi Shield",
     })
+
+    sets.engaged = sets.idle
+
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT

@@ -57,22 +57,8 @@ function user_setup()
     state.IdleMode:options('Normal')
 
     state.LullabyMode = M{['description']='Lullaby Instrument', 'Harp', 'Horn'}
-
-    state.Carol = M{['description']='Carol',
-        'Fire Carol', 'Fire Carol II', 'Ice Carol', 'Ice Carol II', 'Wind Carol', 'Wind Carol II',
-        'Earth Carol', 'Earth Carol II', 'Lightning Carol', 'Lightning Carol II', 'Water Carol', 'Water Carol II',
-        'Light Carol', 'Light Carol II', 'Dark Carol', 'Dark Carol II',
-        }
-
-    state.Threnody = M{['description']='Threnody',
-        'Fire Threnody II', 'Ice Threnody II', 'Wind Threnody II', 'Earth Threnody II',
-        'Ltng. Threnody II', 'Water Threnody II', 'Light Threnody II', 'Dark Threnody II',
-        }
-
-    state.Etude = M{['description']='Etude', 'Sinewy Etude', 'Herculean Etude', 'Learned Etude', 'Sage Etude',
-        'Quick Etude', 'Swift Etude', 'Vivacious Etude', 'Vital Etude', 'Dextrous Etude', 'Uncanny Etude',
-        'Spirited Etude', 'Logical Etude', 'Enchanting Etude', 'Bewitching Etude'}
-
+    state.Carol = M{['description']='Carol','Lightning Carol', 'Lightning Carol II' }
+    state.Threnody = M{['description']='Threnody', 'Earth Threnody II' }
     state.WeaponSet = M{['description']='Weapon Set', 'Carnwenhan' }
     state.WeaponLock = M(true, 'Weapon Lock')
 
@@ -105,7 +91,7 @@ function user_setup()
 
     gear.BRD_Song_Cape = { name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}} --*
     gear.BRD_DW_Cape = { name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
-    gear.BRD_WS1_Cape = { name="Intarabus's Cape", augments={'CHR+20','Accuracy+20 Attack+20','CHR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
+    gear.BRD_KITE_Cape = { name="Intarabus's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','CHR+10','Enmity+10','DEF+50',}} --*
     gear.BRD_WS2_Cape = { name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}} --*
 
     send_command('bind !` gs c cycle SongMode')
@@ -117,15 +103,6 @@ function user_setup()
     send_command('bind !n input /ja "Nightingale" <me>')
     send_command('bind !h input /ma "Horde Lullaby II" <t>')
     send_command('bind !g input /ma "Foe Lullaby II" <t>')
-
-    send_command('bind !insert gs c cycleback Threnody')
-    send_command('bind !delete gs c cycle Threnody')
-
-    send_command('bind !pageup gs c cycleback Etude')
-    send_command('bind !pagedown gs c cycle Etude')
-
-    send_command('bind !home gs c cycleback Carol')
-    send_command('bind !end gs c cycle Carol')
 
     send_command('bind @` gs c cycle LullabyMode')
     send_command('bind @w gs c toggle WeaponLock')
@@ -140,23 +117,18 @@ function user_setup()
     send_command('bind !F2 input /ja "Clarion Call" <me>')
 
     -- ALT + Numpad ===> Songs --
-    send_command('bind !numpad7 input /ma "Valor Minuet III" <stpc>')
-    send_command('bind !numpad8 input /ma "Valor Minuet IV" <stpc>')
-    send_command('bind !numpad9 input /ma "Valor Minuet V" <stpc>')
+    send_command('bind !numpad7 input /ma "Learned Etude" <stpc>')
+    send_command('bind !numpad8 input /ma "Sage Etude" <stpc>')
+    send_command('bind !numpad9 input /ma "Mage\'s Ballad III" <stpc>')
 
     send_command('bind !numpad4 input /ma "Victory March" <stpc>')
     send_command('bind !numpad5 input /ma "Honor March" <stpc>')
-    send_command('bind !numpad6 input /ma "Blade Madrigal" <stpc>')
 
-    send_command('bind !numpad1 input /ma "Knight\'s Minne V" <stpc>')
-    send_command('bind !numpad2 input /ma "Knight\'s Minne IV" <stpc>')
-    send_command('bind !numpad3 input /ma "Herculean Etude" <stpc>')
+    send_command('bind !numpad1 input /ja "Pianissimo" <me>;pause 1.0;input /ma "Foe Sirvente" <me>')
+    send_command('bind !numpad2 input /ja "Pianissimo" <me>;pause 1.0;input /ma "Knight\'s Minne V" <me>')
+    send_command('bind !numpad3 input /ja "Pianissimo" <me>;pause 1.0;input /ma "Knight\'s Minne IV" <me>')
 
-    send_command('bind !numpad0 input /ma "Mage\'s Ballad III" <stpc>')
-    send_command('bind !numpad. input /ma "Mage\'s Ballad II" <stpc>')
-    
-    send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 2')
-    set_macro_page(2, 10)
+    set_macro_page(1, 40)
 
     send_command('wait 3; input /lockstyleset 10')
     send_command('gs enable range')
@@ -169,12 +141,6 @@ function user_unload()
     send_command('unbind ^`')
     send_command('unbind !`')
     send_command('unbind ^backspace')
-    send_command('unbind !insert')
-    send_command('unbind !delete')
-    send_command('unbind !home')
-    send_command('unbind !end')
-    send_command('unbind !pageup')
-    send_command('unbind !pagedown')
     send_command('unbind @`')
     send_command('unbind @w')
     send_command('unbind @e')
@@ -205,7 +171,7 @@ function init_gear_sets()
         neck="Orunmila's Torque", --5
         ear1="Enchanter's Earring +1", --2    
         ear2="Etiolation Earring", --1
-        ring1="Defending Ring", --2
+        ring1="Ragelise's Ring", --2
         ring2="Kishar Ring", --4
         back="Fi Follet Cape +1", --10
         waist="Embla Sash", --5
@@ -232,8 +198,7 @@ function init_gear_sets()
         waist="Rumination Sash",
     }
 
-    sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
-    
+    sets.midcast.Ballad = { legs=gear.Empyrean_Legs }
     sets.midcast.Carol = { hands="Mousai Gages +1" }
     sets.midcast.Etude = { head="Mousai Turban +1" }
     sets.midcast.HonorMarch = { range="Marsyas", hands=gear.Empyrean_Hands }
@@ -243,12 +208,12 @@ function init_gear_sets()
     }
     sets.midcast.Lullaby = { body=gear.Empyrean_Body }
     sets.midcast.Madrigal = { head=gear.Empyrean_Head }
-    sets.midcast.Mambo = { feet="Mou. Crackows +1" }
+    sets.midcast.Mambo = { feet="Mousai Crackows +1" }
     sets.midcast.March = { hands=gear.Empyrean_Hands }
-    sets.midcast.Minne = { legs="Mou. Seraweels +1" }
+    sets.midcast.Minne = { legs="Mousai Seraweels +1" }
     sets.midcast.Minuet = { body=gear.Empyrean_Body }
     sets.midcast.Paeon = { head=gear.Artifact_Head }
-    sets.midcast.Threnody = { body="Mou. Manteel +1" }
+    sets.midcast.Threnody = { body="Mousai Manteel +1" }
     sets.midcast['Adventurer\'s Dirge'] = { range="Marsyas", hands=gear.Relic_Hands }
     sets.midcast['Adventurer\'s Dirge'] = { range="Marsyas" }
     sets.midcast['Foe Sirvente'] = { head=gear.Relic_Head }
@@ -257,8 +222,6 @@ function init_gear_sets()
     sets.midcast["Chocobo Mazurka"] = { range="Marsyas" }
 
     sets.midcast.SongEnhancing = {
-        main="Carnwenhan",
-        sub=gear.Kali_Idle,
         range="Gjallarhorn",
         head=gear.Nyame_Head,
         body=gear.Empyrean_Body,
@@ -270,15 +233,12 @@ function init_gear_sets()
         ear1="Gelatinous Ring +1",
         ear2="Odnowa Earring +1",
         ring1=gear.Moonlight_1,
-        ring2="Defending Ring",
+        ring2="Ragelise's Ring",
         waist="Flume Belt +1",
         back=gear.BRD_Song_Cape,
     }
 
-    -- For song debuffs (duration primary, accuracy secondary)
     sets.midcast.SongEnfeeble = {
-        main="Carnwenhan",
-        sub="Genmei Shield",
         range="Gjallarhorn",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -289,14 +249,12 @@ function init_gear_sets()
         ear1="Cryptic Earring",
         ear2="Trux Earring",
         ring1="Eihwaz Ring",
-        ring2="Defending Ring",
+        ring2="Petrov Ring",
         waist="Kasiri Belt",
-        back=gear.BRD_DW_Cape,
+        back=gear.BRD_KITE_Cape,
     }
 
     sets.midcast['Carnage Elegy'] = {
-        main="Carnwenhan",
-        sub="Ammurapi Shield",
         range="Gjallarhorn",
         head=gear.Nyame_Head,
         body=gear.Artifact_Body,
@@ -307,7 +265,23 @@ function init_gear_sets()
         ear1="Crep. Earring",
         ear2="Regal Earring",
         ring1=gear.Stikini_1,
-        ring2="Defending Ring",
+        ring2="Ragelise's Ring",
+        waist="Acuity Belt +1",
+        back=gear.BRD_Song_Cape,
+    }
+
+    sets.midcast['Earth Threnody II'] = {
+        range="Gjallarhorn",
+        head=gear.Nyame_Head,
+        body=gear.Artifact_Body,
+        hands=gear.Artifact_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Artifact_Feet,
+        neck="Mnbw. Whistle +1",
+        ear1="Crep. Earring",
+        ear2="Regal Earring",
+        ring1=gear.Stikini_1,
+        ring2="Ragelise's Ring",
         waist="Acuity Belt +1",
         back=gear.BRD_Song_Cape,
     }
@@ -324,7 +298,7 @@ function init_gear_sets()
         body=gear.Bunzi_Body,
         hands=gear.Bunzi_Hands,
         ring1=gear.Moonlight_1,
-        ring2="Defending Ring",
+        ring2="Ragelise's Ring",
         legs=gear.Bunzi_Legs,
         feet=gear.Bunzi_Feet,
         neck="Loricate Torque +1",       
@@ -342,9 +316,9 @@ function init_gear_sets()
         neck="Loricate Torque +1",
         ear1="Tuisto Earring",
         ear2="Odnowa Earring +1",
-        ring1="Defending Ring",
+        ring1="Ragelise's Ring",
         ring2="Gelatinous Ring +1",
-        back=gear.BRD_DW_Cape,
+        back=gear.BRD_KITE_Cape,
         waist="Plat. Mog. Belt",
     }
 
@@ -434,9 +408,7 @@ end
 
 
 function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1]:lower() == 'etude' then
-        send_command('@input /ma '..state.Etude.value..' <stpc>')
-    elseif cmdParams[1]:lower() == 'carol' then
+    if cmdParams[1]:lower() == 'carol' then
         send_command('@input /ma '..state.Carol.value..' <stpc>')
     elseif cmdParams[1]:lower() == 'threnody' then
         send_command('@input /ma '..state.Threnody.value..' <t>')
@@ -505,11 +477,7 @@ end
 function get_song_class(spell)
     -- Can't use spell.targets:contains() because this is being pulled from resources
     if set.contains(spell.targets, 'Enemy') then
-        if state.CastingMode.value == 'Resistant' then
-            return 'SongEnfeebleAcc'
-        else
-            return 'SongEnfeeble'
-        end
+        return 'SongEnfeeble'
     elseif state.SongMode.value == 'Placeholder' then
         return 'SongPlaceholder'
     else

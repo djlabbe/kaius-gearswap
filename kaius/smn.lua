@@ -231,6 +231,7 @@ function user_setup()
 end
 
 function user_unload()
+    unbind_numpad()
 end
 
 

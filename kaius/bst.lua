@@ -85,7 +85,7 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT', 'PetPDT')
     state.MagicalDefenseMode:options('MDT', 'PetMDT')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Dolichenus', 'Tauret'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Pangu', 'Dolichenus', 'Tauret'}
     state.WeaponLock = M(false, 'Weapon Lock')
     include('Global-Binds.lua')
 
@@ -217,7 +217,7 @@ function user_unload()
     send_command('unbind ^f11')
     send_command('unbind !l')
     send_command('unbind !h')
-
+    unbind_numpad()
     -- Removes any Text Info Boxes
     send_command('text JugPetText delete')
     send_command('text CorrelationText delete')
@@ -917,8 +917,11 @@ function init_gear_sets()
 
     sets.buff['Killer Instinct'] = {body=gear.Empyrean_Body}
 
+    sets.Pangu = {main="Pangu", sub="Agwu's Axe"}
     sets.Dolichenus = {main="Dolichenus", sub="Ikenga's Axe" }    
-    sets.Tauret = {main="Tauret", sub="Agwu's Axe" }    
+    sets.Tauret = {main="Tauret", sub="Agwu's Axe" }
+    sets.DefaultShield = {sub="Thuellaic Ecu +1"}
+    
     sets.midcast.Pet.MagicAtkReady = {}
     sets.midcast.Pet.MagicAtkReady.TPBonus = {}
 

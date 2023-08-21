@@ -89,16 +89,12 @@ end
 
 function user_unload()
     send_command('unbind @w')
-    send_command('unbind ^numpad7')
-    send_command('unbind ^numpad8')
-    send_command('unbind ^numpad9')
-    send_command('unbind ^numpad4')
-    send_command('unbind ^numpad5')
     send_command('unbind !F1')
     send_command('unbind !F2')    
     send_command('unbind !t')
     send_command('unbind !`')
     send_command('unbind ^`')
+    unbind_numpad()
 end
 
 function init_gear_sets()

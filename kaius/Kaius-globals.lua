@@ -88,7 +88,10 @@ function define_global_sets()
     gear.Herc_PHLX_Body = { name="Herculean Vest", augments={'CHR+9','AGI+3','Phalanx +4','Mag. Acc.+3 "Mag.Atk.Bns."+3',}}
 
     gear.Valo_PET_Body = {name="Valorous Mail", augments={'Pet: Mag. Acc.+24','Pet: "Dbl.Atk."+4 Pet: Crit.hit rate +4','Pet: MND+8','Pet: Accuracy+12 Pet: Rng. Acc.+12',}}
-   
+    gear.Valo_QA_Body = { name="Valorous Mail", augments={'Crit.hit rate+5','STR+8','Quadruple Attack +2','Accuracy+19 Attack+19',}}
+    gear.Valo_STP_Body = { name="Valorous Mail", augments={'Mag. Acc.+12','"Store TP"+8','AGI+3','Accuracy+8','Attack+5',}}
+    gear.Valo_STP_Feet = { name="Valorous Greaves", augments={'Attack+30','"Store TP"+7','VIT+2','Accuracy+15',}}
+    gear.Ody_STP_Legs = { name="Odyssean Cuisses", augments={'"Store TP"+7','STR+7','Accuracy+10','Attack+15',}}
     gear.Ody_CURE_Feet = {name="Odyssean Greaves", augments={'Accuracy+29','"Cure" potency +6%','STR+5','Attack+1',}}
 
     gear.Merlinic_FC_Feet = {name="Merlinic Crackows", augments={'"Mag.Atk.Bns."+21','"Fast Cast"+7','CHR+6','Mag. Acc.+7',}}
@@ -261,6 +264,56 @@ function check_moving()
             state.Auto_Kite:set(false)
         end
     end
+end
+
+function unbind_numpad()
+    send_command('unbind !numpad/')
+    send_command('unbind !numpad*')
+    send_command('unbind !numpad-')
+    send_command('unbind !numpad+')
+    send_command('unbind !numpad7')
+    send_command('unbind !numpad8')
+    send_command('unbind !numpad9')  
+    send_command('unbind !numpad4')
+    send_command('unbind !numpad5')
+    send_command('unbind !numpad6')
+    send_command('unbind !numpad1')
+    send_command('unbind !numpad2')
+    send_command('unbind !numpad3')
+    send_command('unbind !numpad0')
+    send_command('unbind !numpad.')
+    send_command('unbind ^numpad/')
+    send_command('unbind ^numpad*')
+    send_command('unbind ^numpad-')
+    send_command('unbind ^numpad+')
+    send_command('unbind ^numpad7')
+    send_command('unbind ^numpad8')
+    send_command('unbind ^numpad9')  
+    send_command('unbind ^numpad4')
+    send_command('unbind ^numpad5')
+    send_command('unbind ^numpad6')
+    send_command('unbind ^numpad1')
+    send_command('unbind ^numpad2')
+    send_command('unbind ^numpad3')
+    send_command('unbind ^numpad0')
+    send_command('unbind ^numpad.')
+    send_command('unbind @numpad/')
+    send_command('unbind @numpad*')
+    send_command('unbind @numpad-')
+    send_command('unbind @numpad+')
+    send_command('unbind @numpad7')
+    send_command('unbind @numpad8')
+    send_command('unbind @numpad9')  
+    send_command('unbind @numpad4')
+    send_command('unbind @numpad5')
+    send_command('unbind @numpad6')
+    send_command('unbind @numpad1')
+    send_command('unbind @numpad2')
+    send_command('unbind @numpad3')
+    send_command('unbind @numpad0')
+    send_command('unbind @numpad.')
+    send_command('unbind @numpadenter')
+    
 end
 
 function handle_strategems(cmdParams)

@@ -84,13 +84,13 @@ function user_unload()
     send_command('unbind @w') 
     send_command('unbind !g')
     send_command('unbind !b')
-
     send_command('unbind !-')
     send_command('unbind !=')
     send_command('unbind ^;')   
     send_command('unbind ^[')
     send_command('unbind !;')
     send_command('unbind ![')
+    unbind_numpad()
 end
 
 
