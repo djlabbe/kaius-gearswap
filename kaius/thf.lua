@@ -199,7 +199,7 @@ function init_gear_sets()
         ring1="Lebeche Ring",
     })
 
-    sets.precast.WS = set_combine({
+    sets.precast.WS = {
         ammo="Aurgelmir Orb +1",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -209,15 +209,13 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
-        ring1="Regal Ring",
+        ring1="Cornelia's Ring",
         ring2="Epaminondas's Ring",
         back=gear.THF_WSD_Cape,
         waist="Fotia Belt",
-    }, {
-        ring1="Cornelia's Ring"
-    }) 
+    }
 
-    sets.precast.WS['Savage Blade'] = set_combine({
+    sets.precast.WS['Savage Blade'] = {
         ammo="Aurgelmir Orb +1",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -227,20 +225,18 @@ function init_gear_sets()
         neck="Rep. Plat. Medal",
         ear1="Telos Earring",
         ear2="Moonshade Earring",
-        ring1="Regal Ring",
+        ring1="Cornelia's Ring",
         ring2="Epaminondas's Ring",
         back=gear.THF_WSD_Cape,
         waist="Sailfi Belt +1",
-    },{
-        ring1="Cornelia's Ring"
-    }) 
+    }
 
     sets.precast.WS.Critical = {
         ammo="Yetshila +1",
         ear1="Odr Earring",
     }
 
-    sets.precast.WS['Rudra\'s Storm'] = set_combine({
+    sets.precast.WS['Rudra\'s Storm'] = {
         ammo="Coiste Bodhar",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -250,21 +246,17 @@ function init_gear_sets()
         neck="Asn. Gorget +2",
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
-        ring1="Regal Ring",
+        ring1="Cornelia's Ring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         back=gear.THF_WSD_Cape,
-    },{
-        ring1="Cornelia's Ring"
-    }) 
+    }
 
     sets.precast.WS['Rudra\'s Storm'].PDL = set_combine(sets.precast.WS['Rudra\'s Storm'], {
         ammo="Crepuscular Pebble",
         ear1="Odr Earring",
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
-     }, {
-        ring2="Ephramad's Ring",
      })
 
      sets.precast.WS['Rudra\'s Storm'].SA = set_combine(sets.precast.WS['Rudra\'s Storm'],{
@@ -328,7 +320,8 @@ function init_gear_sets()
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Legs,
+        -- feet=gear.Nyame_Legs,
+        feet=gear.Empyrean_Feet,
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",

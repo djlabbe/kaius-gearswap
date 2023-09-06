@@ -354,12 +354,17 @@ function init_gear_sets()
         back=gear.RNG_CRIT_Cape,
     }
 
-    sets.TrueShot = {
+
+    sets.TrueShot_RA = {
         body="Nisroch Jerkin",
         legs=gear.Empyrean_Legs,
         waist="Tellen Belt",
+        feet=gear.Ikenga_Feet,
     }
 
+    sets.TrueShot_WS = {
+        waist="Tellen Belt",
+    }
 
     sets.engaged = {
         head=gear.Malignance_Head,
@@ -732,7 +737,7 @@ function init_gear_sets()
     sets.Savage = {main="Naegling", sub="Gleti's Knife", ranged="Sparrowhawk +2", ammo="Hauksbok Arrow"}
     sets.Aoe = {main="Tauret", sub=gear.Malevolence_A, ranged="Sparrowhawk +2", ammo="Hauksbok Arrow"}
     sets.Annihilator = {main="Perun +1", sub="Gleti's Knife", ranged="Annihilator", ammo="Chrono Bullet"}
-    sets.Fomalhaut = {main="Perun +1", sub="Gleti's Knife", ranged="Fomalhaut", ammo="Chrono Bullet"}
+    sets.Fomalhaut = {main="Perun +1", sub="Crepuscular Knife", ranged="Fomalhaut", ammo="Chrono Bullet"}
     sets.Fomalhaut_HS = {main=gear.Malevolence_B, sub=gear.Malevolence_A, ranged="Fomalhaut", ammo="Chrono Bullet"}
     sets.Armageddon = {main="Perun +1", sub="Gleti's Knife", ranged="Armageddon", ammo="Chrono Bullet"}
     sets.Gastraphetes = {main=gear.Malevolence_B, sub=gear.Malevolence_A, ranged="Gastraphetes", ammo="Quelling Bolt"}
@@ -817,25 +822,33 @@ function job_post_precast(spell, action, spellMap, eventArgs)
     elseif (spell.english == 'Shadowbind' or spell.english == 'Bounty Shot' or spell.english == 'Eagle Eye Shot') then
         special_ammo_check()
     end
-    
-    
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    if spell.action_type == 'Ranged Attack' then
+    if spell.type == "WeaponSkill" then
+        if (elemental_ws:contains(spell.name) == false) then
+            local tarusize = 0.3
+            -- Assume Gun TrueShot range for now
+            local trueshotmax = tarusize + spell.target.model_size + 4.3189 
+            local trueshotmin = tarusize + spell.target.model_size + 3.0209
+            if spell.target.distance > trueshotmin and spell.target.distance < trueshotmax then
+                equip(sets.TrueShot_WS)
+            end
+        end
+    elseif spell.action_type == 'Ranged Attack' then
         if buffactive['Double Shot'] then
             equip(sets.DoubleShot)
             if buffactive['Aftermath: Lv.3'] and player.equipment.ranged == "Armageddon" then
                 equip(sets.DoubleShotCritical)
                 if (spell.target.distance < (7 + spell.target.model_size)) and (spell.target.distance > (5 + spell.target.model_size)) then
-                    equip(sets.TrueShot)
+                    equip(sets.TrueShot_RA)
                 end
             end
         elseif buffactive['Aftermath: Lv.3'] and player.equipment.ranged == "Armageddon" then
             equip(sets.midcast.RA.Critical)
             if (spell.target.distance < (7 + spell.target.model_size)) and (spell.target.distance > (5 + spell.target.model_size)) then
-                equip(sets.TrueShot)
+                equip(sets.TrueShot_RA)
             end
         end
         if state.Buff.Barrage then

@@ -199,9 +199,9 @@ function init_gear_sets()
     } -- 45% Physical
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-    sets.engaged.Acc.DT = set_combine(sets.engaged.LowAcc, sets.engaged.Hybrid)
+    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
 
-    sets.precast.WS = set_combine({
+    sets.precast.WS = {
         ammo="Knobkierrie",
         head=gear.Mpaca_Head,
         body=gear.Relic_Body,
@@ -213,11 +213,9 @@ function init_gear_sets()
         ear1="Thrud Earring",
         ear2="Moonshade Earring",
         ring1="Niqmaddu Ring",
-        ring2="Epaminondas's Ring",
+        ring2="Cornelia's Ring",
         back=gear.SAM_WS_Cape,
-    }, {
-        ring2="Cornelia's Ring"
-    })
+    }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
 
@@ -229,7 +227,7 @@ function init_gear_sets()
         head=gear.Nyame_Head,
     })
 
-    sets.precast.WS["Tachi: Fudo"] = set_combine({
+    sets.precast.WS["Tachi: Fudo"] = {
         ammo="Knobkierrie",
         head=gear.Mpaca_Head,
         body=gear.Nyame_Body,
@@ -240,12 +238,10 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         ear1="Thrud Earring",
         ear2="Moonshade Earring",
-        ring1="Regal Ring",
+        ring1="Cornelia's Ring",
         ring2="Epaminondas's Ring", 
         back=gear.SAM_WS_Cape,
-    }, {
-        ring1="Cornelia's Ring",
-    })
+    }
 
     sets.precast.WS["Tachi: Fudo"].PDL = set_combine( sets.precast.WS["Tachi: Fudo"], {
         ring2="Sroda Ring",
@@ -259,7 +255,7 @@ function init_gear_sets()
     sets.precast.WS["Tachi: Yukikaze"] = sets.precast.WS["Tachi: Fudo"]
     sets.precast.WS["Tachi: Yukikaze"].PDL = sets.precast.WS["Tachi: Fudo"].PDL
 
-    sets.precast.WS["Tachi: Shoha"] = set_combine({
+    sets.precast.WS["Tachi: Shoha"] = {
         ammo="Knobkierrie",
         head=gear.Mpaca_Head,
         body=gear.Nyame_Body,
@@ -270,12 +266,10 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         ear1="Thrud Earring",
         ear2="Moonshade Earring",
-        ring1="Niqmaddu Ring",
+        ring2="Cornelia's Ring",
         ring2="Epaminondas's Ring",
         back=gear.SAM_WS_Cape,
-    }, {
-        ring2="Cornelia's Ring",
-    })
+    }
 
     sets.precast.WS["Tachi: Shoha"].PDL = set_combine( sets.precast.WS["Tachi: Shoha"], {
         ammo="Crepuscular Pebble",
@@ -298,7 +292,7 @@ function init_gear_sets()
         back=gear.SAM_WS_Cape,
     } 
 
-    sets.precast.WS['Tachi: Jinpu'] = set_combine({
+    sets.precast.WS['Tachi: Jinpu'] = {
         ammo="Knobkierrie",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -306,17 +300,15 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Sam. Nodowa +2",
-        ear1="Friomisi Earring",
+        ear1="Schere Earring",
         ear2="Moonshade Earring",
-        ring1="Sroda Ring",
+        ring1="Cornelia's Ring",
         ring2="Epaminondas's Ring",
         back=gear.SAM_WS_Cape,
         waist="Orpheus's Sash",
-    }, {
-        ring1="Cornelia's Ring",
-    });
+    };
 
-    sets.precast.WS['Tachi: Kagero'] = set_combine({
+    sets.precast.WS['Tachi: Kagero'] = {
         ammo="Knobkierrie",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -326,13 +318,11 @@ function init_gear_sets()
         neck="Sibyl Scarf",
         ear1="Friomisi Earring",
         ear2="Moonshade Earring",
-        ring1="Regal Ring",
+        ring1="Cornelia's Ring",
         ring2="Epaminondas's Ring",
         back=gear.SAM_WS_Cape,
         waist="Orpheus's Sash",
-    }, {
-        ring1="Cornelia's Ring",
-    })
+    }
 
       sets.precast.WS['Tachi: Ageha'] = {
         ammo="Pemphredo Tathlum",

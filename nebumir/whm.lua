@@ -560,7 +560,7 @@ function init_gear_sets()
         ear1="Etiolation Earring",
         ear2="Ebers Earring +1",
         ring1=gear.Stikini_1,
-        ring2="Gurebu's ring",
+        ring2=gear.Stikini_2,
         back=gear.WHM_Cure_Cape,
         waist="Carrier's Sash",
     }
@@ -586,6 +586,11 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         main="Yagrush",
         sub="Ammurapi Shield",
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
     })
 
     sets.defense.PDT = sets.idle.DT

@@ -228,7 +228,7 @@ function define_global_sets()
 end
 
 no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-    "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Reraise Hairpin", "Nexus Cape",
+    "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Reraise Hairpin", "Airmid's Gorget", "Nexus Cape",
     "Dev. Bul. Pouch", "Chr. Bul. Pouch", "Liv. Bul. Pouch", "Era. Bul. Pouch", "Quelling B. Quiver",
     "Yoichi's Quiver", "Artemis's Quiver", "Chrono Quiver"}
 
@@ -313,7 +313,6 @@ function unbind_numpad()
     send_command('unbind @numpad0')
     send_command('unbind @numpad.')
     send_command('unbind @numpadenter')
-    
 end
 
 function handle_strategems(cmdParams)
@@ -438,6 +437,11 @@ function check_gear()
     else
         enable("head")
     end
+    if no_swap_gear:contains(player.equipment.neck) then
+        disable("neck")
+    else
+        enable("neck")
+    end
     if no_swap_gear:contains(player.equipment.back) then
         disable("back")
     else
@@ -462,6 +466,10 @@ windower.register_event('zone change',
         end
         if no_swap_gear:contains(player.equipment.head) then
             enable("head")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.neck) then
+            enable("neck")
             equip(sets.idle)
         end
         if no_swap_gear:contains(player.equipment.back) then

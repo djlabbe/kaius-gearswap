@@ -95,6 +95,10 @@ function user_setup()
     send_command('bind !F1 input /ja "Bolster" <me>')
     send_command('bind !F2 input /ja "Widened Compass" <me>')
 
+    send_command('bind !numpad7 input /ma "Paralyze" <t>')
+    send_command('bind !numpad8 input /ma "Slow" <t>')
+    send_command('bind !numpad9 input /ma "Silence" <t>')  
+
     send_command('bind ^insert gs c cycleback Element')
     send_command('bind ^delete gs c cycle Element')
     send_command('bind !h input /ma "Haste" <stpc>')
@@ -250,8 +254,8 @@ function init_gear_sets()
     }
 
     sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {
-        head="Vanya Hood",
         legs=gear.Relic_Legs,
+        feet=gear.Empyrean_Feet,
         back="Lifestream Cape",
     })
 
@@ -431,23 +435,21 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.idle = {
-        main="Daybreak", --0/0/25/0
-        sub="Genmei Shield", --10/0/0/0
+        main="Daybreak",
+        sub="Genmei Shield", --10
+        ranged="Dunna",
         head=gear.Empyrean_Head,
-        range="Dunna",
-        -- head="Merlinic Hood",
-        body=gear.Empyrean_Body,
+        body=gear.Empyrean_Body, --10
         hands=gear.Artifact_Hands,
-        legs=gear.Nyame_Legs,
-        -- feet=gear.Relic_Feet,
-        feet="Merlinic Crackows",
-        neck="Sibyl Scarf",
+        legs=gear.Empyrean_Legs, --7
+        feet=gear.Relic_Feet,
+        neck="Bagua Charm +1",
         ear1="Etiolation Earring",
-        ear2="Lugalbanda Earring",
+        ear2="Handler's Earring +1", --5
         ring1=gear.Stikini_1,
-        ring2=gear.Stikini_2,
+        ring2="Defending Ring", --10
         back=gear.GEO_Idle_Cape,
-        waist="Carrier's Sash",
+        waist="Isa Belt",
     }
 
     sets.resting = set_combine(sets.idle, {
@@ -502,7 +504,7 @@ function init_gear_sets()
     --sets.idle.DT.Pet.Indi = set_combine(sets.idle.DT.Pet, {})
 
     sets.idle.Town = set_combine(sets.idle, {
-        head=gear.Empyrean_Legs,
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,

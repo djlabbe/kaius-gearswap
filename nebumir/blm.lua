@@ -80,11 +80,12 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
 
     state.WeaponLock = M(false, 'Weapon Lock')
-    -- state.MagicBurst = M(true, 'Magic Burst')
+    state.MagicBurst = M(true, 'Magic Burst')
 
     include('Global-Binds.lua')
 
     send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind @q gs c toggle MagicBurst')
 
     send_command('bind !p input /ma "Protect III" <stpc>')
     send_command('bind !o input /ma "Shell II" <stpc>')
@@ -198,6 +199,7 @@ function init_gear_sets()
         ring1="Lebeche Ring",
         ring2="Defending Ring",       
     }) --49
+    
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         ear1="Mendi. Earring", --5
@@ -432,13 +434,30 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet, --6/0
         neck="Sorcerer's Stole +1", --10/0
         ear1="Malignance Earring",
-        ear2="Regal Earring",
-        ring1="Mujin Band",
+        ear2="Wicce Earring +2",
+        ring1="Medada's Ring",
         ring2="Metamorph Ring +1",
         back=gear.BLM_MAB_Cape, --5
         waist="Acuity Belt +1",
     }
 
+    sets.MagicBurst = {
+        main="Marin Staff +1", --10
+        sub="Enki Strap",
+        ammo="Ghastly Tathlum +1",
+        head=gear.Empyrean_Head, --7/(7)
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands, --8/(4)
+        legs=gear.Empyrean_Legs, --15
+        feet=gear.Empyrean_Feet, --6/0
+        neck="Sorcerer's Stole +1", --10/0
+        ear1="Malignance Earring",
+        ear2="Wicce Earring +2",
+        ring1="Medada's Ring",
+        ring2="Metamorph Ring +1",
+        back=gear.BLM_MAB_Cape, --5
+        waist="Acuity Belt +1",
+    }
 
     -- Initializes trusts at iLvl 119
     sets.midcast.Trust = sets.precast.FC
@@ -527,7 +546,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
     }
 
-    sets.idle.Town = sets.midcast['Elemental Magic']
+    sets.idle.Town = sets.MagicBurst
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -568,8 +587,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         equip(sets.DarkAffinity)
     end
     if spell.skill == 'Elemental Magic' then
-        if spell.english == "Impact" then
-            equip(sets.midcast.Impact)
+        if state.MagicBurst.value and spell.english ~= 'Death' then
+            equip(sets.MagicBurst)
         end
         if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
             equip(sets.Obi)

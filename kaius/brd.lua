@@ -605,7 +605,7 @@ function init_gear_sets()
     sets.engaged = {
         range=gear.Linos_STP,
         head=gear.Bunzi_Head,
-        body="Ayanmo Corazza +2", --(6/6)
+        body="Ashera Harness",
         hands=gear.Bunzi_Hands, --(8/8)
         legs="Volte Tights",
         feet=gear.Nyame_Feet,
@@ -958,7 +958,7 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if player.mpp < 51 then
+    if player.mpp < 51 and (player.sub_job == "WHM" or player.sub_job == "RDM" or player.sub_job == "SCH") then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
     if state.Buff.Doom then

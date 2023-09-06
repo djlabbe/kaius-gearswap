@@ -113,15 +113,16 @@ function init_gear_sets()
         ammo="Aurgelmir Orb +1",
         head="Flamma Zucchetto +2",
         body=gear.Empyrean_Body, --12
-        hands="Sakpata's Gauntlets", --8
+        hands=gear.Sakpata_Hands, --8
         legs="Pumm. Cuisses +3",
-        feet="Pummeler's Calligae +3",
+        -- feet="Pummeler's Calligae +3",
+        feet="Tatenashi Sune-Ate +1",
         neck="War. Beads +1",
         waist="Sailfi Belt +1",
         ear1="Schere Earring",
         ear2="Boii Earring +1",
         ring1="Niqmaddu Ring",
-        ring2="Petrov Ring",
+        ring2=gear.Chirich_2,
         back=gear.WAR_TP_Cape,
     }
 

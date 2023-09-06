@@ -494,7 +494,7 @@ function init_gear_sets()
 
     sets.midcast.Cure = {
         main="Daybreak", --30
-        sub="Ammurapi Shield", --3/(-5)
+        sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head=gear.Kaykaus_B_Head, --11(+2)/(-6)
         body=gear.Kaykaus_A_Body, --(+4)/(-6)

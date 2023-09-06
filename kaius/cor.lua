@@ -83,7 +83,11 @@ function user_setup()
     gear.Rostam_B = { name="Rostam", augments={'Path: B',}}
     gear.Rostam_C = { name="Rostam", augments={'Path: C',}}
 
+    gear.Artifact_Head = { name= "Laksamana's Tricorne +2" }
     gear.Artifact_Body = { name= "Laksamana's Frac +3" }
+    gear.Artifact_Hands = { name= "Laksamana's Gants +1" }
+    gear.Artifact_Legs = { name= "Laksamana's Trews +2" }
+    gear.Artifact_Feet = { name= "Laksamana's Bottes +1" }
 
     gear.Relic_Head = { name= "Lanun Tricorne +3" }
     gear.Relic_Body = { name= "Lanun Frac +3" }
@@ -94,7 +98,7 @@ function user_setup()
     gear.Empyrean_Head = { name= "Chasseur's Tricorne +2" }
     gear.Empyrean_Body = { name= "Chasseur's Frac +2" }
     gear.Empyrean_Hands = { name= "Chasseur's Gants +3" }
-    gear.Empyrean_Legs = { name= "Chasseur's Culottes +2" }
+    gear.Empyrean_Legs = { name= "Chasseur's Culottes +3" }
     gear.Empyrean_Feet = { name= "Chasseur's Bottes +2" }
 
     gear.COR_SNP_Cape = { name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10','Mag. Evasion+15',}}        
@@ -198,6 +202,8 @@ function init_gear_sets()
     sets.precast.JA['Random Deal'] = {body=gear.Relic_Body}
 
     sets.precast.CorsairRoll = {
+        main=gear.Rostam_C, 
+        range="Compensator",
         head=gear.Relic_Head,
         body=gear.Malignance_Body, --9/9
         hands=gear.Empyrean_Hands,
@@ -211,8 +217,6 @@ function init_gear_sets()
         back=gear.COR_SNP_Cape,
         waist="Flume Belt +1", --4/0
     }
-
-    sets.precast.CorsairRoll.Duration = {main=gear.Rostam_C, range="Compensator"}
 
     sets.precast.JA["Double-Up"] = {main=gear.Rostam_C, range="Compensator"}
 
@@ -278,7 +282,7 @@ function init_gear_sets()
         feet="Pursuer's Gaiters", --0/10
     }) --32/73
 
-    sets.precast.WS = set_combine({
+    sets.precast.WS = {
         ammo=gear.WSbullet,
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -288,15 +292,13 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Regal Ring",
+        ring1="Cornelia's Ring",
         ring2="Epaminondas's Ring",
         back=gear.COR_LS_Cape,
         waist="Fotia Belt",
-    }, {
-        ring1="Cornelia's Ring"
-    })
+    }
 
-    sets.precast.WS['Last Stand'] = set_combine({
+    sets.precast.WS['Last Stand'] = {
         ammo=gear.WSbullet,
         head=gear.Relic_Head,
         body=gear.Ikenga_Body,
@@ -306,15 +308,13 @@ function init_gear_sets()
         neck="Commodore Charm +2",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Regal Ring",
+        ring1="Cornelia's Ring",
         ring2="Dingir Ring",
         back=gear.COR_LS_Cape,
         waist="Fotia Belt",
-    }, {
-        ring1="Cornelia's Ring"
-    })
+    }
 
-    sets.precast.WS['Wildfire'] = set_combine({
+    sets.precast.WS['Wildfire'] = {
         ammo=gear.MAbullet,
         head=gear.Nyame_Head,
         body=gear.Relic_Body,
@@ -325,14 +325,12 @@ function init_gear_sets()
         ear1="Novio Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
-        ring2="Epaminondas's Ring",
+        ring2="Cornelia's Ring",
         back=gear.COR_LD_Cape,
         waist="Skrymir Cord +1",
-    }, {
-        ring2="Cornelia's Ring",
-    })
+    }
 
-    sets.precast.WS['Hot Shot'] = set_combine({
+    sets.precast.WS['Hot Shot'] = {
         ammo=gear.MAbullet,
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -343,14 +341,12 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
-        ring2="Epaminondas's Ring",
+        ring2="Cornelia's Ring",
         back=gear.COR_LD_Cape,
         waist="Skrymir Cord +1",
-    }, {
-        ring2="Cornelia's Ring",
-    })
+    }
 
-    sets.precast.WS['Leaden Salute'] = set_combine({
+    sets.precast.WS['Leaden Salute'] = {
         ammo=gear.MAbullet,
         head="Pixie Hairpin +1",
         body=gear.Relic_Body,
@@ -364,9 +360,7 @@ function init_gear_sets()
         ring2="Archon Ring",
         back=gear.COR_LD_Cape,
         waist="Skrymir Cord +1",
-    }, {
-        ring2="Cornelia's Ring",
-    })
+    }
 
     sets.precast.WS['Evisceration'] = {
         head=gear.Adhemar_B_Head,
@@ -384,7 +378,7 @@ function init_gear_sets()
         waist="Fotia Belt",
     }
 
-    sets.precast.WS['Savage Blade'] = set_combine({
+    sets.precast.WS['Savage Blade'] = {
         ammo=gear.WSbullet,
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -394,15 +388,13 @@ function init_gear_sets()
         neck="Rep. Plat. Medal",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Regal Ring",
+        ring1="Cornelia's Ring",
         ring2="Epaminondas's Ring",
         back=gear.COR_SB_Cape,
         waist="Sailfi Belt +1",
-    }, {
-        ring1="Cornelia's Ring",
-    })
+    }
 
-    sets.precast.WS['Aeolian Edge'] = set_combine({
+    sets.precast.WS['Aeolian Edge'] = {
         ammo=gear.QDbullet,
         head=gear.Nyame_Head,
         body=gear.Relic_Body,
@@ -413,12 +405,10 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
-        ring2="Epaminondas's Ring",
+        ring2="Cornelia's Ring",
         back=gear.COR_LD_Cape,
         waist="Orpheus's Sash",
-    }, {
-        ring2="Cornelia's Ring"
-    })
+    }
 
     sets.midcast.FastRecast = sets.precast.FC
 
@@ -479,18 +469,19 @@ function init_gear_sets()
         head=gear.Ikenga_Head,
         body=gear.Ikenga_Body,
         hands=gear.Malignance_Hands,
-        legs=gear.Ikenga_Legs,
+        legs=gear.Empyrean_Legs,
         feet=gear.Malignance_Feet,
         neck="Iskur Gorget",
         ear1="Crepuscular Earring",
         ear2="Telos Earring",
         ring1="Crepuscular Ring",
-        ring2="Ilabrat Ring",
+        ring2="Cacoethic Ring +1",
         back=gear.COR_RA_Cape,
         waist="Tellen Belt",
     }
 
-    sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
+    sets.midcast.RA.Critical = {
+        ammo=gear.RAbullet,
         head="Meghanada Visor +2",
         body="Nisroch Jerkin",
         hands="Mummu Wrists +2",
@@ -500,9 +491,9 @@ function init_gear_sets()
         ear2="Telos Earring",
         ring1="Begrudging Ring",
         ring2="Mummu Ring",
-        waist="K. Kachina Belt +1",
         back=gear.COR_RACRIT_Cape,
-    })
+        waist="K. Kachina Belt +1",
+    }
 
 
     sets.TripleShot = {
@@ -518,9 +509,16 @@ function init_gear_sets()
         waist="K. Kachina Belt +1",
     }
 
-    sets.TrueShot = {
+    sets.TrueShot_RA = {
         body="Nisroch Jerkin",
         legs="Osh. Trousers +1",
+        waist="Tellen Belt",
+        feet=gear.Ikenga_Feet,
+    }
+
+    sets.TrueShot_WS = {
+        waist="Tellen Belt",
+        feet=gear.Ikenga_Feet,
     }
 
     sets.engaged = {
@@ -528,7 +526,7 @@ function init_gear_sets()
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
         ear1="Cessance Earring",
@@ -548,7 +546,7 @@ function init_gear_sets()
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
         ear1="Dedition Earring",
@@ -565,7 +563,7 @@ function init_gear_sets()
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
         ear1="Dedition Earring",
@@ -582,7 +580,7 @@ function init_gear_sets()
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
         ear1="Dedition Earring",
@@ -599,7 +597,7 @@ function init_gear_sets()
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
         ear1="Dedition Earring",
@@ -616,7 +614,7 @@ function init_gear_sets()
         head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
         ear1="Dedition Earring",
@@ -660,7 +658,7 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
     })
 
-    sets.idle.Town = sets.engaged.DW.MaxHaste
+    sets.idle.Town = sets.precast.WS['Last Stand']
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = {
@@ -730,9 +728,6 @@ end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
     if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") then
-        if player.status ~= 'Engaged' and state.WeaponLock.value == false then
-            equip(sets.precast.CorsairRoll.Duration)
-        end
         if state.LuzafRing.value then
             equip(sets.precast.LuzafRing)
         end
@@ -774,7 +769,17 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    if spell.type == 'CorsairShot' then
+    if spell.type == "WeaponSkill" then
+        if (elemental_ws:contains(spell.name) == false) then
+            local tarusize = 0.3
+            -- For COR we can just assume Gun TrueShot range
+            local trueshotmax = tarusize + spell.target.model_size + 4.3189 
+            local trueshotmin = tarusize + spell.target.model_size + 3.0209
+            if spell.target.distance > trueshotmin and spell.target.distance < trueshotmax then
+                equip(sets.TrueShot_WS)
+            end
+        end
+    elseif spell.type == 'CorsairShot' then
         if (spell.english ~= 'Light Shot' and spell.english ~= 'Dark Shot') then
             -- Matching double weather (w/o day conflict)
             if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
@@ -802,13 +807,13 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             if buffactive['Aftermath: Lv.3'] and player.equipment.ranged == "Armageddon" then
                 equip(sets.TripleShotCritical)
                 if (spell.target.distance < (7 + spell.target.model_size)) and (spell.target.distance > (5 + spell.target.model_size)) then
-                    equip(sets.TrueShot)
+                    equip(sets.TrueShot_RA)
                 end
             end
         elseif buffactive['Aftermath: Lv.3'] and player.equipment.ranged == "Armageddon" then
             equip(sets.midcast.RA.Critical)
             if (spell.target.distance < (7 + spell.target.model_size)) and (spell.target.distance > (5 + spell.target.model_size)) then
-                equip(sets.TrueShot)
+                equip(sets.TrueShot_RA)
             end
         end
     end
