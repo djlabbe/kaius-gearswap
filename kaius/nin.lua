@@ -857,6 +857,7 @@ function job_self_command(cmdParams, eventArgs)
 end
 
 function gearinfo(cmdParams, eventArgs)
+    --   send_command('input /item "Linen Coin Purse" <me>')
     if cmdParams[1] == 'gearinfo' then
         if type(tonumber(cmdParams[2])) == 'number' then
             if tonumber(cmdParams[2]) ~= DW_needed then

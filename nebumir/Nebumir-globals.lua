@@ -55,7 +55,7 @@ function define_global_sets()
     gear.Ody_CURE_Feet = { name="Odyssean Greaves", augments={'Mag. Acc.+9','"Cure" potency +6%','DEX+1','"Mag.Atk.Bns."+14',}}
     
     gear.Valo_PHLX_Head = { name="Valorous Mask", augments={'Weapon skill damage +3%','"Fast Cast"+1','Phalanx +4','Mag. Acc.+12 "Mag.Atk.Bns."+12',}}
-    gear.Valo_PHLX_Body = { name="Valorous Mail", augments={'Crit. hit damage +2%','Pet: INT+5','Phalanx +4','Mag. Acc.+3 "Mag.Atk.Bns."+3',}}
+    gear.Valo_PHLX_Body = { name="Valorous Mail", augments={'Magic Damage +13','Attack+14','Phalanx +4','Accuracy+16 Attack+16','Mag. Acc.+8 "Mag.Atk.Bns."+8',}}
 
     --------------
     -- SKY SETS --

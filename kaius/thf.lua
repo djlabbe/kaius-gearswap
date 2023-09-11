@@ -564,7 +564,7 @@ function init_gear_sets()
     })
 
     sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        sub="Smythe's Shield",
+        sub="Sm. Escutcheon",
         body="Blacksmith's Apron",
         hands="Smithy's Mitts",
         neck="Smithy's Torque",

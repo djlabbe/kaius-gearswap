@@ -76,7 +76,7 @@ function user_setup()
         send_command('bind !h input /ma "Haste" <stpc>')
         send_command('bind !u input /ma "Aquaveil" <me>')
         send_command('bind !i input /ma "Phalanx" <me>')
-        -- send_command('bind !b input /ma "Bind" <t>')
+        -- send_command('bind !b input /ma "Bind" <t>') already used for bog
         send_command('bind !y input /ma "Refresh" <stpc>')
     end
 

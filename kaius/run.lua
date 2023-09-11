@@ -95,12 +95,11 @@ function user_setup()
     send_command('bind !p input /ma "Protect IV" <stpc>')
     send_command('bind !o input /ma "Shell V" <stpc>')
     send_command('bind !i input /ma "Phalanx" <me>')
-    send_command('bind !u input /ma "Ice Spikes" <me>')
+    send_command('bind !u input /ma "Aquaveil" <me>')
     send_command('bind !y input /ma "Refresh" <me>')
     send_command('bind !m input /ja "Embolden" <me>')
 
-    send_command('bind ![ input /ma "Crusade" <me>')
-    send_command('bind !] input /ma "Aquaveil" <me>')
+    -- send_command('bind ![ input /ma "Crusade" <me>')
 
     send_command('bind ^[ input /ma "Temper" <me>')
     send_command('bind ^] input /ja "Swordplay" <me>')
@@ -110,6 +109,16 @@ function user_setup()
 
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind ^p gs c toggle PhalanxMode')
+
+    if player.sub_job == 'SCH' then
+        send_command('bind !- gs c scholar light')
+        send_command('bind != gs c scholar dark')
+
+        send_command('bind ^; gs c scholar speed')   
+        send_command('bind ^[ gs c scholar aoe')
+        send_command('bind !; gs c scholar cost')
+        send_command('bind ![ gs c scholar power')
+    end
 
     if player.sub_job == 'SAM' then
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 2')
@@ -828,6 +837,9 @@ function job_self_command(cmdParams, eventArgs)
         add_to_chat(r_color, string.char(129,121).. '  ' ..string.upper(r_msg).. '  ' ..string.char(129,122)
                     ..string.char(129,121).. ' Resist: ' .. r_res .. ' ' ..string.char(129,122) 
                     ..string.char(129,121).. ' Damage: ' .. r_dmg .. ' ' ..string.char(129,122)  )
+    elseif cmdParams[1]:lower() == 'scholar' then
+        handle_strategems(cmdParams)
+        eventArgs.handled = true
     end
 end
 
