@@ -378,7 +378,7 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
-        -- ammo="Staunch Tathlum +1", --11
+        ammo="Staunch Tathlum +1", --11
         -- hands=gear.Chironic_WSD_Hands, --20
         neck="Loricate Torque +1",
         ear1="Halasz Earring",
@@ -400,12 +400,12 @@ function init_gear_sets()
     }
     sets.midcast.Lullaby = { body=gear.Empyrean_Body }
     sets.midcast.Madrigal = { head=gear.Empyrean_Head }
-    sets.midcast.Mambo = { feet="Mou. Crackows +1" }
+    sets.midcast.Mambo = { feet="Mousai Crackows +1" }
     sets.midcast.March = { hands=gear.Empyrean_Hands }
-    sets.midcast.Minne = { legs="Mou. Seraweels +1" }
+    sets.midcast.Minne = { legs="Mousai Seraweels +1" }
     sets.midcast.Minuet = { body=gear.Empyrean_Body }
     sets.midcast.Paeon = { head=gear.Artifact_Head }
-    sets.midcast.Threnody = { body="Mou. Manteel +1" }
+    sets.midcast.Threnody = { body="Mousai Manteel +1" }
     sets.midcast['Adventurer\'s Dirge'] = { range="Marsyas", hands=gear.Relic_Hands }
     sets.midcast['Adventurer\'s Dirge'] = { range="Marsyas" }
     sets.midcast['Foe Sirvente'] = { head=gear.Relic_Head }
@@ -422,7 +422,7 @@ function init_gear_sets()
         hands=gear.Empyrean_Hands,
         legs="Inyanga Shalwar +2",
         feet=gear.Artifact_Feet,
-        neck="Mnbw. Whistle +1",
+        neck="Moonbow Whistle +1",
         ear1="Enchanter's Earring +1",
         ear1="Etiolation Earring",
         ear2="Odnowa Earring +1",
@@ -442,7 +442,7 @@ function init_gear_sets()
         hands=gear.Artifact_Hands,
         legs=gear.Artifact_Legs,
         feet=gear.Artifact_Feet,
-        neck="Mnbw. Whistle +1",
+        neck="Moonbow Whistle +1",
         ear1="Crep. Earring",
         ear2="Regal Earring",
         ring1=gear.Stikini_1,
@@ -462,7 +462,7 @@ function init_gear_sets()
         -- ear2="Darkside Earring",
         body=gear.Empyrean_Body,
         hands="Inyanga Dastanas +2",
-        neck="Mnbw. Whistle +1",
+        neck="Moonbow Whistle +1",
         waist="Acuity Belt +1",
         legs="Inyanga Shalwar +2",
         feet=gear.Relic_Feet,
@@ -503,7 +503,6 @@ function init_gear_sets()
     }
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
-        -- neck="Nuna Gorget +1",
         ring1=gear.Stikini_1,
         ring2="Metamor. Ring +1",
         waist="Luminary Sash",
@@ -581,7 +580,7 @@ function init_gear_sets()
         hands=gear.Artifact_Hands,
         legs=gear.Artifact_Legs,
         feet=gear.Artifact_Feet,
-        neck="Mnbw. Whistle +1",
+        neck="Moonbow Whistle +1",
         ear1="Dignitary's Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",

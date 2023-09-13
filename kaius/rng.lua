@@ -705,7 +705,7 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = {feet="Jute Boots +1"}
+    sets.Kiting = { ring1="Shneddick Ring" }
 
     sets.buff.Barrage = {
         head=gear.Ikenga_Head,

@@ -117,6 +117,8 @@ function user_setup()
         send_command('bind ^[ gs c scholar aoe')
         send_command('bind !; gs c scholar cost')
         send_command('bind ![ gs c scholar power')
+        send_command('bind !s input /ja Sublimation <me>')
+
     end
 
     set_macro_page(1, 4)
@@ -525,8 +527,8 @@ function init_gear_sets()
     }
 
     sets.idle.DT = set_combine(sets.idle, {
-        main="Bunzi's Rod", --10
-        sub="Ammurapi Shield",
+        main="Marin Staff +1", --10
+        sub="Enki Strap",
         ammo="Staunch Tathlum +1", --3/3
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body, --8/8

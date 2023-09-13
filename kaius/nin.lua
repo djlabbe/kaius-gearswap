@@ -625,9 +625,7 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = { feet="Danzo sune-ate" }
-
-    sets.DayMovement = { feet="Danzo sune-ate" }
+    sets.DayMovement = { ring1="Shneddick Ring" }
     sets.NightMovement = { feet="Hachiya Kyahan +3" }
 
     sets.Kikoku = {main="Kikoku", sub="Gleti's Knife"}

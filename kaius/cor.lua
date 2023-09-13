@@ -31,7 +31,7 @@ function job_setup()
 
     state.AutoAmmoMode = M(true,'Auto Ammo Mode')
     tickdelay = os.clock() + 5
-    ammostock = 98
+    ammostock = 70
     useItem = false
 	useItemName = ''
     prevItemName = ''
@@ -76,7 +76,7 @@ function user_setup()
     gear.RAccbullet = "Devastating Bullet"
     gear.WSbullet = "Chrono Bullet"
     gear.MAbullet = "Living Bullet"
-    gear.QDbullet = "Living Bullet"
+    gear.QDbullet = "Hauksbok Bullet"
     options.ammo_warning_limit = 10
 
     gear.Rostam_A = { name="Rostam", augments={'Path: A',}}
@@ -324,8 +324,8 @@ function init_gear_sets()
         neck="Comm. Charm +2",
         ear1="Novio Earring",
         ear2="Friomisi Earring",
-        ring1="Dingir Ring",
-        ring2="Cornelia's Ring",
+        ring1="Cornelia's Ring",
+        ring2="Dingir Ring",
         back=gear.COR_LD_Cape,
         waist="Skrymir Cord +1",
     }
@@ -340,8 +340,8 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1="Dingir Ring",
-        ring2="Cornelia's Ring",
+        ring1="Cornelia's Ring",
+        ring2="Dingir Ring",
         back=gear.COR_LD_Cape,
         waist="Skrymir Cord +1",
     }
@@ -356,24 +356,24 @@ function init_gear_sets()
         neck="Comm. Charm +2",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1="Dingir Ring",
-        ring2="Archon Ring",
+        ring1="Archon Ring",
+        ring2="Dingir Ring",
         back=gear.COR_LD_Cape,
         waist="Skrymir Cord +1",
     }
 
     sets.precast.WS['Evisceration'] = {
-        head=gear.Adhemar_B_Head,
+        head="Blistering Sallet +1",
         body="Meghanada Cuirie +2",
         hands=gear.Adhemar_B_Hands,
         legs="Zoar Subligar +1",
         feet=gear.Nyame_Feet,
         feet=gear.Adhemar_D_Feet,
         neck="Fotia Gorget",
-        ear1="Mache Earring +1",
+        ear1="Moonshade Earring",
         ear2="Odr Earring",
-        ring1="Regal Ring",
-        ring2="Mummu Ring",
+        ring1="Ilabrat Ring",
+        ring2="Regal Ring",
         back=gear.COR_DW_Cape,
         waist="Fotia Belt",
     }
@@ -389,7 +389,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
         ring1="Cornelia's Ring",
-        ring2="Epaminondas's Ring",
+        ring2="Regal Ring",
         back=gear.COR_SB_Cape,
         waist="Sailfi Belt +1",
     }
@@ -404,8 +404,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1="Dingir Ring",
-        ring2="Cornelia's Ring",
+        ring1="Cornelia's Ring",
+        ring2="Dingir Ring",
         back=gear.COR_LD_Cape,
         waist="Orpheus's Sash",
     }
@@ -432,12 +432,12 @@ function init_gear_sets()
         hands=gear.Carmine_D_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Relic_Feet,
-        neck="Baetyl Pendant",
+        neck="Commodore charm +2",
         ear1="Novio Earring",
         ear2="Friomisi Earring",
-        ring1="Dingir Ring",
-        ring2="Fenrir Ring +1",
-        back=gear.COR_SB_Cape,
+        ring1="Fenrir Ring +1",
+        ring2="Dingir Ring",
+        back=gear.COR_LD_Cape,
         waist="Skrymir Cord +1",
     }
 
@@ -448,7 +448,7 @@ function init_gear_sets()
         hands=gear.Artifact_Hands,
         legs=gear.Malignance_Legs,
         feet=gear.Artifact_Feet,
-        neck="Comm. Charm +2",
+        neck="Commodore charm +2",
         ear1="Crepuscular Earring",
         ear2="Dignitary's Earring",
         ring1="Regal Ring",
@@ -483,25 +483,24 @@ function init_gear_sets()
     sets.midcast.RA.Critical = {
         ammo=gear.RAbullet,
         head="Meghanada Visor +2",
-        body="Nisroch Jerkin",
-        hands="Mummu Wrists +2",
+        body="Meghanada Cuirie +2",
+        hands=gear.Empyrean_Hands,
         legs="Darraigner's Brais",
-        feet="Osh. Leggings +1",
+        feet="Oshosi Leggings +1",
         ear1="Odr Earring",
-        ear2="Telos Earring",
+        ear2="Chasseur's Earring +1",
         ring1="Begrudging Ring",
-        ring2="Mummu Ring",
+        ring2="Dingir Ring",
         back=gear.COR_RACRIT_Cape,
         waist="K. Kachina Belt +1",
     }
-
 
     sets.TripleShot = {
         head="Oshosi Mask +1", --5
         body=gear.Empyrean_Body, --12
         hands=gear.Relic_Hands,
-        legs="Osh. Trousers +1", --6
-        feet="Osh. Leggings +1", --3
+        legs="Oshosi Trousers +1", --6
+        feet="Oshosi Leggings +1", --3
     } --27
 
     sets.TripleShotCritical = {
@@ -511,7 +510,7 @@ function init_gear_sets()
 
     sets.TrueShot_RA = {
         body="Nisroch Jerkin",
-        legs="Osh. Trousers +1",
+        legs="Oshosi Trousers +1",
         waist="Tellen Belt",
         feet=gear.Ikenga_Feet,
     }
@@ -676,8 +675,8 @@ function init_gear_sets()
         waist="Carrier's Sash",
     }
 
-    sets.Kiting = {legs=gear.Carmine_D_Legs}
-
+    sets.Kiting = { ring1="Shneddick Ring" }
+    
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
         ring1="Eshmun's Ring", --20
@@ -694,7 +693,7 @@ function init_gear_sets()
     sets.Armageddon_R = {main=gear.Rostam_A, sub="Kustawi +1", ranged="Armageddon"}
     sets.Fomalhaut_M = {main=gear.Rostam_B, sub="Crepuscular Knife", ranged="Fomalhaut"}
     sets.Fomalhaut_R = {main=gear.Rostam_A, sub="Kustawi +1", ranged="Fomalhaut"}
-    sets.Naegling = {main="Naegling", sub="Crepuscular Knife", ranged="Anarchy +3"}
+    sets.Naegling = {main="Naegling", sub="Gleti's Knife", ranged="Anarchy +3"}
 
     sets.DefaultShield = {sub="Nusku Shield"}
 

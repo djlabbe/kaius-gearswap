@@ -601,7 +601,7 @@ function init_gear_sets()
 
     sets.idle.Weak = sets.idle.DT
     sets.idle.Town = sets.engaged.Naegling
-    sets.Kiting = { legs=gear.Carmine_D_Legs }
+    sets.Kiting = { ring1="Shneddick Ring" }
 
     sets.buff.Doom = {
         neck="Nicander's Necklace",

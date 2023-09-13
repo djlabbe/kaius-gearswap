@@ -98,10 +98,11 @@ function user_setup()
     send_command('bind !u input /ma "Aquaveil" <me>')
     send_command('bind !y input /ma "Refresh" <me>')
     send_command('bind !m input /ja "Embolden" <me>')
+    
+    send_command('bind @1 input /ja "Lunge" <t>')
+    send_command('bind @2 input /ja "Swipe" <t>')
 
-    -- send_command('bind ![ input /ma "Crusade" <me>')
-
-    send_command('bind ^[ input /ma "Temper" <me>')
+    send_command('bind !j input /ma "Temper" <me>')
     send_command('bind ^] input /ja "Swordplay" <me>')
 
     send_command('bind !insert gs c cycleback Runes')
@@ -120,7 +121,7 @@ function user_setup()
         send_command('bind ![ gs c scholar power')
     end
 
-    if player.sub_job == 'SAM' then
+    if player.sub_job == 'SCH' then
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 2')
         send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 2')
         send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 2')
@@ -538,7 +539,7 @@ function init_gear_sets()
 
     sets.idle.Town = sets.engaged
 
-    sets.Kiting = { legs=gear.Carmine_D_Legs }
+    sets.Kiting = { ring1="Shneddick Ring" }
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20

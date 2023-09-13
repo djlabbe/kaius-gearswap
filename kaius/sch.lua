@@ -1138,8 +1138,8 @@ function sch_skillchain(cmdParams)
 		send_command('input /p Opening [SIX][Skillchain];pause .1;input /ja "Immanence" <me>;pause 1.0;input /ma "stone" <t>;pause 3.5;input /ja "Immanence" <me>;pause 1.0;input /ma "aero" <t>;pause 3.5;input /ja "Immanence" <me>;pause 1.0;input /ma "stone" <t>;pause 3.5;input /ja "Immanence" <me>;pause 1.0;input /ma "aero" <t>;pause 3.5;input /ja "Immanence" <me>;pause 1.0;input /ma "stone" <t>;pause 3.5;input /ja "Immanence" <me>;pause 1.0;input /ma "aero" <t>;pause 3.5;input /ja "Immanence" <me>;pause 1.0;input /ma "stone" <t>;')
 	elseif sctype == 'doublefire' then
 		send_command('input /p Opening [Liquefaction ==> Fusion][Skillchain];pause .1;input /ja "Immanence" <me>;pause 1.0;input /ma "stone" <t>;pause 4.0;input /ja "Immanence" <me>;pause 1.0;input /p Closing Skillchain #1 [Liquefaction][Fire]; input /ma "Pyrohelix" <t>;pause 9.0;input /ja "Immanence" <me>;pause 1.0;input /p Closing Skillchain #2 [Fusion][Fire][Light]; input /ma "Ionohelix" <t>;')
-    elseif sctype == 'doublefire-mb' then
-		send_command('input /p Opening [Liquefaction ==> Fusion][Skillchain];pause .1;input /ja "Immanence" <me>;pause 1.0;input /ma "stone" <t>;pause 4.0;input /ja "Immanence" <me>;pause 1.0;input /p Closing Skillchain #1 [Liquefaction][Fire]; input /ma "Pyrohelix" <t>;pause 3.5;input /ma "Fire V" <t>;pause 3.0;input /ja "Immanence" <me>;pause 1.0;input /p Closing Skillchain #2 [Fusion][Fire][Light]; input /ma "Ionohelix" <t>;')
+    elseif sctype == 'iwin' then
+		send_command('input /p Opening [Liquefaction ==> Fusion][Skillchain];pause .1;input /ja "Immanence" <me>;pause 1.0;input /ma "stone" <t>;pause 4.0;input /ja "Immanence" <me>;pause 1.0;input /p Closing Skillchain #1 [Liquefaction][Fire]; input /ma "Pyrohelix" <t>;pause 4.0;input /ma "Fire V" <t>;pause 4.5;input /ja "Immanence" <me>;pause 1.0;input /p Closing Skillchain #2 [Fusion][Fire][Light]; input /ma "Ionohelix" <t>;pause 4.0;input /ma "Fire V" <t>;pause 4.0;input /ma "Fire V" <t>')
     else
 		add_to_chat(123,'Error: Unknown skillchain ['..sctype..']')
 	end

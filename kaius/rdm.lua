@@ -984,7 +984,7 @@ function init_gear_sets()
     sets.defense.MDT = sets.idle.DT
 
 
-    sets.Kiting = {legs=gear.Carmine_D_Legs}
+    sets.Kiting = { ring1="Shneddick Ring" }
     sets.latent_refresh = {waist="Fucho-no-obi"}
 
     -- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous

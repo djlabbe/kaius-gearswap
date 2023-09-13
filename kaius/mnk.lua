@@ -510,7 +510,7 @@ function init_gear_sets()
         head="Volte Cap",
     }
 
-    sets.Kiting = { feet="Hermes' Sandals" }
+    sets.Kiting = { ring1="Shneddick Ring" }
     sets.Verethragna = { main="Verethragna" }
     sets.Godhands = { main="Godhands" }
 end

@@ -904,7 +904,7 @@ function init_gear_sets()
         --ring2="Locus Ring",
     })
 
-    sets.Kiting = {legs=gear.Carmine_D_Legs}
+    sets.Kiting = { ring1="Shneddick Ring" }
     sets.latent_refresh = {waist="Fucho-no-obi"}
 
     sets.buff.Doom = {

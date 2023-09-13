@@ -773,7 +773,7 @@ function init_gear_sets()
     -- sets.idle.Town = sets.precast.WS['Insurgency']
 
     sets.latent_refresh = { waist="Fucho-no-obi" }
-    sets.Kiting = { legs="Carmine Cuisses +1" }
+    sets.Kiting = { ring1="Shneddick Ring" }
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20

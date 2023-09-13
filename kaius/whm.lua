@@ -590,7 +590,7 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = { feet="Herald's Gaiters" }
+    sets.Kiting = { ring1="Shneddick Ring" }
     sets.latent_refresh = { waist="Fucho-no-obi" }
     sets.DefaultShield = { sub="Genmei Shield" }
 

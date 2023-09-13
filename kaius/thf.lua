@@ -341,7 +341,7 @@ function init_gear_sets()
 
     }
 
-    sets.Kiting = {feet="Jute Boots +1"}
+    sets.Kiting = { ring1="Shneddick Ring" }
 
     sets.engaged = {
         ammo="Aurgelmir Orb +1",
@@ -570,6 +570,7 @@ function init_gear_sets()
         neck="Smithy's Torque",
         ring1="Craftmaster's Ring",
         ring2="Confectioner's Ring",
+        waist="Blacksmith's Belt"
     })
 
 end
