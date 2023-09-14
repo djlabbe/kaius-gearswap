@@ -52,8 +52,8 @@ function user_setup()
     gear.Empyrean_Legs = { name= "Azimuth Tights +2" }
     gear.Empyrean_Feet = { name= "Azimuth Gaiters +2" }
 
-    gear.GEO_Idle_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: "Regen"+5',}}
-    gear.GEO_MAB_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Mag. Evasion+15',}}
+    gear.GEO_Idle_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: "Regen"+5',}} --X
+    gear.GEO_MAB_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Mag. Evasion+15',}} --X
     
     include('Global-Binds.lua')
 

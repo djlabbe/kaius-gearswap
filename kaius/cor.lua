@@ -102,11 +102,11 @@ function user_setup()
     gear.Empyrean_Feet = { name= "Chasseur's Bottes +2" }
 
     gear.COR_SNP_Cape = { name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10','Mag. Evasion+15',}}        
-    gear.COR_RA_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10','Phys. dmg. taken-10%',}} --*
-    gear.COR_DW_Cape = { name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}} --*
-    gear.COR_SB_Cape = { name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
-    gear.COR_LD_Cape = { name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --*
-    gear.COR_LS_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}} --*
+    gear.COR_RA_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10','Phys. dmg. taken-10%',}}
+    gear.COR_DW_Cape = { name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}}
+    gear.COR_SB_Cape = { name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} 
+    gear.COR_LEAD_Cape = { name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+    gear.COR_LS_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}}
     gear.COR_RACRIT_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Crit.hit rate+10',}}
 
     send_command ('bind @` gs c toggle LuzafRing')
@@ -305,7 +305,7 @@ function init_gear_sets()
         hands=gear.Empyrean_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Relic_Feet,
-        neck="Commodore Charm +2",
+        neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
         ring1="Cornelia's Ring",
@@ -326,7 +326,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Cornelia's Ring",
         ring2="Dingir Ring",
-        back=gear.COR_LD_Cape,
+        back=gear.COR_LEAD_Cape,
         waist="Skrymir Cord +1",
     }
 
@@ -342,7 +342,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Cornelia's Ring",
         ring2="Dingir Ring",
-        back=gear.COR_LD_Cape,
+        back=gear.COR_LEAD_Cape,
         waist="Skrymir Cord +1",
     }
 
@@ -358,7 +358,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Archon Ring",
         ring2="Dingir Ring",
-        back=gear.COR_LD_Cape,
+        back=gear.COR_LEAD_Cape,
         waist="Skrymir Cord +1",
     }
 
@@ -406,7 +406,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Cornelia's Ring",
         ring2="Dingir Ring",
-        back=gear.COR_LD_Cape,
+        back=gear.COR_LEAD_Cape,
         waist="Orpheus's Sash",
     }
 
@@ -437,7 +437,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Fenrir Ring +1",
         ring2="Dingir Ring",
-        back=gear.COR_LD_Cape,
+        back=gear.COR_LEAD_Cape,
         waist="Skrymir Cord +1",
     }
 

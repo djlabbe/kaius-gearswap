@@ -59,8 +59,7 @@ function user_setup()
     gear.Empyrean_Feet = { name="Bhikku Gaiters +2" }
 
     gear.MNK_DEX_DA_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
-    gear.MNK_STR_CRIT_Cape = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}}
-    gear.MNK_INT_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+    gear.MNK_STR_CRIT_Cape = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}} --X
     
     send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
@@ -347,7 +346,7 @@ function init_gear_sets()
         feet=gear.Malignance_Feet,
         ring1=gear.Stikini_1,
         ring2="Metamorph Ring +1",
-        back=gear.MNK_INT_Cape,
+        back=gear.MNK_STR_CRIT_Cape,
         waist="Acuity Belt +1",
         
     }
@@ -363,7 +362,7 @@ function init_gear_sets()
         feet=gear.Nyame_Feet,
         ring1="Archon Ring",
         ring2="Metamorph Ring +1",
-        back=gear.MNK_INT_Cape,
+        back=gear.MNK_STR_CRIT_Cape,
         waist="Orpheus's Sash",
     }
 

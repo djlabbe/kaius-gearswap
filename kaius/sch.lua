@@ -98,7 +98,7 @@ function user_setup()
     gear.Empyrean_Legs = { name= "Arbatel Pants +3" }
     gear.Empyrean_Feet = { name= "Arbatel Loafers +3" }
 
-    gear.SCH_MAB_Cape = { name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Mag. Evasion+15',}}
+    gear.SCH_MAB_Cape = { name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Mag. Evasion+15',}} --X
     gear.SCH_REGEN_Cape = { name="Bookworm's Cape", augments={'INT+1','MND+3','Helix eff. dur. +13','"Regen" potency+10',}}
 
     send_command('bind !F1 input /ja "Tabula Rasa" <me>')

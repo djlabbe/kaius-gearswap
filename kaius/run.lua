@@ -74,14 +74,13 @@ function user_setup()
     gear.Empyrean_Legs = { name="Erilaz Leg Guards +3", priority=100 }
     gear.Empyrean_Feet = { name="Erilaz Greaves +3", priority=48 }
 
-    gear.RUN_HPD_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Parrying rate+5%',}, priority=60}
+    gear.RUN_TANK_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Parrying rate+5%',}, priority=60}
     gear.RUN_FC_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}, priority=60}
     gear.RUN_SIRD_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Spell interruption rate down-10%',}, priority=60}
+    gear.RUN_TP_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}, priority=60}
+    gear.RUN_WS1_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}, priority=60}
 
     -- These are capes that I haven't made yet. I just use capes I have made as placeholders.
-    gear.RUN_HPP_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Parrying rate+5%',}, priority=60}
-    gear.RUN_TP_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Parrying rate+5%',}, priority=60}
-    gear.RUN_WS1_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Parrying rate+5%',}, priority=60}
     gear.RUN_WS2_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Parrying rate+5%',}, priority=60}
 
     include('Global-Binds.lua')
@@ -174,7 +173,7 @@ function init_gear_sets()
         hands={name="Kurys Gloves", priority=25}, --9   
         ring1=gear.Moonlight_1,
         ring2={name="Eihwaz Ring", priority=70}, --5    
-        back=gear.RUN_HPD_Cape, --10
+        back=gear.RUN_TANK_Cape, --10
         waist={name="Platinum Moogle Belt", priority=999}, 
         legs=gear.Empyrean_Legs, --11
         feet=gear.Empyrean_Feet,--7
@@ -183,7 +182,7 @@ function init_gear_sets()
     sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {
         body=gear.Artifact_Body,
         legs=gear.Relic_Legs,
-        back=gear.RUN_HPD_Cape,
+        back=gear.RUN_TANK_Cape,
     })
 
     sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
@@ -203,7 +202,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Mujin Band",
         ring2="Fenrir Ring +1",
-        back=gear.RUN_HPD_Cape,
+        back=gear.RUN_TANK_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     }
 
@@ -219,7 +218,7 @@ function init_gear_sets()
         legs=gear.Artifact_Legs,
         neck="Incanter's Torque",
         ear1={name="Tuisto Earring", priority=150},
-        back=gear.RUN_HPD_Cape,
+        back=gear.RUN_TANK_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     }
 
@@ -425,7 +424,7 @@ function init_gear_sets()
         ear2={name="Odnowa Earring +1", priority=110}, 
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
-        back=gear.RUN_HPD_Cape,
+        back=gear.RUN_TANK_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     } --3708 hp
 
@@ -460,7 +459,7 @@ function init_gear_sets()
         ear2={name="Odnowa Earring +1", priority=110}, 
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
-        back=gear.RUN_HPD_Cape,
+        back=gear.RUN_TANK_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     }
 
@@ -476,7 +475,7 @@ function init_gear_sets()
         ear2={name="Odnowa Earring +1", priority=110},
         ring1=gear.Moonlight_1,
         ring2={name="Gelatinous Ring +1", priority=135},
-        back=gear.RUN_HPD_Cape,
+        back=gear.RUN_TANK_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     } --3183 hp
 
@@ -510,7 +509,7 @@ function init_gear_sets()
         ear2={name="Odnowa Earring +1", priority=110},
         ring1=gear.Moonlight_1,
         ring2=gear.Moonlight_2, 
-        back=gear.RUN_HPD_Cape,
+        back=gear.RUN_TANK_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     }
 
@@ -527,14 +526,13 @@ function init_gear_sets()
         ear2={name="Odnowa Earring +1", priority=110}, --3/5
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring", --10/10
-        back=gear.RUN_HPD_Cape, --10/0
+        back=gear.RUN_TANK_Cape, --10/0
         waist={name="Platinum Moogle Belt", priority=999}, 
     }
 
     sets.defense.Parry = {
         hands="Turms Mittens +1",
         legs=gear.Empyrean_Legs,
-        back=gear.RUN_HPP_Cape,
     }
 
     sets.idle.Town = sets.engaged

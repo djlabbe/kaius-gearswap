@@ -62,6 +62,7 @@ function user_setup()
     gear.PLD_FC_Cape = { name="Rudianos's Mantle", augments={'HP+60','"Fast Cast"+10','Spell interruption rate down-10%',}, priority=60}
     gear.PLD_SIRD_Cape = { name="Rudianos's Mantle", augments={'HP+60','"Fast Cast"+10','Spell interruption rate down-10%',}, priority=60}
     gear.PLD_CURE_Cape = { name="Rudianos's Mantle", augments={'HP+60','"Fast Cast"+10','Spell interruption rate down-10%',}, priority=60}
+    
     gear.PLD_PHLX_Cape = { name="Weard Mantle", augments={'VIT+1','DEX+3','Enmity+6','Phalanx +5',}, priority=1}
 
     send_command('bind @f10 gs c toggle EquipShield')

@@ -65,9 +65,7 @@ function user_setup()
     gear.Empyrean_Legs = { name="Ebers Pantaloons +3" }
     gear.Empyrean_Feet = { name="Ebers Duckbills +2" }
 
-    gear.WHM_Cure_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Cure" potency +10%','Phys. dmg. taken-10%',}}
-    gear.WHM_DW_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Cure" potency +10%','Phys. dmg. taken-10%',}}
-    gear.WHM_WS1_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Cure" potency +10%','Phys. dmg. taken-10%',}}
+    gear.WHM_Cure_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Cure" potency +10%','Phys. dmg. taken-10%',}} --X
 
     include('Global-Binds.lua')
 
@@ -499,7 +497,7 @@ function init_gear_sets()
         ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
-        back=gear.WHM_DW_Cape,
+        back=gear.WHM_Cure_Cape,
         waist="Windbuffet Belt +1",
     }
 
@@ -515,7 +513,7 @@ function init_gear_sets()
         ear2="Ishvara Earring",
         ring1="Epaminondas's Ring",
         ring2="Cornelia's Ring",
-        back=gear.WHM_WS1_Cape,
+        back=gear.WHM_Cure_Cape,
         waist="Fotia Belt",
     }
 

@@ -210,7 +210,7 @@ function user_setup()
     gear.Empyrean_Feet = { name="Beckoner's Pigaches +1" }
 
     gear.SMN_Magic_Cape = { name="Campestres's Cape", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: Damage taken -5%',}}
-    gear.SMN_Physical_Cape = { name="Campestres's Cape", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: Damage taken -5%',}}
+    gear.SMN_Physical_Cape = { name="Campestres's Cape", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: Damage taken -5%',}}
     
     set_macro_page(1, 15)
     send_command('wait 3; input /lockstyleset 15')
