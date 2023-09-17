@@ -444,7 +444,6 @@ function init_gear_sets()
     }
 
     sets.DarkAffinity = { head="Pixie Hairpin +1",ring2="Archon Ring" }
-    sets.Obi = { waist="Hachirin-no-Obi" }
 
     sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'], {})
 
@@ -521,8 +520,7 @@ function init_gear_sets()
         waist="Gishdubar Sash",
     }
 
-    sets.Obi = {waist="Hachirin-no-Obi"}
-
+    sets.Obi = { waist="Hachirin-no-Obi" }
 end
 
 function job_pretarget(spell, spellMap, eventArgs)
@@ -582,28 +580,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     elseif spell.skill == 'Geomancy' then
         if buffactive.Entrust and spell.english:startswith('Indi-') then
-            equip({main=gear.Solstice})
-        end
-    end
-
-    if spell.skill == 'Elemental Magic' and state.MagicBurst.value and spell.english ~= 'Death' then
-        equip(sets.MagicBurst)
-        if spell.english == "Impact" then
-            equip(sets.midcast.Impact)
-        end
-    end
-    if spell.skill == 'Elemental Magic' then
-        if (spell.element == world.day_element or spell.element == world.weather_element) then
-            equip(sets.Obi)
-        end
-    elseif spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
-        equip(sets.midcast.EnhancingDuration)
-        if spellMap == 'Refresh' then
-            equip(sets.midcast.Refresh)
-        end
-    elseif spell.skill == 'Geomancy' then
-        if buffactive.Entrust and spell.english:startswith('Indi-') then
-            equip({main="Solstice"})
+            equip({main=gear.Gada_GEO})
         end
     end
 end
@@ -712,9 +689,6 @@ function display_current_job_state(eventArgs)
     local i_msg = state.IdleMode.value
 
     local msg = ''
-    if state.MagicBurst.value then
-        msg = ' Burst: On |'
-    end
     if state.Kiting.value then
         msg = msg .. ' Kiting: On |'
     end
@@ -761,7 +735,6 @@ function job_self_command(cmdParams, eventArgs)
     end
     gearinfo(cmdParams, eventArgs)
 end
-
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then

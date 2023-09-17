@@ -1,5 +1,3 @@
--- Original: Motenten / Modified: Arislan
-
 -------------------------------------------------------------------------------------------------------------------
 --  Keybinds
 -------------------------------------------------------------------------------------------------------------------
@@ -11,53 +9,22 @@
 --              [ F12 ]             Update Current Gear / Report Current Status
 --              [ CTRL+F12 ]        Cycle Idle Modes
 --              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
---              [ WIN+C ]           Toggle Capacity Points Mode
+--              [ WIN+Q ]           Toggle Magic Burst Mode
 --
 --  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
---
---  WS:         [ CTRL+Numpad0 ]    Myrkr
---
---
---              (Global-Binds.lua contains additional non-job-related keybinds)
-
-
--------------------------------------------------------------------------------------------------------------------
--- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
 
--- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-
-    -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
     geo_timer = ''
-    indi_timer = ''
     indi_duration = 308
-    entrust_timer = ''
-    entrust_duration = 344
-    entrust = 0
     newLuopan = 0
-
     state.Buff['Blaze of Glory'] = buffactive['Blaze of Glory'] or false
-
-    state.Auto = M(true, 'Auto Nuke')
-    state.Element = M{['description']='Element','Fire','Blizzard','Aero','Stone','Thunder','Water'}
-
-    degrade_array = {
-        ['Fire'] = {'Fire','Fire II','Fire III','Fire IV','Fire V'},
-        ['Ice'] = {'Blizzard','Blizzard II','Blizzard III','Blizzard IV','Blizzard V'},
-        ['Wind'] = {'Aero','Aero II','Aero III','Aero IV','Aero V'},
-        ['Earth'] = {'Stone','Stone II','Stone III','Stone IV','Stone V'},
-        ['Lightning'] = {'Thunder','Thunder II','Thunder III','Thunder IV','Thunder V'},
-        ['Water'] = {'Water', 'Water II','Water III', 'Water IV','Water V'},
-        ['Aspirs'] = {'Aspir','Aspir II','Aspir III'},
-    }
-
 end
 
 function user_setup()
@@ -66,6 +33,8 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
 
     state.WeaponLock = M(false, 'Weapon Lock')
+    state.MagicBurst = M(true, 'Magic Burst')
+
 
     gear.Artifact_Head = { name= "Geomancy Galero +3" }
     gear.Artifact_Body = { name= "Geomancy Tunic +3" }
@@ -165,27 +134,17 @@ function user_unload()
     send_command('unbind ^[')
     send_command('unbind !;')
     send_command('unbind ![')
+    unbind_numpad()
 end
 
 
-
--- Define sets and vars used by this job file.
 function init_gear_sets()
 
-    ------------------------------------------------------------------------------------------------
-    ----------------------------------------- Precast Sets -----------------------------------------
-    ------------------------------------------------------------------------------------------------
-
-    -- Precast sets to enhance JAs
     sets.precast.JA.Bolster = {body=gear.Relic_Body}
     sets.precast.JA['Full Circle'] = {head=gear.Empyrean_Head}
     sets.precast.JA['Life Cycle'] = {head=gear.Relic_Head, body=gear.Artifact_Body, back=gear.GEO_Idle_Cape,}
 
-
-    -- Fast cast sets for spells
-
     sets.precast.FC = {
-    --  /RDM --15
         ranged="Dunna", --3
         main=gear.GADA_FC, --6
         -- sub="Chanter's Shield", --3
@@ -220,18 +179,16 @@ function init_gear_sets()
     sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
 
 
-    -- Weaponskill sets
-    -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Brutal Earring",
-        ring1="Petrov Ring",
+        ring1="Epaminondas's Ring",
         ring2="Hetairoi Ring",
         waist="Fotia Belt",
     }
@@ -281,59 +238,57 @@ function init_gear_sets()
         -- main="Idris",
         -- sub="Chanter's Shield",
         head=gear.Empyrean_Head,
-        body=gear.Amalric_A_Body,
+        body=gear.Empyrean_Body,
         hands=gear.Artifact_Hands,
-        legs="Vanya Slops",
+        legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
         ear1="Calamitous Earring",
         ear2="Magnetic Earring",
         neck="Reti Pendant",
-        ring1=gear.Stikini_1,
-        ring2=gear.Stikini_2,
+        ring1="Gelatinous Ring +1",
+        ring2="Defending Ring",
         back="Fi Follet Cape +1",
         waist="Shinjutsu-no-Obi +1",
     }
 
     sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {
         legs=gear.Relic_Legs,
-        feet=gear.Empyrean_Feet,
         back="Lifestream Cape",
     })
 
     sets.midcast.Cure = {
-        main="Daybreak", --30
-        sub="Ammurapi Shield", --3/(-5)
-        head="Vanya Hood", --10
-        body="Vanya Robe", --7/(-6)
+        main="Daybreak",
+        sub="Ammurapi Shield",
+        head="Vanya Hood",
+        body="Vanya Robe",
         hands="Vanya Cuffs",
         legs="Vanya Slops",
-        feet="Vanya Clogs", --5
+        feet="Vanya Clogs",
         neck="Noden's Gorget",
         ear1="Beatific Earring",
         ear2="Meili Earring",
-        ring1="Lebeche Ring", --3/(-5)
+        ring1="Lebeche Ring",
         ring2="Haoma's Ring",
-        back="Solemnity Cape", --0/(-10)
+        back="Solemnity Cape",
         waist="Bishop's Sash",
     }
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
-        -- neck="Nuna Gorget +1",
         ring2="Metamor. Ring +1",
-        -- waist="Luminary Sash",
+        waist="Luminary Sash",
     })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
-        neck="Debilis Medallion", --15
-        -- ring1={name="Haoma's Ring", bag="wardrobe3"},
-        ring2="Haoma's Ring",
+        neck="Debilis Medallion",
+        ring1="Haoma's Ring",
+        ring2="Menelaus's Ring",
         back="Oretan. Cape +1",
     })
 
     sets.midcast['Enhancing Magic'] = {
         main=gear.Gada_ENH,
         sub="Ammurapi Shield",
-        head="Befouled Crown",
+        head=gear.Telchine_ENH_Head,
         body=gear.Telchine_ENH_Body,
         hands=gear.Telchine_ENH_Hands,
         legs=gear.Telchine_ENH_Legs,
@@ -376,14 +331,18 @@ function init_gear_sets()
         main="Vadose Rod",
         sub="Ammurapi Shield",
         head=gear.Amalric_A_Head,
+        hands="Regal Cuffs",
+        ear1="Halasz Earring",
         ear2="Magnetic Earring",
+        ring1="Freke Ring",
+        ring2="Evanescence Ring",
+        waist="Emphatikos Rope",
     })
 
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring2="Sheltered Ring"})
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Protect
-
 
     sets.midcast.MndEnfeebles = {
         main="Daybreak",
@@ -394,7 +353,7 @@ function init_gear_sets()
         legs=gear.Artifact_Legs,
         feet=gear.Relic_Feet,
         neck="Bagua Charm +1",
-        ear1="Malignance Earring",
+        ear1="Vor Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2=gear.Stikini_2,
@@ -407,8 +366,6 @@ function init_gear_sets()
         ring2="Metamorph Ring +1",
         waist="Acuity Belt +1",
     }) -- INT/Magic accuracy
-
-    sets.midcast.LockedEnfeebles = {body=gear.Artifact_Body}
 
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
 
@@ -440,16 +397,13 @@ function init_gear_sets()
 
     sets.midcast.Aspir = sets.midcast.Drain
 
-    sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
-        })
-
-    -- Elemental Magic sets
+    sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], { })
 
     sets.midcast['Elemental Magic'] = {
         main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
-        head="Ea Hat +1",
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
@@ -462,18 +416,29 @@ function init_gear_sets()
         ring2="Metamor. Ring +1",
         back=gear.GEO_MAB_Cape,
     }
+    sets.MagicBurst = {
+        main="Bunzi's Rod",
+        sub="Ammurapi Shield",
+        ammo="Ghastly Tathlum +1",
+        head="Ea Hat +1",
+        body=gear.Empyrean_Body,
+        hands=gear.Agwu_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Agwu_Feet,
+        neck="Sibyl Scarf",
+        waist="Acuity Belt +1",
+        ear1="Malignance Earring",
+        ear2="Regal Earring",     
+        ring1="Freke Ring",
+        ring2="Metamorph Ring +1",
+        back=gear.GEO_MAB_Cape,
+    }
 
-    sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-    })
+    sets.DarkAffinity = { head="Pixie Hairpin +1",ring2="Archon Ring" }
 
     sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'], {})
 
-    -- Initializes trusts at iLvl 119
     sets.midcast.Trust = sets.precast.FC
-
-    ------------------------------------------------------------------------------------------------
-    ------------------------------------------ Idle Sets -------------------------------------------
-    ------------------------------------------------------------------------------------------------
 
     sets.idle = {
         main="Daybreak",
@@ -497,78 +462,31 @@ function init_gear_sets()
         waist="Shinjutsu-no-Obi +1",
     })
 
-    -- sets.idle.DT = set_combine(sets.idle, {
-    --     sub="Genmei Shield", --10/0
-    --     body=gear.Empyrean_Body,
-    --     hands=gear.Artifact_Hands, --3/0
-    --     neck="Loricate Torque +1", --6/6
-    --     ear1="Etiolation Earring", --0/3
-    --     ear2="Odnowa Earring +1", --3/3
-    --     ring1="Gelatinous Ring +1", --7/(-1)
-    --     ring2="Defending Ring", --10/10
-    --     back=gear.GEO_Idle_Cape, --5/5
-    --     waist="Carrier's Sash",
-    -- })
-
-    -- -- .Pet sets are for when Luopan is present.
-    -- sets.idle.Pet = set_combine(sets.idle, {
-    --     -- Pet: -DT (37.5% to cap) / Pet: Regen
-    --     main="Solstice", --0/0/25/0
-    --     sub="Genmei Shield", --10/0/0/0
-    --     head="Merlinic Hood", --0/0/0/3
-    --     body=gear.Artifact_Body, --0/0/0/3
-    --     hands=gear.Artifact_Hands, --3/0/13/0
-    --     -- legs=gear.Relic_Legs, --0/0/0/3
-    --     legs="Assiduity Pants +1",
-    --     -- feet=gear.Relic_Feet, --0/0/0/5
-    --     feet="Merlinic Crackows",
-    --     neck="Loricate Torque +1",
-    --     ear1="Moonshade Earring",
-    --     ear2="Odnowa Earring +1", --3/3/0/0
-    --     ring1=gear.Stikini_1, --7/(-1)/0/0
-    --     ring2=gear.Stikini_2, --10/10/0/0
-    --     back=gear.GEO_Idle_Cape, --0/0/0/15
-    --     waist="Isa Belt" --0/0/3/1
-    -- })
-
-    -- sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
-    --     body="Mallquis Saio +2", --8/8
-    --     back=gear.GEO_Idle_Cape, --5/5
-    -- })
-
-    sets.PetHP = {head=gear.Relic_Head}
-
-    -- .Indi sets are for when an Indi-spell is active.
-    --sets.idle.Indi = set_combine(sets.idle, {})
-    --sets.idle.Pet.Indi = set_combine(sets.idle.Pet, {})
-    --sets.idle.DT.Indi = set_combine(sets.idle.DT, {})
-    --sets.idle.DT.Pet.Indi = set_combine(sets.idle.DT.Pet, {})
-
-    sets.idle.Town = set_combine(sets.idle, {
-        head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet,
+    sets.idle.DT = set_combine(sets.idle, {
+        sub="Genmei Shield",
+        body="Shamash Robe",
+        hands=gear.Artifact_Hands,
+        legs=gear.Nyame_Legs,
+        neck="Loricate Torque +1",
+        ear1="Lugalbanda Earring",
+        ear2="Etiolation Earring",
+        ring1="Gelatinous Ring +1",
+        ring2="Defending Ring",
+        back=gear.GEO_Idle_Cape,
+        waist="Isa Belt",
     })
+
+    sets.PetHP = { head=gear.Relic_Head }
+
+    sets.idle.Town = sets.idle
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Kiting = { feet=gear.Artifact_Feet }
 
     sets.latent_refresh = {waist="Fucho-no-Obi"}
 
-    --------------------------------------
-    -- Engaged sets
-    --------------------------------------
-
-    -- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
-    -- sets if more refined versions aren't defined.
-    -- If you create a set with both offense and defense modes, the offense mode should be first.
-    -- EG: sets.engaged.Dagger.Accuracy.Evasion
-
-    -- -- Normal melee group
     sets.engaged = {
         -- main="Idris",
         -- sub="Genmei Shield",
@@ -576,31 +494,24 @@ function init_gear_sets()
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Rep. Plat. Medal",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-        ring1="Petrov Ring",
-        ring2="Hetairoi Ring",
+        ring1=gear.Chirich_1,
+        ring2=gear.Chirich_2,
         waist="Windbuffet Belt +1",
     }
 
-
-    --------------------------------------
-    -- Custom buff sets
-    --------------------------------------
-
-
     sets.buff.Doom = {
-        ring1={name="Saida Ring", bag="wardrobe3"}, 
-        ring2={name="Saida Ring", bag="wardrobe4"},
+        neck="Nicander's Necklace",
+        ring1="Eshmun's Ring",
+        ring2="Purity Ring",
+        waist="Gishdubar Sash",
     }
 
-    sets.Obi = {waist="Hachirin-no-Obi"}
+    sets.Obi = { waist="Hachirin-no-Obi" }
 end
-
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
--------------------------------------------------------------------------------------------------------------------
 
 function job_pretarget(spell, spellMap, eventArgs)
     if spell.type == 'Geomancy' then
@@ -614,10 +525,9 @@ end
 function job_precast(spell, action, spellMap, eventArgs)
     if spell.name:startswith('Aspir') then
         refine_various_spells(spell, action, spellMap, eventArgs)
-    elseif state.Auto.value == true then
-        if spell.skill == 'Elemental Magic' and spell.english ~= 'Impact' and spellMap ~= 'GeoNuke' then
-            refine_various_spells(spell, action, spellMap, eventArgs)
-        end
+    end
+    if spell.skill == 'Elemental Magic' and spell.english ~= 'Impact' and spellMap ~= 'GeoNuke' then
+        refine_various_spells(spell, action, spellMap, eventArgs)
     end
 end
 
@@ -629,6 +539,27 @@ end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == 'Elemental Magic' then
+        if state.MagicBurst.value then
+            equip(sets.MagicBurst)
+            if spell.english == "Impact" then
+                equip(sets.midcast.Impact)
+            end
+            if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
+                equip(sets.Obi)
+            -- Target distance under 1.7 yalms.
+            elseif spell.target.distance < (1.7 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Matching day and weather.
+            elseif spell.element == world.day_element and spell.element == world.weather_element then
+                equip(sets.Obi)
+            -- Target distance under 8 yalms.
+            elseif spell.target.distance < (8 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Match day or weather.
+            elseif spell.element == world.day_element or spell.element == world.weather_element then
+                equip(sets.Obi)
+            end
+        end
         if (spell.element == world.day_element or spell.element == world.weather_element) then
             equip(sets.Obi)
         end
@@ -637,13 +568,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         if spellMap == 'Refresh' then
             equip(sets.midcast.Refresh)
         end
-    elseif spell.skill == 'Enfeebling Magic' and newLuopan == 1 then
-        -- prevent Cohort Cloak from unequipping head when relic head is locked
-        equip(sets.midcast.LockedEnfeebles)
     elseif spell.skill == 'Geomancy' then
         if buffactive.Entrust and spell.english:startswith('Indi-') then
             equip({main=gear.Gada_GEO})
-                entrust = 1
         end
     end
 end
@@ -659,11 +586,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
         end
     end
 end
-
-
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for non-casting events.
--------------------------------------------------------------------------------------------------------------------
 
 -- Called when a player gains or loses a buff.
 -- buff == buff gained or lost
@@ -697,14 +619,9 @@ end
 function job_pet_change(petparam, gain)
     if gain == false then
         send_command('@timers d "'..geo_timer..'"')
-        enable('head')
         newLuopan = 0
     end
 end
-
--------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
--------------------------------------------------------------------------------------------------------------------
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
@@ -712,8 +629,8 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
     classes.CustomIdleGroups:clear()
+    handle_equipping_gear(player.status)
 end
 
 function job_get_spell_map(spell, default_spell_map)
@@ -740,16 +657,8 @@ function customize_idle_set(idleSet)
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
-    if pet.isvalid then
-        if pet.hpp > 73 then
-            if newLuopan == 1 then
-                equip(sets.PetHP)
-                disable('head')
-            end
-        elseif pet.hpp <= 73 then
-            enable('head')
-            newLuopan = 0
-        end
+    if state.Buff.Doom then
+        idleSet = set_combine(idleSet, sets.buff.Doom)
     end
     if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
@@ -792,16 +701,16 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
 
     if spell_recasts[spell.recast_id] > 0 then
         if spell.skill == 'Elemental Magic' and spellMap ~= 'GeoElem' then
-            spell_index = table.find(degrade_array[spell.element],spell.name)
+            spell_index = table.find(elemental_degrade_array[spell.element],spell.name)
             if spell_index > 1 then
-                newSpell = degrade_array[spell.element][spell_index - 1]
+                newSpell = elemental_degrade_array[spell.element][spell_index - 1]
                 send_command('@input /ma "'..newSpell..'" '..tostring(spell.target.raw))
                 eventArgs.cancel = true
             end
         elseif spell.name:startswith('Aspir') then
-            spell_index = table.find(degrade_array['Aspirs'],spell.name)
+            spell_index = table.find(elemental_degrade_array['Aspirs'],spell.name)
             if spell_index > 1 then
-                newSpell = degrade_array['Aspirs'][spell_index - 1]
+                newSpell = elemental_degrade_array['Aspirs'][spell_index - 1]
                 send_command('@input /ma "'..newSpell..'" '..tostring(spell.target.raw))
                 eventArgs.cancel = true
             end
@@ -809,17 +718,12 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
     end
 end
 
-
-
--------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
--------------------------------------------------------------------------------------------------------------------
-
 function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1] == 'nuke' and not midaction() then
-        send_command('@input /ma "' .. state.Element.current .. ' V" <t>')
-    end
-    gearinfo(cmdParams, eventArgs)
+    if cmdParams[1]:lower() == 'scholar' then
+       handle_strategems(cmdParams)
+       eventArgs.handled = true
+   end
+   gearinfo(cmdParams, eventArgs)
 end
 
 function gearinfo(cmdParams, eventArgs)
@@ -835,4 +739,8 @@ function gearinfo(cmdParams, eventArgs)
             job_update()
         end
     end
+end
+
+function check_weaponset()
+    equip(sets[state.WeaponSet.current])
 end
