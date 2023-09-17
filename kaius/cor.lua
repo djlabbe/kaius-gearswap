@@ -528,7 +528,7 @@ function init_gear_sets()
         legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
-        ear1="Cessance Earring",
+        ear1="Dedition Earring",
         ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,

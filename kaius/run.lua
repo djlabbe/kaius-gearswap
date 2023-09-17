@@ -95,7 +95,6 @@ function user_setup()
     send_command('bind !o input /ma "Shell V" <stpc>')
     send_command('bind !i input /ma "Phalanx" <me>')
     send_command('bind !u input /ma "Aquaveil" <me>')
-    send_command('bind !y input /ma "Refresh" <me>')
     send_command('bind !m input /ja "Embolden" <me>')
     
     send_command('bind @1 input /ja "Lunge" <t>')

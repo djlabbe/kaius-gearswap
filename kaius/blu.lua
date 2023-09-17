@@ -721,7 +721,7 @@ function init_gear_sets()
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
         neck="Mirage Stole +2",
-        ear1="Cessance Earring",
+        ear1="Dedition Earring",
         ear2="Hashishin Earring +1",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,

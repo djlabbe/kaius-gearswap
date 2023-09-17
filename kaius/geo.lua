@@ -63,21 +63,29 @@ function user_setup()
     send_command('bind !F1 input /ja "Bolster" <me>')
     send_command('bind !F2 input /ja "Widened Compass" <me>')
 
-    send_command('bind !m input /ja "Dematerialize" <me>')
-    send_command('bind !n input /ja "Lasting Emanation" <me>')
-    send_command('bind !b input /ja "Blaze of Glory" <me>')
-    send_command('bind !f input /ja "Full Circle" <me>')
-    send_command('bind !t input /ja "Theurgic Focus" <me>')
-    send_command('bind !a input /ja "Radial Arcana" <me>')
-   
+    send_command('bind @1 input /ja "Full Circle" <me>')
+    send_command('bind @2 input /ja "Radial Arcana" <me>')
+    send_command('bind @3 input /ja "Mending Halation" <me>')
+    send_command('bind @4 input /ja "Concentric Pulse" <me>')
 
+    send_command('bind !m input /ja "Dematerialize" <me>')
+    send_command('bind !f input /ja "Collimated Fervor" <me>')
+    send_command('bind !t input /ja "Theurgic Focus" <me>')
+   
     if player.sub_job == 'RDM' then
+        send_command('bind !p input /ma "Protect III" <stpc>')
+        send_command('bind !o input /ma "Shell III" <stpc>')
         send_command('bind !g input /ma "Gravity" <t>')
         send_command('bind !h input /ma "Haste" <stpc>')
         send_command('bind !u input /ma "Aquaveil" <me>')
         send_command('bind !i input /ma "Phalanx" <me>')
-        -- send_command('bind !b input /ma "Bind" <t>') already used for bog
-        send_command('bind !y input /ma "Refresh" <stpc>')
+        send_command('bind !b input /ma "Bind" <t>')
+        send_command('bind !y input /ja "Convert" <me>')
+        send_command('bind !numpad7 input /ma "Paralyze" <t>')
+        send_command('bind !numpad8 input /ma "Slow" <t>')
+        send_command('bind !numpad9 input /ma "Silence" <t>')
+        send_command('bind !numpad5 input /ma "Distract" <t>')
+        send_command('bind !numpad6 input /ma "Frazzle" <t>')
     end
 
     if player.sub_job == 'WHM' then
@@ -158,7 +166,6 @@ function init_gear_sets()
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {hands=gear.Relic_Hands})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-        ear1="Mendi. Earring",
         ring1="Lebeche Ring",
         back="Perimede Cape",
     })
@@ -262,7 +269,7 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Meili Earring",
         ear2="Azimuth Earring +1",
-        ring1="Janniston Ring",
+        ring1="Metamorph Ring +1",
         ring2="Haoma's Ring",
         back="Solemnity Cape",
         waist="Bishop's Sash",
@@ -500,7 +507,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Rep. Plat. Medal",
-        ear1="Cessance Earring",
+        ear1="Crepuscular Earring",
         ear2="Balder Earring +1",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,

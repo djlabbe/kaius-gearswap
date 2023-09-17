@@ -539,7 +539,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Sanctity Necklace",
-        ear1="Cessance Earring",
+        ear1="Crepuscular Earring",
         ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,

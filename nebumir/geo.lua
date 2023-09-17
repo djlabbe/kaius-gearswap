@@ -91,27 +91,54 @@ function user_setup()
     include('Global-Binds.lua')
 
     send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind @q gs c toggle MagicBurst')
 
     send_command('bind !F1 input /ja "Bolster" <me>')
     send_command('bind !F2 input /ja "Widened Compass" <me>')
 
-    send_command('bind !numpad7 input /ma "Paralyze" <t>')
-    send_command('bind !numpad8 input /ma "Slow" <t>')
-    send_command('bind !numpad9 input /ma "Silence" <t>')  
-
-    send_command('bind ^insert gs c cycleback Element')
-    send_command('bind ^delete gs c cycle Element')
-    send_command('bind !h input /ma "Haste" <stpc>')
+    send_command('bind @1 input /ja "Full Circle" <me>')
+    send_command('bind @2 input /ja "Radial Arcana" <me>')
+    send_command('bind @3 input /ja "Mending Halation" <me>')
+    send_command('bind @4 input /ja "Concentric Pulse" <me>')
 
     send_command('bind !m input /ja "Dematerialize" <me>')
-    send_command('bind !n input /ja "Lasting Emanation" <me>')
-    send_command('bind !b input /ja "Blaze of Glory" <me>')
-    send_command('bind !f input /ja "Full Circle" <me>')
+    send_command('bind !f input /ja "Collimated Fervor" <me>')
     send_command('bind !t input /ja "Theurgic Focus" <me>')
-    send_command('bind !y input /ja "Radial Arcana" <me>')
+   
+    if player.sub_job == 'RDM' then
+        send_command('bind !p input /ma "Protect III" <stpc>')
+        send_command('bind !o input /ma "Shell III" <stpc>')
+        send_command('bind !g input /ma "Gravity" <t>')
+        send_command('bind !h input /ma "Haste" <stpc>')
+        send_command('bind !u input /ma "Aquaveil" <me>')
+        send_command('bind !i input /ma "Phalanx" <me>')
+        send_command('bind !b input /ma "Bind" <t>')
+        send_command('bind !y input /ja "Convert" <me>')
+        send_command('bind !numpad7 input /ma "Paralyze" <t>')
+        send_command('bind !numpad8 input /ma "Slow" <t>')
+        send_command('bind !numpad9 input /ma "Silence" <t>')
+        send_command('bind !numpad5 input /ma "Distract" <t>')
+        send_command('bind !numpad6 input /ma "Frazzle" <t>')
+    end
 
-    set_macro_page(1, 20) -- page,set
-    send_command('wait 3; input /lockstyleset 20')
+    if player.sub_job == 'WHM' then
+        send_command('bind !h input /ma "Haste" <stpc>')
+        send_command('bind !u input /ma "Aquaveil" <me>')
+    end
+
+
+    if player.sub_job == 'SCH' then
+        send_command('bind !- gs c scholar light')
+        send_command('bind != gs c scholar dark')
+
+        send_command('bind ^; gs c scholar speed')   
+        send_command('bind ^[ gs c scholar aoe')
+        send_command('bind !; gs c scholar cost')
+        send_command('bind ![ gs c scholar power')
+    end
+
+    set_macro_page(1, 21)
+    send_command('wait 3; input /lockstyleset 21')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
     moving = false
@@ -120,12 +147,26 @@ end
 function user_unload()
     send_command('unbind @w')
     send_command('unbind @q')
-    send_command('unbind !`')
-    send_command('unbind ^insert')
-    send_command('unbind ^delete')
-    send_command('unbind #-')
-    send_command('unbind !hw')
+    send_command('unbind !a')
+    send_command('unbind !h')
+    send_command('unbind !m')
+    send_command('unbind !n')
+    send_command('unbind !b')
+    send_command('unbind !f')
+    send_command('unbind !t')
+    send_command('unbind !y')
+    send_command('unbind !i')
+    send_command('unbind !u')
+    send_command('unbind !b')
+    send_command('unbind !g')
+    send_command('unbind !-')
+    send_command('unbind !=')
+    send_command('unbind ^;')   
+    send_command('unbind ^[')
+    send_command('unbind !;')
+    send_command('unbind ![')
 end
+
 
 
 -- Define sets and vars used by this job file.

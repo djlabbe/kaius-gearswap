@@ -609,7 +609,7 @@ function init_gear_sets()
         legs="Volte Tights",
         feet=gear.Nyame_Feet,
         neck="Bard's Charm +2",
-        ear1="Cessance Earring",
+        ear1="Telos Earring",
         ear2="Balder Earring +1",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,

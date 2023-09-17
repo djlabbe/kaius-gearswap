@@ -487,7 +487,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Dragoon's Collar +2",
-        ear1="Enmerkar Earring",
+        ear1="Eabani Earring",
         ear2="Odnowa Earring +1",
         ring1="Defending Ring",
         ring2="Shadow Ring",
@@ -534,12 +534,10 @@ function init_gear_sets()
     }
 
     sets.engaged.Acc = set_combine(sets.engaged, {
-        ear2="Cessance Earring",
         neck="Dragoon's Collar +2",
     })
 
     sets.engaged.Naegling.Acc = set_combine(sets.engaged.Naegling, {
-        ear2="Cessance Earring",
         neck="Dragoon's Collar +2",
     })
 
