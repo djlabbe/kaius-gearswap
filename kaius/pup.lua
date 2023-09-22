@@ -88,6 +88,29 @@ end
 
 function init_gear_sets()
 
+    sets.precast.JA["Tactical Switch"] = {feet=gear.Empyrean_Feet}
+    sets.precast.JA["Ventriloquy"] = {legs=gera.Relic_Legs}
+    sets.precast.JA["Role Reversal"] = {feet=gear.Relic_Feet}
+    sets.precast.JA["Overdrive"] = {body=gear.Relic_Body}
+
+    sets.precast.JA["Repair"] = {
+        ammo="Automat. Oil +3",
+        feet=gear.Relic_Feet
+    }
+
+    sets.precast.JA["Maintenance"] = set_combine(sets.precast.JA["Repair"], {})
+
+    sets.precast.JA.Maneuver = {
+        neck="Buffoon's Collar +1",
+        body="Karagoz Farsetto",
+        hands=gear.Artifact_Hands,
+        -- back="Visucius's Mantle",
+        ear1="Burana Earring"
+    }
+
+    -- sets.precast.JA["Activate"] = {back = "Visucius's Mantle"}
+    -- sets.precast.JA["Deus Ex Automata"] = sets.precast.JA["Activate"]
+
     sets.precast.FC = {
         range="Neo Animator",
         ammo="Automaton Oil +3",
