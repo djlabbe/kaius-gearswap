@@ -321,7 +321,7 @@ function init_gear_sets()
     sets.Kiting = { ring1="Shneddick Ring" }
     
     -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here when activating or changing defense mode:
-    sets.PhysicalShield = {sub="Duban"}
+    sets.PhysicalShield = {sub="Srivatsa"}
     sets.MagicalShield = {sub="Aegis"}
 
     -- Basic defense sets.
@@ -386,8 +386,8 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
-    sets.Sakpata = { main="Sakpata's Sword", sub="Duban" }
-    sets.Malignance = { main="Malignance Sword", sub="Duban"}
+    sets.Sakpata = { main="Sakpata's Sword", sub="Srivatsa" }
+    sets.Malignance = { main="Malignance Sword", sub="Srivatsa"}
 
 end
 
@@ -397,17 +397,6 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_midcast(spell, action, spellMap, eventArgs)
-    -- If DefenseMode is active, apply that gear over midcast
-    -- choices.  Precast is allowed through for fast cast on
-    -- spells, but we want to return to def gear before there's
-    -- time for anything to hit us.
-    -- Exclude Job Abilities from this restriction, as we probably want
-    -- the enhanced effect of whatever item of gear applies to them,
-    -- and only one item should be swapped out.
-    if state.DefenseMode.value ~= 'None' and spell.type ~= 'JobAbility' then
-        handle_equipping_gear(player.status)
-        eventArgs.handled = true
-    end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)

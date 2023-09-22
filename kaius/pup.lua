@@ -29,7 +29,7 @@ function user_setup()
 
     state.OffenseMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'Acc')
-    state.HybridMode:options('Normal', 'DT', 'Counter')
+    state.HybridMode:options('Normal', 'DT')
     state.PhysicalDefenseMode:options('PDT')
 
     state.WeaponLock = M(true, 'Weapon Lock')
@@ -88,23 +88,9 @@ end
 
 function init_gear_sets()
 
-    sets.precast.Waltz = {
-        ammo="Voluspa Tathlum",
-        head="Kendatsuba Jinpachi +1",
-        neck="Unmoving Collar +1",
-        ear1="Handler's Earring +1",
-        ear2="Tuisto Earring",
-        body="Passion Jacket",
-        hands=gear.Relic_Hands,
-        waist="Gishdubar Sash",
-        ring1="Asklepian Ring",
-        ring2="Gelatinous Ring +1",
-    }
-        
-    sets.precast.Waltz['Healing Waltz'] = {}
-
     sets.precast.FC = {
-        ammo="Sapience Orb", --2
+        range="Neo Animator",
+        ammo="Automaton Oil +3",
         head=gear.Herc_FC_head, --13
         body=gear.Taeon_FC_body, --9
         hands="Leyline Gloves", --8
@@ -119,16 +105,17 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
     
     sets.precast.WS = {
-        ammo="Knobkierrie",
+        range="Neo Animator",
+        ammo="Automaton Oil +3",
 		head=gear.Nyame_Head,
 		body=gear.Nyame_Body,
-		hands=gear.Nyame_Hands,
+		hands=gear.Nyame_Body,
 		legs=gear.Nyame_Legs,
 		feet=gear.Nyame_Feet,
 		neck="Fotia Gorget",
 		waist="Moonbow Belt +1",
-		ear1="Moonshade Earring",
-		ear2="Schere Earring",
+		ear1="Schere Earring",
+		ear2="Moonshade Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
 		back=gear.PUP_Cape,
@@ -139,52 +126,35 @@ function init_gear_sets()
     })
 
     sets.precast.WS["Victory Smite"] = {
-        ammo="Coiste Bodhar",
+        range="Neo Animator",
+        ammo="Automaton Oil +3",
 		head=gear.Mpaca_Head,
-		body=gear.Empyrean_Body,
-		hands=gear.Ryuo_A_Hands,
+		body=gear.Mpaca_Body,
+		hands=gear.Mpaca_Body,
 		legs=gear.Mpaca_Legs,
 		feet=gear.Mpaca_Feet,
-		neck="Mnk. Nodowa +2",
+		neck="Fotia Gorget",
 		waist="Moonbow Belt +1",
-		ear1="Sherida Earring",
-		ear2="Schere Earring",
+		ear1="Schere Earring",
+		ear2="Moonshade Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_STR_CRIT_Cape,
+		back=gear.PUP_Cape,
     }
 
     sets.precast.WS["Victory Smite"].Acc = set_combine(sets.precast.WS["Victory Smite"], {
         -- TODO
     })
-
-    sets.precast.WS['Raging Fists'] = {
-        ammo="Knobkierrie",
-		head=gear.Mpaca_Head,
-		body=gear.Mpaca_Body,
-		hands=gear.Tatenashi_Hands,
-		legs=gear.Tatenashi_Legs,
-		feet=gear.Artifact_Feet,
-		neck="Mnk. Nodowa +2",
-		waist="Moonbow Belt +1",
-		ear1="Moonshade Earring",
-		ear2="Schere Earring",
-		ring1="Gere Ring",
-		ring2="Niqmaddu Ring",
-		back=gear.PUP_Cape,
-    }
-    sets.precast.WS["Raging Fists"].Acc = set_combine(sets.precast.WS["Raging Fists"], {
-        -- TODO
-    })
    
     sets.precast.WS['Shijin Spiral'] = {
-        ammo="Knobkierrie",
-		head="Adhemar Bonnet +1",
-		body="Kendatsuba Samue +1",
-		hands=gear.Malignance_Hands,
-		legs=gear.Tatenashi_Legs,
-		feet=gear.Tatenashi_Feet,
-		neck="Mnk. Nodowa +2",
+        range="Neo Animator",
+        ammo="Automaton Oil +3",
+		head=gear.Mpaca_Head,
+		body=gear.Mpaca_Body,
+		hands=gear.Mpaca_Body,
+		legs=gear.Mpaca_Legs,
+		feet=gear.Mpaca_Feet,
+        neck="Fotia Gorget",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
 		ear2="Mache Earring +1",
@@ -194,21 +164,21 @@ function init_gear_sets()
     }
 
     sets.precast.WS["Shijin Spiral"].Acc = set_combine(sets.precast.WS["Shijin Spiral"], {
-        head=gear.Malignance_Head,
-        legs=gear.Relic_Legs,
+        -- TODO
     })
 
     sets.precast.WS['Howling Fist'] =  {
-        ammo="Knobkierrie",
+        range="Neo Animator",
+        ammo="Automaton Oil +3",
 		head=gear.Mpaca_Head,
 		body=gear.Nyame_Body,
-		hands=gear.Tatenashi_Hands,
-		legs=gear.Nyame_Legs,
+		hands=gear.Nyame_Hands,
+		legs=gear.Mpaca_Legs,
 		feet=gear.Nyame_Feet,
-		neck="Mnk. Nodowa +2",
+		neck="Fotia Gorget",
 		waist="Moonbow Belt +1",
-		ear1="Moonshade Earring",
-		ear2="Schere Earring",
+		ear1="Schere Earring",
+		ear2="Moonshade Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
 		back=gear.PUP_Cape,
@@ -218,125 +188,43 @@ function init_gear_sets()
         -- TODO
     })
 
-    sets.precast.WS['Final Heaven'] =  {
-        ammo="Knobkierrie",
+    sets.precast.WS['Stringing Pummel'] =  {
+        range="Neo Animator",
+        ammo="Automaton Oil +3",
 		head=gear.Mpaca_Head,
-		body=gear.Empyrean_Body,
-		hands=gear.Tatenashi_Hands,
-		legs=gear.Tatenashi_Legs,
-		feet=gear.Nyame_Feet,
-		neck="Mnk. Nodowa +2",
-		waist="Moonbow Belt +1",
+		body=gear.Mpaca_Body,
+		hands=gear.Ryuo_A_Hands,
+		legs=gear.Mpaca_Legs,
+		feet=gear.Ryuo_C_Feet,
+		neck="Fotia Gorget",
+		waist="Fotia Belt",
 		ear1="Sherida Earring",
-		ear2="Ishvara Earring",
-		ring1="Gere Ring",
+		ear2="Moonshade Earring",
+		ring1="Regal Ring",
 		ring2="Niqmaddu Ring",
 		back=gear.PUP_Cape,
     }
 
-    sets.precast.WS["Final Heaven"].Acc = set_combine(sets.precast.WS["Final Heaven"], {
+    sets.precast.WS["Stringing Pummel"].Acc = set_combine(sets.precast.WS["Stringing Pummel"], {
         -- TODO
     })
-
-    sets.precast.WS['Tornado Kick'] = {
-        ammo="Coiste Bodhar",
-		head=gear.Mpaca_Head,
-		body=gear.Nyame_Body,
-		hands=gear.Nyame_Hands,
-		legs=gear.Nyame_Legs,
-		feet=gear.Artifact_Feet,
-		neck="Mnk. Nodowa +2",
-		waist="Moonbow Belt +1",
-		ear1="Moonshade Earring",
-		ear2="Schere Earring",
-		ring1="Cornelia's Ring",
-		ring2="Niqmaddu Ring",
-		back=gear.PUP_Cape,
-    }
-
-    sets.precast.WS["Tornado Kick"].Acc = set_combine(sets.precast.WS["Tornado Kick"], {
-        -- TODO
-    })
-    
-    sets.precast.WS['Dragon Kick'] = {
-        ammo="Knobkierrie",
-		head=gear.Mpaca_Head,
-		body=gear.Nyame_Body,
-		hands=gear.Nyame_Hands,
-		legs=gear.Nyame_Legs,
-		feet=gear.Artifact_Feet,
-		neck="Mnk. Nodowa +2",
-		waist="Moonbow Belt +1",
-		ear1="Moonshade Earring",
-		ear2="Schere Earring",
-		ring1="Gere Ring",
-		ring2="Niqmaddu Ring",
-		back=gear.PUP_Cape,
-    }
 
     sets.precast.MaxTP = {
 		ear2="Odr Earring",
     }
 
-    ---- Fall back to default WS set for Asuran Fists, and Spinning Attack ----
-
-    sets.precast.WS['Ascetic\'s Fury'] = {
-        ammo="Crepuscular Pebble",
-		head=gear.Adhemar_B_Head,
-		body=gear.Empyrean_Body,
-		hands=gear.Empyrean_Hands,
-		legs=gear.Mpaca_Legs,
-		feet=gear.Mpaca_Feet,
-		neck="Fotia Gorget",
-		waist="Fotia Belt",
-		ear1="Sherida Earring",
-		ear2="Schere Earring",
-		ring1="Gere Ring",
-		ring2="Niqmaddu Ring",
-		back=gear.MNK_STR_CRIT_Cape,
-    }
-    
-    sets.precast.WS['Shell Crusher'] = {
-        head=gear.Malignance_Head,
-        neck="Moonlight Necklace",
-        ear1="Dignitary's Earring",
-        ear2="Crepuscular Earring",
-        body=gear.Malignance_Body,
-        hands=gear.Malignance_Hands,
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
-        ring1=gear.Stikini_1,
-        ring2="Metamorph Ring +1",
-        back=gear.MNK_INT_Cape,
-        waist="Acuity Belt +1",
-    }
-
-    sets.precast.WS['Cataclysm'] = {
-        head="Pixie Hairpin +1",
-        neck="Sibyl Scarf",
-        ear1="Friomisi Earring",
-        ear2="Moonshade Earring",
-        body=gear.Nyame_Body,
-        hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-        ring1="Archon Ring",
-        ring2="Metamorph Ring +1",
-        back=gear.MNK_INT_Cape,
-        waist="Orpheus's Sash",
-    }
-
     sets.engaged = {
-        ammo="Coiste Bodhar",
-		head=gear.Adhemar_A_Head,
+        range="Neo Animator",
+        ammo="Automaton Oil +3",
+		head=gear.Malignance_Head,
 		body=gear.Mpaca_Body,
-		hands=gear.Adhemar_A_Hands,
-		legs=gear.Empyrean_Legs,
-		feet=gear.Artifact_Feet,
-		neck="Mnk. Nodowa +2",
+		hands=gear.Malignance_Hands,
+		legs="Samnuha Tights",
+		feet=gear.Malignance_Feet,
+		neck="Shulmanu Collar",
 		waist="Moonbow Belt +1",
-        ear1="Sherida Earring",
-		ear2="Schere Earring",
+        ear1="Schere Earring",
+		ear2="Karagoz Earring +1",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
 		back=gear.PUP_Cape,
@@ -349,9 +237,6 @@ function init_gear_sets()
     sets.engaged.Godhands = set_combine(sets.engaged, sets.MacheEar1)
     
     sets.engaged.Acc = set_combine(sets.engaged, {
-        head="Ken. Jinpachi +1",
-        hands="Tatenashi gote +1",
-		ring1="Regal Ring",
 		ring2=gear.Chirich_2,
     })
 
@@ -363,24 +248,7 @@ function init_gear_sets()
         legs=gear.Empyrean_Legs,
         feet=gear.Malignance_Feet,
     }
-   
-    sets.engaged.Counter = {
-        ammo="Coiste Bodhar",
-		head=gear.Empyrean_Head,
-		body=gear.Mpaca_Body,
-		hands=gear.Malignance_Hands,
-		legs=gear.Empyrean_Legs,
-		feet=gear.Empyrean_Feet,
-		neck="Bathy Choker +1",
-		waist="Moonbow Belt +1",
-		ear1="Sherida Earring",
-		ear2="Bhikku Earring +1",
-		ring1="Defending Ring",
-		ring2="Niqmaddu Ring",
-		back=gear.PUP_Cape,
-    }
 
-    sets.engaged.Godhands.Counter = set_combine(sets.engaged.Counter, sets.MacheEar1)
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Godhands.DT = set_combine(sets.engaged.DT, sets.MacheEar1)
@@ -389,27 +257,28 @@ function init_gear_sets()
     sets.engaged.Godhands.Acc.DT = set_combine(sets.engaged.Acc.DT, sets.MacheEar1)
 
     sets.idle = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Mpaca_Head,
-        neck="Bathy Choker +1",
+        range="Neo Animator",
+        ammo="Automaton Oil +3",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Warder's Charm +1",
         ear1="Arete Del Luna +1",
-        ear2="Eabani Earring",
-        body=gear.Mpaca_Body,
-        hands=gear.Mpaca_Hands,
-        ring1=gear.Chirich_1,
-        ring2="Defending Ring",
+        ear2="Sanare Earring",
+        ring1="Gelatinous Ring +1",
+        ring2="Shadow Ring",
         back=gear.PUP_Cape,
         waist="Moonbow Belt +1",
-        legs=gear.Mpaca_Legs,
-        feet=gear.Mpaca_Feet,
     }
 
     sets.idle.Town ={
-        range="Animator P +1",
-        ammo="Automat. Oil +3",
+        range="Neo Animator",
+        ammo="Automaton Oil +3",
 		head=gear.Mpaca_Head,
-		body=gear.Mpaca_Body_Body,
-		hands=gear.Mpaca_Hands_Hands,
+		body=gear.Mpaca_Body,
+		hands=gear.Mpaca_Hands,
 		legs=gear.Mpaca_Legs,
 		feet=gear.Mpaca_Feet,
 		neck="Puppetmaster's Collar +2",
@@ -422,9 +291,10 @@ function init_gear_sets()
     }
     
     sets.defense.PDT = {
-        ammo="Staunch Tathlum +1",
+        range="Neo Animator",
+        ammo="Automaton Oil +3",
         head=gear.Malignance_Head,
-        neck="Monk's Nodowa +2",
+        neck="Pup. Collar +2",
         ear1="Sherida Earring",
         ear2="Schere Earring",
         body=gear.Malignance_Body,
@@ -438,7 +308,8 @@ function init_gear_sets()
     }
     
     sets.defense.MDT = {
-        ammo="Staunch Tathlum +1",
+         range="Neo Animator",
+        ammo="Automaton Oil +3",
         head=gear.Nyame_Head,
         neck="Warder's Charm +1",
         ear1="Odnowa Earring +1",

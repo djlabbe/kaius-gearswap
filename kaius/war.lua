@@ -26,7 +26,7 @@ function user_setup()
     state.OffenseMode:options('Normal', 'Acc', 'PDL')
     state.WeaponskillMode:options('Normal', 'Acc', 'PDL')
     state.HybridMode:options('Normal', 'DT')
-    state.IdleMode:options('Normal', 'DT')
+    state.IdleMode:options('Normal', 'Regen')
 
     state.WeaponSet = M{['description']='Weapon Set', 'Chango', 'Helheim', 'ShiningOne', 'Naegling', 'Loxotic' }
     state.WeaponLock = M(true, 'Weapon Lock')
@@ -522,6 +522,12 @@ function init_gear_sets()
         ring2="Shadow Ring",
         back="Shadow Mantle",
         waist="Engraved Belt",
+    }
+
+    sets.idle.Regen = {
+        body="Sacro Bulwark",    
+        ring1=gear.Chirich_1,
+        ring2=gear.Chirich_2,
     }
 
     sets.idle.Town = sets.engaged;

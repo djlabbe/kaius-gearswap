@@ -610,8 +610,8 @@ function init_gear_sets()
 
     sets.Trishula = { main="Trishula", sub="Utu Grip" }
     sets.ShiningOne = { main="Shining One", sub="Utu Grip" }
-    sets.Naegling = { main="Naegling", sub="Kraken Club" }
-    sets.Mafic = { main="Mafic Cudgel", sub="Kraken Club" }
+    sets.Naegling = { main="Naegling" }
+    sets.Mafic = { main="Mafic Cudgel" }
 
 end
 

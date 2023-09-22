@@ -49,11 +49,11 @@ function user_setup()
     gear.Relic_Legs = { name="Hesychast's Hose +3" }
     gear.Relic_Feet = { name="Hesychast's Gaiters +3" }
 
-    gear.Empyrean_Head = { name="Bhikku Crown +2" }
-    gear.Empyrean_Body = { name="Bhikku Cyclas +2" }
-    gear.Empyrean_Hands = { name="Bhikku Gloves +2" }
-    gear.Empyrean_Legs = { name="Bhikku Hose +2" }
-    gear.Empyrean_Feet = { name="Bhikku Gaiters +2" }
+    gear.Empyrean_Head = { name="Bhikku Crown +3" }
+    gear.Empyrean_Body = { name="Bhikku Cyclas +3" }
+    gear.Empyrean_Hands = { name="Bhikku Gloves +3" }
+    gear.Empyrean_Legs = { name="Bhikku Hose +3" }
+    -- gear.Empyrean_Feet = { name="Bhikku Gaiters +2" }
 
     gear.MNK_DEX_DA_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     gear.MNK_STR_CRIT_Cape = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}} --X
@@ -116,26 +116,11 @@ function init_gear_sets()
         hands=gear.Relic_Hands,
         ring1="Niqmaddu Ring",
         ring2="Gelatinous Ring +1",
-        back="Moonlight Cape",
+        back="Moonbeam Cape",
         waist="Platinum Moogle Belt",
-        legs=gear.Tatenashi_Legs,
+        legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet
     }
-
-    sets.precast.Waltz = {
-        ammo="Voluspa Tathlum",
-        head="Kendatsuba Jinpachi +1",
-        neck="Unmoving Collar +1",
-        ear1="Handler's Earring +1",
-        ear2="Tuisto Earring",
-        body="Passion Jacket",
-        hands=gear.Relic_Hands,
-        waist="Gishdubar Sash",
-        ring1="Asklepian Ring",
-        ring2="Gelatinous Ring +1",
-    }
-        
-    sets.precast.Waltz['Healing Waltz'] = {}
 
     sets.precast.FC = {
         ammo="Sapience Orb", --2
@@ -143,7 +128,7 @@ function init_gear_sets()
         body=gear.Taeon_FC_Body, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
-        neck="Orunmila's Torque", --5
+        neck="Baetyl Pendant", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
         ring1="Prolix Ring", --2
@@ -155,7 +140,7 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo="Knobkierrie",
 		head=gear.Adhemar_B_Head,
-		body="Kendatsuba Samue +1",
+		body=gear.Empyrean_Body,
 		hands=gear.Ryuo_A_Hands,
 		legs=gear.Mpaca_Legs,
 		feet=gear.Mpaca_Feet,
@@ -196,8 +181,8 @@ function init_gear_sets()
         ammo="Knobkierrie",
 		head=gear.Mpaca_Head,
 		body=gear.Mpaca_Body,
-		hands=gear.Tatenashi_Hands,
-		legs=gear.Tatenashi_Legs,
+		hands=gear.Empyrean_Hands,
+		legs=gear.Nyame_Legs,
 		feet=gear.Artifact_Feet,
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
@@ -214,10 +199,10 @@ function init_gear_sets()
     sets.precast.WS['Shijin Spiral'] = {
         ammo="Knobkierrie",
 		head="Adhemar Bonnet +1",
-		body="Kendatsuba Samue +1",
-		hands=gear.Malignance_Hands,
-		legs=gear.Tatenashi_Legs,
-		feet=gear.Tatenashi_Feet,
+		body=gear.Empyrean_Body,
+		hands=gear.Empyrean_Hands,
+		legs=gear.Nyame_Legs,
+		feet=gear.Mpaca_Feet,
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
@@ -236,7 +221,7 @@ function init_gear_sets()
         ammo="Knobkierrie",
 		head=gear.Mpaca_Head,
 		body=gear.Nyame_Body,
-		hands=gear.Tatenashi_Hands,
+		hands=gear.Nyame_Hands,
 		legs=gear.Nyame_Legs,
 		feet=gear.Nyame_Feet,
 		neck="Mnk. Nodowa +2",
@@ -256,8 +241,8 @@ function init_gear_sets()
         ammo="Knobkierrie",
 		head=gear.Mpaca_Head,
 		body=gear.Empyrean_Body,
-		hands=gear.Tatenashi_Hands,
-		legs=gear.Tatenashi_Legs,
+		hands=gear.Nyame_Hands,
+		legs=gear.Nyame_Legs,
 		feet=gear.Nyame_Feet,
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
@@ -283,7 +268,7 @@ function init_gear_sets()
 		waist="Moonbow Belt +1",
 		ear1="Moonshade Earring",
 		ear2="Schere Earring",
-		ring1="Cornelia's Ring",
+		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
 		back=gear.MNK_DEX_DA_Cape,
     }
@@ -334,8 +319,8 @@ function init_gear_sets()
     sets.precast.WS['Shell Crusher'] = {
         head=gear.Malignance_Head,
         neck="Moonlight Necklace",
-        ear1="Dignitary's Earring",
         ear2="Crepuscular Earring",
+        ear1="Bhikku Earring +2",
         body=gear.Malignance_Body,
         hands=gear.Malignance_Hands,
         legs=gear.Malignance_Legs,
@@ -364,11 +349,12 @@ function init_gear_sets()
 
     sets.engaged = {
         ammo="Coiste Bodhar",
-		head=gear.Adhemar_A_Head,
-		body=gear.Mpaca_Body,
+		head=gear.Empyrean_Head,
+		body=gear.Empyrean_Body,
 		hands=gear.Adhemar_A_Hands,
 		legs=gear.Empyrean_Legs,
-		feet=gear.Artifact_Feet,
+		-- feet=gear.Artifact_Feet,
+        feet=gear.Mpaca_Feet,
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Schere Earring",
@@ -385,8 +371,6 @@ function init_gear_sets()
     sets.engaged.Godhands = set_combine(sets.engaged, sets.MacheEar1)
     
     sets.engaged.Acc = set_combine(sets.engaged, {
-        head="Ken. Jinpachi +1",
-        hands="Tatenashi gote +1",
 		ring1="Regal Ring",
 		ring2=gear.Chirich_2,
     })
@@ -410,7 +394,7 @@ function init_gear_sets()
 		neck="Bathy Choker +1",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
-		ear2="Bhikku Earring +1",
+		ear2="Bhikku Earring +2",
 		ring1="Defending Ring",
 		ring2="Niqmaddu Ring",
 		back=gear.MNK_DEX_DA_Cape,
@@ -424,37 +408,7 @@ function init_gear_sets()
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)  
     sets.engaged.Godhands.Acc.DT = set_combine(sets.engaged.Acc.DT, sets.MacheEar1)
 
-    sets.idle = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Mpaca_Head,
-        neck="Bathy Choker +1",
-        ear1="Arete Del Luna +1",
-        ear2="Bhikku Earring +2",
-        body=gear.Mpaca_Body,
-        hands=gear.Mpaca_Hands,
-        ring1=gear.Chirich_1,
-        ring2="Defending Ring",
-        back=gear.MNK_DEX_DA_Cape,
-        waist="Moonbow Belt +1",
-        legs=gear.Mpaca_Legs,
-        feet=gear.Mpaca_Feet,
-    }
 
-    sets.idle.Town ={
-        ammo="Coiste Bodhar",
-		head=gear.Mpaca_Head,
-		body=gear.Mpaca_Body,
-		hands=gear.Mpaca_Hands,
-		legs=gear.Mpaca_Legs,
-		feet=gear.Mpaca_Feet,
-		neck="Mnk. Nodowa +2",
-		waist="Moonbow Belt +1",
-		ear1="Schere Earring",
-		ear2="Bhikku Earring +2",
-		ring1="Gere Ring",
-		ring2="Niqmaddu Ring",
-		back=gear.MNK_DEX_DA_Cape,
-    }
     
     sets.buff.Impetus = { body=gear.Empyrean_Body }
 	sets.buff.Footwork = { feet=gear.Artifact_Feet }
@@ -486,7 +440,7 @@ function init_gear_sets()
         ring1="Defending Ring",
         ring2="Gelatinous Ring +1",
         back=gear.MNK_DEX_DA_Cape,
-        waist="Engraved Belt",
+        waist="Carrier's Sash",
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
     }
@@ -497,6 +451,24 @@ function init_gear_sets()
         ring2="Purity Ring",
         waist="Gishdubar Sash",
     }
+
+    sets.idle = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Malignance_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Malignance_Feet,
+        neck="Warder's Charm +1",
+        ear1="Sanare Earring",
+        ear2="Bhikku Earring +2",
+        ring1=gear.Chirich_1,
+        ring2=gear.Chirich_2,
+        back=gear.MNK_DEX_DA_Cape,
+        waist="Moonbow Belt +1",
+    }
+
+    sets.idle.Town = set_combine(sets.engaged, sets.buff.Impetus)
 
     sets.Kiting = { ring1="Shneddick Ring" }
     sets.Verethragna = { main="Verethragna" }
