@@ -89,7 +89,7 @@ end
 function init_gear_sets()
 
     sets.precast.JA["Tactical Switch"] = {feet=gear.Empyrean_Feet}
-    sets.precast.JA["Ventriloquy"] = {legs=gera.Relic_Legs}
+    sets.precast.JA["Ventriloquy"] = {legs=gear.Relic_Legs}
     sets.precast.JA["Role Reversal"] = {feet=gear.Relic_Feet}
     sets.precast.JA["Overdrive"] = {body=gear.Relic_Body}
 
@@ -254,7 +254,7 @@ function init_gear_sets()
     }
     
     sets.MacheEar1 = {
-        ear1="Mache Earring +1"
+        ear2="Mache Earring +1"
     }
 
     sets.engaged.Godhands = set_combine(sets.engaged, sets.MacheEar1)
@@ -304,7 +304,7 @@ function init_gear_sets()
 		hands=gear.Mpaca_Hands,
 		legs=gear.Mpaca_Legs,
 		feet=gear.Mpaca_Feet,
-		neck="Puppetmaster's Collar +2",
+		neck="Pup. Collar +2",
 		waist="Moonbow Belt +1",
 		ear1="Schere Earring",
 		ear2="Karagoz Earring +1",
@@ -318,8 +318,8 @@ function init_gear_sets()
         ammo="Automaton Oil +3",
         head=gear.Malignance_Head,
         neck="Pup. Collar +2",
-        ear1="Sherida Earring",
-        ear2="Schere Earring",
+        ear1="Schere Earring",
+        -- ear2="Sherida Earring",
         body=gear.Malignance_Body,
         hands=gear.Malignance_Hands,
         ring1="Gere Ring",

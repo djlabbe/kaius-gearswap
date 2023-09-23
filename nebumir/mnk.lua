@@ -57,6 +57,7 @@ function user_setup()
 
     gear.MNK_DEX_DA_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     gear.MNK_STR_CRIT_Cape = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}} --X
+    gear.MNK_STR_DA_Cape = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @e gs c cycle WeaponSet')
@@ -230,7 +231,7 @@ function init_gear_sets()
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=gear.MNK_DEX_DA_Cape,
+		back=gear.MNK_STR_DA_Cape,
     }
 
     sets.precast.WS["Howling Fist"].Acc = set_combine(sets.precast.WS["Howling Fist"], {

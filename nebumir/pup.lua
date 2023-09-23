@@ -317,11 +317,8 @@ function init_gear_sets()
     sets.precast.JA = {} -- Can be left empty
 
     sets.precast.JA["Tactical Switch"] = {feet = Empy_Karagoz.Feet_Tatical}
-
     sets.precast.JA["Ventriloquy"] = {legs = Relic_Pitre.Legs_PMagic}
-
     sets.precast.JA["Role Reversal"] = {feet = Relic_Pitre.Feet_PMagic}
-
     sets.precast.JA["Overdrive"] = {body = Relic_Pitre.Body_PTP}
 
     sets.precast.JA["Repair"] = {
