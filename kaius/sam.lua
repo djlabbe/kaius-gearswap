@@ -156,7 +156,6 @@ function init_gear_sets()
         ammo="Coiste Bodhar",
         hands=gear.Artifact_Hands,
         ear1="Schere Earring",
-        feet=gear.Tatenashi_Feet,
         back=gear.SAM_TP_Cape,
         waist="Ioskeha Belt +1"
     })

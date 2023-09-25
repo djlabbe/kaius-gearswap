@@ -580,7 +580,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     elseif spell.skill == 'Geomancy' then
         if buffactive.Entrust and spell.english:startswith('Indi-') then
-            equip({main=gear.Gada_GEO})
+            equip({main=gear.Gada_INDI})
         end
     end
 end

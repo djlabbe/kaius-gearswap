@@ -33,7 +33,7 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT')
 
     state.WeaponLock = M(true, 'Weapon Lock')
-    state.WeaponSet = M{['description']='Weapon Set', 'Verethragna', 'Godhands'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Xiucoatl', 'Verethragna', 'Godhands'}
 
     gear.Artifact_Head = { name="Foire Taj +1" }
     gear.Artifact_Body = { name="Foire Tobe +1" }
@@ -53,7 +53,7 @@ function user_setup()
     gear.Empyrean_Legs = { name="Karagoz Pantaloni +2" }
     gear.Empyrean_Feet = { name="Karagoz Scarpe +2" }
 
-    gear.PUP_Cape = { name="Shadow Mantle" }
+    gear.PUP_Cape = { name="Visucius's Mantle" }
     gear.PUP_WS_Cape = { name = "Visucius's Mantle" }
     
     send_command('bind @w gs c toggle WeaponLock')
@@ -66,10 +66,11 @@ function user_setup()
         send_command('bind !t input /ja "Provoke" <t>')
     end
 
-    send_command('bind ^numpad7 gs c set WeaponSet Verethragna;input /macro set 1')
-    send_command('bind ^numpad8 gs c set WeaponSet Godhands;input /macro set 1')
+    send_command('bind ^numpad7 gs c set WeaponSet Xiucoatl;input /macro set 1')
+    send_command('bind ^numpad8 gs c set WeaponSet Verethragna;input /macro set 1')
+    send_command('bind ^numpad9 gs c set WeaponSet Godhands;input /macro set 1')
 
-    set_macro_page(1, 2)
+    set_macro_page(1, 18)
     send_command('wait 3; input /lockstyleset 18')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
@@ -257,27 +258,35 @@ function init_gear_sets()
         ear2="Mache Earring +1"
     }
 
-    sets.engaged.Godhands = set_combine(sets.engaged, sets.MacheEar1)
+    sets.engaged.Godhands = sets.engaged
     
     sets.engaged.Acc = set_combine(sets.engaged, {
 		ring2=gear.Chirich_2,
     })
 
-    sets.engaged.Godhands.Acc = set_combine(sets.engaged.Acc, sets.MacheEar1)
+    sets.engaged.Godhands.Acc = sets.engaged.Acc
 
     sets.engaged.Hybrid = {
+        range="Neo Animator",
+        ammo="Automaton Oil +3",
+        head="Heyoka Cap +1",
         body=gear.Mpaca_Body,
-        hands=gear.Malignance_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Malignance_Feet,
+        hands=gear.Empyrean_Hands,
+        legs="Heyoka Subligar",
+        feet=gear.Mpaca_Feet,
+        neck="Shulmanu Collar",
+        ear1="Schere Earring",
+		ear2="Karagoz Earring +1",
+        waist="Moonbow Belt +1",
+        back=gear.PUP_Cape,
     }
 
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-    sets.engaged.Godhands.DT = set_combine(sets.engaged.DT, sets.MacheEar1)
+    sets.engaged.Godhands.DT = sets.engaged.DT
 
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)  
-    sets.engaged.Godhands.Acc.DT = set_combine(sets.engaged.Acc.DT, sets.MacheEar1)
+    sets.engaged.Godhands.Acc.DT = sets.engaged.Acc.DT
 
     sets.idle = {
         range="Neo Animator",
@@ -294,6 +303,10 @@ function init_gear_sets()
         ring2="Shadow Ring",
         back=gear.PUP_Cape,
         waist="Moonbow Belt +1",
+    }
+
+    sets.idle.Turtle = {
+        main="Gnafron's Adargas",
     }
 
     sets.idle.Town ={
@@ -355,6 +368,7 @@ function init_gear_sets()
     }
 
     sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Xiucoatl = { main="Xiucoatl" }
     sets.Verethragna = { main="Verethragna" }
     sets.Godhands = { main="Godhands" }
 end

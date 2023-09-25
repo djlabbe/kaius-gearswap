@@ -282,7 +282,6 @@ function init_gear_sets()
     }
 
     sets.precast.JA.Charm = {
-        ammo="Voluspa Tathlum",
         -- head=gear.Artifact_Head,
         neck="Unmoving Collar +1",
         ear2="Enchanter's Earring +1",
@@ -869,7 +868,6 @@ function init_gear_sets()
 
     --Precast Gear Sets for DNC subjob abilities:
     sets.precast.Waltz = {
-        ammo="Voluspa Tathlum",
         head=gear.Nyame_Head,
         neck="Unmoving Collar +1",
         ear1="Handler's Earring +1",

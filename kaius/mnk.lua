@@ -122,24 +122,9 @@ function init_gear_sets()
         ring2="Gelatinous Ring +1",
         back="Moonlight Cape",
         waist="Platinum Moogle Belt",
-        legs=gear.Tatenashi_Legs,
+        legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet
     }
-
-    sets.precast.Waltz = {
-        ammo="Voluspa Tathlum",
-        head="Kendatsuba Jinpachi +1",
-        neck="Unmoving Collar +1",
-        ear1="Handler's Earring +1",
-        ear2="Tuisto Earring",
-        body="Passion Jacket",
-        hands=gear.Relic_Hands,
-        waist="Gishdubar Sash",
-        ring1="Asklepian Ring",
-        ring2="Gelatinous Ring +1",
-    }
-        
-    sets.precast.Waltz['Healing Waltz'] = {}
 
     sets.precast.FC = {
         ammo="Sapience Orb", --2
@@ -159,7 +144,7 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo="Knobkierrie",
 		head=gear.Adhemar_B_Head,
-		body="Kendatsuba Samue +1",
+		body=gear.Nyame_Body,
 		hands=gear.Ryuo_A_Hands,
 		legs=gear.Mpaca_Legs,
 		feet=gear.Mpaca_Feet,
@@ -201,7 +186,7 @@ function init_gear_sets()
 		head=gear.Mpaca_Head,
 		body=gear.Mpaca_Body,
 		hands=gear.Tatenashi_Hands,
-		legs=gear.Tatenashi_Legs,
+		legs=gear.Nyame_Legs,
 		feet=gear.Artifact_Feet,
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
@@ -218,10 +203,10 @@ function init_gear_sets()
     sets.precast.WS['Shijin Spiral'] = {
         ammo="Knobkierrie",
 		head="Adhemar Bonnet +1",
-		body="Kendatsuba Samue +1",
+		body=gear.Nyame_Body,
 		hands=gear.Malignance_Hands,
-		legs=gear.Tatenashi_Legs,
-		feet=gear.Tatenashi_Feet,
+		legs=gear.Nyame_Legs,
+		feet=gear.Malignance_Feet,
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
@@ -261,7 +246,7 @@ function init_gear_sets()
 		head=gear.Mpaca_Head,
 		body=gear.Empyrean_Body,
 		hands=gear.Tatenashi_Hands,
-		legs=gear.Tatenashi_Legs,
+		legs=gear.Nyame_Legs,
 		feet=gear.Nyame_Feet,
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",

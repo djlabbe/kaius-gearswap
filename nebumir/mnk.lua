@@ -35,7 +35,7 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT')
 
     state.WeaponLock = M(true, 'Weapon Lock')
-    state.WeaponSet = M{['description']='Weapon Set', 'Verethragna', 'Godhands'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Godhands'}
 
     gear.Artifact_Head = { name="Anchorite's Crown +1" }
     gear.Artifact_Body = { name="Anchorite's Cyclas +1" }
@@ -68,8 +68,6 @@ function user_setup()
     if player.sub_job == 'WAR' then
         send_command('bind !t input /ja "Provoke" <t>')
     end
-
-    send_command('bind ^numpad7 gs c set WeaponSet Verethragna;input /macro set 1')
     send_command('bind ^numpad8 gs c set WeaponSet Godhands;input /macro set 1')
 
     set_macro_page(1, 2)
@@ -472,7 +470,6 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.engaged, sets.buff.Impetus)
 
     sets.Kiting = { ring1="Shneddick Ring" }
-    sets.Verethragna = { main="Verethragna" }
     sets.Godhands = { main="Godhands" }
 end
 

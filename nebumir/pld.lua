@@ -36,7 +36,7 @@ function user_setup()
     
     state.PhalanxMode = M(false, 'Equip Phalanx Gear')
     state.EquipShield = M(true, 'Equip Shield w/Defense')
-    state.WeaponSet = M{['description']='Weapon Set', 'Malignance', 'Sakpata'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Burtgang'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name="Reverence Coronet +1" }
@@ -162,6 +162,21 @@ function init_gear_sets()
         ring1="Epaminondas's Ring",
         ring2="Sroda Ring",
         -- back={ name="Rudianos's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
+    }
+
+    sets.precast.WS['Atonement'] = {
+      head=gear.Souveran_C_Head,
+      body=gear.Souveran_C_Body,
+      hands=gear.Souveran_C_Hands,
+      legs=gear.Souveran_C_Legs,
+      feet=gear.Souveran_D_Feet,
+      neck="Moonlight Necklace",      --15/15
+      waist={name="Platinum Moogle Belt", priority=999},
+      ear1={name="Tuisto Earring", priority=150},
+      ear2={name="Odnowa Earring +1", priority=110},
+      ring1="Apeile Ring +1",         --00/09
+      ring2={name="Gelatinous Ring +1", priority=135},        
+      back=gear.PLD_SIRD_Cape,        --10/10
     }
 
     sets.precast.WS['Sanguine Blade'] = {
@@ -359,19 +374,32 @@ function init_gear_sets()
     }
 
     sets.engaged = {
-        ammo="Staunch Tathlum +1", --3
-        head=gear.Empyrean_Head, 
-        body=gear.Sakpata_Body, --10
-        hands=gear.Sakpata_Hands, --8
-        legs=gear.Empyrean_Legs, --12
-        feet=gear.Sakpata_Feet, --6
-        neck={name="Unmoving Collar +1", priority=200},
-        waist={name="Platinum Moogle Belt", priority=999},
-        ear1={name="Tuisto Earring", priority=150},
-        ear2={name="Odnowa Earring +1", priority=110},
-        ring1=gear.Moonlight_1,
-        ring2="Petrov Ring",
-        back=gear.PLD_Idle_Cape,
+        -- ammo="Staunch Tathlum +1", --3
+        -- head=gear.Empyrean_Head, 
+        -- body=gear.Sakpata_Body, --10
+        -- hands=gear.Sakpata_Hands, --8
+        -- legs=gear.Empyrean_Legs, --12
+        -- feet=gear.Sakpata_Feet, --6
+        -- neck={name="Unmoving Collar +1", priority=200},
+        -- waist={name="Platinum Moogle Belt", priority=999},
+        -- ear1={name="Tuisto Earring", priority=150},
+        -- ear2={name="Odnowa Earring +1", priority=110},
+        -- ring1=gear.Moonlight_1,
+        -- ring2="Petrov Ring",
+        -- back=gear.PLD_Idle_Cape,
+        ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+        head="Flam. Zucchetto +2",
+        body={ name="Sakpata's Plate", augments={'Path: A',}},
+        hands={ name="Sakpata's Gauntlets", augments={'Path: A',}},
+        legs={ name="Nyame Flanchard", augments={'Path: B',}},
+        feet="Flamma Gambieras +2",
+        neck="Unmoving Collar +1",
+        waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+        left_ear="Cessance Earring",
+        right_ear="Dedition Earring",
+        left_ring="Moonlight Ring",
+        right_ring="Petrov Ring",
+        back={ name="Rudianos's Mantle", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','Enmity+10','Chance of successful block +5',}},
     } --49% DT
 
 
@@ -386,8 +414,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
-    sets.Sakpata = { main="Sakpata's Sword", sub="Srivatsa" }
-    sets.Malignance = { main="Malignance Sword", sub="Srivatsa"}
+    sets.Burtgang = { main="Malignance Sword", sub="Srivatsa"}
 
 end
 

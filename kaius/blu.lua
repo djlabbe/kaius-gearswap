@@ -442,7 +442,6 @@ function init_gear_sets()
     }
 
     sets.midcast['Blue Magic'].PhysicalAcc = set_combine(sets.midcast['Blue Magic'].Physical, {
-        ammo="Voluspa Tathlum",
         head=gear.Carmine_D_Head,
         hands=gear.Empyrean_Hands,
         legs=gear.Carmine_D_Legs,
@@ -539,7 +538,6 @@ function init_gear_sets()
     })
 
     sets.midcast['Blue Magic'].MagicalChr = set_combine(sets.midcast['Blue Magic'].Magical, {
-        ammo="Voluspa Tathlum",
         ear1="Regal Earring",
         ear2="Enchntr. Earring +1"
     })
@@ -583,7 +581,6 @@ function init_gear_sets()
     })
 
     sets.midcast['Blue Magic'].StunPhysical = set_combine(sets.midcast['Blue Magic'].MagicAccuracy, {
-        ammo="Voluspa Tathlum",
         head=gear.Malignance_Head,
         body=gear.Malignance_Body,
         hands=gear.Malignance_Hands,

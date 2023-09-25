@@ -95,8 +95,8 @@ function user_setup()
         send_command('bind ^numpad9 gs c set WeaponSet Liberator;input /macro set 2')
         send_command('bind ^numpad4 gs c set WeaponSet Apocalypse;input /macro set 2')
         send_command('bind ^numpad5 gs c set WeaponSet Lycurgos;input /macro set 3')
-        send_command('bind ^numpad6 gs c set WeaponSet Naegling;input /macro set 4')
-        send_command('bind ^numpad1 gs c set WeaponSet Loxotic;input /macro set 5')
+        send_command('bind ^numpad6 gs c set WeaponSet Naegling;input /macro set 5')
+        send_command('bind ^numpad1 gs c set WeaponSet Loxotic;input /macro set 4')
         set_macro_page(2, 8)
     elseif player.sub_job == 'DRG' then   
         send_command('bind ^numpad7 gs c set WeaponSet Caladbolg;input /macro set 6')
@@ -788,6 +788,7 @@ function init_gear_sets()
     sets.Apocalypse = { main="Apocalypse", sub="Utu Grip" }
     sets.Lycurgos = { main="Lycurgos", sub="Utu Grip" }
     sets.Loxotic = { main="Loxotic Mace +1", sub="Blurred Shield +1" }
+    sets.Naegling = { main="Naegling", sub="Blurred Shield +1" }
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)

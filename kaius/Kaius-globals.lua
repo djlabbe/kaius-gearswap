@@ -38,6 +38,7 @@ function define_global_sets()
     gear.Colada_ENH = {name="Colada", augments={'Enh. Mag. eff. dur. +4','STR+5','Mag. Acc.+18',}}
 
     gear.Gada_ENH = {name="Gada", augments={'Enh. Mag. eff. dur. +6','Mag. Acc.+16',}}
+    gear.Gada_INDI = { name="Gada", augments={'Indi. eff. dur. +11','DMG:+3',}}
 
     gear.Grioavolr_BP = {name="Grioavolr", augments={'Blood Pact Dmg.+9','Pet: Mag. Acc.+7','Pet: "Mag.Atk.Bns."+17',}}
     gear.Grioavolr_FC = {name="Grioavolr", augments={'"Fast Cast"+6','Mag. Acc.+17','"Mag.Atk.Bns."+13',}}

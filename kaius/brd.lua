@@ -742,12 +742,12 @@ function init_gear_sets()
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
-        neck="Bathy Choker +1",
+        neck="Loricate Torque +1",
         waist="Flume Belt +1",
         left_ear="Eabani Earring",
         right_ear="Infused Earring",
         left_ring="Defending Ring",
-        right_ring="Vengeful Ring",
+        right_ring="Moonlight Ring",
         back="Shadow Mantle",
     }
 

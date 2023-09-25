@@ -296,7 +296,6 @@ function init_gear_sets()
     }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        ammo="Voluspa Tathlum",
         ear2="Telos Earring",
     })
 
@@ -307,7 +306,6 @@ function init_gear_sets()
     })
 
     sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
-        ammo="Voluspa Tathlum",
         ear2="Telos Earring",
     })
 
@@ -328,7 +326,6 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS['Pyrrhic Kleos'], {
-        ammo="Voluspa Tathlum",
         hands=gear.Adhemar_A_Hands,
         legs=gear.Nyame_Legs,
     })
@@ -375,7 +372,6 @@ function init_gear_sets()
     })
 
     sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        ammo="Voluspa Tathlum",
         ear2="Telos Earring",
     })
 
@@ -543,7 +539,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Etoile Gorget +2",
         ear1="Eabani Earring", --4
-        ear2="Balder Earring +1",
+        ear2="Macuelele Earring +1",
         ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
@@ -566,7 +562,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Etoile Gorget +2",
         ear1="Sherida Earring",
-        ear2="Balder Earring +1",
+        ear2="Macuelele Earring +1",
         ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,

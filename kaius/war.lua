@@ -357,7 +357,7 @@ function init_gear_sets()
         head=gear.Empyrean_Head,
         body=gear.Nyame_Body,
         hands=gear.Sakpata_Hands,
-        legs=gear.Tatenashi_Legs,
+        legs=gear.Nyame_Legs,
         feet="Flamma Gambieras +2",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
@@ -525,7 +525,7 @@ function init_gear_sets()
     }
 
     sets.idle.Regen = {
-        body="Sacro Bulwark",    
+        body="Sacro Breastplate",    
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
     }

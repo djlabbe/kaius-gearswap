@@ -230,7 +230,6 @@ function init_gear_sets()
     sets.precast.FoldDoubleBust = {hands=gear.Relic_Hands}
 
     sets.precast.Waltz = {
-        ammo="Voluspa Tathlum",
         neck="Unmoving Collar +1",
         ear1="Handler's Earring +1",
         ear2="Tuisto Earring",
@@ -256,6 +255,7 @@ function init_gear_sets()
     }
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
+        neck="Magoraga Beads",
         body="Passion Jacket",
         ring1="Lebeche Ring",
     })
