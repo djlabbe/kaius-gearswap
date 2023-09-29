@@ -353,7 +353,7 @@ function init_gear_sets()
 		hands=gear.Adhemar_A_Hands,
 		legs=gear.Empyrean_Legs,
 		-- feet=gear.Artifact_Feet,
-        feet=gear.Mpaca_Feet,
+        feet=gear.Malignance_Feet,
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Schere Earring",

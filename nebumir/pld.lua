@@ -132,21 +132,21 @@ function init_gear_sets()
     } --Max MND
 
     sets.precast.FC = {
-        main="Sakpata's Sword", --10
+        -- main="Sakpata's Sword", --10
         ammo="Sapience Orb", --2
         head=gear.Empyrean_Head, --9 
         body=gear.Artifact_Body, --10
         hands="Leyline Gloves", --6
         legs=gear.Eschite_D_Legs, --5
         feet=gear.Empyrean_Feet, --13
-        neck="Baetyl Pendant", --4
+        neck={name="Unmoving Collar +1", priority=200},
         waist={name="Platinum Moogle Belt", priority=999},
         ear1={name="Tuisto Earring", priority=150},
         ear2={name="Odnowa Earring +1", priority=110},
         ring1={name="Gelatinous Ring +1", priority=135}, 
         ring2="Kishar Ring", --4
         back=gear.PLD_FC_Cape, --10
-    } --73% FC, 3428 HP
+    } --63% FC, 3428 HP
 
     sets.precast.WS = {
         ammo="Crepuscular Pebble",
@@ -165,11 +165,11 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Atonement'] = {
-      head=gear.Souveran_C_Head,
+      head="Loess Barbuta +1",
       body=gear.Souveran_C_Body,
       hands=gear.Souveran_C_Hands,
       legs=gear.Souveran_C_Legs,
-      feet=gear.Souveran_D_Feet,
+      feet=gear.Eschite_C_Feet,
       neck="Moonlight Necklace",      --15/15
       waist={name="Platinum Moogle Belt", priority=999},
       ear1={name="Tuisto Earring", priority=150},
@@ -185,7 +185,7 @@ function init_gear_sets()
     }
 
     sets.midcast.Flash = {
-        main="Brilliance",
+        main="Burtgang",
         sub="Srivatsa",
         ammo="Staunch Tathlum +1", -- SIRD 11
         head="Loess Barbuta +1",
@@ -204,7 +204,7 @@ function init_gear_sets()
     sets.midcast.Stun = sets.midcast.Flash
     
     sets.midcast.Cure = { -- Cure/SIRD/Enmity
-        main="Sakpata's Sword",
+        main="Burtgang",
         ammo="Staunch Tathlum +1",      --00/11/00
         head=gear.Souveran_C_Head,      --00/20/09
         body=gear.Empyrean_Body,        --11/20/16
@@ -221,7 +221,7 @@ function init_gear_sets()
     } --3589 HP 53/111/xx
 
     sets.midcast.Blue = { --SIRD/Enmity
-        main="Sakpata's Sword",
+        main="Burtgang",
         sub="Srivatsa",
         ammo="Staunch Tathlum +1",      --11/00
         head=gear.Souveran_C_Head,      --20/09
@@ -305,7 +305,7 @@ function init_gear_sets()
         body=gear.Artifact_Body,
         hands={name="Regal Gauntlets", priority=205}, --[10]
         legs="Founder's Hose",--0/30
-        feet=gear.Ody_CURE_Feet,
+        feet=gear.Eschite_C_Feet,
         neck={name="Unmoving Collar +1", priority=200},
         waist={name="Platinum Moogle Belt", priority=999},
         ear1={name="Tuisto Earring", priority=150},
@@ -374,32 +374,19 @@ function init_gear_sets()
     }
 
     sets.engaged = {
-        -- ammo="Staunch Tathlum +1", --3
-        -- head=gear.Empyrean_Head, 
-        -- body=gear.Sakpata_Body, --10
-        -- hands=gear.Sakpata_Hands, --8
-        -- legs=gear.Empyrean_Legs, --12
-        -- feet=gear.Sakpata_Feet, --6
-        -- neck={name="Unmoving Collar +1", priority=200},
-        -- waist={name="Platinum Moogle Belt", priority=999},
-        -- ear1={name="Tuisto Earring", priority=150},
-        -- ear2={name="Odnowa Earring +1", priority=110},
-        -- ring1=gear.Moonlight_1,
-        -- ring2="Petrov Ring",
-        -- back=gear.PLD_Idle_Cape,
-        ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-        head="Flam. Zucchetto +2",
-        body={ name="Sakpata's Plate", augments={'Path: A',}},
-        hands={ name="Sakpata's Gauntlets", augments={'Path: A',}},
-        legs={ name="Nyame Flanchard", augments={'Path: B',}},
-        feet="Flamma Gambieras +2",
-        neck="Unmoving Collar +1",
-        waist={ name="Sailfi Belt +1", augments={'Path: A',}},
-        left_ear="Cessance Earring",
-        right_ear="Dedition Earring",
-        left_ring="Moonlight Ring",
-        right_ring="Petrov Ring",
-        back={ name="Rudianos's Mantle", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','Enmity+10','Chance of successful block +5',}},
+        ammo="Staunch Tathlum +1", --3
+        head=gear.Empyrean_Head, 
+        body=gear.Sakpata_Body, --10
+        hands=gear.Sakpata_Hands, --8
+        legs=gear.Empyrean_Legs, --12
+        feet=gear.Sakpata_Feet, --6
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
+        ear2={name="Odnowa Earring +1", priority=110},
+        ring1=gear.Moonlight_1,
+        ring2="Petrov Ring",
+        back=gear.PLD_Idle_Cape,
     } --49% DT
 
 
@@ -414,7 +401,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
-    sets.Burtgang = { main="Malignance Sword", sub="Srivatsa"}
+    sets.Burtgang = { main="Burtgang", sub="Srivatsa"}
 
 end
 

@@ -247,7 +247,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
         ring1="Cornelia's Ring",
-        ring2="Ilabrat Ring",
+        ring2="Regal Ring",
         waist="Kentarch Belt +1",
         back=gear.THF_WSD_Cape,
     }
@@ -564,13 +564,13 @@ function init_gear_sets()
     })
 
     sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        sub="Sm. Escutcheon",
-        body="Blacksmith's Apron",
-        hands="Smithy's Mitts",
-        neck="Smithy's Torque",
-        ring1="Craftmaster's Ring",
-        ring2="Confectioner's Ring",
-        waist="Blacksmith's Belt"
+        -- sub="Sm. Escutcheon",
+        -- body="Blacksmith's Apron",
+        -- hands="Smithy's Mitts",
+        -- neck="Smithy's Torque",
+        -- ring1="Craftmaster's Ring",
+        -- ring2="Confectioner's Ring",
+        -- waist="Blacksmith's Belt"
     })
 
 end

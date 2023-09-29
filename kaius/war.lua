@@ -69,10 +69,12 @@ function user_setup()
     send_command('bind !t input /ja "Provoke" <t>')
 
     if player.sub_job == 'SAM' then
+        send_command('bind !c input /ja "Warding Circle" <me>')
         send_command('bind !` input /ja "Hasso" <me>')
         send_command('bind ^` input /ja "Seigan" <me>')
         set_macro_page(1, 1)
     elseif player.sub_job == 'DRG' then
+        send_command('bind !c input /ja "Ancient Circle" <me>')
         set_macro_page(2, 1)
     end
     

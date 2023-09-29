@@ -353,7 +353,7 @@ function init_gear_sets()
         ring1="Regal Ring",
     })
 
-    sets.precast.WS['Rudra\'s Storm'] = set_combine({
+    sets.precast.WS['Rudra\'s Storm'] = {
         ammo="Coiste Bodhar",
         head=gear.Empyrean_Head,
         body=gear.Nyame_Body,
@@ -364,12 +364,10 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
         ring1="Regal Ring",
-        ring2="Epaminondas's Ring",
+        ring2="Cornelia's Ring",
         back=gear.DNC_WS1_Cape,
         waist="Kentarch Belt +1",
-    }, {
-        ring1="Cornelia's Ring",
-    })
+    }
 
     sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
         ear2="Telos Earring",

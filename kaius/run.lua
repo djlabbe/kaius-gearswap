@@ -96,12 +96,12 @@ function user_setup()
     send_command('bind !i input /ma "Phalanx" <me>')
     send_command('bind !u input /ma "Aquaveil" <me>')
     send_command('bind !m input /ja "Embolden" <me>')
+    send_command('bind !b input /ja "Battuta" <me>')
     
     send_command('bind @1 input /ja "Lunge" <t>')
     send_command('bind @2 input /ja "Swipe" <t>')
 
     send_command('bind !j input /ma "Temper" <me>')
-    send_command('bind ^] input /ja "Swordplay" <me>')
 
     send_command('bind !insert gs c cycleback Runes')
     send_command('bind !delete gs c cycle Runes')
@@ -121,7 +121,7 @@ function user_setup()
 
     if player.sub_job == 'SCH' then
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 2')
-        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 2')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 3')
         send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 2')
         set_macro_page(2, 22)
     else   
