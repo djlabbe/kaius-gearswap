@@ -717,11 +717,6 @@ function job_status_change(new, old)
         end
     else
         Master_State = const_stateIdle
-        
-        if state.CP.value == true then --Fail safe to make sure back is enabled after a fight is over
-            enable("back") 
-        end 
-
         TotalSCalc()
     end
 
@@ -996,20 +991,6 @@ windower.register_event(
                     end
 
                 end
-                --Now we check if we need to lock our back for CP
-                if Master_State == const_stateEngaged and state.CP.value == true then 
-                    monsterToCheck = windower.ffxi.get_mob_by_target('t') 
-                    if monsterToCheck then -- Sanity Check 
- 
-                        if monsterToCheck.hpp < 25 then --Check mobs HP Percentage if below 25 then equip CP cape 
-                            equip({ back = CP_CAPE }) 
-                            disable("back") --Lock back till we disengage
-                        else 
-                            enable("back") --Else make sure the back is enabled
-                        end 
- 
-                    end 
-                end 
 
                 --We only want this to activate if we are actually running the timer for the pet weapon skill
                 if pet.tp ~= nil then
@@ -1054,13 +1035,13 @@ windower.register_event(
             if state.PetModeCycle.value == const_tank and Pet_State == const_stateEngaged then
                 if buffactive["Fire Maneuver"] and (pet.attachments.strobe or pet.attachments["strobe II"]) then
                     if Strobe_Recast <= 2 then
-                        equip(sets.pet.Enmity)
+                        equip(sets.petEnmity)
                     end
                 end
 
                 if buffactive["Light Maneuver"] and pet.attachments.flashbulb == true then
                     if Flashbulb_Recast <= 2 then
-                        equip(sets.pet.Enmity)
+                        equip(sets.petEnmity)
                     end
                 end
             end
