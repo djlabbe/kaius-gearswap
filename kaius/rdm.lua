@@ -1120,6 +1120,13 @@ function init_gear_sets()
 
     sets.Obi = {waist="Hachirin-no-Obi"}
 
+    sets.TreasureHunter = {
+        ammo="Perfect Lucky Egg",
+        waist="Chaac Belt",
+        hands="Volte Bracers",
+        head="Volte Cap",
+    }
+
     sets.DefaultShield = { sub="Genmei Shield" }
     
     sets.Naegling = {main="Naegling", sub="Thibron"}
@@ -1391,7 +1398,6 @@ end
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
-        -- add_to_chat(123,'DW NEEDED: '.. DW_needed)
         if DW_needed <= 11 then
             classes.CustomMeleeGroups:append('MaxHaste')
         elseif DW_needed > 11 and DW_needed <= 26 then

@@ -263,16 +263,6 @@ elemental_ws = S{"Gust Slash", "Cyclone", "Energy Steal", "Energy Drain", "Aeoli
                  "Flaming Arrow",
                  "Hot Shot", "Wildfire", "Trueflight", "Leaden Salute"}
 
-function check_moving()
-    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
-        if state.Auto_Kite.value == false and moving then
-            state.Auto_Kite:set(true)
-        elseif state.Auto_Kite.value == true and moving == false then
-            state.Auto_Kite:set(false)
-        end
-    end
-end
-
 function unbind_numpad()
     send_command('unbind !numpad/')
     send_command('unbind !numpad*')

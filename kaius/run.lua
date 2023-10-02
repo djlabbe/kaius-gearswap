@@ -430,17 +430,17 @@ function init_gear_sets()
 
     sets.Hybrid = set_combine(sets.engaged, {
         ammo="Coiste Bodhar",
-        head=gear.Adhemar_A_Head,
+        head=gear.Nyame_Head,
         body="Ashera Harness",
         hands=gear.Adhemar_A_Hands,
-        legs=gear.Nyame_Legs,
+        legs="Samnuha Tights",
         feet=gear.Nyame_Feet,
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Dedition Earring",
         waist="Sailfi Belt +1",
         ring1=gear.Moonlight_1,
-        ring2=gear.Moonlight_2,
+        ring2="Niqmaddu Ring",
         back=gear.RUN_TP_Cape,
     })
 

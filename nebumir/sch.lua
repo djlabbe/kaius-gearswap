@@ -510,7 +510,7 @@ function init_gear_sets()
     sets.midcast.Shellra = sets.midcast.Shell
 
     sets.midcast.MndEnfeebles = {
-        main="Bunzi's Rod",
+        main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head=empty;
@@ -528,7 +528,7 @@ function init_gear_sets()
     }
 
     sets.midcast.IntEnfeebles = {
-        main="Bunzi's Rod",
+        main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head=gear.Artifact_Head,
@@ -572,7 +572,7 @@ function init_gear_sets()
     }
 
     sets.midcast.Kaustra = {
-        main="Bunzi's Rod",
+        main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Pixie Hairpin +1",
@@ -614,7 +614,7 @@ function init_gear_sets()
     })
 
     sets.midcast['Elemental Magic'] = {
-        main="Bunzi's Rod",
+        main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Agwu_Head,
@@ -632,7 +632,7 @@ function init_gear_sets()
     }
 
     sets.midcast.Helix = {
-        main="Bunzi's Rod",
+        main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Relic_Head,
@@ -669,7 +669,7 @@ function init_gear_sets()
     })
 
     sets.MagicBurst = {
-        main="Bunzi's Rod",
+        main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Agwu_Head,
@@ -693,7 +693,7 @@ function init_gear_sets()
     })
 
     sets.MagicBurst_Helix = {
-        main="Bunzi's Rod",
+        main="Daybreak",
         sub="Culminus",
         ammo="Ghastly Tathlum +1",
         head=gear.Agwu_Head, 
@@ -743,7 +743,7 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.idle.Town = set_combine(sets.MagicBurst, {waist="Hachirin-no-obi"})
+    sets.idle.Town = sets.idle
 
     sets.resting = set_combine(sets.idle, {
         main="Chatoyant Staff",

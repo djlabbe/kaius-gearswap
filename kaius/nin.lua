@@ -52,18 +52,18 @@ function user_setup()
 
     include('Global-Binds.lua')
    
-    gear.Artifact_Head = { name= "Hachiya Hatsu. +3" }
-    gear.Artifact_Feet = { name= "Hachiya Kyahan +3" }
+    gear.Artifact_Head = { name="Hachiya Hatsu. +3" }
+    gear.Artifact_Feet = { name="Hachiya Kyahan +3" }
 
-    gear.Relic_Head = { name= "Mochizuki Hatsuburi +3" }
-    gear.Relic_Body = { name= "Mochizuki Chainmail +3" }
+    gear.Relic_Head = { name="Mochizuki Hatsuburi +3" }
+    gear.Relic_Body = { name="Mochizuki Chainmail +3" }
     -- gear.Relic_Legs = { name= "Mochizuki Hakama +3" }
-    gear.Relic_Hands = { name = "Mochizuki Tekko +3" }
-    gear.Relic_Feet = { name = "Mochizuki Kyahan +3" }
+    gear.Relic_Hands = { name="Mochizuki Tekko +3" }
+    gear.Relic_Feet = { name="Mochizuki Kyahan +3" }
 
     -- gear.Empyrean_Body = { name = "Hattori Ningi +1" }
-    gear.Empyrean_Hands = { name = "Hattori Tekko +2" }
-    gear.Empyrean_Feet = { name = "Hattori Kyahan +2" }
+    gear.Empyrean_Hands = { name="Hattori Tekko +2" }
+    gear.Empyrean_Feet = { name="Hattori Kyahan +2" }
 
     gear.NIN_TP_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}}
     gear.NIN_WS_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}} --X

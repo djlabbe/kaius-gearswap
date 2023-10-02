@@ -21,13 +21,23 @@
 -- IMPORTANT: Make sure to also get the Mote-Include.lua file (and its supplementary files) to go with this.
 function get_sets()
     mote_include_version = 2
-
-    -- Load and initialize the include file.
     include("Mote-Include.lua")
+end
+
+function job_setup()
+    include("PUP-LIB.lua")
+    custom_weapon_list = S{"Godhands"}
 end
 
 function user_setup()
     include('Global-Binds.lua')
+
+    --[[
+        WIN-W will turn on or off the Lock Weapon
+    ]]
+    state.WeaponLock = M(false, 'Weapon Lock')
+    state.WeaponSet = M{['description']='Weapon Set', 'Xiucoatl', 'Verethragna', 'Godhands'}
+
 
     --[[
         F9 - Cycle Offense Mode (the offensive half of all 'hybrid' melee modes).
@@ -75,10 +85,10 @@ function user_setup()
     state.PetStyleCycleDD = M {"NORMAL", "BONE", "SPAM", "OD", "ODACC"}
 
     --The actual Pet Mode and Pet Style cycles
-    --Default Mode is Tank
-    state.PetModeCycle = M {"TANK", "DD", "MAGE"}
-    --Default Pet Cycle is Tank
-    state.PetStyleCycle = state.PetStyleCycleTank
+    --Default Mode is DD
+    state.PetModeCycle = M {"DD", "TANK", "MAGE"}
+    --Default Pet Cycle is DD
+    state.PetStyleCycle = state.PetStyleCycleDD
 
     --Toggles
     --[[
@@ -96,11 +106,6 @@ function user_setup()
         (Note this will block all gearswapping when active)
     ]]
     state.LockPetDT = M(false, "Lock Pet DT")
-
-    --[[
-        Alt + (tilda) will turn on or off the Lock Weapon
-    ]]
-    state.LockWeapon = M(false, "Lock Weapon")
 
     --[[
         //gs c toggle setftp
@@ -141,18 +146,18 @@ function user_setup()
         This will toggle the default Keybinds set up for any changeable command on the window
         //gs c hub keybinds
     ]]
-    state.Keybinds = M(false, "Hide Keybinds")
+    state.Keybinds = M(true, "Hide Keybinds")
 
-    --[[
-        Enter the slots you would lock based on a custom set up.
-        Can be used in situation like Salvage where you don't want
-        certain pieces to change.
+    send_command('bind !F1 input /ja "Overdrive" <me>')
+    send_command('bind !F2 input /ja "Heady Artifice" <me>')
 
-        //gs c toggle customgearlock
-        ]]
-    state.CustomGearLock = M(false, "Custom Gear Lock")
-    --Example customGearLock = T{"head", "waist"}
-    customGearLock = T{}
+    if player.sub_job == 'WAR' then
+        send_command('bind !t input /ja "Provoke" <t>')
+    end
+
+    send_command('bind ^numpad7 gs c set WeaponSet Xiucoatl;input /macro set 1')
+    send_command('bind ^numpad8 gs c set WeaponSet Verethragna;input /macro set 1')
+    send_command('bind ^numpad9 gs c set WeaponSet Godhands;input /macro set 1')
 
     send_command("bind !f7 gs c cycle PetModeCycle")
     send_command("bind ^f7 gs c cycleback PetModeCycle")
@@ -161,19 +166,29 @@ function user_setup()
     send_command("bind !e gs c toggle AutoMan")
     send_command("bind !d gs c toggle LockPetDT")
     send_command("bind !f6 gs c predict")
-    send_command("bind ^` gs c toggle LockWeapon")
+    send_command('bind @w gs c toggle WeaponLock')
     send_command("bind home gs c toggle setftp")
     send_command("bind PAGEUP gs c toggle autodeploy")
     send_command("bind PAGEDOWN gs c hide keybinds")
     send_command("bind = gs c clear")
 
     -- Adjust the X (horizontal) and Y (vertical) position here to adjust the window
-    pos_x = 0
-    pos_y = 0
+    pos_x = 2250
+    pos_y = 590
     setupTextWindow(pos_x, pos_y)
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    moving = false
+    get_combat_weapon()
+
+    set_macro_page(1, 18)
+    send_command('wait 3; input /lockstyleset 18')
 end
 
 function file_unload()
+    send_command('unbind !F1')
+    send_command('unbind !F2')
+    send_command('unbind !t')
     send_command("unbind !f7")
     send_command("unbind ^f7")
     send_command("unbind !f8")
@@ -181,7 +196,7 @@ function file_unload()
     send_command("unbind !e")
     send_command("unbind !d")
     send_command("unbind !f6")
-    send_command("unbind ^`")
+    send_command("unbind @w")
     send_command("unbind home")
     send_command("unbind PAGEUP")
     send_command("unbind PAGEDOWN")       
@@ -189,13 +204,12 @@ function file_unload()
     send_command("unbind =")
 end
 
-function job_setup()
-    include("PUP-LIB.lua")
-end
+
 
 function init_gear_sets()
-    gear.Animator_P2 = "Animator P II"
+    gear.Animator_P2 = "Animator P II +1"
     gear.Animator_P1 = "Animator P +1"
+    gear.Animator_Neo = "Neo Animator"
 
     gear.Artifact_Head = { name="Foire Taj +1" }
     gear.Artifact_Body = { name="Foire Tobe +1" }
@@ -221,8 +235,23 @@ function init_gear_sets()
     gear.Taeon_PUP_Legs = { name="Taeon Tights", augments={'Pet: Accuracy+25 Pet: Rng. Acc.+25','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
     gear.Taeon_PUP_Feet = { name="Taeon Boots", augments={'Pet: Accuracy+21 Pet: Rng. Acc.+21','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
 
+    gear.Herc_REPAIR_Head = {}
+    gear.Herc_REPAIR_Body = {}
+    gear.Herc_REPAIR_Hands = {}
+    gear.Herc_PETMA_Head = {}
+    gear.Herc_PETMA_Hands = {}
+    gear.Herc_PETTP_Head = { name="Herculean Helm", augments={'Pet: Accuracy+26 Pet: Rng. Acc.+26','Pet: "Store TP"+10','Pet: STR+2','Pet: Attack+7 Pet: Rng.Atk.+7',}}
+    gear.Herc_PETTP_Hands = { name="Herculean Gloves", augments={'Pet: Accuracy+14 Pet: Rng. Acc.+14','Pet: "Store TP"+11','Pet: STR+10',}}
+    gear.Herc_PETTP_Legs = { name="Herculean Trousers", augments={'Pet: Attack+20 Pet: Rng.Atk.+20','Pet: "Store TP"+11',}}
+    gear.Herc_PETTP_Feet = { name="Herculean Boots", augments={'Pet: Accuracy+10 Pet: Rng. Acc.+10','Pet: "Store TP"+10','Pet: AGI+2','Pet: Attack+8 Pet: Rng.Atk.+8',}}
+    gear.Herc_PETVIT_Head = {}
+    gear.Herc_PETVIT_Hands = {}
+    gear.Herc_PETVIT_Legs = {}
+    gear.Herc_PETVIT_Feet = {}
+
     gear.PUP_Cape = { name="Visucius's Mantle" }
     gear.PUP_WS_Cape = { name = "Visucius's Mantle" }
+    gear.PUP_TPBONUS_Cape = { name="Dispersal Mantle" }
 
 
     --------------------------------------------------------------------------------
@@ -239,11 +268,30 @@ function init_gear_sets()
     --[[
         Will be activated when Pet is not active, otherwise refer to sets.idle.Pet
     ]]
-    sets.idle = {}
+    sets.idle = {
+        range=gear.Animator_P1,
+        ammo="Automat. Oil +3",
+        head=gear.Malignance_Head,
+        body=gear.Malignance_Body,
+        hands=gear.Malignance_Hands,
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+        neck="Warder's Charm +1",
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
+        ring1="Defending Ring",
+        ring2="Purity Ring",
+        waist="Plat. Mog. Belt",
+        back=gear.PUP_Cape,
+    }
+
+    sets.Xiucoatl = { main="Xiucoatl" }
+    sets.Verethragna = { main="Verethragna" }
+    sets.Godhands = { main="Godhands" }
 
     -------------------------------------Fastcast
     sets.precast.FC = {
-        head=gear.Herc_FC_head, --13
+        head=gear.Herc_FC_Head, --13
         body="Zendik Robe", --13
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
@@ -267,7 +315,7 @@ function init_gear_sets()
     sets.precast.JA["Tactical Switch"] = {feet=gear.Empyrean_Feet}
     sets.precast.JA["Ventriloquy"] = {legs=gear.Relic_Legs}
     sets.precast.JA["Role Reversal"] = {feet=gear.Relic_Feet}
-    sets.precast.JA["Overdrive"] = {body=gea r.Relic_Body}
+    sets.precast.JA["Overdrive"] = {body=gear.Relic_Body}
 
     -- Repair Cap 50%
     sets.precast.JA["Repair"] = {
@@ -409,6 +457,7 @@ function init_gear_sets()
         ear2="Eabani Earring",
         ring1="Defending Ring",
         ring2="Purity Ring",
+        waist="Moonbow Belt +1",
         back=gear.PUP_Cape,
     }
 
@@ -539,7 +588,7 @@ function init_gear_sets()
        neck="Bathy Choker +1",
        ear1="Burana Earring",
        ear2="Infused Earring",
-       body="Hiza. Haramaki +2",
+    --    body="Hiza. Haramaki +2",
        hands=gear.Rao_C_Hands,
        legs=gear.Rao_C_Legs,
        feet=gear.Rao_C_Feet,
@@ -562,16 +611,16 @@ function init_gear_sets()
 
     -------------------------------------Magic Midcast
     sets.midcast.Pet = {
-       main="Xiocoatl",
+       main="Xiucoatl",
        range=gear.Animator_P2,
-       head=gear.Herc_PET_Head,
+       head=gear.Herc_PETMA_Head,
        body="Udug Jacket",
-       hands=gear.Herc_PET_Hands,
+       hands=gear.Herc_PETMA_Hands,
        legs=gear.Relic_Legs,
        feet=gear.Relic_Feet,
        neck="Puppetmaster's Collar +2",
        ear1="Burana Earring",
-       ear2="Enmerker Earring",
+       ear2="Enmerkar Earring",
        ring1="Tali'ah Ring",
        ring2="C. Palug Ring",
        waist="Ukko Sash",
@@ -607,6 +656,7 @@ function init_gear_sets()
         ear2="Karagoz Earring +1",
         ring1="Defending Ring",
         ring2="Purity Ring",
+        waist="Moonbow Belt +1",
         back=gear.PUP_Cape,
     }
 
@@ -629,6 +679,7 @@ function init_gear_sets()
         ear2="Karagoz Earring +1",
         ring1="Defending Ring",
         ring2="Purity Ring",
+        waist="Moonbow Belt +1",
         back=gear.PUP_Cape,
     }
 
@@ -647,7 +698,7 @@ function init_gear_sets()
         Activated by Alt+D or
         F10 if Physical Defense Mode = PetDT
     ]]
-    sets.pet.EmergencyDT = {
+    sets.petEmergencyDT = {
        main="Gnafron's Adargas",
        range=gear.Animator_P1,
        ammo="Automat. Oil +3",
@@ -777,7 +828,7 @@ function init_gear_sets()
         feet="Naga Kyahan",
         neck="Shulmanu Collar",
         ear1="Burana Earring",
-        ear2="Enmerker Earring",
+        ear2="Enmerkar Earring",
         ring1=gear.Varar_1,
         ring2="Overbearing Ring",
         back=gear.PUP_Cape,
@@ -798,7 +849,7 @@ function init_gear_sets()
         feet="Naga Kyahan",
         neck="Shulmanu Collar",
         ear1="Burana Earring",
-        ear2="Enmerker Earring",
+        ear2="Enmerkar Earring",
         ring1=gear.Varar_1,
         ring2="Overbearing Ring",
         back=gear.PUP_Cape,
@@ -830,7 +881,7 @@ function init_gear_sets()
         ear2="Burana Earring",
         ring1=gear.Varar_1,
         ring2="C. Palug Ring",
-        back=gear.PUP_Cape,
+        back=gear.PUP_TPBONUS_Cape,
      }
 
     -- Cannibal Blade
@@ -851,7 +902,7 @@ function init_gear_sets()
         feet="Naga Kyahan",
         neck="Shulmanu Collar",
         ear1="Burana Earring",
-        ear2="Enmerker Earring",
+        ear2="Enmerkar Earring",
         ring1=gear.Varar_1,
         ring2="Overbearing Ring",
         back=gear.PUP_Cape,
@@ -866,8 +917,8 @@ function init_gear_sets()
     -- |_|  |_|_|___/\___| |_____/ \___|\__|___/
     ---------------------------------------------
     -- Town Set
-    sets.idle.Town = sets.idle.Pet.MasterDT
+    sets.idle.Town = set_combine(sets.idle.Pet.MasterDT, {range="Neo Animator"})
     sets.defense.MasterDT = sets.idle.MasterDT
-    sets.defense.PetDT = sets.pet.EmergencyDT
-    sets.defense.PetMDT = set_combine(sets.pet.EmergencyDT, {})
+    sets.defense.PetDT = sets.petEmergencyDT
+    sets.defense.PetMDT = set_combine(sets.petEmergencyDT, {})
 end

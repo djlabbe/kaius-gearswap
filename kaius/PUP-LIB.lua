@@ -90,7 +90,10 @@ keybinds_on['key_bind_physical'] = '(CTRL+F10)'
 keybinds_on['key_bind_hybrid'] = '(CTRL+F9)'
 keybinds_on['key_bind_auto_maneuver'] = '(ALT+E)'
 keybinds_on['key_bind_pet_dt'] = '(ALT+D)'
-keybinds_on['key_bind_lock_weapon'] = '(ALT+Tilda)'
+keybinds_on['key_bind_lock_weapon'] = '(WIN+W)'
+keybinds_on['key_bind_wsftp'] = '(HOME)'
+keybinds_on['key_bind_adeploy'] = '(PG UP)'
+
 
 --[[
     This gets passed in when the Keybinds are turned off.
@@ -107,6 +110,8 @@ keybinds_off['key_bind_hybrid'] = ''
 keybinds_off['key_bind_auto_maneuver'] = ''
 keybinds_off['key_bind_pet_dt'] = ''
 keybinds_off['key_bind_lock_weapon'] = ''
+keybinds_off['key_bind_wsftp'] = ''
+keybinds_off['key_bind_adeploy'] = ''
 
 --[[
     These below are used to fill in the different sections on the HUB window
@@ -138,19 +143,18 @@ ${current_pet_skills|- No Skills To Track}
 ]]
 
     hub_mode_std = [[ \cs(255, 115, 0)======= Mode ============\cr
--\cs(125, 125, 0)${key_bind_idle} Idle Mode :\cr ${player_current_idle|Idle}
--\cs(125, 125, 0)${key_bind_offense} Offense Mode :\cr ${player_current_offense|MasterPet}
--\cs(125, 125, 0)${key_bind_physical} Physical Mode :\cr ${player_current_physical|PetDT}
+-\cs(125, 125, 0)${key_bind_offense} Off Mode :\cr ${player_current_offense|MasterPet}
 -\cs(125, 125, 0)${key_bind_hybrid} Hybrid Mode :\cr ${player_current_hybrid|Normal}
+-\cs(125, 125, 0)${key_bind_physical} PDT Mode :\cr ${player_current_physical|PetDT}
+-\cs(125, 125, 0)${key_bind_idle} Idle Mode :\cr ${player_current_idle|Idle}
 ]]
 
     hub_options_std = [[ \cs(255, 115, 0)======= Options ==========\cr
 -\cs(125, 125, 0)${key_bind_auto_maneuver} Auto Maneuver :\cr ${toggle_auto_maneuver|OFF}
 -\cs(125, 125, 0)${key_bind_pet_dt} Lock Pet DT Set :\cr ${toggle_lock_pet_dt_set|OFF}
--\cs(125, 125, 0)${key_bind_lock_weapon} Lock Weapon :\cr ${toggle_lock_weapon|OFF}
--\cs(125, 125, 0) Weaponskill FTP :\cr ${toggle_weaponskill_ftp|OFF}
--\cs(125, 125, 0) Custom Gear Lock :\cr ${toggle_custom_gear_lock|OFF}
--\cs(125, 125, 0) Auto Deploy :\cr ${toggle_auto_deploy|OFF}
+-\cs(125, 125, 0)${key_bind_lock_weapon} Weapon Lock :\cr ${toggle_lock_weapon|OFF}
+-\cs(125, 125, 0)${key_bind_wsftp} Weaponskill FTP :\cr ${toggle_weaponskill_ftp|OFF}
+-\cs(125, 125, 0)${key_bind_adeploy} Auto Deploy :\cr ${toggle_auto_deploy|OFF}
 ]]
 
 --[[
@@ -217,7 +221,7 @@ function validateTextInformation()
         main_text_hub.toggle_lock_pet_dt_set = const_off
     end
 
-    if state.LockWeapon.value then
+    if state.WeaponLock.value then
         main_text_hub.toggle_lock_weapon = const_on
     else
         main_text_hub.toggle_lock_weapon = const_off
@@ -227,12 +231,6 @@ function validateTextInformation()
         main_text_hub.toggle_weaponskill_ftp = const_on
     else
         main_text_hub.toggle_weaponskill_ftp = const_off
-    end
-
-    if state.CustomGearLock.value then
-        main_text_hub.toggle_custom_gear_lock =  const_on
-    else
-        main_text_hub.toggle_custom_gear_lock =  const_off
     end
 
     if state.AutoDeploy.value then
@@ -276,7 +274,7 @@ function setupTextWindow(pos_x, pos_y)
     default_settings.flags.italic = false
     default_settings.padding = 10
     default_settings.text = {}
-    default_settings.text.size = 12
+    default_settings.text.size = 10
     default_settings.text.font = 'Arial'
     default_settings.text.fonts = {}
     default_settings.text.alpha = 255
@@ -433,7 +431,7 @@ end
 ------------------------------------
 
 --Used to calculate the Combined State of you and your pet
-function TotalSCalc()
+function calculateTotalState()
 
     --Figures out state when Pet Mode is DD
     if state.PetModeCycle.current == const_dd then
@@ -609,14 +607,21 @@ function user_customize_idle_set(idleSet)
     
     if Master_State:lower() == const_stateIdle:lower() and Pet_State:lower() == const_stateEngaged:lower() then
         if state.HybridMode.current == "Normal" then --If Hybrid Mode is Normal then simply return the set
-            return idleSet
+            idleSet = idleSet
         else
             idleSet = sets.idle.Pet.Engaged[state.HybridMode.current] --When Pet is engaged we pass in the Hybrid Mode to match to an existing set
-            return idleSet
         end
-    else --Otherwise return the idleSet with no changes from us
-        return idleSet
     end
+
+    if state.Buff.Doom then
+        idleSet = set_combine(idleSet, sets.buff.Doom)
+    end
+    if state.Auto_Kite.value == true then
+        idleSet = set_combine(idleSet, sets.Kiting)
+    end
+
+    return idleSet
+
 end
 
 --Used to determine what Hybrid Mode to use when Player is engaged for trusts only and Pet is Engaged
@@ -637,7 +642,7 @@ end
 
 function job_precast(spell, action, spellMap, eventArgs)
     if spell.english == "Activate" or spell.english == "Deus Ex Automata" then
-        TotalSCalc()
+        calculateTotalState()
         determinePuppetType()
     elseif string.find(spell.english, "Maneuver") then
         equip(sets.precast.JA.Maneuver)
@@ -701,7 +706,7 @@ end
 function job_status_change(new, old)
     if new == "Engaged" then
         Master_State = const_stateEngaged
-        TotalSCalc()
+        calculateTotalState()
 
         --If we have AutoDeploy turned on and our pet is out then we will auto deploy
         if state.AutoDeploy.value == true and pet.isvalid then
@@ -717,7 +722,7 @@ function job_status_change(new, old)
         end
     else
         Master_State = const_stateIdle
-        TotalSCalc()
+        calculateTotalState()
     end
 
     handle_equipping_gear(player.status, Pet_State)
@@ -726,10 +731,10 @@ end
 function job_pet_status_change(new, old)
     if new == "Engaged" then
         Pet_State = const_stateEngaged
-        TotalSCalc()
+        calculateTotalState()
     else
         Pet_State = const_stateIdle
-        TotalSCalc()
+        calculateTotalState()
     end
 
     handle_equipping_gear(player.status, Pet_State)
@@ -847,13 +852,11 @@ function job_self_command(command, eventArgs)
     elseif command[1]:lower() == "setftp" then --Set the FTP toggle
         state.SetFTP:toggle()
         validateTextInformation()
-    elseif command[1]:lower() == "customgearlock" then --Set the customgearlock
-        state.CustomGearLock:toggle()
-        validateTextInformation()
     elseif command[1]:lower() == "clear" then
         failedManeuvers:clear()
         msg('Maneuvers have been reset')
     end
+    gearinfo(command, eventArgs)
 end
 
 --Defaults
@@ -1018,10 +1021,7 @@ windower.register_event(
                     (Master_State:lower() == "idle" or state.OffenseMode.value == "Trusts")
              then
                 --Now if pet has more than 1000 tp and pet is engaged and didn't just finish a weaponskill and we have not locked the pet out this set
-                if
-                    pet.tp >= 850 and Pet_State == const_stateEngaged and justFinishedWeaponSkill == false and
-                        petWeaponSkillLock == false
-                 then
+                if pet.tp >= 850 and Pet_State == const_stateEngaged and justFinishedWeaponSkill == false and petWeaponSkillLock == false then
                     if state.SetFTP.value then
                         equip(set_combine(sets.midcast.Pet.WSFTP))
                     else
@@ -1110,6 +1110,39 @@ windower.register_event(
     end
 )
 
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
+
+function job_update(cmdParams, eventArgs)
+    get_combat_weapon()
+    handle_equipping_gear(player.status)
+end
+
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
+    check_moving()
+end
+
+function get_combat_weapon()
+    state.CombatWeapon:reset()
+    if custom_weapon_list:contains(player.equipment.main) then
+        state.CombatWeapon:set(player.equipment.main)
+    end
+end
+
+
 --Passes state changes for cycle commands
 --handle_update is always called when a job state is changed
 --Best to adjust gear in job_handle_update which is an override for the job file
@@ -1128,7 +1161,6 @@ function job_state_change(stateField, newValue, oldValue)
         Then we are given the newValue what it is changing to
         Then we are given the oldValue what it is changing from
     ]]
-
     if stateField == const_PetModeCycle then --Handles PetModeCycle Changes
         --Depending on the Pet Mode we are changing too these each have their own style to use
         if newValue == const_tank then --Sets PetStyleCycle to Tank if we are going to Tank Mode
@@ -1161,7 +1193,7 @@ function job_state_change(stateField, newValue, oldValue)
         --This command overrides everything and blocks all gear changes
         --Will lock until turned off or Pet is disengaged
         if newValue == true then
-            equip(sets.pet.EmergencyDT)
+            equip(sets.petEmergencyDT)
             disable(
                 "main",
                 "sub",
@@ -1204,24 +1236,6 @@ function job_state_change(stateField, newValue, oldValue)
 
             main_text_hub.toggle_lock_pet_dt_set = const_off
         end
-
-    elseif stateField == "Lock Weapon" then --Updates HUB and disables/enables window for Lock Weapon
-        if newValue == true then
-            disable("main")
-            main_text_hub.toggle_lock_weapon = const_on
-        else
-            enable("main")
-            main_text_hub.toggle_lock_weapon = const_off
-        end
-    elseif stateField == "Custom Gear Lock" then --Updates HUB and disables/enables gear from custom lock
-        if newValue == true then
-            main_text_hub.toggle_custom_gear_lock = const_on
-            disable(customGearLock)
-        else
-            main_text_hub.toggle_custom_gear_lock = const_off
-            enable(customGearLock)
-            handle_equipping_gear(player.status, Pet_State)
-        end
     elseif stateField == 'Auto Deploy' then --Updates HUB for Auto Deploy
         if newValue == true then
             main_text_hub.toggle_auto_deploy = const_on
@@ -1255,6 +1269,13 @@ function job_state_change(stateField, newValue, oldValue)
     elseif stateField == 'Idle Mode' then -- Updates HUB for Idle Mode
         main_text_hub.player_current_idle = newValue
     end
+
+    if state.WeaponLock.value == true then
+        disable('main','sub')
+    else
+        enable('main','sub')
+    end
+    equip(sets[state.WeaponSet.current])
 end
 
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.
@@ -1270,7 +1291,7 @@ function display_current_job_state(eventArgs)
         msg = msg .. ", Pet Style: (" .. state.PetStyleCycle.value .. ")"
     end
 
-    TotalSCalc()
+    calculateTotalState()
     determinePuppetType()
     handle_equipping_gear(player.status, Pet_State)
 
