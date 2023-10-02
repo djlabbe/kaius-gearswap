@@ -27,6 +27,9 @@ Strobe_Time = 0
 
 --Seeds the time used to calculate various functions per second
 time_start = os.time()
+player = windower.ffxi.get_player()
+player.is_moving = false
+player.position = T{x = 0, y = 0, x = 0} 
 
 --Constants in case we decide to change names down the road, will be much easier
 const_dd = "DD"
@@ -514,9 +517,7 @@ function determinePuppetType()
             end
         elseif frame == ValFrame then -- Default Standard Tank
             if 
-                pet.attachments.inhibitor == true 
-                or pet.attachments.attuner == true 
-                and (not pet.attachments.strobe or not pet.attachments['strobe ii']) then -- Bone Slayer
+                pet.attachments.inhibitor == true or pet.attachments.attuner == true  and (not pet.attachments.strobe or not pet.attachments['strobe ii']) then -- Bone Slayer
                 handle_set({const_PetModeCycle, const_dd})
                 handle_set({const_PetStyleCycle, "BONE"})
             else -- Standard Tank
@@ -589,15 +590,6 @@ function table.contains(table, element)
     return false
 end
 
---Takes a condition and returns a given value based on if it is true or false
-function ternary(cond, T, F)
-    if cond then
-        return T
-    else
-        return F
-    end
-end
-
 ----------------------------------------------------
 ----------Windower Hooks/Custom Gearswap------------
 ----------------------------------------------------
@@ -616,7 +608,7 @@ function user_customize_idle_set(idleSet)
     if state.Buff.Doom then
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
-    if state.Auto_Kite.value == true then
+    if player.is_moving then
         idleSet = set_combine(idleSet, sets.Kiting)
     end
 
@@ -943,7 +935,28 @@ function updatePetStats()
             main_text_hub.pet_current_tp = current_pet_tp
         end
     end
+end
 
+function check_player_movement(player)
+	if player.position == nul then
+		player.position = T{} 
+		player.position = {x = 0, y = 0, x = 0} 
+	end
+	if windower.ffxi.get_mob_by_index(player.index) ~= null then
+        current_pos_x = windower.ffxi.get_mob_by_index(player.index).x
+        current_pos_y = windower.ffxi.get_mob_by_index(player.index).y
+		current_pos_z = windower.ffxi.get_mob_by_index(player.index).z
+		if player.position.x ~= current_pos_x and player.position.y ~= current_pos_y then
+			player.is_moving = true
+		else
+			player.is_moving = false
+		end
+		player.position.x = current_pos_x
+		player.position.y = current_pos_y
+		player.position.z = current_pos_z
+	end
+	
+	return player.is_moving
 end
 
 windower.register_event(
@@ -955,6 +968,12 @@ windower.register_event(
         --Items we want to check every second
         if os.time() > time_start then
             time_start = os.time()
+
+            -- Determine if moving for auto kite
+            local temp_pos = player.position
+            player = windower.ffxi.get_player()
+            player.position = temp_pos
+            player.is_moving = check_player_movement(player)
 
             calculatePetTpPerSec()
 
@@ -1109,31 +1128,6 @@ windower.register_event(
         return modified, mode
     end
 )
-
-function gearinfo(cmdParams, eventArgs)
-    if cmdParams[1] == 'gearinfo' then
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
-    end
-end
-
-function job_update(cmdParams, eventArgs)
-    get_combat_weapon()
-    handle_equipping_gear(player.status)
-end
-
-function job_handle_equipping_gear(playerStatus, eventArgs)
-    check_gear()
-    check_moving()
-end
 
 function get_combat_weapon()
     state.CombatWeapon:reset()

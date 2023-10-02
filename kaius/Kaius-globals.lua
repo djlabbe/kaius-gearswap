@@ -416,6 +416,7 @@ function handle_strategems(cmdParams)
     end
 end
 
+
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
