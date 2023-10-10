@@ -621,7 +621,7 @@ function init_gear_sets()
     sets.midcast.MndEnfeeblesAcc =  {
         main="Contemplator +1",
         sub="Enki Strap",
-        range="Ullr",
+        range=" ",
         ammo=empty,
         head=gear.Artifact_Head,
         body=gear.Artifact_Body,
@@ -703,8 +703,9 @@ function init_gear_sets()
     sets.midcast.IntEnfeeblesAcc = {
         main="Contemplator +1",
         sub="Enki Strap",
-        range="Ullr",
-        ammo=empty,
+        -- range="Ullr",
+        -- ammo=empty,
+        ammo="Pemphredo Tathlum",
         head=gear.Relic_Head,
         body=gear.Artifact_Body,
         hands=gear.Empyrean_Hands,

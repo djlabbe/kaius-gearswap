@@ -80,22 +80,22 @@ function user_setup()
 
     include('Global-Binds.lua') 
 
-    gear.Artifact_Head = { name= "Academic's Mortarboard +3" }
-    gear.Artifact_Body = { name= "Academic's Gown +3" }
-    gear.Artifact_Hands = { name= "Academic's Bracers +3" }
-    gear.Artifact_Legs = { name= "Academic's Pants +3" }
-    gear.Artifact_Feet = { name= "Academic's Loafers +3" }
+    gear.Artifact_Head = { name= "Academic's Mortarboard +1" }
+    gear.Artifact_Body = { name= "Academic's Gown +1" }
+    gear.Artifact_Hands = { name= "Academic's Bracers +1" }
+    gear.Artifact_Legs = { name= "Academic's Pants +1" }
+    gear.Artifact_Feet = { name= "Academic's Loafers +1" }
 
     gear.Relic_Head = { name= "Pedagogy Mortarboard +1" }
     gear.Relic_Body = { name= "Pedagogy Gown +1" }
     gear.Relic_Hands = { name= "Pedagogy Bracers +1" }
-    gear.Relic_Legs = { name= "Pedagogy Pants +1" }
+    gear.Relic_Legs = { name= "Pedagogy Pants +3" }
     gear.Relic_Feet = { name= "Pedagogy Loafers +1" }
 
-    gear.Empyrean_Head = { name= "Arbatel Bonnet +2" }
-    gear.Empyrean_Body = { name= "Arbatel Gown +2" }
-    gear.Empyrean_Hands = { name= "Arbatel Bracers +2" }
-    gear.Empyrean_Legs = { name= "Arbatel Pants +2" }
+    gear.Empyrean_Head = { name= "Arbatel Bonnet +3" }
+    gear.Empyrean_Body = { name= "Arbatel Gown +3" }
+    gear.Empyrean_Hands = { name= "Arbatel Bracers +3" }
+    gear.Empyrean_Legs = { name= "Arbatel Pants +3" }
     gear.Empyrean_Feet = { name= "Arbatel Loafers +2" }
 
     gear.SCH_MAB_Cape = { name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Mag. Evasion+15',}}
@@ -232,7 +232,7 @@ function init_gear_sets()
         hands=gear.Artifact_Hands, --9
         legs="Pinga Pants", --11
         feet=gear.Relic_Feet, --8
-        neck="Orunmila's Torque", --5
+        neck="Baetyl Pendant", --4
         ear1="Malignance Earring", --4
         ear2="Enchntr. Earring +1", --2
         ring1="Kishar Ring", --4
@@ -342,7 +342,7 @@ function init_gear_sets()
         hands=gear.Kaykaus_D_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Kaykaus_B_Feet,
-        neck="Orunmila's Torque",
+        neck="Baetyl Pendant",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
         ring1="Mephitas's Ring +1",
@@ -392,7 +392,7 @@ function init_gear_sets()
         hands=gear.Relic_Hands,
         legs=gear.Artifact_Legs,
         feet="Vanya Clogs",
-        neck="Incanter's Torque",
+        neck="Baetyl Pendant",
         ear2="Meili Earring",
         ring1="Haoma's Ring",
         ring2="Menelaus's Ring",
@@ -424,7 +424,8 @@ function init_gear_sets()
         hands=gear.Telchine_ENH_Hands,
         legs=gear.Telchine_ENH_Legs,
         feet=gear.Telchine_ENH_Feet,
-        neck="Incanter's Torque",
+        -- neck="Incanter's Torque",
+        neck="Baetyl Pendant",
         ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1=gear.Stikini_1,
@@ -442,7 +443,8 @@ function init_gear_sets()
         hands=gear.Telchine_ENH_Hands,
         legs=gear.Telchine_ENH_Legs,
         feet=gear.Telchine_ENH_Feet,
-        neck="Incanter's Torque",
+        -- neck="Incanter's Torque",
+        neck="Baetyl Pendant",
         ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1=gear.Stikini_1,
@@ -524,7 +526,7 @@ function init_gear_sets()
         ring1="Kishar Ring",
         ring2=gear.Stikini_2,
         back="Aurist's Cape +1",
-        waist="Obstinate Sash",
+        waist="Acuity Belt +1",
     }
 
     sets.midcast.IntEnfeebles = {
@@ -542,7 +544,7 @@ function init_gear_sets()
         ring1="Kishar Ring",
         ring2=gear.Stikini_2,
         back="Aurist's Cape +1",
-        waist="Obstinate Sash",
+        waist="Acuity Belt +1",
     }
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
@@ -576,10 +578,10 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Pixie Hairpin +1",
-        body=gear.Agwu_Body,
+        body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Agwu_Feet,
+        feet=gear.Empyrean_Feet,
         neck="Argute Stole +2", 
         ear1="Malignance Earring",
         ear2="Regal Earring",
@@ -599,7 +601,7 @@ function init_gear_sets()
         legs=gear.Relic_Legs,
         feet=gear.Agwu_Feet,
         neck="Erra Pendant",
-        ear1="Hirudinea Earring",
+        ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Evanescence Ring",
         ring2="Archon Ring",
@@ -617,7 +619,7 @@ function init_gear_sets()
         main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
-        head=gear.Agwu_Head,
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
@@ -640,13 +642,13 @@ function init_gear_sets()
         ear1="Malignance Earring",
         -- ear2="Arbatel Earring +1",
         ear2="Regal Earring",
-        body=gear.Agwu_Body,
-        hands=gear.Agwu_Hands,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
         ring1="Medada's Ring",
         ring2="Fenrir Ring +1",
         back=gear.SCH_MAB_Cape,
-        waist="Skrymir Cord +1",
-        legs=gear.Agwu_Legs,
+        waist="Skrymir Cord",
+        legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
     }
 
@@ -672,23 +674,23 @@ function init_gear_sets()
         main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
-        head=gear.Agwu_Head,
+        head=gear.Empyrean_Head,
         neck="Argute Stole +2",
         ear1="Malignance Earring",
         ear2="Regal Earring",
         body=gear.Empyrean_Body,
-        hands=gear.Agwu_Hands,
+        hands=gear.Empyrean_Hands,
         ring1="Medada's Ring",
         ring2="Metamorph Ring +1",
         back=gear.SCH_MAB_Cape,
         waist="Acuity Belt +1",
-        legs=gear.Agwu_Legs,
+        legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
     } 
 
     sets.MagicBurst_Ebullience = set_combine(sets.MagicBurst, {
         head=gear.Empyrean_Head, 
-        body=gear.Agwu_Body,
+        body=gear.Empyrean_Body,
         ring1="Mujin Band",
     })
 
@@ -696,17 +698,16 @@ function init_gear_sets()
         main="Daybreak",
         sub="Culminus",
         ammo="Ghastly Tathlum +1",
-        head=gear.Agwu_Head, 
+        head=gear.Empyrean_Head, 
         neck="Argute Stole +2",
         ear1="Malignance Earring",
         ear2="Regal Earring",
-        -- ear2="Arbatel Earring +1",
-        body=gear.Agwu_Body,
-        hands=gear.Agwu_Hands,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
         ring1="Medada's Ring",
         ring2="Mujin Band",
         back=gear.SCH_MAB_Cape,
-        waist="Skrymir Cord +1",
+        waist="Skrymir Cord",
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet, 
     }

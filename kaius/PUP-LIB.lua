@@ -27,9 +27,6 @@ Strobe_Time = 0
 
 --Seeds the time used to calculate various functions per second
 time_start = os.time()
-player = windower.ffxi.get_player()
-player.is_moving = false
-player.position = T{x = 0, y = 0, x = 0} 
 
 --Constants in case we decide to change names down the road, will be much easier
 const_dd = "DD"
@@ -599,21 +596,14 @@ function user_customize_idle_set(idleSet)
     
     if Master_State:lower() == const_stateIdle:lower() and Pet_State:lower() == const_stateEngaged:lower() then
         if state.HybridMode.current == "Normal" then --If Hybrid Mode is Normal then simply return the set
-            idleSet = idleSet
+            return idleSet
         else
             idleSet = sets.idle.Pet.Engaged[state.HybridMode.current] --When Pet is engaged we pass in the Hybrid Mode to match to an existing set
+            return idleSet
         end
+    else --Otherwise return the idleSet with no changes from us
+        return idleSet
     end
-
-    if state.Buff.Doom then
-        idleSet = set_combine(idleSet, sets.buff.Doom)
-    end
-    if player.is_moving then
-        idleSet = set_combine(idleSet, sets.Kiting)
-    end
-
-    return idleSet
-
 end
 
 --Used to determine what Hybrid Mode to use when Player is engaged for trusts only and Pet is Engaged
@@ -848,7 +838,6 @@ function job_self_command(command, eventArgs)
         failedManeuvers:clear()
         msg('Maneuvers have been reset')
     end
-    gearinfo(command, eventArgs)
 end
 
 --Defaults
@@ -935,28 +924,7 @@ function updatePetStats()
             main_text_hub.pet_current_tp = current_pet_tp
         end
     end
-end
 
-function check_player_movement(player)
-	if player.position == nul then
-		player.position = T{} 
-		player.position = {x = 0, y = 0, x = 0} 
-	end
-	if windower.ffxi.get_mob_by_index(player.index) ~= null then
-        current_pos_x = windower.ffxi.get_mob_by_index(player.index).x
-        current_pos_y = windower.ffxi.get_mob_by_index(player.index).y
-		current_pos_z = windower.ffxi.get_mob_by_index(player.index).z
-		if player.position.x ~= current_pos_x and player.position.y ~= current_pos_y then
-			player.is_moving = true
-		else
-			player.is_moving = false
-		end
-		player.position.x = current_pos_x
-		player.position.y = current_pos_y
-		player.position.z = current_pos_z
-	end
-	
-	return player.is_moving
 end
 
 windower.register_event(
@@ -968,12 +936,6 @@ windower.register_event(
         --Items we want to check every second
         if os.time() > time_start then
             time_start = os.time()
-
-            -- Determine if moving for auto kite
-            local temp_pos = player.position
-            player = windower.ffxi.get_player()
-            player.position = temp_pos
-            player.is_moving = check_player_movement(player)
 
             calculatePetTpPerSec()
 
@@ -1155,6 +1117,7 @@ function job_state_change(stateField, newValue, oldValue)
         Then we are given the newValue what it is changing to
         Then we are given the oldValue what it is changing from
     ]]
+    
     if stateField == const_PetModeCycle then --Handles PetModeCycle Changes
         --Depending on the Pet Mode we are changing too these each have their own style to use
         if newValue == const_tank then --Sets PetStyleCycle to Tank if we are going to Tank Mode

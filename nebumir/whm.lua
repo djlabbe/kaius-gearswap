@@ -223,7 +223,7 @@ function init_gear_sets()
         hands=gear.Artifact_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Kaykaus_B_Feet,   
-        ring1="Lebeche Ring", --3/(-5)
+        ring1="Defending Ring", --3/(-5)
         ring2="Mephitas's Ring +1",
         back=gear.WHM_Cure_Cape,
         waist="Shinjutsu-no-Obi +1",

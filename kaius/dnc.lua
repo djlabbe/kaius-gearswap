@@ -38,10 +38,6 @@
 --                                  one of the above commands.
 --  gs c cycle altstep              Cycles through the available steps to use for alternating with the
 --                                  configured main step.
---  gs c toggle usealtstep          Toggles whether or not to use an alternate step.
---  gs c toggle selectsteptarget    Toggles whether or not to use <stnpc> (as opposed to <t>) when using a step.
-
-
 -------------------------------------------------------------------------------------------------------------------
 function get_sets()
     mote_include_version = 2
@@ -60,9 +56,6 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
     state.MainStep = M{['description']='Main Step', 'Box Step', 'Quickstep', 'Feather Step', 'Stutter Step'}
     state.AltStep = M{['description']='Alt Step', 'Feather Step', 'Quickstep', 'Stutter Step', 'Box Step'}
-    state.UseAltStep = M(false, 'Use Alt Step')
-    state.SelectStepTarget = M(false, 'Select Step Target')
-    state.IgnoreTargetting = M(true, 'Ignore Targetting')
 
     state.WeaponSet = M{['description']='Weapon Set', 'Twash_TP', 'Twash_Gleti', }
     state.WeaponLock = M(false, 'Weapon Lock')
@@ -77,7 +70,7 @@ function user_setup()
     gear.Relic_Body = { name= "Horos Casaque +3" }
     gear.Relic_Hands = { name= "Horos Bangles +3" }
     gear.Relic_Legs = { name= "Horos Tights +3" }
-    -- gear.Relic_Feet = { name= "Horos Toe shoes +3" }
+    gear.Relic_Feet = { name= "Horos Toe shoes +3" }
 
     gear.Empyrean_Head = { name= "Maculele Tiara +3" }
     gear.Empyrean_Body = { name= "Maculele Casaque +2" }
@@ -89,7 +82,7 @@ function user_setup()
     gear.DNC_TP_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+8','Phys. dmg. taken-10%',}}
     gear.DNC_WS1_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
     gear.DNC_WS2_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
-    gear.DNC_WS3_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+    gear.DNC_WS3_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Crit.hit rate+10','Phys. dmg. taken-10%',}}
 
     include('Global-Binds.lua')
 
@@ -448,7 +441,6 @@ function init_gear_sets()
     }
 
     sets.engaged.Acc = set_combine(sets.engaged, {
-        ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
     })
@@ -498,7 +490,6 @@ function init_gear_sets()
     }
 
     sets.engaged.DW.Acc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
-        ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
     })
@@ -522,7 +513,6 @@ function init_gear_sets()
 
     sets.engaged.DW.Acc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
 
-        ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
     })
@@ -537,7 +527,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Etoile Gorget +2",
         ear1="Eabani Earring", --4
-        ear2="Macuelele Earring +1",
+        ear2="Maculele Earring +1",
         ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
@@ -545,7 +535,6 @@ function init_gear_sets()
       } -- 4% Gear
 
     sets.engaged.DW.Acc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
-        ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
     })
@@ -560,7 +549,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Etoile Gorget +2",
         ear1="Sherida Earring",
-        ear2="Macuelele Earring +1",
+        ear2="Maculele Earring +1",
         ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
@@ -568,7 +557,7 @@ function init_gear_sets()
     } -- 0%
 
     sets.engaged.DW.Acc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
-        ear2="Telos Earring",
+        head=gear.Malignance_Head,
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
     })
@@ -781,17 +770,6 @@ function customize_melee_set(meleeSet)
     return meleeSet
 end
 
--- Handle auto-targetting based on local setup.
-function job_auto_change_target(spell, action, spellMap, eventArgs)
-    if spell.type == 'Step' then
-        if state.IgnoreTargetting.value == true then
-            state.IgnoreTargetting:reset()
-            eventArgs.handled = true
-        end
-
-        eventArgs.SelectNPCTargets = state.SelectStepTarget.value
-    end
-end
 
 
 -- Function to display the current relevant user state when doing an update.
@@ -852,16 +830,10 @@ end
 
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1] == 'step' then
-        if cmdParams[2] == 't' then
-            state.IgnoreTargetting:set()
-        end
         send_command('@input /ja "'..state['MainStep'].current..'" <t>')
     end
 
     if cmdParams[1] == 'step2' then
-        if cmdParams[2] == 't' then
-            state.IgnoreTargetting:set()
-        end
         send_command('@input /ja "'..state['AltStep'].current..'" <t>')
     end
 

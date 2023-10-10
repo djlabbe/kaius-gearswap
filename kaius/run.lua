@@ -352,10 +352,10 @@ function init_gear_sets()
         neck="Sacro Gorget", -- 10
         ear1={name="Tuisto Earring", priority=150},
         ear2="Mendi. Earring", -- 5
-        ring1="Lebeche Ring", -- 3
-        ring2="Menelaus's Ring", --5
-        back=gear.RUN_FC_Cape, -- 7
-        waist="Sroda Belt",
+        ring1=gear.Moonlight_1,
+        ring2="Eihwaz Ring", 
+        back=gear.RUN_FC_Cape,
+        waist="Sroda Belt", --35
     }
 
     sets.midcast['Enhancing Magic'] = set_combine(sets.midcast.SpellInterrupt, {
@@ -413,16 +413,20 @@ function init_gear_sets()
     
     sets.engaged = {
         ammo="Staunch Tathlum +1",
+        -- ammo="Homiliary",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
         neck={name="Futhark Torque +2", priority=60},
+        -- neck="Sibyl Scarf",
         ear1={name="Tuisto Earring", priority=150},
         ear2={name="Odnowa Earring +1", priority=110}, 
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
+        -- ring1=gear.Stikini_1,
+        -- ring2=gear.Stikini_2,
         back=gear.RUN_TANK_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     } --3708 hp
@@ -448,6 +452,7 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
+        -- ammo="Homiliary",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
@@ -458,6 +463,8 @@ function init_gear_sets()
         ear2={name="Odnowa Earring +1", priority=110}, 
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
+        -- ring1=gear.Stikini_1,
+        -- ring2=gear.Stikini_2,
         back=gear.RUN_TANK_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     }

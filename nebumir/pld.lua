@@ -61,6 +61,7 @@ function user_setup()
     gear.PLD_FC_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Mag. Evasion+15',}}
     gear.PLD_SIRD_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Spell interruption rate down-10%',}}
     gear.PLD_CURE_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Cure" potency +10%','Phys. dmg. taken-10%',}}
+    gear.PLD_DA_Cape = { name="Rudianos's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     gear.PLD_PHLX_Cape = { name="Weard Mantle", augments={'VIT+1','DEX+3','Enmity+6','Phalanx +5',}}
 
     send_command('bind @f10 gs c toggle EquipShield')
@@ -374,19 +375,19 @@ function init_gear_sets()
     }
 
     sets.engaged = {
-        ammo="Staunch Tathlum +1", --3
-        head=gear.Empyrean_Head, 
-        body=gear.Sakpata_Body, --10
-        hands=gear.Sakpata_Hands, --8
-        legs=gear.Empyrean_Legs, --12
-        feet=gear.Sakpata_Feet, --6
-        neck={name="Unmoving Collar +1", priority=200},
-        waist={name="Platinum Moogle Belt", priority=999},
-        ear1={name="Tuisto Earring", priority=150},
-        ear2={name="Odnowa Earring +1", priority=110},
-        ring1=gear.Moonlight_1,
-        ring2="Petrov Ring",
-        back=gear.PLD_Idle_Cape,
+        ammo="Coiste Bodhar",
+        head="Flam. Zucchetto +2",
+        body="Hjarrandi Breast.",
+        hands="Sakpata's Gauntlets",
+        legs="Chev. Cuisses +3",
+        feet="Flam. Gambieras +2",
+        neck="Rep. Plat. Medal",
+        waist="Sailfi Belt +1",
+        left_ear="Cessance Earring",
+        right_ear="Dedition Earring",
+        left_ring="Moonlight Ring",
+        right_ring="Petrov Ring",
+        back=gear.PLD_DA_Cape,
     } --49% DT
 
 

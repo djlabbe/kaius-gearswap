@@ -80,4 +80,4 @@
     send_command('bind @numpad2 input /ma "Kupipi" <me>')
     send_command('bind @numpad3 input /ma "Monberaux" <me>')
 
-    send_command('bind @numpad0 input /ma "Yoran-Oran (UC)" <me>')
+    send_command('bind @numpad0 input /ma "Sylvie (UC)" <me>')

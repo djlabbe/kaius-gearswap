@@ -61,7 +61,7 @@ function user_setup()
         Ctrl-F10 - Cycle type of Physical Defense Mode in use.
         F10 - Activate emergency Physical Defense Mode. Replaces Magical Defense Mode, if that was active.
     ]]
-    state.PhysicalDefenseMode:options("PetDT", "MasterDT")
+    state.PhysicalDefenseMode:options("MasterDT", "PetDT")
 
     --[[
         Alt-F12 - Turns off any emergency mode
@@ -376,7 +376,6 @@ function init_gear_sets()
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS["Stringing Pummel"] = {
-        range="Neo Animator",
 		head=gear.Mpaca_Head,
 		body=gear.Mpaca_Body,
 		hands=gear.Ryuo_A_Hands,
@@ -392,7 +391,6 @@ function init_gear_sets()
     }
 
     sets.precast.WS["Victory Smite"] = {
-        range="Neo Animator",
 		head=gear.Mpaca_Head,
 		body=gear.Mpaca_Body,
 		hands=gear.Mpaca_Hands,
@@ -408,7 +406,6 @@ function init_gear_sets()
     }
 
     sets.precast.WS["Shijin Spiral"] = {
-        range="Neo Animator",
 		head=gear.Mpaca_Head,
 		body=gear.Mpaca_Body,
 		hands=gear.Mpaca_Hands,
@@ -424,7 +421,6 @@ function init_gear_sets()
     }
 
     sets.precast.WS["Howling Fist"] = {
-        range="Neo Animator",
 		head=gear.Mpaca_Head,
 		body=gear.Nyame_Body,
 		hands=gear.Nyame_Hands,

@@ -233,7 +233,7 @@ end
 
 function init_gear_sets()
     sets.precast.FC = {
-        head="Vanya Hood", --10
+        head=gear.Bunzi_Head, --10
         body="Zendik Robe", --13
         hands="Volte Gloves", --6
         legs="Kaykaus Tights +1", --7

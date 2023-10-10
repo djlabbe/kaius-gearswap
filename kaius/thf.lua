@@ -30,6 +30,7 @@ function job_setup()
     state.Buff['Trick Attack'] = buffactive['trick attack'] or false
     state.Buff['Feint'] = buffactive['feint'] or false
     state.Buff.Doom = false
+    state.Buff.AM = false
 end
 
 function user_setup()
@@ -252,33 +253,33 @@ function init_gear_sets()
         back=gear.THF_WSD_Cape,
     }
 
-    sets.precast.WS['Rudra\'s Storm'].PDL = set_combine(sets.precast.WS['Rudra\'s Storm'], {
+    sets.precast.WS["Rudra's Storm"].PDL = set_combine(sets.precast.WS["Rudra's Storm"], {
         ammo="Crepuscular Pebble",
         ear1="Odr Earring",
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
      })
 
-     sets.precast.WS['Rudra\'s Storm'].SA = set_combine(sets.precast.WS['Rudra\'s Storm'],{
+     sets.precast.WS["Rudra's Storm"].SA = set_combine(sets.precast.WS["Rudra's Storm"],{
         ammo="Yetshila +1",
         ear1="Odr Earring",
     })
 
-    sets.precast.WS['Rudra\'s Storm'].PDLSA = set_combine(sets.precast.WS['Rudra\'s Storm'].PDL, sets.precast.WS['Rudra\'s Storm'].SA)
+    sets.precast.WS["Rudra's Storm"].PDLSA = set_combine(sets.precast.WS["Rudra's Storm"].PDL, sets.precast.WS["Rudra's Storm"].SA)
 
-    sets.precast.WS['Rudra\'s Storm'].TA = set_combine(sets.precast.WS['Rudra\'s Storm'],{
+    sets.precast.WS["Rudra's Storm"].TA = set_combine(sets.precast.WS["Rudra's Storm"],{
         ammo="Yetshila +1",
         ear1="Odr Earring",
     })
 
-    sets.precast.WS['Rudra\'s Storm'].PDLTA = set_combine(sets.precast.WS['Rudra\'s Storm'].PDL, sets.precast.WS['Rudra\'s Storm'].TA)
+    sets.precast.WS["Rudra's Storm"].PDLTA = set_combine(sets.precast.WS["Rudra's Storm"].PDL, sets.precast.WS["Rudra's Storm"].TA)
 
-    sets.precast.WS['Rudra\'s Storm'].SATA = set_combine(sets.precast.WS['Rudra\'s Storm'],{
+    sets.precast.WS["Rudra's Storm"].SATA = set_combine(sets.precast.WS["Rudra's Storm"],{
         ammo="Yetshila +1",
         ear1="Odr Earring",
     })
 
-    sets.precast.WS['Rudra\'s Storm'].PDLSATA = set_combine(sets.precast.WS['Rudra\'s Storm'].PDL, sets.precast.WS['Rudra\'s Storm'].SATA)
+    sets.precast.WS["Rudra's Storm"].PDLSATA = set_combine(sets.precast.WS["Rudra's Storm"].PDL, sets.precast.WS["Rudra's Storm"].SATA)
 
     sets.precast.WS['Evisceration'] = {
         ammo="Yetshila +1",
@@ -564,13 +565,13 @@ function init_gear_sets()
     })
 
     sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        -- sub="Sm. Escutcheon",
-        -- body="Blacksmith's Apron",
-        -- hands="Smithy's Mitts",
-        -- neck="Smithy's Torque",
-        -- ring1="Craftmaster's Ring",
-        -- ring2="Confectioner's Ring",
-        -- waist="Blacksmith's Belt"
+        sub="Sm. Escutcheon",
+        body="Blacksmith's Apron",
+        hands="Smithy's Mitts",
+        neck="Smithy's Torque",
+        ring1="Craftmaster's Ring",
+        ring2="Confectioner's Ring",
+        waist="Blacksmith's Belt"
     })
 
 end
@@ -633,6 +634,14 @@ function job_buff_change(buff,gain)
             send_command('@input /p Doomed.')
         else
             state.Buff.Doom = false
+        end
+    end
+
+    if buff == "Aftermath: Lv.3" then
+        if gain then
+            state.Buff.AM = true
+        else
+            state.Buff.AM = false
         end
     end
 
@@ -786,6 +795,14 @@ end
 
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
+
+    -- if (player.target ~= nil and player.target.distance < 5.0) then
+    --     if state.Buff.AM == false and player.tp == 3000 then
+    --         send_command("input /ws 'Rudra's Storm' <t>")
+    --     elseif state.Buff.AM == true and player.tp > 1000 then
+    --         send_command("input /ws 'Rudra's Storm' <t>")
+    --     end
+    -- end
 end
 
 function gearinfo(cmdParams, eventArgs)
