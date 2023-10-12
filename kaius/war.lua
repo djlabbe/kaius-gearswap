@@ -51,7 +51,7 @@ function user_setup()
     gear.Empyrean_Legs = { name= "Boii Cuisses +3" }
     gear.Empyrean_Feet = { name= "Boii Calligae +2" }
 
-    gear.WAR_TP_Cape = { name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+    gear.WAR_TP_Cape = { name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20', 'DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     gear.WAR_WS1_Cape = { name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
     gear.WAR_WS2_Cape = { name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
 

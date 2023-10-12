@@ -79,15 +79,15 @@ function user_setup()
    
     if player.sub_job == 'DRG' then
         send_command('bind ^numpad7 gs c set WeaponSet Masamune;input /macro set 1')
-        send_command('bind ^numpad7 gs c set WeaponSet Dojikiri;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet ShiningOne;input /macro set 2')
+        send_command('bind ^numpad8 gs c set WeaponSet Dojikiri;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 2')
         send_command('bind ^numpad9 gs c set WeaponSet AeolianEdge;input /macro set 5')
         set_macro_page(1, 12)
     elseif player.sub_job == 'WAR' then
         send_command('bind !t input /ja "Provoke" <t>')     
         send_command('bind ^numpad7 gs c set WeaponSet Masamune;input /macro set 3')
-        send_command('bind ^numpad7 gs c set WeaponSet Dojikiri;input /macro set 3')
-        send_command('bind ^numpad8 gs c set WeaponSet ShiningOne;input /macro set 4')
+        send_command('bind ^numpad8 gs c set WeaponSet Dojikiri;input /macro set 3')
+        send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 4')
         send_command('bind ^numpad9 gs c set WeaponSet AeolianEdge;input /macro set 6')
         set_macro_page(3, 12)
     else

@@ -78,7 +78,7 @@ function user_setup()
     gear.RUN_FC_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}, priority=60}
     gear.RUN_SIRD_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Spell interruption rate down-10%',}, priority=60}
     gear.RUN_TP_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}, priority=60}
-    gear.RUN_WS1_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}, priority=60}
+    gear.RUN_WS1_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Weapon skill damage +10%','Phys. dmg. taken-10%',}, priority=60}
 
     -- These are capes that I haven't made yet. I just use capes I have made as placeholders.
     gear.RUN_WS2_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Parrying rate+5%',}, priority=60}

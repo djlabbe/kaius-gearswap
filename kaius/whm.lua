@@ -65,7 +65,7 @@ function user_setup()
     gear.Empyrean_Legs = { name="Ebers Pantaloons +3" }
     gear.Empyrean_Feet = { name="Ebers Duckbills +2" }
 
-    gear.WHM_Cure_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Cure" potency +10%','Phys. dmg. taken-10%',}} --X
+    gear.WHM_Cure_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Haste +10%','Phys. dmg. taken-10%',}} --X
 
     include('Global-Binds.lua')
 
@@ -193,57 +193,52 @@ function init_gear_sets()
     sets.midcast.FC = sets.precast.FC
 
     sets.midcast.CureSolace = {
-        main="Raetic Rod +1",
-        sub="Genmei Shield", -- 10
-        ammo="Staunch Tathlum +1", -- 3 (11 SIRD)
-        head=gear.Kaykaus_B_Head, 
-        neck="Clr. Torque +2", 
-        ear1="Magnetic Earring", -- (8 SIRD)
-        ear2="Glorious Earring", 
+        main="Raetic Rod +1", --(CP-23) (CPII-10)
+        sub="Genmei Shield", -- (DT-10)
+        ammo="Staunch Tathlum +1", -- (DT-3) (SIRD-11)
+        head=gear.Kaykaus_B_Head, --(CP-11) (Enm-6)
+        neck="Clr. Torque +2", --(CP-10) (Enm-25)
+        ear1="Glorious Earring", -- (CPII-2) (Enm-5) 
+        ear2="Ebers Earring +1", --(DT-5)
         body=gear.Empyrean_Body,
-        hands=gear.Artifact_Hands,
-        legs=gear.Empyrean_Legs, --13
-        feet=gear.Kaykaus_B_Feet, 
-        ring1="Janniston Ring",          
-        ring2="Defending Ring", -- 10
-        back=gear.WHM_Cure_Cape, -- 10
+        hands=gear.Artifact_Hands, -- (CPII-4) (Enm-7)
+        legs=gear.Empyrean_Legs, --(DT-13)
+        feet=gear.Kaykaus_B_Feet, --11CP (Enm-12)
+        ring1="Mephitas's Ring +1", --(Enm-7)          
+        ring2="Defending Ring", -- (DT-10)
+        back=gear.WHM_Cure_Cape, -- (DT-10)
         waist="Shinjutsu-no-Obi +1",
-    } --46% PDT
+        --Set Bonus (CPII-4)
+    } --55 CP | 20 CPII | 51% PDT | -52 Enmity
 
     sets.midcast.CureSolaceWeather = set_combine(sets.midcast.CureSolace, {
+        hands=gear.Empyrean_Hands, --(DT-10)
         back="Twilight Cape",
-        ear2="Nourishing Earring +1", 
         waist="Hachirin-no-Obi",
-    })
+    }) --51% DT
 
     sets.midcast.CureNormal = set_combine(sets.midcast.CureSolace, {
         body=gear.Artifact_Body,
     })
 
     sets.midcast.CureWeather = set_combine(sets.midcast.CureNormal, {
+        hands=gear.Empyrean_Hands, --(DT-10)
         back="Twilight Cape",
-        hands=gear.Kaykaus_D_Hands,
-        ear2="Nourishing Earring +1", 
         waist="Hachirin-no-Obi",
-    })
+    })  --51% DT
 
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
-        ear1="Odnowa Earring +1", --3DT
-        ear2="Ebers Earring +1", -- 5DT
-        body=gear.Artifact_Body,
-        legs=gear.Bunzi_Legs, -- 9DT (20 SIRD)
-        feet=gear.Artifact_Feet, -- (29 SIRD)
-    }) --SIRD: 10 (Merit) + 54 + 19 = 83%
-    -- 46 Base DT + 4 = 50%
+        -- SIRD FOR Some Odyssey fights
+        -- legs=gear.Bunzi_Legs, --(DT-9) (20 SIRD)
+        -- feet=gear.Artifact_Feet, -- (29 SIRD)
+    }) --SIRD: 10 (Merit) + 49 + 11 = 70%
 
     sets.midcast.CuragaWeather = set_combine(sets.midcast.CureNormal, {
+        hands=gear.Empyrean_Hands, --(DT-10)
         body=gear.Artifact_Body,
-        hands=gear.Kaykaus_D_Hands,
-        -- ring1="Metamor. Ring +1",
-        ring2="Mephitas's Ring +1",
         back="Twilight Cape",
         waist="Hachirin-no-Obi",
-    })
+    }) --51% DT
 
     sets.midcast.StatusRemoval = {
         main="Yagrush",
@@ -577,11 +572,12 @@ function init_gear_sets()
         waist="Carrier's Sash",
     }) --50/30 (10 Refresh)
 
-    sets.idle.Town = set_combine(sets.idle, {
-        main="Yagrush",
-        sub="Ammurapi Shield",
-    })
+    -- sets.idle.Town = set_combine(sets.idle, {
+    --     main="Yagrush",
+    --     sub="Ammurapi Shield",
+    -- })
 
+    sets.idle.Town =sets.midcast.CureSolace
     sets.engaged = sets.idle
 
 

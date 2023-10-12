@@ -62,6 +62,7 @@ function user_setup()
     gear.DRK_DA_Cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.DRK_WS1_Cape = { name="Ankou's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
     gear.DRK_WS2_Cape = { name="Ankou's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
+    gear.DRK_FC_Cape = { name="Ankou's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
     gear.DRK_DRK_Cape = { name="Niht Mantle", augments={'Attack+15','Dark magic skill +10','"Drain" and "Aspir" potency +23',}}
 
     include('Global-Binds.lua')    
@@ -203,7 +204,7 @@ function init_gear_sets()
         ear2="Malignance Earring", --4
         ring1="Kishar Ring", --4
         ring2="Prolix Ring", --4
-        -- back=gear.DRK_FC_Cape, --10
+        back=gear.DRK_FC_Cape, --10
     }
 
     sets.precast.FC['Dark Magic'] = set_combine(sets.precast.FC, {
