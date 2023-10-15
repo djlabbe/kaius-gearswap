@@ -37,10 +37,10 @@ function user_setup()
     state.WeaponLock = M(true, 'Weapon Lock')
     state.WeaponSet = M{['description']='Weapon Set', 'Godhands'}
 
-    gear.Artifact_Head = { name="Anchorite's Crown +1" }
-    gear.Artifact_Body = { name="Anchorite's Cyclas +1" }
-    gear.Artifact_Hands = { name="Anchorite's Gloves +1" }
-    gear.Artifact_Legs = { name="Anchorite's Hose +1" }    
+    -- gear.Artifact_Head = { name="Anchorite's Crown +1" }
+    -- gear.Artifact_Body = { name="Anchorite's Cyclas +1" }
+    -- gear.Artifact_Hands = { name="Anchorite's Gloves +1" }
+    -- gear.Artifact_Legs = { name="Anchorite's Hose +1" }    
     gear.Artifact_Feet = { name="Anchorite's Gaiters +3" }
 
     gear.Relic_Head = { name="Hesychast's Crown +3" }
@@ -352,8 +352,7 @@ function init_gear_sets()
 		body=gear.Empyrean_Body,
 		hands=gear.Adhemar_A_Hands,
 		legs=gear.Empyrean_Legs,
-		-- feet=gear.Artifact_Feet,
-        feet=gear.Malignance_Feet,
+		feet=gear.Artifact_Feet,
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Schere Earring",
@@ -367,7 +366,8 @@ function init_gear_sets()
         ear1="Mache Earring +1"
     }
 
-    sets.engaged.Godhands = set_combine(sets.engaged, sets.MacheEar1)
+    -- sets.engaged.Godhands = set_combine(sets.engaged, sets.MacheEar1)
+    sets.engaged.Godhands = sets.engaged
     
     sets.engaged.Acc = set_combine(sets.engaged, {
 		ring1="Regal Ring",

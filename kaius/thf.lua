@@ -43,7 +43,7 @@ function user_setup()
     state.WeaponSet = M{['description']='Weapon Set', 'Twashtar_Gleti', 'Twashtar_Crep', 'Twashtar_TP', 'Tauret_Gleti', 'Gandring', 'Savage'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
-    -- gear.Artifact_Head = { name="Pillager's Bonnet +1" }
+    -- gear.Artifact_Head = { name="Pillager's Bonnet +2" }
     gear.Artifact_Body = { name="Pillager's Vest +3" }
     -- gear.Artifact_Hands = { name="Pillager's Armlets +1" }
     -- gear.Artifact_Legs = { name="Pillager's Culottes +1" }

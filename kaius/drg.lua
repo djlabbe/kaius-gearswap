@@ -35,6 +35,8 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal', 'DT')
 
+
+
     state.WeaponSet = M{['description']='Weapon Set', 'Trishula', 'ShiningOne', 'Naegling', 'Mafic' }
     state.WeaponLock = M(false, 'Weapon Lock')  
 
@@ -42,7 +44,7 @@ function user_setup()
     gear.Artifact_Body = { name="Vishap Mail +1" }
     gear.Artifact_Hands = { name="Vishap Finger Gauntlets +3" }
     gear.Artifact_Legs = { name="Vishap Brais +3" }
-    -- gear.Artifact_Feet = { name="Vishap Greaves +1" }
+    -- gear.Artifact_Feet = { name="Vishap Greaves +2" }
 
     gear.Relic_Head = { name="Pteroslaver Armet +3" }
     gear.Relic_Body = { name="Pteroslaver Mail +3" }
@@ -498,7 +500,7 @@ function init_gear_sets()
     sets.engaged = {
         ammo="Coiste Bodhar",
         head="Flamma Zucchetto +2",
-        body=gear.Gleti_Body,
+        body=gear.Empyrean_Body,
         hands=gear.Gleti_Hands,
         legs=gear.Relic_Legs,
         feet="Flamma Gambieras +2",
@@ -514,17 +516,17 @@ function init_gear_sets()
     sets.engaged.Naegling = {
         ammo="Aurgelmir Orb +1",
         head="Hjarrandi Helm",
-        body=gear.Empyrean_Body,
-        hands=gear.Gleti_Hands,
-        legs="Volte Tights",
-        feet=gear.Valo_STP_Feet,
+        body=gear.Gleti_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Relic_Legs,
+        feet="Flamma Gambieras +2",
         neck="Vim Torque +1",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1=gear.Moonlight_1,
+        ring1="Niqmaddu Ring",
         ring2=gear.Moonlight_2,
         back=gear.DRG_STP_Cape,
-        waist="Ioskeha Belt +1",
+        waist="Sailfi Belt +1",
     } --34% DT
 
     sets.engaged['Mafic Cudgel'] = sets.engaged.Naegling
@@ -598,7 +600,7 @@ function init_gear_sets()
     })
 
     sets.idle.Weak = sets.idle.DT
-    sets.idle.Town = sets.engaged.Naegling
+    sets.idle.Town = sets.engaged
     sets.Kiting = { ring1="Shneddick Ring" }
 
     sets.buff.Doom = {

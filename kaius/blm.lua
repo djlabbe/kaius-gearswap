@@ -98,8 +98,8 @@ function init_gear_sets()
     -- gear.Artifact_Head = { name="Spaekona's Petasos +3" }
     gear.Artifact_Body = { name="Spaekona's Coat +3" }
     -- gear.Artifact_Hands = { name="Spaekona's Gloves +3" }
-    -- gear.Artifact_Legs = { name="Spaekona's Tonban +3" }
-    -- gear.Artifact_Feet = { name="Spaekona's Sabots +3" }
+    -- gear.Artifact_Legs = { name="Spaekona's Tonban +2" }
+    -- gear.Artifact_Feet = { name="Spaekona's Sabots +2" }
 
     gear.Relic_Head = { name="Archmage's Petasos +3" }
     gear.Relic_Body = { name="Archmage's Coat +3" }
