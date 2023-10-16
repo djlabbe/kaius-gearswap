@@ -37,7 +37,7 @@ function user_setup()
 
 
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Trishula', 'ShiningOne', 'Naegling', 'Mafic' }
+    state.WeaponSet = M{["description"]='Weapon Set', 'Trishula', 'ShiningOne', 'Naegling', 'Mafic' }
     state.WeaponLock = M(false, 'Weapon Lock')  
 
     -- gear.Artifact_Head = { name="Vishap Armet +1" }
@@ -105,7 +105,6 @@ function user_setup()
         send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 2')
         send_command('bind ^numpad5 gs c set WeaponSet Mafic;input /macro set 3')
         set_macro_page(1, 14)
-        set_macro_page(1, 14)
     end 
 
     state.Auto_Kite = M(false, 'Auto_Kite')
@@ -129,23 +128,23 @@ end
 
 function init_gear_sets()
 
-    sets.precast.JA['Spirit Surge'] = { body=gear.Relic_Body }
-    sets.precast.JA['Call Wyvern'] = { body=gear.Relic_Body }
-    sets.precast.JA['Ancient Circle'] = { legs=gear.Artifact_Legs }
+    sets.precast.JA["Spirit Surge"] = { body=gear.Relic_Body }
+    sets.precast.JA["Call Wyvern"] = { body=gear.Relic_Body }
+    sets.precast.JA["Ancient Circle"] = { legs=gear.Artifact_Legs }
 
-    sets.precast.JA['Spirit Link'] = {
+    sets.precast.JA["Spirit Link"] = {
         -- head=gear.Artifact_Head,
         hands=gear.Empyrean_Hands,
         feet=gear.Relic_Feet,
     }
 
-    sets.precast.JA['Steady Wing'] = {
+    sets.precast.JA["Steady Wing"] = {
         legs=gear.Artifact_Legs,
         feet=gear.Relic_Feet,
         back="Updraft Mantle",
     }
 
-    sets.precast.JA['Jump'] = {
+    sets.precast.JA["Jump"] = {
         ammo="Aurgelmir Orb +1",
         head="Flamma Zucchetto +2",
         neck="Vim Torque +1",
@@ -161,15 +160,15 @@ function init_gear_sets()
         back=gear.DRG_TP_Cape,
     }
 
-    sets.precast.JA['High Jump'] = sets.precast.JA['Jump']
-    sets.precast.JA['Spirit Jump'] = sets.precast.JA['Jump']
+    sets.precast.JA["High Jump"] = sets.precast.JA["Jump"]
+    sets.precast.JA["Spirit Jump"] = sets.precast.JA["Jump"]
 
-    sets.precast.JA['Soul Jump'] = set_combine(sets.precast.JA['Jump'], {
+    sets.precast.JA["Soul Jump"] = set_combine(sets.precast.JA["Jump"], {
         body=gear.Artifact_Body,
     })
-    sets.precast.JA['Super Jump'] = {}
+    sets.precast.JA["Super Jump"] = {}
 
-    sets.precast.JA['Angon'] = {
+    sets.precast.JA["Angon"] = {
         ammo="Angon", 
         hands=gear.Relic_Hands
     }
@@ -187,7 +186,7 @@ function init_gear_sets()
         ring2="Prolix Ring", --2
     }
 
-    sets.precast.WS = set_combine({
+    sets.precast.WS = {
         ammo="Knobkierrie",
         head=gear.Empyrean_Head,
         body=gear.Nyame_Legs,
@@ -199,11 +198,9 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
         ring1="Niqmaddu ring",
-        ring2="Epaminondas's Ring",
+        ring2="Cornelia's Ring",
         back=gear.DRG_WS1_Cape,
-    }, {
-        ring2="Cornelia's Ring"
-    })
+    }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
     sets.precast.WS.PDL = set_combine(sets.precast.WS, {})
@@ -212,7 +209,7 @@ function init_gear_sets()
     -- Savage Blade --
     ------------------
 
-    sets.precast.WS["Savage Blade"] = set_combine({
+    sets.precast.WS["Savage Blade"] = {
         ammo="Knobkierrie",
         head=gear.Empyrean_Head,
         body=gear.Nyame_Body,
@@ -224,11 +221,9 @@ function init_gear_sets()
         ear1="Thrud Earring",
         ear2="Moonshade Earring",
         ring1="Epaminondas's Ring",
-        ring2="Regal Ring",
-        back=gear.DRG_WS1_Cape,
-    }, {
         ring2="Cornelia's Ring",
-    })
+        back=gear.DRG_WS1_Cape,
+    }
 
     sets.precast.WS["Savage Blade"].PDL = set_combine(sets.precast.WS["Savage Blade"], {
         body=gear.Empyrean_Body,
@@ -239,7 +234,7 @@ function init_gear_sets()
     sets.precast.WS["Judgment"] = sets.precast.WS["Savage Blade"]
     sets.precast.WS["Judgment"].PDL = sets.precast.WS["Savage Blade"].PDL
 
-    sets.precast.WS['Stardiver'] = {
+    sets.precast.WS["Stardiver"] = {
         ammo="Coiste Bodhar",
         head=gear.Empyrean_Head,
         neck="Fotia Gorget",
@@ -255,9 +250,9 @@ function init_gear_sets()
         feet=gear.Nyame_Feet,
     }
 
-    sets.precast.WS['Stardiver'].Acc = set_combine(sets.precast.WS['Stardiver'], {})
+    sets.precast.WS["Stardiver"].Acc = set_combine(sets.precast.WS["Stardiver"], {})
 
-    sets.precast.WS['Stardiver'].PDL = set_combine(sets.precast.WS['Stardiver'], {
+    sets.precast.WS["Stardiver"].PDL = set_combine(sets.precast.WS["Stardiver"], {
         hands=gear.Gleti_Hands,
         body=gear.Gleti_Body,
         legs=gear.Gleti_Legs,
@@ -265,7 +260,7 @@ function init_gear_sets()
         ear1="Peltast's Earring +1",
     })
 
-    sets.precast.WS['Camlann\'s Torment'] = set_combine({
+    sets.precast.WS["Camlann\'s Torment"] = {
         ammo="Knobkierrie",
         head=gear.Empyrean_Head,
         body=gear.Nyame_Body,
@@ -277,15 +272,13 @@ function init_gear_sets()
         ear1="Thrud Earring",   
         ear2="Moonshade Earring",
         ring1="Niqmaddu ring",
-        ring2="Regal Ring",
+        ring2="Cornelia's Ring",
         back=gear.DRG_WS1_Cape,
-    }, {
-        ring2="Cornelia's Ring"
-    })
+    }
 
-    sets.precast.WS['Camlann\'s Torment'].Acc = set_combine(sets.precast.WS['Camlann\'s Torment'], {})
+    sets.precast.WS["Camlann\'s Torment"].Acc = set_combine(sets.precast.WS["Camlann\'s Torment"], {})
 
-     sets.precast.WS['Camlann\'s Torment'].PDL = set_combine(sets.precast.WS['Camlann\'s Torment'], {
+     sets.precast.WS["Camlann\'s Torment"].PDL = set_combine(sets.precast.WS["Camlann\'s Torment"], {
         body=gear.Gleti_Body,
         legs=gear.Gleti_Legs,
         ring1="Sroda Ring",
@@ -293,7 +286,7 @@ function init_gear_sets()
         waist="Fotia Belt"
     })
 
-    sets.precast.WS['Sonic Thrust'] = set_combine({
+    sets.precast.WS["Sonic Thrust"] = {
         ammo="Knobkierrie",
         head=gear.Empyrean_Head,
         body=gear.Nyame_Body,
@@ -305,19 +298,17 @@ function init_gear_sets()
         ear1="Sherida Earring",    
         ear2="Moonshade Earring",
         ring1="Niqmaddu ring",
-        ring2="Regal Ring",
+        ring2="Cornelia's Ring",
         back=gear.DRG_WS1_Cape,
-    }, {
-        ring2="Cornelia's Ring"
-    })
+    }
 
-    sets.precast.WS['Sonic Thrust'].Acc = set_combine(sets.precast.WS['Sonic Thrust'], {})
-    sets.precast.WS['Sonic Thrust'].PDL = set_combine(sets.precast.WS['Sonic Thrust'], {
+    sets.precast.WS["Sonic Thrust"].Acc = set_combine(sets.precast.WS["Sonic Thrust"], {})
+    sets.precast.WS["Sonic Thrust"].PDL = set_combine(sets.precast.WS["Sonic Thrust"], {
         head=gear.Relic_Head,
         feet=gear.Relic_Feet,
     })
 
-    sets.precast.WS['Impulse Drive'] = {
+    sets.precast.WS["Impulse Drive"] = {
         head=gear.Empyrean_Head,
         body=gear.Gleti_Body,
         hands=gear.Gleti_Hands,
@@ -332,22 +323,20 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     }
 
-    sets.precast.WS['Impulse Drive'].Acc = set_combine(sets.precast.WS['Impulse Drive'], {
+    sets.precast.WS["Impulse Drive"].Acc = set_combine(sets.precast.WS["Impulse Drive"], {
         legs=gear.Artifact_Legs,
     })
 
-    sets.precast.WS['Impulse Drive'].PDL = set_combine(sets.precast.WS['Impulse Drive'], {
+    sets.precast.WS["Impulse Drive"].PDL = set_combine(sets.precast.WS["Impulse Drive"], {
         body=gear.Gleti_Body,
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
-        ring2="Epaminondas's Ring",
+        ring2="Cornelia's Ring",
         ear1="Peltast's Earring +1",
-    }, {
-        ring2="Cornelia's Ring"
     })
 
-    sets.precast.WS['Impulse Drive'].HighTP = set_combine(sets.precast.WS['Impulse Drive'], {
+    sets.precast.WS["Impulse Drive"].HighTP = set_combine(sets.precast.WS["Impulse Drive"], {
         hands=gear.Relic_Hands,
         ear2="Ishvara Earring",
     })
@@ -355,7 +344,8 @@ function init_gear_sets()
     ----------------
     -- Drakesbane --
     ----------------
-    sets.precast.WS['Drakesbane'] = {
+
+    sets.precast.WS["Drakesbane"] = {
         ammo="Coiste Bodhar",
         head="Blistering Sallet +1",
         body="Hjarrandi Breast.",
@@ -371,7 +361,7 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     }
 
-    sets.precast.WS['Drakesbane'].PDL = set_combine(sets.precast.WS['Drakesbane'], {
+    sets.precast.WS["Drakesbane"].PDL = set_combine(sets.precast.WS["Drakesbane"], {
         ammo="Crepuscular Pebble",
         head=gear.Gleti_Head,
         body=gear.Gleti_Body,
@@ -380,7 +370,7 @@ function init_gear_sets()
         ring2="Sroda Ring",
     })
 
-    sets.precast.WS["Wheeling Thrust"] = set_combine({
+    sets.precast.WS["Wheeling Thrust"] = {
         ammo="Knobkierrie",
         head=gear.Empyrean_Head,
         body=gear.Nyame_Body,
@@ -392,13 +382,11 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Thrud Earring",
         ring1="Niqmaddu Ring",
-        ring2="Regal Ring",
+        ring2="Cornelia's Ring",
         back=gear.DRG_WS1_Cape,
-    }, {
-        ring2="Cornelia's Ring"
-    })
+    }
 
-    sets.precast.WS['Geirskogul'] = set_combine({
+    sets.precast.WS["Geirskogul"] = {
         ammo="Knobkierrie",
         head=gear.Empyrean_Head,
         body=gear.Nyame_Body,
@@ -408,20 +396,18 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Thrud Earring",
         ring="Niqmaddu Ring",
-        ring2="Regal Ring",
+        ring2="Cornelia's Ring",
         waist="Sailfi Belt +1",
         back=gear.DRG_WS3_Cape,
-    }, {
-        ring2="Cornelia's Ring"
-    })
+    }
 
-    sets.precast.WS['Geirskogul'].Acc = set_combine(sets.precast.WS['Geirskogul'], {})
-    sets.precast.WS['Geirskogul'].PDL = set_combine(sets.precast.WS['Geirskogul'], {
+    sets.precast.WS["Geirskogul"].Acc = set_combine(sets.precast.WS["Geirskogul"], {})
+    sets.precast.WS["Geirskogul"].PDL = set_combine(sets.precast.WS["Geirskogul"], {
         ear1="Peltast's Earring +1", 
         ring2="Epaminondas's Ring",
     })
 
-    sets.precast.WS['Leg Sweep'] = set_combine(sets.precast.WS, {
+    sets.precast.WS["Leg Sweep"] = set_combine(sets.precast.WS, {
         ammo="Pemphredo Tathlum",
         head=gear.Empyrean_Body,
         body=gear.Empyrean_Body,
@@ -434,10 +420,10 @@ function init_gear_sets()
         ring2="Crepuscular Ring",
     })
 
-    sets.precast.WS['Leg Sweep'].Acc = set_combine(sets.precast.WS['Leg Sweep'], {})
-    sets.precast.WS['Leg Sweep'].PDL = set_combine(sets.precast.WS['Leg Sweep'], {})
+    sets.precast.WS["Leg Sweep"].Acc = set_combine(sets.precast.WS["Leg Sweep"], {})
+    sets.precast.WS["Leg Sweep"].PDL = set_combine(sets.precast.WS["Leg Sweep"], {})
 
-    sets.precast.WS['Raiden Thrust'] = {
+    sets.precast.WS["Raiden Thrust"] = {
         ammo="Knobkierrie",
         head=gear.Nyame_Head,
         neck="Sibyl Scarf",
@@ -453,7 +439,7 @@ function init_gear_sets()
         feet=gear.Nyame_Feet,
     }
 
-    sets.precast.WS['Thunder Thrust'] = sets.precast.WS['Raiden Thrust']
+    sets.precast.WS["Thunder Thrust"] = sets.precast.WS["Raiden Thrust"]
 
     sets.midcast.HealingBreath = {
         head=gear.Relic_Head,
@@ -529,7 +515,7 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     } --34% DT
 
-    sets.engaged['Mafic Cudgel'] = sets.engaged.Naegling
+    sets.engaged["Mafic Cudgel"] = sets.engaged.Naegling
 
     sets.engaged.Pet = {
         ear2="Sroda Earring",
@@ -543,7 +529,7 @@ function init_gear_sets()
         neck="Dragoon's Collar +2",
     })
 
-    sets.engaged['Mafic Cudgel'].Acc = sets.engaged.Naegling.Acc
+    sets.engaged["Mafic Cudgel"].Acc = sets.engaged.Naegling.Acc
 
     sets.engaged.Hybrid = {
         neck="Dgn. Collar +2",
@@ -556,11 +542,11 @@ function init_gear_sets()
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Naegling.DT = set_combine(sets.engaged.Naegling, sets.engaged.Hybrid)
-    sets.engaged['Mafic Cudgel'].DT =  sets.engaged.Naegling.DT
+    sets.engaged["Mafic Cudgel"].DT =  sets.engaged.Naegling.DT
 
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
     sets.engaged.Naegling.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
-    sets.engaged['Mafic Cudgel'].Acc.DT = sets.engaged.Naegling.Acc.DT
+    sets.engaged["Mafic Cudgel"].Acc.DT = sets.engaged.Naegling.Acc.DT
 
     sets.idle = {
         ammo="Staunch Tathlum +1", --3/3
@@ -595,9 +581,7 @@ function init_gear_sets()
         neck="Dgn. Collar +2",
     })
 
-    sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
-        neck="Dgn. Collar +2",
-    })
+    sets.idle.DT.Pet = set_combine(sets.idle.Pet, { })
 
     sets.idle.Weak = sets.idle.DT
     sets.idle.Town = sets.engaged
@@ -630,7 +614,7 @@ end
 function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.type == 'WeaponSkill' then
         if spell.english == 'Impulse Drive' and player.tp > 2000 then
-           equip(sets.precast.WS['Impulse Drive'].HighTP)
+           equip(sets.precast.WS["Impulse Drive"].HighTP)
         end
     end
 end
@@ -739,7 +723,7 @@ function display_current_job_state(eventArgs)
 
     local d_msg = 'None'
     if state.DefenseMode.value ~= 'None' then
-        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. "DefenseMode"].value
     end
 
     local i_msg = state.IdleMode.value

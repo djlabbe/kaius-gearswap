@@ -414,6 +414,7 @@ function init_gear_sets()
     sets.precast.WS['Fimbulvetr'].Acc = set_combine(sets.precast.WS['Fimbulvetr'], {})
     sets.precast.WS['Fimbulvetr'].PDL = set_combine(sets.precast.WS['Fimbulvetr'], {
         head=gear.Empyrean_Head,
+        ring1="Epaminondas's Ring",
         ear2="Heathen's Earring +1",
     })
 

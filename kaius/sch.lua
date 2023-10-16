@@ -693,17 +693,17 @@ function init_gear_sets()
         sub="Culminus",
         ammo="Ghastly Tathlum +1",
         head=gear.Agwu_Head, 
+        body=gear.Agwu_Body,
+        hands=gear.Agwu_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet, 
         neck="Argute Stole +2",
         ear1="Malignance Earring",
         ear2="Arbatel Earring +1",
-        body=gear.Agwu_Body,
-        hands=gear.Agwu_Hands,
         ring1="Freke Ring",
         ring2="Mujin Band",
         back=gear.SCH_MAB_Cape,
         waist="Skrymir Cord +1",
-        legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet, 
     }
 
     sets.MagicBurst_Helix_Ebullience = set_combine(sets.MagicBurst_Helix, {
