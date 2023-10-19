@@ -304,7 +304,7 @@ function init_gear_sets()
     }
 
     -------------------------------------Kiting
-    sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Kiting = { ring1="Shneddick Ring +1" }
 
     -------------------------------------JA
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {

@@ -745,7 +745,7 @@ function init_gear_sets()
         waist="Shinjutsu-no-Obi +1",
     })
 
-    sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Kiting = { ring1="Shneddick Ring +1" }
     sets.latent_refresh = { waist="Fucho-no-obi" }
 
     sets.engaged = sets.idle -- For normal idle refresh when engaging with trusts

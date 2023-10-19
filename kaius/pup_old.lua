@@ -430,7 +430,7 @@ function init_gear_sets()
         waist="Gishdubar Sash",
     }
 
-    sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Kiting = { ring1="Shneddick Ring +1" }
     sets.Xiucoatl = { main="Xiucoatl" }
     sets.Verethragna = { main="Verethragna" }
     sets.Godhands = { main="Godhands" }

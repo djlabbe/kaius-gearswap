@@ -541,7 +541,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
-    sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Kiting = { ring1="Shneddick Ring +1" }
 
     sets.Naegling = { main="Naegling", sub="Blurred Shield +1" }
     sets.Loxotic = { main="Loxotic Mace +1", sub="Blurred Shield +1" }

@@ -901,7 +901,7 @@ function init_gear_sets()
         --ring2="Locus Ring",
     })
 
-    sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Kiting = { ring1="Shneddick Ring +1" }
     sets.latent_refresh = {waist="Fucho-no-obi"}
 
     sets.buff.Doom = {

@@ -321,7 +321,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {})
     
-    sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Kiting = { ring1="Shneddick Ring +1" }
     sets.latent_refresh = {waist="Fucho-no-obi"}
     
     -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here when activating or changing defense mode:

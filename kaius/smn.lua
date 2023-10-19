@@ -191,8 +191,8 @@ function user_setup()
     
     gear.perp_staff = {name="Gridarvor"}
 
-    gear.Artifact_Head = { name="Convoker's Horn +1" }
-    gear.Artifact_Body = { name="Convoker's Doublet +1" }
+    gear.Artifact_Head = { name="Convoker's Horn +2" }
+    gear.Artifact_Body = { name="Convoker's Doublet +3" }
     gear.Artifact_Hands = { name="Convoker's Bracers +1" }
     gear.Artifact_Legs = { name="Convoker's Spats +1" }
     gear.Artifact_Feet = { name="Convoker's Pigaches +1" }
@@ -203,11 +203,11 @@ function user_setup()
     gear.Relic_Legs = { name="Glyphic Spats +3" }
     gear.Relic_Feet = { name="Glyphic Pigaches +3" }
 
-    gear.Empyrean_Head = { name="Beckoner's Horn +1" }
-    gear.Empyrean_Body = { name="Beckoner's Doublet +1" }
-    gear.Empyrean_Hands = { name="Beckoner's Bracers +1" }
-    gear.Empyrean_Legs = { name="Beckoner's Spats +1" }
-    gear.Empyrean_Feet = { name="Beckoner's Pigaches +1" }
+    gear.Empyrean_Head = { name="Beckoner's Horn +2" }
+    gear.Empyrean_Body = { name="Beckoner's Doublet +2" }
+    gear.Empyrean_Hands = { name="Beckoner's Bracers +2" }
+    gear.Empyrean_Legs = { name="Beckoner's Spats +2" }
+    gear.Empyrean_Feet = { name="Beckoner's Pigaches +1"}
 
     gear.SMN_Magic_Cape = { name="Campestres's Cape", augments={
         'Pet: M.Acc.+20 Pet: M.Dmg.+20',
@@ -223,8 +223,6 @@ function user_setup()
         'Pet: Damage taken -5%',
     }}
     
-    set_macro_page(1, 15)
-    send_command('wait 3; input /lockstyleset 15')
     send_command('bind ^` input /macro book 15; input /macro set 1')
 
     send_command('bind !F1 input /ja "Astral Flow" <me>')
@@ -233,15 +231,52 @@ function user_setup()
     send_command('bind !` input /pet "Avatar\'s Favor" <me>')
     send_command('bind !t input /ja "Apogee" <me>')
 
-    send_command('bind !h input /ma "Haste" <stpc>')
-    send_command('bind !u input /ma "Aquaveil" <me>')
-    send_command('bind !i input /ma "Phalanx" <me>')
+    if player.sub_job == 'RDM' then
+        send_command('bind !y input /ja "Convert" <me>')
+        send_command('bind !h input /ma "Haste" <stpc>')
+        send_command('bind !u input /ma "Aquaveil" <me>')
+        send_command('bind !i input /ma "Phalanx" <me>')
+        send_command('bind !b input /ma "Bind" <t>')
+        send_command('bind !g input /ma "Gravity" <t>')
+    end
+
+    -- ALT + Numpad ===> Summons --
+    send_command('bind !numpad7 input /ma "Ramuh" <me>;input /macro book 15;input /macro set 1')
+    send_command('bind !numpad8 input /ma "Shiva" <me>;input /macro book 15;input /macro set 2')
+    send_command('bind !numpad9 input /ma "Ifrit" <me>;input /macro book 15;input /macro set 3')  
+
+    send_command('bind !numpad4 input /ma "Garuda" <me>;input /macro book 15;input /macro set 4')
+    send_command('bind !numpad5 input /ma "Leviathan" <me>;input /macro book 15;input /macro set 5')
+    send_command('bind !numpad6 input /ma "Titan" <me>;input /macro book 15;input /macro set 6')
+
+    send_command('bind !numpad1 input /ma "Siren" <me>;input /macro book 15;input /macro set 7')
+    send_command('bind !numpad2 input /ma "Cait Sith" <me>;input /macro book 15;input /macro set 8')
+    send_command('bind !numpad3 input /ma "Diabolos" <me>;input /macro book 15;input /macro set 9')
+
+    send_command('bind !numpad0 input /ma "Carbuncle" <me>;input /macro book 23;input /macro set 1')
+    send_command('bind !numpad. input /ma "Fenrir" <me>;input /macro book 23;input /macro set 2')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
     moving = false
+
+    set_macro_page(1, 15)
+    send_command('wait 3; input /lockstyleset 15')
 end
 
 function user_unload()
+    send_command('unbind ^`')
+    send_command('unbind !F1')
+    send_command('unbind !F2')
+
+    send_command('unbind !`')
+    send_command('unbind !t')
+
+    send_command('unbind !h')
+    send_command('unbind !u')
+    send_command('unbind !i')
+    send_command('unbind !y')
+    send_command('unbind !b')
+    send_command('unbind !g')
     unbind_numpad()
 end
 
@@ -293,20 +328,20 @@ function init_gear_sets()
     sets.precast.FC = {
         main=gear.Grioavolr_FC, -- +10
         sub="Khonsu",
-        ammo="Sapience Orb",
-        head="Amalric Coif +1", -- +11
+        ammo="Sapience Orb", --2
+        head="Amalric Coif +1", -- 11
+        body="Inyanga Jubbah +2", -- +14
+        hands="Volte Gloves", --6
+        -- legs={ name="Merlinic Shalwar", augments={'"Fast Cast"+6','CHR+6','Mag. Acc.+14','"Mag.Atk.Bns."+14',}},
+        feet=gear.Merlinic_FC_Feet, --12
         neck="Orunmila's Torque", --5
         ear1="Malignance Earring", -- +4
         ear2="Loquacious Earring", -- +2
-        -- hands={ name="Telchine Gloves", augments={'Mag. Evasion+25','"Fast Cast"+5','Enh. Mag. eff. dur. +10',}},
-        body="Inyanga Jubbah +2", -- +14
         ring1="Lebeche Ring",
         ring2="Kishar Ring", -- +4
-        back="Fi Follet Cape +1",
-        waist="Witful Belt", -- +3
-        -- legs={ name="Merlinic Shalwar", augments={'"Fast Cast"+6','CHR+6','Mag. Acc.+14','"Mag.Atk.Bns."+14',}},
-        feet=gear.Merlinic_FC_Feet --12
-    }
+        back="Fi Follet Cape +1", --10
+        waist="Embla Sash", -- +5
+    } --75 no weapon
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"}) 
 
@@ -323,6 +358,7 @@ function init_gear_sets()
         hands="Inyanga Dastanas +2",
         legs=gear.Artifact_Legs,
         feet="Vanya Clogs",
+        neck="Incanter's Torque",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         ear1="Meili Earring",
@@ -336,8 +372,6 @@ function init_gear_sets()
     }
 
     -- Avatar pact sets.  All pacts are Ability type.
-
-    
     sets.midcast.Pet.BloodPactWard = {
         main="Espiritus",
         sub="Elan Strap +1",
@@ -377,7 +411,7 @@ function init_gear_sets()
         head="Cath Palug Crown",
         neck="Summoner's Collar +2",
         ear1="Lugalbanda Earring",
-        ear2="Beckoner's Earring +1",
+        ear2="Beckoner's Earring +2",
         body=gear.Apogee_A_Body,
         hands=gear.Merlinic_BP_Hands,
         ring1=gear.Varar_1,
@@ -392,11 +426,11 @@ function init_gear_sets()
         main="Gridarvor",
         sub="Elan Strap +1",
         ammo="Epitaph",
-        head="Helios Band",
+        head=gear.Apogee_B_Head,
         neck="Summoner's Collar +2",
         ear1="Lugalbanda Earring",
-        ear2="Beckoner's Earring +1",
-        body=gear.Artifact_Body,
+        ear2="Beckoner's Earring +2",
+        body=gear.Relic_Body,
         hands=gear.Merlinic_BP_Hands,
         ring1="Cath Palug Ring",
         ring2=gear.Varar_2,
@@ -412,7 +446,7 @@ function init_gear_sets()
         head=gear.Apogee_A_Head,
         neck="Summoner's Collar +2",
         ear1="Lugalbanda Earring",
-        ear2="Beckoner's Earring +1",
+        ear2="Beckoner's Earring +2",
         body=gear.Artifact_Body,
         hands=gear.Merlinic_BP_Hands,
         ring1=gear.Varar_1,
@@ -425,9 +459,7 @@ function init_gear_sets()
 
     sets.midcast.Pet.PhysicalBloodPactRage.Acc = sets.midcast.Pet.PhysicalBloodPactRage
 
-
     sets.midcast.Pet.MagicalBloodPactRage.Acc = sets.midcast.Pet.MagicalBloodPactRage
-
 
     -- Spirits cast magic spells, which can be identified in standard ways.
     
@@ -445,15 +477,15 @@ function init_gear_sets()
         ammo="Epitaph",
         head=gear.Empyrean_Head,
         neck="Caller's Pendant",
-        ear1="Evans Earring",
-        ear2="Beck. Earring +1",
-        body="Apogee Dalmatica +1",
+        ear1="C. Palug Earring",
+        ear2="Beckoner's Earring +2",
+        body=gear.Apogee_A_Body,
         hands="Asteria Mitts +1",
-        ring1=gear.Stikini_1,
-        ring2=gear.Stikini_2,
-        back="Campestres's Cape",
-        waist="Carrier's Sash",
-        legs=gear.Bunzi_Legs,
+        ring1="Shneddick Ring +1",
+        ring2="Defending Ring",
+        back=gear.SMN_Magic_Cape,
+        waist="Lucidity Sash",
+        legs="Assid. Pants +1",
         feet="Baayami Sabots +1",
     }
 
@@ -464,33 +496,33 @@ function init_gear_sets()
         head=gear.Empyrean_Head,
         neck="Caller's Pendant",
         ear1="Evans Earring",
-        ear2="Beck. Earring +1",
-        body="Apogee Dalmatica +1",
+        ear2="Beckoner's Earring +2",
+        body=gear.Apogee_A_Body,
         hands="Asteria Mitts +1",
-        ring1="Evoker's Ring",
+        ring1=gear.Stikini_1,
         ring2="Defending Ring",
-        back="Campestres's Cape",
+        back=gear.SMN_Magic_Cape,
         waist="Lucidity Sash",
         legs="Assid. Pants +1",
         feet="Baayami Sabots +1",
     }
         
-    sets.idle.Avatar = {
+    sets.idle.Pet = {
         main="Gridarvor",
         sub="Elan Strap +1",
         ammo="Epitaph",
         head=gear.Empyrean_Head,
         neck="Caller's Pendant",
-        ear1="Evans Earring",
-        ear2="Beck. Earring +1",
-        body="Apogee Dalmatica +1",
+        ear1="C. Palug Earring",
+        ear2="Beckoner's Earring +2",
+        body=gear.Empyrean_Body,
         hands="Asteria Mitts +1",
-        ring1="Evoker's Ring",
-        ring2="Stikini Ring +1",
-        back="Campestres's Cape",
+        ring1="Shneddick Ring +1",
+        ring2="Defending Ring",
+        back=gear.SMN_Magic_Cape,
         waist="Lucidity Sash",
         legs="Assid. Pants +1",
-        feet=gear.Apogee_A_Feet,
+        feet="Baayami Sabots +1",
     }
 
     sets.idle.PDT.Avatar = {
@@ -500,12 +532,12 @@ function init_gear_sets()
         head=gear.Empyrean_Head,
         neck="Caller's Pendant",
         ear1="Evans Earring",
-        ear2="Beck. Earring +1",
-        body="Apogee Dalmatica +1",
+        ear2="Beckoner's Earring +2",
+        body=gear.Apogee_A_Body,
         hands="Asteria Mitts +1",
-        ring1="Evoker's Ring",
-        ring2="Stikini Ring +1",
-        back="Campestres's Cape",
+        ring1=gear.Stikini_1,
+        ring2=gear.Stikini_2,
+        back=gear.SMN_Magic_Cape,
         waist="Lucidity Sash",
         legs="Assid. Pants +1",
         feet=gear.Apogee_A_Feet,
@@ -518,27 +550,29 @@ function init_gear_sets()
         head=gear.Empyrean_Head,
         neck="Caller's Pendant",
         ear1="Evans Earring",
-        ear2="Beck. Earring +1",
-        body="Apogee Dalmatica +1",
+        ear2="Beckoner's Earring +2",
+        body=gear.Apogee_A_Body,
         hands="Asteria Mitts +1",
-        ring1="Evoker's Ring",
-        ring2="Stikini Ring +1",
-        back="Campestres's Cape",
+        ring1=gear.Stikini_1,
+        ring2=gear.Stikini_2,
+        back=gear.SMN_Magic_Cape,
         waist="Lucidity Sash",
         legs="Assid. Pants +1",
         feet=gear.Apogee_A_Feet,
     }
 
     -- Favor uses Caller's Horn instead of Convoker's Horn for refresh
-    sets.idle.Avatar.Favor = {
+    sets.idle.Avatar_Favor = {
         head=gear.Empyrean_Head,
     }
 
-    sets.idle.Avatar.Melee = {
+    sets.idle.Avatar_Melee = {
         hands=gear.Relic_Hands,
         waist="Incarnation Sash",
-        legs=gear.Artifact_Legs
+        legs=gear.Empyrean_Legs
     }
+
+  
         
     sets.perp = {}
 
@@ -577,11 +611,11 @@ function init_gear_sets()
         neck="Caller's Pendant",
         ear1="Loquacious Earring",
         ear2="Evans Earring",
-        body="Apogee Dalmatica +1",
+        body=gear.Apogee_A_Body,
         hands="Asteria Mitts +1",
         ring1="Evoker's Ring",
-        ring2="Stikini Ring +1",
-        back="Campestres's Cape",
+        ring2=gear.Stikini_2,
+        back=gear.SMN_Magic_Cape,
         waist="Lucidity Sash",
         legs="Assid. Pants +1",
         feet=gear.Apogee_A_Feet,
@@ -595,21 +629,22 @@ function init_gear_sets()
         neck="Caller's Pendant",
         ear1="Loquacious Earring",
         ear2="Evans Earring",
-        body="Apogee Dalmatica +1",
+        body=gear.Apogee_A_Body,
         hands="Asteria Mitts +1",
         ring1="Evoker's Ring",
-        ring2="Stikini Ring +1",
-        back="Campestres's Cape",
+        ring2=gear.Stikini_2,
+        back=gear.SMN_Magic_Cape,
         waist="Lucidity Sash",
         legs="Assid. Pants +1",
         feet=gear.Apogee_A_Feet,
     }
 
-    sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Kiting = { ring1="Shneddick Ring +1" }
     
     sets.latent_refresh = {
         waist="Fucho-no-obi"
     }
+
     
 end
 
@@ -723,27 +758,23 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    -- if pet.isvalid then
-    --     if pet.element == world.day_element then
-    --         idleSet = set_combine(idleSet, sets.perp.Day)
-    --     end
-    --     if pet.element == world.weather_element then
-    --         idleSet = set_combine(idleSet, sets.perp.Weather)
-    --     end
-    --     if sets.perp[pet.name] then
-    --         idleSet = set_combine(idleSet, sets.perp[pet.name])
-    --     end
-    --     gear.perp_staff.name = elements.perpetuance_staff_of[pet.element]
-    --     if gear.perp_staff.name and (player.inventory[gear.perp_staff.name] or player.wardrobe[gear.perp_staff.name]) then
-    --         idleSet = set_combine(idleSet, sets.perp.staff_and_grip)
-    --     end
-    --     if state.Buff["Avatar's Favor"] and avatars:contains(pet.name) then
-    --         idleSet = set_combine(idleSet, sets.idle.Avatar.Favor)
-    --     end
-    --     if pet.status == 'Engaged' then
-    --         idleSet = set_combine(idleSet, sets.idle.Avatar.Melee)
-    --     end
-    -- end
+    if pet.isvalid then
+        if pet.element == world.day_element then
+            idleSet = set_combine(idleSet, sets.perp.Day)
+        end
+        if pet.element == world.weather_element then
+            idleSet = set_combine(idleSet, sets.perp.Weather)
+        end
+        if sets.perp[pet.name] then
+            idleSet = set_combine(idleSet, sets.perp[pet.name])
+        end
+        if state.Buff["Avatar's Favor"] and avatars:contains(pet.name) then
+            idleSet = set_combine(idleSet, sets.idle.Avatar_Favor)
+        end
+        if pet.status == 'Engaged' then
+            idleSet = set_combine(idleSet, sets.idle.Avatar_Melee)
+        end
+    end
     if state.Buff.Doom then
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
@@ -783,7 +814,7 @@ end
 
 -- Called for custom player commands.
 function job_self_command(cmdParams, eventArgs)
-    gearinfo(cmdParams, eventArgs)
+    -- gearinfo(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'petweather' then
         handle_petweather()
         eventArgs.handled = true
@@ -969,17 +1000,17 @@ function create_pact_timer(spell_name)
 end
 
 
-function gearinfo(cmdParams, eventArgs)
-    if cmdParams[1] == 'gearinfo' then
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
-    end
-end
+-- function gearinfo(cmdParams, eventArgs)
+--     if cmdParams[1] == 'gearinfo' then
+--         if type(cmdParams[4]) == 'string' then
+--             if cmdParams[4] == 'true' then
+--                 moving = true
+--             elseif cmdParams[4] == 'false' then
+--                 moving = false
+--             end
+--         end
+--         if not midaction() then
+--             job_update()
+--         end
+--     end
+-- end

@@ -455,7 +455,7 @@ function init_gear_sets()
         feet=gear.Malignance_Feet,
     }
 
-    sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Kiting = { ring1="Shneddick Ring +1" }
 
 
     --------------------

@@ -543,7 +543,7 @@ function init_gear_sets()
 
     sets.idle.Town = sets.engaged
 
-    sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Kiting = { ring1="Shneddick Ring +1" }
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20

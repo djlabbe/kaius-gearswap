@@ -494,7 +494,7 @@ function init_gear_sets()
         head="Volte Cap",
     }
 
-    sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Kiting = { ring1="Shneddick Ring +1" }
     sets.Verethragna = { main="Verethragna" }
     sets.Godhands = { main="Godhands" }
 end
