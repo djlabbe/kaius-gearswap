@@ -56,7 +56,7 @@ function user_setup()
     gear.Relic_Feet = { name="Plunderer's Poulaines +3" }
 
     gear.Empyrean_Head = { name="Skulker's Bonnet +2" }
-    gear.Empyrean_Body = { name="Skulker's Vest +2" }
+    gear.Empyrean_Body = { name="Skulker's Vest +3" }
     gear.Empyrean_Hands = { name="Skulker's Armlets +2" }
     gear.Empyrean_Legs = { name="Skulker's Culottes +2" }
     gear.Empyrean_Feet = { name="Skulker's Poulaines +3" }

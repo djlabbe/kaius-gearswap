@@ -195,7 +195,7 @@ function user_setup()
     gear.Artifact_Body = { name="Convoker's Doublet +3" }
     gear.Artifact_Hands = { name="Convoker's Bracers +1" }
     gear.Artifact_Legs = { name="Convoker's Spats +1" }
-    gear.Artifact_Feet = { name="Convoker's Pigaches +1" }
+    gear.Artifact_Feet = { name="Convoker's Pigaches +3" }
 
     gear.Relic_Head = { name="Glyphic Horn +3" }
     gear.Relic_Body = { name="Glyphic Doublet +3" }
@@ -203,11 +203,11 @@ function user_setup()
     gear.Relic_Legs = { name="Glyphic Spats +3" }
     gear.Relic_Feet = { name="Glyphic Pigaches +3" }
 
-    gear.Empyrean_Head = { name="Beckoner's Horn +2" }
+    gear.Empyrean_Head = { name="Beckoner's Horn +3" }
     gear.Empyrean_Body = { name="Beckoner's Doublet +2" }
     gear.Empyrean_Hands = { name="Beckoner's Bracers +2" }
     gear.Empyrean_Legs = { name="Beckoner's Spats +2" }
-    gear.Empyrean_Feet = { name="Beckoner's Pigaches +1"}
+    gear.Empyrean_Feet = { name="Beckoner's Pigaches +2"}
 
     gear.SMN_Magic_Cape = { name="Campestres's Cape", augments={
         'Pet: M.Acc.+20 Pet: M.Dmg.+20',
@@ -306,22 +306,38 @@ function init_gear_sets()
     sets.precast.BloodPactWard = {
         main="Espiritus",
         sub="Elan Strap +1",
-        ammo="Sancus Sachet +1",
-        head=gear.Empyrean_Head,
-        neck="Caller's Pendant",
+        ammo="Epitaph",
+        head="Baayami Hat +1",
+        neck="Incanter's Torque",
         ear1="C. Palug Earring",
         ear2="Lodurr Earring",
-        body=gear.Artifact_Body,
-        hands=gear.Relic_Hands,
+        body="Baayami Robe +1",
+        hands="Baayami Cuffs +1",
         ring1="Evoker's Ring",
         ring2=gear.Stikini_2,
         back="Conveyance Cape",
-        waist="Lucidity Sash",
-        legs=gear.Relic_Legs,
-        feet=gear.Relic_Feet,
+        waist="Kobo Obi",
+        legs="Baayami Slops +1",
+        feet="Baayami Sabots +1",
     }
 
-    sets.precast.BloodPactRage = sets.precast.BloodPactWard
+    sets.precast.BloodPactRage = {
+        main="Espiritus",
+        sub="Elan Strap +1",
+        ammo="Sancus Sachet +1",
+        head=gear.Empyrean_Head,
+        neck="Incanter's Torque",
+        ear1="C. Palug Earring",
+        ear2="Lodurr Earring",
+        body="Baayami Robe +1",
+        hands="Baayami Cuffs +1",
+        ring1="Evoker's Ring",
+        ring2=gear.Stikini_2,
+        back="Conveyance Cape",
+        waist="Kobo Obi",
+        legs="Baayami Slops +1",
+        feet="Baayami Sabots +1",
+    }
 
     -- Fast cast sets for spells
     
@@ -477,7 +493,7 @@ function init_gear_sets()
         ammo="Epitaph",
         head=gear.Empyrean_Head,
         neck="Caller's Pendant",
-        ear1="C. Palug Earring",
+        ear1="Lugalbanda Earring",
         ear2="Beckoner's Earring +2",
         body=gear.Apogee_A_Body,
         hands="Asteria Mitts +1",
@@ -508,22 +524,22 @@ function init_gear_sets()
     }
         
     sets.idle.Pet = {
-        main="Gridarvor",
-        sub="Elan Strap +1",
+        main="Gridarvor", --5
+        sub="Khonsu", --(6)
         ammo="Epitaph",
-        head=gear.Empyrean_Head,
-        neck="Caller's Pendant",
-        ear1="C. Palug Earring",
-        ear2="Beckoner's Earring +2",
-        body=gear.Empyrean_Body,
+        head=gear.Empyrean_Head, --(10)
+        body=gear.Empyrean_Body, --7 --(6)
         hands="Asteria Mitts +1",
-        ring1="Shneddick Ring +1",
-        ring2="Defending Ring",
-        back=gear.SMN_Magic_Cape,
-        waist="Lucidity Sash",
-        legs="Assid. Pants +1",
+        legs="Assid. Pants +1", --3
         feet="Baayami Sabots +1",
-    }
+        neck="Caller's Pendant", --1
+        ear1="Lugalbanda Earring",
+        ear2="Beckoner's Earring +2", --(6)
+        ring1="Shneddick Ring +1",
+        ring2="Defending Ring", --(10)
+        back=gear.SMN_Magic_Cape,
+        waist="Regal Belt", --(3)
+    } -- +14 Refresh, -16 Perp, -41% DT, +25 PetRegain 
 
     sets.idle.PDT.Avatar = {
         main="Gridarvor",
