@@ -47,7 +47,7 @@ function user_setup()
     gear.Relic_Feet = { name= "Bagua Sandals +3" }
 
     gear.Empyrean_Head = { name= "Azimuth Hood +3" }
-    gear.Empyrean_Body = { name= "Azimuth Coat +2" }
+    gear.Empyrean_Body = { name= "Azimuth Coat +3" }
     gear.Empyrean_Hands = { name= "Azimuth Gloves +2" }
     gear.Empyrean_Legs = { name= "Azimuth Tights +2" }
     gear.Empyrean_Feet = { name= "Azimuth Gaiters +2" }

@@ -80,11 +80,11 @@ function user_setup()
 
     include('Global-Binds.lua') 
 
-    gear.Artifact_Head = { name= "Academic's Mortarboard +1" }
+    gear.Artifact_Head = { name= "Academic's Mortarboard +2" }
     gear.Artifact_Body = { name= "Academic's Gown +1" }
     gear.Artifact_Hands = { name= "Academic's Bracers +1" }
     gear.Artifact_Legs = { name= "Academic's Pants +1" }
-    gear.Artifact_Feet = { name= "Academic's Loafers +1" }
+    gear.Artifact_Feet = { name= "Academic's Loafers +3" }
 
     gear.Relic_Head = { name= "Pedagogy Mortarboard +1" }
     gear.Relic_Body = { name= "Pedagogy Gown +1" }
@@ -99,7 +99,7 @@ function user_setup()
     gear.Empyrean_Feet = { name= "Arbatel Loafers +3" }
 
     gear.SCH_MAB_Cape = { name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Mag. Evasion+15',}}
-    gear.SCH_REGEN_Cape = { name="Bookworm's Cape", augments={'INT+1','MND+3','Helix eff. dur. +13','"Regen" potency+10',}}
+    gear.SCH_REGEN_Cape = { name="Bookworm's Cape", augments={'INT+3','MND+1','Helix eff. dur. +16','"Regen" potency+9',}}
 
     send_command('bind !F1 input /ja "Tabula Rasa" <me>')
     send_command('bind !F2 input /ja "Caper Emissarius" <stpc>')
@@ -733,7 +733,7 @@ function init_gear_sets()
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back=gear.SCH_MAB_Cape,
-        waist="Carrier's Sash",
+        waist="Plat. Mog. Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {

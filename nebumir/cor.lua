@@ -86,6 +86,8 @@ function user_setup()
 
     gear.Artifact_Head = { name= "Laksamana's Tricorne +3" }
     gear.Artifact_Body = { name= "Laksamana's Frac +3" }
+    gear.Artifact_Hands = { name= "Laksamana's Gants +2" }
+    gear.Artifact_Legs = { name= "Laksamana's Trews +3" }
     gear.Artifact_Feet = { name= "Laksamana's Bottes +3" }
 
     gear.Relic_Head = { name= "Lanun Tricorne +3" }

@@ -46,7 +46,7 @@ function user_setup()
     -- gear.Artifact_Head = { name="Pillager's Bonnet +2" }
     gear.Artifact_Body = { name="Pillager's Vest +3" }
     -- gear.Artifact_Hands = { name="Pillager's Armlets +1" }
-    -- gear.Artifact_Legs = { name="Pillager's Culottes +1" }
+    gear.Artifact_Legs = { name="Pillager's Culottes +2" }
     gear.Artifact_Feet = { name="Pillager's Poulaines +1" }
 
     gear.Relic_Head = { name="Plunderer's Bonnet +3" }
@@ -55,7 +55,7 @@ function user_setup()
     gear.Relic_Legs = { name="Plunderer's Culottes +3" }
     gear.Relic_Feet = { name="Plunderer's Poulaines +3" }
 
-    gear.Empyrean_Head = { name="Skulker's Bonnet +2" }
+    gear.Empyrean_Head = { name="Skulker's Bonnet +3" }
     gear.Empyrean_Body = { name="Skulker's Vest +3" }
     gear.Empyrean_Hands = { name="Skulker's Armlets +2" }
     gear.Empyrean_Legs = { name="Skulker's Culottes +2" }
@@ -70,19 +70,19 @@ function user_setup()
     send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
 
-    send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad9 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad4 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad1 input /equip Main "Lament";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad9 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad4 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad1 input /equip Main "Lament";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
 
     send_command('bind !F1 input /ja "Perfect Dodge" <me>')
     send_command('bind !F2 input /ja "Larceny" <t>')
@@ -240,7 +240,7 @@ function init_gear_sets()
     sets.precast.WS['Rudra\'s Storm'] = {
         ammo="Coiste Bodhar",
         head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
+        body=gear.Empyrean_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
@@ -564,6 +564,8 @@ function init_gear_sets()
         back="Moonlight Cape", --6/6
     })
 
+    -- sets.idle.Town = sets.precast.WS["Rudra's Storm"]
+    -- sets.idle.Town = sets.engaged.DW.MaxHaste
     sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
         sub="Sm. Escutcheon",
         body="Blacksmith's Apron",

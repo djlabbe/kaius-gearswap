@@ -172,15 +172,8 @@ function job_setup()
     -- Flags for code to get around the issue of slow skill updates.
     wards.flag = false
     wards.spell = ''
-    
-   
 end
 
--------------------------------------------------------------------------------------------------------------------
--- User setup functions for this job.  Recommend that these be overridden in a sidecar file.
--------------------------------------------------------------------------------------------------------------------
-
--- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     state.OffenseMode:options('None', 'Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
@@ -193,8 +186,8 @@ function user_setup()
 
     gear.Artifact_Head = { name="Convoker's Horn +2" }
     gear.Artifact_Body = { name="Convoker's Doublet +3" }
-    gear.Artifact_Hands = { name="Convoker's Bracers +1" }
-    gear.Artifact_Legs = { name="Convoker's Spats +1" }
+    gear.Artifact_Hands = { name="Convoker's Bracers +2" }
+    gear.Artifact_Legs = { name="Convoker's Spats +2" }
     gear.Artifact_Feet = { name="Convoker's Pigaches +3" }
 
     gear.Relic_Head = { name="Glyphic Horn +3" }

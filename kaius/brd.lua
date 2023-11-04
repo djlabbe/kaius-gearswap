@@ -639,7 +639,7 @@ function init_gear_sets()
         ring1=gear.Moonlight_1, --(5/5)
         ring2=gear.Moonlight_2, --(5/5)
         back=gear.BRD_DW_Cape, --10
-        waist="Reiki Yotai", --7
+        waist="Sailfi Belt +1",
         } -- 26%
 
     sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {

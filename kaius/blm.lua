@@ -109,9 +109,9 @@ function init_gear_sets()
 
     gear.Empyrean_Head = { name="Wicce Petasos +3" }
     gear.Empyrean_Body = { name="Wicce Coat +3" }
-    gear.Empyrean_Hands = { name="Wicce Gloves +2" }
+    gear.Empyrean_Hands = { name="Wicce Gloves +3" }
     gear.Empyrean_Legs = { name="Wicce Chausses +3" }
-    gear.Empyrean_Feet = { name="Wicce Sabots +2" }
+    gear.Empyrean_Feet = { name="Wicce Sabots +3" }
 
     gear.BLM_MAB_Cape = { name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}} --X
     gear.BLM_Death_Cape = { name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}}
@@ -466,8 +466,8 @@ function init_gear_sets()
     })
 
     sets.midcast['Elemental Magic'] = {
-        main="Marin Staff +1",
-        sub="Enki Strap",
+        main="Bunzi's Rod",
+        sub="Ammurapi Shield",
         ammo="Sroda Tathlum",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
@@ -617,7 +617,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
     }
 
-    sets.idle.Town = sets.midcast['Elemental Magic']
+    sets.idle.Town = sets.MagicBurst
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.

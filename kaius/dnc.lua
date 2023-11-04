@@ -354,7 +354,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Etoile Gorget +2",
-        ear1="Sherida Earring",
+        ear1="Odr Earring",
         ear2="Moonshade Earring",
         ring1="Regal Ring",
         ring2="Cornelia's Ring",
