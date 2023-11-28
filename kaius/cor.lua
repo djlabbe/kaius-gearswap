@@ -96,7 +96,7 @@ function user_setup()
     gear.Relic_Feet = { name= "Lanun Bottes +3" }
 
     gear.Empyrean_Head = { name= "Chasseur's Tricorne +2" }
-    gear.Empyrean_Body = { name= "Chasseur's Frac +2" }
+    gear.Empyrean_Body = { name= "Chasseur's Frac +3" }
     gear.Empyrean_Hands = { name= "Chasseur's Gants +3" }
     gear.Empyrean_Legs = { name= "Chasseur's Culottes +3" }
     gear.Empyrean_Feet = { name= "Chasseur's Bottes +2" }
@@ -106,7 +106,7 @@ function user_setup()
     gear.COR_DW_Cape = { name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}} --X
     gear.COR_SB_Cape = { name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
     gear.COR_LEAD_Cape = { name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
-    gear.COR_LS_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}}
+    gear.COR_LS_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
     gear.COR_RACRIT_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Crit.hit rate+10','Phys. dmg. taken-10%',}}
 
     send_command ('bind @` gs c toggle LuzafRing')
@@ -215,7 +215,7 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.COR_SNP_Cape,
-        waist="Flume Belt +1", --4/0
+        waist="Platinum Moogle Belt",
     }
 
     sets.precast.JA["Double-Up"] = {main=gear.Rostam_C, range="Compensator"}
@@ -450,7 +450,7 @@ function init_gear_sets()
         feet=gear.Artifact_Feet,
         neck="Commodore charm +2",
         ear1="Crepuscular Earring",
-        ear2="Dignitary's Earring",
+        ear2="Chasseur's Earring +1",
         ring1="Regal Ring",
         ring2="Dingir Ring",
         back=gear.COR_SB_Cape,
@@ -468,7 +468,7 @@ function init_gear_sets()
         ammo=gear.RAbullet,
         head=gear.Ikenga_Head,
         body=gear.Ikenga_Body,
-        hands=gear.Malignance_Hands,
+        hands=gear.Ikenga_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Malignance_Feet,
         neck="Iskur Gorget",
@@ -610,7 +610,7 @@ function init_gear_sets()
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
         ammo=gear.RAbullet,
-        head=gear.Malignance_Head, --6/6
+        head=gear.Adhemar_B_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
         legs=gear.Empyrean_Legs, --7/7
@@ -618,8 +618,10 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
+        -- ring1=gear.Chirich_1,
+        -- ring2=gear.Chirich_2,
+        ring1="Petrov Ring",
+        ring2="Epona's Ring",
         back=gear.COR_DW_Cape,
         waist="Sailfi Belt +1",
     } -- 11%

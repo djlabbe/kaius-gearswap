@@ -264,7 +264,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
-        ring1="Weather. Ring", --6(4)
+        ring1="Prolix Ring", --2
         ring2="Kishar Ring", --4
     }
 
@@ -693,7 +693,7 @@ function init_gear_sets()
     sets.Obi = {waist="Hachirin-no-Obi"}
 
     sets.Naegling = {main="Naegling", sub="Gleti's Knife", ranged="Anarchy +2"}
-    sets.Fomalhaut_M = {main=gear.Lanun_B, sub="Gleti's Knife", ranged="Fomalhaut"}
+    sets.Fomalhaut_M = {main="Tauret", sub="Gleti's Knife", ranged="Fomalhaut"}
     sets.Fomalhaut_R = {main=gear.Lanun_A, sub="Kustawi +1", ranged="Fomalhaut"}
 
     sets.DefaultShield = {sub="Nusku Shield"}

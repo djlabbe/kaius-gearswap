@@ -395,7 +395,7 @@ function init_gear_sets()
         feet=gear.Nyame_Feet,
         ear1="Sherida Earring",
         ear2="Thrud Earring",
-        ring="Niqmaddu Ring",
+        ring1="Niqmaddu Ring",
         ring2="Cornelia's Ring",
         waist="Sailfi Belt +1",
         back=gear.DRG_WS3_Cape,
@@ -414,8 +414,8 @@ function init_gear_sets()
         hands=gear.Empyrean_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        ear1="Dignitary's Earring",
         ear2="Crepuscular Earring",
+        ear1="Peltast's Earring +1",
         ring1="Metamor. Ring +1",
         ring2="Crepuscular Ring",
     })

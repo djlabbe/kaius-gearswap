@@ -402,7 +402,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Ea Hat +1",
         body="Ea Houppe. +1",
-        hands=gear.Amalric_D_Hands,
+        hands=gear.Empyrean_Hands,
         legs="Ea Slops +1",
         feet=gear.Agwu_Feet,
         neck="Erra Pendant",

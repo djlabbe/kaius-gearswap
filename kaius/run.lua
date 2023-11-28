@@ -403,7 +403,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Erra Pendant",
-        ear1="Dignitary's Earring",
+        ear1="Crepuscular Earring",
         ear2="Vor Earring",
         ring1="Metamor. Ring +1",
         ring2="Kishar Ring",

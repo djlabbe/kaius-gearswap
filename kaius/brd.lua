@@ -108,10 +108,10 @@ function user_setup()
     gear.Empyrean_Legs = { name= "Fili Rhingrave +2" }
     gear.Empyrean_Feet = { name= "Fili Cothurnes +2" }
 
-    gear.BRD_Song_Cape = { name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}} --X
+    gear.BRD_Song_Cape = { name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
     gear.BRD_DW_Cape = { name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}} --X
     gear.BRD_KITE_Cape = { name="Intarabus's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}} --X
-    gear.BRD_WS2_Cape = { name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}} --X
+    gear.BRD_WS2_Cape = { name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
 
     include('Global-Binds.lua')
 
@@ -236,7 +236,7 @@ function init_gear_sets()
         head=gear.Bunzi_Head, --10
         body="Zendik Robe", --13
         hands="Volte Gloves", --6
-        legs="Kaykaus Tights +1", --7
+        legs=gear.Kaykaus_A_Legs, --7
         feet=gear.Empyrean_Feet, --10
         neck="Orunmila's Torque", --5
         ear1="Enchanter's Earring +1", --2    
@@ -428,7 +428,7 @@ function init_gear_sets()
         ear2="Odnowa Earring +1",
         ring1=gear.Moonlight_1,
         ring2="Defending Ring",
-        waist="Flume Belt +1",
+        waist="Platinum Moogle Belt",
         back=gear.BRD_Song_Cape,
     }
 
@@ -581,7 +581,7 @@ function init_gear_sets()
         legs=gear.Artifact_Legs,
         feet=gear.Artifact_Feet,
         neck="Moonbow Whistle +1",
-        ear1="Dignitary's Earring",
+        ear1="Crepuscular Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2="Metamor. Ring +1",
@@ -669,8 +669,8 @@ function init_gear_sets()
         neck="Bard's Charm +2",
         ear1="Telos Earring", --4
         ear2="Balder Earring +1",
-        ring1=gear.Moonlight_1, --(5/5)
-        ring2=gear.Moonlight_2, --(5/5)
+        ring1=gear.Chirich_1, --(5/5)
+        ring2=gear.Chirich_2, --(5/5)
         back=gear.BRD_DW_Cape, --(10/0)
         waist="Sailfi Belt +1", --7
     } --DT=(41/31)|DW=11
@@ -693,6 +693,7 @@ function init_gear_sets()
     sets.engaged.Hybrid = {
         head=gear.Bunzi_Head,
         legs=gear.Nyame_Legs,
+        ring1=gear.Moonlight_1,
         ring2="Defending Ring",
     }
 
@@ -743,7 +744,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
         neck="Loricate Torque +1",
-        waist="Flume Belt +1",
+        waist="Platinum Moogle Belt",
         left_ear="Eabani Earring",
         right_ear="Infused Earring",
         left_ring="Defending Ring",

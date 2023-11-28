@@ -47,7 +47,7 @@ function user_setup()
     gear.Artifact_Body = { name="Pillager's Vest +3" }
     -- gear.Artifact_Hands = { name="Pillager's Armlets +1" }
     gear.Artifact_Legs = { name="Pillager's Culottes +2" }
-    gear.Artifact_Feet = { name="Pillager's Poulaines +1" }
+    gear.Artifact_Feet = { name="Pillager's Poulaines +3" }
 
     gear.Relic_Head = { name="Plunderer's Bonnet +3" }
     gear.Relic_Body = { name="Plunderer's Vest +3" }
@@ -91,7 +91,8 @@ function user_setup()
     send_command('bind !f input /ja "Feint" <me>')
     send_command('bind !b input /ja "Bully" <t>')    
     send_command('bind !h input /ja "Hide" <me>')
-    send_command('bind !m input /ja "Mug" <me>')
+    send_command('bind !m input /ja "Mug" <t>')
+    send_command('bind !y input /ja "Steal" <t>')
     
     if player.sub_job == 'WAR' then
         send_command('bind !t input /ja "Provoke" <t>')
@@ -149,7 +150,6 @@ function init_gear_sets()
     sets.precast.JA.Provoke = sets.TreasureHunter
 
     sets.precast.JA['Accomplice'] = { head=gear.Empyrean_Head }
-    sets.precast.JA['Aura Steal'] = { head=gear.Relic_Head }
     sets.precast.JA['Collaborator'] = set_combine(sets.TreasureHunter, { head=gear.Empyrean_Head })
     sets.precast.JA['Flee'] = { feet=gear.Artifact_Feet }
     sets.precast.JA['Hide'] = { body=gear.Artifact_Body }
@@ -157,6 +157,7 @@ function init_gear_sets()
 
     sets.precast.JA['Steal'] = {
         head=gear.Relic_Head,
+        hands="Thief's Kote",
         feet=gear.Artifact_Feet,
     }
 
@@ -342,7 +343,7 @@ function init_gear_sets()
 
     }
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    sets.Kiting = { feet=gear.Artifact_Feet }
 
     sets.engaged = {
         ammo="Aurgelmir Orb +1",
@@ -463,7 +464,7 @@ function init_gear_sets()
         ring2="Hetairoi Ring",
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
-    } -- 6%  (27& PDT)
+    } -- 6%
     
 
     sets.engaged.DW.MaxHaste.ExtraHaste = set_combine(sets.engaged.DW.MaxHaste, {
@@ -471,10 +472,8 @@ function init_gear_sets()
     })
 
     sets.engaged.Hybrid = {
-        -- head=gear.Malignance_Head, --6/6
+        head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
-        -- hands=gear.Malignance_Hands, --5/5
-        -- legs=gear.Malignance_Legs, --7/7
         ring2=gear.Moonlight_2, --5/5
     }
 

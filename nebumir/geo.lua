@@ -50,7 +50,7 @@ function user_setup()
 
     gear.Empyrean_Head = { name= "Azimuth Hood +3" }
     gear.Empyrean_Body = { name= "Azimuth Coat +3" }
-    gear.Empyrean_Hands = { name= "Azimuth Gloves +2" }
+    gear.Empyrean_Hands = { name= "Azimuth Gloves +3" }
     gear.Empyrean_Legs = { name= "Azimuth Tights +3" }
     gear.Empyrean_Feet = { name= "Azimuth Gaiters +3" }
     
@@ -203,7 +203,7 @@ function init_gear_sets()
     sets.precast.WS['Flash Nova'] = {
         head=gear.Relic_Head,
         body=gear.Amalric_A_Body,
-        hands=gear.Amalric_D_Hands,
+        hands=gear.Nyame_Hands,
         legs=gear.Relic_Legs,
         feet=gear.Relic_Feet,
         neck="Saevus Pendant +1",
@@ -412,7 +412,7 @@ function init_gear_sets()
         waist="Acuity Belt +1",
         ear1="Malignance Earring",
         ear2="Regal Earring",     
-        ring1="Jhakri Ring",
+        ring1="Freke Ring",
         ring2="Metamor. Ring +1",
         back=gear.GEO_MAB_Cape,
     }

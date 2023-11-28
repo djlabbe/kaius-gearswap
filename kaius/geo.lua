@@ -48,9 +48,9 @@ function user_setup()
 
     gear.Empyrean_Head = { name= "Azimuth Hood +3" }
     gear.Empyrean_Body = { name= "Azimuth Coat +3" }
-    gear.Empyrean_Hands = { name= "Azimuth Gloves +2" }
-    gear.Empyrean_Legs = { name= "Azimuth Tights +2" }
-    gear.Empyrean_Feet = { name= "Azimuth Gaiters +2" }
+    gear.Empyrean_Hands = { name= "Azimuth Gloves +3" }
+    gear.Empyrean_Legs = { name= "Azimuth Tights +3" }
+    gear.Empyrean_Feet = { name= "Azimuth Gaiters +3" }
 
     gear.GEO_Idle_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: "Regen"+5',}} --X
     gear.GEO_MAB_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Mag. Evasion+15',}} --X
@@ -429,11 +429,11 @@ function init_gear_sets()
         main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
-        head="Ea Hat +1",
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
-        hands=gear.Agwu_Hands,
+        hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Agwu_Feet,
+        feet=gear.Empyrean_Feet,
         neck="Sibyl Scarf",
         waist="Acuity Belt +1",
         ear1="Malignance Earring",
@@ -487,8 +487,6 @@ function init_gear_sets()
 
     sets.PetHP = { head=gear.Relic_Head }
 
-    sets.idle.Town = sets.idle
-
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
@@ -507,10 +505,11 @@ function init_gear_sets()
         feet=gear.Nyame_Feet,
         neck="Rep. Plat. Medal",
         ear1="Crepuscular Earring",
-        ear2="Balder Earring +1",
+        ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         waist="Windbuffet Belt +1",
+        back="Aurist's Cape +1"
     }
 
     sets.buff.Doom = {
@@ -521,6 +520,8 @@ function init_gear_sets()
     }
 
     sets.Obi = { waist="Hachirin-no-Obi" }
+
+    sets.idle.Town = sets.MagicBurst
 end
 
 function job_pretarget(spell, spellMap, eventArgs)

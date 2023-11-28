@@ -31,7 +31,7 @@ function job_setup()
 end
 
 function user_setup()
-    state.OffenseMode:options('Normal', 'Acc', 'Subtle', 'Subtle_Auspice')
+    state.OffenseMode:options('Normal', 'Acc', 'Subtle')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal', 'DT')
@@ -91,6 +91,10 @@ function user_setup()
         send_command('bind ^numpad4 gs c set WeaponSet AeolianEdge;input /macro set 6')
         set_macro_page(3, 12)
     else
+        send_command('bind ^numpad7 gs c set WeaponSet Masamune;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Dojikiri;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 2')
+        send_command('bind ^numpad4 gs c set WeaponSet AeolianEdge;input /macro set 5')
         set_macro_page(1, 12)
     end
 
@@ -160,26 +164,10 @@ function init_gear_sets()
         hands=gear.Artifact_Hands,
         ear1="Schere Earring",
         back=gear.SAM_TP_Cape,
-        waist="Ioskeha Belt +1"
     })
 
-    sets.engaged.Subtle = {
-        ammo="Aurgelmir Orb +1",
-        head="Kendatsuba Jinpachi +1", --8
-        body="Dagon Breastplate", --(10)
-        hands=gear.Artifact_Hands,
-        legs=gear.Mpaca_Legs, --(5)
-        feet=gear.Ryuo_C_Feet, --8
-        neck="Bathy Choker +1", --11
-        ear1="Schere Earring", --3
-        ear2="Dignitary's Earring", --5
-        ring1="Niqmaddu Ring", --(5)
-        ring2="Chirich Ring +1", --10
-        waist="Sarissapho. Belt", --5
-        back=gear.SAM_TP_Cape,
-    } --50/20
 
-    sets.engaged.Subtle_Auspice = {
+    sets.engaged.Subtle = {
         ammo="Aurgelmir Orb +1",
         head="Kendatsuba Jinpachi +1", --8
         body="Dagon Breastplate", --(10)
@@ -193,7 +181,7 @@ function init_gear_sets()
         ring2="Chirich Ring +1", --10
         waist="Sailfi Belt +1",
         back=gear.SAM_TP_Cape,
-    } --25/20
+    } --25/20 (Need Auspice)
 
     -- Base 35%
     sets.engaged.Hybrid = {
@@ -334,7 +322,7 @@ function init_gear_sets()
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
         neck="Sanctity Necklace",
-        ear1="Dignitary's Earring",
+        ear1="Crepuscular Earring",
         ear2="Kasuga Earring +1",
         ring1=gear.Stikini_1,
         ring2="Metamorph Ring +1",

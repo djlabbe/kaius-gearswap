@@ -329,7 +329,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring2="Archon Ring",
         back=gear.SCH_MAB_Cape,
-        waist="Sacro Cord",
+        -- waist="Sacro Cord",
     })
 
     sets.precast.WS['Myrkr'] = {

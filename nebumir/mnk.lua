@@ -260,7 +260,7 @@ function init_gear_sets()
         ammo="Coiste Bodhar",
 		head=gear.Mpaca_Head,
 		body=gear.Nyame_Body,
-		hands=gear.Nyame_Hands,
+		hands=gear.Empyrean_Hands,
 		legs=gear.Nyame_Legs,
 		feet=gear.Artifact_Feet,
 		neck="Mnk. Nodowa +2",
@@ -355,7 +355,8 @@ function init_gear_sets()
 		feet=gear.Artifact_Feet,
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
-		ear1="Schere Earring",
+		-- ear1="Schere Earring",
+        ear1="Sherida Earring",
         ear2="Bhikku Earring +2",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
@@ -379,8 +380,6 @@ function init_gear_sets()
     sets.engaged.Hybrid = {
         body=gear.Mpaca_Body,
         hands=gear.Malignance_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Malignance_Feet,
     }
    
     sets.engaged.Counter = {

@@ -323,8 +323,8 @@ function init_gear_sets()
     sets.precast.WS['Shell Crusher'] = {
         head=gear.Malignance_Head,
         neck="Moonlight Necklace",
-        ear1="Dignitary's Earring",
-        ear2="Crepuscular Earring",
+        ear1="Crepuscular Earring",
+        ear2="Bhikku Earring +1",
         body=gear.Malignance_Body,
         hands=gear.Malignance_Hands,
         legs=gear.Malignance_Legs,

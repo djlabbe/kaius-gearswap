@@ -166,7 +166,6 @@ function init_gear_sets()
         hands=gear.Artifact_Hands,
         ear1="Schere Earring",
         ring1="Regal Ring",
-        feet=gear.Tatenashi_Feet,
         back=gear.SAM_TP_Cape,
     })
 

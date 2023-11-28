@@ -196,20 +196,20 @@ function init_gear_sets()
         main="Raetic Rod +1", --(CP-23) (CPII-10)
         sub="Genmei Shield", -- (DT-10)
         ammo="Staunch Tathlum +1", -- (DT-3) (SIRD-11)
-        head=gear.Kaykaus_B_Head, --(CP-11) (Enm-6)
+        head=gear.Kaykaus_C_Head, --(CP-11)
         neck="Clr. Torque +2", --(CP-10) (Enm-25)
         ear1="Glorious Earring", -- (CPII-2) (Enm-5) 
         ear2="Ebers Earring +1", --(DT-5)
         body=gear.Empyrean_Body,
         hands=gear.Artifact_Hands, -- (CPII-4) (Enm-7)
         legs=gear.Empyrean_Legs, --(DT-13)
-        feet=gear.Kaykaus_B_Feet, --11CP (Enm-12)
+        feet=gear.Kaykaus_C_Feet, --11CP
         ring1="Mephitas's Ring +1", --(Enm-7)          
         ring2="Defending Ring", -- (DT-10)
         back=gear.WHM_Cure_Cape, -- (DT-10)
         waist="Shinjutsu-no-Obi +1",
         --Set Bonus (CPII-4)
-    } --55 CP | 20 CPII | 51% PDT | -52 Enmity
+    } --55 CP | 20 CPII | 51% PDT | -34 Enmity
 
     sets.midcast.CureSolaceWeather = set_combine(sets.midcast.CureSolace, {
         hands=gear.Empyrean_Hands, --(DT-10)
@@ -390,7 +390,7 @@ function init_gear_sets()
         feet=gear.Artifact_Feet,
         neck="Erra Pendant",
         ear1="Regal Earring",
-        ear2="Dignitary's Earring",
+        ear2="Eber's Earring +1",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back="Aurist's Cape +1",

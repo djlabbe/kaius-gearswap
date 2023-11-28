@@ -550,7 +550,7 @@ function init_gear_sets()
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
         neck="Mirage Stole +2",
-        ear1="Dignitary's Earring",
+        ear1="Crepuscular Earring",
         ear2="Hashi. Earring +1",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,

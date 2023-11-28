@@ -427,7 +427,6 @@ function init_gear_sets()
     }
 
     sets.engaged.Acc = set_combine(sets.engaged, {
-        ammo="C. Palug Stone",
         hands="Gazu Bracelets +1",
         body="Pillager's Vest +3",
         legs="Pill. Culottes +3",
@@ -460,7 +459,6 @@ function init_gear_sets()
     } -- 41%
 
     sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
-        ammo="C. Palug Stone",
         hands="Gazu Bracelets +1",
         legs="Pill. Culottes +3",
         ear1="Cessance Earring",
@@ -488,7 +486,6 @@ function init_gear_sets()
     } -- 37%
 
     sets.engaged.DW.Acc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
-        ammo="C. Palug Stone",
         hands="Gazu Bracelets +1",
         legs="Pill. Culottes +3",
         ear2="Telos Earring",
@@ -515,7 +512,6 @@ function init_gear_sets()
     } -- 26%
 
     sets.engaged.DW.Acc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
-        ammo="C. Palug Stone",
         hands="Gazu Bracelets +1",
         legs="Pill. Culottes +3",
         ear2="Telos Earring",
@@ -542,7 +538,6 @@ function init_gear_sets()
     } -- 22%
 
     sets.engaged.DW.Acc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
-        ammo="C. Palug Stone",
         hands="Gazu Bracelets +1",
         legs="Pill. Culottes +3",
         ear2="Telos Earring",
@@ -568,7 +563,6 @@ function init_gear_sets()
     } -- 5% needed
 
     sets.engaged.DW.Acc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
-        ammo="C. Palug Stone",
         hands="Gazu Bracelets +1",
         legs="Pill. Culottes +3",
         ear2="Telos Earring",

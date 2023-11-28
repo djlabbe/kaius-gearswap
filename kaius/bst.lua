@@ -91,7 +91,7 @@ function user_setup()
 
     -- Set up Jug Pet cycling and keybind Alt+F8/Ctrl+F8
     -- INPUT PREFERRED JUG PETS HERE
-    state.JugMode = M{['description']='Jug Mode', 'Dire Broth', 'Tant. Broth', 'Lyrical Broth', 'Spicy Broth', 'C. Plasma Broth', 'Bubbly Broth'}
+    state.JugMode = M{['description']='Jug Mode', 'Dire Broth', 'Tant. Broth', 'Lyrical Broth', 'Spicy Broth', 'C. Plasma Broth', 'Bubbly Broth', 'Windy Greens'}
     send_command('bind !f8 gs c cycle JugMode')
     send_command('bind ^f8 gs c cycleback JugMode')
 
@@ -418,7 +418,7 @@ function init_gear_sets()
         ring1=gear.Moonlight_1,
         ring2="Defending Ring",
         back=gear.BST_DW_Cape,
-        waist="Flume Belt +1",
+        waist="Platinum Moogle Belt",
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet
     }
@@ -547,10 +547,10 @@ function init_gear_sets()
     sets.engaged.DW.HighHaste = sets.engaged.DW
 
     -- 45% Magic Haste (36% DW to cap) 11 NIN
-    sets.engaged.DW.MaxHaste = set_combine(sets.engaged.DW, {
+    sets.engaged.DW.MaxHaste = {
         ammo="Coiste Bodhar",
         head=gear.Malignance_Head,
-        body=gear.Malignance_Body,
+        body=gear.Gleti_Body,
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Malignance_Feet,
@@ -561,7 +561,7 @@ function init_gear_sets()
         ring2="Epona's Ring",
         back=gear.BST_DW_Cape,
         waist="Sailfi Belt +1",
-    })
+    }
 
     sets.engaged.Hybrid = {
         ring2=gear.Moonlight_2
@@ -862,6 +862,21 @@ function init_gear_sets()
         feet=gear.Nyame_Feet
     }
 
+    sets.idle.Town = {
+        ammo="Hesperiidae",        
+        head=gear.Gleti_Head,
+        body=gear.Gleti_Body,
+        hands=gear.Gleti_Hands,
+        legs=gear.Gleti_Legs,
+        feet=gear.Gleti_Feet,
+        neck="Beastmaster Collar +2",
+        ear1="Sherida Earring",
+        ear2="Balder Earring +1",    
+        ring1="Gere Ring",
+        ring2="Shneddick Ring +1",
+        back=gear.BST_DW_Cape,
+    }
+
     ----------------
     -- OTHER SETS --
     ----------------
@@ -901,7 +916,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head=gear.Malignance_Head,
         neck="Beastmaster Collar +2",
-        ear1="Dignitary's Earring",
+        ear1="Crepuscular Earring",
         ear2="Nukumi Earring +1",
         body=gear.Malignance_Body,
         hands=gear.Malignance_Hands,
@@ -1445,7 +1460,7 @@ function pet_info_update()
         elseif pet.name == 'RhymingShizuna' or pet.name == 'SheepFamiliar' or pet.name == 'LullabyMelodia' or pet.name == 'NurseryNazuna' then
             PetInfo = "Sheep, Beast";PetJob = 'Warrior';ReadyMoveOne = 'Sheep Charge';ReadyMoveTwo = 'Rage';ReadyMoveThree = 'Sheep Song';ReadyMoveFour = 'Lamb Chop'
         elseif pet.name == 'AttentiveIbuki' or pet.name == 'SwoopingZhivago' then
-            PetInfo = "Tulfaire, Bird";PetJob = 'Warrior';ReadyMoveOne = 'Swooping Frenzy';ReadyMoveTwo = 'Pentapeck';ReadyMoveThree = 'Molting Plumage';ReadyMoveFour = 'Molting Plumage'
+            PetInfo = "Tulfaire, Bird";PetJob = 'Warrior';ReadyMoveOne = 'Swooping Frenzy';ReadyMoveTwo = 'Molting Plumage';ReadyMoveThree = 'Pentapeck';ReadyMoveFour = 'Molting Plumage'
         elseif pet.name == 'AmiableRoche' or pet.name == 'TurbidToloi' then
             PetInfo = "Pugil, Aquan";PetJob = 'Warrior';ReadyMoveOne = 'Recoil Dive';ReadyMoveTwo = 'Water Wall';ReadyMoveThree = 'Intimidate';ReadyMoveFour = 'Intimidate'
         elseif pet.name == 'BrainyWaluis' or pet.name == 'FunguarFamiliar' or pet.name == 'DiscreetLouise' then

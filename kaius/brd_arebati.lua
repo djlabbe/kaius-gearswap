@@ -271,7 +271,7 @@ function init_gear_sets()
         ear2="Odnowa Earring +1",
         ring1=gear.Moonlight_1,
         ring2="Defending Ring",
-        waist="Flume Belt +1",
+        waist="Platinum Moogle Belt",
         back=gear.BRD_Song_Cape,
     }
 
