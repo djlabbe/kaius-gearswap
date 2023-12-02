@@ -96,8 +96,8 @@ function user_setup()
     gear.Relic_Legs = { name= "Lanun Trews +3" }
     gear.Relic_Feet = { name= "Lanun Bottes +3" }
 
-    gear.Empyrean_Head = { name= "Chasseur's Tricorne +2" }
-    gear.Empyrean_Body = { name= "Chasseur's Frac +2" }
+    gear.Empyrean_Head = { name= "Chasseur's Tricorne +3" }
+    gear.Empyrean_Body = { name= "Chasseur's Frac +3" }
     gear.Empyrean_Hands = { name= "Chasseur's Gants +3" }
     gear.Empyrean_Legs = { name= "Chasseur's Culottes +3" }
     gear.Empyrean_Feet = { name= "Chasseur's Bottes +3" }
@@ -657,6 +657,8 @@ function init_gear_sets()
     })
 
     sets.idle.Town = set_combine(sets.engaged.DW.MaxHaste, {
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
         hands=gear.Empyrean_Hands,

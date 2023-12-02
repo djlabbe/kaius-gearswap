@@ -24,7 +24,7 @@ function job_setup()
         'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
     wyv_elem_breath = S{'Flame Breath', 'Frost Breath', 'Sand Breath', 'Hydro Breath', 'Gust Breath', 'Lightning Breath'}
     state.Buff.Doom = false
-    custom_weapon_list = S{"Naegling", "Mafic Cudgel"}
+    custom_weapon_list = S{"Aram", "Naegling", "Mafic Cudgel"}
 end
 
 function user_setup()
@@ -37,7 +37,7 @@ function user_setup()
 
 
 
-    state.WeaponSet = M{["description"]='Weapon Set', 'Trishula', 'ShiningOne', 'Naegling', 'Mafic' }
+    state.WeaponSet = M{["description"]='Weapon Set', 'Trishula', 'ShiningOne', 'Aram', 'Naegling', 'Mafic' }
     state.WeaponLock = M(false, 'Weapon Lock')  
 
     -- gear.Artifact_Head = { name="Vishap Armet +1" }
@@ -76,6 +76,7 @@ function user_setup()
         send_command('bind ^` input /ja "Seigan" <me>')
         send_command('bind ^numpad7 gs c set WeaponSet Trishula;input /macro set 1')
         send_command('bind ^numpad8 gs c set WeaponSet ShiningOne;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet Aram;input /macro set 1')
         send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 2')
         send_command('bind ^numpad5 gs c set WeaponSet Mafic;input /macro set 3')
         set_macro_page(1, 14)
@@ -83,6 +84,7 @@ function user_setup()
         send_command('bind !t input /ja "Provoke" <t>')
         send_command('bind ^numpad7 gs c set WeaponSet Trishula;input /macro set 4')
         send_command('bind ^numpad8 gs c set WeaponSet ShiningOne;input /macro set 4')
+        send_command('bind ^numpad9 gs c set WeaponSet Aram;input /macro set 4')
         send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 5')
         send_command('bind ^numpad5 gs c set WeaponSet Mafic;input /macro set 6')
         set_macro_page(4, 14)
@@ -90,18 +92,21 @@ function user_setup()
         send_command('bind ^` input /ja "Chocobo Jig" <me>')
         send_command('bind ^numpad7 gs c set WeaponSet Trishula;input /macro set 4')
         send_command('bind ^numpad8 gs c set WeaponSet ShiningOne;input /macro set 4')
+        send_command('bind ^numpad9 gs c set WeaponSet Aram;input /macro set 4')
         send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 5')
         send_command('bind ^numpad5 gs c set WeaponSet Mafic;input /macro set 6')
         set_macro_page(4, 14)
     elseif player.sub_job == 'NIN' then
         send_command('bind ^numpad7 gs c set WeaponSet Trishula;input /macro set 4')
         send_command('bind ^numpad8 gs c set WeaponSet ShiningOne;input /macro set 4')
+        send_command('bind ^numpad9 gs c set WeaponSet Aram;input /macro set 4')
         send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 5')
         send_command('bind ^numpad5 gs c set WeaponSet Mafic;input /macro set 6')
         set_macro_page(4, 14)
     else
         send_command('bind ^numpad7 gs c set WeaponSet Trishula;input /macro set 1')
         send_command('bind ^numpad8 gs c set WeaponSet ShiningOne;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet Aram;input /macro set 1')
         send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 2')
         send_command('bind ^numpad5 gs c set WeaponSet Mafic;input /macro set 3')
         set_macro_page(1, 14)
@@ -198,7 +203,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
         ring1="Niqmaddu ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.DRG_WS1_Cape,
     }
 
@@ -218,17 +223,27 @@ function init_gear_sets()
         feet=gear.Nyame_Feet,
         neck="Rep. Plat. Medal",
         waist="Sailfi Belt +1",
-        ear1="Thrud Earring",
-        ear2="Moonshade Earring",
-        ring1="Epaminondas's Ring",
-        ring2="Cornelia's Ring",
+        ear1="Moonshade Earring",
+        ear2="Thrud Earring",
+        ring1=gear.Cornelia_Or_Regal,
+        ring2="Epaminondas's Ring",
         back=gear.DRG_WS1_Cape,
     }
 
     sets.precast.WS["Savage Blade"].PDL = set_combine(sets.precast.WS["Savage Blade"], {
+        ammo="Knobkierrie",
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
         neck="Dragoon's Collar +2",
-        ear1="Peltast's Earring +1",
+        waist="Sailfi Belt +1",
+        ear1="Moonshade Earring",
+        ear2="Peltast's Earring +1",
+        ring1=gear.Cornelia_Or_Regal,
+        ring2="Epaminondas's Ring",
+        back=gear.DRG_WS1_Cape,
     })
 
     sets.precast.WS["Judgment"] = sets.precast.WS["Savage Blade"]
@@ -250,14 +265,49 @@ function init_gear_sets()
         feet=gear.Nyame_Feet,
     }
 
-    sets.precast.WS["Stardiver"].Acc = set_combine(sets.precast.WS["Stardiver"], {})
+    -- This requires editing MoteLibs to work.
+    -- Insert the following code in Mote-Include.lua immediately following line 826:
+    --
+    --    if state.CombatWeapon.has_value and equipSet[state.CombatWeapon.value] then
+    --      equipSet = equipSet[state.CombatWeapon.value]
+    --      mote_vars.set_breadcrumbs:append(state.CombatWeapon.value)
+    --    end
+    --
+    sets.precast.WS["Stardiver"]["Shining One"] = {
+        ammo="Coiste Bodhar",
+        head="Blistering Sallet +1",
+        neck="Fotia Gorget",
+        ear1="Sherida Earring",     
+        ear2="Moonshade Earring",
+        body=gear.Gleti_Body,
+        hands=gear.Gleti_Hands,
+        ring1="Niqmaddu Ring",
+        ring2="Begrudging Ring",
+        back=gear.DRG_WS2_Cape,
+        waist="Fotia Belt",
+        legs=gear.Empyrean_Legs,
+        feet=gear.Gleti_Feet,
+    }
 
+    sets.precast.WS["Stardiver"].Acc = set_combine(sets.precast.WS["Stardiver"], {})
+    sets.precast.WS["Stardiver"]["Shining One"].Acc = set_combine(sets.precast.WS["Stardiver"]["Shining One"], {})
     sets.precast.WS["Stardiver"].PDL = set_combine(sets.precast.WS["Stardiver"], {
         hands=gear.Gleti_Hands,
         body=gear.Gleti_Body,
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
         ear1="Peltast's Earring +1",
+    })
+
+    sets.precast.WS["Stardiver"]["Shining One"].PDL = set_combine(sets.precast.WS["Stardiver"]["Shining One"], {
+        head=gear.Gleti_Head,
+        legs=gear.Gleti_Legs,
+        feet=gear.Gleti_Feet,
+        neck="Dragoon's Collar +2",
+        ear1="Moonshade Earring",
+        ear2="Peltast's Earring +1",
+        ring2="Sroda Ring",
+        back=gear.DRG_WS2_Cape,
     })
 
     sets.precast.WS["Camlann\'s Torment"] = {
@@ -272,7 +322,7 @@ function init_gear_sets()
         ear1="Thrud Earring",   
         ear2="Moonshade Earring",
         ring1="Niqmaddu ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Regal,
         back=gear.DRG_WS1_Cape,
     }
 
@@ -298,7 +348,7 @@ function init_gear_sets()
         ear1="Sherida Earring",    
         ear2="Moonshade Earring",
         ring1="Niqmaddu ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.DRG_WS1_Cape,
     }
 
@@ -332,7 +382,7 @@ function init_gear_sets()
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
-        ring2="Cornelia's Ring",
+        ring2="Sroda Ring",
         ear1="Peltast's Earring +1",
     })
 
@@ -353,8 +403,8 @@ function init_gear_sets()
         legs=gear.Empyrean_Legs,
         feet=gear.Gleti_Feet,
         neck="Dgn. Collar +2",
-        ear1="Peltast's Earring +1",
-        ear2="Moonshade Earring",
+        ear1="Moonshade Earring",
+        ear2="Peltast's Earring +1",
         ring1="Niqmaddu Ring",
         ring2="Begrudging Ring",
         back=gear.DRG_WS1_Cape,
@@ -382,9 +432,13 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Thrud Earring",
         ring1="Niqmaddu Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Regal,
         back=gear.DRG_WS1_Cape,
     }
+
+    ----------------
+    -- Geirskogul --
+    ----------------
 
     sets.precast.WS["Geirskogul"] = {
         ammo="Knobkierrie",
@@ -396,7 +450,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Thrud Earring",
         ring1="Niqmaddu Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         waist="Sailfi Belt +1",
         back=gear.DRG_WS3_Cape,
     }
@@ -406,6 +460,10 @@ function init_gear_sets()
         ear1="Peltast's Earring +1", 
         ring2="Epaminondas's Ring",
     })
+
+    ----------------
+    -- Leg Sweep --
+    ----------------
 
     sets.precast.WS["Leg Sweep"] = set_combine(sets.precast.WS, {
         ammo="Pemphredo Tathlum",
@@ -459,8 +517,8 @@ function init_gear_sets()
         legs=gear.Relic_Legs,
         feet="Flamma Gambieras +2",
         neck="Dragoon's Collar +2",
-        ear1="Sherida Earring",
-        ear2="Sroda Earring",
+        -- ear1="Sherida Earring",
+        -- ear2="Sroda Earring",
         ring1=gear.Moonlight_1, --5
         ring2=gear.Moonlight_2, --5
         waist="Sailfi Belt +1",
@@ -499,6 +557,22 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     }
 
+    sets.engaged.Aram = {
+        ammo="Aurgelmir Orb +1",
+        head="Hjarrandi Helm",
+        body=gear.Empyrean_Body,
+        hands=gear.Gleti_Hands,
+        legs=gear.Relic_Legs,
+        feet=gear.Valo_STP_Feet,
+        neck="Vim Torque +1",
+        waist="Sweordfaetels +1",
+        ring1="Lehko's Ring",
+        ring2=gear.Moonlight_2,
+        ear1="Dedition Earring",
+        ear2="Pel. Earring +1",
+        back=gear.DRG_STP_Cape,
+    }
+
     sets.engaged.Naegling = {
         ammo="Aurgelmir Orb +1",
         head="Hjarrandi Helm",
@@ -525,6 +599,10 @@ function init_gear_sets()
         neck="Dragoon's Collar +2",
     })
 
+    sets.engaged.Aram.Acc = set_combine(sets.engaged.Aram, {
+        neck="Dragoon's Collar +2",
+    })
+
     sets.engaged.Naegling.Acc = set_combine(sets.engaged.Naegling, {
         neck="Dragoon's Collar +2",
     })
@@ -543,10 +621,14 @@ function init_gear_sets()
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Naegling.DT = set_combine(sets.engaged.Naegling, sets.engaged.Hybrid)
     sets.engaged["Mafic Cudgel"].DT =  sets.engaged.Naegling.DT
+    sets.engaged.Aram.DT = set_combine(sets.engaged.Aram, {
+        body="Hjarrandi Breastplate"
+    })
 
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
-    sets.engaged.Naegling.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
+    sets.engaged.Naegling.Acc.DT = set_combine(sets.engaged.Naegling, sets.engaged.Hybrid)
     sets.engaged["Mafic Cudgel"].Acc.DT = sets.engaged.Naegling.Acc.DT
+    sets.engaged.Aram.Acc.DT = sets.engaged.Aram.DT
 
     sets.idle = {
         ammo="Staunch Tathlum +1", --3/3
@@ -584,7 +666,7 @@ function init_gear_sets()
     sets.idle.DT.Pet = set_combine(sets.idle.Pet, { })
 
     sets.idle.Weak = sets.idle.DT
-    sets.idle.Town = sets.engaged
+    sets.idle.Town = sets.engaged.Aram
     sets.Kiting = { ring1="Shneddick Ring +1" }
 
     sets.buff.Doom = {
@@ -596,6 +678,7 @@ function init_gear_sets()
 
     sets.Trishula = { main="Trishula", sub="Utu Grip" }
     sets.ShiningOne = { main="Shining One", sub="Utu Grip" }
+    sets.Aram = { main="Aram", sub="Utu Grip" }
     sets.Naegling = { main="Naegling" }
     sets.Mafic = { main="Mafic Cudgel" }
 
@@ -694,10 +777,7 @@ end
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
     check_weaponset()
-    if player.equipment.main == "Naegling" then
-        meleeSet = set_combine(meleeSet, sets.engaged.Naegling)
-    end
-    if pet.isValid then
+    if pet.isValid and state.WeaponSet.Value ~= "Aram" then
         meleeSet = set_combine(meleeSet, sets.engaged.Pet)
     end
     if state.Buff.Doom then

@@ -749,7 +749,7 @@ function init_gear_sets()
         right_ear="Infused Earring",
         left_ring="Defending Ring",
         right_ring="Moonlight Ring",
-        back="Shadow Mantle",
+        back=gear.BRD_KITE_Cape,
     }
 
     sets.idle.MEva = {

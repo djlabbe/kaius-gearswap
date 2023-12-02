@@ -872,7 +872,6 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
-        -- back="Shadow Mantle",
         back=gear.BLU_TP_Cape,
         waist="Carrier's Sash",
     }
@@ -889,7 +888,6 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         -- ring1="Shadow Ring", --0/4
         ring2="Defending Ring", --10/10
-        -- back="Shadow Mantle",
         back=gear.BLU_TP_Cape,
         waist="Carrier's Sash",
     }

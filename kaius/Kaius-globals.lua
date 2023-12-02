@@ -12,6 +12,22 @@
 
 function define_global_sets()
 
+    ------------------------
+    -- TVR FALLBACK RING ---
+    ------------------------
+
+    gear.Cornelia_Or_Epaminondas = { name = "Epaminondas's Ring" }
+    gear.Cornelia_Or_Sroda = { name = "Sroda Ring" }
+    gear.Cornelia_Or_Niqmaddu = { name = "Niqmaddu Ring" }
+    gear.Cornelia_Or_Regal = { name = "Regal Ring" }
+
+    if player.inventory["Cornelia's Ring"] or player.wardrobe["Cornelia's Ring"] then
+        gear.Cornelia_Or_Epaminondas = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Sroda = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Niqmaddu = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Regal = { name = "Cornelia's Ring" }
+    end
+
     ---------------------
     -- DUPLICATE RINGS --
     ---------------------

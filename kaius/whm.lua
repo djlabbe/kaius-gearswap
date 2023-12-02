@@ -171,7 +171,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Impatiens",
         head=gear.Relic_Head,
-        feet=gear.Kaykaus_B_Feet,
+        feet=gear.Kaykaus_C_Feet,
         ring1="Lebeche Ring",
         back="Perimede Cape",
     })
@@ -390,7 +390,7 @@ function init_gear_sets()
         feet=gear.Artifact_Feet,
         neck="Erra Pendant",
         ear1="Regal Earring",
-        ear2="Eber's Earring +1",
+        ear2="Ebers Earring +1",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back="Aurist's Cape +1",

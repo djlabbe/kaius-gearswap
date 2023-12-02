@@ -682,7 +682,7 @@ function init_gear_sets()
         ear2="Eabani Earring",
         ring1="Defending Ring",
         ring2="Shadow Ring",
-        back="Shadow Mantle",
+        back=gear.RNG_DW_Cape,
         waist="Carrier's Sash",
     }
 
