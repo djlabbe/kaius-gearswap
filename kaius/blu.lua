@@ -144,7 +144,6 @@ function user_setup()
 
     state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Maxentius', 'Nuking'}
     state.WeaponLock = M(false, 'Weapon Lock')
-    state.MagicBurst = M(false, 'Magic Burst')
     include('Global-Binds.lua')
 
     gear.Artifact_Hands = { name="Assimilator's Bazubands +2" }
@@ -171,7 +170,6 @@ function user_setup()
 
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @e gs c cycleback WeaponSet')
-    send_command('bind @q gs c toggle MagicBurst')
 
     send_command('bind !F1 input /ja "Azure Lore" <me>')
     send_command('bind !F2 input /ja "Unbridled Wisdom" <me>')
@@ -595,18 +593,17 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].Healing = {
         ammo="Staunch Tathlum +1",
-        head=gear.Carmine_D_Head,
-        body="Pinga Tunic +1", -- 15
-        hands=gear.Telchine_ENH_Hands, -- 10
-        -- legs=gear.Artifact_Legs,
+        head=gear.Empyrean_Head,
+        body="Pinga Tunic +1",
+        hands=gear.Telchine_CURE_Hands,
         legs="Pinga Pants +1",
-        feet="Medium's Sabots", -- 12
-        -- neck="Nuna Gorget +1",
-        ear1="Mendi. Earring", -- 5
+        feet="Medium's Sabots",
+        neck="Loricate Torque +1",
+        ear1="Mendi. Earring",
         ear2="Regal Earring",
-        ring1="Lebeche Ring", -- 3
+        ring1="Metamporph Ring +1",
         ring2=gear.Stikini_2,
-        back="Oretan. Cape +1", --6
+        back="Oretan. Cape +1",
         waist="Luminary Sash",
     }
 
@@ -618,14 +615,21 @@ function init_gear_sets()
         waist="Gishdubar Sash",
     })
 
-    sets.midcast['Blue Magic']['White Wind'] = set_combine(sets.midcast['Blue Magic'].Healing, {
-        -- head=gear.Adhemar_D_Head,
+    sets.midcast['Blue Magic']['White Wind'] = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Nyame_Head,
+        body="Pinga Tunic +1",
+        hands=gear.Telchine_CURE_Hands,
+        legs="Pinga Pants +1",
+        feet=gear.Carmine_D_Feet,
         neck="Unmoving Collar +1",
-        ear2="Etiolation Earring",
+        ear1="Tuisto Earring",
+        ear2="Odnowa Earring +1",
+        ring1="Gelatinous Ring +1",
         ring2="Eihwaz Ring",
         back="Moonlight Cape",
-        waist="Kasiri Belt",
-    })
+        waist="Platinum Moogle Belt",
+    }
 
     sets.midcast['Blue Magic'].Buff = sets.midcast['Blue Magic']
     sets.midcast['Blue Magic'].Refresh = set_combine(sets.midcast['Blue Magic'], {
@@ -639,8 +643,7 @@ function init_gear_sets()
         hands=gear.Empyrean_Hands,
         ear1="Njordr Earring",
         ear2="Enchntr. Earring +1",
-        -- ring2="Weather. Ring",
-    }) -- 1 shadow per 50 skill
+    })
 
     sets.midcast['Blue Magic']['Carcharian Verve'] = set_combine(sets.midcast['Blue Magic'].Buff, {
         head=gear.Amalric_A_Head, 
@@ -706,7 +709,6 @@ function init_gear_sets()
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
-
     sets.engaged = {
         ammo="Coiste Bodhar",
         head=gear.Adhemar_A_Head,
@@ -723,83 +725,70 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     }
 
-    -- Base Dual-Wield Values:
-    -- * DW6: +37%
-    -- * DW5: +35%
-    -- * DW4: +30%
-    -- * DW3: +25% (NIN Subjob)
-    -- * DW2: +15% (DNC Subjob)
-    -- * DW1: +10%
-
-    -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
         ammo="Coiste Bodhar",
-        head=gear.Adhemar_A_Head,
-        body=gear.Gleti_Body,
-        hands=gear.Gleti_Hands,
-        legs=gear.Carmine_D_Legs, --6
-        feet=gear.Gleti_Feet,
-        neck="Mirage Stole +2",
-        ear1="Eabani Earring", --4
-        ear2="Suppanomimi", --5
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.BLU_TP_Cape,
-        waist="Reiki Yotai", --7
-    } -- 31% (+25) = 56
-
-    -- 15% Magic Haste (67% DW to cap)
-    sets.engaged.DW.LowHaste = set_combine(sets.engaged.DW, {
-        ammo="Coiste Bodhar",
-        head=gear.Adhemar_A_Head,
-        body=gear.Gleti_Body,
-        hands=gear.Gleti_Hands,
-        legs=gear.Carmine_D_Legs, --6
-        feet=gear.Gleti_Feet,
-        neck="Mirage Stole +2",
-        ear1="Eabani Earring", --4
-        ear2="Suppanomimi", --5
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.BLU_TP_Cape,
-        waist="Reiki Yotai", --7
-    }) -- 31% (+25) = 56
-
-    -- 30% Magic Haste (56% DW to cap)
-    sets.engaged.DW.MidHaste = {
-        ammo="Coiste Bodhar",
-        head=gear.Adhemar_A_Head,
-        body=gear.Gleti_Body,
-        hands=gear.Gleti_Hands,
-        legs=gear.Malignance_Legs,
-        feet=gear.Gleti_Feet,
-        neck="Mirage Stole +2",
-        ear1="Eabani Earring", --4
-        ear2="Hashishin Earring +1",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.BLU_TP_Cape,
-        waist="Reiki Yotai", --7
-    } -- 20% (+25) = 45
-
-    -- 35% Magic Haste (51% DW to cap)
-    sets.engaged.DW.HighHaste = {
-        ammo="Coiste Bodhar",
         head=gear.Malignance_Head,
-        body=gear.Adhemar_A_Body, --6
+        body=gear.Gleti_Body,
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Malignance_Feet,
         neck="Mirage Stole +2",
-        ear1="Eabani Earring", --4
+        ear1="Dedition Earring",
         ear2="Hashishin Earring +1",
         ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
+        ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
-        waist="Sailfi Belt +1",
-    } -- 16% (+25) = 41
+        waist="Sailfi Belt +1", 
+    } 
 
-    -- 45% Magic Haste (36% DW to cap)
+    sets.engaged.DW.LowHaste = set_combine(sets.engaged.DW, {
+        ammo="Coiste Bodhar",
+        head=gear.Malignance_Head,
+        body=gear.Gleti_Body,
+        hands=gear.Gleti_Hands,
+        legs=gear.Gleti_Legs,
+        feet=gear.Malignance_Feet,
+        neck="Mirage Stole +2",
+        ear1="Dedition Earring",
+        ear2="Hashishin Earring +1",
+        ring1=gear.Chirich_1,
+        ring2="Epona's Ring",
+        back=gear.BLU_TP_Cape,
+        waist="Sailfi Belt +1", 
+    })
+
+    sets.engaged.DW.MidHaste = {
+        ammo="Coiste Bodhar",
+        head=gear.Malignance_Head,
+        body=gear.Gleti_Body,
+        hands=gear.Gleti_Hands,
+        legs=gear.Gleti_Legs,
+        feet=gear.Malignance_Feet,
+        neck="Mirage Stole +2",
+        ear1="Dedition Earring",
+        ear2="Hashishin Earring +1",
+        ring1=gear.Chirich_1,
+        ring2="Epona's Ring",
+        back=gear.BLU_TP_Cape,
+        waist="Sailfi Belt +1", 
+    }
+
+    sets.engaged.DW.HighHaste = {
+        ammo="Coiste Bodhar",
+        head=gear.Malignance_Head,
+        body=gear.Gleti_Body,
+        hands=gear.Gleti_Hands,
+        legs=gear.Gleti_Legs,
+        feet=gear.Malignance_Feet,
+        neck="Mirage Stole +2",
+        ear1="Dedition Earring",
+        ear2="Hashishin Earring +1",
+        ring1=gear.Chirich_1,
+        ring2="Epona's Ring",
+        back=gear.BLU_TP_Cape,
+        waist="Sailfi Belt +1", 
+    } 
+
     sets.engaged.DW.MaxHaste = {
         ammo="Coiste Bodhar",
         head=gear.Malignance_Head,
@@ -811,22 +800,14 @@ function init_gear_sets()
         ear1="Dedition Earring",
         ear2="Hashishin Earring +1",
         ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
+        ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Sailfi Belt +1", 
-    } -- 1% to Cap
+    }
 
     sets.engaged.Hybrid = {
-        head=gear.Malignance_Head, --6/6
-        body=gear.Gleti_Body, --9/0
-        hands=gear.Gleti_Hands, --7/0
-        legs=gear.Malignance_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
-        back=gear.BLU_TP_Cape, --10/0
-        ear1="Eabani Earring", --4
-        ear2="Suppanomimi", --5
-        -- ring2="Defending Ring",
-    } --53/27(+29% ShellV)
+
+    }
 
     sets.engaged.Learning = {
         body=gear.Gleti_Body,
@@ -884,17 +865,8 @@ function init_gear_sets()
         waist="Plat. Mog. Belt",
     }
 
-    -- sets.idle.Town = sets.midcast['Blue Magic'].Magical
     sets.idle.Town = sets.engaged.DW.MaxHaste
     sets.idle.Weak = sets.idle.DT
-  
-
-    sets.magic_burst = set_combine(sets.midcast['Blue Magic'].Magical, {
-        neck="Warder's Charm +1",
-        --ear1="Static Earring",
-        ring1="Mujin Band",
-        --ring2="Locus Ring",
-    })
 
     sets.Kiting = { ring1="Shneddick Ring +1" }
     sets.latent_refresh = {waist="Fucho-no-obi"}
@@ -1172,13 +1144,13 @@ end
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
-        if DW_needed <= 11 then
+        if DW_needed <= 1 then
             classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 11 and DW_needed <= 22 then
+        elseif DW_needed > 1 and DW_needed <= 6 then
             classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 22 and DW_needed <= 27 then
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif DW_needed > 27 and DW_needed <= 37 then
+        elseif DW_needed > 6 and DW_needed <= 26 then
+            classes.CustomMeleeGroups:append('LowHaste')
+        elseif DW_needed > 26 and DW_needed <= 37 then
             classes.CustomMeleeGroups:append('LowHaste')
         elseif DW_needed > 37 then
             classes.CustomMeleeGroups:append('')
@@ -1232,9 +1204,6 @@ end
 -- State buff checks that will equip buff gear and mark the event as handled.
 function apply_ability_bonuses(spell, action, spellMap)
     if state.Buff['Burst Affinity'] and (spellMap == 'Magical' or spellMap == 'MagicalLight' or spellMap == 'MagicalDark' or spellMap == 'Breath') then
-        if state.MagicBurst.value then
-            equip(sets.magic_burst)
-        end
         equip(sets.buff['Burst Affinity'])
     end
     if state.Buff.Efflux and spellMap == 'Physical' then

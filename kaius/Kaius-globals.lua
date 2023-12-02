@@ -93,6 +93,7 @@ function define_global_sets()
     gear.Telchine_REGEN_Hands = { name="Telchine Gloves", augments={'"Regen" potency+3',}}
     gear.Telchine_REGEN_Legs = { name="Telchine Braconi", augments={'"Regen" potency+3',}}
     gear.Telchine_REGEN_Feet = { name="Telchine Pigaches", augments={'Mag. Evasion+25','Song spellcasting time -6%','"Regen" potency+3',}}
+    gear.Telchine_CURE_Hands = { name="Telchine Gloves", augments={'Mag. Evasion+19','"Cure" potency +8%','MND+9',}}
 
     gear.Yorium_PHLX_Head = {name="Yorium Barbuta", augments={'Phalanx +3',}}
     gear.Yorium_PHLX_Body = {name="Yorium Cuirass", augments={'Phalanx +3',}}
