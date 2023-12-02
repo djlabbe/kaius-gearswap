@@ -284,7 +284,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Ilabrat Ring",
         back=gear.BRD_WS2_Cape,
         waist="Fotia Belt",
@@ -337,7 +337,7 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         neck="Bard's Charm +2",
         ring1="Epaminondas's Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Ilabrat,
         waist="Kentarch Belt +1",
         back=gear.BRD_WS2_Cape,
     }
@@ -360,7 +360,7 @@ function init_gear_sets()
     sets.precast.WS['Savage Blade'] = {
         range=gear.Linos_WS,
         head=gear.Nyame_Head,
-        body=gear.Relic_Body,
+        body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
@@ -368,7 +368,7 @@ function init_gear_sets()
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
         ring1="Epaminondas's Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Sroda,
         waist="Sailfi Belt +1",
         back=gear.BRD_WS2_Cape,
     }
@@ -611,7 +611,7 @@ function init_gear_sets()
         neck="Bard's Charm +2",
         ear1="Telos Earring",
         ear2="Balder Earring +1",
-        ring1=gear.Chirich_1,
+        ring1=gear.Lehko_Or_Chirich1,
         ring2=gear.Chirich_2,
         back=gear.BRD_DW_Cape,
         waist="Windbuffet Belt +1",
@@ -669,7 +669,7 @@ function init_gear_sets()
         neck="Bard's Charm +2",
         ear1="Telos Earring", --4
         ear2="Balder Earring +1",
-        ring1=gear.Chirich_1, --(5/5)
+        ring1=gear.Lehko_Or_Chirich1, --(5/5)
         ring2=gear.Chirich_2, --(5/5)
         back=gear.BRD_DW_Cape, --(10/0)
         waist="Sailfi Belt +1", --7

@@ -228,7 +228,7 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         ear1="Thrud Earring",
         ear2="Moonshade Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Epaminondas's Ring", 
         back=gear.SAM_WS_Cape,
     }

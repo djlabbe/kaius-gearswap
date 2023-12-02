@@ -558,18 +558,18 @@ function init_gear_sets()
     }
 
     sets.engaged.Aram = {
-        ammo="Aurgelmir Orb +1",
+        ammo="Coiste Bodhar",
         head="Hjarrandi Helm",
         body=gear.Empyrean_Body,
         hands=gear.Gleti_Hands,
-        legs=gear.Relic_Legs,
+        legs=gear.Gleti_Legs,
         feet=gear.Valo_STP_Feet,
         neck="Vim Torque +1",
-        waist="Sweordfaetels +1",
+        waist="Sailfi Belt +1",
         ring1="Lehko's Ring",
-        ring2=gear.Moonlight_2,
-        ear1="Dedition Earring",
-        ear2="Pel. Earring +1",
+        ring2="Niqmaddu Ring",
+        ear1="Sherida Earring",
+        ear2="Dedition Earring",
         back=gear.DRG_STP_Cape,
     }
 
@@ -622,7 +622,8 @@ function init_gear_sets()
     sets.engaged.Naegling.DT = set_combine(sets.engaged.Naegling, sets.engaged.Hybrid)
     sets.engaged["Mafic Cudgel"].DT =  sets.engaged.Naegling.DT
     sets.engaged.Aram.DT = set_combine(sets.engaged.Aram, {
-        body="Hjarrandi Breastplate"
+        body=gear.Gleti_Body,
+        feet=gear.Nyame_Feet,
     })
 
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
@@ -666,7 +667,7 @@ function init_gear_sets()
     sets.idle.DT.Pet = set_combine(sets.idle.Pet, { })
 
     sets.idle.Weak = sets.idle.DT
-    sets.idle.Town = sets.engaged.Aram
+    sets.idle.Town = sets.engaged.Aram.DT
     sets.Kiting = { ring1="Shneddick Ring +1" }
 
     sets.buff.Doom = {

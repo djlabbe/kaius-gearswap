@@ -328,7 +328,7 @@ function init_gear_sets()
         neck="Mirage Stole +2",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Epaminondas's Ring",
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Sroda Ring",
         back=gear.BLU_WS1_Cape,
         waist="Sailfi Belt +1",
@@ -884,7 +884,8 @@ function init_gear_sets()
         waist="Plat. Mog. Belt",
     }
 
-    sets.idle.Town = sets.midcast['Blue Magic'].Magical
+    -- sets.idle.Town = sets.midcast['Blue Magic'].Magical
+    sets.idle.Town = sets.engaged.DW.MaxHaste
     sets.idle.Weak = sets.idle.DT
   
 

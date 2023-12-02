@@ -132,7 +132,7 @@ function user_setup()
 
     send_command('bind !numpad4 input /ja "Wizard\'s Roll" <me>')
     send_command('bind !numpad5 input /ja "Warlock\'s Roll" <me>')
-    send_command('bind !numpad6 input /ja "Beast Roll" <me>')
+    send_command('bind !numpad6 input /ja "Monk\'s Roll" <me>')
 
     send_command('bind !numpad1 input /ja "Fighter\'s Roll" <me>')
     send_command('bind !numpad2 input /ja "Rogue\'s Roll" <me>')
