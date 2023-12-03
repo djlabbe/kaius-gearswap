@@ -272,7 +272,7 @@ function init_gear_sets()
 		waist="Moonbow Belt +1",
 		ear1="Moonshade Earring",
 		ear2="Schere Earring",
-		ring1="Cornelia's Ring",
+		ring1=gear.Cornelia_Or_Gere,
 		ring2="Niqmaddu Ring",
 		back=gear.MNK_DEX_DA_Cape,
     }

@@ -21,6 +21,7 @@ function define_global_sets()
     gear.Cornelia_Or_Niqmaddu = { name = "Niqmaddu Ring" }
     gear.Cornelia_Or_Regal = { name = "Regal Ring" }
     gear.Cornelia_Or_Ilabrat = { name = "Ilabrat Ring" }
+    gear.Cornelia_Or_Gere = { name = "Gere Ring" }
 
     if player.inventory["Cornelia's Ring"] or player.wardrobe["Cornelia's Ring"] then
         gear.Cornelia_Or_Epaminondas = { name = "Cornelia's Ring" }
@@ -28,6 +29,7 @@ function define_global_sets()
         gear.Cornelia_Or_Niqmaddu = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Regal = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Ilabrat = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Gere = { name = "Cornelia's Ring" }
     end
 
     gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe7"}

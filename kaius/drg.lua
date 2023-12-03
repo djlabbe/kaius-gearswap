@@ -257,12 +257,12 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         body=gear.Nyame_Body,
         hands=gear.Empyrean_Hands,
-        ring1="Niqmaddu Ring",
-        ring2="Sroda Ring",
         back=gear.DRG_WS2_Cape,
         waist="Fotia Belt",
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
+        ring1="Niqmaddu Ring",
+        ring2="Sroda Ring",
     }
 
     -- This requires editing MoteLibs to work.

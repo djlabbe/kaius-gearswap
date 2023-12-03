@@ -202,8 +202,8 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         ear1="Thrud Earring",
         ear2="Moonshade Earring",
-        ring1="Niqmaddu Ring",
-        ring2="Cornelia's Ring",
+        ring1="Regal Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.SAM_WS_Cape,
     }
 
@@ -256,7 +256,7 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         ear1="Thrud Earring",
         ear2="Moonshade Earring",
-        ring2="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Sroda,
         ring2="Epaminondas's Ring",
         back=gear.SAM_WS_Cape,
     }
@@ -292,7 +292,7 @@ function init_gear_sets()
         neck="Sam. Nodowa +2",
         ear1="Schere Earring",
         ear2="Moonshade Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Epaminondas's Ring",
         back=gear.SAM_WS_Cape,
         waist="Orpheus's Sash",
@@ -308,7 +308,7 @@ function init_gear_sets()
         neck="Sibyl Scarf",
         ear1="Friomisi Earring",
         ear2="Moonshade Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Epaminondas's Ring",
         back=gear.SAM_WS_Cape,
         waist="Orpheus's Sash",

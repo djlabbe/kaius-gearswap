@@ -256,7 +256,7 @@ function init_gear_sets()
         ear1="Lugra Earring +1",
         ear2="Heathen's Earring +1",
         ring1="Epaminondas's Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Niqmaddu,
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
     }
@@ -279,7 +279,7 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Niqmaddu Ring",
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
@@ -325,7 +325,7 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
         ear2="Heathen's Earring +1",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Niqmaddu Ring",
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
@@ -348,8 +348,8 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
         ear2="Heathen's Earring +1",
-        ring1="Epaminondas's Ring",
-        ring2="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Regal,
+        ring2="Niqmaddu Ring",
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
     }
@@ -388,7 +388,7 @@ function init_gear_sets()
         ear1="Friomisi Earring",
         ear2="Malignance Earring",
         ring1="Archon Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         waist="Orpheus's Sash",
         back= gear.DRK_WS1_Cape,
     }
@@ -408,7 +408,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
         ring1="Regal Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Niqmaddu,
         back= gear.DRK_WS1_Cape,
     }
 
@@ -431,7 +431,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Thrud Earring", --3
         ring1="Regal Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back= gear.DRK_WS2_Cape, --10
     }
 
@@ -496,7 +496,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Heathen's Earring +1",
         ring1="Epaminondas's Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Regal,
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
     }
@@ -504,7 +504,7 @@ function init_gear_sets()
     sets.precast.WS['Judgment'].Acc = set_combine(sets.precast.WS['Judgment'], {})
     sets.precast.WS['Judgment'].PDL = set_combine(sets.precast.WS['Judgment'], {
         head=gear.Empyrean_Head,
-        ring1="Sroda Ring",
+        ring2="Sroda Ring",
     })
 
     -------------

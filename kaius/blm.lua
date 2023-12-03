@@ -248,10 +248,10 @@ function init_gear_sets()
         feet=gear.Nyame_Feet,
         neck="Src. Stole +2",
         waist="Orpheus's Sash",
-        left_ear="Malignance Earring",
-        right_ear="Regal Earring",
-        left_ring="Archon Ring",
-        right_ring="Cornelia's Ring",
+        ear1="Malignance Earring",
+        ear2="Regal Earring",
+        ring1="Archon Ring",
+        ring2="Cornelia's Ring",
         back=gear.BLM_MAB_Cape, --WSD Better
     }
 
