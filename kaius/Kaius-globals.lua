@@ -31,9 +31,11 @@ function define_global_sets()
     end
 
     gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe7"}
+    gear.Lehko_Or_Chirich2 = {name="Chirich Ring +1", bag="wardrobe8"}
 
     if player.inventory["Lehko Habhoka's Ring"] or player.wardrobe["Lehko Habhoka's Ring"] then
         gear.Lehko_Or_Chirich1 = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Chirich2 = { name = "Lehko Habhoka's Ring" }
     end
 
     ---------------------
