@@ -408,7 +408,7 @@ function init_gear_sets()
         ring1="Metamor. Ring +1",
         ring2="Kishar Ring",
         back=gear.RUN_SIRD_Cape,
-        waist="Acuity Belt +1",
+        waist="Orpheus's Sash",
     }
     
     sets.engaged = {

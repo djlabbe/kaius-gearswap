@@ -223,9 +223,9 @@ function init_gear_sets()
     gear.Relic_Legs = { name="Pitre Churidars +3" }
     gear.Relic_Feet = { name="Pitre Babouches +3" }
 
-    gear.Empyrean_Head = { name="Karagoz Cappello +2" }
+    gear.Empyrean_Head = { name="Karagoz Cappello +3" }
     gear.Empyrean_Body = { name="Karagoz Farsetto +2" }
-    gear.Empyrean_Hands = { name="Karagoz Guanti +2" }
+    gear.Empyrean_Hands = { name="Karagoz Guanti +3" }
     gear.Empyrean_Legs = { name="Karagoz Pantaloni +2" }
     gear.Empyrean_Feet = { name="Karagoz Scarpe +2" }
 
@@ -271,11 +271,11 @@ function init_gear_sets()
     sets.idle = {
         range=gear.Animator_P1,
         ammo="Automat. Oil +3",
-        head=gear.Malignance_Head,
-        body=gear.Malignance_Body,
-        hands=gear.Malignance_Hands,
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
+        head=gear.Mpaca_Head,
+        body=gear.Mpaca_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Mpaca_Legs,
+        feet=gear.Mpaca_Feet,
         neck="Warder's Charm +1",
         ear1="Eabani Earring",
         ear2="Sanare Earring",
@@ -362,7 +362,7 @@ function init_gear_sets()
         ammo="Automat. Oil +3",
 		head=gear.Nyame_Head,
 		body=gear.Nyame_Body,
-		hands=gear.Nyame_Body,
+		hands=gear.Mpaca_Hands,
 		legs=gear.Nyame_Legs,
 		feet=gear.Nyame_Feet,
 		neck="Fotia Gorget",
@@ -443,11 +443,11 @@ function init_gear_sets()
     sets.idle.MasterDT = {
         range=gear.Animator_P1,
         ammo="Automat. Oil +3",
-        head=gear.Malignance_Head,
-        body=gear.Malignance_Body,
-        hands=gear.Malignance_Hands,
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
+        head=gear.Mpaca_Head,
+        body=gear.Mpaca_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Mpaca_Legs,
+        feet=gear.Mpaca_Feet,
         neck="Warder's Charm +1",
         ear1="Odnowa Earring +1",
         ear2="Eabani Earring",
@@ -467,7 +467,7 @@ function init_gear_sets()
         ammo="Automat. Oil +3",
         head=gear.Malignance_Head,
         body=gear.Mpaca_Body,
-        hands=gear.Malignance_Hands,
+        hands=gear.Empyrean_Hands,
         legs="Samnuha Tights",
         feet=gear.Malignance_Feet,
         neck="Shulmanu Collar",
@@ -498,7 +498,7 @@ function init_gear_sets()
         ammo="Automat. Oil +3",
         head=gear.Malignance_Head,
         body=gear.Mpaca_Body,
-        hands=gear.Malignance_Hands,
+        hands=gear.Empyrean_Hands,
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
         neck="Shulmanu Collar",
@@ -819,9 +819,9 @@ function init_gear_sets()
         ammo="Automat. Oil +3",
         head=gear.Empyrean_Head,
         body=gear.Relic_Body,
-        hands=gear.Empyrean_Hands,
+        hands=gear.Mpaca_Hands,
         legs=gear.Empyrean_Legs,
-        feet="Naga Kyahan",
+        feet=gear.Mpaca_Feet,
         neck="Shulmanu Collar",
         ear1="Burana Earring",
         ear2="Enmerkar Earring",
@@ -840,9 +840,9 @@ function init_gear_sets()
         ammo="Automat. Oil +3",
         head=gear.Empyrean_Head,
         body=gear.Relic_Body,
-        hands=gear.Empyrean_Hands,
+        hands=gear.Mpaca_Hands,
         legs=gear.Empyrean_Legs,
-        feet="Naga Kyahan",
+        feet=gear.Mpaca_Feet,
         neck="Shulmanu Collar",
         ear1="Burana Earring",
         ear2="Enmerkar Earring",

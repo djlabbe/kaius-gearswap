@@ -265,10 +265,11 @@ function init_gear_sets()
         ammo=gear.RAbullet,
         head=gear.Empyrean_Head, --0/14
         body="Oshosi Vest +1", --14/0
-        hands=gear.Relic_Hands, --13/0
+        hands=gear.Carmine_D_Hands, --13/0
         legs=gear.Adhemar_D_Legs, --10/13
         feet="Meghanada jambeaux +2", --10/0
         neck="Comm. Charm +2", --4/0
+        ring="Crepuscular Ring",
         back=gear.COR_SNP_Cape, --10/0 --TODO
         waist="Yemaya Belt", --0/5
     } --61/32
@@ -278,7 +279,6 @@ function init_gear_sets()
     }) --47/52
 
     sets.precast.RA.Flurry2 = set_combine(sets.precast.RA.Flurry1, {
-        hands=gear.Carmine_D_Hands, --8/11
         feet="Pursuer's Gaiters", --0/10
     }) --32/73
 
@@ -292,7 +292,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Epaminondas's Ring",
         back=gear.COR_LS_Cape,
         waist="Fotia Belt",
@@ -308,7 +308,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Dingir Ring",
         back=gear.COR_LS_Cape,
         waist="Fotia Belt",
@@ -324,7 +324,7 @@ function init_gear_sets()
         neck="Comm. Charm +2",
         ear1="Novio Earring",
         ear2="Friomisi Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Dingir Ring",
         back=gear.COR_LEAD_Cape,
         waist="Skrymir Cord +1",
@@ -340,7 +340,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Dingir Ring",
         back=gear.COR_LEAD_Cape,
         waist="Skrymir Cord +1",
@@ -388,7 +388,7 @@ function init_gear_sets()
         neck="Rep. Plat. Medal",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Regal Ring",
         back=gear.COR_SB_Cape,
         waist="Sailfi Belt +1",
@@ -404,7 +404,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Dingir Ring",
         back=gear.COR_LEAD_Cape,
         waist="Orpheus's Sash",
@@ -470,12 +470,12 @@ function init_gear_sets()
         body=gear.Ikenga_Body,
         hands=gear.Ikenga_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Malignance_Feet,
+        feet=gear.Ikenga_Feet,
         neck="Iskur Gorget",
         ear1="Crepuscular Earring",
         ear2="Telos Earring",
         ring1="Crepuscular Ring",
-        ring2="Cacoethic Ring +1",
+        ring2="Ilabrat Ring",
         back=gear.COR_RA_Cape,
         waist="Tellen Belt",
     }

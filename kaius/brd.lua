@@ -614,7 +614,8 @@ function init_gear_sets()
         ring1=gear.Lehko_Or_Chirich1,
         ring2=gear.Chirich_2,
         back=gear.BRD_DW_Cape,
-        waist="Windbuffet Belt +1",
+        waist="Sailfi Belt +1", --7
+
     }
 
     sets.engaged.Acc = set_combine(sets.engaged, {
@@ -669,8 +670,8 @@ function init_gear_sets()
         neck="Bard's Charm +2",
         ear1="Telos Earring", --4
         ear2="Balder Earring +1",
-        ring1=gear.Lehko_Or_Chirich1, --(5/5)
-        ring2=gear.Chirich_2, --(5/5)
+        ring1=gear.Lehko_Or_Chirich1,
+        ring2=gear.Chirich_2, 
         back=gear.BRD_DW_Cape, --(10/0)
         waist="Sailfi Belt +1", --7
     } --DT=(41/31)|DW=11
@@ -694,7 +695,7 @@ function init_gear_sets()
         head=gear.Bunzi_Head,
         legs=gear.Nyame_Legs,
         ring1=gear.Moonlight_1,
-        ring2="Defending Ring",
+        ring2=gear.Moonlight_2,
     }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)

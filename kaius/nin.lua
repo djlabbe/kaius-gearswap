@@ -25,7 +25,7 @@ function job_setup()
     info.default_ja_ids = S{35, 204}
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
     state.Buff.Migawari = buffactive.migawari or false
-    state.Buff.Doom = false
+    state.Buff.Doom = buffactive.doom or false
     state.Buff.Yonin = buffactive.Yonin or false
     state.Buff.Innin = buffactive.Innin or false
     state.Buff.Futae = buffactive.Futae or false
@@ -78,7 +78,6 @@ function user_setup()
 
     send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
-    send_command('bind @e gs c cycle WeaponSet')
     send_command('bind @q gs c toggle MagicBurst')
 
     -- send_command('bind !numpad7 input /ma "Jubaku: Ichi" <t>')
@@ -103,10 +102,18 @@ function user_setup()
     send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
 
 
+    send_command('bind ^numpad7 gs c set WeaponSet Heishi;')
+    send_command('bind ^numpad8 gs c set WeaponSet Kikoku;')
+    send_command('bind ^numpad9 gs c set WeaponSet Naegling;')
+    send_command('bind ^numpad4 gs c set WeaponSet Aeolian;')
+
     -- Whether a warning has been given for low ninja tools
     state.warned = M(false)
-
     set_macro_page(1, 13)
+
+
+
+
     send_command('wait 3; input /lockstyleset 13')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
@@ -194,7 +201,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
         ring1="Epaminondas's Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Regal,
         back=gear.NIN_WS_Cape,
         waist="Fotia Belt",
     }
@@ -211,7 +218,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Hattori Earring +1",
         ring1="Gere Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Regal,
         back=gear.NIN_DA_Cape,
     }
 
@@ -227,7 +234,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Lugra Earring +1",
         ring1="Gere Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Regal,
         back=gear.NIN_WS_Cape,
     }
 
@@ -242,7 +249,7 @@ function init_gear_sets()
         ear1="Odr Earring",
         ear2="Lugra Earring +1",
         ring1="Gere Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Regal,
         back=gear.NIN_WS_Cape,
     }
 
@@ -258,7 +265,7 @@ function init_gear_sets()
         ear1="Odr Earring",
         ear2="Lugra Earring +1",
         ring1="Gere Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Regal,
         back=gear.NIN_WS_Cape,
     }
 
@@ -274,7 +281,7 @@ function init_gear_sets()
         ear1="Mache Earring +1",
         ear2="Lugra Earring +1",
         ring1="Gere Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Regal,
         back=gear.NIN_DA_Cape,
     }
 
@@ -290,7 +297,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Lugra Earring +1",
         ring1="Gere Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Sroda,
         back=gear.NIN_TP_Cape,
     }
 
@@ -305,7 +312,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Lugra Earring +1",
         ring1="Gere Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         waist="Orpheus's Sash",
         back=gear.NIN_WS_Cape,
     }
@@ -325,7 +332,7 @@ function init_gear_sets()
         -- ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.NIN_MAB_Cape,
         waist="Skrymir Cord +1",
     }
@@ -340,7 +347,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,        
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Archon Ring",
         waist="Orpheus's Sash",
         back=gear.NIN_WS_Cape,
@@ -358,7 +365,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Lugra Earring +1",
         ring1="Gere Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.NIN_WS_Cape,
     }
 
@@ -372,7 +379,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,        
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1="Cornelia's Ring",
+        ring1="Dingir Ring",
         ring2="Epaminondas's Ring",
         waist="Orpheus's Sash",
         back=gear.NIN_WS_Cape,
@@ -542,13 +549,13 @@ function init_gear_sets()
         neck="Ninja Nodowa +2",
         ear1="Dedition Earring",
         ear2="Hattori Earring +1",
-        body=gear.Malignance_Body,
-        hands=gear.Adhemar_A_Hands,
+        body=gear.Mpaca_Body,
+        hands=gear.Mpaca_Hands,
         ring1="Gere Ring",
         ring2=gear.Chirich_2,
         back=gear.NIN_TP_Cape,
         waist="Sailfi Belt +1",        
-        legs=gear.Malignance_Legs,
+        legs=gear.Mpaca_Legs,
         feet=gear.Malignance_Feet,
     } -- 0%
 
@@ -586,11 +593,11 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Date Shuriken",
-        head=gear.Malignance_Head,
-        body=gear.Malignance_Body,
-        hands=gear.Malignance_Hands,
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
+        head=gear.Mpaca_Head,
+        body=gear.Mpaca_Body,
+        hands=gear.Mpaca_Hands,
+        legs=gear.Mpaca_Legs,
+        feet=gear.Mpaca_Feet,
         neck="Warder's Charm +1",
         ear1="Arete Del Luna +1",
         ear2="Sanare Earring",
@@ -693,6 +700,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         if state.Buff.Futae then
             equip(sets.precast.JA['Futae'])
         end
+        if state.Buff.Doom then
+            equip(sets.buff.Doom)
+        end
     end
 end
 
@@ -714,12 +724,14 @@ function job_buff_change(buff, gain)
         add_to_chat(61, "*** MIGAWARI DOWN ***")
     end
 
-    if buff == "Doom" then
+    if buff == "doom" then
         if gain then
-            state.Buff.Doom = true
+            equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
+            disable('neck','ring1','ring2','waist')
         else
-            state.Buff.Doom = false
+            enable('neck','ring1','ring2','waist')
+            handle_equipping_gear(player.status)
         end
     end
 end
@@ -765,9 +777,6 @@ function get_custom_wsmode(spell, action, spellMap)
 end
 
 function customize_idle_set(idleSet)
-    if state.Buff.Doom then
-        idleSet = set_combine(idleSet, sets.buff.Doom)
-    end
     if state.Auto_Kite.value == true then
         if world.time >= (17*60) or world.time <= (7*60) then
             idleSet = set_combine(idleSet, sets.NightMovement)
@@ -785,9 +794,6 @@ function customize_melee_set(meleeSet)
     end
     if state.TreasureMode.value == 'Fulltime' then
         meleeSet = set_combine(meleeSet, sets.TreasureHunter)
-    end
-    if state.Buff.Doom then
-        meleeSet = set_combine(meleeSet, sets.buff.Doom)
     end
     check_weaponset()
     return meleeSet

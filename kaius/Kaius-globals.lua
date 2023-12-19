@@ -23,6 +23,12 @@ function define_global_sets()
     gear.Cornelia_Or_Ilabrat = { name = "Ilabrat Ring" }
     gear.Cornelia_Or_Gere = { name = "Gere Ring" }
 
+    gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe7"}
+    gear.Lehko_Or_Chirich2 = {name="Chirich Ring +1", bag="wardrobe8"}
+
+    gear.Gerubu_Or_Stikini1 = {name="Stikini Ring +1", bag="wardrobe7"}
+    gear.Gerubu_Or_Stikini2 = {name="Stikini Ring +2", bag="wardrobe8"}
+
     if player.inventory["Cornelia's Ring"] or player.wardrobe["Cornelia's Ring"] then
         gear.Cornelia_Or_Epaminondas = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Sroda = { name = "Cornelia's Ring" }
@@ -30,14 +36,16 @@ function define_global_sets()
         gear.Cornelia_Or_Regal = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Ilabrat = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Gere = { name = "Cornelia's Ring" }
-    end
-
-    gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe7"}
-    gear.Lehko_Or_Chirich2 = {name="Chirich Ring +1", bag="wardrobe8"}
+    end   
 
     if player.inventory["Lehko Habhoka's Ring"] or player.wardrobe["Lehko Habhoka's Ring"] then
         gear.Lehko_Or_Chirich1 = { name = "Lehko Habhoka's Ring" }
         gear.Lehko_Or_Chirich2 = { name = "Lehko Habhoka's Ring" }
+    end
+ 
+
+    if player.inventory["Gurebu's Ring"] or player.wardrobe["Gurebu's Ring"] then
+        gear.Gerubu_Or_Stikini1 = { name = "Gurebu's Ring" }
     end
 
     ---------------------
@@ -55,6 +63,12 @@ function define_global_sets()
 
     gear.Varar_1 = {name="Varar Ring +1", bag="wardrobe7"}
     gear.Varar_2 = {name="Varar Ring +1", bag="wardrobe8"}
+
+    -----------------------
+    ----- PRIO. ITEMS -----
+    -----------------------
+    
+    gear.Platinum_Moogle_Belt = {name="Platinum Moogle Belt", priority=999}
     
     -----------------------
     -- Augmented Weapons --

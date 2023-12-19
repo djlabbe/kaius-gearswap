@@ -137,18 +137,18 @@ function user_setup()
     gear.Empyrean_Legs = { name="Amini Bragues +3" }    
     gear.Empyrean_Feet = { name="Amini Bottillons +3" }
 
-    gear.RNG_DW_Cape ={ name="Belenus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
+    gear.RNG_DW_Cape ={ name="Belenus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}} --X
     gear.RNG_RA_Cape = { name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10','Phys. dmg. taken-10%',}} --X
     gear.RNG_SNP_Cape = { name="Belenus's Cape", augments={'"Snapshot"+10',}} --X
     gear.RNG_TP_Cape = { name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10','Phys. dmg. taken-10%',}} --X
     gear.RNG_LS_Cape = { name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
     gear.RNG_TF_Cape = { name="Belenus's Cape", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}} --X
     gear.RNG_SB_Cape = { name="Belenus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
-    gear.RNG_CRIT_Cape = { name="Belenus's Cape", augments={'AGI+20','Accuracy+20 Attack+20','Crit.hit rate+10','Phys. dmg. taken-10%',}}
+    gear.RNG_CRIT_Cape = { name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Crit.hit rate+10','Phys. dmg. taken-10%',}} --X
 
     send_command('bind @w gs c toggle WeaponLock')
 
-    send_command('bind !F1 input /ja "Eagle Eye SHot" <me>')
+    send_command('bind !F1 input /ja "Eagle Eye Shot" <t>')
     send_command('bind !F2 input /ja "Overkill" <me>')
 
     send_command('bind !` input /ja "Velocity Shot" <me>')
@@ -303,7 +303,7 @@ function init_gear_sets()
         neck="Scout's Gorget +2",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Ilabrat Ring",
+        ring1=gear.Chirich_1,
         ring2="Regal Ring",
         back=gear.RNG_RA_Cape,
         waist="Tellen Belt",
@@ -451,7 +451,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
         ring1="Epaminondas's Ring", --5
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Regal,
         back=gear.RNG_LS_Cape, --10
         waist="Fotia Belt",
     }
@@ -474,14 +474,24 @@ function init_gear_sets()
         hands=gear.Nyame_Hands, --7
         legs=gear.Nyame_Legs, --10
         feet=gear.Empyrean_Feet, --8
-        neck="Scout's Gorget +2",
+        neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
         ring1="Dingir Ring", --5
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Regal,
         back=gear.RNG_LS_Cape, --10
         waist="Fotia Belt",
     }
+
+    sets.precast.WS['Last Stand'].PDL = set_combine(sets.precast.WS['Last Stand'], {
+        body=gear.Ikenga_Body,
+        hands=gear.Malignance_Hands,
+        ring1="Sroda Ring",
+        ring2="Epaminondas's Ring",
+        legs=gear.Ikenga_Legs,
+        neck="Scout's Gorget +2",
+        ear2="Amini Earring +1",
+    })
 
     sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
         ammo=gear.ACCbullet,
@@ -563,7 +573,7 @@ function init_gear_sets()
         body=gear.Empyrean_Body,
         hands=gear.Nyame_Hands, --7
         ring1="Epaminondas's Ring", --5
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Regal,
         back=gear.RNG_LS_Cape, --10
         waist="Fotia Belt",
         legs=gear.Nyame_Legs, --10
@@ -577,7 +587,7 @@ function init_gear_sets()
         ear2="Amini Earring +1",
         body=gear.Empyrean_Body,
         hands=gear.Nyame_Hands, --7
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Sroda Ring",
         back=gear.RNG_LS_Cape, --10
         waist="Fotia Belt",
@@ -600,7 +610,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.RNG_TF_Cape,
         waist="Eschan Stone",
     }
@@ -619,7 +629,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1="Sroda Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.RNG_TF_Cape,
         waist="Skrymir Cord +1",
     }
@@ -633,7 +643,7 @@ function init_gear_sets()
         neck="Republican Platinum Medal",
         ear1="Sherida Earring",       
         ear2="Moonshade Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Regal Ring",
         back=gear.RNG_SB_Cape,
         waist="Sailfi Belt +1",
@@ -649,7 +659,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Amini Earring +1",       
         ring1="Sroda Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.RNG_SB_Cape,
         waist="Sailfi Belt +1",
     }
@@ -699,6 +709,8 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.precast.WS["Trueflight"], {
         waist="Orpheus's Sash",
     })
+
+    sets.idle.Town = sets.midcast.RA
     
     -- sets.idle.Town = sets.idle
 
@@ -737,7 +749,7 @@ function init_gear_sets()
     sets.Savage = {main="Naegling", sub="Gleti's Knife", ranged="Sparrowhawk +2", ammo="Hauksbok Arrow"}
     sets.Aoe = {main="Tauret", sub=gear.Malevolence_A, ranged="Sparrowhawk +2", ammo="Hauksbok Arrow"}
     sets.Annihilator = {main="Perun +1", sub="Gleti's Knife", ranged="Annihilator", ammo="Chrono Bullet"}
-    sets.Fomalhaut = {main="Perun +1", sub="Crepuscular Knife", ranged="Fomalhaut", ammo="Chrono Bullet"}
+    sets.Fomalhaut = {main="Perun +1", sub="Ternion Dagger +1", ranged="Fomalhaut", ammo="Chrono Bullet"}
     sets.Fomalhaut_HS = {main=gear.Malevolence_B, sub=gear.Malevolence_A, ranged="Fomalhaut", ammo="Chrono Bullet"}
     sets.Armageddon = {main="Perun +1", sub="Gleti's Knife", ranged="Armageddon", ammo="Chrono Bullet"}
     sets.Gastraphetes = {main=gear.Malevolence_B, sub=gear.Malevolence_A, ranged="Gastraphetes", ammo="Quelling Bolt"}
@@ -911,9 +923,9 @@ end
 
 function job_state_change(stateField, newValue, oldValue)
     if state.WeaponLock.value == true then
-        disable('main','sub','range')
+        disable('main','sub','range', 'ammo')
     else
-        enable('main','sub','range')
+        enable('main','sub','range', 'ammo')
     end
     check_weaponset()
 end

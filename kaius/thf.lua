@@ -70,19 +70,19 @@ function user_setup()
     send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
 
-    -- send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad9 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad4 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad1 input /equip Main "Lament";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad9 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad4 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad1 input /equip Main "Lament";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
 
     send_command('bind !F1 input /ja "Perfect Dodge" <me>')
     send_command('bind !F2 input /ja "Larceny" <t>')
@@ -564,16 +564,16 @@ function init_gear_sets()
     })
 
     -- sets.idle.Town = sets.precast.WS["Rudra's Storm"]
-    -- sets.idle.Town = sets.engaged.DW.MaxHaste
-    sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        sub="Sm. Escutcheon",
-        body="Blacksmith's Apron",
-        hands="Smithy's Mitts",
-        neck="Smithy's Torque",
-        ring1="Craftmaster's Ring",
-        ring2="Confectioner's Ring",
-        waist="Blacksmith's Belt"
-    })
+    sets.idle.Town = sets.engaged.DW.MaxHaste
+    -- sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
+    --     sub="Sm. Escutcheon",
+    --     body="Blacksmith's Apron",
+    --     hands="Smithy's Mitts",
+    --     neck="Smithy's Torque",
+    --     ring1="Craftmaster's Ring",
+    --     ring2="Confectioner's Ring",
+    --     waist="Blacksmith's Belt"
+    -- })
 
 end
 
