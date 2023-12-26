@@ -692,7 +692,6 @@ function init_gear_sets()
        waist="Isa Belt",
     }
 
-
     -- WSNoFTP is the default weaponskill set used
     sets.midcast.Pet.WSNoFTP = {
         main="Xiucoatl",
