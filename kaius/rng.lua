@@ -49,14 +49,16 @@ function job_setup()
         ['Fomalhaut'] = 'Chrono Bullet',
         ['Gastraphetes'] = 'Quelling Bolt',
         ['Armageddon'] = 'Devastating Bullet',
-        ['Annihilator'] = 'Eradicating Bullet'
+        ['Annihilator'] = 'Eradicating Bullet',
+        ['Gandiva'] = "Artimis's Arrow"
     }
 
     data.equipment.rema_ranged_weapons_ammo_pouch = {
         ['Fomalhaut'] = 'Chr. Bul. Pouch',
         ['Gastraphetes'] = 'Quelling B. Quiver',
         ['Armageddon'] = 'Dev. Bul. Pouch',
-        ['Annihilator'] = 'Era. Bul. Pouch'
+        ['Annihilator'] = 'Era. Bul. Pouch',
+        ['Gandiva'] = "Artimis's Quiver"
     }
 
     no_shoot_ammo = S{"Animikii Bullet", "Hauksbok Arrow"}
@@ -70,12 +72,13 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'Acc', 'Enmity', 'PDL')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Gastraphetes', 'Fomalhaut', 'Fomalhaut_HS', 'Armageddon', 'Annihilator', 'Savage', 'Aoe'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Gastraphetes', 'Gandiva', 'Fomalhaut', 'Fomalhaut_HS', 'Armageddon', 'Annihilator', 'Savage', 'Aoe'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
     DefaultAmmo = {
                     ['Yoichinoyumi'] = "Chrono Arrow",
-                    ['Gandiva'] = "Chrono Arrow",
+                    -- ['Gandiva'] = "Chrono Arrow",
+                    ['Gandiva'] = "Artimis's Arrow",
                     ['Fail-Not'] = "Chrono Arrow",
                     ['Annihilator'] = "Chrono Bullet",
                     ['Armageddon'] = "Chrono Bullet",
@@ -86,7 +89,8 @@ function user_setup()
 
     AccAmmo = {    
                     ['Yoichinoyumi'] = "Yoichi's Arrow",
-                    ['Gandiva'] = "Yoichi's Arrow",
+                    -- ['Gandiva'] = "Yoichi's Arrow",
+                    ['Gandiva'] = "Artimis's Arrow",
                     ['Fail-Not'] = "Yoichi's Arrow",
                     ['Annihilator'] = "Eradicating Bullet",
                     ['Armageddon'] = "Eradicating Bullet",
@@ -97,7 +101,8 @@ function user_setup()
 
     WSAmmo = {     
                     ['Yoichinoyumi'] = "Chrono Arrow",
-                    ['Gandiva'] = "Chrono Arrow",
+                    -- ['Gandiva'] = "Chrono Arrow",
+                    ['Gandiva'] = "Artimis's Arrow",
                     ['Fail-Not'] = "Chrono Arrow",
                     ['Annihilator'] = "Chrono Bullet",
                     ['Armageddon'] = "Chrono Bullet",
@@ -108,7 +113,8 @@ function user_setup()
 
     MagicAmmo = {  
                     ['Yoichinoyumi'] = "Chrono Arrow",
-                    ['Gandiva'] = "Chrono Arrow",
+                    -- ['Gandiva'] = "Chrono Arrow",
+                    ['Gandiva'] = "Artimis's Arrow",
                     ['Fail-Not'] = "Chrono Arrow",
                     ['Annihilator'] = "Devastating Bullet",
                     ['Armageddon'] = "Devastating Bullet",
@@ -161,7 +167,7 @@ function user_setup()
         send_command('bind !t input /ja "Provoke" <t>')
         set_macro_page(marks, 11)
     elseif player.sub_job == 'DNC' then
-        send_command('bind ^` input /ja "Chocobo Jig" <me>')
+        send_command('bind @` input /ja "Chocobo Jig" <me>')
         marks = 2
         sword = 5
         set_macro_page(marks, 11)
@@ -179,6 +185,7 @@ function user_setup()
 
     send_command('bind ^numpad4 gs c set WeaponSet Armageddon; input //dp gun; input /macro set ' ..marks)
     send_command('bind ^numpad5 gs c set WeaponSet Annihilator; input //dp gun; input /macro set ' ..marks)
+    send_command('bind ^numpad6 gs c set WeaponSet Gandiva; input //dp bow; input /macro set 10')
 
     send_command('bind ^numpad1 gs c set WeaponSet Savage; input //dp bow; input /macro set ' ..sword)
     send_command('bind ^numpad2 gs c set WeaponSet Aoe; input //dp bow; input /macro set ' ..marks)
@@ -527,7 +534,7 @@ function init_gear_sets()
         ear2="Amini Earring +1",
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
-        ring1="Begrudging Ring",
+        ring1="Dingir Ring",
         ring2="Regal Ring",
         back=gear.RNG_CRIT_Cape,
         waist="Fotia Belt",
@@ -706,11 +713,7 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
     })
 
-    sets.idle.Town = set_combine(sets.precast.WS["Trueflight"], {
-        waist="Orpheus's Sash",
-    })
-
-    sets.idle.Town = sets.midcast.RA
+    sets.idle.Town = sets.precast.WS['Jishnu\'s Radiance']
     
     -- sets.idle.Town = sets.idle
 
@@ -753,6 +756,9 @@ function init_gear_sets()
     sets.Fomalhaut_HS = {main=gear.Malevolence_B, sub=gear.Malevolence_A, ranged="Fomalhaut", ammo="Chrono Bullet"}
     sets.Armageddon = {main="Perun +1", sub="Gleti's Knife", ranged="Armageddon", ammo="Chrono Bullet"}
     sets.Gastraphetes = {main=gear.Malevolence_B, sub=gear.Malevolence_A, ranged="Gastraphetes", ammo="Quelling Bolt"}
+    
+    sets.Gandiva = {main="Perun +1", sub="Gleti's Knife", ranged="Gandiva", ammo="Artemis's Arrow"}
+
     sets.DefaultShield = {sub="Nusku Shield"}
 
 end

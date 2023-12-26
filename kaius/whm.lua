@@ -384,7 +384,7 @@ function init_gear_sets()
         main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
-        head=gear.Empyrean_Head,
+        head=gear.Artifact_Head,
         body=gear.Artifact_Body,
         hands=gear.Relic_Hands,
         legs=gear.Artifact_Legs,
@@ -395,17 +395,26 @@ function init_gear_sets()
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back="Aurist's Cape +1",
-        waist="Acuity Belt +1",
+        waist="Obstinate Sash",
     }
 
-    sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
-        head=empty;
-        body="Cohort Cloak +1",
+    sets.midcast.Banish = {
+        main="Daybreak",
+        sub="Ammurapi Shield",
+        ammo="Ghastly Tathlum +1",
+        head="Cath Palug Crown";
+        body="Shamash Robe",
         hands=gear.Bunzi_Hands,
         legs=gear.Bunzi_Legs,
-        ear1="Malignance Earring", 
+        feet=gear.Bunzi_Feet,
+        neck="Sibyl Scarf",
+        ear1="Regal Earring",
+        ear2="Malignance Earring", 
         ring1="Freke Ring",
-    })
+        ring2=gear.Stikini_2,
+        back="Aurist's Cape +1",
+        waist="Luminary Sash",
+    }
 
     sets.midcast.Holy = sets.midcast.Banish
 
@@ -465,12 +474,11 @@ function init_gear_sets()
 
     sets.midcast.Trust = sets.precast.FC
 
-
-    sets.engaged.DW = {
+    sets.engaged = {
         ammo="Hasty Pinion +1",
         head=gear.Bunzi_Head,
         body=gear.Nyame_Body,
-        hands=gear.Nyame_Hands,
+        hands=gear.Bunzi_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Rep. Plat. Medal",
@@ -478,7 +486,23 @@ function init_gear_sets()
         ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
-        back=gear.WHM_Cure_Cape,
+        back=gear.WHM_DW_Cape,
+        waist="Windbuffet Belt +1",
+    }
+
+    sets.engaged.DW = {
+        ammo="Hasty Pinion +1",
+        head=gear.Bunzi_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Bunzi_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Rep. Plat. Medal",
+        ear1="Crepuscular Earring",
+        ear2="Telos Earring",
+        ring1=gear.Chirich_1,
+        ring2=gear.Chirich_2,
+        back=gear.WHM_DW_Cape,
         waist="Windbuffet Belt +1",
     }
 
@@ -494,6 +518,22 @@ function init_gear_sets()
         ear2="Ishvara Earring",
         ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Ilabrat Ring",
+        back=gear.WHM_Cure_Cape,
+        waist="Fotia Belt",
+    }
+
+    sets.precast.WS['Mystic Boon'] = {
+        ammo="Oshasha's Treatise",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Fotia Gorget",
+        ear1="Moonshade Earring",
+        ear2="Regal Earring",
+        ring1=gear.Cornelia_Or_Epaminondas,
+        ring2="Metamorph Ring +1",
         back=gear.WHM_Cure_Cape,
         waist="Fotia Belt",
     }
@@ -563,9 +603,7 @@ function init_gear_sets()
     --     sub="Ammurapi Shield",
     -- })
 
-    sets.idle.Town =sets.idle
-    sets.engaged = sets.idle
-
+    sets.idle.Town = sets.idle
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT

@@ -35,16 +35,14 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal', 'DT')
 
-
-
     state.WeaponSet = M{["description"]='Weapon Set', 'Trishula', 'ShiningOne', 'Aram', 'Naegling', 'Mafic' }
     state.WeaponLock = M(false, 'Weapon Lock')  
 
-    -- gear.Artifact_Head = { name="Vishap Armet +1" }
-    gear.Artifact_Body = { name="Vishap Mail +1" }
+    gear.Artifact_Head = { name="Vishap Armet +2" }
+    gear.Artifact_Body = { name="Vishap Mail +2" }
     gear.Artifact_Hands = { name="Vishap Finger Gauntlets +3" }
     gear.Artifact_Legs = { name="Vishap Brais +3" }
-    -- gear.Artifact_Feet = { name="Vishap Greaves +2" }
+    gear.Artifact_Feet = { name="Vishap Greaves +2" }
 
     gear.Relic_Head = { name="Pteroslaver Armet +3" }
     gear.Relic_Body = { name="Pteroslaver Mail +3" }

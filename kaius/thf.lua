@@ -564,16 +564,16 @@ function init_gear_sets()
     })
 
     -- sets.idle.Town = sets.precast.WS["Rudra's Storm"]
-    sets.idle.Town = sets.engaged.DW.MaxHaste
-    -- sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-    --     sub="Sm. Escutcheon",
-    --     body="Blacksmith's Apron",
-    --     hands="Smithy's Mitts",
-    --     neck="Smithy's Torque",
-    --     ring1="Craftmaster's Ring",
-    --     ring2="Confectioner's Ring",
-    --     waist="Blacksmith's Belt"
-    -- })
+    -- sets.idle.Town = sets.engaged.DW.MaxHaste
+    sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
+        sub="Sm. Escutcheon",
+        body="Blacksmith's Apron",
+        hands="Smithy's Mitts",
+        neck="Smithy's Torque",
+        ring1="Craftmaster's Ring",
+        ring2="Confectioner's Ring",
+        waist="Blacksmith's Belt"
+    })
 
 end
 

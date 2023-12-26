@@ -63,7 +63,7 @@ function user_setup()
 
     -- gear.Empyrean_Body = { name = "Hattori Ningi +1" }
     gear.Empyrean_Hands = { name="Hattori Tekko +2" }
-    gear.Empyrean_Feet = { name="Hattori Kyahan +2" }
+    gear.Empyrean_Feet = { name="Hattori Kyahan +3" }
 
     gear.NIN_TP_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}}
     gear.NIN_WS_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}} --X
@@ -303,7 +303,7 @@ function init_gear_sets()
 
     sets.precast.Hybrid = {
         ammo="Seeth. Bomblet +1",
-        head=gear.Relic_Head,
+        head=gear.Nyame_Head,
         neck="Fotia Gorget",
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
@@ -620,7 +620,7 @@ function init_gear_sets()
         back="Moonlight Cape", --6/6
     })
     
-    sets.idle.Town = sets.engaged.MaxHaste
+    sets.idle.Town = sets.precast.WS["Blade: Shun"]
 
     sets.TreasureHunter = {
         ammo="Perfect Lucky Egg",

@@ -375,19 +375,19 @@ function init_gear_sets()
     }
 
     sets.engaged = {
-        ammo="Coiste Bodhar",
-        head="Flam. Zucchetto +2",
-        body="Hjarrandi Breast.",
-        hands="Sakpata's Gauntlets",
-        legs="Chev. Cuisses +3",
-        feet="Flam. Gambieras +2",
-        neck="Rep. Plat. Medal",
-        waist="Sailfi Belt +1",
-        left_ear="Cessance Earring",
-        right_ear="Dedition Earring",
-        left_ring="Moonlight Ring",
-        right_ring="Petrov Ring",
-        back=gear.PLD_DA_Cape,
+        ammo="Staunch Tathlum +1",
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Artifact_Feet,
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
+        ear2={name="Odnowa Earring +1", priority=110},
+        ring1=gear.Moonlight_1,
+        ring2={name="Gelatinous Ring +1", priority=135},
+        back=gear.PLD_Idle_Cape,
     } --49% DT
 
 

@@ -66,21 +66,20 @@ function user_setup()
         send_command('bind !c input /ja "Warding Circle" <me>')
         send_command('bind !` input /ja "Hasso" <me>')
         send_command('bind ^` input /ja "Seigan" <me>')
-
         send_command('bind ^numpad7 gs c set WeaponSet Chango;input /macro set 1')
-        send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 3')
-        send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 4')
-        send_command('bind ^numpad5 gs c set WeaponSet Loxotic;input /macro set 5')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 5')
+        send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 4')
+        send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 2')
+        send_command('bind ^numpad5 gs c set WeaponSet Loxotic;input /macro set 3')
         
         set_macro_page(1, 1)
     elseif player.sub_job == 'DRG' then
         send_command('bind !c input /ja "Ancient Circle" <me>')
-
         send_command('bind ^numpad7 gs c set WeaponSet Chango;input /macro set 6')
-        send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 8')
-        send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 9')
-        send_command('bind ^numpad5 gs c set WeaponSet Loxotic;input /macro set 10')
-
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 10')
+        send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 9')
+        send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 7')
+        send_command('bind ^numpad5 gs c set WeaponSet Loxotic;input /macro set 8')
         set_macro_page(6, 1)
     end
     

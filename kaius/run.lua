@@ -59,8 +59,8 @@ function user_setup()
     gear.Artifact_Head = { name="Runeist Bandeau +3", priority=109 }
     gear.Artifact_Body = { name="Runeist Coat +3", priority=218 }
     gear.Artifact_Hands = { name="Runeist Mitons +3", priority=85 }
-    gear.Artifact_Legs = { name="Runeist Trousers +1", priority=80 }
-    gear.Artifact_Feet = { name="Runeist Bottes +1", priority=74 }
+    gear.Artifact_Legs = { name="Runeist Trousers +2", priority=80 }
+    gear.Artifact_Feet = { name="Runeist Bottes +2", priority=74 }
 
     gear.Relic_Head = { name="Futhark Bandeau +3", priority=56 }
     gear.Relic_Body = { name="Futhark Coat +3", priority=119 }
@@ -252,7 +252,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
         ring1="Regal Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.RUN_WS1_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     }
@@ -452,7 +452,6 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        -- ammo="Homiliary",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
@@ -460,11 +459,9 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck={name="Futhark Torque +2", priority=60},
         ear1={name="Tuisto Earring", priority=150},
-        ear2={name="Odnowa Earring +1", priority=110}, 
+        ear2="Erilaz Earring +1", 
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
-        -- ring1=gear.Stikini_1,
-        -- ring2=gear.Stikini_2,
         back=gear.RUN_TANK_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     }
@@ -717,9 +714,6 @@ function customize_melee_set(meleeSet)
 end
 
 function customize_defense_set(defenseSet)
-    if buffactive['Battuta'] then
-        defenseSet = set_combine(defenseSet, sets.defense.Parry)
-    end
     if state.Buff.Doom then
         defenseSet = set_combine(defenseSet, sets.buff.Doom)
     end

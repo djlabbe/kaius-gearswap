@@ -28,8 +28,9 @@ function define_global_sets()
 
     gear.Gerubu_Or_Stikini1 = {name="Stikini Ring +1", bag="wardrobe7"}
     gear.Gerubu_Or_Stikini2 = {name="Stikini Ring +2", bag="wardrobe8"}
+    gear.Gerubu_Or_Shadow = { name = "Shadow Ring" }
 
-    if player.inventory["Cornelia's Ring"] or player.wardrobe["Cornelia's Ring"] then
+    if item_available("Cornelia's Ring") then
         gear.Cornelia_Or_Epaminondas = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Sroda = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Niqmaddu = { name = "Cornelia's Ring" }
@@ -38,14 +39,16 @@ function define_global_sets()
         gear.Cornelia_Or_Gere = { name = "Cornelia's Ring" }
     end   
 
-    if player.inventory["Lehko Habhoka's Ring"] or player.wardrobe["Lehko Habhoka's Ring"] then
+    if item_available("Lehko Habhoka's Ring") then
         gear.Lehko_Or_Chirich1 = { name = "Lehko Habhoka's Ring" }
         gear.Lehko_Or_Chirich2 = { name = "Lehko Habhoka's Ring" }
     end
  
 
-    if player.inventory["Gurebu's Ring"] or player.wardrobe["Gurebu's Ring"] then
+    if item_available("Gurebu's Ring") then
         gear.Gerubu_Or_Stikini1 = { name = "Gurebu's Ring" }
+        gear.Gerubu_Or_Stikini2 = { name = "Gurebu's Ring" }
+        gear.Gerubu_Or_Shadow = { name = "Gurebu's Ring" }
     end
 
     ---------------------
@@ -471,6 +474,14 @@ function check_moving()
             state.Auto_Kite:set(false)
         end
     end
+end
+
+function item_available(item)
+	if player.inventory[item] or player.wardrobe[item] or player.wardrobe2[item] or player.wardrobe3[item] or player.wardrobe4[item] or player.wardrobe5[item] or player.wardrobe6[item] or player.wardrobe7[item] or player.wardrobe8[item] then
+		return true
+	else
+		return false
+	end
 end
 
 function check_gear()

@@ -215,7 +215,7 @@ function init_gear_sets()
         neck="Baetyl Pendant", --4
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
-        ring2="Weather. Ring", --6(4)
+        ring2="Prolix Ring", --2
     }
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
@@ -357,16 +357,18 @@ function init_gear_sets()
         hands=gear.Malignance_Hands,
         legs=gear.Malignance_Legs,
         feet=gear.Empyrean_Feet,
-        neck="Asn. Gorget +1",
+        neck="Bathy Choker",
         ear1="Sherida Earring",
         ear2="Infused Earring",
         -- ring1="Gere Ring",
         -- ring2="Epona's Ring",
+        
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         back="Toutatis's Cape",
         waist="Reiki Yotai", --7
     }
+
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
