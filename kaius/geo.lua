@@ -34,10 +34,10 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(true, 'Magic Burst')
 
-    gear.Artifact_Head = { name= "Geomancy Galero +1" }
+    gear.Artifact_Head = { name= "Geomancy Galero +2" }
     gear.Artifact_Body = { name= "Geomancy Tunic +2" }
     gear.Artifact_Hands = { name= "Geomancy Mitaines +3" }
-    gear.Artifact_Legs = { name= "Geomancy Pants +1" }
+    gear.Artifact_Legs = { name= "Geomancy Pants +2" }
     gear.Artifact_Feet = { name= "Geomancy Sandals +3" }
 
     gear.Relic_Head = { name= "Bagua Galero +3" }

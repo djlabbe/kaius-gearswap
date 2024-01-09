@@ -119,6 +119,12 @@ function define_global_sets()
     gear.Mpaca_Legs= {name="Mpaca's Hose", priority=72}
     gear.Mpaca_Feet = {name="Mpaca's Boots", priority=50}
 
+    gear.Ikenga_Head = {name="Ikenga's Hat", priority=57}
+    gear.Ikenga_Body = {name="Ikenga's Vest", priority=79}
+    gear.Ikenga_Hands = {name="Ikenga's Gloves", priority=57}
+    gear.Ikenga_Legs= {name="Ikenga's Trousers", priority=68}
+    gear.Ikenga_Feet = {name="Ikenga's Clogs", priority=45}
+
     ----------------
     -- MISC. SETS --
     ----------------

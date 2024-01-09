@@ -60,10 +60,10 @@ function user_setup()
     state.WeaponSet = M{['description']='Weapon Set', 'Twash_TP', 'Twash_Gleti', }
     state.WeaponLock = M(false, 'Weapon Lock')
 
-    gear.Artifact_Head = { name= "Maxixi Tiara +1" }
+    gear.Artifact_Head = { name= "Maxixi Tiara +2" }
     gear.Artifact_Body = { name= "Maxixi Casaque +3" }
-    gear.Artifact_Hands = { name= "Maxixi Bangles +1" }
-    gear.Artifact_Legs = { name= "Maxixi Tights +1" }
+    gear.Artifact_Hands = { name= "Maxixi Bangles +3" }
+    gear.Artifact_Legs = { name= "Maxixi Tights +2" }
     gear.Artifact_Feet = { name= "Maxixi Toe shoes +1" }
 
     gear.Relic_Head = { name= "Horos Tiara +3" }
@@ -106,8 +106,10 @@ function user_setup()
     send_command('bind ^numpad7 gs c set WeaponSet Twash_TP')
     send_command('bind ^numpad8 gs c set WeaponSet Twash_Gleti')
 
-    if player.sub_job == 'SAM' then
+    if player.sub_job == 'DRG' then
         set_macro_page(1, 19)
+    elseif player.sub_job == 'SAM' then
+        set_macro_page(2, 19)
     elseif player.sub_job == 'WAR' then
         set_macro_page(2, 19)
     elseif player.sub_job == 'NIN' then
@@ -224,8 +226,8 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
         neck="Etoile Gorget +2",
-        ear1="Digni. Earring",
-        ear2="Enchntr. Earring +1",
+        ear1="Enchanter's Earring +1",
+        ear2="Maculele Earring +1",       
         ring1="Metamor. Ring +1",
         ring2=gear.Stikini_2,
         waist="Eschan Stone",
@@ -256,7 +258,7 @@ function init_gear_sets()
     sets.precast.FC = {
         ammo="Sapience Orb",
         head=gear.Herc_FC_Head, --13
-        body=gear.Taeon_FC_body, --9
+        body=gear.Taeon_FC_Body, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
         feet=gear.Nyame_Feet, --2
@@ -357,7 +359,7 @@ function init_gear_sets()
         ear1="Odr Earring",
         ear2="Moonshade Earring",
         ring1="Regal Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.DNC_WS1_Cape,
         waist="Kentarch Belt +1",
     }
@@ -394,9 +396,9 @@ function init_gear_sets()
 
     sets.midcast.SpellInterrupt = {
         ammo="Staunch Tathlum +1", --11
-        body=gear.Taeon_Phalanx_body, --10
+        body=gear.Taeon_Phalanx_Body, --10
         hands="Rawhide Gloves", --15
-        legs=gear.Taeon_Phalanx_legs, --10
+        legs=gear.Taeon_Phalanx_Legs, --10
         feet=gear.Taeon_Phalanx_Feet, --10
         neck="Loricate Torque +1", --5
         ear1="Halasz Earring", --5

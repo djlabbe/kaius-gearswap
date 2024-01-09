@@ -149,7 +149,7 @@ function init_gear_sets()
         main=gear.GADA_FC, --6
         -- sub="Chanter's Shield", --3
         head=gear.Amalric_A_Head, --11
-        body=gear.Merlinic_MB_body, --6
+        body=gear.Merlinic_MB_Body, --6
         hands=gear.Merlinic_FC_hands, --7
         legs=gear.Artifact_Legs, --15
         feet="Regal Pumps +1", --4

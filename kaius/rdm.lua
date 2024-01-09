@@ -532,7 +532,7 @@ function init_gear_sets()
     })
 
     sets.midcast.StatusRemoval = {
-        head="Vanya Hood",
+        head=gear.Kaykaus_B_Head, --11
         body=gear.Relic_Body,
         legs=gear.Artifact_Legs,
         feet="Vanya Clogs",

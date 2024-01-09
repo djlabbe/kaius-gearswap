@@ -356,7 +356,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Dedition Earring",
         ring1="Gere Ring",
-        ring2="Hetairoi Ring",
+        ring2=gear.Lehko_Or_Hetairoi,
         back=gear.THF_TP_Cape,
         waist="Windbuffet Belt +1",
     }
@@ -377,7 +377,7 @@ function init_gear_sets()
         ear1="Dedition Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2="Hetairoi Ring",
+        ring2=gear.Lehko_Or_Hetairoi,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
     } -- 41%
@@ -398,7 +398,7 @@ function init_gear_sets()
         ear1="Dedition Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2="Hetairoi Ring",
+        ring2=gear.Lehko_Or_Hetairoi,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
     } -- 37%
@@ -419,7 +419,7 @@ function init_gear_sets()
         ear1="Dedition Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2="Hetairoi Ring",
+        ring2=gear.Lehko_Or_Hetairoi,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
     } -- 26%
@@ -440,7 +440,7 @@ function init_gear_sets()
         ear1="Dedition Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2="Hetairoi Ring",
+        ring2=gear.Lehko_Or_Hetairoi,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
     } -- 22%
@@ -461,7 +461,7 @@ function init_gear_sets()
         ear1="Dedition Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2="Hetairoi Ring",
+        ring2=gear.Lehko_Or_Hetairoi,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
     } -- 6%
@@ -534,18 +534,18 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head=gear.Malignance_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
+        head=gear.Gleti_Head, --6/6
+        body=gear.Gleti_Body, --9/0
+        hands=gear.Gleti_Hands, --5/5
+        legs=gear.Gleti_Legs, --7/7
+        feet=gear.Empyrean_Feet, --11/11
         neck="Warder's Charm +1",
         ear1="Eabani Earring",
-        ear2="Arete del Luna +1",
+        ear2="Sanare Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         back=gear.THF_TP_Cape,
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -560,6 +560,7 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         ring1="Purity Ring", --0/4
         ring2="Defending Ring", --10/10
+        waist="Platinum Moogle Belt",
         back="Moonlight Cape", --6/6
     })
 

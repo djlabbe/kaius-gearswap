@@ -25,6 +25,9 @@ function define_global_sets()
 
     gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe7"}
     gear.Lehko_Or_Chirich2 = {name="Chirich Ring +1", bag="wardrobe8"}
+    gear.Lehko_Or_Begrudging = {name="Begrudging Ring" }
+    gear.Lehko_Or_Dingir = {name="Dingir Ring" }
+    gear.Lehko_Or_Hetairoi = {name="Hetairoi Ring"}
 
     gear.Gerubu_Or_Stikini1 = {name="Stikini Ring +1", bag="wardrobe7"}
     gear.Gerubu_Or_Stikini2 = {name="Stikini Ring +2", bag="wardrobe8"}
@@ -42,6 +45,9 @@ function define_global_sets()
     if item_available("Lehko Habhoka's Ring") then
         gear.Lehko_Or_Chirich1 = { name = "Lehko Habhoka's Ring" }
         gear.Lehko_Or_Chirich2 = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Begrudging = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Dingir = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Hetairoi = { name = "Lehko Habhoka's Ring" }
     end
  
 

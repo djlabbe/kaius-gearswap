@@ -95,8 +95,10 @@ function user_setup()
 
     send_command('bind !s input /ja Sublimation <me>')
     send_command('bind !d input /ja "Divine Seal" <me>')
-    send_command('bind !p input /ma "Protectra V" <me>')
-    send_command('bind !o input /ma "Shellra V" <me>')
+    send_command('bind ^p input /ma "Protectra V" <me>')
+    send_command('bind ^o input /ma "Shellra V" <me>')
+    send_command('bind !p input /ma "Protect V" <me>')
+    send_command('bind !o input /ma "Shell V" <me>')
     send_command('bind !h input /ma "Haste" <stpc>')
     send_command('bind !u input /ma "Aquaveil" <me>')
 
@@ -226,9 +228,9 @@ function init_gear_sets()
     })  --51% DT
 
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
-        -- SIRD FOR Some Odyssey fights
+        -- SIRD for Odyssey
         legs=gear.Bunzi_Legs, --(DT-9) (20 SIRD)
-        -- feet=gear.Artifact_Feet, -- (29 SIRD)
+        feet=gear.Artifact_Feet, -- (29 SIRD)
     })
 
     sets.midcast.CuragaWeather = set_combine(sets.midcast.CureNormal, {
@@ -241,15 +243,16 @@ function init_gear_sets()
     sets.midcast.StatusRemoval = {
         main="Yagrush",
         sub="Genmei Shield",
-        head=gear.Empyrean_Body,
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands="Fanatic Gloves",
         legs=gear.Artifact_Legs,
         feet=gear.Empyrean_Feet,
-        neck="Incanter's Torque",
+        neck="Loricate Torque",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
         ring1="Kishar Ring",
+        ring2="Defending Ring",
         back=gear.WHM_Cure_Cape,
         waist="Embla Sash",
     }
@@ -257,7 +260,7 @@ function init_gear_sets()
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
         main="Yagrush",
         sub="Genmei Shield",
-        head="Vanya Hood",
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands="Fanatic Gloves", --15
         legs=gear.Artifact_Legs, --21
@@ -300,6 +303,11 @@ function init_gear_sets()
         hands=gear.Telchine_ENH_Hands,
         legs=gear.Telchine_ENH_Legs,
         feet=gear.Artifact_Feet,
+        neck="Loricate Torque +1",
+        ring1="Defending Ring",
+        ring2="Gelatinous Ring +1",
+        ear1="Tuisto Earring",
+        ear2="Ebers Earring +1",
         waist="Embla Sash",
     }
 
@@ -308,12 +316,15 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Inyanga Tiara +2",
-        neck="Incanter's Torque",
-        ear2="Magnetic Earring",
         body=gear.Relic_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Artifact_Legs,
         feet=gear.Bunzi_Feet,
+        neck="Incanter's Torque",
+        ear1="Tuisto Earring",
+        ear2="Ebers Earring +1",
+        ring1="Defending Ring",
+        ring2="Gelatinous Ring +1",
         back="Solemnity Cape",
         waist="Embla Sash",
     }
@@ -332,6 +343,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Staunch Tathlum +1",
         head="Chironic Hat",
+        body=gear.Bunzi_Body,
         hands="Regal Cuffs",
         legs="Shedir Seraweels",
         feet=gear.Artifact_Feet,
@@ -598,12 +610,12 @@ function init_gear_sets()
         waist="Carrier's Sash",
     }) --50/30 (10 Refresh)
 
-    -- sets.idle.Town = set_combine(sets.idle, {
-    --     main="Yagrush",
-    --     sub="Ammurapi Shield",
-    -- })
+    sets.idle.Town = set_combine(sets.idle, {
+        main="Yagrush",
+        sub="Ammurapi Shield",
+    })
 
-    sets.idle.Town = sets.idle
+    -- sets.idle.Town = sets.idle
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT

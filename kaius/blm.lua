@@ -446,7 +446,7 @@ function init_gear_sets()
         sub="Khonsu",
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
-        body=gear.Merlinic_MB_body,
+        body=gear.Merlinic_MB_Body,
         hands=gear.Artifact_Hands, 
         legs=gear.Empyrean_Feet,
         feet=gear.Artifact_Feet,

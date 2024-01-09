@@ -142,8 +142,8 @@ function user_setup()
     send_command('bind !numpad+ input /ja "Crooked Cards" <me>')
 
     if player.sub_job == 'NIN' then
-        send_command('bind ^numpad7 gs c set WeaponSet DeathPenalty_M;input /macro set 2')
-        send_command('bind ^numpad8 gs c set WeaponSet DeathPenalty_R;input /macro set 2')
+        send_command('bind ^numpad7 gs c set WeaponSet DeathPenalty_M;input /macro set 3')
+        send_command('bind ^numpad8 gs c set WeaponSet DeathPenalty_R;input /macro set 3')
         send_command('bind ^numpad4 gs c set WeaponSet Armageddon_M;input /macro set 2')
         send_command('bind ^numpad5 gs c set WeaponSet Armageddon_R;input /macro set 2')
         send_command('bind ^numpad1 gs c set WeaponSet Fomalhaut_M;input /macro set 2')
@@ -151,17 +151,20 @@ function user_setup()
         send_command('bind ^numpad0 gs c set WeaponSet Naegling;input /macro set 1')
         set_macro_page(2, 17)
     elseif player.sub_job == 'DNC' then
+        send_command('bind @1 input /ja "Box Step" <t>')
+        send_command('bind @2 input /ja "Stutter Step" <t>')
+
+        send_command('bind ^numpad7 gs c set WeaponSet DeathPenalty_M;input /macro set 6')
+        send_command('bind ^numpad8 gs c set WeaponSet DeathPenalty_R;input /macro set 6')
+        send_command('bind ^numpad4 gs c set WeaponSet Armageddon_M;input /macro set 5')
+        send_command('bind ^numpad5 gs c set WeaponSet Armageddon_R;input /macro set 5')
+        send_command('bind ^numpad1 gs c set WeaponSet Fomalhaut_M;input /macro set 5')
+        send_command('bind ^numpad2 gs c set WeaponSet Fomalhaut_R;input /macro set 5')
+        send_command('bind ^numpad0 gs c set WeaponSet Naegling;input /macro set 4')
+        set_macro_page(5, 17)
+    else
         send_command('bind ^numpad7 gs c set WeaponSet DeathPenalty_M;input /macro set 3')
         send_command('bind ^numpad8 gs c set WeaponSet DeathPenalty_R;input /macro set 3')
-        send_command('bind ^numpad4 gs c set WeaponSet Armageddon_M;input /macro set 3')
-        send_command('bind ^numpad5 gs c set WeaponSet Armageddon_R;input /macro set 3')
-        send_command('bind ^numpad1 gs c set WeaponSet Fomalhaut_M;input /macro set 3')
-        send_command('bind ^numpad2 gs c set WeaponSet Fomalhaut_R;input /macro set 3')
-        send_command('bind ^numpad0 gs c set WeaponSet Naegling;input /macro set 4')
-        set_macro_page(3, 17)
-    else
-        send_command('bind ^numpad7 gs c set WeaponSet DeathPenalty_M;input /macro set 2')
-        send_command('bind ^numpad8 gs c set WeaponSet DeathPenalty_R;input /macro set 2')
         send_command('bind ^numpad4 gs c set WeaponSet Armageddon_M;input /macro set 2')
         send_command('bind ^numpad5 gs c set WeaponSet Armageddon_R;input /macro set 2')
         send_command('bind ^numpad1 gs c set WeaponSet Fomalhaut_M;input /macro set 2')
@@ -304,7 +307,7 @@ function init_gear_sets()
         body=gear.Ikenga_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Nyame_Legs,
-        feet=gear.Relic_Feet,
+        feet=gear.Nyame_Feet,
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
@@ -487,12 +490,13 @@ function init_gear_sets()
         hands=gear.Empyrean_Hands,
         legs="Darraigner's Brais",
         feet="Oshosi Leggings +1",
+        neck="Iskur Gorget",
         ear1="Odr Earring",
         ear2="Chasseur's Earring +1",
-        ring1="Begrudging Ring",
+        ring1=gear.Lehko_Or_Begrudging,
         ring2="Dingir Ring",
         back=gear.COR_RACRIT_Cape,
-        waist="K. Kachina Belt +1",
+        waist="Tellen Belt",
     }
 
     sets.TripleShot = {
@@ -505,7 +509,6 @@ function init_gear_sets()
 
     sets.TripleShotCritical = {
         head="Meghanada Visor +2",
-        waist="K. Kachina Belt +1",
     }
 
     sets.TrueShot_RA = {
@@ -659,7 +662,7 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
     })
 
-    sets.idle.Town = sets.precast.WS['Last Stand']
+    sets.idle.Town = sets.midcast.RA.Critical
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = {

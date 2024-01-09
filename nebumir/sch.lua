@@ -82,7 +82,7 @@ function user_setup()
 
     gear.Artifact_Head = { name= "Academic's Mortarboard +3" }
     gear.Artifact_Body = { name= "Academic's Gown +2" }
-    gear.Artifact_Hands = { name= "Academic's Bracers +2" }
+    gear.Artifact_Hands = { name= "Academic's Bracers +3" }
     gear.Artifact_Legs = { name= "Academic's Pants +2" }
     gear.Artifact_Feet = { name= "Academic's Loafers +3" }
 

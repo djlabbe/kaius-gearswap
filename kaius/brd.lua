@@ -509,7 +509,7 @@ function init_gear_sets()
     })
 
     sets.midcast.StatusRemoval = {
-        head="Vanya Hood",
+        head=gear.Kaykaus_B_Head, --11
         body=gear.Nyame_Body,
         legs="Volte Tights",
         feet="Vanya Clogs",
@@ -598,7 +598,8 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = { feet=gear.Empyrean_Feet }
+    sets.Kiting = { ring1="Shneddick Ring +1" }
+
     sets.latent_refresh = { waist="Fucho-no-obi" }
 
     sets.engaged = {

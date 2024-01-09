@@ -668,7 +668,7 @@ function init_gear_sets()
         ear1="Telos Earring",      
         ear2="Dedition Earring",
         ring1="Niqmaddu ring",
-        ring2=gear.Chirich_2,
+        ring2=gear.Lehko_Or_Chirich2,
         back=gear.DRK_DA_Cape,
     }
 
@@ -678,7 +678,7 @@ function init_gear_sets()
         body="Dagon Breastplate",
         ear1="Brutal Earring",      
         ear2="Schere Earring",
-        ring2="Hetairoi Ring",
+        ring2=gear.Lehko_Or_Hetairoi,
     }
 
     sets.engaged.Liberator = {

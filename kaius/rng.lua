@@ -43,14 +43,14 @@ function job_setup()
     delayed_cast = ''
 
     data.equipment = {}
-    data.equipment.rema_ranged_weapons = S{'Fomalhaut','Gastraphetes', 'Armageddon', 'Annihilator'}
+    data.equipment.rema_ranged_weapons = S{'Fomalhaut','Gastraphetes', 'Armageddon', 'Annihilator', 'Gandiva'}
 
     data.equipment.rema_ranged_weapons_ammo = {
         ['Fomalhaut'] = 'Chrono Bullet',
         ['Gastraphetes'] = 'Quelling Bolt',
         ['Armageddon'] = 'Devastating Bullet',
         ['Annihilator'] = 'Eradicating Bullet',
-        ['Gandiva'] = "Artimis's Arrow"
+        ['Gandiva'] = "Artemis's Arrow"
     }
 
     data.equipment.rema_ranged_weapons_ammo_pouch = {
@@ -58,7 +58,7 @@ function job_setup()
         ['Gastraphetes'] = 'Quelling B. Quiver',
         ['Armageddon'] = 'Dev. Bul. Pouch',
         ['Annihilator'] = 'Era. Bul. Pouch',
-        ['Gandiva'] = "Artimis's Quiver"
+        ['Gandiva'] = "Artemis's Quiver"
     }
 
     no_shoot_ammo = S{"Animikii Bullet", "Hauksbok Arrow"}
@@ -78,7 +78,7 @@ function user_setup()
     DefaultAmmo = {
                     ['Yoichinoyumi'] = "Chrono Arrow",
                     -- ['Gandiva'] = "Chrono Arrow",
-                    ['Gandiva'] = "Artimis's Arrow",
+                    ['Gandiva'] = "Artemis's Arrow",
                     ['Fail-Not'] = "Chrono Arrow",
                     ['Annihilator'] = "Chrono Bullet",
                     ['Armageddon'] = "Chrono Bullet",
@@ -90,7 +90,7 @@ function user_setup()
     AccAmmo = {    
                     ['Yoichinoyumi'] = "Yoichi's Arrow",
                     -- ['Gandiva'] = "Yoichi's Arrow",
-                    ['Gandiva'] = "Artimis's Arrow",
+                    ['Gandiva'] = "Artemis's Arrow",
                     ['Fail-Not'] = "Yoichi's Arrow",
                     ['Annihilator'] = "Eradicating Bullet",
                     ['Armageddon'] = "Eradicating Bullet",
@@ -102,7 +102,7 @@ function user_setup()
     WSAmmo = {     
                     ['Yoichinoyumi'] = "Chrono Arrow",
                     -- ['Gandiva'] = "Chrono Arrow",
-                    ['Gandiva'] = "Artimis's Arrow",
+                    ['Gandiva'] = "Artemis's Arrow",
                     ['Fail-Not'] = "Chrono Arrow",
                     ['Annihilator'] = "Chrono Bullet",
                     ['Armageddon'] = "Chrono Bullet",
@@ -114,7 +114,7 @@ function user_setup()
     MagicAmmo = {  
                     ['Yoichinoyumi'] = "Chrono Arrow",
                     -- ['Gandiva'] = "Chrono Arrow",
-                    ['Gandiva'] = "Artimis's Arrow",
+                    ['Gandiva'] = "Artemis's Arrow",
                     ['Fail-Not'] = "Chrono Arrow",
                     ['Annihilator'] = "Devastating Bullet",
                     ['Armageddon'] = "Devastating Bullet",
@@ -306,12 +306,12 @@ function init_gear_sets()
         body=gear.Ikenga_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet,
+        feet=gear.Ikenga_Feet,
         neck="Scout's Gorget +2",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2="Regal Ring",
+        ear1="Telos Earring",
+        ear2="Crepuscular Earring",
+        ring1="Ilabrat Ring",
+        ring2="Crepuscular Ring",
         back=gear.RNG_RA_Cape,
         waist="Tellen Belt",
     }
@@ -322,19 +322,17 @@ function init_gear_sets()
     })
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
-        head=gear.Relic_Head,
-        -- body=gear.Empyrean_Body,
-        -- head="Meghanada Visor +2",
+        head="Meghanada Visor +2",
         body="Nisroch Jerkin",
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
-        feet="Oshosi Leggings +1",
+        feet=gear.Ikenga_Feet,
         neck="Scout's Gorget +2",
         ear1="Odr Earring",
         ear2="Amini Earring +1",
-        ring1="Begrudging Ring",
+        ring1=gear.Lehko_Or_Begrudging,
         ring2="Regal Ring",
-        waist="K. Kachina Belt +1",
+        waist="Tellen Belt",
         back=gear.RNG_CRIT_Cape,
     })
 
@@ -347,7 +345,7 @@ function init_gear_sets()
     } --25
 
     sets.DoubleShot.Critical = {
-        head=gear.Relic_Head,
+        head="Meghanada Visor +2",
         body=gear.Relic_Body,
         hands="Oshosi Gloves +1", -- 5
         legs="Oshosi Trousers +1", --7
@@ -355,9 +353,9 @@ function init_gear_sets()
         neck="Scout's Gorget +2",
         ear1="Odr Earring",
         ear2="Amini Earring +1",
-        ring1="Begrudging Ring",
-        ring2="Mummu Ring",
-        waist="K. Kachina Belt +1",
+        ring1=gear.Lehko_Or_Begrudging,
+        ring2="Regal Ring",
+        waist="Tellen Belt",
         back=gear.RNG_CRIT_Cape,
     }
 
@@ -528,18 +526,18 @@ function init_gear_sets()
     })
 
     sets.precast.WS['Jishnu\'s Radiance'] ={
-        head=gear.Artifact_Head,
+        head="Blistering Sallet +1",
         neck="Fotia Gorget",
         ear1="Odr Earring",
         ear2="Amini Earring +1",
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
-        ring1="Dingir Ring",
+        ring1=gear.Lehko_Or_Dingir,
         ring2="Regal Ring",
         back=gear.RNG_CRIT_Cape,
         waist="Fotia Belt",
-        legs=gear.Nyame_Legs,
-        feet=gear.Empyrean_Feet,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Ikenga_Feet,
     }
 
     sets.precast.WS['Jishnu\'s Radiance'].PDL ={
@@ -549,12 +547,12 @@ function init_gear_sets()
         ear2="Amini Earring +1",
         body=gear.Empyrean_Body,
         hands=gear.Ikenga_Hands,
-        ring1="Begrudging Ring",
+        ring1=gear.Lehko_Or_Begrudging,
         ring2="Regal Ring",
         back=gear.RNG_CRIT_Cape,
         waist="Fotia Belt",
         legs=gear.Ikenga_Legs,
-        feet=gear.Empyrean_Feet,
+        feet=gear.Ikenga_Feet,
     }
 
     sets.precast.WS['Jishnu\'s Radiance'].Acc = set_combine(sets.precast.WS['Jishnu\'s Radiance'], {
@@ -713,8 +711,9 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
     })
 
-    sets.idle.Town = sets.precast.WS['Jishnu\'s Radiance']
-    
+    -- sets.idle.Town = sets.precast.WS['Jishnu\'s Radiance']
+    -- sets.idle.Town = sets.midcast.RA
+    sets.idle.Town = sets.midcast.RA.Critical
     -- sets.idle.Town = sets.idle
 
     sets.defense.PDT = sets.idle.DT
@@ -757,7 +756,7 @@ function init_gear_sets()
     sets.Armageddon = {main="Perun +1", sub="Gleti's Knife", ranged="Armageddon", ammo="Chrono Bullet"}
     sets.Gastraphetes = {main=gear.Malevolence_B, sub=gear.Malevolence_A, ranged="Gastraphetes", ammo="Quelling Bolt"}
     
-    sets.Gandiva = {main="Perun +1", sub="Gleti's Knife", ranged="Gandiva", ammo="Artemis's Arrow"}
+    sets.Gandiva = {main="Oneiros Knife", sub="Gleti's Knife", ranged="Gandiva", ammo="Artemis's Arrow"}
 
     sets.DefaultShield = {sub="Nusku Shield"}
 
@@ -1215,7 +1214,7 @@ function check_ammo()
 		else
 			ammo_to_stock = ammostock
 		end
-	
+      
 		if data.equipment.rema_ranged_weapons:contains(player.equipment.range) and count_total_ammo(data.equipment.rema_ranged_weapons_ammo[player.equipment.range]) < ammo_to_stock then
 			if get_usable_item(player.equipment.range).usable then
 				windower.chat.input("/item '"..player.equipment.range.."' <me>")
