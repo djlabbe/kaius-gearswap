@@ -111,7 +111,7 @@ function user_setup()
 
     send_command ('bind @` gs c toggle LuzafRing')
 
-    send_command ('bind ^` input /ja "Bolter\'s Roll" <me>')
+    send_command ('bind ^` gs c set WeaponLock false;input /ja "Bolter\'s Roll" <me>')
   
     send_command('bind !insert gs c cycleback QD')
     send_command('bind !delete gs c cycle QD')
@@ -126,20 +126,20 @@ function user_setup()
     send_command ('bind !t input /ja "Triple Shot" <me>')
 
     -- ALT + Numpad ===> Rolls --
-    send_command('bind !numpad7 input /ja "Samurai Roll" <me>')
-    send_command('bind !numpad8 input /ja "Chaos Roll" <me>')
-    send_command('bind !numpad9 input /ja "Tactician\'s Roll" <me>')  
+    send_command('bind !numpad7 gs c set WeaponLock false;input /ja "Samurai Roll" <me>')
+    send_command('bind !numpad8 gs c set WeaponLock false;input /ja "Chaos Roll" <me>')
+    send_command('bind !numpad9 gs c set WeaponLock false;input /ja "Tactician\'s Roll" <me>')  
 
-    send_command('bind !numpad4 input /ja "Wizard\'s Roll" <me>')
-    send_command('bind !numpad5 input /ja "Warlock\'s Roll" <me>')
-    send_command('bind !numpad6 input /ja "Monk\'s Roll" <me>')
+    send_command('bind !numpad4 gs c set WeaponLock false;input /ja "Wizard\'s Roll" <me>')
+    send_command('bind !numpad5 gs c set WeaponLock false;input /ja "Warlock\'s Roll" <me>')
+    send_command('bind !numpad6 gs c set WeaponLock false;input /ja "Monk\'s Roll" <me>')
 
-    send_command('bind !numpad1 input /ja "Fighter\'s Roll" <me>')
-    send_command('bind !numpad2 input /ja "Rogue\'s Roll" <me>')
-    send_command('bind !numpad3 input /ja "Naturalist\'s Roll" <me>')
+    send_command('bind !numpad1 gs c set WeaponLock false;input /ja "Fighter\'s Roll" <me>')
+    send_command('bind !numpad2 gs c set WeaponLock false;input /ja "Rogue\'s Roll" <me>')
+    send_command('bind !numpad3 gs c set WeaponLock false;input /ja "Naturalist\'s Roll" <me>')
 
-    send_command('bind !numpad0 input /ja "Evoker\'s Roll" <me>')
-    send_command('bind !numpad+ input /ja "Crooked Cards" <me>')
+    send_command('bind !numpad0 gs c set WeaponLock false;input /ja "Evoker\'s Roll" <me>')
+    send_command('bind !numpad+ gs c set WeaponLock false;input /ja "Crooked Cards" <me>')
 
     if player.sub_job == 'NIN' then
         send_command('bind ^numpad7 gs c set WeaponSet DeathPenalty_M;input /macro set 3')
