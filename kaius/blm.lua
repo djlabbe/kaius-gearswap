@@ -487,7 +487,7 @@ function init_gear_sets()
         main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
-        head="Ea Hat +1",
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Agwu_Hands,
         legs=gear.Empyrean_Legs,

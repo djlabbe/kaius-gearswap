@@ -60,7 +60,7 @@ function user_setup()
     state.Carol = M{['description']='Carol','Lightning Carol', 'Lightning Carol II' }
     state.Threnody = M{['description']='Threnody', 'Earth Threnody II' }
     state.WeaponSet = M{['description']='Weapon Set', 'Carnwenhan' }
-    state.WeaponLock = M(true, 'Weapon Lock')
+    state.WeaponLock = M(false, 'Weapon Lock')
 
     include('Global-Binds.lua') 
     
@@ -68,7 +68,6 @@ function user_setup()
     info.ExtraSongs = 2
 
     gear.Kali_Idle = {name="Kali", augments={'MP+60','Mag. Acc.+20','"Refresh"+1',}}
-    gear.Ipetam_Eva = { name="Ipetam", augments={'Evasion+14','STR+14 AGI+14',}}
     gear.Linos_EVA = { name="Linos", augments={'Evasion+13','AGI+7',}}
 
     gear.Artifact_Head = { name= "Brioso Roundlet +3" }
@@ -86,13 +85,15 @@ function user_setup()
     gear.Empyrean_Head = { name= "Fili Calot +2" }
     gear.Empyrean_Body = { name= "Fili Hongreline +3" }
     gear.Empyrean_Hands = { name= "Fili Manchettes +3" }
-    gear.Empyrean_Legs = { name= "Fili Rhingrave +2" }
+    gear.Empyrean_Legs = { name= "Fili Rhingrave +3" }
     gear.Empyrean_Feet = { name= "Fili Cothurnes +2" }
 
     gear.BRD_Song_Cape = { name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}} --*
-    gear.BRD_DW_Cape = { name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
-    gear.BRD_KITE_Cape = { name="Intarabus's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','CHR+10','Enmity+10','DEF+50',}} --*
+    gear.BRD_DW_Cape = { name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}} --X
+    gear.BRD_KITE_Cape = { name="Intarabus's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}} --*
     gear.BRD_WS2_Cape = { name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}} --*
+
+    send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 2')
 
     send_command('bind !` gs c cycle SongMode')
     send_command('bind ^` input /ma "Chocobo Mazurka" <me>')
@@ -272,19 +273,19 @@ function init_gear_sets()
 
     sets.midcast['Earth Threnody II'] = {
         range="Gjallarhorn",
-        head=gear.Nyame_Head,
-        body=gear.Artifact_Body,
-        hands=gear.Artifact_Hands,
-        legs=gear.Nyame_Legs,
+        head=gear.Artifact_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands, --11
+        legs=gear.Empyrean_Legs, --13
         feet=gear.Artifact_Feet,
         neck="Mnbw. Whistle +1",
-        ear1="Crep. Earring",
-        ear2="Regal Earring",
+        ear1="Regal Earring",
+        ear2="Fili Earring +1", --4
         ring1=gear.Stikini_1,
-        ring2="Ragelise's Ring",
+        ring2="Metamorph Ring +1",
         waist="Acuity Belt +1",
-        back=gear.BRD_Song_Cape,
-    }
+        back=gear.BRD_Song_Cape, --10
+    } --38% DT
 
     -- For song defbuffs (accuracy primary, duration secondary)
     sets.midcast.SongEnfeebleAcc = set_combine(sets.midcast.SongEnfeeble, {
@@ -305,18 +306,16 @@ function init_gear_sets()
     }
 
     sets.idle = {
-        main=gear.Ipetam_Eva,
-        sub="Genmei Shield",
         range="Gjallarhorn",
         head=gear.Nyame_Head, --7
         body=gear.Nyame_Body, --10
-        hands=gear.Nyame_Hands, --8
+        hands=gear.Empyrean_Hands, --8
         legs=gear.Nyame_Legs, --9
         feet=gear.Nyame_Feet, --6
         neck="Loricate Torque +1",
         ear1="Tuisto Earring",
         ear2="Odnowa Earring +1",
-        ring1="Ragelise's Ring",
+        ring1="Shneddick Ring +1",
         ring2="Gelatinous Ring +1",
         back=gear.BRD_KITE_Cape,
         waist="Plat. Mog. Belt",
@@ -324,10 +323,10 @@ function init_gear_sets()
 
     sets.defense.PDT = sets.idle
     sets.defense.MDT = sets.idle
-    sets.idle.Town = sets.idle
+    sets.idle.Town = sets.midcast['Earth Threnody II']
 
     sets.Carnwenhan = { main="Carnwenhan", sub="Genmei Shield" }
-    sets.Kiting = { feet=gear.Empyrean_Feet }
+    sets.Kiting = {  ring1="Shneddick Ring +1", }
 
 end
 

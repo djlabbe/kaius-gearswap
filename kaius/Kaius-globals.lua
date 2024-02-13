@@ -28,13 +28,15 @@ function define_global_sets()
     gear.Lehko_Or_Begrudging = {name="Begrudging Ring" }
     gear.Lehko_Or_Dingir = {name="Dingir Ring" }
     gear.Lehko_Or_Hetairoi = {name="Hetairoi Ring"}
+    gear.Lehko_Or_Moonlight2 = {name="Moonlight Ring", bag="wardrobe8"}
+    gear.Lehko_Or_Petrov = {name="Petrov Ring"}
 
     gear.Gerubu_Or_Stikini1 = {name="Stikini Ring +1", bag="wardrobe7"}
     gear.Gerubu_Or_Stikini2 = {name="Stikini Ring +2", bag="wardrobe8"}
     gear.Gerubu_Or_Shadow = { name = "Shadow Ring" }
 
     if item_available("Cornelia's Ring") then
-        gear.Cornelia_Or_Epaminondas = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Epaminondas = { name = "Cornelia's Ring" }     
         gear.Cornelia_Or_Sroda = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Niqmaddu = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Regal = { name = "Cornelia's Ring" }
@@ -48,6 +50,8 @@ function define_global_sets()
         gear.Lehko_Or_Begrudging = { name = "Lehko Habhoka's Ring" }
         gear.Lehko_Or_Dingir = { name = "Lehko Habhoka's Ring" }
         gear.Lehko_Or_Hetairoi = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Moonlight2 = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Petrov = { name = "Lehko Habhoka's Ring" }
     end
  
 
@@ -139,6 +143,7 @@ function define_global_sets()
 
     gear.Herc_FC_Head = { name="Herculean Helm", augments={'"Mag.Atk.Bns."+1','"Fast Cast"+6','INT+3','Mag. Acc.+10',}}
     gear.Herc_PHLX_Body = { name="Herculean Vest", augments={'CHR+9','AGI+3','Phalanx +4','Mag. Acc.+3 "Mag.Atk.Bns."+3',}}
+    gear.Herc_PHLX_Hands = { name="Herculean Gloves", augments={'"Fast Cast"+2','Attack+25','Phalanx +4','Mag. Acc.+13 "Mag.Atk.Bns."+13',}}
 
     gear.Valo_PET_Body = {name="Valorous Mail", augments={'Pet: Mag. Acc.+24','Pet: "Dbl.Atk."+4 Pet: Crit.hit rate +4','Pet: MND+8','Pet: Accuracy+12 Pet: Rng. Acc.+12',}}
     gear.Valo_QA_Body = { name="Valorous Mail", augments={'Crit.hit rate+5','STR+8','Quadruple Attack +2','Accuracy+19 Attack+19',}}

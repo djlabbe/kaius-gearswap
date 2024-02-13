@@ -79,7 +79,7 @@ function user_setup()
 
     gear.Rostam_A = { name="Rostam", augments={'Path: A',}}
     gear.Rostam_B = { name="Rostam", augments={'Path: B',}}
-    gear.Rostam_C = { name="Rostam", augments={'Path: C',}}
+    gear.Rostam_C = { name="Lanunb Knifew", augments={'Path: C',}}
 
     gear.Artifact_Head = { name= "Laksamana's Tricorne +3" }
     gear.Artifact_Body = { name= "Laksamana's Frac +3" }

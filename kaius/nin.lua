@@ -483,7 +483,7 @@ function init_gear_sets()
         body=gear.Relic_Body, --10
         hands=gear.Malignance_Hands,
         ring1="Gere Ring",
-        ring2=gear.Chirich_2,
+        ring2=gear.Lehko_Or_Chirich2,
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
         legs=gear.Malignance_Legs,
@@ -502,7 +502,7 @@ function init_gear_sets()
         ear1="Dedition Earring",
         ear2="Hattori Earring +1",
         ring1="Gere Ring",
-        ring2=gear.Chirich_2,
+        ring2=gear.Lehko_Or_Chirich2,
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
     } -- 30%
@@ -518,7 +518,7 @@ function init_gear_sets()
         body=gear.Adhemar_A_Body, --6
         hands=gear.Adhemar_A_Hands,
         ring1="Gere Ring",
-        ring2=gear.Chirich_2,
+        ring2=gear.Lehko_Or_Chirich2,
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7        
         legs=gear.Malignance_Legs,
@@ -535,7 +535,7 @@ function init_gear_sets()
         body=gear.Malignance_Body,
         hands=gear.Adhemar_A_Hands,
         ring1="Gere Ring",
-        ring2=gear.Chirich_2,
+        ring2=gear.Lehko_Or_Chirich2,
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7        
         legs=gear.Malignance_Legs,
@@ -552,7 +552,7 @@ function init_gear_sets()
         body=gear.Mpaca_Body,
         hands=gear.Mpaca_Hands,
         ring1="Gere Ring",
-        ring2=gear.Chirich_2,
+        ring2=gear.Lehko_Or_Chirich2,
         back=gear.NIN_TP_Cape,
         waist="Sailfi Belt +1",        
         legs=gear.Mpaca_Legs,
@@ -620,7 +620,7 @@ function init_gear_sets()
         back="Moonlight Cape", --6/6
     })
     
-    sets.idle.Town = sets.precast.WS["Blade: Shun"]
+    sets.idle.Town = sets.precast.WS["Blade: Chi"]
 
     sets.TreasureHunter = {
         ammo="Perfect Lucky Egg",

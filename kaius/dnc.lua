@@ -11,21 +11,12 @@
 --              [ F12 ]             Update Current Gear / Report Current Status
 --              [ CTRL+F12 ]        Cycle Idle Modes
 --              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
---              [ WIN+C ]           Toggle Capacity Points Mode
 --
 --  Abilities:  [ CTRL+- ]          Primary step element cycle forward.
 --              [ CTRL+= ]          Primary step element cycle backward.
 --              [ ALT+- ]           Secondary step element cycle forward.
 --              [ ALT+= ]           Secondary step element cycle backward.
---              [ CTRL+[ ]          Toggle step target type.
---              [ CTRL+] ]          Toggle use secondary step.
---              [ Numpad0 ]         Perform Current Step
 --
---  Spells:     [ WIN+, ]           Utsusemi: Ichi
---              [ WIN+. ]           Utsusemi: Ni
---
---              (Global-Binds.lua contains additional non-job-related keybinds)
-
 -------------------------------------------------------------------------------------------------------------------
 --  Custom Commands (preface with /console to use these in macros)
 -------------------------------------------------------------------------------------------------------------------
@@ -50,14 +41,14 @@ function job_setup()
 end
 
 function user_setup()
-    state.OffenseMode:options('Normal', 'Acc')
+    state.OffenseMode:options('Normal', 'PDL')
     state.HybridMode:options('Normal', 'DT')
-    state.WeaponskillMode:options('Normal', 'Acc')
+    state.WeaponskillMode:options('Normal', 'PDL')
     state.IdleMode:options('Normal', 'DT')
     state.MainStep = M{['description']='Main Step', 'Box Step', 'Quickstep', 'Feather Step', 'Stutter Step'}
     state.AltStep = M{['description']='Alt Step', 'Feather Step', 'Quickstep', 'Stutter Step', 'Box Step'}
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Twash_TP', 'Twash_Gleti', }
+    state.WeaponSet = M{['description']='Weapon Set', 'Twash_TP', 'Twash_Gleti', 'Twash_Crep' }
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name= "Maxixi Tiara +2" }
@@ -105,6 +96,7 @@ function user_setup()
     
     send_command('bind ^numpad7 gs c set WeaponSet Twash_TP')
     send_command('bind ^numpad8 gs c set WeaponSet Twash_Gleti')
+    send_command('bind ^numpad9 gs c set WeaponSet Twash_Crep')
 
     if player.sub_job == 'DRG' then
         set_macro_page(1, 19)
@@ -290,18 +282,28 @@ function init_gear_sets()
         waist="Fotia Belt",
     }
 
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        ear2="Telos Earring",
+    sets.precast.WS.PDL = set_combine(sets.precast.WS, {
+    
     })
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
-        ear1="Sherida Earring",
-        ear2="Macu. Earring +1",
-        back=gear.DNC_WS2_Cape,
+        ammo="Aurgelmir Orb +1",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Fotia Gorget",
+        ear1="Ishvara Earring",
+        ear2="Moonshade Earring",
+        ring1="Regal Ring",
+        ring2="Epaminondas's Ring",
+        back=gear.DNC_WS1_Cape,
+        waist="Fotia Belt",
     })
 
-    sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
-        ear2="Telos Earring",
+    sets.precast.WS['Exenterator'].PDL = set_combine(sets.precast.WS['Exenterator'], {
+        
     })
 
     sets.precast.WS['Pyrrhic Kleos'] = {
@@ -320,9 +322,8 @@ function init_gear_sets()
         waist="Fotia Belt",
     }
 
-    sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS['Pyrrhic Kleos'], {
-        hands=gear.Adhemar_A_Hands,
-        legs=gear.Nyame_Legs,
+    sets.precast.WS['Pyrrhic Kleos'].PDL = set_combine(sets.precast.WS['Pyrrhic Kleos'], {
+        
     })
 
     sets.precast.WS['Evisceration'] = {
@@ -341,11 +342,11 @@ function init_gear_sets()
         back=gear.DNC_WS3_Cape,
     }
 
-    sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
-        body=gear.Relic_Body,
+    sets.precast.WS['Evisceration'].PDL = set_combine(sets.precast.WS['Evisceration'], {
+        hands=gear.Gleti_Hands,
+        gear.Lustratio_D_Feet,
         legs=gear.Gleti_Legs,
-        feet=gear.Artifact_Feet,
-        ring1="Regal Ring",
+        neck="Etoile Gorget +2",
     })
 
     sets.precast.WS['Rudra\'s Storm'] = {
@@ -364,8 +365,11 @@ function init_gear_sets()
         waist="Kentarch Belt +1",
     }
 
-    sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        ear2="Telos Earring",
+    sets.precast.WS['Rudra\'s Storm'].PDL = set_combine(sets.precast.WS['Rudra\'s Storm'], {
+        ammo="Crepuscular Pebble",
+        ear2="Maculele Earring +1",
+        body=gear.Gleti_Body,
+        hands=gear.Artifact_Hands,
     })
 
     sets.precast.WS['Aeolian Edge'] = {
@@ -382,10 +386,6 @@ function init_gear_sets()
         ring2="Shiva Ring +1",
         back=gear.DNC_WS1_Cape,
         waist="Orpheus's Sash",
-    }
-
-    sets.precast.Skillchain = {
-        hands=gear.Empyrean_Hands,
     }
 
     ------------------------------------------------------------------------------------------------
@@ -407,15 +407,6 @@ function init_gear_sets()
     }
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
-
-    ------------------------------------------------------------------------------------------------
-    ---------------------------------------- Defense Sets ------------------------------------------
-    ------------------------------------------------------------------------------------------------
-
-    sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT
-
-    sets.Kiting = { ring1="Shneddick Ring +1" }
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Engaged Sets ------------------------------------------
@@ -620,11 +611,11 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
-        head=gear.Malignance_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
+        head=gear.Gleti_Head,
+        body=gear.Gleti_Body,
+        hands=gear.Gleti_Hands,
+        legs=gear.Gleti_Legs,
+        feet=gear.Gleti_Feet,
         neck="Warder's Charm +1",
         ear2="Etiolation Earring",
         ring1="Purity Ring", --0/4
@@ -633,6 +624,16 @@ function init_gear_sets()
     })
 
     sets.idle.Town = sets.precast.WS['Rudra\'s Storm']
+
+    ------------------------------------------------------------------------------------------------
+    ---------------------------------------- Defense Sets ------------------------------------------
+    ------------------------------------------------------------------------------------------------
+
+    sets.defense.PDT = sets.idle.DT
+    sets.defense.MDT = sets.idle.DT
+
+    sets.Kiting = { ring1="Shneddick Ring +1" }
+
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -653,6 +654,7 @@ function init_gear_sets()
 
     sets.Twash_TP = { main="Twashtar", sub="Centovente" }
     sets.Twash_Gleti = { main="Twashtar", sub="Gleti's Knife" }
+    sets.Twash_Crep = { main="Twashtar", sub="Crepuscular Knife" }
 
 end
 

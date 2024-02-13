@@ -171,7 +171,7 @@ function init_gear_sets()
         ear1="Schere Earring", --6
         ear2="Boii Earring +1", --8
         ring1="Niqmaddu Ring",
-        ring2=gear.Chirich_2,
+        ring2=gear.Lehko_Or_Chirich2,
         waist="Sailfi Belt +1", --5
         back=gear.WAR_TP_Cape, --10
     } -- 68% DA + 28% Traits + Gifts +5% Merits

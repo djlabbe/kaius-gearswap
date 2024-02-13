@@ -320,7 +320,7 @@ function init_gear_sets()
         hands={name="Regal Gauntlets", priority=205}, --[10]
         legs=gear.Carmine_A_Legs, --[20]
         feet=gear.Empyrean_Feet,
-        neck="Moonlight Necklace", --15/[15]
+        neck="Moonlight Necklace", --[15]
         ear1="Magnetic Earring", --[8]
         ear2={name="Odnowa Earring +1", priority=110},
         ring1=gear.Moonlight_1,
@@ -369,7 +369,7 @@ function init_gear_sets()
         -- main="Deacon Sword", --4
         head=gear.Relic_Head, --7
         body=gear.Herc_PHLX_Body, --4
-        hands=gear.Taeon_Phalanx_Hands, --3(10)
+        hands=gear.Herc_PHLX_Hands, --4
         legs=gear.Taeon_Phalanx_Legs, --3(10)
         feet=gear.Taeon_Phalanx_Feet, --3(10)
     }

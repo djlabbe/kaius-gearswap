@@ -582,7 +582,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Telos Earring",
         ring1="Niqmaddu Ring",
-        ring2=gear.Moonlight_2,
+        ring2=gear.Lehko_Or_Moonlight2, 
         back=gear.DRG_STP_Cape,
         waist="Sailfi Belt +1",
     } --34% DT
@@ -665,7 +665,7 @@ function init_gear_sets()
     sets.idle.DT.Pet = set_combine(sets.idle.Pet, { })
 
     sets.idle.Weak = sets.idle.DT
-    sets.idle.Town = sets.engaged.Aram
+    sets.idle.Town = sets.engaged
     sets.Kiting = { ring1="Shneddick Ring +1" }
 
     sets.buff.Doom = {

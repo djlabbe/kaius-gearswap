@@ -63,13 +63,13 @@ end
 function user_setup()
     include('Global-Binds.lua') 
 
-    state.OffenseMode:options('Normal')
+    state.OffenseMode:options('Normal', 'PDL')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('Normal', 'Critical')
     state.WeaponskillMode:options('Normal')
-    state.IdleMode:options('Normal', 'DT')
+    state.IdleMode:options('Normal')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'DeathPenalty_M', 'DeathPenalty_R', 'Armageddon_M', 'Armageddon_R', 'Fomalhaut_M', 'Fomalhaut_R', 'Naegling'}
+    state.WeaponSet = M{['description']='Weapon Set', 'DeathPenalty_M', 'DeathPenalty_R', 'Armageddon_M', 'Armageddon_R', 'Fomalhaut_M', 'Fomalhaut_R', 'Naegling_Gleti', 'Naegling_Crep'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.RAbullet = "Chrono Bullet"
@@ -95,11 +95,11 @@ function user_setup()
     gear.Relic_Legs = { name= "Lanun Trews +3" }
     gear.Relic_Feet = { name= "Lanun Bottes +3" }
 
-    gear.Empyrean_Head = { name= "Chasseur's Tricorne +2" }
+    gear.Empyrean_Head = { name= "Chasseur's Tricorne +3" }
     gear.Empyrean_Body = { name= "Chasseur's Frac +3" }
     gear.Empyrean_Hands = { name= "Chasseur's Gants +3" }
     gear.Empyrean_Legs = { name= "Chasseur's Culottes +3" }
-    gear.Empyrean_Feet = { name= "Chasseur's Bottes +2" }
+    gear.Empyrean_Feet = { name= "Chasseur's Bottes +3" }
 
     gear.COR_SNP_Cape = { name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10','Mag. Evasion+15',}}        
     gear.COR_RA_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10','Phys. dmg. taken-10%',}}
@@ -148,7 +148,8 @@ function user_setup()
         send_command('bind ^numpad5 gs c set WeaponSet Armageddon_R;input /macro set 2')
         send_command('bind ^numpad1 gs c set WeaponSet Fomalhaut_M;input /macro set 2')
         send_command('bind ^numpad2 gs c set WeaponSet Fomalhaut_R;input /macro set 2')
-        send_command('bind ^numpad0 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad0 gs c set WeaponSet Naegling_Gleti;input /macro set 1')
+        send_command('bind ^numpad. gs c set WeaponSet Naegling_Crep;input /macro set 1')
         set_macro_page(2, 17)
     elseif player.sub_job == 'DNC' then
         send_command('bind @1 input /ja "Box Step" <t>')
@@ -160,7 +161,8 @@ function user_setup()
         send_command('bind ^numpad5 gs c set WeaponSet Armageddon_R;input /macro set 5')
         send_command('bind ^numpad1 gs c set WeaponSet Fomalhaut_M;input /macro set 5')
         send_command('bind ^numpad2 gs c set WeaponSet Fomalhaut_R;input /macro set 5')
-        send_command('bind ^numpad0 gs c set WeaponSet Naegling;input /macro set 4')
+        send_command('bind ^numpad0 gs c set WeaponSet Naegling_Gleti;input /macro set 4')
+        send_command('bind ^numpad. gs c set WeaponSet Naegling_Crep;input /macro set 4')
         set_macro_page(5, 17)
     else
         send_command('bind ^numpad7 gs c set WeaponSet DeathPenalty_M;input /macro set 3')
@@ -169,7 +171,8 @@ function user_setup()
         send_command('bind ^numpad5 gs c set WeaponSet Armageddon_R;input /macro set 2')
         send_command('bind ^numpad1 gs c set WeaponSet Fomalhaut_M;input /macro set 2')
         send_command('bind ^numpad2 gs c set WeaponSet Fomalhaut_R;input /macro set 2')
-        send_command('bind ^numpad0 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad0 gs c set WeaponSet Naegling_Gleti;input /macro set 1')
+        send_command('bind ^numpad. gs c set WeaponSet Naegling_Crep;input /macro set 1')
         set_macro_page(2, 17)
     end
    
@@ -202,7 +205,14 @@ function init_gear_sets()
 
     sets.precast.JA['Snake Eye'] = {legs=gear.Relic_Legs}
     sets.precast.JA['Wild Card'] = {feet=gear.Relic_Feet}
-    sets.precast.JA['Random Deal'] = {body=gear.Relic_Body}
+
+    sets.precast.JA['Random Deal'] = {
+        head=gear.Ikenga_Head,
+        body=gear.Relic_Body,
+        hands=gear.Ikenga_Hands,
+        legs=gear.Ikenga_Legs,
+        feet=gear.Ikenga_Feet,
+    }
 
     sets.precast.CorsairRoll = {
         main=gear.Rostam_C, 
@@ -271,7 +281,7 @@ function init_gear_sets()
         hands=gear.Carmine_D_Hands, --13/0
         legs=gear.Adhemar_D_Legs, --10/13
         feet="Meghanada jambeaux +2", --10/0
-        neck="Comm. Charm +2", --4/0
+        neck="Commodore Charm +2", --4/0
         ring="Crepuscular Ring",
         back=gear.COR_SNP_Cape, --10/0 --TODO
         waist="Yemaya Belt", --0/5
@@ -291,7 +301,7 @@ function init_gear_sets()
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
-        feet=gear.Relic_Feet,
+        feet=gear.Nyame_Feet,
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
@@ -300,6 +310,8 @@ function init_gear_sets()
         back=gear.COR_LS_Cape,
         waist="Fotia Belt",
     }
+
+    sets.precast.WS.PDL = set_combine(sets.precast.WS, {})
 
     sets.precast.WS['Last Stand'] = {
         ammo=gear.WSbullet,
@@ -317,6 +329,11 @@ function init_gear_sets()
         waist="Fotia Belt",
     }
 
+    sets.precast.WS['Last Stand'].PDL = set_combine(sets.precast.WS['Last Stand'], {
+
+    })
+
+
     sets.precast.WS['Wildfire'] = {
         ammo=gear.MAbullet,
         head=gear.Nyame_Head,
@@ -324,7 +341,7 @@ function init_gear_sets()
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Relic_Feet,
-        neck="Comm. Charm +2",
+        neck="Commodore Charm +2",
         ear1="Novio Earring",
         ear2="Friomisi Earring",
         ring1=gear.Cornelia_Or_Regal,
@@ -356,7 +373,7 @@ function init_gear_sets()
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Relic_Feet,
-        neck="Comm. Charm +2",
+        neck="Commodore Charm +2",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1="Archon Ring",
@@ -397,6 +414,12 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     }
 
+    sets.precast.WS['Savage Blade'].PDL = set_combine(sets.precast.WS['Savage Blade'], {
+        neck="Commodore Charm +2",
+        body=gear.Ikenga_Body,
+        ring2="Sroda Ring",
+    })
+
     sets.precast.WS['Aeolian Edge'] = {
         ammo=gear.QDbullet,
         head=gear.Nyame_Head,
@@ -430,7 +453,7 @@ function init_gear_sets()
 
     sets.midcast.CorsairShot = {
         ammo=gear.QDbullet,
-        head=gear.Nyame_Head,
+        head=gear.Ikenga_Head,
         body=gear.Relic_Body,
         hands=gear.Carmine_D_Hands,
         legs=gear.Nyame_Legs,
@@ -545,7 +568,7 @@ function init_gear_sets()
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
         ammo=gear.RAbullet,
-        head=gear.Malignance_Head, --6/6
+        head=gear.Adhemar_B_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
         legs=gear.Empyrean_Legs, --7/7
@@ -553,8 +576,8 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
+        ring1=gear.Lehko_Or_Petrov,
+        ring2="Epona's Ring",
         back=gear.COR_DW_Cape,
         waist="Sailfi Belt +1",
     } -- 48%
@@ -562,7 +585,7 @@ function init_gear_sets()
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.DW.LowHaste = {
         ammo=gear.RAbullet,
-        head=gear.Malignance_Head, --6/6
+        head=gear.Adhemar_B_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
         legs=gear.Empyrean_Legs, --7/7
@@ -570,8 +593,8 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
+        ring1=gear.Lehko_Or_Petrov,
+        ring2="Epona's Ring",
         back=gear.COR_DW_Cape,
         waist="Sailfi Belt +1",
     } -- 42%
@@ -579,7 +602,7 @@ function init_gear_sets()
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.DW.MidHaste = {
         ammo=gear.RAbullet,
-        head=gear.Malignance_Head, --6/6
+        head=gear.Adhemar_B_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
         legs=gear.Empyrean_Legs, --7/7
@@ -587,8 +610,8 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
+        ring1=gear.Lehko_Or_Petrov,
+        ring2="Epona's Ring",
         back=gear.COR_DW_Cape,
         waist="Sailfi Belt +1",
     } -- 30%
@@ -596,7 +619,7 @@ function init_gear_sets()
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.DW.HighHaste = {
         ammo=gear.RAbullet,
-        head=gear.Malignance_Head, --6/6
+        head=gear.Adhemar_B_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
         legs=gear.Empyrean_Legs, --7/7
@@ -604,8 +627,8 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
+        ring1=gear.Lehko_Or_Petrov,
+        ring2="Epona's Ring",
         back=gear.COR_DW_Cape,
         waist="Sailfi Belt +1",
     } -- 30%
@@ -621,16 +644,14 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        -- ring1=gear.Chirich_1,
-        -- ring2=gear.Chirich_2,
-        ring1="Petrov Ring",
+        ring1=gear.Lehko_Or_Petrov,
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape,
         waist="Sailfi Belt +1",
     } -- 11%
 
     sets.engaged.Hybrid = {
-        ring2="Defending Ring" --10
+        head=gear.Malignance_Head
     }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
@@ -644,40 +665,35 @@ function init_gear_sets()
     sets.idle = {
         ammo=gear.MAbullet,
         head=gear.Malignance_Head,
-        body=gear.Malignance_Body,
+        body="Adamantite Armor",
         hands=gear.Malignance_Hands,
-        legs=gear.Malignance_Legs,
+        legs=gear.Empyrean_Legs,
         feet=gear.Malignance_Feet,
         neck="Warder's Charm +1",
         ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
+        ring1="Shneddick Ring +1",
+        ring2="Shadow Ring",
         back=gear.COR_SNP_Cape,
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     }
 
-    sets.idle.DT = set_combine(sets.idle, {
-        ring1="Purity Ring", --0/4
-        ring2="Defending Ring", --10/10
-    })
-
-    sets.idle.Town = sets.midcast.RA.Critical
+    sets.idle.Town = sets.idle
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = {
-        head=gear.Malignance_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
+        head=gear.Malignance_Head, 
+        body="Adamantite Armor",
+        hands=gear.Malignance_Hands, 
+        legs=gear.Malignance_Legs, 
+        feet=gear.Malignance_Feet,
         neck="Warder's Charm +1",
         ear1="Etiolation Earring",
         ear2="Eabani Earring",
-        ring1="Purity Ring", --0/4
-        ring2="Defending Ring", --10/10
+        ring1="Purity Ring", 
+        ring2="Defending Ring",
         back=gear.COR_SNP_Cape,
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     }
 
     sets.Kiting = { ring1="Shneddick Ring +1" }
@@ -698,7 +714,8 @@ function init_gear_sets()
     sets.Armageddon_R = {main=gear.Rostam_A, sub="Kustawi +1", ranged="Armageddon"}
     sets.Fomalhaut_M = {main=gear.Rostam_B, sub="Crepuscular Knife", ranged="Fomalhaut"}
     sets.Fomalhaut_R = {main=gear.Rostam_A, sub="Kustawi +1", ranged="Fomalhaut"}
-    sets.Naegling = {main="Naegling", sub="Gleti's Knife", ranged="Anarchy +3"}
+    sets.Naegling_Gleti = {main="Naegling", sub="Gleti's Knife", ranged="Anarchy +3"}
+    sets.Naegling_Crep = {main="Naegling", sub="Crepuscular Knife", ranged="Anarchy +3"}
 
     sets.DefaultShield = {sub="Nusku Shield"}
 

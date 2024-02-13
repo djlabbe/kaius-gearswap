@@ -5,6 +5,52 @@
 -------------------------------------------------------------------------------------------------------------------
 
 function define_global_sets()
+
+    ------------------------
+    -- TVR FALLBACK RING ---
+    ------------------------
+
+    gear.Cornelia_Or_Epaminondas = { name = "Epaminondas's Ring" }
+    gear.Cornelia_Or_Sroda = { name = "Sroda Ring" }
+    gear.Cornelia_Or_Niqmaddu = { name = "Niqmaddu Ring" }
+    gear.Cornelia_Or_Regal = { name = "Regal Ring" }
+    gear.Cornelia_Or_Ilabrat = { name = "Ilabrat Ring" }
+    gear.Cornelia_Or_Gere = { name = "Gere Ring" }
+
+    gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe7"}
+    gear.Lehko_Or_Chirich2 = {name="Chirich Ring +1", bag="wardrobe8"}
+    gear.Lehko_Or_Begrudging = {name="Begrudging Ring" }
+    gear.Lehko_Or_Dingir = {name="Dingir Ring" }
+    gear.Lehko_Or_Hetairoi = {name="Hetairoi Ring"}
+    gear.Lehko_Or_Moonlight2 = {name="Moonlight Ring", bag="wardrobe8"}
+
+    gear.Gerubu_Or_Stikini1 = {name="Stikini Ring +1", bag="wardrobe7"}
+    gear.Gerubu_Or_Stikini2 = {name="Stikini Ring +2", bag="wardrobe8"}
+    gear.Gerubu_Or_Shadow = { name = "Shadow Ring" }
+
+    if item_available("Cornelia's Ring") then
+        gear.Cornelia_Or_Epaminondas = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Sroda = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Niqmaddu = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Regal = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Ilabrat = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Gere = { name = "Cornelia's Ring" }
+    end   
+
+    if item_available("Lehko Habhoka's Ring") then
+        gear.Lehko_Or_Chirich1 = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Chirich2 = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Begrudging = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Dingir = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Hetairoi = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Moonlight2 = { name = "Lehko Habhoka's Ring" }
+    end
+ 
+    if item_available("Gurebu's Ring") then
+        gear.Gerubu_Or_Stikini1 = { name = "Gurebu's Ring" }
+        gear.Gerubu_Or_Stikini2 = { name = "Gurebu's Ring" }
+        gear.Gerubu_Or_Shadow = { name = "Gurebu's Ring" }
+    end
     
     ---------------------
     -- DUPLICATE RINGS --
@@ -380,3 +426,10 @@ windower.register_event('zone change',
     end
 )
 
+function item_available(item)
+	if player.inventory[item] or player.wardrobe[item] or player.wardrobe2[item] or player.wardrobe3[item] or player.wardrobe4[item] or player.wardrobe5[item] or player.wardrobe6[item] or player.wardrobe7[item] or player.wardrobe8[item] then
+		return true
+	else
+		return false
+	end
+end

@@ -105,7 +105,7 @@ function user_setup()
     gear.Empyrean_Head = { name= "Fili Calot +2" }
     gear.Empyrean_Body = { name= "Fili Hongreline +3" }
     gear.Empyrean_Hands = { name= "Fili Manchettes +3" }
-    gear.Empyrean_Legs = { name= "Fili Rhingrave +2" }
+    gear.Empyrean_Legs = { name= "Fili Rhingrave +3" }
     gear.Empyrean_Feet = { name= "Fili Cothurnes +2" }
 
     gear.BRD_Song_Cape = { name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
@@ -544,10 +544,6 @@ function init_gear_sets()
         back="Fi Follet Cape +1",
         waist="Embla Sash",
     }
-
-    sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
-        head="Inyanga Tiara +2"
-    })
 
     sets.midcast.Haste = sets.midcast['Enhancing Magic']
 
