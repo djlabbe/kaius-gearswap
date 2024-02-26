@@ -419,7 +419,7 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
-        body=gear.Mpaca_Body,
+        body="Adamantite Armor",
         hands=gear.Mpaca_Hands,
         ring1=gear.Chirich_1,
         ring2="Defending Ring",

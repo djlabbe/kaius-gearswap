@@ -719,17 +719,17 @@ function init_gear_sets()
     sets.idle = {
         range="Gjallarhorn",
         head=gear.Bunzi_Head,
-        body=gear.Bunzi_Body,
+        body="Adamantite Armor",
         hands=gear.Bunzi_Hands,
         legs=gear.Bunzi_Legs,
         feet=gear.Bunzi_Feet,
         neck="Warder's Charm +1",
         ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
-        ring1="Defending Ring",
+        ring1="Shneddick Ring +1",
         ring2="Shadow Ring",
         back=gear.BRD_DW_Cape,
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     }
 
     sets.idle.DT = {

@@ -688,7 +688,7 @@ function init_gear_sets()
 
     sets.idle = {
         head=gear.Malignance_Head,
-        body=gear.Malignance_Body,
+        body="Adamantite Armor",
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Malignance_Feet,

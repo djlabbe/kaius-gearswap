@@ -413,20 +413,16 @@ function init_gear_sets()
     
     sets.engaged = {
         ammo="Staunch Tathlum +1",
-        -- ammo="Homiliary",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
         neck={name="Futhark Torque +2", priority=60},
-        -- neck="Sibyl Scarf",
         ear1={name="Tuisto Earring", priority=150},
         ear2={name="Odnowa Earring +1", priority=110}, 
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
-        -- ring1=gear.Stikini_1,
-        -- ring2=gear.Stikini_2,
         back=gear.RUN_TANK_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     } --3708 hp

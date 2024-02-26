@@ -678,7 +678,7 @@ function init_gear_sets()
         waist="Platinum Moogle Belt",
     }
 
-    sets.idle.Town = sets.idle
+    sets.idle.Town = sets.precast.WS['Savage Blade'].PDL
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = {
@@ -697,6 +697,8 @@ function init_gear_sets()
     }
 
     sets.Kiting = { ring1="Shneddick Ring +1" }
+
+    
     
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20

@@ -632,7 +632,7 @@ function init_gear_sets()
     sets.idle = {
         ammo="Staunch Tathlum +1", --3/3
         head=gear.Empyrean_Head, --10/10
-        body=gear.Nyame_Body,
+        body="Adamantite Armor",
         hands=gear.Gleti_Hands, --5/5
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,

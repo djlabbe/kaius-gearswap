@@ -594,7 +594,7 @@ function init_gear_sets()
     sets.idle = {
         ammo="Date Shuriken",
         head=gear.Mpaca_Head,
-        body=gear.Mpaca_Body,
+        body="Adamantite Armor",
         hands=gear.Mpaca_Hands,
         legs=gear.Mpaca_Legs,
         feet=gear.Mpaca_Feet,
