@@ -454,7 +454,7 @@ function init_gear_sets()
     sets.precast.WS["Stringing Pummel"] = {
 		head=gear.Mpaca_Head,
 		body=gear.Mpaca_Body,
-		hands=gear.Ryuo_A_Hands,
+		hands=gear.Mpaca_Hands,
 		legs=gear.Mpaca_Legs,
 		feet=gear.Ryuo_C_Feet, --TODO: D
 		neck="Fotia Gorget",

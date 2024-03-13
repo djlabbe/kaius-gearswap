@@ -503,8 +503,8 @@ function init_gear_sets()
         legs=gear.Kaykaus_A_Legs, --11(+2)/(-6)
         feet=gear.Kaykaus_B_Feet, --11(+2)/(-12)
         neck="Incanter's Torque",
-        ear1="Beatific Earring",
-        ear2="Meili Earring",
+        ear1="Meili Earring",
+        ear2="Lethardy Earring +1",
         ring1="Haoma's Ring",
         ring2="Menelaus's Ring",
         back=gear.RDM_ENF_Cape, --(-10)
@@ -945,7 +945,7 @@ function init_gear_sets()
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back=gear.RDM_ENF_Cape,
-        waist="Carrier's Sash",
+         waist="Platinum Moogle Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -959,7 +959,7 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         ring2="Defending Ring", --10/10
         back=gear.RDM_ENF_Cape,
-        waist="Carrier's Sash",
+         waist="Platinum Moogle Belt",
     })
 
     sets.idle.Town = set_combine(sets.idle, {

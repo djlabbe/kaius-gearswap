@@ -535,7 +535,7 @@ function init_gear_sets()
         ear2="Odnowa Earring +1",
         ring1="Defending Ring",
         ring2="Shadow Ring",
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
         back=gear.DRG_TP_Cape
     }
 
@@ -642,7 +642,7 @@ function init_gear_sets()
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
         back=gear.DRG_TP_Cape, --6/6
-        waist="Carrier's Sash", --4/0
+        waist="Platinum Moogle Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -655,7 +655,7 @@ function init_gear_sets()
         ear1="Etiolation Earring",
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     })
 
     sets.idle.Pet = set_combine(sets.idle, {

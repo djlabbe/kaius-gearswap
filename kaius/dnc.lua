@@ -48,7 +48,7 @@ function user_setup()
     state.MainStep = M{['description']='Main Step', 'Box Step', 'Quickstep', 'Feather Step', 'Stutter Step'}
     state.AltStep = M{['description']='Alt Step', 'Feather Step', 'Quickstep', 'Stutter Step', 'Box Step'}
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Twash_TP', 'Twash_Gleti', 'Twash_Crep' }
+    state.WeaponSet = M{['description']='Weapon Set',  'Twash_TP', 'Twash_Gleti', 'Twash_Crep', 'Mpu'  }
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name= "Maxixi Tiara +2" }
@@ -68,7 +68,6 @@ function user_setup()
     gear.Empyrean_Hands = { name= "Maculele Bangles +2" }
     gear.Empyrean_Legs = { name= "Maculele Tights +2" }
     gear.Empyrean_Feet = { name= "Maculele Toe shoes +3" }
-
 
     gear.DNC_TP_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+8','Phys. dmg. taken-10%',}} --X
     gear.DNC_WS1_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
@@ -97,6 +96,7 @@ function user_setup()
     send_command('bind ^numpad7 gs c set WeaponSet Twash_TP')
     send_command('bind ^numpad8 gs c set WeaponSet Twash_Gleti')
     send_command('bind ^numpad9 gs c set WeaponSet Twash_Crep')
+    send_command('bind ^numpad4 gs c set WeaponSet Mpu')
 
     if player.sub_job == 'DRG' then
         set_macro_page(1, 19)
@@ -177,8 +177,8 @@ function init_gear_sets()
         ring1="Defending Ring",
         ring2="Metamor. Ring +1", --CHR
         -- back=gear.DNC_WTZ_Cape,
-        waist="Carrier's Sash",
-        } -- Waltz Potency/CHR (55%)
+        waist="Platinum Moogle Belt",
+    } -- Waltz Potency/CHR (55%)
 
     sets.precast.WaltzSelf = set_combine(sets.precast.Waltz, {
         head="Mummu Bonnet +2", --(8)
@@ -194,7 +194,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head=gear.Artifact_Head,
         body=gear.Artifact_Body,
-        hands="Gazu Bracelets +1",
+        hands=gear.Artifact_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Artifact_Feet,
         neck="Etoile Gorget +2",
@@ -230,7 +230,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head=gear.Artifact_Head,
         body=gear.Artifact_Body,
-        hands="Gazu Bracelets +1",
+        hands=gear.Empyrean_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Artifact_Feet,
         neck="Etoile Gorget +2",
@@ -359,7 +359,7 @@ function init_gear_sets()
         neck="Etoile Gorget +2",
         ear1="Odr Earring",
         ear2="Moonshade Earring",
-        ring1="Regal Ring",
+        ring1=gear.Ephramad_Or_Regal,
         ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.DNC_WS1_Cape,
         waist="Kentarch Belt +1",
@@ -560,9 +560,9 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-        head=gear.Malignance_Head, --6/6
+        head=gear.Gleti_Head, --6/6
         body=gear.Gleti_Body, --9/0
-        legs=gear.Malignance_Legs, --7/7
+        legs=gear.Gleti_Legs, --7/7
         hands=gear.Gleti_Hands, --7/0  
         ring1=gear.Moonlight_1, --5/5
         ring2=gear.Moonlight_2, --5/5
@@ -655,6 +655,7 @@ function init_gear_sets()
     sets.Twash_TP = { main="Twashtar", sub="Centovente" }
     sets.Twash_Gleti = { main="Twashtar", sub="Gleti's Knife" }
     sets.Twash_Crep = { main="Twashtar", sub="Crepuscular Knife" }
+    sets.Mpu = { main="Mpu Gandring", sub="Centovente" }
 
 end
 

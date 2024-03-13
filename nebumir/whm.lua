@@ -170,7 +170,6 @@ end
 function init_gear_sets()
 
     sets.precast.FC = {
-        main=gear.Gada_FC, --6
         sub="Ammurapi Shield",
         ammo="Incantor Stone", --2
         head=gear.Empyrean_Head, --13

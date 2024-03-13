@@ -476,7 +476,7 @@ function init_gear_sets()
     -- No Magic Haste (74% DW to cap)
     sets.engaged = {
         ammo="Date Shuriken",
-        head=gear.Ryuo_C_Head, --9
+        head=gear.Malignance_Head,
         neck="Ninja Nodowa +2",
         ear1="Dedition Earring",
         ear2="Hattori Earring +1",
@@ -485,7 +485,7 @@ function init_gear_sets()
         ring1="Gere Ring",
         ring2=gear.Lehko_Or_Chirich2,
         back=gear.NIN_TP_Cape,
-        waist="Reiki Yotai", --7
+        waist="Sailfi Belt +1",        
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
     } -- 38%
@@ -493,7 +493,7 @@ function init_gear_sets()
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.LowHaste = {
         ammo="Date Shuriken",
-        head=gear.Ryuo_C_Head, --9
+        head=gear.Malignance_Head,
         body=gear.Relic_Body, --10
         hands=gear.Adhemar_A_Hands,
         legs=gear.Malignance_Legs,
@@ -504,14 +504,14 @@ function init_gear_sets()
         ring1="Gere Ring",
         ring2=gear.Lehko_Or_Chirich2,
         back=gear.NIN_TP_Cape,
-        waist="Reiki Yotai", --7
+        waist="Sailfi Belt +1",        
     } -- 30%
 
 
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.MidHaste = {
         ammo="Date Shuriken",
-        head=gear.Ryuo_C_Head, --9
+        head=gear.Malignance_Head,
         neck="Ninja Nodowa +2",
         ear1="Dedition Earring",
         ear2="Hattori Earring +1",
@@ -520,7 +520,7 @@ function init_gear_sets()
         ring1="Gere Ring",
         ring2=gear.Lehko_Or_Chirich2,
         back=gear.NIN_TP_Cape,
-        waist="Reiki Yotai", --7        
+        waist="Sailfi Belt +1",           
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
     } -- 22%
@@ -528,7 +528,7 @@ function init_gear_sets()
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.HighHaste = {
         ammo="Date Shuriken",
-        head=gear.Ryuo_C_Head, --9
+        head=gear.Malignance_Head,
         neck="Ninja Nodowa +2",
         ear1="Dedition Earring",
         ear2="Hattori Earring +1",
@@ -537,7 +537,7 @@ function init_gear_sets()
         ring1="Gere Ring",
         ring2=gear.Lehko_Or_Chirich2,
         back=gear.NIN_TP_Cape,
-        waist="Reiki Yotai", --7        
+        waist="Sailfi Belt +1",               
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
     } -- 16%

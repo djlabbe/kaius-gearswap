@@ -248,7 +248,7 @@ function init_gear_sets()
         hands="Fanatic Gloves",
         legs=gear.Artifact_Legs,
         feet=gear.Empyrean_Feet,
-        neck="Loricate Torque",
+        neck="Loricate Torque +1",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
         ring1="Kishar Ring",
@@ -414,7 +414,7 @@ function init_gear_sets()
         main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
-        head="Cath Palug Crown";
+        head=gear.Bunzi_Head,
         body="Shamash Robe",
         hands=gear.Bunzi_Hands,
         legs=gear.Bunzi_Legs,
@@ -607,7 +607,7 @@ function init_gear_sets()
         ring1=gear.Gerubu_Or_Stikini1,
         ring2=gear.Stikini_2,
         back=gear.WHM_Cure_Cape,
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     }) --50/30 (10 Refresh)
 
     sets.idle.Town = set_combine(sets.idle, {

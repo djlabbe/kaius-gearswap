@@ -371,7 +371,7 @@ function init_gear_sets()
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         ear1="Meili Earring",
-        ear2="Beatific Earring",
+        ear2="Mendicant's Earring",
         back="Fi Follet Cape +1",
         waist="Luminary Sash",
     }

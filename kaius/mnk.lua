@@ -58,7 +58,7 @@ function user_setup()
     gear.Empyrean_Legs = { name="Bhikku Hose +2" }
     gear.Empyrean_Feet = { name="Bhikku Gaiters +2" }
 
-    gear.MNK_DEX_DA_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+    gear.MNK_DEX_DA_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     gear.MNK_STR_CRIT_Cape = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}} --X
     
     send_command('bind ^= gs c cycle treasuremode')
@@ -145,7 +145,7 @@ function init_gear_sets()
         ammo="Knobkierrie",
 		head=gear.Adhemar_B_Head,
 		body=gear.Nyame_Body,
-		hands=gear.Ryuo_A_Hands,
+		hands=gear.Empyrean_Hands,
 		legs=gear.Mpaca_Legs,
 		feet=gear.Mpaca_Feet,
 		neck="Mnk. Nodowa +2",
@@ -165,7 +165,7 @@ function init_gear_sets()
         ammo="Coiste Bodhar",
 		head=gear.Mpaca_Head,
 		body=gear.Empyrean_Body,
-		hands=gear.Ryuo_A_Hands,
+		hands=gear.Empyrean_Hands,
 		legs=gear.Mpaca_Legs,
 		feet=gear.Mpaca_Feet,
 		neck="Mnk. Nodowa +2",
@@ -374,7 +374,7 @@ function init_gear_sets()
     sets.engaged.Godhands = set_combine(sets.engaged, sets.MacheEar1)
     
     sets.engaged.Acc = set_combine(sets.engaged, {
-        head="Ken. Jinpachi +1",
+        head="Kendatsuba Jinpachi +1",
         hands="Tatenashi gote +1",
 		ring1="Regal Ring",
 		ring2=gear.Chirich_2,

@@ -698,7 +698,7 @@ function init_gear_sets()
         ring1="Defending Ring",
         ring2="Shadow Ring",
         back=gear.RNG_DW_Cape,
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {

@@ -23,6 +23,9 @@ function define_global_sets()
     gear.Cornelia_Or_Ilabrat = { name = "Ilabrat Ring" }
     gear.Cornelia_Or_Gere = { name = "Gere Ring" }
 
+    gear.Ephramad_Or_Regal = { name = "Regal Ring" }
+    gear.Ephramad_Or_Petrov = { name = "Petrov Ring" }
+
     gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe7"}
     gear.Lehko_Or_Chirich2 = {name="Chirich Ring +1", bag="wardrobe8"}
     gear.Lehko_Or_Begrudging = {name="Begrudging Ring" }
@@ -35,6 +38,9 @@ function define_global_sets()
     gear.Gerubu_Or_Stikini2 = {name="Stikini Ring +2", bag="wardrobe8"}
     gear.Gerubu_Or_Shadow = { name = "Shadow Ring" }
 
+    gear.Medada_Or_Freke = { name = "Freke Ring" }
+    gear.Medada_Or_Metamorph = { name = "Metamorph Ring +1" }
+
     if item_available("Cornelia's Ring") then
         gear.Cornelia_Or_Epaminondas = { name = "Cornelia's Ring" }     
         gear.Cornelia_Or_Sroda = { name = "Cornelia's Ring" }
@@ -43,6 +49,11 @@ function define_global_sets()
         gear.Cornelia_Or_Ilabrat = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Gere = { name = "Cornelia's Ring" }
     end   
+
+    if item_available("Ephramad's Ring") then
+        gear.Ephramad_Or_Regal = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Petrov = { name = "Ephramad's Ring" }
+    end
 
     if item_available("Lehko Habhoka's Ring") then
         gear.Lehko_Or_Chirich1 = { name = "Lehko Habhoka's Ring" }
@@ -59,6 +70,11 @@ function define_global_sets()
         gear.Gerubu_Or_Stikini1 = { name = "Gurebu's Ring" }
         gear.Gerubu_Or_Stikini2 = { name = "Gurebu's Ring" }
         gear.Gerubu_Or_Shadow = { name = "Gurebu's Ring" }
+    end
+
+    if item_available("Medada's Ring") then
+        gear.Medada_Or_Freke = { name = "Medada's Ring" }
+        gear.Medada_Or_Metamorph = { name = "Medada's Ring"  }
     end
 
     ---------------------

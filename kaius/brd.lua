@@ -762,7 +762,7 @@ function init_gear_sets()
         ring1="Purity Ring",
         ring2=gear.Moonlight_2,
         back=gear.BRD_Song_Cape, --6/6
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     }
 
     sets.idle.Town = sets.engaged.DW.MaxHaste

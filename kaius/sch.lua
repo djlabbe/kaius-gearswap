@@ -727,7 +727,7 @@ function init_gear_sets()
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back=gear.SCH_MAB_Cape,
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {

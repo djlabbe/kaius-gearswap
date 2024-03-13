@@ -29,6 +29,8 @@ function job_setup()
 end
 
 function user_setup()
+    include('Global-Binds.lua')    
+
     state.OffenseMode:options('Normal', 'Acc', 'PDL', 'Subtle')
     state.HybridMode:options('Normal', 'DT')
     state.WeaponskillMode:options('Normal', 'Acc', 'PDL')
@@ -66,13 +68,13 @@ function user_setup()
     gear.DRK_MB_Cape = { name="Ankou's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
     gear.DRK_DRK_Cape = { name="Niht Mantle", augments={'Attack+15','Dark magic skill +10','"Drain" and "Aspir" potency +23',}}
 
-    include('Global-Binds.lua')    
+    send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind @a gs c toggle Critical')
+    send_command('bind @e gs c cycle WeaponSet')
+    send_command('bind @q gs c toggle MagicBurst')
 
-    if player.sub_job == 'SAM' then
-        send_command('bind !` input /ja "Hasso" <me>')
-        send_command('bind ^` input /ja "Seigan" <me>')
-        send_command('bind ^c input /ja "Warding Circle" <me>')
-    end
+    send_command('bind !F1 input /ja "Blood Weapon" <me>')
+    send_command('bind !F2 input /ja "Soul Enslavement" <me>')
 
     send_command('bind !t input /ma "Stun" <t>')
     send_command('bind !y input /ja "Weapon Bash" <t>')
@@ -81,18 +83,13 @@ function user_setup()
     send_command('bind !a input /ja "Arcane Crest" <t>')
     send_command('bind !c input /ja "Arcane Circle" <me>')
 
-    send_command('bind @w gs c toggle WeaponLock')
-    send_command('bind @a gs c toggle Critical')
-    send_command('bind @e gs c cycle WeaponSet')
-    send_command('bind @q gs c toggle MagicBurst')
-
     send_command('bind !h input /ma "Dread Spikes" <me>')
     send_command('bind !j input /ma "Endark II" <me>')
 
-    send_command('bind !F1 input /ja "Blood Weapon" <me>')
-    send_command('bind !F2 input /ja "Soul Enslavement" <me>')
-
     if player.sub_job == 'SAM' then
+        send_command('bind !` input /ja "Hasso" <me>')
+        send_command('bind ^` input /ja "Seigan" <me>')
+        send_command('bind ^c input /ja "Warding Circle" <me>')
         send_command('bind ^numpad7 gs c set WeaponSet Caladbolg;input /macro set 1')
         send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 1')
         send_command('bind ^numpad9 gs c set WeaponSet Liberator;input /macro set 2')
@@ -137,10 +134,10 @@ function user_setup()
     send_command('bind !numpad1 input /ma "Absorb-MND" <t>')
     send_command('bind !numpad2 input /ma "Absorb-CHR" <t>')
 
-    send_command('wait 3; input /lockstyleset 8')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
     moving = false
+    send_command('wait 3; input /lockstyleset 8')
     get_combat_weapon()
 end
 
@@ -758,7 +755,7 @@ function init_gear_sets()
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back=gear.DRK_TP_Cape,
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {

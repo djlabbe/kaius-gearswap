@@ -396,7 +396,7 @@ function init_gear_sets()
         legs=gear.Mpaca_Legs,
         feet=gear.Mpaca_Feet,
         neck="Warder's Charm +1",
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
         ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
         ring1=gear.Chirich_1,
@@ -444,7 +444,7 @@ function init_gear_sets()
         ring1="Purity Ring",
         ring2="Defending Ring",
         back=gear.SAM_TP_Cape, 
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
     }

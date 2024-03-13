@@ -74,14 +74,11 @@ function user_setup()
     gear.Empyrean_Legs = { name="Erilaz Leg Guards +3", priority=100 }
     gear.Empyrean_Feet = { name="Erilaz Greaves +3", priority=48 }
 
-    gear.RUN_TANK_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Parrying rate+5%',}, priority=60}
+    gear.RUN_TANK_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Parrying rate+5%'}, priority=60}
     gear.RUN_FC_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}, priority=60}
     gear.RUN_SIRD_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Spell interruption rate down-10%',}, priority=60}
     gear.RUN_TP_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}, priority=60}
     gear.RUN_WS1_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Weapon skill damage +10%','Phys. dmg. taken-10%',}, priority=60}
-
-    -- These are capes that I haven't made yet. I just use capes I have made as placeholders.
-    gear.RUN_WS2_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Parrying rate+5%',}, priority=60}
 
     include('Global-Binds.lua')
 
