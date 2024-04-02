@@ -84,14 +84,14 @@ function user_setup()
     gear.Artifact_Legs = { name="Pillager's Culottes +3" }
     -- gear.Artifact_Feet = { name="Pillager's Poulaines +1" }
 
-    -- gear.Relic_Head = { name="Plunderer's Bonnet +3" }
+    gear.Relic_Head = { name="Plunderer's Bonnet +3" }
     gear.Relic_Body = { name="Plunderer's Vest +3" }
     -- gear.Relic_Hands = { name="Plunderer's Armlets +3" }
     gear.Relic_Legs = { name="Plunderer's Culottes +3" }
     gear.Relic_Feet = { name="Plunderer's Poulaines +3" }
 
-    gear.Empyrean_Head = { name="Skulker's Bonnet +2" }
-    gear.Empyrean_Body = { name="Skulker's Vest +2" }
+    gear.Empyrean_Head = { name="Skulker's Bonnet +3" }
+    gear.Empyrean_Body = { name="Skulker's Vest +3" }
     -- gear.Empyrean_Hands = { name="Skulker's Armlets +1" }
     -- gear.Empyrean_Legs = { name="Skulker's Culottes +1" }
     gear.Empyrean_Feet = { name="Skulker's Poulaines +3" }
@@ -357,7 +357,7 @@ function init_gear_sets()
         hands=gear.Malignance_Hands,
         legs=gear.Malignance_Legs,
         feet=gear.Empyrean_Feet,
-        neck="Bathy Choker",
+        neck="Bathy Choker +1",
         ear1="Sherida Earring",
         ear2="Infused Earring",
         -- ring1="Gere Ring",

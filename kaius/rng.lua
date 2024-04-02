@@ -126,8 +126,8 @@ function user_setup()
     include('Global-Binds.lua')
 
     gear.Artifact_Head = { name="Orion Beret +3" }
-    -- gear.Artifact_Body = { name="Orion Jerkin +1" }
-    gear.Artifact_Legs = { name="Orion Braccae +1" }
+    gear.Artifact_Body = { name="Orion Jerkin +2" }
+    gear.Artifact_Legs = { name="Orion Braccae +2" }
     gear.Artifact_Hands = { name="Orion Bracers +3" }
     gear.Artifact_Feet = { name="Orion Socks +2" }
 
@@ -383,7 +383,7 @@ function init_gear_sets()
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.RNG_TP_Cape,
-        waist="Windbuffet Belt +1",
+        waist="Sailfi Belt +1",
     }
 
     -- * DNC Subjob DW Trait: +15%

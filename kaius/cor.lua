@@ -63,10 +63,10 @@ end
 function user_setup()
     include('Global-Binds.lua') 
 
-    state.OffenseMode:options('Normal', 'PDL')
+    state.OffenseMode:options('Normal', 'Acc', 'PDL')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('Normal', 'Critical')
-    state.WeaponskillMode:options('Normal')
+    state.WeaponskillMode:options('Normal', 'Acc', 'PDL')
     state.IdleMode:options('Normal')
 
     state.WeaponSet = M{['description']='Weapon Set', 'DeathPenalty_M', 'DeathPenalty_R', 'Armageddon_M', 'Armageddon_R', 'Fomalhaut_M', 'Fomalhaut_R', 'Naegling_Gleti', 'Naegling_Crep'}
@@ -342,7 +342,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Relic_Feet,
         neck="Commodore Charm +2",
-        ear1="Novio Earring",
+        ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1=gear.Cornelia_Or_Regal,
         ring2="Dingir Ring",
@@ -414,6 +414,22 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     }
 
+    sets.precast.WS['Savage Blade'].Acc = {
+        ammo=gear.WSbullet,
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body, -- If you are using that shiny R30 Ikenga for tp bonus, it has 0 melee acc (vs 40 on nyame)
+        hands=gear.Empyrean_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Rep. Plat. Medal",
+        ear1="Moonshade Earring",
+        ear2="Telos Earring", -- +10
+        ring1=gear.Cornelia_Or_Epaminondas, -- Prefer Ephram Ring here (+22-23 Acc and 10 PDL vs 5 WS on a plain Epam ring!! if we ARE attack cap thats a holy shit upgrade)
+        ring2="Regal Ring",
+        back=gear.COR_SB_Cape,
+        waist="Kentarch Belt +1", -- Trade 15 attack for 15 acc (compared to sailfi)
+    }
+
     sets.precast.WS['Savage Blade'].PDL = set_combine(sets.precast.WS['Savage Blade'], {
         neck="Commodore Charm +2",
         body=gear.Ikenga_Body,
@@ -459,7 +475,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Relic_Feet,
         neck="Commodore charm +2",
-        ear1="Novio Earring",
+        ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Fenrir Ring +1",
         ring2="Dingir Ring",
@@ -499,9 +515,10 @@ function init_gear_sets()
         feet=gear.Ikenga_Feet,
         neck="Iskur Gorget",
         ear1="Crepuscular Earring",
-        ear2="Telos Earring",
+        -- ear2="Telos Earring",
+        ear2="Beyla Earring",
         ring1="Crepuscular Ring",
-        ring2="Ilabrat Ring",
+        ring2=gear.Ephramad_Or_Ilabrat,
         back=gear.COR_RA_Cape,
         waist="Tellen Belt",
     }
@@ -707,7 +724,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
-    sets.FullTP = {ear1="Novio Earring"}
+    sets.FullTP = {ear1="Crematio Earring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
 
     sets.DeathPenalty_M = {main=gear.Rostam_B, sub="Tauret", ranged="Death Penalty"}
@@ -908,6 +925,17 @@ end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
+end
+
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if state.OffenseMode.value == 'Acc' then
+        wsmode = 'Acc'
+    elseif state.OffenseMode.value == 'PDL' then
+        wsmode = 'PDL'
+    end
+
+    return wsmode
 end
 
 function update_combat_form()

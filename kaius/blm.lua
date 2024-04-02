@@ -43,12 +43,12 @@ function user_setup()
     send_command('bind !u input /ma "Aquaveil" <me>')
     send_command('bind !s input /ja Sublimation <me>')
 
+    send_command('bind !` input /ja "Mana Wall" <me>')
     send_command('bind !t input /ma "Stun" <t>')
     send_command('bind !b input /ma "Bind" <t>')
     send_command('bind !e input /ja "Elemental Seal" <me>')
     send_command('bind !m input /ws "Myrkr" <me>')
     send_command('bind @1 input /ws "Vidohunir" <t>')
-
 
     send_command('bind !F1 input /ja "Manafont" <me>')
     send_command('bind !F2 input /ja "Subtle Sorcery" <me>')
@@ -169,7 +169,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Enchntr. Earring +1",
         back="Fi Follet Cape +1",
-        waist="Witful Belt",
+        waist="Shinjutsu-no-Obi +1",
         ring1="Lebeche Ring",
         ring2="Defending Ring",       
     })
@@ -214,7 +214,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Telos Earring",
         ring1="Epaminondas's Ring",
-        ring2="Cornelia's Ring",
+        ring2="Ephramad's Ring",
         back=gear.BLM_MAB_Cape,
         waist="Fotia Belt",
     }
@@ -247,7 +247,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Archon Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Ephramad_Or_Petrov,
         back=gear.BLM_MAB_Cape, --WSD Better
     }
 
@@ -566,7 +566,7 @@ function init_gear_sets()
         head=gear.Empyrean_Head,
         body="Shamash Robe",
         hands="Volte Gloves",
-        legs=gear.Agwu_Legs,
+        legs="Assid. Pants +1",
         feet=gear.Nyame_Feet,
         neck="Sibyl Scarf",
         ear1="Etiolation Earring",

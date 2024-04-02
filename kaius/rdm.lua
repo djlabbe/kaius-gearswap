@@ -570,7 +570,7 @@ function init_gear_sets()
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back=gear.RDM_ENH_Cape,
-        waist="Olympus Sash",
+        waist="Embla Sash",
     }
 
     sets.midcast.EnhancingDuration = {

@@ -157,7 +157,6 @@ function init_gear_sets()
 
     sets.precast.JA['Steal'] = {
         head=gear.Relic_Head,
-        hands="Thief's Kote",
         feet=gear.Artifact_Feet,
     }
 
@@ -189,7 +188,7 @@ function init_gear_sets()
         head=gear.Herc_FC_Head, --13
         body=gear.Taeon_FC_Body, --9
         hands="Leyline Gloves", --8
-        legs="Rawhide Trousers", --5
+        legs="Enif Cosciales", --8
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
@@ -211,8 +210,8 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
-        ring1="Cornelia's Ring",
-        ring2="Epaminondas's Ring",
+        ring1=gear.Cornelia_Or_Ilabrat,
+        ring2=gear.Ephramad_Or_Epaminondas,
         back=gear.THF_WSD_Cape,
         waist="Fotia Belt",
     }
@@ -227,8 +226,8 @@ function init_gear_sets()
         neck="Rep. Plat. Medal",
         ear1="Telos Earring",
         ear2="Moonshade Earring",
-        ring1="Cornelia's Ring",
-        ring2="Epaminondas's Ring",
+        ring1=gear.Cornelia_Or_Ilabrat,
+        ring2=gear.Ephramad_Or_Epaminondas,
         back=gear.THF_WSD_Cape,
         waist="Sailfi Belt +1",
     }
@@ -248,8 +247,8 @@ function init_gear_sets()
         neck="Asn. Gorget +2",
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
-        ring1="Cornelia's Ring",
-        ring2="Regal Ring",
+        ring1=gear.Cornelia_Or_Ilabrat,
+        ring2=gear.Ephramad_Or_Regal,
         waist="Kentarch Belt +1",
         back=gear.THF_WSD_Cape,
     }

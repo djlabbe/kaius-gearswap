@@ -48,14 +48,14 @@ function user_setup()
     state.MainStep = M{['description']='Main Step', 'Box Step', 'Quickstep', 'Feather Step', 'Stutter Step'}
     state.AltStep = M{['description']='Alt Step', 'Feather Step', 'Quickstep', 'Stutter Step', 'Box Step'}
 
-    state.WeaponSet = M{['description']='Weapon Set',  'Twash_TP', 'Twash_Gleti', 'Twash_Crep', 'Mpu'  }
+    state.WeaponSet = M{['description']='Weapon Set',  'Twash_TP', 'Twash_Gleti', 'Twash_Crep', 'Mpu', "Aeneas"  }
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name= "Maxixi Tiara +2" }
     gear.Artifact_Body = { name= "Maxixi Casaque +3" }
     gear.Artifact_Hands = { name= "Maxixi Bangles +3" }
     gear.Artifact_Legs = { name= "Maxixi Tights +2" }
-    gear.Artifact_Feet = { name= "Maxixi Toe shoes +1" }
+    gear.Artifact_Feet = { name= "Maxixi Toe shoes +2" }
 
     gear.Relic_Head = { name= "Horos Tiara +3" }
     gear.Relic_Body = { name= "Horos Casaque +3" }
@@ -69,10 +69,10 @@ function user_setup()
     gear.Empyrean_Legs = { name= "Maculele Tights +2" }
     gear.Empyrean_Feet = { name= "Maculele Toe shoes +3" }
 
-    gear.DNC_TP_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+8','Phys. dmg. taken-10%',}} --X
+    gear.DNC_TP_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.DNC_WS1_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
-    gear.DNC_WS2_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
-    gear.DNC_WS3_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Crit.hit rate+10','Phys. dmg. taken-10%',}} 
+    gear.DNC_WS2_Cape = { name="Senuna's Mantle", augments={'STR+20','Accuracy+20 Attack+20', 'Weapon skill damage +10%','Phys. dmg. taken-10%',}} -- Needs Dye (STR)
+    gear.DNC_WS3_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Crit.hit rate+10','Phys. dmg. taken-10%',}}  -- Needs Dye (Dex)
 
     include('Global-Binds.lua')
 
@@ -92,13 +92,16 @@ function user_setup()
     send_command('bind @1 gs c step')
     send_command('bind @2 gs c step2')
     send_command('bind !t input /ja "Animated Flourish" <t>')
+    send_command('bind !h input /ja "Haste Samba" <me>')
     
     send_command('bind ^numpad7 gs c set WeaponSet Twash_TP')
     send_command('bind ^numpad8 gs c set WeaponSet Twash_Gleti')
     send_command('bind ^numpad9 gs c set WeaponSet Twash_Crep')
     send_command('bind ^numpad4 gs c set WeaponSet Mpu')
+    send_command('bind ^numpad5 gs c set WeaponSet Aeneas')
 
     if player.sub_job == 'DRG' then
+        send_command('bind !c input /ja "Ancient Circle" <me>')
         set_macro_page(1, 19)
     elseif player.sub_job == 'SAM' then
         set_macro_page(2, 19)
@@ -267,43 +270,67 @@ function init_gear_sets()
     })
 
     sets.precast.WS = {
-        ammo="Aurgelmir Orb +1",
+        ammo="Coiste Bodhar",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck="Fotia Gorget",
-        ear1="Ishvara Earring",
-        ear2="Moonshade Earring",
+        neck="Etoile Gorget +2",
+        ear1="Moonshade Earring",
+        ear2="Sherida Earring",
         ring1="Regal Ring",
-        ring2="Epaminondas's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.DNC_WS1_Cape,
         waist="Fotia Belt",
     }
 
     sets.precast.WS.PDL = set_combine(sets.precast.WS, {
-    
+        ring1=gear.Ephramad_Or_Regal,
+        ear2="Maculele Earring +1"
     })
 
-    sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
-        ammo="Aurgelmir Orb +1",
-        head=gear.Nyame_Head,
+    sets.precast.WS['Rudra\'s Storm'] = {
+        ammo="Coiste Bodhar",
+        head=gear.Empyrean_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck="Fotia Gorget",
-        ear1="Ishvara Earring",
-        ear2="Moonshade Earring",
-        ring1="Regal Ring",
-        ring2="Epaminondas's Ring",
+        neck="Etoile Gorget +2",
+        ear1="Moonshade Earring",
+        ear2="Odr Earring",
+        ring1=gear.Ephramad_Or_Regal,
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.DNC_WS1_Cape,
-        waist="Fotia Belt",
+        waist="Kentarch Belt +1",
+    }
+
+    sets.precast.WS['Rudra\'s Storm'].PDL = set_combine(sets.precast.WS['Rudra\'s Storm'], {
+        ammo="Crepuscular Pebble",
+        ear2="Maculele Earring +1",
+        body=gear.Gleti_Body,
     })
 
-    sets.precast.WS['Exenterator'].PDL = set_combine(sets.precast.WS['Exenterator'], {
-        
+    sets.precast.WS['Ruthless Stroke'] = {
+        ammo="Coiste Bodhar",
+        head=gear.Empyrean_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Etoile Gorget +2",
+        ear1="Moonshade Earring",
+        ear2="Odr Earring",
+        ring1=gear.Ephramad_Or_Regal,
+        ring2=gear.Cornelia_Or_Epaminondas,
+        back=gear.DNC_WS1_Cape,
+        waist="Kentarch Belt +1",
+    }
+
+    sets.precast.WS['Ruthless Stroke'].PDL = set_combine(sets.precast.WS['Ruthless Stroke'], {
+        ear2="Maculele Earring +1",
+        body=gear.Gleti_Body,
     })
 
     sets.precast.WS['Pyrrhic Kleos'] = {
@@ -316,14 +343,15 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Sherida Earring",
         ear2="Mache Earring +1",
-        ring1="Regal Ring",
+        ring1=gear.Ephramad_Or_Regal,
         ring2="Gere Ring",
         back=gear.DNC_WS2_Cape,
         waist="Fotia Belt",
     }
 
     sets.precast.WS['Pyrrhic Kleos'].PDL = set_combine(sets.precast.WS['Pyrrhic Kleos'], {
-        
+        neck="Etoile Gorget +2",
+        ear2="Maculele Earring +1",
     })
 
     sets.precast.WS['Evisceration'] = {
@@ -334,22 +362,20 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Adhemar_B_Feet,
         neck="Fotia Gorget",
-        ear1="Odr Earring",
-        ear2="Moonshade Earring",
+        ear1="Moonshade Earring",
+        ear2="Odr Earring",
         ring1="Gere Ring",
-        ring2="Regal Ring",
+        ring2=gear.Ephramad_Or_Regal,
         waist="Fotia Belt",
         back=gear.DNC_WS3_Cape,
     }
 
     sets.precast.WS['Evisceration'].PDL = set_combine(sets.precast.WS['Evisceration'], {
         hands=gear.Gleti_Hands,
-        gear.Lustratio_D_Feet,
-        legs=gear.Gleti_Legs,
         neck="Etoile Gorget +2",
     })
 
-    sets.precast.WS['Rudra\'s Storm'] = {
+    sets.precast.WS['Shark Bite'] = {
         ammo="Coiste Bodhar",
         head=gear.Empyrean_Head,
         body=gear.Nyame_Body,
@@ -357,20 +383,19 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Etoile Gorget +2",
-        ear1="Odr Earring",
-        ear2="Moonshade Earring",
-        ring1=gear.Ephramad_Or_Regal,
-        ring2=gear.Cornelia_Or_Epaminondas,
+        ear1="Moonshade Earring",
+        ear2="Sherida Earring",
+        ring1="Ilabrat Ring",
+        ring2=gear.Ephramad_Or_Regal,
+        waist="Sailfi Belt +1",
         back=gear.DNC_WS1_Cape,
-        waist="Kentarch Belt +1",
     }
 
-    sets.precast.WS['Rudra\'s Storm'].PDL = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        ammo="Crepuscular Pebble",
-        ear2="Maculele Earring +1",
+    sets.precast.WS['Shark Bite'].PDL = set_combine(sets.precast.WS['Shark Bite'], {
         body=gear.Gleti_Body,
-        hands=gear.Artifact_Hands,
+        ear2="Maculele Earring +1",
     })
+   
 
     sets.precast.WS['Aeolian Edge'] = {
         ammo="Ghastly Tathlum +1",
@@ -412,39 +437,10 @@ function init_gear_sets()
     ---------------------------------------- Engaged Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    -- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
-    -- sets if more refined versions aren't defined.
-    -- If you create a set with both offense and defense modes, the offense mode should be first.
-    -- EG: sets.engaged.Dagger.Accuracy.Evasion
-
-    sets.engaged = {
-        ammo="Aurgelmir Orb +1",
-        head=gear.Adhemar_B_Head,
-        body=gear.Relic_Body,
-        hands=gear.Adhemar_B_Hands,
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
-        neck="Etoile Gorget +2",
-        ear1="Dedition Earring",
-        ear2="Macu. Earring +1",
-        ring1="Gere Ring",
-        ring2="Epona's Ring",
-        back=gear.DNC_TP_Cape,
-        waist="Windbuffet Belt +1",
-    }
-
-    sets.engaged.Acc = set_combine(sets.engaged, {
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-    })
-
-    -- * DNC Native DW Trait: 30% DW
-    -- * DNC Job Points DW Gift: 5% DW
-
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
         ammo="Coiste Bodhar",
-        head=gear.Malignance_Head,
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body, --11
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
@@ -456,65 +452,47 @@ function init_gear_sets()
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Reiki Yotai", --7
-    } --35 + 27 = 62
-
-
-    sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
-        ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-    })
+    }
 
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.DW.LowHaste = {
         ammo="Coiste Bodhar",
-        head=gear.Malignance_Head,
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body, --11
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Empyrean_Feet,
         neck="Etoile Gorget +2",
         ear1="Eabani Earring", --4
-        ear2="Suppanomimi", --5
+        ear2="Maculele Earring +1",
         ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
-        waist="Reiki Yotai", --7
+        waist="Sailfi Belt +1",
     }
-
-    sets.engaged.DW.Acc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-    })
     
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.DW.MidHaste = {
         ammo="Coiste Bodhar",
-        head=gear.Adhemar_B_Head,
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body, --11
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Empyrean_Feet,
         neck="Etoile Gorget +2",
         ear1="Eabani Earring", --4
-        ear2="Suppanomimi", --5
+        ear2="Maculele Earring +1",
         ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
-        waist="Reiki Yotai", --7
-        } -- 16%
-
-    sets.engaged.DW.Acc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
-
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-    })
+        waist="Sailfi Belt +1",
+    } -- 16%
 
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.DW.HighHaste = {
         ammo="Coiste Bodhar",
-        head=gear.Adhemar_B_Head,
-        body=gear.Relic_Body,
+        head=gear.Empyrean_Head,
+        body=gear.Gleti_Body,
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Empyrean_Feet,
@@ -527,16 +505,11 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
       } -- 4% Gear
 
-    sets.engaged.DW.Acc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-    })
-
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
         ammo="Coiste Bodhar",
-        head=gear.Adhemar_B_Head,
-        body=gear.Relic_Body,
+        head=gear.Empyrean_Head,
+        body=gear.Gleti_Body,
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Empyrean_Feet,
@@ -549,43 +522,20 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     } -- 0%
 
-    sets.engaged.DW.Acc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
-        head=gear.Malignance_Head,
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-    })
-
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-        head=gear.Gleti_Head, --6/6
-        body=gear.Gleti_Body, --9/0
-        legs=gear.Gleti_Legs, --7/7
-        hands=gear.Gleti_Hands, --7/0  
-        ring1=gear.Moonlight_1, --5/5
-        ring2=gear.Moonlight_2, --5/5
-        back=gear.DNC_TP_Cape, --10/0
-    } --49/23
+        ring2=gear.Moonlight_2, 
+    } 
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
-
     sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid)
-
     sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.LowHaste = set_combine(sets.engaged.DW.Acc.LowHaste, sets.engaged.Hybrid)
-
     sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.MidHaste = set_combine(sets.engaged.DW.Acc.MidHaste, sets.engaged.Hybrid)
-
     sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.HighHaste = set_combine(sets.engaged.DW.Acc.HighHaste, sets.engaged.Hybrid)
-
     sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.MaxHaste = set_combine(sets.engaged.DW.Acc.MaxHaste, sets.engaged.Hybrid)
 
      ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
@@ -600,7 +550,7 @@ function init_gear_sets()
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
-        neck="Bathy Choker +1",
+        neck="Warder's Charm +1",
         ear1="Eabani Earring",
         ear2="Sanare Earring",
         ring1=gear.Chirich_1,
@@ -623,7 +573,7 @@ function init_gear_sets()
         back=gear.DNC_TP_Cape,
     })
 
-    sets.idle.Town = sets.precast.WS['Rudra\'s Storm']
+    sets.idle.Town = sets.engaged.DW.MaxHaste
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
@@ -656,6 +606,7 @@ function init_gear_sets()
     sets.Twash_Gleti = { main="Twashtar", sub="Gleti's Knife" }
     sets.Twash_Crep = { main="Twashtar", sub="Crepuscular Knife" }
     sets.Mpu = { main="Mpu Gandring", sub="Centovente" }
+    sets.Aeneas = { main="Aeneas", sub="Centovente" }
 
 end
 
@@ -765,17 +716,8 @@ function customize_idle_set(idleSet)
 end
 
 function customize_melee_set(meleeSet)
-    --if state.Buff['Climactic Flourish'] then
-    --    meleeSet = set_combine(meleeSet, sets.buff['Climactic Flourish'])
-    --end
-    -- if state.ClosedPosition.value == true then
-    --     meleeSet = set_combine(meleeSet, sets.buff['Closed Position'])
-    -- end
-
     return meleeSet
 end
-
-
 
 -- Function to display the current relevant user state when doing an update.
 -- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.

@@ -156,7 +156,7 @@ function init_gear_sets()
         ear2="Kasuga Earring +1",
         ring1="Niqmaddu Ring",
         ring2=gear.Chirich_2,
-        back=gear.SAM_STP_Cape,
+        back=gear.SAM_TP_Cape,
     }
 
     sets.engaged.Acc = set_combine(sets.engaged, {
@@ -169,7 +169,7 @@ function init_gear_sets()
 
     sets.engaged.Subtle = {
         ammo="Aurgelmir Orb +1",
-        head="Kendatsuba Jinpachi +1", --8
+        head=gear.Empyrean_Head,
         body="Dagon Breastplate", --(10)
         hands=gear.Artifact_Hands,
         legs=gear.Mpaca_Legs, --(5)

@@ -367,13 +367,7 @@ function init_gear_sets()
         ear1="Mache Earring +1"
     }
 
-    -- sets.engaged.Godhands = set_combine(sets.engaged, sets.MacheEar1)
     sets.engaged.Godhands = sets.engaged
-    
-    sets.engaged.Acc = set_combine(sets.engaged, {
-		ring1="Regal Ring",
-		ring2=gear.Chirich_2,
-    })
 
     sets.engaged.Godhands.Acc = set_combine(sets.engaged.Acc, sets.MacheEar1)
 
@@ -405,8 +399,6 @@ function init_gear_sets()
 
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)  
     sets.engaged.Godhands.Acc.DT = set_combine(sets.engaged.Acc.DT, sets.MacheEar1)
-
-
     
     sets.buff.Impetus = { body=gear.Empyrean_Body }
 	sets.buff.Footwork = { feet=gear.Artifact_Feet }

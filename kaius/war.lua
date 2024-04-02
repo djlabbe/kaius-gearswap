@@ -33,8 +33,8 @@ function user_setup()
 
     include('Global-Binds.lua')
 
-    -- gear.Artifact_Head = { name= "Pummeler's Mask +1" }
-    -- gear.Artifact_Body = { name= "Pummeler's Lorica +1" }
+    gear.Artifact_Head = { name= "Pummeler's Mask +2" }
+    gear.Artifact_Body = { name= "Pummeler's Lorica +2" }
     -- gear.Artifact_Hands = { name= "Pummeler's Mufflers +1" }
     gear.Artifact_Legs = { name= "Pummeler's Cuisses +3" }
     gear.Artifact_Feet = { name= "Pummeler's Calligae +3" }
@@ -248,8 +248,8 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Fotia Gorget",
-        ring1="Cornelia's Ring",
-        ring2="Epaminondas's Ring",
+        ring1=gear.Cornelia_Or_Regal,
+        ring2="Niqmaddu Ring",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
         waist="Sailfi Belt +1",
@@ -279,14 +279,16 @@ function init_gear_sets()
         neck="Warrior's bead necklace +2",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
-        ring1="Cornelia's Ring",
-        ring2="Gelatinous Ring +1",
+        ring1=gear.Cornelia_Or_Regal,
+        ring2="Niqmaddu Ring",
         waist="Sailfi Belt +1",
         back=gear.WAR_WS2_Cape,
     }
 
     sets.precast.WS["Upheaval"].Acc = set_combine(sets.precast.WS["Upheaval"], {})
-    sets.precast.WS["Upheaval"].PDL = set_combine(sets.precast.WS["Upheaval"], {})
+    sets.precast.WS["Upheaval"].PDL = set_combine(sets.precast.WS["Upheaval"], {
+        ring1=gear.Ephramad_Or_Sroda
+    })
 
     sets.precast.WS["Upheaval"].MightyStrikes = { 
         ammo="Yetshila +1",
@@ -294,10 +296,15 @@ function init_gear_sets()
         neck="Fotia Gorget",
         body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
-        ring1="Cornelia's Ring",
-        ring2="Epaminondas's Ring",
         legs=gear.Sakpata_Legs,
         feet=gear.Empyrean_Feet,
+        neck="Warrior's bead necklace +2",
+        ear1="Moonshade Earring",
+        ear2="Thrud Earring",
+        ring1=gear.Cornelia_Or_Regal,
+        ring2="Niqmaddu Ring",
+        waist="Sailfi Belt +1",
+        back=gear.WAR_WS2_Cape,
     }
 
     sets.precast.WS["Ukko's Fury"] = {
@@ -311,7 +318,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Boii Earring +1",
         ring1="Niqmaddu Ring",
-        ring2="Regal Ring",
+        ring2=gear.Ephramad_Or_Regal,
         waist="Sailfi Belt +1",
         back=gear.WAR_WS2_Cape,
     }
@@ -328,7 +335,7 @@ function init_gear_sets()
         legs=gear.Empyrean_Legs,
         feet=gear.Nyame_Feet,
         neck="Warrior's bead necklace +2",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Epaminondas's Ring",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
@@ -338,7 +345,9 @@ function init_gear_sets()
     }
 
     sets.precast.WS["Fel Cleave"].Acc = set_combine(sets.precast.WS["Fel Cleave"], {})
-    sets.precast.WS["Fel Cleave"].PDL = set_combine(sets.precast.WS["Fel Cleave"], {})
+    sets.precast.WS["Fel Cleave"].PDL = set_combine(sets.precast.WS["Fel Cleave"], {
+        ring1=gear.Ephramad_Or_Regal,
+    })
 
     sets.precast.WS["Armor Break"] = {
         ammo="Pemphredo Tathlum",
@@ -366,7 +375,7 @@ function init_gear_sets()
         body=gear.Nyame_Body,
         hands=gear.Sakpata_Hands,
         legs=gear.Nyame_Legs,
-        feet="Flamma Gambieras +2",
+        feet=gear.Sakpata_Feet,
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Lugra Earring +1",
@@ -395,7 +404,7 @@ function init_gear_sets()
         neck="Warrior's bead necklace +2",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Niqmaddu,
         ring2="Regal Ring",
         waist="Sailfi Belt +1",
         back=gear.WAR_WS1_Cape,
@@ -476,7 +485,7 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring", 
         ear2="Thrud Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Regal Ring",       
         back=gear.WAR_WS1_Cape,
     }
@@ -484,6 +493,7 @@ function init_gear_sets()
     sets.precast.WS["Savage Blade"].Acc = set_combine(sets.precast.WS["Savage Blade"], {})
     sets.precast.WS['Savage Blade'].PDL = set_combine(sets.precast.WS['Savage Blade'], {
         body=gear.Sakpata_Body,
+        ring1=gear.Ephramad_Or_Epaminondas,
         ring2="Sroda Ring",
     })
 
@@ -501,7 +511,7 @@ function init_gear_sets()
         neck="Warrior's Bead Necklace +2",
         ear1="Moonshade Earring", 
         ear2="Thrud Earring",
-        ring1="Cornelia's Ring",
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Regal Ring",       
         waist="Sailfi Belt +1",
         back=gear.WAR_WS1_Cape,

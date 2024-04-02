@@ -53,8 +53,8 @@ function user_setup()
     gear.Empyrean_Head = { name="Peltast's Mezail +3" }
     gear.Empyrean_Body = { name="Peltast's Plackart +3" }
     gear.Empyrean_Hands = { name="Peltast's Vambraces +3" }
-    gear.Empyrean_Legs = { name="Peltast's Cuissots +2" }
-    gear.Empyrean_Feet = { name="Peltast's Schynbalds +2" }
+    gear.Empyrean_Legs = { name="Peltast's Cuissots +3" }
+    gear.Empyrean_Feet = { name="Peltast's Schynbalds +3" }
 
     gear.DRG_TP_Cape = { name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.DRG_STP_Cape = { name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}} --X
@@ -164,7 +164,10 @@ function init_gear_sets()
     }
 
     sets.precast.JA["High Jump"] = sets.precast.JA["Jump"]
-    sets.precast.JA["Spirit Jump"] = sets.precast.JA["Jump"]
+
+    sets.precast.JA["Spirit Jump"] = set_combine(sets.precast.JA["Jump"], {
+        feet=gear.Empyrean_Feet,
+    })
 
     sets.precast.JA["Soul Jump"] = set_combine(sets.precast.JA["Jump"], {
         body=gear.Artifact_Body,
@@ -181,13 +184,13 @@ function init_gear_sets()
         head=gear.Carmine_D_Head, --14
         body="Sacro Breastplate", --10
         hands="Leyline Gloves", --8
-        legs="Ayanmo Cosciales +2", --6
+        legs="Enif Cosciales", --8
         feet=gear.Carmine_B_Feet, --8
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
         ring2="Prolix Ring", --2
-    }
+    } --61% FC
 
     sets.precast.WS = {
         ammo="Knobkierrie",
@@ -229,19 +232,11 @@ function init_gear_sets()
     }
 
     sets.precast.WS["Savage Blade"].PDL = set_combine(sets.precast.WS["Savage Blade"], {
-        ammo="Knobkierrie",
-        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
-        hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
+        feet=gear.Empyrean_Feet,
         neck="Dragoon's Collar +2",
-        waist="Sailfi Belt +1",
-        ear1="Moonshade Earring",
         ear2="Peltast's Earring +1",
-        ring1=gear.Cornelia_Or_Regal,
-        ring2="Epaminondas's Ring",
-        back=gear.DRG_WS1_Cape,
+        ring1=gear.Ephramad_Or_Regal,
     })
 
     sets.precast.WS["Judgment"] = sets.precast.WS["Savage Blade"]
@@ -250,17 +245,17 @@ function init_gear_sets()
     sets.precast.WS["Stardiver"] = {
         ammo="Coiste Bodhar",
         head=gear.Empyrean_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
         neck="Fotia Gorget",
         ear1="Sherida Earring",     
         ear2="Moonshade Earring",
-        body=gear.Nyame_Body,
-        hands=gear.Empyrean_Hands,
-        back=gear.DRG_WS2_Cape,
-        waist="Fotia Belt",
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
         ring1="Niqmaddu Ring",
         ring2="Sroda Ring",
+        back=gear.DRG_WS2_Cape,
+        waist="Fotia Belt",
     }
 
     -- This requires editing MoteLibs to work.
@@ -274,17 +269,17 @@ function init_gear_sets()
     sets.precast.WS["Stardiver"]["Shining One"] = {
         ammo="Coiste Bodhar",
         head="Blistering Sallet +1",
+        body=gear.Gleti_Body,
+        hands=gear.Gleti_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Gleti_Feet,
         neck="Fotia Gorget",
         ear1="Sherida Earring",     
         ear2="Moonshade Earring",
-        body=gear.Gleti_Body,
-        hands=gear.Gleti_Hands,
         ring1="Niqmaddu Ring",
         ring2="Begrudging Ring",
         back=gear.DRG_WS2_Cape,
         waist="Fotia Belt",
-        legs=gear.Empyrean_Legs,
-        feet=gear.Gleti_Feet,
     }
 
     sets.precast.WS["Stardiver"].Acc = set_combine(sets.precast.WS["Stardiver"], {})
@@ -294,6 +289,7 @@ function init_gear_sets()
         body=gear.Gleti_Body,
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
+        ring2=gear.Ephramad_Or_Sroda,
         ear1="Peltast's Earring +1",
     })
 
@@ -304,7 +300,7 @@ function init_gear_sets()
         neck="Dragoon's Collar +2",
         ear1="Moonshade Earring",
         ear2="Peltast's Earring +1",
-        ring2="Sroda Ring",
+        ring2=gear.Ephramad_Or_Sroda,
         back=gear.DRG_WS2_Cape,
     })
 
@@ -329,8 +325,7 @@ function init_gear_sets()
      sets.precast.WS["Camlann\'s Torment"].PDL = set_combine(sets.precast.WS["Camlann\'s Torment"], {
         body=gear.Gleti_Body,
         legs=gear.Gleti_Legs,
-        ring1="Sroda Ring",
-        ring2="Epaminondas's Ring",
+        ring2=gear.Ephramad_Or_Epaminondas,
         waist="Fotia Belt"
     })
 
@@ -354,6 +349,7 @@ function init_gear_sets()
     sets.precast.WS["Sonic Thrust"].PDL = set_combine(sets.precast.WS["Sonic Thrust"], {
         head=gear.Relic_Head,
         feet=gear.Relic_Feet,
+        ring2=gear.Ephramad_Or_Epaminondas,
     })
 
     sets.precast.WS["Impulse Drive"] = {
@@ -380,7 +376,7 @@ function init_gear_sets()
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
-        ring2="Sroda Ring",
+        ring2=gear.Ephramad_Or_Sroda,
         ear1="Peltast's Earring +1",
     })
 
@@ -415,7 +411,7 @@ function init_gear_sets()
         body=gear.Gleti_Body,
         legs=gear.Gleti_Legs,
         ear1="Thrud Earring",
-        ring2="Sroda Ring",
+        ring2=gear.Ephramad_Or_Sroda,
     })
 
     sets.precast.WS["Wheeling Thrust"] = {
@@ -515,8 +511,6 @@ function init_gear_sets()
         legs=gear.Relic_Legs,
         feet="Flamma Gambieras +2",
         neck="Dragoon's Collar +2",
-        -- ear1="Sherida Earring",
-        -- ear2="Sroda Earring",
         ring1=gear.Moonlight_1, --5
         ring2=gear.Moonlight_2, --5
         waist="Sailfi Belt +1",
@@ -631,13 +625,13 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1", --3/3
-        head=gear.Empyrean_Head, --10/10
-        body="Adamantite Armor",
+        head=gear.Gleti_Head,
+        body="Sacro Breastplate",
         hands=gear.Gleti_Hands, --5/5
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
         neck="Dgn. Collar +2",
-        ear1="Arete Del Luna +1",
+        ear1="Tuisto Earring",
         ear2="Sanare Earring",
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
@@ -645,27 +639,25 @@ function init_gear_sets()
         waist="Platinum Moogle Belt",
     }
 
-    sets.idle.DT = set_combine(sets.idle, {
-        ammo="Staunch Tathlum +1", --3/3
-        body="Hjarrandi Breast.", --12/12
-        head=gear.Gleti_Head, --10/10
-        hands=gear.Gleti_Hands,
-        feet=gear.Relic_Feet,
-        neck="Loricate Torque +1", --6/6
-        ear1="Etiolation Earring",
-        ring1="Moonlight Ring", --5/5
-        ring2="Defending Ring", --10/10
-        waist="Platinum Moogle Belt",
-    })
+    sets.idle.DT = sets.idle
 
     sets.idle.Pet = set_combine(sets.idle, {
+        head=gear.Empyrean_Head,
         neck="Dgn. Collar +2",
     })
 
-    sets.idle.DT.Pet = set_combine(sets.idle.Pet, { })
+    sets.idle.DT.Pet = sets.idle.Pet
 
-    sets.idle.Weak = sets.idle.DT
-    sets.idle.Town = sets.engaged
+    sets.idle.Town = set_combine(sets.engaged, {
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        ring2=gear.Ephramad_Or_Regal,
+        ear2="Peltast's Earring +1"
+    })
+
     sets.Kiting = { ring1="Shneddick Ring +1" }
 
     sets.buff.Doom = {

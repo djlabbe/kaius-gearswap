@@ -182,7 +182,7 @@ function init_gear_sets()
     gear.Taeon_PUP_Feet = { name="Taeon Boots", augments={'Pet: Accuracy+21 Pet: Rng. Acc.+21','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
 
     gear.Herc_REPAIR_Head = {}
-    gear.Herc_REPAIR_Body = {}
+    gear.Herc_REPAIR_Body = { name="Herculean Vest", augments={'"Repair" potency +7%','Pet: STR+10','Pet: "Mag.Atk.Bns."+3',}}
     gear.Herc_REPAIR_Hands = {}
     gear.Herc_PETMA_Head = {}
     gear.Herc_PETMA_Hands = {}
@@ -277,7 +277,7 @@ function init_gear_sets()
 
     -- Idle Mode = IDLE, Hybrid = NORMAL
     sets.idle.Pet.Engaged = {
-        main="Ohtas",
+        main="Xiucoatl",
         range=gear.Animator_P1,
         ammo="Automat. Oil +3",
         head=gear.Taeon_PUP_Head,
@@ -573,7 +573,7 @@ function init_gear_sets()
         head="Heyoka Cap +1",
         body=gear.Empyrean_Body,
         hands=gear.Mpaca_Hands,
-        legs="Heyoka Subligar",
+        legs="Heyoka Subligar +1",
         feet=gear.Malignance_Feet,
         neck="Shulmanu Collar",
         ear1="Schere Earring",
@@ -591,7 +591,7 @@ function init_gear_sets()
         head="Heyoka Cap +1",
         body=gear.Empyrean_Body,
         hands=gear.Mpaca_Hands,
-        legs="Heyoka Subligar",
+        legs="Heyoka Subligar +1",
         feet=gear.Malignance_Feet,
         neck="Shulmanu Collar",
         ear1="Schere Earring",
@@ -610,7 +610,7 @@ function init_gear_sets()
         head="Heyoka Cap +1",
         body=gear.Malignance_Body,
         hands=gear.Mpaca_Hands,
-        legs="Heyoka Subligar",
+        legs="Heyoka Subligar +1",
         feet=gear.Malignance_Feet,
         neck="Shulmanu Collar",
         ear1="Schere Earring",
@@ -627,7 +627,7 @@ function init_gear_sets()
        neck="Bathy Choker +1",
        ear1="Burana Earring",
        ear2="Infused Earring",
-    --    body="Hiza. Haramaki +2",
+       body="Adamantite Armor",
        hands=gear.Rao_C_Hands,
        legs=gear.Rao_C_Legs,
        feet=gear.Rao_C_Feet,
@@ -638,7 +638,6 @@ function init_gear_sets()
     }
 
     sets.midcast.Pet = {
-       main="Sakpata's Fists",
        range=gear.Animator_P2,
        ammo="Automat. Oil +3",
        head=gear.Herc_PETMA_Head,

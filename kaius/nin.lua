@@ -68,6 +68,7 @@ function user_setup()
     gear.NIN_TP_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}}
     gear.NIN_WS_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}} --X
     gear.NIN_DA_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
+    gear.NIN_FC_Cape = { name="Andartia's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}}
 
     -- send_command('bind !F1 input /ja "Mijin Gakure" <me>')
     send_command('bind !F2 input /ja "Mikage" <me>')
@@ -152,7 +153,7 @@ function init_gear_sets()
     }
 
     sets.precast.JA['Provoke'] = sets.Enmity
-    -- sets.precast.JA['Mijin Gakure'] = { legs=gear.Relic_Legs }
+    sets.precast.JA['Mijin Gakure'] = { legs=gear.Relic_Legs }
     sets.precast.JA['Futae'] = { hands=gear.Empyrean_Hands }
     sets.precast.JA['Sange'] = { body=gear.Relic_Body }
     sets.precast.JA['Innin'] = { head=gear.Relic_Head }
@@ -179,9 +180,9 @@ function init_gear_sets()
         ear2="Enchntr. Earring +1", --2
         ring1="Kishar Ring", --4
         ring2="Prolix Ring", --2
-        -- back=gear.NIN_FC_Cape, --10
+        back=gear.NIN_FC_Cape, --10
         waist="Sailfi Belt +1",
-    }
+    } -- 63 FC
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         body=gear.Relic_Body, --14
@@ -399,17 +400,14 @@ function init_gear_sets()
         ear1="Halasz Earring", --5
         ear2="Magnetic Earring", --8
         ring1="Evanescence Ring", --5
-        -- back=gear.NIN_FC_Cape, --10
+        back=gear.NIN_FC_Cape,
         waist="Audumbla Sash", --10
-    }
+    } -- 109 + 10 == 110
 
     -- Specific spells
       sets.midcast.Utsusemi = set_combine(sets.midcast.SpellInterrupt, {
-        feet=gear.Empyrean_Feet,
-        ear1="Eabani Earring",
-        ear2="Odnowa Earring +1",
+        feet=gear.Empyrean_Feet, -- Minus 10
         ring2="Defending Ring",
-        -- back=gear.NIN_FC_Cape,
     })
 
     sets.midcast.ElementalNinjutsu = {

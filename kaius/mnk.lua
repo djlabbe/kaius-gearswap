@@ -24,26 +24,23 @@ function job_setup()
     state.Buff.Impetus = buffactive.Impetus or false
     state.Buff.Doom = false
     custom_weapon_list = S{"Godhands"}
-    include('Mote-TreasureHunter')
-    info.default_ja_ids = S{35, 204}  -- JA IDs for actions that always have TH: Provoke, Animated Flourish
-    info.default_u_ja_ids = S{201, 202, 203, 205, 207} -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
 end
 
 function user_setup()
     include('Global-Binds.lua')
 
-    state.OffenseMode:options('Normal', 'Acc')
-    state.WeaponskillMode:options('Normal', 'Acc')
+    state.OffenseMode:options('Normal', 'PDL')
+    state.WeaponskillMode:options('Normal', 'PDL')
     state.HybridMode:options('Normal', 'DT', 'Counter')
     state.PhysicalDefenseMode:options('PDT')
 
     state.WeaponLock = M(true, 'Weapon Lock')
     state.WeaponSet = M{['description']='Weapon Set', 'Verethragna', 'Godhands'}
 
-    gear.Artifact_Head = { name="Anchorite's Crown +1" }
-    gear.Artifact_Body = { name="Anchorite's Cyclas +1" }
-    gear.Artifact_Hands = { name="Anchorite's Gloves +1" }
-    gear.Artifact_Legs = { name="Anchorite's Hose +1" }    
+    gear.Artifact_Head = { name="Anchorite's Crown +2" }
+    gear.Artifact_Body = { name="Anchorite's Cyclas +2" }
+    gear.Artifact_Hands = { name="Anchorite's Gloves +2" }
+    gear.Artifact_Legs = { name="Anchorite's Hose +2" }    
     gear.Artifact_Feet = { name="Anchorite's Gaiters +3" }
 
     gear.Relic_Head = { name="Hesychast's Crown +3" }
@@ -53,15 +50,14 @@ function user_setup()
     gear.Relic_Feet = { name="Hesychast's Gaiters +3" }
 
     gear.Empyrean_Head = { name="Bhikku Crown +2" }
-    gear.Empyrean_Body = { name="Bhikku Cyclas +2" }
+    gear.Empyrean_Body = { name="Bhikku Cyclas +3" }
     gear.Empyrean_Hands = { name="Bhikku Gloves +2" }
-    gear.Empyrean_Legs = { name="Bhikku Hose +2" }
+    gear.Empyrean_Legs = { name="Bhikku Hose +3" }
     gear.Empyrean_Feet = { name="Bhikku Gaiters +2" }
 
     gear.MNK_DEX_DA_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     gear.MNK_STR_CRIT_Cape = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}} --X
     
-    send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @e gs c cycle WeaponSet')
 
@@ -157,7 +153,7 @@ function init_gear_sets()
 		back=gear.MNK_DEX_DA_Cape,
     }
 
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+    sets.precast.WS.PDL = set_combine(sets.precast.WS, {
         -- TODO
     })
 
@@ -168,7 +164,7 @@ function init_gear_sets()
 		hands=gear.Empyrean_Hands,
 		legs=gear.Mpaca_Legs,
 		feet=gear.Mpaca_Feet,
-		neck="Mnk. Nodowa +2",
+		neck="Fotia Gorget",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
 		ear2="Schere Earring",
@@ -177,8 +173,10 @@ function init_gear_sets()
 		back=gear.MNK_STR_CRIT_Cape,
     }
 
-    sets.precast.WS["Victory Smite"].Acc = set_combine(sets.precast.WS["Victory Smite"], {
-        -- TODO
+    sets.precast.WS["Victory Smite"].PDL = set_combine(sets.precast.WS["Victory Smite"] , {
+        ammo="Crepuscular Pebble",
+        hands=gear.Empyrean_Hands,
+        neck="Monk's Nodowa +2",
     })
 
     sets.precast.WS['Raging Fists'] = {
@@ -196,7 +194,7 @@ function init_gear_sets()
 		ring2="Niqmaddu Ring",
 		back=gear.MNK_DEX_DA_Cape,
     }
-    sets.precast.WS["Raging Fists"].Acc = set_combine(sets.precast.WS["Raging Fists"], {
+    sets.precast.WS["Raging Fists"].PDL = set_combine(sets.precast.WS["Raging Fists"], {
         -- TODO
     })
    
@@ -216,7 +214,7 @@ function init_gear_sets()
 		back=gear.MNK_DEX_DA_Cape,
     }
 
-    sets.precast.WS["Shijin Spiral"].Acc = set_combine(sets.precast.WS["Shijin Spiral"], {
+    sets.precast.WS["Shijin Spiral"].PDL = set_combine(sets.precast.WS["Shijin Spiral"], {
         head=gear.Malignance_Head,
         legs=gear.Relic_Legs,
     })
@@ -237,7 +235,7 @@ function init_gear_sets()
 		back=gear.MNK_DEX_DA_Cape,
     }
 
-    sets.precast.WS["Howling Fist"].Acc = set_combine(sets.precast.WS["Howling Fist"], {
+    sets.precast.WS["Howling Fist"].PDL = set_combine(sets.precast.WS["Howling Fist"], {
         -- TODO
     })
 
@@ -257,7 +255,7 @@ function init_gear_sets()
 		back=gear.MNK_DEX_DA_Cape,
     }
 
-    sets.precast.WS["Final Heaven"].Acc = set_combine(sets.precast.WS["Final Heaven"], {
+    sets.precast.WS["Final Heaven"].PDL = set_combine(sets.precast.WS["Final Heaven"], {
         -- TODO
     })
 
@@ -277,7 +275,7 @@ function init_gear_sets()
 		back=gear.MNK_DEX_DA_Cape,
     }
 
-    sets.precast.WS["Tornado Kick"].Acc = set_combine(sets.precast.WS["Tornado Kick"], {
+    sets.precast.WS["Tornado Kick"].PDL = set_combine(sets.precast.WS["Tornado Kick"], {
         -- TODO
     })
 
@@ -366,27 +364,23 @@ function init_gear_sets()
 		ring2="Niqmaddu Ring",
 		back=gear.MNK_DEX_DA_Cape,
     }
+
+    sets.engaged.PDL = sets.engaged
     
     sets.MacheEar1 = {
         ear1="Mache Earring +1"
     }
 
     sets.engaged.Godhands = set_combine(sets.engaged, sets.MacheEar1)
-    
-    sets.engaged.Acc = set_combine(sets.engaged, {
-        head="Kendatsuba Jinpachi +1",
-        hands="Tatenashi gote +1",
-		ring1="Regal Ring",
-		ring2=gear.Chirich_2,
-    })
 
-    sets.engaged.Godhands.Acc = set_combine(sets.engaged.Acc, sets.MacheEar1)
+    sets.engaged.Godhands.PDL = set_combine(sets.engaged.PDL, sets.MacheEar1)
 
     sets.engaged.Hybrid = {
+        head=gear.Empyrean_Head,
         body=gear.Mpaca_Body,
-        hands=gear.Malignance_Hands,
+        hands=gear.Mpaca_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Malignance_Feet,
+        feet=gear.Mpaca_Feet,
     }
    
     sets.engaged.Counter = {
@@ -410,40 +404,8 @@ function init_gear_sets()
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Godhands.DT = set_combine(sets.engaged.DT, sets.MacheEar1)
 
-    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)  
-    sets.engaged.Godhands.Acc.DT = set_combine(sets.engaged.Acc.DT, sets.MacheEar1)
-
-    sets.idle = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Mpaca_Head,
-        neck="Bathy Choker +1",
-        ear1="Arete Del Luna +1",
-        ear2="Eabani Earring",
-        body="Adamantite Armor",
-        hands=gear.Mpaca_Hands,
-        ring1=gear.Chirich_1,
-        ring2="Defending Ring",
-        back=gear.MNK_DEX_DA_Cape,
-        waist="Moonbow Belt +1",
-        legs=gear.Mpaca_Legs,
-        feet=gear.Mpaca_Feet,
-    }
-
-    sets.idle.Town ={
-        ammo="Coiste Bodhar",
-		head=gear.Empyrean_Head,
-		body=gear.Empyrean_Body,
-		hands=gear.Adhemar_A_Hands,
-		legs=gear.Empyrean_Legs,
-		feet=gear.Artifact_Feet,
-		neck="Mnk. Nodowa +2",
-		waist="Moonbow Belt +1",
-		ear1="Sherida Earring",
-		ear2="Schere Earring",
-		ring1="Gere Ring",
-		ring2="Niqmaddu Ring",
-		back=gear.MNK_DEX_DA_Cape,
-    }
+    sets.engaged.PDL.DT = set_combine(sets.engaged.PDL, sets.engaged.Hybrid)  
+    sets.engaged.Godhands.PDL.DT = set_combine(sets.engaged.PDL.DT, sets.MacheEar1)
     
     sets.buff.Impetus = { body=gear.Empyrean_Body }
 	sets.buff.Footwork = { feet=gear.Artifact_Feet }
@@ -487,12 +449,23 @@ function init_gear_sets()
         waist="Gishdubar Sash",
     }
 
-    sets.TreasureHunter = {
-        ammo="Perfect Lucky Egg",
-        waist="Chaac Belt",
-        hands="Volte Bracers",
-        head="Volte Cap",
+    sets.idle = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Mpaca_Head,
+        body="Adamantite Armor",
+        hands=gear.Mpaca_Hands,
+        legs=gear.Mpaca_Legs,
+        feet=gear.Mpaca_Feet,
+        ear1="Arete Del Luna +1",
+        ear2="Eabani Earring",
+        neck="Bathy Choker +1",
+        ring1=gear.Chirich_1,
+        ring2="Defending Ring",
+        back=gear.MNK_DEX_DA_Cape,
+        waist="Moonbow Belt +1",
     }
+
+    sets.idle.Town = set_combine(sets.engaged.DT, sets.buff.Impetus)
 
     sets.Kiting = { ring1="Shneddick Ring +1" }
     sets.Verethragna = { main="Verethragna" }
@@ -554,8 +527,8 @@ end
 
 function get_custom_wsmode(spell, action, spellMap)
     local wsmode
-    if state.OffenseMode.value == 'Acc' then
-        wsmode = 'Acc'
+    if state.OffenseMode.value == 'PDL' then
+        wsmode = 'PDL'
     end
 
     return wsmode
@@ -623,10 +596,6 @@ function customize_melee_set(meleeSet)
         meleeSet = set_combine(meleeSet, sets.buff.Footwork)
     end
 
-    if state.TreasureMode.value == 'Fulltime' then
-        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
-    end
-
     if state.Buff.Doom then
         meleeSet = set_combine(meleeSet, sets.buff.Doom)
     end
@@ -658,19 +627,6 @@ function gearinfo(cmdParams, eventArgs)
         if not midaction() then
             job_update()
         end
-    end
-end
-
--- Check for various actions that we've specified in user code as being used with TH gear.
--- This will only ever be called if TreasureMode is not 'None'.
--- Category and Param are as specified in the action event packet.
-function th_action_check(category, param)
-    if category == 2 or -- any ranged attack
-        --category == 4 or -- any magic action
-        (category == 3 and param == 30) or -- Aeolian Edge
-        (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
-        (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
-        then return true
     end
 end
 

@@ -161,8 +161,8 @@ function user_setup()
     gear.Artifact_Head = { name= "Totemic Helm +2" }
     gear.Artifact_Body = { name= "Totemic Jackcoat +2" }
     gear.Artifact_Hands = { name= "Totemic Gloves +3" }
-    -- gear.Artifact_Legs = { name= "Totemic Trousers +1" }
-    -- gear.Artifact_Feet = { name= "Totemic Gaiters +1" }
+    gear.Artifact_Legs = { name= "Totemic Trousers +2" }
+    gear.Artifact_Feet = { name= "Totemic Gaiters +2" }
 
     gear.Relic_Head = { name= "Ankusa Helm +3" }
     gear.Relic_Body = { name= "Ankusa Jackcoat +3" }
@@ -834,7 +834,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet
     }
-    sets.midcast.ExtraMAB = {ear1="Novio Earring"}
+    sets.midcast.ExtraMAB = {ear1="Crematio Earring"}
     sets.midcast.ExtraWSDMG = {ear1="Ishvara Earring"}
 
     ---------------
@@ -848,7 +848,7 @@ function init_gear_sets()
 
     sets.idle.Pet.Engaged = {
         ammo="Hesperiidae",
-        head=gear.Emicho_C_Head,
+        head=gear.Empyrean_Head,
         neck="Beastmaster Collar +2",
         ear1="Enmerkar Earring",
         ear2="Nukumi Earring +1",
@@ -933,7 +933,7 @@ function init_gear_sets()
     sets.Pangu = {main="Pangu", sub="Agwu's Axe"}
     sets.Dolichenus = {main="Dolichenus", sub="Ikenga's Axe" }    
     sets.Tauret = {main="Tauret", sub="Agwu's Axe" }
-    sets.DefaultShield = {sub="Thuellaic Ecu +1"}
+    sets.DefaultShield = {sub="Adapa Shield"}
     
     sets.midcast.Pet.MagicAtkReady = {}
     sets.midcast.Pet.MagicAtkReady.TPBonus = {}

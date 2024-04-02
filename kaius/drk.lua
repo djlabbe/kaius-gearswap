@@ -193,9 +193,9 @@ function init_gear_sets()
     sets.precast.FC = {
         ammo="Sapience Orb", --2
         head=gear.Carmine_D_Head, --10
-        hands="Leyline Gloves", --8
         body="Sacro Breastplate", --10
-        -- legs=gear.Ody_FC_Legs, -- 5
+        hands="Leyline Gloves", --8
+        legs="Enif Cosciales", --8
         feet=gear.Carmine_B_Feet, -- 8
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
@@ -673,8 +673,8 @@ function init_gear_sets()
 
     sets.engaged.Caladbolg.Aftermath = {
         body="Dagon Breastplate",
-        ear1="Brutal Earring",      
-        ear2="Schere Earring",
+        ear1="Schere Earring",
+        ear1="Balder Earring +1",      
         ring2=gear.Lehko_Or_Hetairoi,
     }
 
@@ -687,9 +687,8 @@ function init_gear_sets()
         feet="Flamma Gambieras +2",
         neck="Abyssal Beads +2",
         waist="Sailfi Belt +1",
-        ear1="Brutal Earring",      
-        -- ear2="Schere Earring",
-        ear2="Telos Earring",
+        ear1="Telos Earring",
+        ear2="Balder Earring +1", 
         ring1="Niqmaddu ring",
         ring2="Hetairoi Ring",
         back= gear.DRK_TP_Cape,

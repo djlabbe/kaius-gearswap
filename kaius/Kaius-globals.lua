@@ -25,6 +25,9 @@ function define_global_sets()
 
     gear.Ephramad_Or_Regal = { name = "Regal Ring" }
     gear.Ephramad_Or_Petrov = { name = "Petrov Ring" }
+    gear.Ephramad_Or_Ilabrat = { name = "Ilabrat Ring" }
+    gear.Ephramad_Or_Epaminondas = { name = "Epaminondas's Ring" }
+    gear.Ephramad_Or_Sroda = { name = "Sroda Ring" }
 
     gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe7"}
     gear.Lehko_Or_Chirich2 = {name="Chirich Ring +1", bag="wardrobe8"}
@@ -53,6 +56,9 @@ function define_global_sets()
     if item_available("Ephramad's Ring") then
         gear.Ephramad_Or_Regal = { name = "Ephramad's Ring" }
         gear.Ephramad_Or_Petrov = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Ilabrat = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Epaminondas = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Sroda = { name = "Ephramad's Ring" }
     end
 
     if item_available("Lehko Habhoka's Ring") then
@@ -222,6 +228,7 @@ function define_global_sets()
     gear.Amalric_D_Hands = {name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
     gear.Amalric_A_Legs = {name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
     gear.Amalric_D_Feet = {name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}}
+    gear.Amalric_A_Feet = {name="Amalric Nails +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
 
     gear.Souveran_C_Head = { name="Souv. Schaller +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=280}
     gear.Souveran_C_Body = { name="Souv. Cuirass +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=171}
@@ -229,7 +236,6 @@ function define_global_sets()
     gear.Souveran_C_Legs = { name="Souv. Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=163}
     gear.Souveran_D_Feet = { name="Souveran Schuhs +1", augments={'HP+65','Attack+25','Magic dmg. taken -4',}, priority=187}
 
-    gear.Ryuo_A_Hands = {name="Ryuo Tekko +1", augments={'STR+12','DEX+12','Accuracy+20',}}
     gear.Ryuo_C_Head = {name="Ryuo Somen +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}}
     gear.Ryuo_C_Feet = {name="Ryuo Sune-Ate +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}}
     gear.Ryuo_D_Legs = {name="Ryuo Hakama +1", augments={'Accuracy+25','"Store TP"+5','Phys. dmg. taken -4',}}

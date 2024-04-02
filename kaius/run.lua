@@ -194,7 +194,7 @@ function init_gear_sets()
         legs=gear.Agwu_Legs,
         feet=gear.Agwu_Feet,
         neck={name="Unmoving Collar +1", priority=200},
-        ear1="Novio Earring",
+        ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Mujin Band",
         ring2="Fenrir Ring +1",
@@ -324,7 +324,7 @@ function init_gear_sets()
         ring2={name="Gelatinous Ring +1", priority=135},
         back=gear.RUN_SIRD_Cape, --[10]
         waist={name="Platinum Moogle Belt", priority=999}, 
-    } --99+10 = 109 SIR  (3492 HP + 41 PDT)
+    } --94+10 = 104 SIR  (3745 HP + 44 DT)
 
     sets.midcast['Blue Magic'] = sets.midcast.SpellInterrupt
     sets.midcast['Blue Magic'].Enmity = sets.midcast.Blue 
@@ -340,20 +340,20 @@ function init_gear_sets()
     sets.midcast.Stun = sets.midcast.Enmity;
 
     sets.midcast.Cure = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Nyame_Head,
+        ammo="Staunch Tathlum +1",-- [11]
+        head=gear.Empyrean_Head, --[20]
         body=gear.Nyame_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet,
-        neck="Sacro Gorget", -- 10
-        ear1={name="Tuisto Earring", priority=150},
-        ear2="Mendi. Earring", -- 5
+        hands={name="Regal Gauntlets", priority=205}, --[10]
+        legs=gear.Carmine_A_Legs, --[20]
+        feet=gear.Empyrean_Feet, --(DT)
+        neck="Moonlight Necklace", --[15]
+        ear1="Magnetic Earring", --[8]
+        ear2={name="Odnowa Earring +1", priority=110}, --(DT+HP)
         ring1=gear.Moonlight_1,
-        ring2="Eihwaz Ring", 
-        back=gear.RUN_FC_Cape,
-        waist="Sroda Belt", --35
-    }
+        ring2={name="Gelatinous Ring +1", priority=135},
+        back=gear.RUN_SIRD_Cape, --[10]
+        waist="Sroda Belt", --35CP
+    } --3405 HP, 104SIR, 41 DT
 
     sets.midcast['Enhancing Magic'] = set_combine(sets.midcast.SpellInterrupt, {
         hands={name="Regal Gauntlets", priority=205}, --[10]
@@ -425,7 +425,7 @@ function init_gear_sets()
     } --3708 hp
 
 
-    sets.Hybrid = set_combine(sets.engaged, {
+    sets.Hybrid = {
         ammo="Coiste Bodhar",
         head=gear.Nyame_Head,
         body="Ashera Harness",
@@ -439,7 +439,7 @@ function init_gear_sets()
         ring1=gear.Moonlight_1,
         ring2="Niqmaddu Ring",
         back=gear.RUN_TP_Cape,
-    })
+    }
 
     sets.engaged.DD = set_combine(sets.engaged, sets.Hybrid)
 
@@ -475,13 +475,7 @@ function init_gear_sets()
         waist={name="Platinum Moogle Belt", priority=999}, 
     } --3183 hp
 
-    sets.idle.Phalanx = set_combine(sets.idle, {
-        head=gear.Relic_Head, --7
-        body=gear.Taeon_Phalanx_Body, --3(10)
-        hands=gear.Taeon_Phalanx_Hands, --3(10)
-        legs=gear.Taeon_Phalanx_Legs, --3(10)
-        feet=gear.Taeon_Phalanx_Feet, --3(10)
-    })
+    sets.idle.Phalanx = set_combine(sets.idle, sets.Phalanx)
 
     sets.idle.Refresh = set_combine(sets.idle, {
         ammo="Homiliary",
@@ -524,11 +518,6 @@ function init_gear_sets()
         ring2="Shadow Ring", --10/10
         back=gear.RUN_TANK_Cape, --10/0
         waist={name="Platinum Moogle Belt", priority=999}, 
-    }
-
-    sets.defense.Parry = {
-        hands="Turms Mittens +1",
-        legs=gear.Empyrean_Legs,
     }
 
     sets.idle.Town = sets.engaged

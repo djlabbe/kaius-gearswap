@@ -93,7 +93,7 @@ function user_setup()
     gear.Artifact_Head = { name= "Brioso Roundlet +3" }
     gear.Artifact_Body = { name= "Brioso Justaucorps +3" }
     gear.Artifact_Hands = { name= "Brioso Cuffs +3" }
-    gear.Artifact_Legs = { name= "Brioso Cannions +2" }
+    gear.Artifact_Legs = { name= "Brioso Cannions +3" }
     gear.Artifact_Feet = { name= "Brioso Slippers +3" }
 
     gear.Relic_Head = { name= "Bihu Roundlet +3" }

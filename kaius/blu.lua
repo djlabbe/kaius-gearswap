@@ -569,7 +569,7 @@ function init_gear_sets()
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back=gear.BLU_MAB_Cape, -- TODO
-        waist="Witful Belt",
+        waist="Acuity Belt +1",
         legs=gear.Empyrean_Legs,
         feet="Malignance Boots"
     }
