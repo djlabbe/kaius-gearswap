@@ -504,7 +504,7 @@ function init_gear_sets()
         feet=gear.Kaykaus_B_Feet, --11(+2)/(-12)
         neck="Incanter's Torque",
         ear1="Meili Earring",
-        ear2="Lethardy Earring +1",
+        ear2="Lethargy Earring +1",
         ring1="Haoma's Ring",
         ring2="Menelaus's Ring",
         back=gear.RDM_ENF_Cape, --(-10)

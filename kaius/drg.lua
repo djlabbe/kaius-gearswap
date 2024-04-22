@@ -558,7 +558,7 @@ function init_gear_sets()
         feet=gear.Valo_STP_Feet,
         neck="Vim Torque +1",
         waist="Sailfi Belt +1",
-        ring1="Lehko's Ring",
+        ring1=gear.Lehko_Or_Moonlight1, 
         ring2="Niqmaddu Ring",
         ear1="Sherida Earring",
         ear2="Dedition Earring",
@@ -658,7 +658,11 @@ function init_gear_sets()
         ear2="Peltast's Earring +1"
     })
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { legs=gear.Carmine_A_Legs }
+    end
 
     sets.buff.Doom = {
         neck="Nicander's Necklace",

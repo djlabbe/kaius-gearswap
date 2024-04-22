@@ -55,7 +55,7 @@ function user_setup()
     gear.Empyrean_Body = { name= "Kasuga Domaru +3" }
     gear.Empyrean_Hands = { name= "Kasuga Kote +3" }
     gear.Empyrean_Legs = { name= "Kasuga Haidate +3" }
-    gear.Empyrean_Feet = { name= "Kasuga Sune-Ate +2" }
+    gear.Empyrean_Feet = { name= "Kasuga Sune-Ate +3" }
 
     gear.SAM_STP_Cape = { name="Takaha Mantle" }
     gear.SAM_TP_Cape = { name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}}

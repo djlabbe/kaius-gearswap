@@ -45,8 +45,8 @@ function user_setup()
     gear.Relic_Legs = { name= "Agoge Cuisses +3" }
     gear.Relic_Feet = { name= "Agoge Calligae +3" }
 
-    gear.Empyrean_Head = { name= "Boii Mask +2" }
-    gear.Empyrean_Body = { name= "Boii Lorica +2" }
+    gear.Empyrean_Head = { name= "Boii Mask +3" }
+    gear.Empyrean_Body = { name= "Boii Lorica +3" }
     gear.Empyrean_Hands = { name= "Boii Mufflers +3" }
     gear.Empyrean_Legs = { name= "Boii Cuisses +3" }
     gear.Empyrean_Feet = { name= "Boii Calligae +2" }

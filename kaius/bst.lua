@@ -26,7 +26,7 @@
 -- alt+F12 turns off Defense modes
 -- ctrl+F12 cycles Idle modes
 --
--- Keep in mind that any time you Change Jobs/Subjobs, your Pet/Correlation/etc reset to default options.
+-- Keep in mind that any time you Change Jobs/Subjobs, your Pet/etc reset to default options.
 -- F12 will list your current options.
 --
 -------------------------------------------------------------------------------------------------------------------
@@ -208,7 +208,7 @@ function user_setup()
 end
 
 function user_unload()
-    -- Unbinds the Reward, Correlation, JugMode, and Treasure hotkeys.
+    -- Unbinds the Reward, JugMode hotkeys.
     send_command('unbind ^=')
     send_command('unbind @=')
     send_command('unbind !f8')
@@ -220,7 +220,6 @@ function user_unload()
     unbind_numpad()
     -- Removes any Text Info Boxes
     send_command('text JugPetText delete')
-    send_command('text CorrelationText delete')
     send_command('text AccuracyText delete')
 end
 
@@ -228,7 +227,8 @@ end
 function init_gear_sets()
 
     gear.BST_DW_Cape = { name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
-    gear.BST_WS1_Cape = { name="Artio's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}}
+    gear.BST_WS1_Cape = { name="Artio's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+    gear.BST_PETMACC_Cape = { name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Eva.+20 /Mag. Eva.+20','Pet: Mag. Acc.+10','"Fast Cast"+10','Phys. dmg. taken-10%',}}
 
     sets.Enmity = {
         head="Halitus Helm",
@@ -343,13 +343,13 @@ function init_gear_sets()
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck="Bst. Collar +2",
+        neck="Beastmaster Collar +2",
         waist="Incarnation Sash",
         ear1="Crepuscular Earring",
         ear2="Enmerkar Earring",
         ring1="Tali'ah Ring",
         ring2="Cath Palug Ring",
-        back=gear.BST_TP_Cape,
+        back=gear.BST_PETMACC_Cape,
     }
 
     sets.midcast.Pet.Buff = {
@@ -688,7 +688,7 @@ function init_gear_sets()
     sets.precast.WS['Onslaught'] = {
         ammo="Aurgelmir Orb +1",
         head=gear.Relic_Head,
-        neck="Bst. Collar +2",
+        neck="Beastmaster Collar +2",
         ear1="Ishvara Earring",
         ear2="Thrud Earring",
         body=gear.Gleti_Body,
@@ -871,10 +871,10 @@ function init_gear_sets()
         feet=gear.Gleti_Feet,
         neck="Beastmaster Collar +2",
         ear1="Sherida Earring",
-        ear2="Balder Earring +1",    
+        ear2="Nukumi Earring +1",    
         ring1="Gere Ring",
         ring2="Shneddick Ring +1",
-        back=gear.BST_DW_Cape,
+        back=gear.BST_PETMACC_Cape,
     }
 
     ----------------
@@ -1097,15 +1097,11 @@ function customize_melee_set(meleeSet)
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- Hooks for Reward, Correlation, Treasure Hunter, and Pet Mode handling.
+-- Hooks for Reward, Treasure Hunter, and Pet Mode handling.
 -------------------------------------------------------------------------------------------------------------------
 
 function job_state_change(stateField, newValue, oldValue)
-    if stateField == 'Correlation Mode' then
-        state.CorrelationMode:set(newValue)
-    elseif stateField == 'Treasure Mode' then
-        state.TreasureMode:set(newValue)
-    elseif stateField == 'Reward Mode' then
+    if stateField == 'Reward Mode' then
         state.RewardMode:set(newValue)
     elseif stateField == 'Pet Mode' then
         state.CombatWeapon:set(newValue)
@@ -1248,8 +1244,6 @@ function display_current_job_state(eventArgs)
     if state.Kiting.value then
         msg = msg .. ', Kiting'
     end
-
-    msg = msg .. ', Corr.: '..state.CorrelationMode.value
 
     if state.JugMode.value ~= 'None' then
         add_to_chat(8,'-- Jug Pet: '.. PetName ..' -- (Pet Info: '.. PetInfo ..', '.. PetJob ..')')
@@ -1552,10 +1546,6 @@ function display_mode_info()
         send_command('text AccuracyText pos '..x..' '..y..'')
         send_command('text AccuracyText size '..TextSize..'')
         y = y + (TextSize + 6)
-        send_command('text CorrelationText create Corr. Mode: '..state.CorrelationMode.value..'')
-        send_command('text CorrelationText pos '..x..' '..y..'')
-        send_command('text CorrelationText size '..TextSize..'')
-        y = y + (TextSize + 6)
         send_command('text JugPetText create Jug Mode: '..state.JugMode.value..'')
         send_command('text JugPetText pos '..x..' '..y..'')
         send_command('text JugPetText size '..TextSize..'')
@@ -1566,7 +1556,6 @@ end
 function update_display_mode_info()
     if DisplayModeInfo == 'true' then
         send_command('text AccuracyText text Acc. Mode: '..state.OffenseMode.value..'')
-        send_command('text CorrelationText text Corr. Mode: '..state.CorrelationMode.value..'')
         send_command('text JugPetText text Jug Mode: '..state.JugMode.value..'')
     end
 end

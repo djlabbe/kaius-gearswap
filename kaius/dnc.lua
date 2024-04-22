@@ -582,7 +582,11 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Skadi's Jambeaux +1" }
+    end
 
 
     ------------------------------------------------------------------------------------------------

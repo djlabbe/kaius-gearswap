@@ -522,7 +522,11 @@ function init_gear_sets()
 
     sets.idle.Town = sets.engaged
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { legs=gear.Carmine_A_Legs }
+    end
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20

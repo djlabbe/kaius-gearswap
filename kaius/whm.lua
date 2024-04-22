@@ -65,7 +65,7 @@ function user_setup()
     gear.Empyrean_Legs = { name="Ebers Pantaloons +3", priority=71 }
     gear.Empyrean_Feet = { name="Ebers Duckbills +3", priority=71 }
 
-    gear.WHM_Cure_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Haste+10','Mag. Evasion+15',}} --X
+    gear.WHM_Cure_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
     gear.WHM_DW_Cape = { name="Alaunus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
 
     include('Global-Binds.lua')
@@ -203,9 +203,9 @@ function init_gear_sets()
         hands=gear.Artifact_Hands, -- (CPII-4) (Enm-7)
         legs=gear.Empyrean_Legs, --(DT-13)
         feet=gear.Empyrean_Feet, --(DT-11)
-        ring1={name="Gelatinous Ring +1", priority=135}, --(Enm-7)          
-        ring2={name="Defending Ring", priority=1}, -- (DT-10)
-        back=gear.WHM_Cure_Cape, 
+        ring1=gear.Janniston_Or_Gelatinous, --(PDT-7)          
+        ring2={name="Mephitas's Ring +1", priority=1},
+        back=gear.WHM_Cure_Cape, -- (DT-10)
         waist={name="Shinjutsu-no-Obi +1", priority=1},
     } --55 CP | 20 CPII | 51% PDT | -34 Enmity
 
@@ -577,7 +577,7 @@ function init_gear_sets()
     sets.idle = {
         main="Mpaca's Staff",
         sub="Irenic Strap +1",
-        ammo="Staunch Tathlum +1", --3
+        ammo="Homiliary",
         head=gear.Bunzi_Head, --7
         body=gear.Empyrean_Body,
         hands=gear.Bunzi_Hands, --8
@@ -588,39 +588,27 @@ function init_gear_sets()
         ear2="Ebers Earring +1", --5
         ring1=gear.Gerubu_Or_Stikini1,
         ring2=gear.Stikini_2,
-        back=gear.WHM_Cure_Cape,
+        back=gear.WHM_Cure_Cape, --10 
         waist=gear.Platinum_Moogle_Belt, --3
-    } --50/30 (10 Refresh)
+    } --57 (11 Refresh)
 
-    sets.idle.DT = set_combine(sets.idle, {
-        main="Daybreak",
-        sub="Genmei Shield",
-        ammo="Staunch Tathlum +1",
-        head=gear.Bunzi_Head,
-        body=gear.Empyrean_Body,
-        hands=gear.Bunzi_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Bunzi_Feet,
-        neck="Sibyl Scarf",
-        ear1="Sanare Earring",
-        ear2="Eabani Earring",
-        ring1=gear.Gerubu_Or_Stikini1,
-        ring2=gear.Stikini_2,
-        back=gear.WHM_Cure_Cape,
-        waist="Platinum Moogle Belt",
-    }) --50/30 (10 Refresh)
 
-    sets.idle.Town = set_combine(sets.idle, {
-        main="Yagrush",
-        sub="Ammurapi Shield",
+    sets.idle.Town = sets.midcast.CureSolace
+
+    sets.defense.PDT = set_combine(sets.idle, {
+
     })
 
-    -- sets.idle.Town = sets.idle
-
-    sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT
+    sets.defense.MDT = set_combine(sets.idle, {
     
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    })
+    
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Herald's Gaiters" }
+    end
+
     sets.latent_refresh = { waist="Fucho-no-obi" }
     sets.DefaultShield = { sub="Genmei Shield" }
 
@@ -769,8 +757,8 @@ function customize_idle_set(idleSet)
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
     if state.Auto_Kite.value == true then
-       idleSet = set_combine(idleSet, sets.Kiting)
-    end
+        idleSet = set_combine(idleSet, sets.Kiting)
+     end
 
     return idleSet
 end

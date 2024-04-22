@@ -689,7 +689,7 @@ function init_gear_sets()
         neck="Warder's Charm +1",
         ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
-        ring1="Shneddick Ring +1",
+        ring1=gear.Chirich_1,
         ring2="Shadow Ring",
         back=gear.COR_SNP_Cape,
         waist="Platinum Moogle Belt",
@@ -713,9 +713,11 @@ function init_gear_sets()
         waist="Platinum Moogle Belt",
     }
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
-
-    
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { legs=gear.Carmine_A_Legs }
+    end
     
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20

@@ -83,6 +83,16 @@ function define_global_sets()
         gear.Medada_Or_Metamorph = { name = "Medada's Ring"  }
     end
 
+    ------------------------
+    -- ADOULIN FALLBACK RING ---
+    ------------------------
+
+    gear.Janniston_Or_Gelatinous = {name="Gelatinous Ring +1", priority=135}
+
+    if item_available("Janniston Ring +1") then
+        gear.Janniston_Or_Gelatinous = { name = "Janniston Ring +1", priority=1 }
+    end
+
     ---------------------
     -- DUPLICATE RINGS --
     ---------------------

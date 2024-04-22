@@ -53,7 +53,7 @@ function user_setup()
     gear.Empyrean_Body = { name="Bhikku Cyclas +3" }
     gear.Empyrean_Hands = { name="Bhikku Gloves +3" }
     gear.Empyrean_Legs = { name="Bhikku Hose +3" }
-    -- gear.Empyrean_Feet = { name="Bhikku Gaiters +2" }
+    gear.Empyrean_Feet = { name="Bhikku Gaiters +3" }
 
     gear.MNK_DEX_DA_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
     gear.MNK_STR_CRIT_Cape = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}} --X
@@ -446,9 +446,9 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
-        hands=gear.Malignance_Hands,
+        hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Malignance_Feet,
+        feet=gear.Empyrean_Feet,
         neck="Warder's Charm +1",
         ear1="Sanare Earring",
         ear2="Bhikku Earring +2",
@@ -458,7 +458,13 @@ function init_gear_sets()
         waist="Moonbow Belt +1",
     }
 
-    sets.idle.Town = set_combine(sets.engaged, sets.buff.Impetus)
+    sets.idle.Town = set_combine(sets.engaged, {
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+    })
 
     sets.Kiting = { ring1="Shneddick Ring" }
     sets.Godhands = { main="Godhands" }

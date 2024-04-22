@@ -594,7 +594,11 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet=gear.Empyrean_Feet }
+    end
 
     sets.latent_refresh = { waist="Fucho-no-obi" }
 
@@ -726,7 +730,7 @@ function init_gear_sets()
         neck="Warder's Charm +1",
         ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
-        ring1="Shneddick Ring +1",
+        ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
         back=gear.BRD_DW_Cape,
         waist="Platinum Moogle Belt",
