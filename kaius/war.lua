@@ -194,19 +194,19 @@ function init_gear_sets()
     }
 
     sets.engaged.SingleWield = {
-        ammo="Coiste Bodhar",
-        head=gear.Empyrean_Head,
-        body="Hjarrandi Breastplate",
-        hands=gear.Sakpata_Hands,
-        legs=gear.Sakpata_Legs,
-        feet=gear.Artifact_Feet,
-        neck="Warrior's bead necklace +2",
-        ear1="Schere Earring",
-        ear2="Boii Earring +1",
+        ammo="Coiste Bodhar", --3
+        head=gear.Empyrean_Head, --7
+        body=gear.Empyrean_Body, 
+        hands=gear.Sakpata_Hands, --6
+        legs=gear.Sakpata_Legs, --7
+        feet=gear.Artifact_Feet, --9
+        neck="Warrior's bead necklace +2", --7
+        ear1="Schere Earring", --6
+        ear2="Boii Earring +1", --8
         ring1="Niqmaddu Ring",
-        ring2="Petrov Ring",
-        waist="Sailfi Belt +1",
-        back=gear.WAR_TP_Cape,
+        ring2="Petrov Ring", --1
+        waist="Sailfi Belt +1", --5
+        back=gear.WAR_TP_Cape, -10
     }
 
     sets.engaged.DW = {
@@ -310,7 +310,7 @@ function init_gear_sets()
     sets.precast.WS["Ukko's Fury"] = {
         ammo="Yetshila +1",
         head=gear.Empyrean_Head,
-        body="Hjarrandi Breastplate",
+        body=gear.Sakpata_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
@@ -425,7 +425,7 @@ function init_gear_sets()
     sets.precast.WS["Stardiver"] = {
         ammo="Yetshila +1",
         head=gear.Empyrean_Head,
-        body="Hjarrandi Breastplate",
+        body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
@@ -448,7 +448,7 @@ function init_gear_sets()
     sets.precast.WS["Impulse Drive"] = {
         ammo="Yetshila +1",
         head=gear.Empyrean_Head,
-        body="Hjarrandi Breastplate",
+        body=gear.Sakpata_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
@@ -557,7 +557,11 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Hermes' Sandals" }
+    end
 
     sets.Naegling = { main="Naegling", sub="Blurred Shield +1" }
     sets.Loxotic = { main="Loxotic Mace +1", sub="Blurred Shield +1" }

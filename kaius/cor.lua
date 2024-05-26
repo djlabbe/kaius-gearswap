@@ -31,7 +31,7 @@ function job_setup()
 
     state.AutoAmmoMode = M(true,'Auto Ammo Mode')
     tickdelay = os.clock() + 5
-    ammostock = 70
+    ammostock = 250
     useItem = false
 	useItemName = ''
     prevItemName = ''
@@ -579,6 +579,8 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     }
 
+    sets.engaged.Acc = sets.engaged
+
     -- * DNC Subjob DW Trait: +15%
     -- * NIN Subjob DW Trait: +25%
 
@@ -599,73 +601,22 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     } -- 48%
 
-    -- 15% Magic Haste (67% DW to cap)
-    sets.engaged.DW.LowHaste = {
+    sets.engaged.DW.Acc = {
         ammo=gear.RAbullet,
-        head=gear.Adhemar_B_Head, --6/6
+        head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
         legs=gear.Empyrean_Legs, --7/7
         feet=gear.Malignance_Feet, --4/4
         neck="Iskur Gorget",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
-        ring1=gear.Lehko_Or_Petrov,
-        ring2="Epona's Ring",
+        -- ear1="Dedition Earring",
+        ear1="Eabani Earring",
+        ear2="Suppanomimi",
+        ring1=gear.Chirich_1,
+        ring2=gear.Chirich_2,
         back=gear.COR_DW_Cape,
-        waist="Sailfi Belt +1",
-    } -- 42%
-
-    -- 30% Magic Haste (56% DW to cap)
-    sets.engaged.DW.MidHaste = {
-        ammo=gear.RAbullet,
-        head=gear.Adhemar_B_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Empyrean_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
-        neck="Iskur Gorget",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
-        ring1=gear.Lehko_Or_Petrov,
-        ring2="Epona's Ring",
-        back=gear.COR_DW_Cape,
-        waist="Sailfi Belt +1",
-    } -- 30%
-
-    -- 35% Magic Haste (51% DW to cap)
-    sets.engaged.DW.HighHaste = {
-        ammo=gear.RAbullet,
-        head=gear.Adhemar_B_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Empyrean_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
-        neck="Iskur Gorget",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
-        ring1=gear.Lehko_Or_Petrov,
-        ring2="Epona's Ring",
-        back=gear.COR_DW_Cape,
-        waist="Sailfi Belt +1",
-    } -- 30%
-
-    -- 45% Magic Haste (36% DW to cap)
-    sets.engaged.DW.MaxHaste = {
-        ammo=gear.RAbullet,
-        head=gear.Adhemar_B_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Empyrean_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
-        neck="Iskur Gorget",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
-        ring1=gear.Lehko_Or_Petrov,
-        ring2="Epona's Ring",
-        back=gear.COR_DW_Cape,
-        waist="Sailfi Belt +1",
-    } -- 11%
+        waist="Reiki Yotai",
+    }
 
     sets.engaged.Hybrid = {
         head=gear.Malignance_Head

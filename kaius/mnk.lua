@@ -467,7 +467,12 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.engaged.DT, sets.buff.Impetus)
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Hermes' Sandals" }
+    end
+    
     sets.Verethragna = { main="Verethragna" }
     sets.Godhands = { main="Godhands" }
 end

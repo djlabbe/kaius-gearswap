@@ -196,7 +196,7 @@ function init_gear_sets()
         ammo="Coiste Bodhar",
         -- head=gear.Empyrean_Head,
         head=gear.Sakpata_Head,
-        body="Hjarrandi Breastplate",
+        body=gear.Empyrean_Body,
         hands=gear.Sakpata_Hands,
         legs=gear.Sakpata_Legs,
         feet=gear.Artifact_Feet,

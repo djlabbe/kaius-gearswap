@@ -490,7 +490,7 @@ function init_gear_sets()
         ear2="Beckoner's Earring +2",
         body=gear.Apogee_A_Body,
         hands="Asteria Mitts +1",
-        ring1="Shneddick Ring +1",
+        ring1=gear.Stikini_1,
         ring2="Defending Ring",
         back=gear.SMN_Magic_Cape,
         waist="Lucidity Sash",

@@ -65,7 +65,7 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('Normal', 'Critical')
     state.WeaponskillMode:options('Normal')
-    state.IdleMode:options('Normal', 'DT')
+    state.IdleMode:options('Normal', 'DT', 'Refresh')
 
     state.WeaponSet = M{['description']='Weapon Set', 'Fomalhaut_M', 'Fomalhaut_R', 'Naegling'}
     state.WeaponLock = M(false, 'Weapon Lock')
@@ -655,6 +655,12 @@ function init_gear_sets()
         back=gear.COR_SNP_Cape,
         waist="Carrier's Sash",
     }
+    
+    sets.idle.Refresh = set_combine(sets.idle, {
+        neck="Sibyl Scarf",
+        ring1=gear.Stikini_1,
+        ring2=gear.Stikini_2,
+    })
 
     sets.idle.DT = set_combine(sets.idle, {
         ring1="Purity Ring", --0/4

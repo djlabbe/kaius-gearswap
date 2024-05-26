@@ -45,10 +45,6 @@ function job_setup()
     skill_spells = S{
         'Temper', 'Temper II', 'Enfire', 'Enfire II', 'Enblizzard', 'Enblizzard II', 'Enaero', 'Enaero II',
         'Enstone', 'Enstone II', 'Enthunder', 'Enthunder II', 'Enwater', 'Enwater II'}
-
-    include('Mote-TreasureHunter')
-    info.default_ja_ids = S{35, 204}  -- JA IDs for actions that always have TH: Provoke, Animated Flourish
-    info.default_u_ja_ids = S{201, 202, 203, 205, 207} -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
 end
 
 function user_setup()
@@ -97,7 +93,6 @@ function user_setup()
     include('Global-Binds.lua')
 
     send_command('bind !` input /ja "Composure" <me>')
-    send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @q gs c toggle MagicBurst')
 
     send_command('bind !F1 input /ja "Chainspell" <me>')
@@ -985,7 +980,12 @@ function init_gear_sets()
     sets.defense.MDT = sets.idle.DT
 
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Skadi's Jambeaux +1" }
+    end
+
     sets.latent_refresh = {waist="Fucho-no-obi"}
 
     -- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
@@ -1120,13 +1120,6 @@ function init_gear_sets()
     }
 
     sets.Obi = {waist="Hachirin-no-Obi"}
-
-    sets.TreasureHunter = {
-        ammo="Perfect Lucky Egg",
-        waist="Chaac Belt",
-        hands="Volte Bracers",
-        head="Volte Cap",
-    }
 
     sets.DefaultShield = { sub="Genmei Shield" }
     
@@ -1331,9 +1324,6 @@ end
 function customize_melee_set(meleeSet)
     if state.EnspellMode.value == true then
         meleeSet = set_combine(meleeSet, sets.engaged.Enspell)
-    end
-    if state.TreasureMode.value == 'Fulltime' then
-        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
     end
     if state.Buff.Doom then
         meleeSet = set_combine(meleeSet, sets.buff.Doom)
@@ -1545,19 +1535,6 @@ function set_sleep_timer(spell)
     end
     add_to_chat(1, 'Base: ' ..base.. ' Merits: ' ..self.merits.enfeebling_magic_duration.. ' Job Points: ' ..self.job_points.rdm.stymie_effect.. ' Set Bonus: ' ..empy_mult)
 
-end
-
--- Check for various actions that we've specified in user code as being used with TH gear.
--- This will only ever be called if TreasureMode is not 'None'.
--- Category and Param are as specified in the action event packet.
-function th_action_check(category, param)
-    if category == 2 or -- any ranged attack
-        --category == 4 or -- any magic action
-        (category == 3 and param == 30) or -- Aeolian Edge
-        (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
-        (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
-        then return true
-    end
 end
 
 function check_weaponset()

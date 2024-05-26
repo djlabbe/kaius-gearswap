@@ -368,7 +368,7 @@ function init_gear_sets()
         body=gear.Herc_PHLX_Body, --4
         hands=gear.Herc_PHLX_Hands, --4
         legs=gear.Taeon_Phalanx_Legs, --3(10)
-        feet=gear.Taeon_Phalanx_Feet, --3(10)
+        feet=gear.Herc_PHLX_Feet, --5
     }
 
     sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], sets.Phalanx)

@@ -34,7 +34,7 @@ function job_setup()
 end
 
 function user_setup()
-    state.OffenseMode:options('Normal', 'PDL')
+    state.OffenseMode:options('Normal', 'Acc', 'PDL')
     state.HybridMode:options('Normal', 'DT', 'Evasion')
     state.RangedMode:options('Normal')
     state.WeaponskillMode:options('Normal', 'PDL')
@@ -457,10 +457,12 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Relic_Feet,
         neck="Asn. Gorget +2",
-        ear1="Dedition Earring",
+        -- ear1="Dedition Earring",
+        ear1="Sherida Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Hetairoi,
+        -- ring2=gear.Lehko_Or_Hetairoi,
+        ring2=gear.Lehko_Or_Chirich2,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
     } -- 6%

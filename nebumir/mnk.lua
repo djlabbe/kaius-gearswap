@@ -350,7 +350,7 @@ function init_gear_sets()
         ammo="Coiste Bodhar",
 		head=gear.Empyrean_Head,
 		body=gear.Empyrean_Body,
-		hands=gear.Adhemar_A_Hands,
+		hands=gear.Empyrean_Hands,
 		legs=gear.Empyrean_Legs,
 		feet=gear.Artifact_Feet,
 		neck="Mnk. Nodowa +2",

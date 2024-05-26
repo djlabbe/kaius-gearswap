@@ -174,8 +174,10 @@ function define_global_sets()
     gear.Chironic_PHLX_Legs = {name="Chironic Hose", augments={'Attack+7','Crit.hit rate+1','Phalanx +5','Mag. Acc.+12 "Mag.Atk.Bns."+12',}}
 
     gear.Herc_FC_Head = { name="Herculean Helm", augments={'"Mag.Atk.Bns."+1','"Fast Cast"+6','INT+3','Mag. Acc.+10',}}
+    
     gear.Herc_PHLX_Body = { name="Herculean Vest", augments={'CHR+9','AGI+3','Phalanx +4','Mag. Acc.+3 "Mag.Atk.Bns."+3',}}
     gear.Herc_PHLX_Hands = { name="Herculean Gloves", augments={'"Fast Cast"+2','Attack+25','Phalanx +4','Mag. Acc.+13 "Mag.Atk.Bns."+13',}}
+    gear.Herc_PHLX_Feet = { name="Herculean Boots", augments={'"Mag.Atk.Bns."+3','DEX+15','Phalanx +5',}}
 
     gear.Valo_PET_Body = {name="Valorous Mail", augments={'Pet: Mag. Acc.+24','Pet: "Dbl.Atk."+4 Pet: Crit.hit rate +4','Pet: MND+8','Pet: Accuracy+12 Pet: Rng. Acc.+12',}}
     gear.Valo_QA_Body = { name="Valorous Mail", augments={'Crit.hit rate+5','STR+8','Quadruple Attack +2','Accuracy+19 Attack+19',}}
@@ -236,8 +238,11 @@ function define_global_sets()
     gear.Amalric_A_Head = {name="Amalric Coif +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
     gear.Amalric_A_Body = {name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
     gear.Amalric_D_Hands = {name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
+   
     gear.Amalric_A_Legs = {name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
-    gear.Amalric_D_Feet = {name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}}
+   
+    -- gear.Amalric_D_Feet = {name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}}
+   
     gear.Amalric_A_Feet = {name="Amalric Nails +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
 
     gear.Souveran_C_Head = { name="Souv. Schaller +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=280}

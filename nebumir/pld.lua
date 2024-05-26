@@ -107,6 +107,22 @@ function user_unload()
 end
 
 function init_gear_sets()
+    sets.precast.JA = {
+        ammo="Sapience Orb",
+        head="Loess Barbuta +1",
+        body=gear.Empyrean_Body,
+        hands=gear.Souveran_C_Hands,
+        legs=gear.Souveran_C_Legs,
+        feet=gear.Empyrean_Feet,
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
+        ear2="Cryptic Earring",
+        ring1="Apeile Ring +1",
+        ring2="Eihwaz Ring",
+        back=gear.PLD_Idle_Cape,
+    }
+
     sets.precast.JA['Invincible'] = {legs=gear.Relic_Legs}
     sets.precast.JA['Holy Circle'] = {feet=gear.Artifact_Feet}
     sets.precast.JA['Shield Bash'] = {hands=gear.Relic_Hands}
@@ -283,21 +299,7 @@ function init_gear_sets()
         ring2=gear.Stikini_2,
     }, sets.Phalanx)
 
-	sets.precast.JA = {
-        ammo="Sapience Orb",
-        head="Loess Barbuta +1",
-        body=gear.Empyrean_Body,
-        hands=gear.Souveran_C_Hands,
-        legs=gear.Souveran_C_Legs,
-        feet=gear.Empyrean_Feet,
-        neck={name="Unmoving Collar +1", priority=200},
-        waist={name="Platinum Moogle Belt", priority=999},
-        ear1={name="Tuisto Earring", priority=150},
-        ear2="Cryptic Earring",
-        ring1="Apeile Ring +1",
-        ring2="Eihwaz Ring",
-        back=gear.PLD_Idle_Cape,
-    }
+
 
 	sets.midcast.Reprisal = {
         ammo="Staunch Tathlum +1",
