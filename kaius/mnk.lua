@@ -55,7 +55,7 @@ function user_setup()
     gear.Empyrean_Legs = { name="Bhikku Hose +3" }
     gear.Empyrean_Feet = { name="Bhikku Gaiters +2" }
 
-    gear.MNK_DEX_DA_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+    gear.MNK_DEX_DA_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.MNK_STR_CRIT_Cape = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}} --X
     
     send_command('bind @w gs c toggle WeaponLock')
@@ -164,7 +164,7 @@ function init_gear_sets()
 		hands=gear.Empyrean_Hands,
 		legs=gear.Mpaca_Legs,
 		feet=gear.Mpaca_Feet,
-		neck="Fotia Gorget",
+		neck="Monk's Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
 		ear2="Schere Earring",
@@ -175,8 +175,6 @@ function init_gear_sets()
 
     sets.precast.WS["Victory Smite"].PDL = set_combine(sets.precast.WS["Victory Smite"] , {
         ammo="Crepuscular Pebble",
-        hands=gear.Empyrean_Hands,
-        neck="Monk's Nodowa +2",
     })
 
     sets.precast.WS['Raging Fists'] = {
@@ -376,11 +374,12 @@ function init_gear_sets()
     sets.engaged.Godhands.PDL = set_combine(sets.engaged.PDL, sets.MacheEar1)
 
     sets.engaged.Hybrid = {
-        head=gear.Empyrean_Head,
-        body=gear.Mpaca_Body,
-        hands=gear.Mpaca_Hands,
+        head=gear.Malignance_Head,
+        neck="Warder's Charm +1",
+        body=gear.Malignance_Body,
+        hands=gear.Malignance_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Mpaca_Feet,
+        feet=gear.Malignance_Feet,
     }
    
     sets.engaged.Counter = {

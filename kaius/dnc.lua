@@ -28,7 +28,7 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'PDL')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponSet = M{['description']='Weapon Set',  'Twash_TP', 'Twash_Gleti', 'Twash_Crep', 'Mpu', "Aeneas"  }
+    state.WeaponSet = M{['description']='Weapon Set',  'Twash_TP', 'Twash_Gleti', 'Twash_Crep', 'Mpu', "Aeneas", "Tauret"  }
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name= "Maxixi Tiara +3" }
@@ -49,6 +49,7 @@ function user_setup()
     gear.Empyrean_Legs = { name= "Maculele Tights +2" }
     gear.Empyrean_Feet = { name= "Maculele Toe shoes +3" }
 
+    gear.DNC_STP_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','"Regen"+5',}} --X
     gear.DNC_TP_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.DNC_WS1_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
     gear.DNC_WS2_Cape = { name="Senuna's Mantle", augments={'STR+20','Accuracy+20 Attack+20', 'Weapon skill damage +10%','Phys. dmg. taken-10%',}} -- Needs Dye (STR)
@@ -66,8 +67,8 @@ function user_setup()
     send_command('bind @` input /ja "Chocobo Jig II" <me>')
     send_command('bind @1 input /ja "Box Step" <t>')
     send_command('bind @2 input /ja "Quickstep" <t>')
-    send_command('bind @3 input /ja "Feather Step" <t>')
-    send_command('bind @4 input /ja "Stutter Step" <t>')
+    send_command('bind @3 input /ja "Stutter Step" <t>')
+    send_command('bind @4 input /ja "Feather Step" <t>')
     send_command('bind !t input /ja "Animated Flourish" <t>')
     send_command('bind !h input /ja "Haste Samba" <me>')
     
@@ -76,6 +77,7 @@ function user_setup()
     send_command('bind ^numpad9 gs c set WeaponSet Twash_Crep')
     send_command('bind ^numpad4 gs c set WeaponSet Mpu')
     send_command('bind ^numpad5 gs c set WeaponSet Aeneas')
+    send_command('bind ^numpad6 gs c set WeaponSet Tauret')
 
     if player.sub_job == 'DRG' then
         send_command('bind !c input /ja "Ancient Circle" <me>')
@@ -435,7 +437,9 @@ function init_gear_sets()
 
     sets.engaged.Regain = set_combine(sets.engaged, {
         head="Turms Cap +1",
-        hands="Regal Gloves"
+        hands="Regal Gloves",
+        ring1=gear.Chirich_1,
+        ring2=gear.Chirich_2,
     })
 
      ------------------------------------------------------------------------------------------------
@@ -445,7 +449,7 @@ function init_gear_sets()
     sets.resting = {}
 
     sets.idle = {
-        ammo="Yamarang",
+        ammo="Staunch Tathlum +1",
         head='Turms Cap +1',
         body=gear.Gleti_Body,
         hands="Regal Gloves",
@@ -454,9 +458,9 @@ function init_gear_sets()
         neck="Loricate Torque +1",
         ear1="Tuisto Earring",
         ear2="Odnowa Earring +1",
-        ring1="Gelatinous Ring +1",
+        ring1="Roller's Ring",
         ring2="Defending Ring",
-        back=gear.DNC_TP_Cape,
+        back=gear.DNC_STP_Cape,
         waist="Engraved Belt",
     }
 
@@ -474,7 +478,7 @@ function init_gear_sets()
         back=gear.DNC_TP_Cape,
     })
 
-    sets.idle.Town = sets.precast.WS['Ruthless Stroke']
+    sets.idle.Town = sets.idle
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
@@ -511,6 +515,7 @@ function init_gear_sets()
     sets.Twash_Crep = { main="Twashtar", sub="Crepuscular Knife" }
     sets.Mpu = { main="Mpu Gandring", sub="Centovente" }
     sets.Aeneas = { main="Aeneas", sub="Centovente" }
+    sets.Tauret = { main="Tauret", sub="Gleti's Knife" }
 
 end
 
@@ -646,8 +651,6 @@ function display_current_job_state(eventArgs)
 
     local ws_msg = state.WeaponskillMode.value
 
-    local s_msg = state.MainStep.current
-
     local d_msg = 'None'
     if state.DefenseMode.value ~= 'None' then
         d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
@@ -662,7 +665,6 @@ function display_current_job_state(eventArgs)
 
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,060).. ' Step: '  ..string.char(31,001)..s_msg.. string.char(31,002)..  ' |'
         ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
         ..string.char(31,002)..msg)

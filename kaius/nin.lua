@@ -103,10 +103,11 @@ function user_setup()
     send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
 
 
-    send_command('bind ^numpad7 gs c set WeaponSet Heishi;')
-    send_command('bind ^numpad8 gs c set WeaponSet Kikoku;')
-    send_command('bind ^numpad9 gs c set WeaponSet Naegling;')
-    send_command('bind ^numpad4 gs c set WeaponSet Aeolian;')
+    send_command('bind ^numpad7 gs c set WeaponSet Heishi; ;input /macro set 1')
+    send_command('bind ^numpad8 gs c set WeaponSet Kikoku; ;input /macro set 2')
+    send_command('bind ^numpad9 gs c set WeaponSet Naegling; ;input /macro set 3')
+
+    send_command('bind ^numpad4 gs c set WeaponSet Aeolian;input /macro set 4')
 
     -- Whether a warning has been given for low ninja tools
     state.warned = M(false)
@@ -592,18 +593,19 @@ function init_gear_sets()
     sets.idle = {
         ammo="Date Shuriken",
         head=gear.Mpaca_Head,
-        body="Adamantite Armor",
+        body="Hizamaru Haramaki +2",
         hands=gear.Mpaca_Hands,
         legs=gear.Mpaca_Legs,
         feet=gear.Mpaca_Feet,
-        neck="Warder's Charm +1",
+        neck="Bathy Choker +1",
         ear1="Arete Del Luna +1",
-        ear2="Sanare Earring",
+        ear2="Infused Earring",
         ring1=gear.Chirich_1,
-        ring2="Shadow Ring",
+        ring2=gear.Chirich_2,
         back=gear.NIN_TP_Cape,
         waist="Engraved Belt",
     }
+
 
     sets.idle.DT = set_combine(sets.idle, {
         head=gear.Malignance_Head, --6/6
@@ -618,7 +620,7 @@ function init_gear_sets()
         back="Moonlight Cape", --6/6
     })
     
-    sets.idle.Town = sets.precast.WS["Blade: Chi"]
+    -- sets.idle.Town = sets.precast.WS["Blade: Chi"]
 
     sets.TreasureHunter = {
         ammo="Perfect Lucky Egg",
@@ -630,7 +632,7 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.DayMovement = { ring1="Shneddick Ring +1" }
+    sets.DayMovement = { feet="Danzo Sune-Ate" }
     sets.NightMovement = { feet="Hachiya Kyahan +3" }
 
     sets.Kikoku = {main="Kikoku", sub="Gleti's Knife"}
