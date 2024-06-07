@@ -148,9 +148,11 @@ function define_global_sets()
     -- SKY SETS --
     --------------
     
-    gear.Kaykaus_B_Head = { name="Kaykaus Mitra +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
-    gear.Kaykaus_B_Feet = { name="Kaykaus Boots +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
-    gear.Kaykaus_D_Hands = { name="Kaykaus Cuffs +1", augments={'MP+80','"Conserve MP"+7','"Fast Cast"+4',}}
+    gear.Kaykaus_B_Head = {name="Kaykaus Mitra +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
+    gear.Kaykaus_A_Body = {name="Kaykaus Bliaut +1", augments={'MP+80','MND+12','Mag. Acc.+20',}} 
+    gear.Kaykaus_D_Hands = {name="Kaykaus Cuffs +1", augments={'MP+80','"Conserve MP"+7','"Fast Cast"+4',}}
+    gear.Kaykaus_A_Legs = {name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}}
+    gear.Kaykaus_B_Feet = {name="Kaykaus Boots +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
 
     gear.Amalric_A_Head = { name="Amalric Coif +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
     gear.Amalric_A_Body = { name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}

@@ -281,8 +281,6 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Rudra\'s Storm'].PDL = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        ammo="Crepuscular Pebble",
-        ear2="Maculele Earring +1",
         body=gear.Gleti_Body,
     })
 
@@ -329,15 +327,15 @@ function init_gear_sets()
     })
 
     sets.precast.WS['Evisceration'] = {
-        ammo="Coiste Bodhar",
+        ammo="Charis Feather",
         head="Blistering Sallet +1",
         body=gear.Gleti_Body,
-        hands=gear.Adhemar_B_Hands,
+        hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
-        feet=gear.Adhemar_B_Feet,
+        feet=gear.Empyrean_Feet,
         neck="Fotia Gorget",
-        ear1="Moonshade Earring",
-        ear2="Odr Earring",
+        ear1="Odr Earring",
+        ear2="Maculele Earring +1",
         ring1="Gere Ring",
         ring2=gear.Ephramad_Or_Regal,
         waist="Fotia Belt",
@@ -345,7 +343,6 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Evisceration'].PDL = set_combine(sets.precast.WS['Evisceration'], {
-        hands=gear.Gleti_Hands,
         neck="Etoile Gorget +2",
     })
 

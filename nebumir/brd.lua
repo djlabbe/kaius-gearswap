@@ -74,7 +74,7 @@ function user_setup()
         'Quick Etude', 'Swift Etude', 'Vivacious Etude', 'Vital Etude', 'Dextrous Etude', 'Uncanny Etude',
         'Spirited Etude', 'Logical Etude', 'Enchanting Etude', 'Bewitching Etude'}
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Twashtar', 'Tauret', 'Carnwenhan' }
+    state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Tauret', 'Carnwenhan' }
     state.WeaponLock = M(true, 'Weapon Lock')
 
  
@@ -82,17 +82,18 @@ function user_setup()
     info.ExtraSongs = 2
 
     gear.Kali_Idle = {name="Kali", augments={'MP+60','Mag. Acc.+20','"Refresh"+1',}}
+    gear.Kali_Song = {name="Kali", augments={'DMG:+15','CHR+15','Mag. Acc.+15',}}
     gear.Ipetam_Eva = { name="Ipetam", augments={'Evasion+14','STR+14 AGI+14',}}
 
     gear.Linos_STP = {name="Linos", augments={'Accuracy+12','"Store TP"+3','Quadruple Attack +3',}} -- Missing 1 step, and acc
     gear.Linos_WS = { name="Linos", augments={'Attack+16','Weapon skill damage +3%','STR+6 VIT+6',}} -- BAD STR, Could use more attack or attack/acc
     gear.Linos_MATK = { name="Linos", augments={'"Mag.Atk.Bns."+15',}}
 
-    gear.Artifact_Head = { name= "Brioso Roundlet +3" }
-    gear.Artifact_Body = { name= "Brioso Justaucorps +3" }
-    gear.Artifact_Hands = { name= "Brioso Cuffs +3" }
-    gear.Artifact_Legs = { name= "Brioso Cannions +3" }
-    gear.Artifact_Feet = { name= "Brioso Slippers +3" }
+    gear.Artifact_Head = { name= "Brioso Roundlet +1" }
+    gear.Artifact_Body = { name= "Brioso Justaucorps +2" }
+    gear.Artifact_Hands = { name= "Brioso Cuffs +1" }
+    gear.Artifact_Legs = { name= "Brioso Cannions +1" }
+    gear.Artifact_Feet = { name= "Brioso Slippers +1" }
 
     gear.Relic_Head = { name= "Bihu Roundlet +3" }
     gear.Relic_Body = { name= "Bihu Justaucorps +3" }
@@ -101,9 +102,9 @@ function user_setup()
     gear.Relic_Feet = { name= "Bihu Slippers +3" }
 
     gear.Empyrean_Head = { name= "Fili Calot +2" }
-    gear.Empyrean_Body = { name= "Fili Hongreline +3" }
-    gear.Empyrean_Hands = { name= "Fili Manchettes +3" }
-    gear.Empyrean_Legs = { name= "Fili Rhingrave +3" }
+    gear.Empyrean_Body = { name= "Fili Hongreline +2" }
+    gear.Empyrean_Hands = { name= "Fili Manchettes +2" }
+    gear.Empyrean_Legs = { name= "Fili Rhingrave +2" }
     gear.Empyrean_Feet = { name= "Fili Cothurnes +2" }
 
     gear.BRD_Song_Cape = { name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
@@ -162,25 +163,21 @@ function user_setup()
 
     if player.sub_job == 'NIN' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 2')
         send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 2')
         send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 2')
         set_macro_page(1, 10)
     elseif player.sub_job == 'DNC' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 3')
-        send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 4')
         send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 4')
         send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 4')
         set_macro_page(3, 10)
     elseif player.sub_job == 'WHM' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 5')
-        send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 6')
         send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 6')
         send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 6')
         set_macro_page(5, 10)
     elseif player.sub_job == 'PLD' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 7')
-        send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 8')
         send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 8')
         send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 8')
         set_macro_page(7, 10)
@@ -233,7 +230,7 @@ function init_gear_sets()
     sets.precast.FC = {
         head=gear.Bunzi_Head, --10
         body="Inyanga Jubbah +2", --10?
-        hands="Volte Gloves", --6
+        hands="Gendewitha Gages +1", --7 + 5(song)
         legs=gear.Kaykaus_A_Legs, --7
         feet=gear.Empyrean_Feet, --10
         neck="Baetyl Pendant", --4
@@ -412,7 +409,8 @@ function init_gear_sets()
     sets.midcast["Chocobo Mazurka"] = { range="Marsyas" }
 
     sets.midcast.SongEnhancing = {
-        main="Carnwenhan",
+        -- main="Carnwenhan",
+        main=gear.Kali_Song,
         sub=gear.Kali_Idle,
         range="Gjallarhorn",
         head=gear.Empyrean_Head,
@@ -430,9 +428,15 @@ function init_gear_sets()
         back=gear.BRD_Song_Cape,
     }
 
+    sets.midcast["Army's Paeon VI"] = set_combine(sets.midcast.SongEnhancing, { range="Daurdabla",})
+    sets.midcast["Army's Paeon V"] = set_combine(sets.midcast.SongEnhancing, { range="Daurdabla",})
+    sets.midcast["Army's Paeon IV"] = set_combine(sets.midcast.SongEnhancing, { range="Daurdabla",})
+    sets.midcast["Army's Paeon III"] = set_combine(sets.midcast.SongEnhancing, { range="Daurdabla",})
+
     -- For song debuffs (duration primary, accuracy secondary)
     sets.midcast.SongEnfeeble = {
-        main="Carnwenhan",
+        -- main="Carnwenhan",
+        main=gear.Kali_Song,
         sub="Ammurapi Shield",
         range="Gjallarhorn",
         head=gear.Artifact_Head,
@@ -527,7 +531,8 @@ function init_gear_sets()
     })
 
     sets.midcast['Enhancing Magic'] = {
-        main="Carnwenhan",
+        -- main="Carnwenhan",
+        main=gear.Kali_Song,
         sub="Ammurapi Shield",
         head=gear.Telchine_ENH_Head,
         body=gear.Telchine_ENH_Body,
@@ -567,7 +572,8 @@ function init_gear_sets()
     sets.midcast.Shellra = sets.midcast.Shell
 
     sets.midcast['Enfeebling Magic'] = {
-        main="Carnwenhan",
+        -- main="Carnwenhan",
+        main=gear.Kali_Song,
         sub="Ammurapi Shield",
         head=empty;
         body="Cohort Cloak +1",
@@ -729,7 +735,7 @@ function init_gear_sets()
         ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
         ring1=gear.Moonlight_1,
-        ring2=gear.Moonlight_2,
+        ring2=gear.Chirich_2,
         back=gear.BRD_DW_Cape,
         waist="Platinum Moogle Belt",
     }
@@ -769,7 +775,8 @@ function init_gear_sets()
 
     sets.idle.Town = sets.idle
 
-    sets.SongDWDuration = { main="Carnwenhan", sub=gear.Kali_Idle }
+    -- sets.SongDWDuration = { main="Carnwenhan", sub=gear.Kali_Idle }
+    sets.SongDWDuration = { main=gear.Kali_Song, sub=gear.Kali_Idle }
 
     sets.buff.Doom = {
         neck="Nicander's Necklace",
@@ -780,7 +787,6 @@ function init_gear_sets()
 
     sets.Obi = { waist="Hachirin-no-Obi" }
     sets.Naegling = { main="Naegling", sub="Fusetto +2" }
-    sets.Twashtar = { main="Twashtar", sub="Fusetto +2" }
     sets.Carnwenhan = { main="Carnwenhan", sub="Gleti's Knife" }
     sets.Tauret = { main="Tauret", sub="Gleti's Knife" }
     sets.DefaultShield = { sub="Genmei Shield" }

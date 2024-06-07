@@ -283,7 +283,7 @@ function init_gear_sets()
         feet="Meghanada jambeaux +2", --10/0
         neck="Commodore Charm +2", --4/0
         ring="Crepuscular Ring",
-        back=gear.COR_SNP_Cape, --10/0 --TODO
+        back=gear.COR_SNP_Cape, --10/0
         waist="Yemaya Belt", --0/5
     } --61/32
 
@@ -587,7 +587,7 @@ function init_gear_sets()
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
         ammo=gear.RAbullet,
-        head=gear.Adhemar_B_Head, --6/6
+        head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands, --5/5
         legs=gear.Empyrean_Legs, --7/7
@@ -595,7 +595,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1=gear.Lehko_Or_Petrov,
+        ring1=gear.Lehko_Or_Chirich1,
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape,
         waist="Sailfi Belt +1",
@@ -646,7 +646,7 @@ function init_gear_sets()
         waist="Platinum Moogle Belt",
     }
 
-    sets.idle.Town = sets.precast.WS['Savage Blade'].PDL
+    sets.idle.Town = sets.precast.WS['Leaden Salute']
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = {
@@ -681,7 +681,7 @@ function init_gear_sets()
     sets.Obi = {waist="Hachirin-no-Obi"}
 
     sets.DeathPenalty_M = {main=gear.Rostam_B, sub="Tauret", ranged="Death Penalty"}
-    sets.DeathPenalty_R = {main=gear.Rostam_A, sub="Tauret", ranged="Death Penalty"}
+    sets.DeathPenalty_R = {main=gear.Rostam_A, sub="Kustawi +1", ranged="Death Penalty"}
     sets.Armageddon_M = {main=gear.Rostam_B, sub="Crepuscular Knife", ranged="Armageddon"}
     sets.Armageddon_R = {main=gear.Rostam_A, sub="Kustawi +1", ranged="Armageddon"}
     sets.Fomalhaut_M = {main=gear.Rostam_B, sub="Crepuscular Knife", ranged="Fomalhaut"}

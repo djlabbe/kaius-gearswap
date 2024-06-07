@@ -67,7 +67,7 @@ function user_setup()
     state.WeaponskillMode:options('Normal')
     state.IdleMode:options('Normal', 'DT', 'Refresh')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Fomalhaut_M', 'Fomalhaut_R', 'Naegling'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Fomalhaut_M', 'DeathPenalty_M', 'Fomalhaut_R', 'Naegling'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.RAbullet = "Chrono Bullet"
@@ -79,7 +79,7 @@ function user_setup()
 
     gear.Rostam_A = { name="Rostam", augments={'Path: A',}}
     gear.Rostam_B = { name="Rostam", augments={'Path: B',}}
-    gear.Rostam_C = { name="Lanun Knife", augments={'Path: C',}}
+    gear.Rostam_C = { name="Rostam", augments={'Path: C',}}
 
     gear.Artifact_Head = { name= "Laksamana's Tricorne +3" }
     gear.Artifact_Body = { name= "Laksamana's Frac +3" }
@@ -697,7 +697,7 @@ function init_gear_sets()
     sets.FullTP = {ear1="Novio Earring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
 
-    -- sets.DeathPenalty_M = {main=gear.Rostam_B, sub="Tauret", ranged="Death Penalty"}
+    sets.DeathPenalty_M = {main=gear.Rostam_B, sub="Tauret", ranged="Anarchy +2"}
     -- sets.DeathPenalty_R = {main=gear.Rostam_A, sub="Tauret", ranged="Death Penalty"}
     -- sets.Armageddon_M = {main=gear.Rostam_B, sub="Crepuscular Knife", ranged="Armageddon"}
     -- sets.Armageddon_R = {main=gear.Rostam_A, sub="Kustawi +1", ranged="Armageddon"}

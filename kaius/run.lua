@@ -51,7 +51,7 @@ function user_setup()
     state.MagicalDefenseMode:options('MDT')
 
     state.PhalanxMode = M(false, 'Equip Phalanx Gear')
-    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Helheim', 'Lycurgos'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Lycurgos'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
     state.Runes = M{['description']='Runes', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda', 'Lux', 'Tenebrae'}
@@ -118,12 +118,10 @@ function user_setup()
 
     if player.sub_job == 'SCH' then
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 2')
-        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 3')
         send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 2')
         set_macro_page(2, 22)
     else   
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 1')
         send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 1')
         set_macro_page(1, 22)
     end

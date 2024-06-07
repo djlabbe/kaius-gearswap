@@ -174,7 +174,7 @@ function init_gear_sets()
         ring2=gear.Lehko_Or_Chirich2,
         waist="Sailfi Belt +1", --5
         back=gear.WAR_TP_Cape, --10
-    } -- 68% DA + 28% Traits + Gifts +5% Merits
+    } -- 68% DA + 28% Traits + Gifts +5 % Merits = 101
     -- 52% PDT
 
     sets.engaged.Acc = {
@@ -206,7 +206,7 @@ function init_gear_sets()
         ring1="Niqmaddu Ring",
         ring2="Petrov Ring", --1
         waist="Sailfi Belt +1", --5
-        back=gear.WAR_TP_Cape, -10
+        back=gear.WAR_TP_Cape,
     }
 
     sets.engaged.DW = {
@@ -657,7 +657,7 @@ end
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
     check_weaponset()
-    if player.equipment.main == "Naegling" and DW == false then
+    if (player.equipment.main == "Naegling" or player.equipment.main == "Loxotic Mace +1") and DW == false then
         meleeSet = set_combine(meleeSet, sets.engaged.SingleWield)
     end
     if state.Buff.Doom then

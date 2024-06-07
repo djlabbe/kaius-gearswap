@@ -192,7 +192,7 @@ function init_gear_sets()
     sets.midcast.FC = sets.precast.FC
 
     sets.midcast.CureSolace = {
-        main={name="Raetic Rod +1", priority=25}, --(CP-23) (CPII-10)
+        main="Asclepius",
         sub={name="Genmei Shield", priority=1},-- (DT-10)
         ammo={name="Staunch Tathlum +1", priority=1}, -- (DT-3) (SIRD-11)
         head=gear.Empyrean_Head, --(CP-22)
@@ -577,14 +577,15 @@ function init_gear_sets()
     sets.idle = {
         main="Mpaca's Staff",
         sub="Irenic Strap +1",
-        ammo="Homiliary",
+       -- ammo="Homiliary",
+        ammo="Staunch Tathlum +1",
         head=gear.Bunzi_Head, --7
         body=gear.Empyrean_Body,
         hands=gear.Bunzi_Hands, --8
         legs=gear.Empyrean_Legs, --13
         feet=gear.Empyrean_Feet, --11
         neck="Sibyl Scarf",
-        ear1="Sanare Earring",
+        ear1="Hearty Earring",
         ear2="Ebers Earring +1", --5
         ring1=gear.Gerubu_Or_Stikini1,
         ring2=gear.Stikini_2,
@@ -593,7 +594,7 @@ function init_gear_sets()
     } --57 (11 Refresh)
 
 
-    sets.idle.Town = sets.midcast.CureSolace
+    sets.idle.Town = sets.idle
 
     sets.defense.PDT = set_combine(sets.idle, {
 
