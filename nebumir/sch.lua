@@ -616,7 +616,7 @@ function init_gear_sets()
     })
 
     sets.midcast['Elemental Magic'] = {
-        main="Daybreak",
+        main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Empyrean_Head,
@@ -634,7 +634,7 @@ function init_gear_sets()
     }
 
     sets.midcast.Helix = {
-        main="Daybreak",
+        main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Relic_Head,

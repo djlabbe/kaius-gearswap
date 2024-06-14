@@ -349,7 +349,7 @@ function init_gear_sets()
 
     sets.engaged = {
         ammo="Coiste Bodhar",
-		head=gear.Adhemar_A_Head,
+		head=gear.Empyrean_Head,
 		body=gear.Mpaca_Body,
 		hands=gear.Adhemar_A_Hands,
 		legs=gear.Empyrean_Legs,

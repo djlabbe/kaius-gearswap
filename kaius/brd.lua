@@ -523,7 +523,7 @@ function init_gear_sets()
     }
 
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
-        -- hands="Hieros Mittens",
+        hands="Hieros Mittens",
         neck="Debilis Medallion",
         back="Oretan. Cape +1",
     })

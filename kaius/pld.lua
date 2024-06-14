@@ -51,10 +51,10 @@ function user_setup()
     gear.Relic_Legs = { name="Caballarius Breeches +3" }
     gear.Relic_Feet = { name="Caballarius Leggings +3" }
 
-    gear.Empyrean_Head = { name="Chevalier's Armet +2", priority=145 }
+    gear.Empyrean_Head = { name="Chevalier's Armet +3", priority=145 }
     gear.Empyrean_Body = { name="Chevalier's Cuirass +2", priority=151 }
     gear.Empyrean_Hands = { name="Chevalier's Gauntlets +2", priority=64 }
-    gear.Empyrean_Legs = { name="Chevalier's Cuisses +2", priority=127 }
+    gear.Empyrean_Legs = { name="Chevalier's Cuisses +3", priority=127 }
     gear.Empyrean_Feet = { name="Chevalier's Sabatons +2", priority=52 }
 
     gear.PLD_Idle_Cape = { name="Rudianos's Mantle", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','Enmity+10','Chance of successful block +5',}}
@@ -118,22 +118,7 @@ function init_gear_sets()
     sets.precast.JA['Fealty'] = {body=gear.Relic_Body}
     sets.precast.JA['Divine Emblem'] = {feet=gear.Empyrean_Feet}
     sets.precast.JA['Cover'] = {head=gear.Artifact_Head}
-
-    sets.precast.JA['Chivalry'] = {
-        ammo="Sapience Orb",
-        head="Hjarrandi Helm",
-        body=gear.Souveran_C_Body,
-        hands=gear.Souveran_C_Hands,
-        legs=gear.Souveran_C_Legs,
-        feet=gear.Empyrean_Feet,
-        neck={name="Unmoving Collar +1", priority=200},
-        waist={name="Platinum Moogle Belt", priority=999},
-        ear1={name="Tuisto Earring", priority=150},
-        ear2="Cryptic Earring",
-        ring1="Apeile Ring +1",
-        ring2="Eihwaz Ring",
-        back=gear.PLD_Idle_Cape,
-    } --Max MND
+    sets.precast.JA['Chivalry'] = {hands=gear.Relic_Hands }
 
     sets.precast.FC = {
         main="Sakpata's Sword", --10
@@ -369,7 +354,13 @@ function init_gear_sets()
     } --3594 w/ Schneddick Ring
 
     sets.idle.Town = set_combine(sets.idle, {})    
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { legs=gear.Carmine_A_Legs }
+    end
+    
     sets.latent_refresh = {waist="Fucho-no-obi"}
     
     -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here when activating or changing defense mode:

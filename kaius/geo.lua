@@ -281,6 +281,7 @@ function init_gear_sets()
     })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
+        hands="Hieros Mittens",
         neck="Debilis Medallion",
         ring1="Haoma's Ring",
         ring2="Menelaus's Ring",

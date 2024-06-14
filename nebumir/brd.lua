@@ -83,7 +83,6 @@ function user_setup()
 
     gear.Kali_Idle = {name="Kali", augments={'MP+60','Mag. Acc.+20','"Refresh"+1',}}
     gear.Kali_Song = {name="Kali", augments={'DMG:+15','CHR+15','Mag. Acc.+15',}}
-    gear.Ipetam_Eva = { name="Ipetam", augments={'Evasion+14','STR+14 AGI+14',}}
 
     gear.Linos_STP = {name="Linos", augments={'Accuracy+12','"Store TP"+3','Quadruple Attack +3',}} -- Missing 1 step, and acc
     gear.Linos_WS = { name="Linos", augments={'Attack+16','Weapon skill damage +3%','STR+6 VIT+6',}} -- BAD STR, Could use more attack or attack/acc
@@ -93,7 +92,7 @@ function user_setup()
     gear.Artifact_Body = { name= "Brioso Justaucorps +2" }
     gear.Artifact_Hands = { name= "Brioso Cuffs +1" }
     gear.Artifact_Legs = { name= "Brioso Cannions +1" }
-    gear.Artifact_Feet = { name= "Brioso Slippers +1" }
+    gear.Artifact_Feet = { name= "Brioso Slippers +3" }
 
     gear.Relic_Head = { name= "Bihu Roundlet +3" }
     gear.Relic_Body = { name= "Bihu Justaucorps +3" }
@@ -101,15 +100,15 @@ function user_setup()
     gear.Relic_Legs = { name= "Bihu Cannions +3" }
     gear.Relic_Feet = { name= "Bihu Slippers +3" }
 
-    gear.Empyrean_Head = { name= "Fili Calot +2" }
-    gear.Empyrean_Body = { name= "Fili Hongreline +2" }
-    gear.Empyrean_Hands = { name= "Fili Manchettes +2" }
-    gear.Empyrean_Legs = { name= "Fili Rhingrave +2" }
-    gear.Empyrean_Feet = { name= "Fili Cothurnes +2" }
+    gear.Empyrean_Head = { name= "Fili Calot +3" }
+    gear.Empyrean_Body = { name= "Fili Hongreline +3" }
+    gear.Empyrean_Hands = { name= "Fili Manchettes +3" }
+    gear.Empyrean_Legs = { name= "Fili Rhingrave +3" }
+    gear.Empyrean_Feet = { name= "Fili Cothurnes +3" }
 
     gear.BRD_Song_Cape = { name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
     gear.BRD_DW_Cape = { name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}} --X
-    gear.BRD_KITE_Cape = { name="Intarabus's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}} --X
+    -- gear.BRD_KITE_Cape = { name="Intarabus's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}} --X
     gear.BRD_WS2_Cape = { name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
 
     include('Global-Binds.lua')
@@ -491,11 +490,11 @@ function init_gear_sets()
         main="Daybreak", --30
         sub="Ammurapi Shield",
         head=gear.Kaykaus_B_Head, --11
-        body=gear.Kaykaus_A_Body, --(+4)/(-6)
+        body=gear.Bunzi_Body,
         hands=gear.Kaykaus_D_Hands, --11(+2)/(-6)
         legs=gear.Kaykaus_A_Legs, --11/(+2)/(-6)
         feet=gear.Kaykaus_B_Feet, --11(+2)/(-12)
-        neck="Incanter's Torque",
+        neck="Loricate Torque +1",
         ear1="Meili Earring",
         ear2="Fili Earring +1",
         ring1="Menelaus's Ring",
@@ -515,7 +514,7 @@ function init_gear_sets()
         body=gear.Nyame_Body,
         legs="Vanya Slops",
         feet="Vanya Clogs",
-        neck="Incanter's Torque",
+        neck="Loricate Torque +1",
         ear1="Meili Earring",
         ear2="Fili Earring +1",
         ring1="Menelaus's Ring",
@@ -539,7 +538,7 @@ function init_gear_sets()
         hands=gear.Telchine_ENH_Hands,
         legs=gear.Telchine_ENH_Legs,
         feet=gear.Telchine_ENH_Feet,
-        neck="Incanter's Torque",
+        neck="Loricate Torque +1",
         ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1=gear.Stikini_1,
@@ -595,14 +594,8 @@ function init_gear_sets()
         waist="Shinjutsu-no-Obi +1"
     })
 
-    sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT
 
-    if (item_available("Shneddick Ring")) then
-        sets.Kiting = { ring1="Shneddick Ring" }
-    else
-        sets.Kiting = { feet=gear.Empyrean_Feet }
-    end
+    sets.Kiting = { feet=gear.Empyrean_Feet }
 
     sets.latent_refresh = { waist="Fucho-no-obi" }
 
@@ -726,11 +719,11 @@ function init_gear_sets()
 
     sets.idle = {
         range="Daurdabla",
-        head=gear.Bunzi_Head,
-        body="Ashera Harness",
-        hands=gear.Bunzi_Hands,
-        legs=gear.Bunzi_Legs,
-        feet=gear.Bunzi_Feet,
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
         neck="Warder's Charm +1",
         ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
@@ -741,9 +734,6 @@ function init_gear_sets()
     }
 
     sets.idle.DT = {
-        main=gear.Ipetam_Eva,
-        sub="Genmei Shield",
-        range=gear.Linos_EVA,
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
@@ -772,6 +762,9 @@ function init_gear_sets()
         back=gear.BRD_Song_Cape, --6/6
         waist="Platinum Moogle Belt",
     }
+
+    sets.defense.PDT = sets.idle.DT
+    sets.defense.MDT = sets.idle.DT
 
     sets.idle.Town = sets.idle
 

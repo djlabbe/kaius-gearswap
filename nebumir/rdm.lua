@@ -816,8 +816,8 @@ function init_gear_sets()
     sets.midcast['Bio III'] = set_combine(sets.midcast['Dark Magic'], { legs=gear.Relic_Legs })
 
     sets.midcast['Elemental Magic'] = {
-        main="Marin Staff +1",
-        sub="Enki Strap",
+        main="Bunzi's Rod", --10
+        sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
@@ -834,8 +834,8 @@ function init_gear_sets()
     }
 
     sets.MagicBurst = {
-        main="Marin Staff +1",
-        sub="Enki Strap",
+        main="Bunzi's Rod", --10
+        sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head="Ea Hat +1",
         body="Ea Houppe. +1",

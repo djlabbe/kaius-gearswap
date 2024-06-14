@@ -39,10 +39,10 @@ function user_setup()
     state.WeaponSet = M{['description']='Weapon Set', 'Burtgang'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
-    gear.Artifact_Head = { name="Reverence Coronet +1" }
+    gear.Artifact_Head = { name="Reverence Coronet +3" }
     gear.Artifact_Body = { name="Reverence Surcoat +3" }
-    gear.Artifact_Hands = { name="Reverence Gauntlets +1" }
-    gear.Artifact_Legs = { name="Reverence Breeches +1" }    
+    gear.Artifact_Hands = { name="Reverence Gauntlets +3" }
+    gear.Artifact_Legs = { name="Reverence Breeches +3" }    
     gear.Artifact_Feet = { name="Reverence Leggings +3" }
 
     gear.Relic_Head = { name="Caballarius Coronet +3" }
@@ -131,22 +131,7 @@ function init_gear_sets()
     sets.precast.JA['Fealty'] = {body=gear.Relic_Body}
     sets.precast.JA['Divine Emblem'] = {feet=gear.Empyrean_Feet}
     sets.precast.JA['Cover'] = {head=gear.Artifact_Head}
-
-    sets.precast.JA['Chivalry'] = {
-        ammo="Sapience Orb",
-        head="Hjarrandi Helm",
-        body=gear.Souveran_C_Body,
-        hands=gear.Souveran_C_Hands,
-        legs=gear.Souveran_C_Legs,
-        feet=gear.Empyrean_Feet,
-        neck={name="Unmoving Collar +1", priority=200},
-        waist={name="Platinum Moogle Belt", priority=999},
-        ear1={name="Tuisto Earring", priority=150},
-        ear2="Cryptic Earring",
-        ring1="Apeile Ring +1",
-        ring2="Eihwaz Ring",
-        back=gear.PLD_Idle_Cape,
-    } --Max MND
+    sets.precast.JA['Chivalry'] = {hands=gear.Relic_Hands }
 
     sets.precast.FC = {
         -- main="Sakpata's Sword", --10

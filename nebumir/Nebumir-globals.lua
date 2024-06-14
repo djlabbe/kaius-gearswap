@@ -214,6 +214,12 @@ function define_global_sets()
     gear.Ikenga_Legs= {name="Ikenga's Trousers", priority=68}
     gear.Ikenga_Feet = {name="Ikenga's Clogs", priority=45}
 
+    gear.Bunzi_Head = {name="Bunzi's Hat", priority=50}
+    gear.Bunzi_Body = {name="Bunzi's Robe", priority=72}
+    gear.Bunzi_Hands = {name="Bunzi's Gloves", priority=50}
+    gear.Bunzi_Legs= {name="Bunzi's Pants", priority=61}
+    gear.Bunzi_Feet = {name="Bunzi's Sabots", priority=38}
+
     ----------------
     -- MISC. SETS --
     ----------------

@@ -562,7 +562,7 @@ function init_gear_sets()
         ring1="Purity Ring", --0/4
         ring2="Defending Ring", --10/10
         waist="Platinum Moogle Belt",
-        back="Moonlight Cape", --6/6
+        back=gear.THF_TP_Cape, 
     })
 
     -- sets.idle.Town = sets.precast.WS["Rudra's Storm"]

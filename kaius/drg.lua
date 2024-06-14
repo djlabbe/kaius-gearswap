@@ -551,7 +551,7 @@ function init_gear_sets()
 
     sets.engaged.Aram = {
         ammo="Coiste Bodhar",
-        head="Hjarrandi Helm",
+        head="Flamma Zucchetto +2",
         body=gear.Empyrean_Body,
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,

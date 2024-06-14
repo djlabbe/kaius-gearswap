@@ -281,7 +281,7 @@ function init_gear_sets()
         sub="Genmei Shield",
         head="Vanya Hood",
         body="Shamash Robe",
-        -- hands="Hieros Mittens",
+        hands="Hieros Mittens",
         feet="Vanya Clogs",
         neck="Debilis Medallion",
         ear1="Meili Earring",

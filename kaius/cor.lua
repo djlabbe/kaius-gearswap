@@ -638,8 +638,8 @@ function init_gear_sets()
         legs=gear.Empyrean_Legs,
         feet=gear.Malignance_Feet,
         neck="Warder's Charm +1",
-        ear1="Arete Del Luna +1",
-        ear2="Eabani Earring",
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
         ring1=gear.Chirich_1,
         ring2="Shadow Ring",
         back=gear.COR_SNP_Cape,
@@ -680,7 +680,7 @@ function init_gear_sets()
     sets.FullTP = {ear1="Crematio Earring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
 
-    sets.DeathPenalty_M = {main=gear.Rostam_B, sub="Tauret", ranged="Death Penalty"}
+    sets.DeathPenalty_M = {main=gear.Rostam_B, sub="Crepuscular Knife", ranged="Death Penalty"}
     sets.DeathPenalty_R = {main=gear.Rostam_A, sub="Kustawi +1", ranged="Death Penalty"}
     sets.Armageddon_M = {main=gear.Rostam_B, sub="Crepuscular Knife", ranged="Armageddon"}
     sets.Armageddon_R = {main=gear.Rostam_A, sub="Kustawi +1", ranged="Armageddon"}

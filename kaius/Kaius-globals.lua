@@ -88,9 +88,11 @@ function define_global_sets()
     ------------------------
 
     gear.Janniston_Or_Gelatinous = {name="Gelatinous Ring +1", priority=135}
+    gear.Janniston_Or_Haomas = {name="Haoma's Ring"}
 
     if item_available("Janniston Ring +1") then
         gear.Janniston_Or_Gelatinous = { name = "Janniston Ring +1", priority=1 }
+        gear.Janniston_Or_Haomas = { name = "Janniston Ring +1", priority=1 }
     end
 
     ---------------------

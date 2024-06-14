@@ -170,8 +170,7 @@ end
 function init_gear_sets()
 
     sets.precast.FC = {
-        sub="Ammurapi Shield",
-        ammo="Incantor Stone", --2
+        ammo={name="Impatiens", priority=1}, 
         head=gear.Empyrean_Head, --13
         neck="Cleric's Torque +1", --8
         ear1="Loquacious earring", --2
@@ -182,7 +181,7 @@ function init_gear_sets()
         ring2="Kishar Ring", --4
         back="Fi Follet Cape +1", --10
         waist="Embla Sash", --5
-        legs="Ayanmo Cosciales +2", --6
+        legs="Pinga Pants", --6
         feet="Regal Pumps +1", --7
     } --79
 
@@ -191,8 +190,6 @@ function init_gear_sets()
     })
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-        main="Queller Rod", --7
-        sub="Ammurapi Shield",
         ammo="Impatiens", --(2)
         head=gear.Relic_Head, --15
         feet=gear.Kaykaus_B_Feet, --7

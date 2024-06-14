@@ -309,7 +309,7 @@ function init_gear_sets()
         ring1="Evoker's Ring",
         ring2=gear.Stikini_2,
         back="Conveyance Cape",
-        waist="Kobo Obi",
+        waist="Lucidity Sash",
         legs="Baayami Slops +1",
         feet="Baayami Sabots +1",
     }
@@ -327,7 +327,7 @@ function init_gear_sets()
         ring1="Evoker's Ring",
         ring2=gear.Stikini_2,
         back="Conveyance Cape",
-        waist="Kobo Obi",
+        waist="Lucidity Sash",
         legs="Baayami Slops +1",
         feet="Baayami Sabots +1",
     }
@@ -396,7 +396,7 @@ function init_gear_sets()
         ring1="Evoker's Ring",
         ring2=gear.Stikini_2,
         back="Conveyance Cape",
-        waist="Kobo Obi",
+        waist="Lucidity Sash",
     }
 
     sets.midcast.Pet.DebuffBloodPactWard = {
@@ -508,7 +508,7 @@ function init_gear_sets()
         ear2="Beckoner's Earring +2",
         body=gear.Apogee_A_Body,
         hands="Asteria Mitts +1",
-        ring1=gear.Stikini_1,
+        ring1=gear.Gerubu_Or_Stikini1,
         ring2="Defending Ring",
         back=gear.SMN_Magic_Cape,
         waist="Lucidity Sash",
@@ -528,7 +528,7 @@ function init_gear_sets()
         neck="Caller's Pendant", --1
         ear1="Lugalbanda Earring",
         ear2="Beckoner's Earring +2", --(6)
-        ring1="Shneddick Ring +1",
+        ring1=gear.Gerubu_Or_Stikini1,
         ring2="Defending Ring", --(10)
         back=gear.SMN_Magic_Cape,
         waist="Regal Belt", --(3)
@@ -579,6 +579,24 @@ function init_gear_sets()
         hands=gear.Relic_Hands,
         waist="Incarnation Sash",
         legs=gear.Empyrean_Legs
+    }
+
+    sets.idle.Town = {
+        main="Gridarvor",
+        sub="Khonsu",
+        ammo="Epitaph",
+        head=gear.Bunzi_Head,
+        body=gear.Bunzi_Body,
+        hands=gear.Bunzi_Hands,
+        legs=gear.Bunzi_Legs,
+        feet=gear.Bunzi_Feet,
+        neck="Summoner's Collar +2",
+        ear1="Lugalbanda Earring",
+        ear2="Beckoner's Earring +2",
+        ring1=gear.Gerubu_Or_Stikini1,
+        ring2="Cath Palug Ring",
+        back=gear.SMN_Magic_Cape,
+        waist="Regal Belt",
     }
 
   
@@ -648,7 +666,11 @@ function init_gear_sets()
         feet=gear.Apogee_A_Feet,
     }
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Herald's Gaiters" }
+    end
     
     sets.latent_refresh = {
         waist="Fucho-no-obi"
