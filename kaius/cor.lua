@@ -31,7 +31,7 @@ function job_setup()
 
     state.AutoAmmoMode = M(true,'Auto Ammo Mode')
     tickdelay = os.clock() + 5
-    ammostock = 250
+    ammostock = 70
     useItem = false
 	useItemName = ''
     prevItemName = ''
@@ -282,7 +282,7 @@ function init_gear_sets()
         legs=gear.Adhemar_D_Legs, --10/13
         feet="Meghanada jambeaux +2", --10/0
         neck="Commodore Charm +2", --4/0
-        ring="Crepuscular Ring",
+        ring1="Crepuscular Ring",
         back=gear.COR_SNP_Cape, --10/0
         waist="Yemaya Belt", --0/5
     } --61/32

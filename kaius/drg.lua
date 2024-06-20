@@ -603,6 +603,7 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         neck="Dgn. Collar +2",
+        head=gear.Nyame_Head,
         body=gear.Gleti_Body, --9/0
         legs=gear.Gleti_Legs, --8/0
         hands=gear.Empyrean_Hands, --11/11

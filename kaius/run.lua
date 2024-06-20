@@ -120,7 +120,12 @@ function user_setup()
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 2')
         send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 2')
         set_macro_page(2, 22)
-    else   
+    elseif player.sub_job == 'BLU' then 
+        send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 1')
+        send_command('lua l azureSets')
+        set_macro_page(1, 22)
+    else 
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 1')
         send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 1')
         set_macro_page(1, 22)
@@ -151,6 +156,7 @@ function user_unload()
     send_command('unbind !delete')
     send_command('unbind @e')
     send_command('unbind @w')
+    send_command('lua u azureSets')
     unbind_numpad()
 
 end

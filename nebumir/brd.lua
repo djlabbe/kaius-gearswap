@@ -408,9 +408,8 @@ function init_gear_sets()
     sets.midcast["Chocobo Mazurka"] = { range="Marsyas" }
 
     sets.midcast.SongEnhancing = {
-        -- main="Carnwenhan",
-        main=gear.Kali_Song,
-        sub=gear.Kali_Idle,
+        main="Carnwenhan",
+        sub=gear.Kali_Song,
         range="Gjallarhorn",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
@@ -434,8 +433,7 @@ function init_gear_sets()
 
     -- For song debuffs (duration primary, accuracy secondary)
     sets.midcast.SongEnfeeble = {
-        -- main="Carnwenhan",
-        main=gear.Kali_Song,
+        main="Carnwenhan",
         sub="Ammurapi Shield",
         range="Gjallarhorn",
         head=gear.Artifact_Head,
@@ -530,8 +528,7 @@ function init_gear_sets()
     })
 
     sets.midcast['Enhancing Magic'] = {
-        -- main="Carnwenhan",
-        main=gear.Kali_Song,
+        main="Carnwenhan",
         sub="Ammurapi Shield",
         head=gear.Telchine_ENH_Head,
         body=gear.Telchine_ENH_Body,
@@ -571,8 +568,7 @@ function init_gear_sets()
     sets.midcast.Shellra = sets.midcast.Shell
 
     sets.midcast['Enfeebling Magic'] = {
-        -- main="Carnwenhan",
-        main=gear.Kali_Song,
+        main="Carnwenhan",
         sub="Ammurapi Shield",
         head=empty;
         body="Cohort Cloak +1",
@@ -768,8 +764,7 @@ function init_gear_sets()
 
     sets.idle.Town = sets.idle
 
-    -- sets.SongDWDuration = { main="Carnwenhan", sub=gear.Kali_Idle }
-    sets.SongDWDuration = { main=gear.Kali_Song, sub=gear.Kali_Idle }
+    sets.SongDWDuration = { main="Carnwenhan", sub=gear.Kali_Idle }
 
     sets.buff.Doom = {
         neck="Nicander's Necklace",

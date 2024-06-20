@@ -52,17 +52,17 @@ function user_setup()
     gear.Relic_Feet = { name="Caballarius Leggings +3" }
 
     gear.Empyrean_Head = { name="Chevalier's Armet +3", priority=145 }
-    gear.Empyrean_Body = { name="Chevalier's Cuirass +2", priority=151 }
-    gear.Empyrean_Hands = { name="Chevalier's Gauntlets +2", priority=64 }
+    gear.Empyrean_Body = { name="Chevalier's Cuirass +3", priority=151 }
+    gear.Empyrean_Hands = { name="Chevalier's Gauntlets +3", priority=64 }
     gear.Empyrean_Legs = { name="Chevalier's Cuisses +3", priority=127 }
     gear.Empyrean_Feet = { name="Chevalier's Sabatons +2", priority=52 }
 
-    gear.PLD_Idle_Cape = { name="Rudianos's Mantle", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','Enmity+10','Chance of successful block +5',}}
+    gear.PLD_Idle_Cape = { name="Rudianos's Mantle", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}}
     gear.PLD_FC_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Mag. Evasion+15',}}
     gear.PLD_SIRD_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Spell interruption rate down-10%',}}
     gear.PLD_CURE_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Cure" potency +10%','Phys. dmg. taken-10%',}}
     gear.PLD_DA_Cape = { name="Rudianos's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
-    gear.PLD_PHLX_Cape = { name="Weard Mantle", augments={'Enmity+5','Phalanx +4',}, priority=1}
+    gear.PLD_PHLX_Cape = { name="Weard Mantle", augments={'VIT+1','DEX+5','Phalanx +5',}, priority=1}
 
     send_command('bind @f10 gs c toggle EquipShield')
     send_command('bind @w gs c toggle WeaponLock')
@@ -84,6 +84,7 @@ function user_setup()
     include('Global-Binds.lua')
 
     if player.sub_job == 'BLU' then
+        send_command('lua l azureSets')
         send_command('bind ^numpad7 gs c set WeaponSet Sakpata;input /macro set 1')
         send_command('bind ^numpad8 gs c set WeaponSet Naegling;input /macro set 1')
         set_macro_page(1, 7)
@@ -106,6 +107,7 @@ function user_unload()
     send_command('unbind !f11')
     send_command('unbind @f10')
     send_command('unbind @f11')
+    send_command('lua u azureSets')
     unbind_numpad()
 end
 
@@ -191,22 +193,22 @@ function init_gear_sets()
     
     sets.midcast.Stun = sets.midcast.Flash
     
-    sets.midcast.Cure = { -- Cure/SIRD/Enmity
+    sets.midcast.Cure = { -- Cure/SIRD/Enmity/PDT
         main="Sakpata's Sword",
-        ammo="Staunch Tathlum +1",      --00/11/00
-        head=gear.Souveran_C_Head,      --00/20/09
-        body=gear.Empyrean_Body,        --11/20/16
-        hands="Macabre Gaunt. +1",      --11/00/07
-        legs="Founder's Hose",          --00/30/00
-        feet=gear.Ody_CURE_Feet,        --13/20/00
-        neck={name="Unmoving Collar +1", priority=200},      --00/00/10
-        waist={name="Platinum Moogle Belt", priority=999},
-        ear1={name="Tuisto Earring", priority=150},          --00/00/00
-        ear2="Nourishing Earring +1",   --07/00/00
-        ring1="Defending Ring",         --Keep DT Up
-        ring2={name="Gelatinous Ring +1", priority=135},     
-        back=gear.PLD_SIRD_Cape,        --00/10/10
-    } --3589 HP 53/111/xx
+        ammo="Staunch Tathlum +1",                           --00/00/00/10
+        head=gear.Souveran_C_Head,                           --00/20/09/08
+        body=gear.Empyrean_Body,                             --11/20/16/00
+        hands=gear.Empyrean_Hands,                           --11/00/07/11
+        legs="Founder's Hose",                               --00/30/00/00
+        feet=gear.Ody_CURE_Feet,                             --13/20/00/00
+        neck={name="Unmoving Collar +1", priority=200},      --00/00/10/00
+        waist={name="Platinum Moogle Belt", priority=999},   --00/00/00/03
+        ear1={name="Tuisto Earring", priority=150},          --00/00/00/00
+        right_ear={ name="Chev. Earring +1", },              --11/00/00/05
+        ring1="Defending Ring",                              --00/00/00/10
+        ring2={name="Gelatinous Ring +1", priority=135},     --00/00/00/07
+        back=gear.PLD_SIRD_Cape,                             --00/10/10/00
+    }                                --3659 HP               --46/111/52/53     +10 SIRD Merit =121                        
 
     sets.midcast.Blue = { --SIRD/Enmity
         main="Sakpata's Sword",
@@ -295,10 +297,11 @@ function init_gear_sets()
         legs="Founder's Hose",--0/30
         feet=gear.Ody_CURE_Feet,
         neck={name="Unmoving Collar +1", priority=200},
-        waist={name="Platinum Moogle Belt", priority=999},
         ear1={name="Tuisto Earring", priority=150},
         ear2="Etiolation Earring",
+        ring1="Kishar Ring",
         ring2={name="Gelatinous Ring +1", priority=135},
+        waist={name="Platinum Moogle Belt", priority=999},
         back=gear.PLD_SIRD_Cape,
     }
 
@@ -343,13 +346,13 @@ function init_gear_sets()
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Artifact_Feet,
+        feet=gear.Sakpata_Feet,
         neck={name="Unmoving Collar +1", priority=200},
-        waist={name="Platinum Moogle Belt", priority=999},
         ear1={name="Tuisto Earring", priority=150},
         ear2={name="Odnowa Earring +1", priority=110},
         ring1=gear.Moonlight_1,
         ring2={name="Gelatinous Ring +1", priority=135},
+        waist={name="Platinum Moogle Belt", priority=999},
         back=gear.PLD_Idle_Cape,
     } --3594 w/ Schneddick Ring
 
@@ -360,8 +363,6 @@ function init_gear_sets()
     else
         sets.Kiting = { legs=gear.Carmine_A_Legs }
     end
-    
-    sets.latent_refresh = {waist="Fucho-no-obi"}
     
     -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here when activating or changing defense mode:
     sets.PhysicalShield = {sub="Ochain"}
@@ -464,9 +465,6 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if player.mpp < 51 then
-        idleSet = set_combine(idleSet, sets.latent_refresh)
-    end
     if state.PhalanxMode.value == true then
         idleSet = set_combine(idleSet, sets.Phalanx)
     end
