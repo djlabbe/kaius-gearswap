@@ -74,7 +74,7 @@ function user_setup()
         'Quick Etude', 'Swift Etude', 'Vivacious Etude', 'Vital Etude', 'Dextrous Etude', 'Uncanny Etude',
         'Spirited Etude', 'Logical Etude', 'Enchanting Etude', 'Bewitching Etude'}
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Twashtar', 'Tauret', 'Carnwenhan' }
+    state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Tauret', 'Carnwenhan' }
     state.WeaponLock = M(true, 'Weapon Lock')
 
  
@@ -82,18 +82,16 @@ function user_setup()
     info.ExtraSongs = 2
 
     gear.Kali_Idle = {name="Kali", augments={'MP+60','Mag. Acc.+20','"Refresh"+1',}}
-    -- gear.Kali_Song = {name="Kali", augments={'DMG:+15','CHR+15','Mag. Acc.+15',}}
-    gear.Ipetam_Eva = { name="Ipetam", augments={'Evasion+14','STR+14 AGI+14',}}
+    gear.Kali_Song = {name="Kali", augments={'DMG:+15','CHR+15','Mag. Acc.+15',}}
 
-    gear.Linos_TP = {name="Linos", augments={'Accuracy+13 Attack+13','"Dbl.Atk."+3','Quadruple Attack +3',}}
-    gear.Linos_STP = {name="Linos", augments={'Accuracy +19','Store TP +4','Quadruple Attack +3',}}
-    gear.Linos_WS = {name="Linos", augments={'Accuracy+15 Attack+15','Weapon skill damage +3%','STR+6'}}
-    gear.Linos_EVA = { name="Linos", augments={'Evasion+13','AGI+7',}}
+    gear.Linos_STP = {name="Linos", augments={'Accuracy+12','"Store TP"+3','Quadruple Attack +3',}} -- Missing 1 step, and acc
+    gear.Linos_WS = { name="Linos", augments={'Attack+16','Weapon skill damage +3%','STR+6 VIT+6',}} -- BAD STR, Could use more attack or attack/acc
+    gear.Linos_MATK = { name="Linos", augments={'"Mag.Atk.Bns."+15',}}
 
-    gear.Artifact_Head = { name= "Brioso Roundlet +3" }
-    gear.Artifact_Body = { name= "Brioso Justaucorps +3" }
-    gear.Artifact_Hands = { name= "Brioso Cuffs +3" }
-    gear.Artifact_Legs = { name= "Brioso Cannions +3" }
+    gear.Artifact_Head = { name= "Brioso Roundlet +1" }
+    gear.Artifact_Body = { name= "Brioso Justaucorps +2" }
+    gear.Artifact_Hands = { name= "Brioso Cuffs +1" }
+    gear.Artifact_Legs = { name= "Brioso Cannions +1" }
     gear.Artifact_Feet = { name= "Brioso Slippers +3" }
 
     gear.Relic_Head = { name= "Bihu Roundlet +3" }
@@ -102,15 +100,15 @@ function user_setup()
     gear.Relic_Legs = { name= "Bihu Cannions +3" }
     gear.Relic_Feet = { name= "Bihu Slippers +3" }
 
-    gear.Empyrean_Head = { name= "Fili Calot +2" }
+    gear.Empyrean_Head = { name= "Fili Calot +3" }
     gear.Empyrean_Body = { name= "Fili Hongreline +3" }
     gear.Empyrean_Hands = { name= "Fili Manchettes +3" }
     gear.Empyrean_Legs = { name= "Fili Rhingrave +3" }
-    gear.Empyrean_Feet = { name= "Fili Cothurnes +2" }
+    gear.Empyrean_Feet = { name= "Fili Cothurnes +3" }
 
     gear.BRD_Song_Cape = { name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
     gear.BRD_DW_Cape = { name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}} --X
-    gear.BRD_KITE_Cape = { name="Intarabus's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}} --X
+    -- gear.BRD_KITE_Cape = { name="Intarabus's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}} --X
     gear.BRD_WS2_Cape = { name="Intarabus's Cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
 
     include('Global-Binds.lua')
@@ -164,25 +162,21 @@ function user_setup()
 
     if player.sub_job == 'NIN' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 2')
         send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 2')
         send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 2')
         set_macro_page(1, 10)
     elseif player.sub_job == 'DNC' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 3')
-        send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 4')
         send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 4')
         send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 4')
         set_macro_page(3, 10)
     elseif player.sub_job == 'WHM' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 5')
-        send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 6')
         send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 6')
         send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 6')
         set_macro_page(5, 10)
     elseif player.sub_job == 'PLD' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 7')
-        send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 8')
         send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 8')
         send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 8')
         set_macro_page(7, 10)
@@ -234,11 +228,11 @@ end
 function init_gear_sets()
     sets.precast.FC = {
         head=gear.Bunzi_Head, --10
-        body="Zendik Robe", --13
-        hands="Volte Gloves", --6
+        body="Inyanga Jubbah +2", --10?
+        hands="Gendewitha Gages +1", --7 + 5(song)
         legs=gear.Kaykaus_A_Legs, --7
         feet=gear.Empyrean_Feet, --10
-        neck="Orunmila's Torque", --5
+        neck="Baetyl Pendant", --4
         ear1="Enchanter's Earring +1", --2    
         ear2="Etiolation Earring", --1
         ring1="Prolix Ring", --2
@@ -291,12 +285,12 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Evisceration'] = {
-        range=gear.Linos_TP,
+        range=gear.Linos_WS,
         head="Blistering Sallet +1",
         neck="Bard's Charm +2",
         body=gear.Relic_Body,
         hands=gear.Nyame_Hands,
-        legs="Zoar Subligar +1",
+        legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         ear1="Mache Earring +1",
         ear2="Moonshade Earring",
@@ -306,7 +300,7 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
-        range=gear.Linos_TP,
+        range=gear.Linos_WS,
         body=gear.Relic_Body,
         hands=gear.Relic_Hands,
         back=gear.BRD_WS2_Cape,
@@ -391,8 +385,8 @@ function init_gear_sets()
 
     -- Gear to enhance certain classes of songs.
     sets.midcast.Ballad = { legs=gear.Empyrean_Legs }
-    sets.midcast.Carol = { hands="Mousai Gages +1" }
-    sets.midcast.Etude = { head="Mousai Turban +1" }
+    -- sets.midcast.Carol = { hands="Mousai Gages +1" }
+    -- sets.midcast.Etude = { head="Mousai Turban +1" }
     sets.midcast.HonorMarch = { range="Marsyas", hands=gear.Empyrean_Hands }
     sets.midcast.Lullaby = {
         body=gear.Empyrean_Body,
@@ -400,12 +394,12 @@ function init_gear_sets()
     }
     sets.midcast.Lullaby = { body=gear.Empyrean_Body }
     sets.midcast.Madrigal = { head=gear.Empyrean_Head }
-    sets.midcast.Mambo = { feet="Mousai Crackows +1" }
+    -- sets.midcast.Mambo = { feet="Mousai Crackows +1" }
     sets.midcast.March = { hands=gear.Empyrean_Hands }
-    sets.midcast.Minne = { legs="Mousai Seraweels +1" }
+    -- sets.midcast.Minne = { legs="Mousai Seraweels +1" }
     sets.midcast.Minuet = { body=gear.Empyrean_Body }
     sets.midcast.Paeon = { head=gear.Artifact_Head }
-    sets.midcast.Threnody = { body="Mousai Manteel +1" }
+    -- sets.midcast.Threnody = { body="Mousai Manteel +1" }
     sets.midcast['Adventurer\'s Dirge'] = { range="Marsyas", hands=gear.Relic_Hands }
     sets.midcast['Adventurer\'s Dirge'] = { range="Marsyas" }
     sets.midcast['Foe Sirvente'] = { head=gear.Relic_Head }
@@ -415,7 +409,7 @@ function init_gear_sets()
 
     sets.midcast.SongEnhancing = {
         main="Carnwenhan",
-        sub=gear.Kali_Idle,
+        sub=gear.Kali_Song,
         range="Gjallarhorn",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
@@ -431,6 +425,11 @@ function init_gear_sets()
         waist="Platinum Moogle Belt",
         back=gear.BRD_Song_Cape,
     }
+
+    sets.midcast["Army's Paeon VI"] = set_combine(sets.midcast.SongEnhancing, { range="Daurdabla",})
+    sets.midcast["Army's Paeon V"] = set_combine(sets.midcast.SongEnhancing, { range="Daurdabla",})
+    sets.midcast["Army's Paeon IV"] = set_combine(sets.midcast.SongEnhancing, { range="Daurdabla",})
+    sets.midcast["Army's Paeon III"] = set_combine(sets.midcast.SongEnhancing, { range="Daurdabla",})
 
     -- For song debuffs (duration primary, accuracy secondary)
     sets.midcast.SongEnfeeble = {
@@ -489,11 +488,11 @@ function init_gear_sets()
         main="Daybreak", --30
         sub="Ammurapi Shield",
         head=gear.Kaykaus_B_Head, --11
-        body=gear.Kaykaus_A_Body, --(+4)/(-6)
+        body=gear.Bunzi_Body,
         hands=gear.Kaykaus_D_Hands, --11(+2)/(-6)
         legs=gear.Kaykaus_A_Legs, --11/(+2)/(-6)
         feet=gear.Kaykaus_B_Feet, --11(+2)/(-12)
-        neck="Incanter's Torque",
+        neck="Loricate Torque +1",
         ear1="Meili Earring",
         ear2="Fili Earring +1",
         ring1="Menelaus's Ring",
@@ -511,9 +510,9 @@ function init_gear_sets()
     sets.midcast.StatusRemoval = {
         head=gear.Kaykaus_B_Head, --11
         body=gear.Nyame_Body,
-        legs="Volte Tights",
+        legs="Vanya Slops",
         feet="Vanya Clogs",
-        neck="Incanter's Torque",
+        neck="Loricate Torque +1",
         ear1="Meili Earring",
         ear2="Fili Earring +1",
         ring1="Menelaus's Ring",
@@ -523,7 +522,7 @@ function init_gear_sets()
     }
 
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
-        hands="Hieros Mittens",
+        -- hands="Hieros Mittens",
         neck="Debilis Medallion",
         back="Oretan. Cape +1",
     })
@@ -536,7 +535,7 @@ function init_gear_sets()
         hands=gear.Telchine_ENH_Hands,
         legs=gear.Telchine_ENH_Legs,
         feet=gear.Telchine_ENH_Feet,
-        neck="Incanter's Torque",
+        neck="Loricate Torque +1",
         ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1=gear.Stikini_1,
@@ -591,14 +590,8 @@ function init_gear_sets()
         waist="Shinjutsu-no-Obi +1"
     })
 
-    sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT
 
-    if (item_available("Shneddick Ring +1")) then
-        sets.Kiting = { ring1="Shneddick Ring +1" }
-    else
-        sets.Kiting = { feet=gear.Empyrean_Feet }
-    end
+    sets.Kiting = { feet=gear.Empyrean_Feet }
 
     sets.latent_refresh = { waist="Fucho-no-obi" }
 
@@ -607,11 +600,11 @@ function init_gear_sets()
         head=gear.Bunzi_Head,
         body="Ashera Harness",
         hands=gear.Bunzi_Hands, --(8/8)
-        legs="Volte Tights",
+        legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Bard's Charm +2",
         ear1="Telos Earring",
-        ear2="Balder Earring +1",
+        ear2="Cessance Earring",
         ring1=gear.Lehko_Or_Chirich1,
         ring2=gear.Chirich_2,
         back=gear.BRD_DW_Cape,
@@ -633,13 +626,13 @@ function init_gear_sets()
         head=gear.Bunzi_Head,
         body="Ashera Harness",
         hands=gear.Bunzi_Hands, --(8/8)
-        legs="Volte Tights",
+        legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet, --(7/7)
         neck="Bard's Charm +2",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
         ring1=gear.Moonlight_1, --(5/5)
-        ring2=gear.Moonlight_2, --(5/5)
+        ring2=gear.Chirich_2, --(5/5)
         back=gear.BRD_DW_Cape, --10
         waist="Sailfi Belt +1",
         } -- 26%
@@ -663,16 +656,16 @@ function init_gear_sets()
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
         range=gear.Linos_STP,
-        head=gear.Bunzi_Head,
+        head="Ayanmo Zucchetto +2",
         body="Ashera Harness",
         hands=gear.Bunzi_Hands, --(8/8)
-        legs="Volte Tights",
+        legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet, --(7/7)
         neck="Bard's Charm +2",
         ear1="Telos Earring", --4
-        ear2="Balder Earring +1",
+        ear2="Cessance Earring",
         ring1=gear.Lehko_Or_Chirich1,
-        ring2=gear.Chirich_2, 
+        ring2="Petrov Ring", 
         back=gear.BRD_DW_Cape, --(10/0)
         waist="Sailfi Belt +1", --7
     } --DT=(41/31)|DW=11
@@ -684,7 +677,7 @@ function init_gear_sets()
         -- head="Volte Tiara",
         body="Ashera Harness",
         -- hands=gear.Telchine_STP_Hands,
-        legs="Volte Tights",
+        legs=gear.Nyame_Legs,
         -- feet="Volte Spats",
         neck="Bard's Charm +2",
         ring1=gear.Chirich_1,
@@ -721,25 +714,22 @@ function init_gear_sets()
     sets.engaged.DW.Acc.DT.MaxHastePlus = set_combine(sets.engaged.DW.Acc.MaxHastePlus, sets.engaged.Hybrid)
 
     sets.idle = {
-        range="Gjallarhorn",
-        head=gear.Bunzi_Head,
-        body="Adamantite Armor",
-        hands=gear.Bunzi_Hands,
-        legs=gear.Bunzi_Legs,
-        feet=gear.Bunzi_Feet,
+        range="Daurdabla",
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
         neck="Warder's Charm +1",
         ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
         ring1=gear.Moonlight_1,
-        ring2="Shadow Ring",
+        ring2=gear.Chirich_2,
         back=gear.BRD_DW_Cape,
         waist="Platinum Moogle Belt",
     }
 
     sets.idle.DT = {
-        main=gear.Ipetam_Eva,
-        sub="Genmei Shield",
-        range=gear.Linos_EVA,
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
@@ -769,7 +759,10 @@ function init_gear_sets()
         waist="Platinum Moogle Belt",
     }
 
-    sets.idle.Town = sets.engaged.DW.MaxHaste
+    sets.defense.PDT = sets.idle.DT
+    sets.defense.MDT = sets.idle.DT
+
+    sets.idle.Town = sets.idle
 
     sets.SongDWDuration = { main="Carnwenhan", sub=gear.Kali_Idle }
 
@@ -781,9 +774,8 @@ function init_gear_sets()
     }
 
     sets.Obi = { waist="Hachirin-no-Obi" }
-    sets.Naegling = { main="Naegling", sub="Centovente" }
-    sets.Twashtar = { main="Twashtar", sub="Centovente" }
-    sets.Carnwenhan = { main="Carnwenhan", sub="Crepuscular Knife" }
+    sets.Naegling = { main="Naegling", sub="Fusetto +2" }
+    sets.Carnwenhan = { main="Carnwenhan", sub="Gleti's Knife" }
     sets.Tauret = { main="Tauret", sub="Gleti's Knife" }
     sets.DefaultShield = { sub="Genmei Shield" }
 

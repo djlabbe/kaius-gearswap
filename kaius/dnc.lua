@@ -11,33 +11,7 @@
 --              [ F12 ]             Update Current Gear / Report Current Status
 --              [ CTRL+F12 ]        Cycle Idle Modes
 --              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
---              [ WIN+C ]           Toggle Capacity Points Mode
---
---  Abilities:  [ CTRL+- ]          Primary step element cycle forward.
---              [ CTRL+= ]          Primary step element cycle backward.
---              [ ALT+- ]           Secondary step element cycle forward.
---              [ ALT+= ]           Secondary step element cycle backward.
---              [ CTRL+[ ]          Toggle step target type.
---              [ CTRL+] ]          Toggle use secondary step.
---              [ Numpad0 ]         Perform Current Step
---
---  Spells:     [ WIN+, ]           Utsusemi: Ichi
---              [ WIN+. ]           Utsusemi: Ni
---
---              (Global-Binds.lua contains additional non-job-related keybinds)
 
--------------------------------------------------------------------------------------------------------------------
---  Custom Commands (preface with /console to use these in macros)
--------------------------------------------------------------------------------------------------------------------
-
---  gs c step                       Uses the currently configured step on the target, with either <t> or
---                                  <stnpc> depending on setting.
---  gs c step t                     Uses the currently configured step on the target, but forces use of <t>.
---
---  gs c cycle mainstep             Cycles through the available steps to use as the primary step when using
---                                  one of the above commands.
---  gs c cycle altstep              Cycles through the available steps to use for alternating with the
---                                  configured main step.
 -------------------------------------------------------------------------------------------------------------------
 function get_sets()
     mote_include_version = 2
@@ -46,25 +20,22 @@ end
 
 function job_setup()
     state.Buff['Climactic Flourish'] = buffactive['climactic flourish'] or false
-    state.Buff['Sneak Attack'] = buffactive['sneak attack'] or false
 end
 
 function user_setup()
-    state.OffenseMode:options('Normal', 'Acc')
-    state.HybridMode:options('Normal', 'DT')
-    state.WeaponskillMode:options('Normal', 'Acc')
+    state.OffenseMode:options('Normal', 'PDL')
+    state.HybridMode:options('Normal', 'DT', 'Regain')
+    state.WeaponskillMode:options('Normal', 'PDL')
     state.IdleMode:options('Normal', 'DT')
-    state.MainStep = M{['description']='Main Step', 'Box Step', 'Quickstep', 'Feather Step', 'Stutter Step'}
-    state.AltStep = M{['description']='Alt Step', 'Feather Step', 'Quickstep', 'Stutter Step', 'Box Step'}
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Twash_TP', 'Twash_Gleti', }
+    state.WeaponSet = M{['description']='Weapon Set',  'Twash_TP', 'Twash_Gleti', 'Twash_Crep', 'Mpu', "Aeneas", "Tauret"  }
     state.WeaponLock = M(false, 'Weapon Lock')
 
-    gear.Artifact_Head = { name= "Maxixi Tiara +1" }
+    gear.Artifact_Head = { name= "Maxixi Tiara +3" }
     gear.Artifact_Body = { name= "Maxixi Casaque +3" }
-    gear.Artifact_Hands = { name= "Maxixi Bangles +1" }
-    gear.Artifact_Legs = { name= "Maxixi Tights +1" }
-    gear.Artifact_Feet = { name= "Maxixi Toe shoes +1" }
+    gear.Artifact_Hands = { name= "Maxixi Bangles +3" }
+    gear.Artifact_Legs = { name= "Maxixi Tights +3" }
+    gear.Artifact_Feet = { name= "Maxixi Toe shoes +3" }
 
     gear.Relic_Head = { name= "Horos Tiara +3" }
     gear.Relic_Body = { name= "Horos Casaque +3" }
@@ -78,18 +49,13 @@ function user_setup()
     gear.Empyrean_Legs = { name= "Maculele Tights +2" }
     gear.Empyrean_Feet = { name= "Maculele Toe shoes +3" }
 
-
-    gear.DNC_TP_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+8','Phys. dmg. taken-10%',}} --X
+    gear.DNC_STP_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','"Regen"+5',}} --X
+    gear.DNC_TP_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.DNC_WS1_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
-    gear.DNC_WS2_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
-    gear.DNC_WS3_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Crit.hit rate+10','Phys. dmg. taken-10%',}} 
+    gear.DNC_WS2_Cape = { name="Senuna's Mantle", augments={'STR+20','Accuracy+20 Attack+20', 'Weapon skill damage +10%','Phys. dmg. taken-10%',}} -- Needs Dye (STR)
+    gear.DNC_WS3_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Crit.hit rate+10','Phys. dmg. taken-10%',}}  -- Needs Dye (Dex)
 
     include('Global-Binds.lua')
-
-    send_command('bind !insert gs c cycleback mainstep')
-    send_command('bind !delete gs c cycle mainstep')
-    send_command('bind !home gs c cycleback altstep')
-    send_command('bind !end gs c cycle altstep')
 
     send_command('bind @w gs c toggle WeaponLock')
 
@@ -99,15 +65,25 @@ function user_setup()
     send_command('bind !` input /ja "Saber Dance" <me>')
     send_command('bind ^` input /ja "Fan Dance" <me>')
     send_command('bind @` input /ja "Chocobo Jig II" <me>')
-    send_command('bind @1 gs c step')
-    send_command('bind @2 gs c step2')
+    send_command('bind @1 input /ja "Box Step" <t>')
+    send_command('bind @2 input /ja "Quickstep" <t>')
+    send_command('bind @3 input /ja "Stutter Step" <t>')
+    send_command('bind @4 input /ja "Feather Step" <t>')
     send_command('bind !t input /ja "Animated Flourish" <t>')
+    send_command('bind !h input /ja "Haste Samba" <me>')
     
     send_command('bind ^numpad7 gs c set WeaponSet Twash_TP')
     send_command('bind ^numpad8 gs c set WeaponSet Twash_Gleti')
+    send_command('bind ^numpad9 gs c set WeaponSet Twash_Crep')
+    send_command('bind ^numpad4 gs c set WeaponSet Mpu')
+    send_command('bind ^numpad5 gs c set WeaponSet Aeneas')
+    send_command('bind ^numpad6 gs c set WeaponSet Tauret')
 
-    if player.sub_job == 'SAM' then
+    if player.sub_job == 'DRG' then
+        send_command('bind !c input /ja "Ancient Circle" <me>')
         set_macro_page(1, 19)
+    elseif player.sub_job == 'SAM' then
+        set_macro_page(2, 19)
     elseif player.sub_job == 'WAR' then
         set_macro_page(2, 19)
     elseif player.sub_job == 'NIN' then
@@ -121,12 +97,7 @@ function user_setup()
     send_command('wait 3; input /lockstyleset 19')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
-    Haste = 0
-    DW_needed = 0
-    DW = false
     moving = false
-    update_combat_form()
-    determine_haste_group()
 end
 
 
@@ -183,8 +154,8 @@ function init_gear_sets()
         ring1="Defending Ring",
         ring2="Metamor. Ring +1", --CHR
         -- back=gear.DNC_WTZ_Cape,
-        waist="Carrier's Sash",
-        } -- Waltz Potency/CHR (55%)
+        waist="Platinum Moogle Belt",
+    } -- Waltz Potency/CHR (55%)
 
     sets.precast.WaltzSelf = set_combine(sets.precast.Waltz, {
         head="Mummu Bonnet +2", --(8)
@@ -200,7 +171,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head=gear.Artifact_Head,
         body=gear.Artifact_Body,
-        hands="Gazu Bracelets +1",
+        hands=gear.Artifact_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Artifact_Feet,
         neck="Etoile Gorget +2",
@@ -224,8 +195,8 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
         neck="Etoile Gorget +2",
-        ear1="Digni. Earring",
-        ear2="Enchntr. Earring +1",
+        ear1="Enchanter's Earring +1",
+        ear2="Maculele Earring +1",       
         ring1="Metamor. Ring +1",
         ring2=gear.Stikini_2,
         waist="Eschan Stone",
@@ -236,7 +207,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head=gear.Artifact_Head,
         body=gear.Artifact_Body,
-        hands="Gazu Bracelets +1",
+        hands=gear.Empyrean_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Artifact_Feet,
         neck="Etoile Gorget +2",
@@ -251,12 +222,12 @@ function init_gear_sets()
     sets.precast.Flourish2['Reverse Flourish'] = {hands=gear.Empyrean_Hands, back="Toetapper Mantle"}
     sets.precast.Flourish3 = {}
     sets.precast.Flourish3['Striking Flourish'] = {body=gear.Empyrean_Body}
-    sets.precast.Flourish3['Climactic Flourish'] = {head=gear.Empyrean_Head,}
+    sets.precast.Flourish3['Climactic Flourish'] = {head=gear.Empyrean_Head, ammo="Charis feather"}
 
     sets.precast.FC = {
         ammo="Sapience Orb",
         head=gear.Herc_FC_Head, --13
-        body=gear.Taeon_FC_body, --9
+        body=gear.Taeon_FC_Body, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
         feet=gear.Nyame_Feet, --2
@@ -273,33 +244,65 @@ function init_gear_sets()
     })
 
     sets.precast.WS = {
-        ammo="Aurgelmir Orb +1",
+        ammo="Coiste Bodhar",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck="Fotia Gorget",
-        ear1="Ishvara Earring",
+        neck="Etoile Gorget +2",
+        ear1="Sherida Earring",
         ear2="Moonshade Earring",
         ring1="Regal Ring",
-        ring2="Epaminondas's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.DNC_WS1_Cape,
         waist="Fotia Belt",
     }
 
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        ear2="Telos Earring",
+    sets.precast.WS.PDL = set_combine(sets.precast.WS, {
+        ring1=gear.Ephramad_Or_Regal,
+        ear2="Maculele Earring +1"
     })
 
-    sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
-        ear1="Sherida Earring",
-        ear2="Macu. Earring +1",
-        back=gear.DNC_WS2_Cape,
+    sets.precast.WS['Rudra\'s Storm'] = {
+        ammo="Coiste Bodhar",
+        head=gear.Empyrean_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Etoile Gorget +2",
+        ear1="Moonshade Earring",
+        ear2="Maculele Earring +1",
+        ring1=gear.Ephramad_Or_Regal,
+        ring2=gear.Cornelia_Or_Epaminondas,
+        back=gear.DNC_WS1_Cape,
+        waist="Kentarch Belt +1",
+    }
+
+    sets.precast.WS['Rudra\'s Storm'].PDL = set_combine(sets.precast.WS['Rudra\'s Storm'], {
+        body=gear.Gleti_Body,
     })
 
-    sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
-        ear2="Telos Earring",
+    sets.precast.WS['Ruthless Stroke'] = {
+        ammo="Coiste Bodhar",
+        head=gear.Empyrean_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Artifact_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Etoile Gorget +2",
+        ear1="Moonshade Earring",
+        ear2="Maculele Earring +1",
+        ring1=gear.Ephramad_Or_Regal,
+        ring2=gear.Cornelia_Or_Epaminondas,
+        back=gear.DNC_WS1_Cape,
+        waist="Kentarch Belt +1",
+    }
+
+    sets.precast.WS['Ruthless Stroke'].PDL = set_combine(sets.precast.WS['Ruthless Stroke'], {
+        ear2="Maculele Earring +1",
+        body=gear.Gleti_Body,
     })
 
     sets.precast.WS['Pyrrhic Kleos'] = {
@@ -312,41 +315,38 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Sherida Earring",
         ear2="Mache Earring +1",
-        ring1="Regal Ring",
+        ring1=gear.Ephramad_Or_Regal,
         ring2="Gere Ring",
         back=gear.DNC_WS2_Cape,
         waist="Fotia Belt",
     }
 
-    sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS['Pyrrhic Kleos'], {
-        hands=gear.Adhemar_A_Hands,
-        legs=gear.Nyame_Legs,
+    sets.precast.WS['Pyrrhic Kleos'].PDL = set_combine(sets.precast.WS['Pyrrhic Kleos'], {
+        neck="Etoile Gorget +2",
+        ear2="Maculele Earring +1",
     })
 
     sets.precast.WS['Evisceration'] = {
-        ammo="Coiste Bodhar",
+        ammo="Charis Feather",
         head="Blistering Sallet +1",
         body=gear.Gleti_Body,
-        hands=gear.Adhemar_B_Hands,
+        hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
-        feet=gear.Adhemar_B_Feet,
+        feet=gear.Empyrean_Feet,
         neck="Fotia Gorget",
         ear1="Odr Earring",
-        ear2="Moonshade Earring",
+        ear2="Maculele Earring +1",
         ring1="Gere Ring",
-        ring2="Regal Ring",
+        ring2=gear.Ephramad_Or_Regal,
         waist="Fotia Belt",
         back=gear.DNC_WS3_Cape,
     }
 
-    sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
-        body=gear.Relic_Body,
-        legs=gear.Gleti_Legs,
-        feet=gear.Artifact_Feet,
-        ring1="Regal Ring",
+    sets.precast.WS['Evisceration'].PDL = set_combine(sets.precast.WS['Evisceration'], {
+        neck="Etoile Gorget +2",
     })
 
-    sets.precast.WS['Rudra\'s Storm'] = {
+    sets.precast.WS['Shark Bite'] = {
         ammo="Coiste Bodhar",
         head=gear.Empyrean_Head,
         body=gear.Nyame_Body,
@@ -354,17 +354,19 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Etoile Gorget +2",
-        ear1="Odr Earring",
+        ear1="Sherida Earring",
         ear2="Moonshade Earring",
-        ring1="Regal Ring",
-        ring2="Cornelia's Ring",
+        ring1="Ilabrat Ring",
+        ring2=gear.Ephramad_Or_Regal,
+        waist="Sailfi Belt +1",
         back=gear.DNC_WS1_Cape,
-        waist="Kentarch Belt +1",
     }
 
-    sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        ear2="Telos Earring",
+    sets.precast.WS['Shark Bite'].PDL = set_combine(sets.precast.WS['Shark Bite'], {
+        body=gear.Gleti_Body,
+        ear2="Maculele Earring +1",
     })
+   
 
     sets.precast.WS['Aeolian Edge'] = {
         ammo="Ghastly Tathlum +1",
@@ -382,10 +384,6 @@ function init_gear_sets()
         waist="Orpheus's Sash",
     }
 
-    sets.precast.Skillchain = {
-        hands=gear.Empyrean_Hands,
-    }
-
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -394,9 +392,9 @@ function init_gear_sets()
 
     sets.midcast.SpellInterrupt = {
         ammo="Staunch Tathlum +1", --11
-        body=gear.Taeon_Phalanx_body, --10
+        body=gear.Taeon_Phalanx_Body, --10
         hands="Rawhide Gloves", --15
-        legs=gear.Taeon_Phalanx_legs, --10
+        legs=gear.Taeon_Phalanx_Legs, --10
         feet=gear.Taeon_Phalanx_Feet, --10
         neck="Loricate Torque +1", --5
         ear1="Halasz Earring", --5
@@ -407,143 +405,13 @@ function init_gear_sets()
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
     ------------------------------------------------------------------------------------------------
-    ---------------------------------------- Defense Sets ------------------------------------------
-    ------------------------------------------------------------------------------------------------
-
-    sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT
-
-    sets.Kiting = { ring1="Shneddick Ring +1" }
-
-    ------------------------------------------------------------------------------------------------
     ---------------------------------------- Engaged Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    -- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
-    -- sets if more refined versions aren't defined.
-    -- If you create a set with both offense and defense modes, the offense mode should be first.
-    -- EG: sets.engaged.Dagger.Accuracy.Evasion
-
     sets.engaged = {
-        ammo="Aurgelmir Orb +1",
-        head=gear.Adhemar_B_Head,
-        body=gear.Relic_Body,
-        hands=gear.Adhemar_B_Hands,
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
-        neck="Etoile Gorget +2",
-        ear1="Dedition Earring",
-        ear2="Macu. Earring +1",
-        ring1="Gere Ring",
-        ring2="Epona's Ring",
-        back=gear.DNC_TP_Cape,
-        waist="Windbuffet Belt +1",
-    }
-
-    sets.engaged.Acc = set_combine(sets.engaged, {
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-    })
-
-    -- * DNC Native DW Trait: 30% DW
-    -- * DNC Job Points DW Gift: 5% DW
-
-    -- No Magic Haste (74% DW to cap)
-    sets.engaged.DW = {
         ammo="Coiste Bodhar",
-        head=gear.Malignance_Head,
-        body=gear.Empyrean_Body, --11
-        hands=gear.Gleti_Hands,
-        legs=gear.Gleti_Legs,
-        feet=gear.Empyrean_Feet,
-        neck="Etoile Gorget +2",
-        ear1="Eabani Earring", --4
-        ear2="Suppanomimi", --5
-        ring1="Gere Ring",
-        ring2="Epona's Ring",
-        back=gear.DNC_TP_Cape,
-        waist="Reiki Yotai", --7
-    } --35 + 27 = 62
-
-
-    sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
-        ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-    })
-
-    -- 15% Magic Haste (67% DW to cap)
-    sets.engaged.DW.LowHaste = {
-        ammo="Coiste Bodhar",
-        head=gear.Malignance_Head,
-        body=gear.Empyrean_Body, --11
-        hands=gear.Gleti_Hands,
-        legs=gear.Gleti_Legs,
-        feet=gear.Empyrean_Feet,
-        neck="Etoile Gorget +2",
-        ear1="Eabani Earring", --4
-        ear2="Suppanomimi", --5
-        ring1="Gere Ring",
-        ring2="Epona's Ring",
-        back=gear.DNC_TP_Cape,
-        waist="Reiki Yotai", --7
-    }
-
-    sets.engaged.DW.Acc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-    })
-    
-    -- 30% Magic Haste (56% DW to cap)
-    sets.engaged.DW.MidHaste = {
-        ammo="Coiste Bodhar",
-        head=gear.Adhemar_B_Head,
-        body=gear.Empyrean_Body, --11
-        hands=gear.Gleti_Hands,
-        legs=gear.Gleti_Legs,
-        feet=gear.Empyrean_Feet,
-        neck="Etoile Gorget +2",
-        ear1="Eabani Earring", --4
-        ear2="Suppanomimi", --5
-        ring1="Gere Ring",
-        ring2="Epona's Ring",
-        back=gear.DNC_TP_Cape,
-        waist="Reiki Yotai", --7
-        } -- 16%
-
-    sets.engaged.DW.Acc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
-
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-    })
-
-    -- 35% Magic Haste (51% DW to cap)
-    sets.engaged.DW.HighHaste = {
-        ammo="Coiste Bodhar",
-        head=gear.Adhemar_B_Head,
-        body=gear.Relic_Body,
-        hands=gear.Gleti_Hands,
-        legs=gear.Gleti_Legs,
-        feet=gear.Empyrean_Feet,
-        neck="Etoile Gorget +2",
-        ear1="Eabani Earring", --4
-        ear2="Maculele Earring +1",
-        ring1="Gere Ring",
-        ring2="Epona's Ring",
-        back=gear.DNC_TP_Cape,
-        waist="Sailfi Belt +1",
-      } -- 4% Gear
-
-    sets.engaged.DW.Acc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-    })
-
-    -- 45% Magic Haste (36% DW to cap)
-    sets.engaged.DW.MaxHaste = {
-        ammo="Coiste Bodhar",
-        head=gear.Adhemar_B_Head,
-        body=gear.Relic_Body,
+        head=gear.Empyrean_Head,
+        body=gear.Gleti_Body,
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Empyrean_Feet,
@@ -551,48 +419,25 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Maculele Earring +1",
         ring1="Gere Ring",
-        ring2="Epona's Ring",
+        ring2="Ilabrat Ring",
         back=gear.DNC_TP_Cape,
         waist="Sailfi Belt +1",
-    } -- 0%
-
-    sets.engaged.DW.Acc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
-        head=gear.Malignance_Head,
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-    })
+    }
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.engaged.Hybrid = {
-        head=gear.Malignance_Head, --6/6
-        body=gear.Gleti_Body, --9/0
-        legs=gear.Malignance_Legs, --7/7
-        hands=gear.Gleti_Hands, --7/0  
-        ring1=gear.Moonlight_1, --5/5
-        ring2=gear.Moonlight_2, --5/5
-        back=gear.DNC_TP_Cape, --10/0
-    } --49/23
+    sets.engaged.DT = set_combine(sets.engaged, {
+        ring2=gear.Moonlight_2, 
+    })
 
-    sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
-
-    sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid)
-
-    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.LowHaste = set_combine(sets.engaged.DW.Acc.LowHaste, sets.engaged.Hybrid)
-
-    sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.MidHaste = set_combine(sets.engaged.DW.Acc.MidHaste, sets.engaged.Hybrid)
-
-    sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.HighHaste = set_combine(sets.engaged.DW.Acc.HighHaste, sets.engaged.Hybrid)
-
-    sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Acc.DT.MaxHaste = set_combine(sets.engaged.DW.Acc.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.Regain = set_combine(sets.engaged, {
+        head="Turms Cap +1",
+        hands="Regal Gloves",
+        ring1=gear.Chirich_1,
+        ring2=gear.Chirich_2,
+    })
 
      ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
@@ -602,27 +447,27 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head=gear.Gleti_Head,
+        head='Turms Cap +1',
         body=gear.Gleti_Body,
-        hands=gear.Gleti_Hands,
+        hands="Regal Gloves",
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
-        neck="Bathy Choker +1",
-        ear1="Eabani Earring",
-        ear2="Sanare Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.DNC_TP_Cape,
+        neck="Loricate Torque +1",
+        ear1="Tuisto Earring",
+        ear2="Odnowa Earring +1",
+        ring1="Roller's Ring",
+        ring2="Defending Ring",
+        back=gear.DNC_STP_Cape,
         waist="Engraved Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
-        head=gear.Malignance_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
+        head=gear.Gleti_Head,
+        body=gear.Gleti_Body,
+        hands=gear.Gleti_Hands,
+        legs=gear.Gleti_Legs,
+        feet=gear.Gleti_Feet,
         neck="Warder's Charm +1",
         ear2="Etiolation Earring",
         ring1="Purity Ring", --0/4
@@ -630,7 +475,21 @@ function init_gear_sets()
         back=gear.DNC_TP_Cape,
     })
 
-    sets.idle.Town = sets.precast.WS['Rudra\'s Storm']
+    sets.idle.Town = sets.idle
+
+    ------------------------------------------------------------------------------------------------
+    ---------------------------------------- Defense Sets ------------------------------------------
+    ------------------------------------------------------------------------------------------------
+
+    sets.defense.PDT = sets.idle.DT
+    sets.defense.MDT = sets.idle.DT
+
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Skadi's Jambeaux +1" }
+    end
+
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -640,7 +499,6 @@ function init_gear_sets()
     sets.buff['Saber Dance'] = {legs=gear.Relic_Legs}
     sets.buff['Fan Dance'] = {hands=gear.Relic_Hands}
     sets.buff['Climactic Flourish'] = {head=gear.Empyrean_Head}
-    -- sets.buff['Closed Position'] = {feet=gear.Relic_Feet}
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -651,6 +509,10 @@ function init_gear_sets()
 
     sets.Twash_TP = { main="Twashtar", sub="Centovente" }
     sets.Twash_Gleti = { main="Twashtar", sub="Gleti's Knife" }
+    sets.Twash_Crep = { main="Twashtar", sub="Crepuscular Knife" }
+    sets.Mpu = { main="Mpu Gandring", sub="Centovente" }
+    sets.Aeneas = { main="Aeneas", sub="Centovente" }
+    sets.Tauret = { main="Tauret", sub="Gleti's Knife" }
 
 end
 
@@ -690,6 +552,23 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     if player.status ~= 'Engaged' and state.WeaponLock.value == false then
         check_weaponset()
     end
+
+    if (spell.english == "Box Step") then
+        send_command('@timers c "Box Step ['..spell.target.name..']" 120 down spells/00288.png')
+        send_command('@timers c "USE BOX STEP" 40 down spells/00288.png')
+    end
+    if (spell.english == "Quickstep") then
+        send_command('@timers c "Quickstep ['..spell.target.name..']" 120 down spells/00290.png')
+        send_command('@timers c "USE QUICKSTEP" 40 down spells/00290.png')
+    end
+    if (spell.english == "Stutter Step") then
+        send_command('@timers c "Stutter Step  ['..spell.target.name..']" 120 down spells/00292.png')
+        send_command('@timers c "USE STUTTER STEP" 40 down spells/00292.png')
+    end
+    if (spell.english == "Feather Step") then
+        send_command('@timers c "Feather Step ['..spell.target.name..']" 120 down spells/00289.png')
+        send_command('@timers c "USE FEATHER STEP" 40 down spells/00289.png')
+    end
 end
 
 function job_state_change(field, new_value, old_value)
@@ -725,8 +604,6 @@ end
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    update_combat_form()
-    determine_haste_group()
     check_moving()
 end
 
@@ -734,13 +611,6 @@ function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
 end
 
-function update_combat_form()
-    if DW == true then
-        state.CombatForm:set('DW')
-    elseif DW == false then
-        state.CombatForm:reset()
-    end
-end
 
 function get_custom_wsmode(spell, action, spellMap)
     local wsmode
@@ -760,17 +630,8 @@ function customize_idle_set(idleSet)
 end
 
 function customize_melee_set(meleeSet)
-    --if state.Buff['Climactic Flourish'] then
-    --    meleeSet = set_combine(meleeSet, sets.buff['Climactic Flourish'])
-    --end
-    -- if state.ClosedPosition.value == true then
-    --     meleeSet = set_combine(meleeSet, sets.buff['Closed Position'])
-    -- end
-
     return meleeSet
 end
-
-
 
 -- Function to display the current relevant user state when doing an update.
 -- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
@@ -787,8 +648,6 @@ function display_current_job_state(eventArgs)
 
     local ws_msg = state.WeaponskillMode.value
 
-    local s_msg = state.MainStep.current
-
     local d_msg = 'None'
     if state.DefenseMode.value ~= 'None' then
         d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
@@ -803,7 +662,6 @@ function display_current_job_state(eventArgs)
 
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,060).. ' Step: '  ..string.char(31,001)..s_msg.. string.char(31,002)..  ' |'
         ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
         ..string.char(31,002)..msg)
@@ -811,22 +669,6 @@ function display_current_job_state(eventArgs)
     eventArgs.handled = true
 end
 
-function determine_haste_group()
-    classes.CustomMeleeGroups:clear()
-    if DW == true then
-        if DW_needed <= 1 then
-            classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 1 and DW_needed <= 9 then
-            classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 9 and DW_needed <= 21 then
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif DW_needed > 21 and DW_needed <= 39 then
-            classes.CustomMeleeGroups:append('LowHaste')
-        elseif DW_needed > 39 then
-            classes.CustomMeleeGroups:append('')
-        end
-    end
-end
 
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1] == 'step' then
@@ -842,22 +684,6 @@ end
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then
-        if type(tonumber(cmdParams[2])) == 'number' then
-            if tonumber(cmdParams[2]) ~= DW_needed then
-            DW_needed = tonumber(cmdParams[2])
-            DW = true
-            end
-        elseif type(cmdParams[2]) == 'string' then
-            if cmdParams[2] == 'false' then
-                DW_needed = 0
-                DW = false
-            end
-        end
-        if type(tonumber(cmdParams[3])) == 'number' then
-            if tonumber(cmdParams[3]) ~= Haste then
-                Haste = tonumber(cmdParams[3])
-            end
-        end
         if type(cmdParams[4]) == 'string' then
             if cmdParams[4] == 'true' then
                 moving = true
@@ -872,14 +698,12 @@ function gearinfo(cmdParams, eventArgs)
 end
 
 
--- Automatically use Presto for steps when it's available and we have less than 3 finishing moves
+-- Automatically use Presto for steps when it's available 
 function job_pretarget(spell, action, spellMap, eventArgs)
     if spell.type == 'Step' then
         local allRecasts = windower.ffxi.get_ability_recasts()
         local prestoCooldown = allRecasts[236]
-        --local under3FMs = not buffactive['Finishing Move 3'] and not buffactive['Finishing Move 4'] and not buffactive['Finishing Move 5']
-
-        if player.main_job_level >= 77 and prestoCooldown < 1 then --and under3FMs then
+        if player.main_job_level >= 77 and prestoCooldown < 1 then
             cast_delay(1.1)
             send_command('input /ja "Presto" <me>')
         end

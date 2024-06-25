@@ -170,9 +170,7 @@ end
 function init_gear_sets()
 
     sets.precast.FC = {
-        main=gear.Gada_FC, --6
-        sub="Ammurapi Shield",
-        ammo="Incantor Stone", --2
+        ammo={name="Impatiens", priority=1}, 
         head=gear.Empyrean_Head, --13
         neck="Cleric's Torque +1", --8
         ear1="Loquacious earring", --2
@@ -183,7 +181,7 @@ function init_gear_sets()
         ring2="Kishar Ring", --4
         back="Fi Follet Cape +1", --10
         waist="Embla Sash", --5
-        legs="Ayanmo Cosciales +2", --6
+        legs="Pinga Pants", --6
         feet="Regal Pumps +1", --7
     } --79
 
@@ -192,8 +190,6 @@ function init_gear_sets()
     })
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-        main="Queller Rod", --7
-        sub="Ammurapi Shield",
         ammo="Impatiens", --(2)
         head=gear.Relic_Head, --15
         feet=gear.Kaykaus_B_Feet, --7
@@ -212,13 +208,13 @@ function init_gear_sets()
     sets.midcast.FC = sets.precast.FC
 
     sets.midcast.CureSolace = {
-        main="Raetic Rod +1",
+        main="Asclepius",
         sub="Thuellaic Ecu +1",
         ammo="Staunch Tathlum +1",
         head=gear.Kaykaus_B_Head,
         neck="Clr. Torque +1", 
         ear1="Glorious Earring",
-        ear2="Nourishing earring +1",
+        ear2="Ebers Earring +1",
         body=gear.Empyrean_Body,
         hands=gear.Artifact_Hands,
         legs=gear.Empyrean_Legs,
@@ -226,7 +222,8 @@ function init_gear_sets()
         ring1="Defending Ring", --3/(-5)
         ring2="Mephitas's Ring +1",
         back=gear.WHM_Cure_Cape,
-        waist="Shinjutsu-no-Obi +1",
+        -- waist="Shinjutsu-no-Obi +1",
+        waist="Plat. Mog. Belt",
       }
 
     sets.midcast.CureSolaceWeather = set_combine(sets.midcast.CureSolace, {
@@ -265,13 +262,13 @@ function init_gear_sets()
 
     sets.midcast.StatusRemoval = {
         main="Yagrush",
-        sub="Chanter's Shield",
+        sub="Genmei Shield",
         head="Vanya Hood",
         body=gear.Empyrean_Body,
         hands="Fanatic Gloves",
         legs=gear.Artifact_Legs,
         feet="Vanya Clogs",
-        neck="Incanter's Torque",
+        neck="Loricate Torque +1",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
         ring1="Kishar Ring",
@@ -310,7 +307,7 @@ function init_gear_sets()
         hands=gear.Telchine_ENH_Hands,
         legs=gear.Telchine_ENH_Legs,
         feet=gear.Artifact_Feet,
-        neck="Incanter's Torque",
+        neck="Loricate Torque +1",
         ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1=gear.Stikini_1,
@@ -335,7 +332,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Inyanga Tiara +2",
-        neck="Incanter's Torque",
+        neck="Loricate Torque +1",
         ear2="Magnetic Earring",
         body=gear.Relic_Body,
         hands=gear.Empyrean_Hands,
@@ -382,7 +379,7 @@ function init_gear_sets()
         hands=gear.Empyrean_Hands,
         legs=gear.Relic_Legs,
         feet=gear.Empyrean_Feet,
-        neck="Incanter's Torque",
+        neck="Loricate Torque +1",
         ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1=gear.Stikini_1,
@@ -453,7 +450,7 @@ function init_gear_sets()
     -- Custom spell classes
     sets.midcast.MndEnfeebles = {
         main="Bunzi's Rod",
-        sub="Thuellaic Ecu +1",
+        sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head=gear.Artifact_Head;
         body=gear.Artifact_Body,
@@ -550,17 +547,19 @@ function init_gear_sets()
     sets.idle = {
         main="Daybreak",
         sub="Genmei Shield",
-        ammo="Homiliary",
+        -- ammo="Homiliary",
+        ammo="Staunch Tathlum +1",
         head=gear.Nyame_Head,
         body=gear.Empyrean_Body,
-        hands=gear.Chironic_REF_Hands,
+        hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Nyame_Feet,
-        neck="Sibyl Scarf",
-        ear1="Etiolation Earring",
+        -- neck="Sibyl Scarf",
+        neck="Loricate Torque +1",
+        ear1="Hearty Earring",
         ear2="Ebers Earring +1",
         ring1=gear.Stikini_1,
-        ring2=gear.Stikini_2,
+        ring2=gear.Gerubu_Or_Stikini2,
         back=gear.WHM_Cure_Cape,
         waist="Plat. Mog. Belt",
     }
@@ -578,13 +577,13 @@ function init_gear_sets()
         ear1="Etiolation Earring",
         ear2="Arete Del Luna +1",
         ring1=gear.Stikini_1,
-        ring2=gear.Stikini_2,
+        ring2=gear.Gerubu_Or_Stikini2,
         back=gear.WHM_Cure_Cape,
         waist="Carrier's Sash",
     })
 
     sets.idle.Town = set_combine(sets.idle, {
-        main="Yagrush",
+        main="Asclepius",
         sub="Ammurapi Shield",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,

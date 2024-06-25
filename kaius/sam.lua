@@ -55,7 +55,7 @@ function user_setup()
     gear.Empyrean_Body = { name= "Kasuga Domaru +3" }
     gear.Empyrean_Hands = { name= "Kasuga Kote +3" }
     gear.Empyrean_Legs = { name= "Kasuga Haidate +3" }
-    gear.Empyrean_Feet = { name= "Kasuga Sune-Ate +2" }
+    gear.Empyrean_Feet = { name= "Kasuga Sune-Ate +3" }
 
     gear.SAM_STP_Cape = { name="Takaha Mantle" }
     gear.SAM_TP_Cape = { name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}}
@@ -156,7 +156,7 @@ function init_gear_sets()
         ear2="Kasuga Earring +1",
         ring1="Niqmaddu Ring",
         ring2=gear.Chirich_2,
-        back=gear.SAM_STP_Cape,
+        back=gear.SAM_TP_Cape,
     }
 
     sets.engaged.Acc = set_combine(sets.engaged, {
@@ -169,7 +169,7 @@ function init_gear_sets()
 
     sets.engaged.Subtle = {
         ammo="Aurgelmir Orb +1",
-        head="Kendatsuba Jinpachi +1", --8
+        head=gear.Empyrean_Head,
         body="Dagon Breastplate", --(10)
         hands=gear.Artifact_Hands,
         legs=gear.Mpaca_Legs, --(5)
@@ -396,7 +396,7 @@ function init_gear_sets()
         legs=gear.Mpaca_Legs,
         feet=gear.Mpaca_Feet,
         neck="Warder's Charm +1",
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
         ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
         ring1=gear.Chirich_1,
@@ -444,7 +444,7 @@ function init_gear_sets()
         ring1="Purity Ring",
         ring2="Defending Ring",
         back=gear.SAM_TP_Cape, 
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
     }

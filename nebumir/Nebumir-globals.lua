@@ -4,7 +4,94 @@
 -- include is complete.  It is called at the end of basic initialization in Mote-Include.
 -------------------------------------------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------------------------------------------
+-- Notes: 
+-- Order of states applied:
+--   sets.engaged[state.CombatForm][state.CombatWeapon][state.OffenseMode][state.DefenseMode][classes.CustomMeleeGroups (any number)]
+-------------------------------------------------------------------------------------------------------------------
+
 function define_global_sets()
+
+     ------------------------
+    -- TVR FALLBACK RING ---
+    ------------------------
+
+    gear.Cornelia_Or_Epaminondas = { name = "Epaminondas's Ring" }
+    gear.Cornelia_Or_Sroda = { name = "Sroda Ring" }
+    gear.Cornelia_Or_Niqmaddu = { name = "Niqmaddu Ring" }
+    gear.Cornelia_Or_Regal = { name = "Regal Ring" }
+    gear.Cornelia_Or_Ilabrat = { name = "Ilabrat Ring" }
+    gear.Cornelia_Or_Gere = { name = "Gere Ring" }
+
+    gear.Ephramad_Or_Regal = { name = "Regal Ring" }
+    gear.Ephramad_Or_Petrov = { name = "Petrov Ring" }
+    gear.Ephramad_Or_Ilabrat = { name = "Ilabrat Ring" }
+    gear.Ephramad_Or_Epaminondas = { name = "Epaminondas's Ring" }
+    gear.Ephramad_Or_Sroda = { name = "Sroda Ring" }
+
+    gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe7"}
+    gear.Lehko_Or_Chirich2 = {name="Chirich Ring +1", bag="wardrobe8"}
+    gear.Lehko_Or_Begrudging = {name="Begrudging Ring" }
+    gear.Lehko_Or_Dingir = {name="Dingir Ring" }
+    gear.Lehko_Or_Hetairoi = {name="Hetairoi Ring"}
+    gear.Lehko_Or_Moonlight2 = {name="Moonlight Ring", bag="wardrobe8"}
+    gear.Lehko_Or_Petrov = {name="Petrov Ring"}
+
+    gear.Gerubu_Or_Stikini1 = {name="Stikini Ring +1", bag="wardrobe7"}
+    gear.Gerubu_Or_Stikini2 = {name="Stikini Ring +2", bag="wardrobe8"}
+    gear.Gerubu_Or_Shadow = { name = "Shadow Ring" }
+
+    gear.Medada_Or_Freke = { name = "Freke Ring" }
+    gear.Medada_Or_Metamorph = { name = "Metamorph Ring +1" }
+
+    if item_available("Cornelia's Ring") then
+        gear.Cornelia_Or_Epaminondas = { name = "Cornelia's Ring" }     
+        gear.Cornelia_Or_Sroda = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Niqmaddu = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Regal = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Ilabrat = { name = "Cornelia's Ring" }
+        gear.Cornelia_Or_Gere = { name = "Cornelia's Ring" }
+    end   
+
+    if item_available("Ephramad's Ring") then
+        gear.Ephramad_Or_Regal = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Petrov = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Ilabrat = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Epaminondas = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Sroda = { name = "Ephramad's Ring" }
+    end
+
+    if item_available("Lehko Habhoka's Ring") then
+        gear.Lehko_Or_Chirich1 = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Chirich2 = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Begrudging = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Dingir = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Hetairoi = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Moonlight2 = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Petrov = { name = "Lehko Habhoka's Ring" }
+    end
+ 
+
+    if item_available("Gurebu's Ring") then
+        gear.Gerubu_Or_Stikini1 = { name = "Gurebu's Ring" }
+        gear.Gerubu_Or_Stikini2 = { name = "Gurebu's Ring" }
+        gear.Gerubu_Or_Shadow = { name = "Gurebu's Ring" }
+    end
+
+    if item_available("Medada's Ring") then
+        gear.Medada_Or_Freke = { name = "Medada's Ring" }
+        gear.Medada_Or_Metamorph = { name = "Medada's Ring"  }
+    end
+
+        ------------------------
+    -- ADOULIN FALLBACK RING ---
+    ------------------------
+
+    gear.Janniston_Or_Gelatinous = {name="Gelatinous Ring +1", priority=135}
+
+    if item_available("Janniston Ring +1") then
+        gear.Janniston_Or_Gelatinous = { name = "Janniston Ring +1", priority=1 }
+    end
     
     ---------------------
     -- DUPLICATE RINGS --
@@ -25,7 +112,7 @@ function define_global_sets()
         
     gear.Malevolence_A = { name="Malevolence", augments={'INT+2','Mag. Acc.+3','"Mag.Atk.Bns."+3',}}
     gear.Malevolence_B = { name="Malevolence", augments={'INT+4','Mag. Acc.+10','"Fast Cast"+3',}}
-    gear.Gada_FC = { name="Gada", augments={'"Fast Cast"+6','DMG:+5',}}
+    gear.Gada_INDI = { name="Gada", augments={'Indi. eff. dur. +9','DMG:+5',}}
     gear.Gada_ENH = { name="Gada", augments={'Enh. Mag. eff. dur. +6','"Mag.Atk.Bns."+15',}}
     gear.Colada_ENH = { name="Colada", augments={'Enh. Mag. eff. dur. +4','MND+1','"Mag.Atk.Bns."+13','DMG:+9',}}
 
@@ -61,9 +148,11 @@ function define_global_sets()
     -- SKY SETS --
     --------------
     
-    gear.Kaykaus_B_Head = { name="Kaykaus Mitra +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
-    gear.Kaykaus_B_Feet = { name="Kaykaus Boots +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
-    gear.Kaykaus_D_Hands = { name="Kaykaus Cuffs +1", augments={'MP+80','"Conserve MP"+7','"Fast Cast"+4',}}
+    gear.Kaykaus_B_Head = {name="Kaykaus Mitra +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
+    gear.Kaykaus_A_Body = {name="Kaykaus Bliaut +1", augments={'MP+80','MND+12','Mag. Acc.+20',}} 
+    gear.Kaykaus_D_Hands = {name="Kaykaus Cuffs +1", augments={'MP+80','"Conserve MP"+7','"Fast Cast"+4',}}
+    gear.Kaykaus_A_Legs = {name="Kaykaus Tights +1", augments={'MP+80','MND+12','Mag. Acc.+20',}}
+    gear.Kaykaus_B_Feet = {name="Kaykaus Boots +1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}}
 
     gear.Amalric_A_Head = { name="Amalric Coif +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
     gear.Amalric_A_Body = { name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
@@ -119,6 +208,18 @@ function define_global_sets()
     gear.Mpaca_Legs= {name="Mpaca's Hose", priority=72}
     gear.Mpaca_Feet = {name="Mpaca's Boots", priority=50}
 
+    gear.Ikenga_Head = {name="Ikenga's Hat", priority=57}
+    gear.Ikenga_Body = {name="Ikenga's Vest", priority=79}
+    gear.Ikenga_Hands = {name="Ikenga's Gloves", priority=57}
+    gear.Ikenga_Legs= {name="Ikenga's Trousers", priority=68}
+    gear.Ikenga_Feet = {name="Ikenga's Clogs", priority=45}
+
+    gear.Bunzi_Head = {name="Bunzi's Hat", priority=50}
+    gear.Bunzi_Body = {name="Bunzi's Robe", priority=72}
+    gear.Bunzi_Hands = {name="Bunzi's Gloves", priority=50}
+    gear.Bunzi_Legs= {name="Bunzi's Pants", priority=61}
+    gear.Bunzi_Feet = {name="Bunzi's Sabots", priority=38}
+
     ----------------
     -- MISC. SETS --
     ----------------
@@ -133,12 +234,10 @@ function define_global_sets()
     gear.Tatenashi_Hands = {name="Tatenashi Gote +1"}
     gear.Tatenashi_Legs = {name="Tatenashi Haidate +1"}
     gear.Tatenashi_Feet = {name="Tatenashi Sune-Ate +1"}
-
 end
 
-
 no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
-    "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Reraise Hairpin", "Nexus Cape",
+    "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring", "Reraise Hairpin", "Airmid's Gorget", "Nexus Cape",
     "Dev. Bul. Pouch", "Chr. Bul. Pouch", "Liv. Bul. Pouch", "Era. Bul. Pouch", "Quelling B. Quiver",
     "Yoichi's Quiver", "Artemis's Quiver", "Chrono Quiver"}
 
@@ -152,6 +251,7 @@ elemental_degrade_array = {
     ['Lightning'] = {'Thunder','Thunder II','Thunder III','Thunder IV','Thunder V','Thunder VI'},
     ['Sleeps'] = {'Sleep','Sleep II',},
 }
+
 elemental_ws = S{"Gust Slash", "Cyclone", "Energy Steal", "Energy Drain", "Aeolian Edge",
                  "Burning Blade", "Red Lotus Blade", "Shining Blade", "Seraph Blade", "Spirits Within", "Sanguine Blade", "Atonement",
                  "Frostbite", "Freezebite", "Herculean Slash",
@@ -164,16 +264,6 @@ elemental_ws = S{"Gust Slash", "Cyclone", "Energy Steal", "Energy Drain", "Aeoli
                  "Rock Crusher", "Earth Crusher", "Starburst", "Sunburst", "Cataclysm", "Vidohunir", "Garland of Bliss", "Omniscience",
                  "Flaming Arrow",
                  "Hot Shot", "Wildfire", "Trueflight", "Leaden Salute"}
-
-function check_moving()
-    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
-        if state.Auto_Kite.value == false and moving then
-            state.Auto_Kite:set(true)
-        elseif state.Auto_Kite.value == true and moving == false then
-            state.Auto_Kite:set(false)
-        end
-    end
-end
 
 function unbind_numpad()
     send_command('unbind !numpad/')
@@ -221,9 +311,16 @@ function unbind_numpad()
     send_command('unbind @numpad3')
     send_command('unbind @numpad0')
     send_command('unbind @numpad.')
+    send_command('unbind ~numpad7')
+    send_command('unbind ~numpad8')
+    send_command('unbind ~numpad9')
+    send_command('unbind ~numpad4')
+    send_command('unbind ~numpad5')
+    send_command('unbind ~numpad6')
+    send_command('unbind ~numpad1')
+    send_command('unbind ~numpad0')
     send_command('unbind @numpadenter')
 end
-
 
 function handle_strategems(cmdParams)
     if not cmdParams[2] then
@@ -321,6 +418,25 @@ function handle_strategems(cmdParams)
     end
 end
 
+
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
+    end
+end
+
+function item_available(item)
+	if player.inventory[item] or player.wardrobe[item] or player.wardrobe2[item] or player.wardrobe3[item] or player.wardrobe4[item] or player.wardrobe5[item] or player.wardrobe6[item] or player.wardrobe7[item] or player.wardrobe8[item] then
+		return true
+	else
+		return false
+	end
+end
+
 function check_gear()
     if no_swap_gear:contains(player.equipment.left_ring) then
         disable("ring1")
@@ -336,6 +452,11 @@ function check_gear()
         disable("head")
     else
         enable("head")
+    end
+    if no_swap_gear:contains(player.equipment.neck) then
+        disable("neck")
+    else
+        enable("neck")
     end
     if no_swap_gear:contains(player.equipment.back) then
         disable("back")
@@ -363,6 +484,10 @@ windower.register_event('zone change',
             enable("head")
             equip(sets.idle)
         end
+        if no_swap_gear:contains(player.equipment.neck) then
+            enable("neck")
+            equip(sets.idle)
+        end
         if no_swap_gear:contains(player.equipment.back) then
             enable("back")
             equip(sets.idle)
@@ -373,4 +498,3 @@ windower.register_event('zone change',
         end
     end
 )
-

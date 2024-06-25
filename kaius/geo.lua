@@ -34,10 +34,10 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(true, 'Magic Burst')
 
-    gear.Artifact_Head = { name= "Geomancy Galero +1" }
+    gear.Artifact_Head = { name= "Geomancy Galero +2" }
     gear.Artifact_Body = { name= "Geomancy Tunic +2" }
     gear.Artifact_Hands = { name= "Geomancy Mitaines +3" }
-    gear.Artifact_Legs = { name= "Geomancy Pants +1" }
+    gear.Artifact_Legs = { name= "Geomancy Pants +2" }
     gear.Artifact_Feet = { name= "Geomancy Sandals +3" }
 
     gear.Relic_Head = { name= "Bagua Galero +3" }
@@ -52,8 +52,8 @@ function user_setup()
     gear.Empyrean_Legs = { name= "Azimuth Tights +3" }
     gear.Empyrean_Feet = { name= "Azimuth Gaiters +3" }
 
-    gear.GEO_Idle_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: "Regen"+5',}} --X
-    gear.GEO_MAB_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Mag. Evasion+15',}} --X
+    gear.GEO_Idle_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: "Regen"+5',}} -- Missing Dye (10 meva)
+    gear.GEO_MAB_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Mag. Evasion+15',}}
     
     include('Global-Binds.lua')
 
@@ -281,6 +281,7 @@ function init_gear_sets()
     })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
+        hands="Hieros Mittens",
         neck="Debilis Medallion",
         ring1="Haoma's Ring",
         ring2="Menelaus's Ring",
@@ -368,6 +369,23 @@ function init_gear_sets()
         ring2="Metamorph Ring +1",
         waist="Acuity Belt +1",
     }) -- INT/Magic accuracy
+
+    sets.midcast['Absorb-TP'] = {
+        main="Idris",
+        sub="Ammurapi Shield",
+        head=gear.Empyrean_Head,
+        body=gear.Artifact_Body,
+        hands=gear.Artifact_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Erra Pendant",
+        ear1="Mani Earring",
+        ear2="Regal Earring",
+        ring1="Archon Ring",
+        ring2="Metamorph Ring +1",
+        back="Aurist's Cape +1",
+        waist="Acuity Belt +1",
+    }
 
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
 
@@ -462,7 +480,7 @@ function init_gear_sets()
         ear1="Etiolation Earring",
         ear2="Azimuth Earring +1", --5
         ring1=gear.Stikini_1,
-        ring2="Defending Ring", --10
+        ring2=gear.Stikini_2,
         back=gear.GEO_Idle_Cape,
         waist="Isa Belt",
     }
@@ -472,6 +490,7 @@ function init_gear_sets()
     })
 
     sets.idle.DT = set_combine(sets.idle, {
+        main="Idris",
         sub="Genmei Shield",
         body="Shamash Robe",
         hands=gear.Artifact_Hands,
@@ -520,7 +539,7 @@ function init_gear_sets()
     }
 
     sets.Obi = { waist="Hachirin-no-Obi" }
-
+    
     sets.idle.Town = sets.MagicBurst
 end
 

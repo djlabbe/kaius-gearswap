@@ -39,10 +39,10 @@ function user_setup()
     state.WeaponSet = M{['description']='Weapon Set', 'Burtgang'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
-    gear.Artifact_Head = { name="Reverence Coronet +1" }
+    gear.Artifact_Head = { name="Reverence Coronet +3" }
     gear.Artifact_Body = { name="Reverence Surcoat +3" }
-    gear.Artifact_Hands = { name="Reverence Gauntlets +1" }
-    gear.Artifact_Legs = { name="Reverence Breeches +1" }    
+    gear.Artifact_Hands = { name="Reverence Gauntlets +3" }
+    gear.Artifact_Legs = { name="Reverence Breeches +3" }    
     gear.Artifact_Feet = { name="Reverence Leggings +3" }
 
     gear.Relic_Head = { name="Caballarius Coronet +3" }
@@ -103,23 +103,14 @@ function user_unload()
     send_command('unbind !f11')
     send_command('unbind @f10')
     send_command('unbind @f11')
+    unbind_numpad()
 end
 
-
 function init_gear_sets()
-    sets.precast.JA['Invincible'] = {legs=gear.Relic_Legs}
-    sets.precast.JA['Holy Circle'] = {feet=gear.Artifact_Feet}
-    sets.precast.JA['Shield Bash'] = {hands=gear.Relic_Hands}
-    sets.precast.JA['Sentinel'] = {feet=gear.Relic_Feet}
-    sets.precast.JA['Rampart'] = {head=gear.Relic_Head}
-    sets.precast.JA['Fealty'] = {body=gear.Relic_Body}
-    sets.precast.JA['Divine Emblem'] = {feet=gear.Empyrean_Feet}
-    sets.precast.JA['Cover'] = {head=gear.Artifact_Head}
-
-    sets.precast.JA['Chivalry'] = {
+    sets.precast.JA = {
         ammo="Sapience Orb",
-        head="Hjarrandi Helm",
-        body=gear.Souveran_C_Body,
+        head="Loess Barbuta +1",
+        body=gear.Empyrean_Body,
         hands=gear.Souveran_C_Hands,
         legs=gear.Souveran_C_Legs,
         feet=gear.Empyrean_Feet,
@@ -130,7 +121,17 @@ function init_gear_sets()
         ring1="Apeile Ring +1",
         ring2="Eihwaz Ring",
         back=gear.PLD_Idle_Cape,
-    } --Max MND
+    }
+
+    sets.precast.JA['Invincible'] = {legs=gear.Relic_Legs}
+    sets.precast.JA['Holy Circle'] = {feet=gear.Artifact_Feet}
+    sets.precast.JA['Shield Bash'] = {hands=gear.Relic_Hands}
+    sets.precast.JA['Sentinel'] = {feet=gear.Relic_Feet}
+    sets.precast.JA['Rampart'] = {head=gear.Relic_Head}
+    sets.precast.JA['Fealty'] = {body=gear.Relic_Body}
+    sets.precast.JA['Divine Emblem'] = {feet=gear.Empyrean_Feet}
+    sets.precast.JA['Cover'] = {head=gear.Artifact_Head}
+    sets.precast.JA['Chivalry'] = {hands=gear.Relic_Hands }
 
     sets.precast.FC = {
         -- main="Sakpata's Sword", --10
@@ -162,7 +163,6 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         ring1="Epaminondas's Ring",
         ring2="Sroda Ring",
-        -- back={ name="Rudianos's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
     }
 
     sets.precast.WS['Atonement'] = {
@@ -284,21 +284,7 @@ function init_gear_sets()
         ring2=gear.Stikini_2,
     }, sets.Phalanx)
 
-	sets.precast.JA = {
-        ammo="Sapience Orb",
-        head="Loess Barbuta +1",
-        body=gear.Empyrean_Body,
-        hands=gear.Souveran_C_Hands,
-        legs=gear.Souveran_C_Legs,
-        feet=gear.Empyrean_Feet,
-        neck={name="Unmoving Collar +1", priority=200},
-        waist={name="Platinum Moogle Belt", priority=999},
-        ear1={name="Tuisto Earring", priority=150},
-        ear2="Cryptic Earring",
-        ring1="Apeile Ring +1",
-        ring2="Eihwaz Ring",
-        back=gear.PLD_Idle_Cape,
-    }
+
 
 	sets.midcast.Reprisal = {
         ammo="Staunch Tathlum +1",
@@ -306,12 +292,11 @@ function init_gear_sets()
         body=gear.Artifact_Body,
         hands={name="Regal Gauntlets", priority=205}, --[10]
         legs="Founder's Hose",--0/30
-        feet=gear.Eschite_C_Feet,
+        feet=gear.Ody_CURE_Feet,
         neck={name="Unmoving Collar +1", priority=200},
         waist={name="Platinum Moogle Belt", priority=999},
         ear1={name="Tuisto Earring", priority=150},
         ear2="Etiolation Earring",
-        -- ring1="Weather. Ring",
         ring2={name="Gelatinous Ring +1", priority=135},
         back=gear.PLD_SIRD_Cape,
     }
@@ -333,8 +318,8 @@ function init_gear_sets()
     } --3594 w/ Schneddick Ring
 
     sets.idle.Town = set_combine(sets.idle, {})
-    
     sets.Kiting = { ring1="Shneddick Ring" }
+    sets.latent_refresh = {waist="Fucho-no-obi"}
     
     -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here when activating or changing defense mode:
     sets.PhysicalShield = {sub="Srivatsa"}
@@ -375,23 +360,38 @@ function init_gear_sets()
     }
 
     sets.engaged = {
-        ammo="Coiste Bodhar",
-        head="Flam. Zucchetto +2",
-        body="Hjarrandi Breast.",
-        hands="Sakpata's Gauntlets",
-        legs="Chev. Cuisses +3",
-        feet="Flam. Gambieras +2",
-        neck="Rep. Plat. Medal",
-        waist="Sailfi Belt +1",
-        left_ear="Cessance Earring",
-        right_ear="Dedition Earring",
-        left_ring="Moonlight Ring",
-        right_ring="Petrov Ring",
-        back=gear.PLD_DA_Cape,
+        ammo="Staunch Tathlum +1",
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Artifact_Feet,
+        neck={name="Unmoving Collar +1", priority=200},
+        waist={name="Platinum Moogle Belt", priority=999},
+        ear1={name="Tuisto Earring", priority=150},
+        ear2={name="Odnowa Earring +1", priority=110},
+        ring1=gear.Moonlight_1,
+        ring2={name="Gelatinous Ring +1", priority=135},
+        back=gear.PLD_Idle_Cape,
     } --49% DT
 
+    sets.Hybrid = {
+        ammo="Coiste Bodhar",
+        head=gear.Sakpata_Head,
+        body=gear.Sakpata_Body,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Sakpata_Legs,
+        feet=gear.Sakpata_Feet,
+        neck="Rep. Plat. Medal",
+        waist="Sailfi Belt +1",
+        ear1="Dedition Earring",
+        ear2="Telos Earring",
+        ring1=gear.Moonlight_1,
+        ring2="Petrov Ring",
+        back=gear.PLD_DA_Cape,
+    }
 
-    sets.engaged.PDT = sets.engaged
+    sets.engaged.DD = set_combine(sets.engaged, sets.Hybrid)
     
     sets.buff.Cover = {head=gear.Artifact_Head, body=gear.Relic_Body}
 
@@ -403,13 +403,7 @@ function init_gear_sets()
     }
 
     sets.Burtgang = { main="Burtgang", sub="Srivatsa"}
-
 end
-
-
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for standard casting events.
--------------------------------------------------------------------------------------------------------------------
 
 function job_midcast(spell, action, spellMap, eventArgs)
 end
@@ -419,7 +413,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
         check_weaponset()
     end
 end
-
 
 -- Called when the player's status changes.
 function job_state_change(field, new_value, old_value)
@@ -451,15 +444,10 @@ function job_buff_change(buff,gain)
     end
 end
 
--------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
--------------------------------------------------------------------------------------------------------------------
-
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
     check_moving()
 end
-
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
@@ -467,6 +455,9 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
+    if player.mpp < 51 then
+        idleSet = set_combine(idleSet, sets.latent_refresh)
+    end
     if state.PhalanxMode.value == true then
         idleSet = set_combine(idleSet, sets.Phalanx)
     end
@@ -547,16 +538,11 @@ function display_current_job_state(eventArgs)
     eventArgs.handled = true
 end
 
-------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
--------------------------------------------------------------------------------------------------------------------
-
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
 end
 
 function gearinfo(cmdParams, eventArgs)
-    -- send_command('input /item "Altana\'s Hymn" <me>')
     if cmdParams[1] == 'gearinfo' then
         if type(cmdParams[4]) == 'string' then
             if cmdParams[4] == 'true' then

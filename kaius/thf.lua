@@ -34,7 +34,7 @@ function job_setup()
 end
 
 function user_setup()
-    state.OffenseMode:options('Normal', 'PDL')
+    state.OffenseMode:options('Normal', 'Acc', 'PDL')
     state.HybridMode:options('Normal', 'DT', 'Evasion')
     state.RangedMode:options('Normal')
     state.WeaponskillMode:options('Normal', 'PDL')
@@ -70,19 +70,19 @@ function user_setup()
     send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
 
-    -- send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad9 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad4 input /equip Main "Wax Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad1 input /equip Main "Lament";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad9 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad4 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad1 input /equip Main "Irradiance Blade";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
 
     send_command('bind !F1 input /ja "Perfect Dodge" <me>')
     send_command('bind !F2 input /ja "Larceny" <t>')
@@ -157,7 +157,6 @@ function init_gear_sets()
 
     sets.precast.JA['Steal'] = {
         head=gear.Relic_Head,
-        hands="Thief's Kote",
         feet=gear.Artifact_Feet,
     }
 
@@ -189,7 +188,7 @@ function init_gear_sets()
         head=gear.Herc_FC_Head, --13
         body=gear.Taeon_FC_Body, --9
         hands="Leyline Gloves", --8
-        legs="Rawhide Trousers", --5
+        legs="Enif Cosciales", --8
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
@@ -211,8 +210,8 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
-        ring1="Cornelia's Ring",
-        ring2="Epaminondas's Ring",
+        ring1=gear.Cornelia_Or_Ilabrat,
+        ring2=gear.Ephramad_Or_Epaminondas,
         back=gear.THF_WSD_Cape,
         waist="Fotia Belt",
     }
@@ -227,8 +226,8 @@ function init_gear_sets()
         neck="Rep. Plat. Medal",
         ear1="Telos Earring",
         ear2="Moonshade Earring",
-        ring1="Cornelia's Ring",
-        ring2="Epaminondas's Ring",
+        ring1=gear.Cornelia_Or_Ilabrat,
+        ring2=gear.Ephramad_Or_Epaminondas,
         back=gear.THF_WSD_Cape,
         waist="Sailfi Belt +1",
     }
@@ -248,8 +247,8 @@ function init_gear_sets()
         neck="Asn. Gorget +2",
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
-        ring1="Cornelia's Ring",
-        ring2="Regal Ring",
+        ring1=gear.Cornelia_Or_Ilabrat,
+        ring2=gear.Ephramad_Or_Regal,
         waist="Kentarch Belt +1",
         back=gear.THF_WSD_Cape,
     }
@@ -356,7 +355,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Dedition Earring",
         ring1="Gere Ring",
-        ring2="Hetairoi Ring",
+        ring2=gear.Lehko_Or_Hetairoi,
         back=gear.THF_TP_Cape,
         waist="Windbuffet Belt +1",
     }
@@ -377,7 +376,7 @@ function init_gear_sets()
         ear1="Dedition Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2="Hetairoi Ring",
+        ring2=gear.Lehko_Or_Hetairoi,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
     } -- 41%
@@ -398,7 +397,7 @@ function init_gear_sets()
         ear1="Dedition Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2="Hetairoi Ring",
+        ring2=gear.Lehko_Or_Hetairoi,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
     } -- 37%
@@ -419,7 +418,7 @@ function init_gear_sets()
         ear1="Dedition Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2="Hetairoi Ring",
+        ring2=gear.Lehko_Or_Hetairoi,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
     } -- 26%
@@ -440,7 +439,7 @@ function init_gear_sets()
         ear1="Dedition Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2="Hetairoi Ring",
+        ring2=gear.Lehko_Or_Hetairoi,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
     } -- 22%
@@ -458,10 +457,12 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Relic_Feet,
         neck="Asn. Gorget +2",
-        ear1="Dedition Earring",
+        -- ear1="Dedition Earring",
+        ear1="Sherida Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2="Hetairoi Ring",
+        -- ring2=gear.Lehko_Or_Hetairoi,
+        ring2=gear.Lehko_Or_Chirich2,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
     } -- 6%
@@ -534,18 +535,18 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head=gear.Malignance_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
+        head=gear.Gleti_Head, --6/6
+        body=gear.Gleti_Body, --9/0
+        hands=gear.Gleti_Hands, --5/5
+        legs=gear.Gleti_Legs, --7/7
+        feet=gear.Empyrean_Feet, --11/11
         neck="Warder's Charm +1",
         ear1="Eabani Earring",
-        ear2="Arete del Luna +1",
+        ear2="Sanare Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         back=gear.THF_TP_Cape,
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -560,7 +561,8 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         ring1="Purity Ring", --0/4
         ring2="Defending Ring", --10/10
-        back="Moonlight Cape", --6/6
+        waist="Platinum Moogle Belt",
+        back=gear.THF_TP_Cape, 
     })
 
     -- sets.idle.Town = sets.precast.WS["Rudra's Storm"]

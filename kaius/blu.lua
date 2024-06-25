@@ -157,7 +157,7 @@ function user_setup()
 
     gear.Empyrean_Head = { name="Hashishin Kavuk +3" }
     gear.Empyrean_Body = { name="Hashishin Mintan +3" }
-    gear.Empyrean_Hands = { name="Hashishin Bazubands +2" }
+    gear.Empyrean_Hands = { name="Hashishin Bazubands +3" }
     gear.Empyrean_Legs = { name="Hashishin Tayt +3" }
     gear.Empyrean_Feet = { name="Hashishin Basmak +3" }
 
@@ -175,23 +175,26 @@ function user_setup()
     send_command('bind !F2 input /ja "Unbridled Wisdom" <me>')
 
     send_command('bind !t input /ma "Glutinous Dart" <t>')
-    send_command('bind !` input /ma "Cocoon" <me>')
     send_command('bind !i input /ma "Barrier Tusk" <me>')
     send_command('bind !j input /ma "Reactor Cool" <me>')
     send_command('bind ^[ input /ja "Diffusion" <me>')
     send_command('bind !u input /ma "Aquaveil" <me>')
     send_command('bind !h input /ma "Erratic Flutter" <me>')
+    send_command('bind !b input /ma "Battery Charge" <me>')
 
     if player.sub_job == 'RDM' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
         send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 2')
         send_command('bind ^numpad9 gs c set WeaponSet Nuking;input /macro set 3')
+        send_command('bind !p input /ma "Protect III" <me>')
+        send_command('bind !o input /ma "Shell III" <me>')
+        send_command('bind !i input /ma "Phalanx" <me>')
         set_macro_page(1, 16)
     elseif player.sub_job == 'WAR' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 4')
         send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 5')
         send_command('bind ^numpad9 gs c set WeaponSet Nuking;input /macro set 6')
-        set_macro_page(3, 16)
+        set_macro_page(4, 16)
     else
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
         send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 2')
@@ -566,7 +569,7 @@ function init_gear_sets()
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back=gear.BLU_MAB_Cape, -- TODO
-        waist="Witful Belt",
+        waist="Acuity Belt +1",
         legs=gear.Empyrean_Legs,
         feet="Malignance Boots"
     }
@@ -601,7 +604,7 @@ function init_gear_sets()
         neck="Loricate Torque +1",
         ear1="Mendi. Earring",
         ear2="Regal Earring",
-        ring1="Metamporph Ring +1",
+        ring1="Metamorph Ring +1",
         ring2=gear.Stikini_2,
         back="Oretan. Cape +1",
         waist="Luminary Sash",
@@ -836,8 +839,8 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1",
         head=gear.Malignance_Head,
         body=gear.Empyrean_Body,
-        hands=gear.Malignance_Hands,
-        legs=gear.Malignance_Legs,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
         feet=gear.Malignance_Feet,
         neck="Warder's Charm +1",
         ear1="Eabani Earring",
@@ -865,10 +868,15 @@ function init_gear_sets()
         waist="Plat. Mog. Belt",
     }
 
-    sets.idle.Town = sets.engaged.DW.MaxHaste
+    sets.idle.Town = sets.midcast['Blue Magic'].Magical
     sets.idle.Weak = sets.idle.DT
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { legs=gear.Carmine_A_Legs }
+    end
+    
     sets.latent_refresh = {waist="Fucho-no-obi"}
 
     sets.defense.PDT = {

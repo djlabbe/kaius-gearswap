@@ -26,7 +26,7 @@
 -- alt+F12 turns off Defense modes
 -- ctrl+F12 cycles Idle modes
 --
--- Keep in mind that any time you Change Jobs/Subjobs, your Pet/Correlation/etc reset to default options.
+-- Keep in mind that any time you Change Jobs/Subjobs, your Pet/etc reset to default options.
 -- F12 will list your current options.
 --
 -------------------------------------------------------------------------------------------------------------------
@@ -161,8 +161,8 @@ function user_setup()
     gear.Artifact_Head = { name= "Totemic Helm +2" }
     gear.Artifact_Body = { name= "Totemic Jackcoat +2" }
     gear.Artifact_Hands = { name= "Totemic Gloves +3" }
-    -- gear.Artifact_Legs = { name= "Totemic Trousers +1" }
-    -- gear.Artifact_Feet = { name= "Totemic Gaiters +1" }
+    gear.Artifact_Legs = { name= "Totemic Trousers +2" }
+    gear.Artifact_Feet = { name= "Totemic Gaiters +2" }
 
     gear.Relic_Head = { name= "Ankusa Helm +3" }
     gear.Relic_Body = { name= "Ankusa Jackcoat +3" }
@@ -208,7 +208,7 @@ function user_setup()
 end
 
 function user_unload()
-    -- Unbinds the Reward, Correlation, JugMode, and Treasure hotkeys.
+    -- Unbinds the Reward, JugMode hotkeys.
     send_command('unbind ^=')
     send_command('unbind @=')
     send_command('unbind !f8')
@@ -220,7 +220,6 @@ function user_unload()
     unbind_numpad()
     -- Removes any Text Info Boxes
     send_command('text JugPetText delete')
-    send_command('text CorrelationText delete')
     send_command('text AccuracyText delete')
 end
 
@@ -228,7 +227,9 @@ end
 function init_gear_sets()
 
     gear.BST_DW_Cape = { name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
-    gear.BST_WS1_Cape = { name="Artio's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}}
+    gear.BST_WS1_Cape = { name="Artio's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+    gear.BST_PETMACC_Cape = { name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Eva.+20 /Mag. Eva.+20','Pet: Mag. Acc.+10','"Fast Cast"+10','Phys. dmg. taken-10%',}}
+    gear.BST_PETTP_Cape = { name="Artio's Mantle", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Eva.+20 /Mag. Eva.+20','Pet: Haste+10','System: 1 ID: 1246 Val: 4',}}
 
     sets.Enmity = {
         head="Halitus Helm",
@@ -343,13 +344,13 @@ function init_gear_sets()
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck="Bst. Collar +2",
+        neck="Beastmaster Collar +2",
         waist="Incarnation Sash",
         ear1="Crepuscular Earring",
         ear2="Enmerkar Earring",
         ring1="Tali'ah Ring",
         ring2="Cath Palug Ring",
-        back=gear.BST_TP_Cape,
+        back=gear.BST_PETMACC_Cape,
     }
 
     sets.midcast.Pet.Buff = {
@@ -455,7 +456,11 @@ function init_gear_sets()
         feet=gear.Malignance_Feet,
     }
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Skadi's Jambeaux +1" }
+    end
 
 
     --------------------
@@ -599,7 +604,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Nukumi Earring +1",
         ring1="Gere Ring",
-        ring2="Sroda Ring",
+        ring2=gear.Cornelia_Or_Sroda,
         back=gear.BST_WS1_Cape,
         waist="Sailfi Belt +1",
     }
@@ -616,7 +621,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Thrud Earring",    
         ring1="Gere Ring",
-        ring2="Sroda Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.BST_WS1_Cape,
         waist="Sailfi Belt +1",
     }
@@ -631,8 +636,8 @@ function init_gear_sets()
         neck="Rep. Plat. Medal",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",      
-        ring1="Regal Ring",
-        ring2="Epaminondas's Ring",
+        ring1=gear.Cornelia_Or_Regal,
+        ring2="Gere Ring",
         back=gear.BST_WS1_Cape,
         waist="Sailfi Belt +1",
     }
@@ -648,7 +653,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Thrud Earring",      
         ring1="Gere Ring",
-        ring2="Sroda Ring",
+        ring2=gear.Cornelia_Or_Sroda,
         waist="Fotia Belt",
         back=gear.BST_WS1_Cape,
     } 
@@ -686,11 +691,11 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Onslaught'] = {
-        ammo="Aurgelmir Orb +1",
+        ammo="Coiste Bodhar",
         head=gear.Relic_Head,
-        neck="Bst. Collar +2",
-        ear1="Ishvara Earring",
-        ear2="Thrud Earring",
+        neck="Beastmaster Collar +2",
+        ear1="Lugra Earring +1",
+        ear2="Nukumi Earring +1",
         body=gear.Gleti_Body,
         hands=gear.Artifact_Hands,
         ring1="Epaminondas's Ring",
@@ -834,7 +839,7 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet
     }
-    sets.midcast.ExtraMAB = {ear1="Novio Earring"}
+    sets.midcast.ExtraMAB = {ear1="Crematio Earring"}
     sets.midcast.ExtraWSDMG = {ear1="Ishvara Earring"}
 
     ---------------
@@ -848,34 +853,21 @@ function init_gear_sets()
 
     sets.idle.Pet.Engaged = {
         ammo="Hesperiidae",
-        head=gear.Emicho_C_Head,
+        head=gear.Empyrean_Head,
         neck="Beastmaster Collar +2",
         ear1="Enmerkar Earring",
         ear2="Nukumi Earring +1",
-        body=gear.Nyame_Body,
+        body=gear.Relic_Body,
         hands=gear.Emicho_C_Hands,
         ring1=gear.Varar_1,
         ring2=gear.Varar_2,
-        back=gear.BST_DW_Cape,
+        back=gear.BST_PETTP_Cape,
         waist="Incarnation Sash",
         legs=gear.Relic_Legs,
         feet=gear.Nyame_Feet
     }
 
-    sets.idle.Town = {
-        ammo="Hesperiidae",        
-        head=gear.Gleti_Head,
-        body=gear.Gleti_Body,
-        hands=gear.Gleti_Hands,
-        legs=gear.Gleti_Legs,
-        feet=gear.Gleti_Feet,
-        neck="Beastmaster Collar +2",
-        ear1="Sherida Earring",
-        ear2="Balder Earring +1",    
-        ring1="Gere Ring",
-        ring2="Shneddick Ring +1",
-        back=gear.BST_DW_Cape,
-    }
+    sets.idle.Town = sets.idle.Pet.Engaged
 
     ----------------
     -- OTHER SETS --
@@ -930,10 +922,10 @@ function init_gear_sets()
 
     sets.buff['Killer Instinct'] = {body=gear.Empyrean_Body}
 
-    sets.Pangu = {main="Pangu", sub="Agwu's Axe"}
+    sets.Pangu = {main="Pangu", sub="Ikenga's Axe"}
     sets.Dolichenus = {main="Dolichenus", sub="Ikenga's Axe" }    
     sets.Tauret = {main="Tauret", sub="Agwu's Axe" }
-    sets.DefaultShield = {sub="Thuellaic Ecu +1"}
+    sets.DefaultShield = {sub="Adapa Shield"}
     
     sets.midcast.Pet.MagicAtkReady = {}
     sets.midcast.Pet.MagicAtkReady.TPBonus = {}
@@ -1097,15 +1089,11 @@ function customize_melee_set(meleeSet)
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- Hooks for Reward, Correlation, Treasure Hunter, and Pet Mode handling.
+-- Hooks for Reward, Treasure Hunter, and Pet Mode handling.
 -------------------------------------------------------------------------------------------------------------------
 
 function job_state_change(stateField, newValue, oldValue)
-    if stateField == 'Correlation Mode' then
-        state.CorrelationMode:set(newValue)
-    elseif stateField == 'Treasure Mode' then
-        state.TreasureMode:set(newValue)
-    elseif stateField == 'Reward Mode' then
+    if stateField == 'Reward Mode' then
         state.RewardMode:set(newValue)
     elseif stateField == 'Pet Mode' then
         state.CombatWeapon:set(newValue)
@@ -1248,8 +1236,6 @@ function display_current_job_state(eventArgs)
     if state.Kiting.value then
         msg = msg .. ', Kiting'
     end
-
-    msg = msg .. ', Corr.: '..state.CorrelationMode.value
 
     if state.JugMode.value ~= 'None' then
         add_to_chat(8,'-- Jug Pet: '.. PetName ..' -- (Pet Info: '.. PetInfo ..', '.. PetJob ..')')
@@ -1552,10 +1538,6 @@ function display_mode_info()
         send_command('text AccuracyText pos '..x..' '..y..'')
         send_command('text AccuracyText size '..TextSize..'')
         y = y + (TextSize + 6)
-        send_command('text CorrelationText create Corr. Mode: '..state.CorrelationMode.value..'')
-        send_command('text CorrelationText pos '..x..' '..y..'')
-        send_command('text CorrelationText size '..TextSize..'')
-        y = y + (TextSize + 6)
         send_command('text JugPetText create Jug Mode: '..state.JugMode.value..'')
         send_command('text JugPetText pos '..x..' '..y..'')
         send_command('text JugPetText size '..TextSize..'')
@@ -1566,7 +1548,6 @@ end
 function update_display_mode_info()
     if DisplayModeInfo == 'true' then
         send_command('text AccuracyText text Acc. Mode: '..state.OffenseMode.value..'')
-        send_command('text CorrelationText text Corr. Mode: '..state.CorrelationMode.value..'')
         send_command('text JugPetText text Jug Mode: '..state.JugMode.value..'')
     end
 end

@@ -23,21 +23,76 @@ function define_global_sets()
     gear.Cornelia_Or_Ilabrat = { name = "Ilabrat Ring" }
     gear.Cornelia_Or_Gere = { name = "Gere Ring" }
 
-    if player.inventory["Cornelia's Ring"] or player.wardrobe["Cornelia's Ring"] then
-        gear.Cornelia_Or_Epaminondas = { name = "Cornelia's Ring" }
+    gear.Ephramad_Or_Regal = { name = "Regal Ring" }
+    gear.Ephramad_Or_Petrov = { name = "Petrov Ring" }
+    gear.Ephramad_Or_Ilabrat = { name = "Ilabrat Ring" }
+    gear.Ephramad_Or_Epaminondas = { name = "Epaminondas's Ring" }
+    gear.Ephramad_Or_Sroda = { name = "Sroda Ring" }
+
+    gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe7"}
+    gear.Lehko_Or_Chirich2 = {name="Chirich Ring +1", bag="wardrobe8"}
+    gear.Lehko_Or_Begrudging = {name="Begrudging Ring" }
+    gear.Lehko_Or_Dingir = {name="Dingir Ring" }
+    gear.Lehko_Or_Hetairoi = {name="Hetairoi Ring"}
+    gear.Lehko_Or_Moonlight2 = {name="Moonlight Ring", bag="wardrobe8"}
+    gear.Lehko_Or_Petrov = {name="Petrov Ring"}
+
+    gear.Gerubu_Or_Stikini1 = {name="Stikini Ring +1", bag="wardrobe7"}
+    gear.Gerubu_Or_Stikini2 = {name="Stikini Ring +2", bag="wardrobe8"}
+    gear.Gerubu_Or_Shadow = { name = "Shadow Ring" }
+
+    gear.Medada_Or_Freke = { name = "Freke Ring" }
+    gear.Medada_Or_Metamorph = { name = "Metamorph Ring +1" }
+
+    if item_available("Cornelia's Ring") then
+        gear.Cornelia_Or_Epaminondas = { name = "Cornelia's Ring" }     
         gear.Cornelia_Or_Sroda = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Niqmaddu = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Regal = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Ilabrat = { name = "Cornelia's Ring" }
         gear.Cornelia_Or_Gere = { name = "Cornelia's Ring" }
+    end   
+
+    if item_available("Ephramad's Ring") then
+        gear.Ephramad_Or_Regal = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Petrov = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Ilabrat = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Epaminondas = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Sroda = { name = "Ephramad's Ring" }
     end
 
-    gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe7"}
-    gear.Lehko_Or_Chirich2 = {name="Chirich Ring +1", bag="wardrobe8"}
-
-    if player.inventory["Lehko Habhoka's Ring"] or player.wardrobe["Lehko Habhoka's Ring"] then
+    if item_available("Lehko Habhoka's Ring") then
         gear.Lehko_Or_Chirich1 = { name = "Lehko Habhoka's Ring" }
         gear.Lehko_Or_Chirich2 = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Begrudging = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Dingir = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Hetairoi = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Moonlight2 = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Petrov = { name = "Lehko Habhoka's Ring" }
+    end
+ 
+
+    if item_available("Gurebu's Ring") then
+        gear.Gerubu_Or_Stikini1 = { name = "Gurebu's Ring" }
+        gear.Gerubu_Or_Stikini2 = { name = "Gurebu's Ring" }
+        gear.Gerubu_Or_Shadow = { name = "Gurebu's Ring" }
+    end
+
+    if item_available("Medada's Ring") then
+        gear.Medada_Or_Freke = { name = "Medada's Ring" }
+        gear.Medada_Or_Metamorph = { name = "Medada's Ring"  }
+    end
+
+    ------------------------
+    -- ADOULIN FALLBACK RING ---
+    ------------------------
+
+    gear.Janniston_Or_Gelatinous = {name="Gelatinous Ring +1", priority=135}
+    gear.Janniston_Or_Haomas = {name="Haoma's Ring"}
+
+    if item_available("Janniston Ring +1") then
+        gear.Janniston_Or_Gelatinous = { name = "Janniston Ring +1", priority=1 }
+        gear.Janniston_Or_Haomas = { name = "Janniston Ring +1", priority=1 }
     end
 
     ---------------------
@@ -55,6 +110,12 @@ function define_global_sets()
 
     gear.Varar_1 = {name="Varar Ring +1", bag="wardrobe7"}
     gear.Varar_2 = {name="Varar Ring +1", bag="wardrobe8"}
+
+    -----------------------
+    ----- PRIO. ITEMS -----
+    -----------------------
+    
+    gear.Platinum_Moogle_Belt = {name="Platinum Moogle Belt", priority=999}
     
     -----------------------
     -- Augmented Weapons --
@@ -115,7 +176,10 @@ function define_global_sets()
     gear.Chironic_PHLX_Legs = {name="Chironic Hose", augments={'Attack+7','Crit.hit rate+1','Phalanx +5','Mag. Acc.+12 "Mag.Atk.Bns."+12',}}
 
     gear.Herc_FC_Head = { name="Herculean Helm", augments={'"Mag.Atk.Bns."+1','"Fast Cast"+6','INT+3','Mag. Acc.+10',}}
+    
     gear.Herc_PHLX_Body = { name="Herculean Vest", augments={'CHR+9','AGI+3','Phalanx +4','Mag. Acc.+3 "Mag.Atk.Bns."+3',}}
+    gear.Herc_PHLX_Hands = { name="Herculean Gloves", augments={'"Fast Cast"+2','Attack+25','Phalanx +4','Mag. Acc.+13 "Mag.Atk.Bns."+13',}}
+    gear.Herc_PHLX_Feet = { name="Herculean Boots", augments={'"Mag.Atk.Bns."+3','DEX+15','Phalanx +5',}}
 
     gear.Valo_PET_Body = {name="Valorous Mail", augments={'Pet: Mag. Acc.+24','Pet: "Dbl.Atk."+4 Pet: Crit.hit rate +4','Pet: MND+8','Pet: Accuracy+12 Pet: Rng. Acc.+12',}}
     gear.Valo_QA_Body = { name="Valorous Mail", augments={'Crit.hit rate+5','STR+8','Quadruple Attack +2','Accuracy+19 Attack+19',}}
@@ -176,8 +240,12 @@ function define_global_sets()
     gear.Amalric_A_Head = {name="Amalric Coif +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
     gear.Amalric_A_Body = {name="Amalric Doublet +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
     gear.Amalric_D_Hands = {name="Amalric Gages +1", augments={'INT+12','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
+   
     gear.Amalric_A_Legs = {name="Amalric Slops +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
-    gear.Amalric_D_Feet = {name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}}
+   
+    -- gear.Amalric_D_Feet = {name="Amalric Nails +1", augments={'Mag. Acc.+20','"Mag.Atk.Bns."+20','"Conserve MP"+7',}}
+   
+    gear.Amalric_A_Feet = {name="Amalric Nails +1", augments={'MP+80','Mag. Acc.+20','"Mag.Atk.Bns."+20',}}
 
     gear.Souveran_C_Head = { name="Souv. Schaller +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=280}
     gear.Souveran_C_Body = { name="Souv. Cuirass +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=171}
@@ -185,7 +253,6 @@ function define_global_sets()
     gear.Souveran_C_Legs = { name="Souv. Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=163}
     gear.Souveran_D_Feet = { name="Souveran Schuhs +1", augments={'HP+65','Attack+25','Magic dmg. taken -4',}, priority=187}
 
-    gear.Ryuo_A_Hands = {name="Ryuo Tekko +1", augments={'STR+12','DEX+12','Accuracy+20',}}
     gear.Ryuo_C_Head = {name="Ryuo Somen +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}}
     gear.Ryuo_C_Feet = {name="Ryuo Sune-Ate +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}}
     gear.Ryuo_D_Legs = {name="Ryuo Hakama +1", augments={'Accuracy+25','"Store TP"+5','Phys. dmg. taken -4',}}
@@ -457,6 +524,14 @@ function check_moving()
             state.Auto_Kite:set(false)
         end
     end
+end
+
+function item_available(item)
+	if player.inventory[item] or player.wardrobe[item] or player.wardrobe2[item] or player.wardrobe3[item] or player.wardrobe4[item] or player.wardrobe5[item] or player.wardrobe6[item] or player.wardrobe7[item] or player.wardrobe8[item] then
+		return true
+	else
+		return false
+	end
 end
 
 function check_gear()

@@ -80,10 +80,10 @@ function user_setup()
 
     include('Global-Binds.lua') 
 
-    gear.Artifact_Head = { name= "Academic's Mortarboard +2" }
-    gear.Artifact_Body = { name= "Academic's Gown +1" }
-    gear.Artifact_Hands = { name= "Academic's Bracers +1" }
-    gear.Artifact_Legs = { name= "Academic's Pants +1" }
+    gear.Artifact_Head = { name= "Academic's Mortarboard +3" }
+    gear.Artifact_Body = { name= "Academic's Gown +3" }
+    gear.Artifact_Hands = { name= "Academic's Bracers +3" }
+    gear.Artifact_Legs = { name= "Academic's Pants +3" }
     gear.Artifact_Feet = { name= "Academic's Loafers +3" }
 
     gear.Relic_Head = { name= "Pedagogy Mortarboard +3" }
@@ -616,7 +616,7 @@ function init_gear_sets()
     })
 
     sets.midcast['Elemental Magic'] = {
-        main="Daybreak",
+        main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Empyrean_Head,
@@ -634,7 +634,7 @@ function init_gear_sets()
     }
 
     sets.midcast.Helix = {
-        main="Daybreak",
+        main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Relic_Head,

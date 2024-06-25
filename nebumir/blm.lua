@@ -92,6 +92,7 @@ function user_setup()
     send_command('bind !i input /ma "Blink" <me>')
     send_command('bind !u input /ma "Aquaveil" <me>')
 
+    send_command('bind !` input /ja "Mana Wall" <me>')
     send_command('bind !t input /ma "Stun" <t>')
     send_command('bind !b input /ma "Bind" <t>')
 
@@ -139,9 +140,9 @@ end
 function init_gear_sets()
     -- gear.Artifact_Head = { name="Spaekona's Petasos +3" }
     gear.Artifact_Body = { name="Spaekona's Coat +3" }
-    -- gear.Artifact_Hands = { name="Spaekona's Gloves +3" }
+    gear.Artifact_Hands = { name="Spaekona's Gloves +3" }
     -- gear.Artifact_Legs = { name="Spaekona's Tonban +3" }
-    -- gear.Artifact_Feet = { name="Spaekona's Sabots +3" }
+    gear.Artifact_Feet = { name="Spaekona's Sabots +3" }
 
     gear.Relic_Head = { name="Archmage's Petasos +3" }
     gear.Relic_Body = { name="Archmage's Coat +3" }
@@ -426,8 +427,8 @@ function init_gear_sets()
     sets.midcast.Aspir = sets.midcast.Drain
 
     sets.midcast['Elemental Magic'] = {
-        main="Marin Staff +1", --10
-        sub="Enki Strap",
+        main="Bunzi's Rod", --10
+        sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Empyrean_Head, --7/(7)
         body=gear.Empyrean_Body,
@@ -444,8 +445,8 @@ function init_gear_sets()
     }
 
     sets.MagicBurst = {
-        main="Marin Staff +1", --10
-        sub="Enki Strap",
+        main="Bunzi's Rod", --10
+        sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Empyrean_Head, --7/(7)
         body=gear.Empyrean_Body,
@@ -509,8 +510,8 @@ function init_gear_sets()
     -- Idle sets
 
     sets.idle = {
-        main="Marin Staff +1", --10
-        sub="Enki Strap",
+        main="Bunzi's Rod", --10
+        sub="Ammurapi Shield",
         ammo="Staunch Tathlum +1",
         head="Merlinic Hood",
         body=gear.Relic_Body,
@@ -523,12 +524,12 @@ function init_gear_sets()
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back=gear.BLM_MAB_Cape,
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {
-        main="Marin Staff +1", --10
-        sub="Enki Strap",
+        main="Bunzi's Rod", --10
+        sub="Ammurapi Shield",
         ammo="Staunch Tathlum +1", --3/3
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body, --8/8
@@ -540,7 +541,7 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.BLM_MAB_Cape, --6/6
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     })
 
     sets.idle.ManaWall = {

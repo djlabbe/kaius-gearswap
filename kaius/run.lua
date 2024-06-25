@@ -51,7 +51,7 @@ function user_setup()
     state.MagicalDefenseMode:options('MDT')
 
     state.PhalanxMode = M(false, 'Equip Phalanx Gear')
-    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Helheim', 'Lycurgos'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Lycurgos'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
     state.Runes = M{['description']='Runes', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda', 'Lux', 'Tenebrae'}
@@ -59,8 +59,8 @@ function user_setup()
     gear.Artifact_Head = { name="Runeist Bandeau +3", priority=109 }
     gear.Artifact_Body = { name="Runeist Coat +3", priority=218 }
     gear.Artifact_Hands = { name="Runeist Mitons +3", priority=85 }
-    gear.Artifact_Legs = { name="Runeist Trousers +1", priority=80 }
-    gear.Artifact_Feet = { name="Runeist Bottes +1", priority=74 }
+    gear.Artifact_Legs = { name="Runeist Trousers +2", priority=80 }
+    gear.Artifact_Feet = { name="Runeist Bottes +2", priority=74 }
 
     gear.Relic_Head = { name="Futhark Bandeau +3", priority=56 }
     gear.Relic_Body = { name="Futhark Coat +3", priority=119 }
@@ -74,14 +74,11 @@ function user_setup()
     gear.Empyrean_Legs = { name="Erilaz Leg Guards +3", priority=100 }
     gear.Empyrean_Feet = { name="Erilaz Greaves +3", priority=48 }
 
-    gear.RUN_TANK_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Parrying rate+5%',}, priority=60}
+    gear.RUN_TANK_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Parrying rate+5%'}, priority=60}
     gear.RUN_FC_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}, priority=60}
     gear.RUN_SIRD_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Spell interruption rate down-10%',}, priority=60}
     gear.RUN_TP_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}, priority=60}
     gear.RUN_WS1_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Weapon skill damage +10%','Phys. dmg. taken-10%',}, priority=60}
-
-    -- These are capes that I haven't made yet. I just use capes I have made as placeholders.
-    gear.RUN_WS2_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Parrying rate+5%',}, priority=60}
 
     include('Global-Binds.lua')
 
@@ -121,12 +118,15 @@ function user_setup()
 
     if player.sub_job == 'SCH' then
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 2')
-        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 3')
         send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 2')
         set_macro_page(2, 22)
-    else   
+    elseif player.sub_job == 'BLU' then 
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 1')
+        send_command('lua l azureSets')
+        set_macro_page(1, 22)
+    else 
+        send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 1')
         send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 1')
         set_macro_page(1, 22)
     end
@@ -156,6 +156,7 @@ function user_unload()
     send_command('unbind !delete')
     send_command('unbind @e')
     send_command('unbind @w')
+    send_command('lua u azureSets')
     unbind_numpad()
 
 end
@@ -197,7 +198,7 @@ function init_gear_sets()
         legs=gear.Agwu_Legs,
         feet=gear.Agwu_Feet,
         neck={name="Unmoving Collar +1", priority=200},
-        ear1="Novio Earring",
+        ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Mujin Band",
         ring2="Fenrir Ring +1",
@@ -252,7 +253,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Moonshade Earring",
         ring1="Regal Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.RUN_WS1_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     }
@@ -320,14 +321,14 @@ function init_gear_sets()
         hands={name="Regal Gauntlets", priority=205}, --[10]
         legs=gear.Carmine_A_Legs, --[20]
         feet=gear.Empyrean_Feet,
-        neck="Moonlight Necklace", --15/[15]
+        neck="Moonlight Necklace", --[15]
         ear1="Magnetic Earring", --[8]
         ear2={name="Odnowa Earring +1", priority=110},
         ring1=gear.Moonlight_1,
         ring2={name="Gelatinous Ring +1", priority=135},
         back=gear.RUN_SIRD_Cape, --[10]
         waist={name="Platinum Moogle Belt", priority=999}, 
-    } --99+10 = 109 SIR  (3492 HP + 41 PDT)
+    } --94+10 = 104 SIR  (3745 HP + 44 DT)
 
     sets.midcast['Blue Magic'] = sets.midcast.SpellInterrupt
     sets.midcast['Blue Magic'].Enmity = sets.midcast.Blue 
@@ -343,20 +344,20 @@ function init_gear_sets()
     sets.midcast.Stun = sets.midcast.Enmity;
 
     sets.midcast.Cure = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Nyame_Head,
+        ammo="Staunch Tathlum +1",-- [11]
+        head=gear.Empyrean_Head, --[20]
         body=gear.Nyame_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet,
-        neck="Sacro Gorget", -- 10
-        ear1={name="Tuisto Earring", priority=150},
-        ear2="Mendi. Earring", -- 5
+        hands={name="Regal Gauntlets", priority=205}, --[10]
+        legs=gear.Carmine_A_Legs, --[20]
+        feet=gear.Empyrean_Feet, --(DT)
+        neck="Moonlight Necklace", --[15]
+        ear1="Magnetic Earring", --[8]
+        ear2={name="Odnowa Earring +1", priority=110}, --(DT+HP)
         ring1=gear.Moonlight_1,
-        ring2="Eihwaz Ring", 
-        back=gear.RUN_FC_Cape,
-        waist="Sroda Belt", --35
-    }
+        ring2={name="Gelatinous Ring +1", priority=135},
+        back=gear.RUN_SIRD_Cape, --[10]
+        waist="Sroda Belt", --35CP
+    } --3405 HP, 104SIR, 41 DT
 
     sets.midcast['Enhancing Magic'] = set_combine(sets.midcast.SpellInterrupt, {
         hands={name="Regal Gauntlets", priority=205}, --[10]
@@ -369,9 +370,9 @@ function init_gear_sets()
         -- main="Deacon Sword", --4
         head=gear.Relic_Head, --7
         body=gear.Herc_PHLX_Body, --4
-        hands=gear.Taeon_Phalanx_Hands, --3(10)
+        hands=gear.Herc_PHLX_Hands, --4
         legs=gear.Taeon_Phalanx_Legs, --3(10)
-        feet=gear.Taeon_Phalanx_Feet, --3(10)
+        feet=gear.Herc_PHLX_Feet, --5
     }
 
     sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], sets.Phalanx)
@@ -408,31 +409,27 @@ function init_gear_sets()
         ring1="Metamor. Ring +1",
         ring2="Kishar Ring",
         back=gear.RUN_SIRD_Cape,
-        waist="Acuity Belt +1",
+        waist="Orpheus's Sash",
     }
     
     sets.engaged = {
         ammo="Staunch Tathlum +1",
-        -- ammo="Homiliary",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
         neck={name="Futhark Torque +2", priority=60},
-        -- neck="Sibyl Scarf",
         ear1={name="Tuisto Earring", priority=150},
         ear2={name="Odnowa Earring +1", priority=110}, 
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
-        -- ring1=gear.Stikini_1,
-        -- ring2=gear.Stikini_2,
         back=gear.RUN_TANK_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     } --3708 hp
 
 
-    sets.Hybrid = set_combine(sets.engaged, {
+    sets.Hybrid = {
         ammo="Coiste Bodhar",
         head=gear.Nyame_Head,
         body="Ashera Harness",
@@ -446,13 +443,12 @@ function init_gear_sets()
         ring1=gear.Moonlight_1,
         ring2="Niqmaddu Ring",
         back=gear.RUN_TP_Cape,
-    })
+    }
 
     sets.engaged.DD = set_combine(sets.engaged, sets.Hybrid)
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        -- ammo="Homiliary",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
@@ -460,11 +456,9 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck={name="Futhark Torque +2", priority=60},
         ear1={name="Tuisto Earring", priority=150},
-        ear2={name="Odnowa Earring +1", priority=110}, 
+        ear2="Erilaz Earring +1", 
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
-        -- ring1=gear.Stikini_1,
-        -- ring2=gear.Stikini_2,
         back=gear.RUN_TANK_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     }
@@ -485,13 +479,7 @@ function init_gear_sets()
         waist={name="Platinum Moogle Belt", priority=999}, 
     } --3183 hp
 
-    sets.idle.Phalanx = set_combine(sets.idle, {
-        head=gear.Relic_Head, --7
-        body=gear.Taeon_Phalanx_Body, --3(10)
-        hands=gear.Taeon_Phalanx_Hands, --3(10)
-        legs=gear.Taeon_Phalanx_Legs, --3(10)
-        feet=gear.Taeon_Phalanx_Feet, --3(10)
-    })
+    sets.idle.Phalanx = set_combine(sets.idle, sets.Phalanx)
 
     sets.idle.Refresh = set_combine(sets.idle, {
         ammo="Homiliary",
@@ -536,14 +524,13 @@ function init_gear_sets()
         waist={name="Platinum Moogle Belt", priority=999}, 
     }
 
-    sets.defense.Parry = {
-        hands="Turms Mittens +1",
-        legs=gear.Empyrean_Legs,
-    }
-
     sets.idle.Town = sets.engaged
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { legs=gear.Carmine_A_Legs }
+    end
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -717,9 +704,6 @@ function customize_melee_set(meleeSet)
 end
 
 function customize_defense_set(defenseSet)
-    if buffactive['Battuta'] then
-        defenseSet = set_combine(defenseSet, sets.defense.Parry)
-    end
     if state.Buff.Doom then
         defenseSet = set_combine(defenseSet, sets.buff.Doom)
     end

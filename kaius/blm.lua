@@ -1,7 +1,6 @@
 -------------------------------------------------------------------------------------------------------------------
 --  Keybinds
 -------------------------------------------------------------------------------------------------------------------
---
 --  Modes:      [ F10 ]             Emergency -PDT Mode
 --              [ ALT+F10 ]         Toggle Kiting Mode
 --              [ F11 ]             Emergency -MDT Mode
@@ -9,7 +8,6 @@
 --              [ F12 ]             Update Current Gear / Report Current Status
 --              [ CTRL+F12 ]        Cycle Idle Modes
 --              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
---
 -------------------------------------------------------------------------------------------------------------------
 
 function get_sets()
@@ -33,6 +31,8 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(true, 'Magic Burst')
 
+    state.WeaponMode = M{['description']='Weapon Mode', 'Bunzi','Laevateinn' }
+
     include('Global-Binds.lua')
 
     send_command('bind @w gs c toggle WeaponLock')
@@ -43,20 +43,21 @@ function user_setup()
     send_command('bind !o input /ma "Shell II" <stpc>')
     send_command('bind !i input /ma "Blink" <me>')
     send_command('bind !u input /ma "Aquaveil" <me>')
+    send_command('bind !s input /ja Sublimation <me>')
 
+    send_command('bind !` input /ja "Mana Wall" <me>')
     send_command('bind !t input /ma "Stun" <t>')
     send_command('bind !b input /ma "Bind" <t>')
-
-    send_command('bind !numpad1 input /macro set 1')
-    send_command('bind !numpad2 input /macro set 2')
-    send_command('bind !numpad3 input /macro set 3')
-    send_command('bind !numpad4 input /macro set 4')
-    send_command('bind !numpad5 input /macro set 5')
-    send_command('bind !numpad6 input /macro set 6')
+    send_command('bind !e input /ja "Elemental Seal" <me>')
+    send_command('bind !m input /ws "Myrkr" <me>')
+    send_command('bind @1 input /ws "Vidohunir" <t>')
 
     send_command('bind !F1 input /ja "Manafont" <me>')
     send_command('bind !F2 input /ja "Subtle Sorcery" <me>')
     
+    send_command('bind ^numpad7 gs c set WeaponMode Bunzi;gs c set WeaponLock false')
+    send_command('bind ^numpad8 gs c set WeaponMode Laevateinn;gs c set WeaponLock true')
+
     if player.sub_job == 'RDM' then
         send_command('bind !g input /ma "Gravity" <t>')
     end
@@ -114,7 +115,7 @@ function init_gear_sets()
     gear.Empyrean_Feet = { name="Wicce Sabots +3" }
 
     gear.BLM_MAB_Cape = { name="Taranus's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}} --X
-    gear.BLM_Death_Cape = { name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10','Damage taken-5%',}}
+    gear.BLM_Death_Cape = { name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10','Damage taken-5%',}} --X
 
     sets.precast.JA['Mana Wall'] = {
         feet=gear.Empyrean_Feet,
@@ -131,7 +132,7 @@ function init_gear_sets()
         feet=gear.Merlinic_FC_Feet,
         neck="Orunmila's Torque",
         ear1="Malignance Earring",
-        ear2="Enchntr. Earring +1",
+        ear2="Enchanter's Earring +1",
         ring1="Kishar Ring",
         ring2="Lebeche Ring",
         back="Fi Follet Cape +1",
@@ -163,7 +164,7 @@ function init_gear_sets()
 
     -- 8% From JP, 30 from celerity, (10 from /SCH) = 32% Needed
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
-        ammo="Impatiens",
+        ammo="Sapience Orb",
         head=gear.Empyrean_Head,
         body="Zendik Robe",
         hands=gear.Agwu_Hands,
@@ -173,7 +174,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Enchntr. Earring +1",
         back="Fi Follet Cape +1",
-        waist="Witful Belt",
+        waist="Shinjutsu-no-Obi +1",
         ring1="Lebeche Ring",
         ring2="Defending Ring",       
     })
@@ -201,10 +202,6 @@ function init_gear_sets()
         main="Daybreak", 
         sub="Ammurapi Shield", 
         waist="Shinjutsu-no-Obi +1"
-    })
-
-    sets.precast.Storm = set_combine(sets.precast.FC, {
-        ring2=gear.Stikini_2,
     })
 
     sets.precast.WS = {
@@ -251,7 +248,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Archon Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Ephramad_Or_Petrov,
         back=gear.BLM_MAB_Cape, --WSD Better
     }
 
@@ -284,7 +281,7 @@ function init_gear_sets()
         sub="Genmei Shield",
         head="Vanya Hood",
         body="Shamash Robe",
-        -- hands="Hieros Mittens",
+        hands="Hieros Mittens",
         feet="Vanya Clogs",
         neck="Debilis Medallion",
         ear1="Meili Earring",
@@ -443,29 +440,34 @@ function init_gear_sets()
 
     sets.midcast.Death = {
         main="Hvergelmir",
-        sub="Khonsu",
+        sub="Niobid Strap",
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
-        body=gear.Merlinic_MB_body,
-        hands=gear.Artifact_Hands, 
-        legs=gear.Empyrean_Feet,
-        feet=gear.Artifact_Feet,
+        body=gear.Relic_Body,
+        hands=gear.Agwu_Hands, 
+        legs=gear.Empyrean_Legs,
+        feet=gear.Amalric_A_Feet,
         neck="Sorcerer's stole +2",
         ear1="Barkarole Earring",
-        ear2="Regal Earring",
+        ear2="Etiolation Earring",
         ring1="Archon Ring",
-        ring2="Metamor. Ring +1",
+        ring2="Mephitas's Ring +1",
         back=gear.BLM_Death_Cape,
         waist="Acuity Belt +1",
     }
 
-    sets.midcast.Death.Resistant = sets.midcast.Death
-
     sets.midcast.Death.Resistant = set_combine(sets.midcast.Death, {
-        head="Amalric Coif +1",
+        sub="Khonsu",
+        head=gear.Amalric_A_Head,
+        ring1="Metamorph Ring +1",
+        ear2="Regal Earring",
+        hands=gear.Artifact_Hands,
+        feet=gear.Artifact_Feet,
     })
 
     sets.midcast['Elemental Magic'] = {
+        -- main="Laevateinn",
+        -- sub="Enki Strap",
         main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Sroda Tathlum",
@@ -478,16 +480,18 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Freke Ring",
-        ring2="Metamorph Ring +1",
+        ring2=gear.Medada_Or_Metamorph,
         back=gear.BLM_MAB_Cape,
         waist="Acuity Belt +1",
     }
 
     sets.MagicBurst = {
+        -- main="Laevateinn",
+        -- sub="Enki Strap",
         main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
-        head="Ea Hat +1",
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Agwu_Hands,
         legs=gear.Empyrean_Legs,
@@ -496,7 +500,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Freke Ring",
-        ring2="Metamorph Ring +1",
+        ring2=gear.Medada_Or_Metamorph,
         back=gear.BLM_MAB_Cape,
         waist="Acuity Belt +1",
     }
@@ -530,12 +534,19 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Herald's Gaiters" }
+    end
+    
+    
     sets.latent_refresh = { waist="Fucho-no-obi" }
 
     sets.engaged = {
+        ammo="Hasty Pinion +1",
         head="Blistering Sallet +1",
-        body=gear.Agwu_Body,
+        body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
@@ -544,6 +555,7 @@ function init_gear_sets()
         ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
+        waist="Windbuffet Belt +1",
         back=gear.BLM_MAB_Cape,
     }
 
@@ -562,13 +574,15 @@ function init_gear_sets()
     sets.Obi = { waist="Hachirin-no-Obi" }
 
     sets.idle = {
+        main="Mpaca's Staff",
+        sub="Irenic Strap +1",
         main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Empyrean_Head,
         body="Shamash Robe",
         hands="Volte Gloves",
-        legs=gear.Agwu_Legs,
+        legs="Assid. Pants +1",
         feet=gear.Nyame_Feet,
         neck="Sibyl Scarf",
         ear1="Etiolation Earring",
@@ -576,10 +590,12 @@ function init_gear_sets()
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back=gear.BLM_MAB_Cape,
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {
+        main="Mpaca's Staff",
+        sub="Irenic Strap +1",
         main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Staunch Tathlum +1",
@@ -593,10 +609,12 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1",
         ring2="Defending Ring",
         back=gear.BLM_MAB_Cape,
-        waist="Carrier's Sash",
+        waist="Platinum Moogle Belt",
     })
 
     sets.idle.DeathMode = {
+        main="Hvergelmir",
+        sub="Khonsu",
         ammo="Ghastly Tathlum +1",
         head=gear.Empyrean_Head,
         body="Ros. Jaseran +1",
@@ -617,7 +635,20 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
     }
 
-    sets.idle.Town = sets.MagicBurst
+    sets.idle.RefreshWeapons = {
+        main="Mpaca's Staff",
+        sub="Irenic Strap +1",
+    }
+
+    sets.idle.Town = set_combine(sets.MagicBurst, {
+        main="Laevateinn",
+        sub="Enki Strap",
+        head=gear.Agwu_Head,
+        body=gear.Agwu_Body,
+        hands=gear.Agwu_Hands,
+        legs=gear.Agwu_Legs,
+        feet=gear.Agwu_Feet,
+    })
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
@@ -695,7 +726,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         elseif spell.element == world.day_element or spell.element == world.weather_element then
             equip(sets.Obi)
         end
-        if player.mpp < 50 then
+        if player.mpp < 35 then
             equip(sets.Coat)
         end
     end
@@ -784,6 +815,9 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
+    if (state.WeaponMode.value ~= 'Laevateinn') then
+        idleSet = set_combine(idleSet, sets.idle.RefreshWeapons)
+    end
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
@@ -828,7 +862,7 @@ end
 -- Function to display the current relevant user state when doing an update.
 -- Return true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
-
+    local msg = ''
     local c_msg = state.CastingMode.value
 
     local d_msg = 'None'
@@ -845,7 +879,7 @@ function display_current_job_state(eventArgs)
     add_to_chat(060, '| Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
         ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,002)..msg)
+        ..string.char(31,002).. msg)
 
     eventArgs.handled = true
 end

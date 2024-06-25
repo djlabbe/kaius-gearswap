@@ -68,16 +68,21 @@
     send_command('bind !numpad* input /item "Panacea" <me>')
 
     -- Trust Hotkeys (Windows Key)
+    send_command('bind !numpad/ input /item "Holy Water" <me>')
+    send_command('bind !numpad* input /item "Panacea" <me>')
+    send_command('bind !numpad- input /item "Remedy" <me>')
+    
     send_command('bind @numpad7 input /ma "Valaineral" <me>')
     send_command('bind @numpad8 input /ma "AAEV" <me>')
     send_command('bind @numpad9 input /ma "Selh\'teus" <me>')
-
+    
     send_command('bind @numpad4 input /ma "Ulmia" <me>')
     send_command('bind @numpad5 input /ma "Joachim" <me>')
     send_command('bind @numpad6 input /ma "Qultada" <me>')
     
     send_command('bind @numpad1 input /ma "Koru-Moru" <me>')
-    send_command('bind @numpad2 input /ma "Kupipi" <me>')
-    send_command('bind @numpad3 input /ma "Monberaux" <me>')
-
-    send_command('bind @numpad0 input /ma "Sylvie (UC)" <me>')
+    send_command('bind @numpad2 input /ma "Arciela II" <me>')
+    send_command('bind @numpad3 input /ma "Sylvie (UC)" <me>')
+    
+    send_command('bind @numpad0 input /ma "Monberaux" <me>')
+    send_command('bind @numpad. input /ma "Cornelia" <me>')
