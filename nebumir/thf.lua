@@ -301,7 +301,7 @@ function init_gear_sets()
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
         neck="Baetyl Pendant",
         ear1="Friomisi Earring",
         ear2="Moonshade Earring",

@@ -420,7 +420,7 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].Physical = {
         ammo="Aurgelmir Orb +1",
         head=gear.Relic_Head,
-        head=gear.Gleti_Body,
+        body=gear.Gleti_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Relic_Feet,

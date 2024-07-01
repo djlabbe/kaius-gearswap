@@ -426,16 +426,14 @@ function init_gear_sets()
         back=gear.BRD_Song_Cape,
     }
 
-    sets.midcast["Army's Paeon VI"] = set_combine(sets.midcast.SongEnhancing, { range="Daurdabla",})
-    sets.midcast["Army's Paeon V"] = set_combine(sets.midcast.SongEnhancing, { range="Daurdabla",})
-    sets.midcast["Army's Paeon IV"] = set_combine(sets.midcast.SongEnhancing, { range="Daurdabla",})
-    sets.midcast["Army's Paeon III"] = set_combine(sets.midcast.SongEnhancing, { range="Daurdabla",})
+
 
     -- For song debuffs (duration primary, accuracy secondary)
     sets.midcast.SongEnfeeble = {
         main="Carnwenhan",
         sub="Ammurapi Shield",
-        range="Gjallarhorn",
+        -- range="Gjallarhorn",
+        range="Daurdabla", -- Skillup!
         head=gear.Artifact_Head,
         body=gear.Artifact_Body,
         hands=gear.Artifact_Hands,
@@ -482,6 +480,12 @@ function init_gear_sets()
         feet=gear.Bunzi_Feet,
         neck="Loricate Torque +1",       
     }
+
+    sets.midcast["Army's Paeon VI"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
+    sets.midcast["Army's Paeon V"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
+    sets.midcast["Army's Paeon IV"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
+    sets.midcast["Army's Paeon III"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
+    sets.midcast["Army's Paeon II"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
 
     -- Other general spells and classes.
     sets.midcast.Cure = {
@@ -725,6 +729,22 @@ function init_gear_sets()
         ear2="Eabani Earring",
         ring1=gear.Moonlight_1,
         ring2=gear.Chirich_2,
+        back=gear.BRD_DW_Cape,
+        waist="Platinum Moogle Belt",
+    }
+
+    sets.idle.Refresh = {
+        range="Daurdabla",
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Warder's Charm +1",
+        ear1="Arete Del Luna +1",
+        ear2="Eabani Earring",
+        ring1=gear.Stikini_1,
+        ring2=gear.Stikini_2,
         back=gear.BRD_DW_Cape,
         waist="Platinum Moogle Belt",
     }

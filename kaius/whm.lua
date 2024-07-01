@@ -264,6 +264,7 @@ function init_gear_sets()
         body=gear.Empyrean_Body,
         hands="Fanatic Gloves", --15
         legs=gear.Artifact_Legs, --21
+        feet=gear.Empyrean_Feet,
         neck="Debilis Medallion", --15
         ear1="Meili Earring",
         ear2="Ebers Earring +1", --3/3
@@ -279,27 +280,29 @@ function init_gear_sets()
 
     sets.midcast['Enhancing Magic'] = {
         main=gear.Gada_ENH,
-        sub="Ammurapi Shield",
+        sub="Genmei Shield",
+        ammo="Staunch Tathlum +1",
         back=gear.WHM_Cure_Cape,
         head=gear.Telchine_ENH_Head,
-        body=gear.Telchine_ENH_Body,
+        body=gear.Nyame_Body,
         hands=gear.Telchine_ENH_Hands,
         legs=gear.Telchine_ENH_Legs,
         feet=gear.Artifact_Feet,
         neck="Incanter's Torque",
         ear1="Mimir Earring",
-        ear2="Andoaa Earring",
-        ring1=gear.Stikini_1,
-        ring2=gear.Stikini_2,
-        back="Fi Follet Cape +1",
+        ear2="Ebers Earring +1",
+        ring1="Defending Ring",
+        ring2="Gelatinous Ring +1",
+        back=gear.WHM_Cure_Cape,
         waist="Olympus Sash",
     }
 
     sets.midcast.EnhancingDuration = {
         main=gear.Gada_ENH,
-        sub="Ammurapi Shield",
+        sub="Genmei Shield",
+        ammo="Staunch Tathlum +1",
         head=gear.Telchine_ENH_Head,
-        body=gear.Telchine_ENH_Body,
+        body=gear.Nyame_Body,
         hands=gear.Telchine_ENH_Hands,
         legs=gear.Telchine_ENH_Legs,
         feet=gear.Artifact_Feet,
@@ -309,6 +312,7 @@ function init_gear_sets()
         ear1="Tuisto Earring",
         ear2="Ebers Earring +1",
         waist="Embla Sash",
+        back=gear.WHM_Cure_Cape,
     }
 
     sets.midcast.Regen = {
@@ -340,7 +344,7 @@ function init_gear_sets()
 
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         main="Vadose Rod",
-        sub="Ammurapi Shield",
+        sub="Genmei Shield",
         ammo="Staunch Tathlum +1",
         head="Chironic Hat",
         body=gear.Bunzi_Body,
@@ -607,7 +611,7 @@ function init_gear_sets()
     if (item_available("Shneddick Ring +1")) then
         sets.Kiting = { ring1="Shneddick Ring +1" }
     else
-        sets.Kiting = { feet="Herald's Gaiters" }
+        -- sets.Kiting = { feet="Herald's Gaiters" }
     end
 
     sets.latent_refresh = { waist="Fucho-no-obi" }

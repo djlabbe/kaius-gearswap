@@ -25,6 +25,8 @@ function job_setup()
     wyv_elem_breath = S{'Flame Breath', 'Frost Breath', 'Sand Breath', 'Hydro Breath', 'Gust Breath', 'Lightning Breath'}
     state.Buff.Doom = false
     custom_weapon_list = S{"Aram", "Naegling", "Mafic Cudgel"}
+    -- tickdelay = os.clock() + 5
+    -- next_cast = 0
 end
 
 function user_setup()
@@ -39,7 +41,7 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')  
 
     gear.Artifact_Head = { name="Vishap Armet +2" }
-    gear.Artifact_Body = { name="Vishap Mail +2" }
+    gear.Artifact_Body = { name="Vishap Mail +3" }
     gear.Artifact_Hands = { name="Vishap Finger Gauntlets +3" }
     gear.Artifact_Legs = { name="Vishap Brais +3" }
     gear.Artifact_Feet = { name="Vishap Greaves +2" }
@@ -153,7 +155,7 @@ function init_gear_sets()
         neck="Vim Torque +1",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        body=gear.Relic_Body,
+        body=gear.Artifact_Body,
         hands=gear.Artifact_Hands,
         legs=gear.Relic_Legs,
         feet="Ostro Greaves",       
@@ -164,15 +166,10 @@ function init_gear_sets()
     }
 
     sets.precast.JA["High Jump"] = sets.precast.JA["Jump"]
-
+    sets.precast.JA["Soul Jump"] = sets.precast.JA["Jump"]
     sets.precast.JA["Spirit Jump"] = set_combine(sets.precast.JA["Jump"], {
         feet=gear.Empyrean_Feet,
     })
-
-    sets.precast.JA["Soul Jump"] = set_combine(sets.precast.JA["Jump"], {
-        body=gear.Artifact_Body,
-    })
-    sets.precast.JA["Super Jump"] = {}
 
     sets.precast.JA["Angon"] = {
         ammo="Angon", 
@@ -195,7 +192,7 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo="Knobkierrie",
         head=gear.Empyrean_Head,
-        body=gear.Nyame_Legs,
+        body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
@@ -233,7 +230,6 @@ function init_gear_sets()
 
     sets.precast.WS["Savage Blade"].PDL = set_combine(sets.precast.WS["Savage Blade"], {
         body=gear.Empyrean_Body,
-        feet=gear.Empyrean_Feet,
         neck="Dragoon's Collar +2",
         ear2="Peltast's Earring +1",
         ring1=gear.Ephramad_Or_Regal,
@@ -347,8 +343,6 @@ function init_gear_sets()
 
     sets.precast.WS["Sonic Thrust"].Acc = set_combine(sets.precast.WS["Sonic Thrust"], {})
     sets.precast.WS["Sonic Thrust"].PDL = set_combine(sets.precast.WS["Sonic Thrust"], {
-        head=gear.Relic_Head,
-        feet=gear.Relic_Feet,
         ring2=gear.Ephramad_Or_Epaminondas,
     })
 
@@ -356,7 +350,7 @@ function init_gear_sets()
         head=gear.Empyrean_Head,
         body=gear.Gleti_Body,
         hands=gear.Gleti_Hands,
-        legs=gear.Gleti_Legs,
+        legs=gear.Empyrean_Legs,
         feet=gear.Nyame_Feet,
         neck="Dgn. Collar +2",
         ear1="Peltast's Earring +1",
@@ -381,7 +375,6 @@ function init_gear_sets()
     })
 
     sets.precast.WS["Impulse Drive"].HighTP = set_combine(sets.precast.WS["Impulse Drive"], {
-        hands=gear.Relic_Hands,
         ear2="Ishvara Earring",
     })
 
@@ -461,11 +454,11 @@ function init_gear_sets()
 
     sets.precast.WS["Leg Sweep"] = set_combine(sets.precast.WS, {
         ammo="Pemphredo Tathlum",
-        head=gear.Empyrean_Body,
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
         ear2="Crepuscular Earring",
         ear1="Peltast's Earring +1",
         ring1="Metamor. Ring +1",
@@ -481,7 +474,7 @@ function init_gear_sets()
         neck="Sibyl Scarf",
         ear1="Friomisi Earring",
         ear2="Moonshade Earring",
-        body=gear.Nyame_Head,
+        body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         ring1="Epaminondas's Ring",
         ring2="Shiva Ring +1",
@@ -494,6 +487,7 @@ function init_gear_sets()
     sets.precast.WS["Thunder Thrust"] = sets.precast.WS["Raiden Thrust"]
 
     sets.midcast.HealingBreath = {
+        ammo="Staunch Tathlum +1",
         head=gear.Relic_Head,
         legs=gear.Artifact_Legs,
         feet=gear.Relic_Feet,
@@ -547,7 +541,23 @@ function init_gear_sets()
         ring2=gear.Moonlight_2,
         back=gear.DRG_TP_Cape,
         waist="Sailfi Belt +1",
-    }
+    } -- 7 + 5 + 10 
+
+    sets.engaged.Naegling = {
+        ammo="Coiste Bodhar",
+        head="Flamma Zucchetto +2",
+        body=gear.Gleti_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Relic_Legs,
+        feet="Flamma Gambieras +2",
+        neck="Vim Torque +1",
+        ear1="Sherida Earring",
+        ear2="Telos Earring",
+        ring1="Niqmaddu Ring",
+        ring2=gear.Lehko_Or_Moonlight2, 
+        back=gear.DRG_TP_Cape,
+        waist="Sailfi Belt +1",
+    } --43% DT
 
     sets.engaged.Aram = {
         ammo="Coiste Bodhar",
@@ -565,21 +575,6 @@ function init_gear_sets()
         back=gear.DRG_STP_Cape,
     }
 
-    sets.engaged.Naegling = {
-        ammo="Aurgelmir Orb +1",
-        head="Hjarrandi Helm",
-        body=gear.Gleti_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Relic_Legs,
-        feet="Flamma Gambieras +2",
-        neck="Vim Torque +1",
-        ear1="Sherida Earring",
-        ear2="Telos Earring",
-        ring1="Niqmaddu Ring",
-        ring2=gear.Lehko_Or_Moonlight2, 
-        back=gear.DRG_STP_Cape,
-        waist="Sailfi Belt +1",
-    } --34% DT
 
     sets.engaged["Mafic Cudgel"] = sets.engaged.Naegling
 
@@ -602,17 +597,17 @@ function init_gear_sets()
     sets.engaged["Mafic Cudgel"].Acc = sets.engaged.Naegling.Acc
 
     sets.engaged.Hybrid = {
-        neck="Dgn. Collar +2",
-        head=gear.Nyame_Head,
+        neck="Dgn. Collar +2", -- Keep Pet Alive
+        head="Hjarrandi Helm", --7
         body=gear.Gleti_Body, --9/0
         legs=gear.Gleti_Legs, --8/0
         hands=gear.Empyrean_Hands, --11/11
-        ring1=gear.Moonlight_1, --5/5
         ring2=gear.Moonlight_2, --5/5
-    } --48% Physical, 21% MDT (50% w/ Shell V)
+        back=gear.DRG_TP_Cape, --10
+    } --50% Physical DT, Haste Cap
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-    sets.engaged.Naegling.DT = set_combine(sets.engaged.Naegling, sets.engaged.Hybrid)
+    sets.engaged.Naegling.DT = set_combine(sets.engaged.Naegling, sets.engaged.Hybrid, {head="Flamma Zucchetto +2",})
     sets.engaged["Mafic Cudgel"].DT =  sets.engaged.Naegling.DT
     sets.engaged.Aram.DT = set_combine(sets.engaged.Aram, {
         body=gear.Gleti_Body,
@@ -651,9 +646,9 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.engaged, {
         head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Empyrean_Legs,
+        body=gear.Gleti_Body,
+        hands=gear.Gleti_Hands,
+        legs=gear.Gleti_Legs,
         feet=gear.Empyrean_Feet,
         ring2=gear.Ephramad_Or_Regal,
         ear2="Peltast's Earring +1"
@@ -848,3 +843,70 @@ end
 function check_weaponset()
     equip(sets[state.WeaponSet.current])
 end
+
+-- -- We need a way to do actions (use hasso)
+-- -- This code hooks into windower and supplies a function to be executed before every frame ("prerender").
+-- -- First we just make sure sufficient time has elapsed for our purposes, then we check to make sure we are not incapacitated.
+-- -- If we are good to go, we execute "job_tick". 
+-- windower.raw_register_event('prerender', function()
+--     if not (os.clock() > tickdelay) then return end
+    
+--     gearswap.refresh_globals(false)
+    
+--     if (player ~= nil) and (player.status == 'Idle' or player.status == 'Engaged') and not (check_midaction() or moving or buffactive['Sneak'] or buffactive['Invisible'] or silent_check_disable()) then
+--         if job_tick() then return end
+--     end
+--     tickdelay = os.clock() + .5
+--     init_gear_sets()
+-- end)
+
+
+-- -- Helper to determine whether player has some status that prevents action. (True = incapacitated, false = NOT incapacitated)
+-- function silent_check_disable()
+-- 	if buffactive.terror or buffactive.petrification or buffactive.sleep or buffactive.Lullaby or buffactive.stun then
+-- 		return true
+-- 	else
+-- 		return false
+-- 	end	
+-- end
+
+-- -- Helper used to make sure we are not in the middle of some action, if we are, then we schedule the action to occur again in a moment
+-- function check_midaction(spell, spellMap, eventArgs)
+-- 	if os.clock() < next_cast then
+-- 		if eventArgs and not (spell.type:startswith('BloodPact') and state.Buff["Astral Conduit"]) then
+-- 			eventArgs.cancel = true
+-- 			if delayed_cast == '' then
+-- 				windower.send_command:schedule((next_cast - os.clock()),'gs c delayedcast')
+-- 			end
+-- 			delayed_cast = spell.english
+-- 			delayed_target = spell.target.id
+-- 		end
+-- 		return true
+-- 	else
+-- 		return false
+-- 	end
+-- end
+
+-- -- The second part of each tick cycle, here we call the check_hasso to see if we need to take any actions.
+-- function job_tick()
+-- 	if check_hasso() then return true end
+-- 	return false
+-- end
+
+-- function check_hasso()
+-- 	if player.sub_job == 'SAM' and player.in_combat and not  buffactive['Hasso'] then
+		
+-- 		local abil_recasts = windower.ffxi.get_ability_recasts()
+
+-- 		if abil_recasts[138] == 0 then
+--             windower.chat.input('/echo Auto Hasso!')
+-- 			windower.chat.input('/ja "Hasso" <me>')
+--             tickdelay = os.clock() + 1.1 -- JA delay, no reason to try to do anything until it's done
+-- 			return true
+-- 		else
+-- 			return false
+-- 		end
+-- 	end
+
+-- 	return false
+-- end

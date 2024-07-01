@@ -36,6 +36,7 @@ function define_global_sets()
     gear.Lehko_Or_Hetairoi = {name="Hetairoi Ring"}
     gear.Lehko_Or_Moonlight2 = {name="Moonlight Ring", bag="wardrobe8"}
     gear.Lehko_Or_Petrov = {name="Petrov Ring"}
+    gear.Lehko_Or_GEre = {name="Gere Ring"}
 
     gear.Gerubu_Or_Stikini1 = {name="Stikini Ring +1", bag="wardrobe7"}
     gear.Gerubu_Or_Stikini2 = {name="Stikini Ring +2", bag="wardrobe8"}
@@ -69,6 +70,7 @@ function define_global_sets()
         gear.Lehko_Or_Hetairoi = { name = "Lehko Habhoka's Ring" }
         gear.Lehko_Or_Moonlight2 = { name = "Lehko Habhoka's Ring" }
         gear.Lehko_Or_Petrov = { name = "Lehko Habhoka's Ring" }
+        gear.Lehko_Or_Gere = { name = "Lehko Habhoka's Ring" }
     end
  
 

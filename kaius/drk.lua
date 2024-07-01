@@ -219,7 +219,7 @@ function init_gear_sets()
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Body,
+        legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
         neck="Abyssal Beads +2",
         waist="Sailfi Belt +1",
@@ -245,7 +245,7 @@ function init_gear_sets()
     sets.precast.WS['Catastrophe'] = {
         ammo="Knobkierrie",
         head=gear.Nyame_Head, 
-        body=gear.Nyame_Legs,
+        body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
@@ -269,7 +269,7 @@ function init_gear_sets()
      sets.precast.WS['Cross Reaper'] = {
         ammo="Knobkierrie",
         head=gear.Empyrean_Head,
-        body=gear.Nyame_Legs,
+        body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
@@ -289,16 +289,16 @@ function init_gear_sets()
     })
 
     sets.precast.WS['Entropy'] = {
-        ammo="Knobkierrie",
+        ammo="Coiste Bodhar",
         head=gear.Empyrean_Head,
-        body="Dagon Breastplate",
-        hands=gear.Sakpata_Hands,
-        legs=gear.Artifact_Legs,
-        feet=gear.Empyrean_Feet,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
-        ear2="Heathen's Earring +1",
-        ring1="Regal Ring",
+        ear2="Schere Earring",
+        ring1="Metamorph Ring +1",
         ring2="Niqmaddu Ring",
         waist="Fotia Belt",
         back= gear.DRK_WS1_Cape,
@@ -308,8 +308,10 @@ function init_gear_sets()
     sets.precast.WS['Entropy'].PDL = set_combine(sets.precast.WS['Entropy'], {
         ammo="Crepuscular Pebble",
         body=gear.Sakpata_Body,
+        hands=gear.Sakpata_Hands,
         legs=gear.Sakpata_Legs,
-        ring2="Sroda Ring",
+        ring1="Sroda Ring",
+        ear2="Heathen's Earring +1"
     })
 
     sets.precast.WS['Insurgency'] = {
@@ -363,7 +365,7 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Body,
+        legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
         neck="Sibyl Scarf",
         ear1="Moonshade Earring",
@@ -379,7 +381,7 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Body,
+        legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
         neck="Sibyl Scarf",
         ear1="Friomisi Earring",
@@ -569,7 +571,7 @@ function init_gear_sets()
         body=gear.Carmine_B_Body,
         hands="Ratri Gadlings +1",
         legs=gear.Relic_Legs,
-        feet="Rat. Sollerets +1",
+        feet="Ratri Sollerets +1",
         ear1="Mani Earring",
         ear2="Malignance Earring",
         ring1=gear.Stikini_1,
@@ -602,7 +604,7 @@ function init_gear_sets()
         body=gear.Carmine_B_Body,
         hands="Pavor Gauntlets",
         legs=gear.Relic_Legs,
-        feet="Rat. Sollerets +1",
+        feet="Ratri Sollerets +1",
         neck="Erra Pendant",  
         ear1="Mani Earring",
         ear2="Malignance Earring",
@@ -681,7 +683,7 @@ function init_gear_sets()
     sets.engaged.Liberator = {
         ammo="Coiste Bodhar",
         head="Flamma Zucchetto +2",
-        body=gear.Valo_QA_Body,
+        body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
         legs=gear.Artifact_Legs,
         feet="Flamma Gambieras +2",
@@ -878,10 +880,9 @@ function customize_idle_set(idleSet)
 end
 
 function customize_melee_set(meleeSet)
-    if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Caladbolg" and not state.OffenseMode == "Subtle" then
+    if (buffactive['Aftermath: Lv.3'] and player.equipment.main == "Caladbolg" and state.OffenseMode ~= "Subtle") then
         meleeSet = set_combine(meleeSet, sets.engaged.Caladbolg.Aftermath)
-    end
-    if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Liberator" and not state.OffenseMode == "Subtle" then
+    elseif (buffactive['Aftermath: Lv.3'] and player.equipment.main == "Liberator" and state.OffenseMode ~= "Subtle") then
         meleeSet = set_combine(meleeSet, sets.engaged.Liberator.Aftermath)
     end
     if state.Buff.Doom then

@@ -13,35 +13,14 @@
 --
 --  Abilities:  [ CTRL+` ]          Afflatus Solace
 --              [ ALT+` ]           Afflatus Misery
---              [ CTRL+[ ]          Divine Seal
---              [ CTRL+] ]          Divine Caress
---              [ CTRL+` ]          Composure
---              [ CTRL+- ]          Light Arts/Addendum: White
---              [ CTRL+= ]          Dark Arts/Addendum: Black
---              [ CTRL+; ]          Celerity/Alacrity
---              [ ALT+[ ]           Accesion/Manifestation
---              [ ALT+; ]           Penury/Parsimony
+--              [ ALT+- ]           Light Arts + Add White
+--              [ ALT+= ]           Dark Arts + Add Dark
+--              [ CTRL+; ]           Speed
+--              [ CTRL+[ ]           AOE
+--              [ ALT+; ]            Cost
+--              [ ALT+[ ]            Power
 --
 --  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
---
---              (Global-Binds.lua contains additional non-job-related keybinds)
-
-
--------------------------------------------------------------------------------------------------------------------
--- Setup functions for this job.  Generally should not be modified.
--------------------------------------------------------------------------------------------------------------------
-
---              Addendum Commands:
---              Shorthand versions for each strategem type that uses the version appropriate for
---              the current Arts.
---                                          Light Arts                    Dark Arts
---                                          ----------                  ---------
---              gs c scholar light          Light Arts/Addendum
---              gs c scholar dark                                       Dark Arts/Addendum
---              gs c scholar cost           Penury                      Parsimony
---              gs c scholar speed          Celerity                    Alacrity
---              gs c scholar aoe            Accession                   Manifestation
---              gs c scholar addendum       Addendum: White             Addendum: Black
 -------------------------------------------------------------------------------------------------------------------
 
 function get_sets()
@@ -68,11 +47,11 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')
     state.WeaponSet = M{['description']='Weapon Set', 'Maxentius', 'Yagrush' }
 
-    gear.Artifact_Head = { name= "Theophany Cap +3" }
-    gear.Artifact_Body = { name="Theophany Bliaut +3" }
-    gear.Artifact_Hands = { name="Theophany Mitts +3" }
-    gear.Artifact_Legs = { name="Theophany Pantaloons +3" }
-    gear.Artifact_Feet = { name="Theophany Duckbills +3" }
+    gear.Artifact_Head = { name="Theophany Cap +3", priority=64 }
+    gear.Artifact_Body = { name="Theophany Bliaut +3", priority=91 }
+    gear.Artifact_Hands = { name="Theophany Mitts +3", priority=43 }
+    gear.Artifact_Legs = { name="Theophany Pantaloons +3", priority=74 }
+    gear.Artifact_Feet = { name="Theophany Duckbills +3", priority=74 }
 
     gear.Relic_Head = { name="Piety Cap +3" }
     gear.Relic_Body = { name="Piety Bliaut +3" }
@@ -80,11 +59,11 @@ function user_setup()
     gear.Relic_Legs = { name="Piety Pantaloons +3" }
     gear.Relic_Feet = { name="Piety Duckbills +3" }
 
-    gear.Empyrean_Head = { name="Ebers Cap +3" }
-    gear.Empyrean_Body = { name="Ebers Bliaut +3" }
-    gear.Empyrean_Hands = { name="Ebers Mitts +3" }
-    gear.Empyrean_Legs = { name="Ebers Pantaloons +3" }
-    gear.Empyrean_Feet = { name="Ebers Duckbills +3" }
+    gear.Empyrean_Head = { name="Ebers Cap +3", priority=64 }
+    gear.Empyrean_Body = { name="Ebers Bliaut +3", priority=127 }
+    gear.Empyrean_Hands = { name="Ebers Mitts +3", priority=65 }
+    gear.Empyrean_Legs = { name="Ebers Pantaloons +3", priority=71 }
+    gear.Empyrean_Feet = { name="Ebers Duckbills +3", priority=71 }
 
     gear.WHM_Cure_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','MND+10','"Cure" potency +10%',}}
     gear.WHM_DW_Cape = { name="Alaunus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
@@ -119,6 +98,8 @@ function user_setup()
     send_command('bind !d input /ja "Divine Seal" <me>')
     send_command('bind !p input /ma "Protectra V" <me>')
     send_command('bind !o input /ma "Shellra V" <me>')
+    send_command('bind ^p input /ma "Protect V" <stpc>')
+    send_command('bind ^o input /ma "Shell V" <stpc>')
     send_command('bind !h input /ma "Haste" <stpc>')
     send_command('bind !u input /ma "Aquaveil" <me>')
 
@@ -165,6 +146,7 @@ function user_unload()
 
     send_command('unbind @r')
     send_command('unbind @w')
+    unbind_numpad()
 end
 
 function init_gear_sets()
@@ -209,69 +191,63 @@ function init_gear_sets()
 
     sets.midcast.CureSolace = {
         main="Asclepius",
-        sub="Thuellaic Ecu +1",
-        ammo="Staunch Tathlum +1",
-        head=gear.Kaykaus_B_Head,
+        sub={name="Genmei Shield", priority=1},-- (DT-10)
+        ammo={name="Staunch Tathlum +1", priority=1}, -- (DT-3) (SIRD-11)
+        head=gear.Empyrean_Head, --(CP-22)
         neck="Clr. Torque +1", 
-        ear1="Glorious Earring",
-        ear2="Ebers Earring +1",
+        ear1={name="Glorious Earring", priority=1}, -- (CPII-2) (Enm-5) 
+        ear2={name="Ebers Earring +1", priority=1}, --(DT-5)
         body=gear.Empyrean_Body,
-        hands=gear.Artifact_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Kaykaus_B_Feet,   
-        ring1="Defending Ring", --3/(-5)
-        ring2="Mephitas's Ring +1",
-        back=gear.WHM_Cure_Cape,
-        -- waist="Shinjutsu-no-Obi +1",
-        waist="Plat. Mog. Belt",
+        hands=gear.Artifact_Hands, -- (CPII-4) (Enm-7)
+        legs=gear.Empyrean_Legs, --(DT-13)
+        feet=gear.Empyrean_Feet, --(DT-11)
+        ring1=gear.Janniston_Or_Gelatinous, --(PDT-7)          
+        ring2={name="Mephitas's Ring +1", priority=1},
+        back=gear.WHM_Cure_Cape, -- (DT-10)
+        waist={name="Shinjutsu-no-Obi +1", priority=1},
       }
 
     sets.midcast.CureSolaceWeather = set_combine(sets.midcast.CureSolace, {
         back="Twilight Cape",
-        ear2="Nourishing Earring +1", --7
         waist="Hachirin-no-Obi",
-    })
+    }) --51% DT
 
     sets.midcast.CureNormal = set_combine(sets.midcast.CureSolace, {
         body=gear.Artifact_Body,
      })
 
     sets.midcast.CureWeather = set_combine(sets.midcast.CureNormal, {
+        hands=gear.Empyrean_Hands, --(DT-10)
         back="Twilight Cape",
-        hands=gear.Kaykaus_D_Hands, --11/(-6)
-        ear2="Nourishing Earring +1", --7
         waist="Hachirin-no-Obi",
-    })
+    })  --51% DT
 
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
-        body=gear.Artifact_Body, --0(+6)/(-6)
-        hands=gear.Artifact_Hands,
-        ring1="Metamor. Ring +1",
-        ring2="Mephitas's Ring +1",
-        -- waist="Luminary Sash",
+        -- SIRD for Odyssey
+        legs=gear.Bunzi_Legs, --(DT-9) (20 SIRD)
+        feet=gear.Artifact_Feet, -- (29 SIRD)
     })
 
     sets.midcast.CuragaWeather = set_combine(sets.midcast.CureNormal, {
-        body=gear.Artifact_Body, --0(+6)/(-6)
-        hands=gear.Kaykaus_D_Hands, --11/(-6)
-        ring1="Metamor. Ring +1",
-        ring2="Mephitas's Ring +1",
+        hands=gear.Empyrean_Hands, --(DT-10)
+        body=gear.Artifact_Body,
         back="Twilight Cape",
         waist="Hachirin-no-Obi",
-    })
+    }) --51% DT
 
     sets.midcast.StatusRemoval = {
         main="Yagrush",
         sub="Genmei Shield",
-        head="Vanya Hood",
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands="Fanatic Gloves",
         legs=gear.Artifact_Legs,
-        feet="Vanya Clogs",
+        feet=gear.Empyrean_Feet,
         neck="Loricate Torque +1",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
         ring1="Kishar Ring",
+        ring2="Defending Ring",
         back=gear.WHM_Cure_Cape,
         waist="Embla Sash",
     }
@@ -279,11 +255,11 @@ function init_gear_sets()
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
         main="Yagrush",
         sub="Genmei Shield",
-        head="Vanya Hood",
+        head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands="Fanatic Gloves", --15
         legs=gear.Artifact_Legs, --21
-        feet="Vanya Clogs", --5
+        feet=gear.Empyrean_Feet,
         neck="Debilis Medallion", --15
         ear1="Meili Earring",
         ear2="Ebers Earring +1", --3/3
@@ -332,12 +308,15 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Inyanga Tiara +2",
-        neck="Loricate Torque +1",
-        ear2="Magnetic Earring",
         body=gear.Relic_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Artifact_Legs,
-        feet=gear.Artifact_Feet, -- feet=gear.Bunzi_Feet,
+        feet=gear.Bunzi_Feet,
+        neck="Incanter's Torque",
+        ear1="Tuisto Earring",
+        ear2="Ebers Earring +1",
+        ring1="Defending Ring",
+        ring2="Gelatinous Ring +1",
         back="Solemnity Cape",
         waist="Embla Sash",
     }
@@ -356,6 +335,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Staunch Tathlum +1", 
         head="Chironic Hat",
+        body=gear.Bunzi_Body,
         hands="Regal Cuffs",
         legs="Shedir Seraweels",
         feet=gear.Artifact_Feet,
@@ -388,6 +368,10 @@ function init_gear_sets()
         waist="Embla Sash",
     })
 
+    sets.midcast.BarStatus = set_combine(sets.midcast.BarElement, {
+        neck="Sroda Necklace",
+    });
+
     sets.midcast.BoostStat = set_combine(sets.midcast['Enhancing Magic'], {
         feet=gear.Empyrean_Feet,
     })
@@ -411,7 +395,7 @@ function init_gear_sets()
         feet=gear.Artifact_Feet,
         neck="Erra Pendant",
         ear1="Regal Earring",
-        -- ear2="Digni. Earring",
+        ear2="Ebers Earring +1",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back="Aurist's Cape +1",
@@ -545,57 +529,40 @@ function init_gear_sets()
     }
 
     sets.idle = {
-        main="Daybreak",
-        sub="Genmei Shield",
+        main="Mpaca's Staff",
+        sub="Irenic Strap +1",
         -- ammo="Homiliary",
         ammo="Staunch Tathlum +1",
-        head=gear.Nyame_Head,
+        head=gear.Bunzi_Head, --7
         body=gear.Empyrean_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Nyame_Feet,
-        -- neck="Sibyl Scarf",
-        neck="Loricate Torque +1",
-        ear1="Hearty Earring",
-        ear2="Ebers Earring +1",
-        ring1=gear.Stikini_1,
-        ring2=gear.Gerubu_Or_Stikini2,
-        back=gear.WHM_Cure_Cape,
-        waist="Plat. Mog. Belt",
-    }
-
-    sets.idle.DT = set_combine(sets.idle, {
-        main="Daybreak",
-        sub="Genmei Shield",
-        ammo="Staunch Tathlum +1",
-        head=gear.Nyame_Head,
-        body=gear.Empyrean_Body,
-        hands=gear.Nyame_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Nyame_Feet,
+        hands=gear.Bunzi_Hands, --8
+        legs=gear.Empyrean_Legs, --13
+        feet=gear.Empyrean_Feet, --11
         neck="Sibyl Scarf",
-        ear1="Etiolation Earring",
-        ear2="Arete Del Luna +1",
-        ring1=gear.Stikini_1,
-        ring2=gear.Gerubu_Or_Stikini2,
-        back=gear.WHM_Cure_Cape,
-        waist="Carrier's Sash",
+        ear1="Hearty Earring",
+        ear2="Ebers Earring +1", --5
+        ring1=gear.Gerubu_Or_Stikini1,
+        ring2=gear.Stikini_2,
+        back=gear.WHM_Cure_Cape, --10 
+        waist=gear.Platinum_Moogle_Belt, --3
+    }  --57 (11 Refresh)
+
+    sets.idle.Town = sets.idle
+
+    sets.defense.PDT = set_combine(sets.idle, {
+
     })
 
-    sets.idle.Town = set_combine(sets.idle, {
-        main="Asclepius",
-        sub="Ammurapi Shield",
-        head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet,
+    sets.defense.MDT = set_combine(sets.idle, {
+    
     })
 
-    sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT
+    if (item_available("Shneddick Ring")) then
+        sets.Kiting = { ring1="Shneddick Ring" }
+    else
+        sets.Kiting = { feet="Herald's Gaiters" }
+    end
 
-    sets.Kiting = { ring1="Shneddick Ring" }
     sets.latent_refresh = { waist="Fucho-no-obi" }
     sets.DefaultShield = { sub="Genmei Shield" }
 
@@ -646,10 +613,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     end
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Job-specific hooks for non-casting events.
--------------------------------------------------------------------------------------------------------------------
-
 function job_buff_change(buff,gain)
     if buff == "Sublimation: Activated" then
         handle_equipping_gear(player.status)
@@ -674,11 +637,6 @@ function job_state_change(stateField, newValue, oldValue)
     end
     check_weaponset()
 end
-
-
--------------------------------------------------------------------------------------------------------------------
--- User code that supplements standard library decisions.
--------------------------------------------------------------------------------------------------------------------
 
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
@@ -786,10 +744,6 @@ function display_current_job_state(eventArgs)
     eventArgs.handled = true
 end
 
--------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
--------------------------------------------------------------------------------------------------------------------
-
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'scholar' then
@@ -826,63 +780,6 @@ end
 
 function update_sublimation()
     state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
-end
-
--- General handling of strategems in an Arts-agnostic way.
--- Format: gs c scholar <strategem>
-function handle_strategems(cmdParams)
-    -- cmdParams[1] == 'scholar'
-    -- cmdParams[2] == strategem to use
-
-    if not cmdParams[2] then
-        add_to_chat(123,'Error: No strategem command given.')
-        return
-    end
-    local strategem = cmdParams[2]:lower()
-
-    if strategem == 'light' then
-        if buffactive['light arts'] then
-            send_command('input /ja "Addendum: White" <me>')
-        elseif buffactive['addendum: white'] then
-            add_to_chat(122,'Error: Addendum: White is already active.')
-        else
-            send_command('input /ja "Light Arts" <me>')
-        end
-    elseif strategem == 'dark' then
-        if buffactive['dark arts'] then
-            send_command('input /ja "Addendum: Black" <me>')
-        elseif buffactive['addendum: black'] then
-            add_to_chat(122,'Error: Addendum: Black is already active.')
-        else
-            send_command('input /ja "Dark Arts" <me>')
-        end
-    elseif buffactive['light arts'] or buffactive['addendum: white'] then
-        if strategem == 'cost' then
-            send_command('input /ja Penury <me>')
-        elseif strategem == 'speed' then
-            send_command('input /ja Celerity <me>')
-        elseif strategem == 'aoe' then
-            send_command('input /ja Accession <me>')
-        elseif strategem == 'addendum' then
-            send_command('input /ja "Addendum: White" <me>')
-        else
-            add_to_chat(123,'Error: Unknown strategem ['..strategem..']')
-        end
-    elseif buffactive['dark arts']  or buffactive['addendum: black'] then
-        if strategem == 'cost' then
-            send_command('input /ja Parsimony <me>')
-        elseif strategem == 'speed' then
-            send_command('input /ja Alacrity <me>')
-        elseif strategem == 'aoe' then
-            send_command('input /ja Manifestation <me>')
-        elseif strategem == 'addendum' then
-            send_command('input /ja "Addendum: Black" <me>')
-        else
-            add_to_chat(123,'Error: Unknown strategem ['..strategem..']')
-        end
-    else
-        add_to_chat(123,'No arts has been activated yet.')
-    end
 end
 
 function determine_haste_group()

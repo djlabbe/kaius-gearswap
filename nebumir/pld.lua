@@ -393,7 +393,10 @@ function init_gear_sets()
 
     sets.engaged.DD = set_combine(sets.engaged, sets.Hybrid)
     
-    sets.buff.Cover = {head=gear.Artifact_Head, body=gear.Relic_Body}
+    sets.buff.Cover = {
+        head=gear.Artifact_Head, 
+        body=gear.Relic_Body
+    }
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20

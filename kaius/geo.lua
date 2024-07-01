@@ -140,7 +140,11 @@ function init_gear_sets()
 
     sets.precast.JA.Bolster = {body=gear.Relic_Body}
     sets.precast.JA['Full Circle'] = {head=gear.Empyrean_Head}
-    sets.precast.JA['Life Cycle'] = {head=gear.Relic_Head, body=gear.Artifact_Body, back=gear.GEO_Idle_Cape,}
+    sets.precast.JA['Life Cycle'] = {
+        head=gear.Relic_Head, 
+        body=gear.Artifact_Body, 
+        back=gear.GEO_Idle_Cape,
+    }
 
     sets.precast.FC = {
         ranged="Dunna", --3

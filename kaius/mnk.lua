@@ -23,6 +23,7 @@ function job_setup()
     state.Buff.Footwork = buffactive.Footwork or false
     state.Buff.Impetus = buffactive.Impetus or false
     state.Buff.Doom = false
+    state.Buff.Boost = false
     custom_weapon_list = S{"Godhands"}
 end
 
@@ -31,7 +32,7 @@ function user_setup()
 
     state.OffenseMode:options('Normal', 'PDL')
     state.WeaponskillMode:options('Normal', 'PDL')
-    state.HybridMode:options('Normal', 'DT', 'Counter')
+    state.HybridMode:options('Normal', 'DT', 'Counter', 'Ngai')
     state.PhysicalDefenseMode:options('PDT')
 
     state.WeaponLock = M(true, 'Weapon Lock')
@@ -51,9 +52,9 @@ function user_setup()
 
     gear.Empyrean_Head = { name="Bhikku Crown +2" }
     gear.Empyrean_Body = { name="Bhikku Cyclas +3" }
-    gear.Empyrean_Hands = { name="Bhikku Gloves +2" }
+    gear.Empyrean_Hands = { name="Bhikku Gloves +3" }
     gear.Empyrean_Legs = { name="Bhikku Hose +3" }
-    gear.Empyrean_Feet = { name="Bhikku Gaiters +2" }
+    gear.Empyrean_Feet = { name="Bhikku Gaiters +3" }
 
     gear.MNK_DEX_DA_Cape = { name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.MNK_STR_CRIT_Cape = { name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}} --X
@@ -165,6 +166,7 @@ function init_gear_sets()
 		legs=gear.Mpaca_Legs,
 		feet=gear.Mpaca_Feet,
 		neck="Monk's Nodowa +2",
+        -- neck="Fotia Gorget",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
 		ear2="Schere Earring",
@@ -329,7 +331,6 @@ function init_gear_sets()
         ring2="Metamorph Ring +1",
         back=gear.MNK_STR_CRIT_Cape,
         waist="Acuity Belt +1",
-        
     }
 
     sets.precast.WS['Cataclysm'] = {
@@ -349,16 +350,16 @@ function init_gear_sets()
 
     sets.engaged = {
         ammo="Coiste Bodhar",
-		head=gear.Empyrean_Head,
+		head=gear.Adhemar_B_Head,
 		body=gear.Mpaca_Body,
 		hands=gear.Adhemar_A_Hands,
 		legs=gear.Empyrean_Legs,
-		feet=gear.Artifact_Feet,
+		feet=gear.Empyrean_Feet,
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
         ear1="Sherida Earring",
 		ear2="Schere Earring",
-		ring1="Gere Ring",
+		ring1=gear.Lehko_Or_Gere,
 		ring2="Niqmaddu Ring",
 		back=gear.MNK_DEX_DA_Cape,
     }
@@ -374,6 +375,13 @@ function init_gear_sets()
     sets.engaged.Godhands.PDL = set_combine(sets.engaged.PDL, sets.MacheEar1)
 
     sets.engaged.Hybrid = {
+        head=gear.Malignance_Head,
+        hands=gear.Malignance_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+    }
+
+    sets.engaged.Ngai = {
         head=gear.Malignance_Head,
         neck="Warder's Charm +1",
         body=gear.Malignance_Body,
@@ -401,13 +409,14 @@ function init_gear_sets()
     sets.engaged.Godhands.Counter = set_combine(sets.engaged.Counter, sets.MacheEar1)
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+    sets.engaged.Ngai = set_combine(sets.engaged, sets.engaged.Ngai)
     sets.engaged.Godhands.DT = set_combine(sets.engaged.DT, sets.MacheEar1)
 
     sets.engaged.PDL.DT = set_combine(sets.engaged.PDL, sets.engaged.Hybrid)  
     sets.engaged.Godhands.PDL.DT = set_combine(sets.engaged.PDL.DT, sets.MacheEar1)
     
     sets.buff.Impetus = { body=gear.Empyrean_Body }
-	sets.buff.Footwork = { feet=gear.Artifact_Feet }
+	-- sets.buff.Footwork = { feet=gear.Artifact_Feet } -- Just use empy always (base attack + kick attack almost as much as AF, plus way more other stats)
 
     sets.defense.PDT = {
         ammo="Staunch Tathlum +1",
@@ -450,18 +459,22 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head=gear.Mpaca_Head,
+        head=gear.Malignance_Head,
         body="Adamantite Armor",
-        hands=gear.Mpaca_Hands,
-        legs=gear.Mpaca_Legs,
-        feet=gear.Mpaca_Feet,
+        hands=gear.Malignance_Hands,
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
         ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
         neck="Bathy Choker +1",
         ring1=gear.Chirich_1,
-        ring2="Defending Ring",
+        ring2=gear.Gerubu_Or_Shadow,
         back=gear.MNK_DEX_DA_Cape,
         waist="Moonbow Belt +1",
+    }
+
+    sets.buff.Boost = {
+        waist="Ask Sash"
     }
 
     sets.idle.Town = set_combine(sets.engaged.DT, sets.buff.Impetus)
@@ -469,7 +482,9 @@ function init_gear_sets()
     if (item_available("Shneddick Ring +1")) then
         sets.Kiting = { ring1="Shneddick Ring +1" }
     else
-        sets.Kiting = { feet="Hermes' Sandals" }
+        sets.Kiting = { 
+            feet="Hermes' Sandals" 
+        }
     end
     
     sets.Verethragna = { main="Verethragna" }
@@ -520,6 +535,15 @@ function job_buff_change(buff,gain)
            
         else
             state.Buff.Doom = false
+        end
+    end
+
+    if buff == "Boost" then
+        if gain then
+            state.Buff.Boost = true
+           
+        else
+            state.Buff.Boost = false
         end
     end
 end

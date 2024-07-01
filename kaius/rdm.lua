@@ -990,7 +990,7 @@ function init_gear_sets()
     if (item_available("Shneddick Ring +1")) then
         sets.Kiting = { ring1="Shneddick Ring +1" }
     else
-        sets.Kiting = { feet="Skadi's Jambeaux +1" }
+        sets.Kiting = { legs=gear.Carmine_A_Legs }
     end
 
     sets.latent_refresh = {waist="Fucho-no-obi"}

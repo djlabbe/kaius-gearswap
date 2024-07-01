@@ -74,7 +74,7 @@ function user_setup()
         'Quick Etude', 'Swift Etude', 'Vivacious Etude', 'Vital Etude', 'Dextrous Etude', 'Uncanny Etude',
         'Spirited Etude', 'Logical Etude', 'Enchanting Etude', 'Bewitching Etude'}
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Twashtar', 'Tauret', 'Carnwenhan' }
+    state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Twashtar', 'Tauret', 'Carnwenhan', 'Staff' }
     state.WeaponLock = M(true, 'Weapon Lock')
 
  
@@ -167,24 +167,28 @@ function user_setup()
         send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 2')
         send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 2')
         send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 2')
+        send_command('bind ^numpad5 gs c set WeaponSet Staff;input /macro set 9')
         set_macro_page(1, 10)
     elseif player.sub_job == 'DNC' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 3')
         send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 4')
         send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 4')
         send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 4')
+        send_command('bind ^numpad5 gs c set WeaponSet Staff;input /macro set 9')
         set_macro_page(3, 10)
     elseif player.sub_job == 'WHM' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 5')
         send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 6')
         send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 6')
         send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 6')
+        send_command('bind ^numpad5 gs c set WeaponSet Staff;input /macro set 9')
         set_macro_page(5, 10)
     elseif player.sub_job == 'PLD' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 7')
         send_command('bind ^numpad8 gs c set WeaponSet Twashtar;input /macro set 8')
         send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 8')
         send_command('bind ^numpad4 gs c set WeaponSet Carnwenhan;input /macro set 8')
+        send_command('bind ^numpad5 gs c set WeaponSet Staff;input /macro set 9')
         set_macro_page(7, 10)
     else
         set_macro_page(1, 10)
@@ -371,6 +375,21 @@ function init_gear_sets()
         ring2=gear.Cornelia_Or_Sroda,
         waist="Sailfi Belt +1",
         back=gear.BRD_WS2_Cape,
+    }
+
+    sets.precast.WS['Shell Crusher'] = {
+        head=gear.Empyrean_Head,
+        neck="Moonlight Necklace",
+        ear1="Crepuscular Earring",
+        ear2="Fili Earring +1",
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        ring1=gear.Stikini_1,
+        ring2="Metamorph Ring +1",
+        back=gear.BRD_Song_Cape,
+        waist="Acuity Belt +1",
     }
 
 
@@ -785,6 +804,7 @@ function init_gear_sets()
     sets.Twashtar = { main="Twashtar", sub="Centovente" }
     sets.Carnwenhan = { main="Carnwenhan", sub="Crepuscular Knife" }
     sets.Tauret = { main="Tauret", sub="Gleti's Knife" }
+    sets.Staff = { main="Mpaca's Staff", sub="Enki Strap"}
     sets.DefaultShield = { sub="Genmei Shield" }
 
 end

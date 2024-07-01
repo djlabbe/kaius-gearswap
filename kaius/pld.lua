@@ -402,7 +402,10 @@ function init_gear_sets()
         waist={name="Platinum Moogle Belt", priority=999},
     }
     
-    sets.buff.Cover = {head=gear.Artifact_Head, body=gear.Relic_Body}
+    sets.buff.Cover = {
+        head=gear.Artifact_Head, 
+        body=gear.Relic_Body
+    }
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20

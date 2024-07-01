@@ -153,7 +153,6 @@ function init_gear_sets()
     sets.precast.JA['Collaborator'] = set_combine(sets.TreasureHunter, { head=gear.Empyrean_Head })
     sets.precast.JA['Flee'] = { feet=gear.Artifact_Feet }
     sets.precast.JA['Hide'] = { body=gear.Artifact_Body }
-    sets.precast.JA['Conspirator'] = set_combine(sets.TreasureHunter, { body=gear.Empyrean_Body })
 
     sets.precast.JA['Steal'] = {
         head=gear.Relic_Head,
@@ -321,7 +320,7 @@ function init_gear_sets()
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
-        -- feet=gear.Nyame_Legs,
+        -- feet=gear.Nyame_Feet,
         feet=gear.Empyrean_Feet,
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
@@ -473,7 +472,6 @@ function init_gear_sets()
     })
 
     sets.engaged.Hybrid = {
-        head=gear.Malignance_Head, --6/6
         body=gear.Malignance_Body, --9/9
         ring2=gear.Moonlight_2, --5/5
     }
