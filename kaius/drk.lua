@@ -665,7 +665,7 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         waist="Sailfi Belt +1",
         ear1="Telos Earring",      
-        ear2="Dedition Earring",
+        ear2="Balder Earring +1",
         ring1="Niqmaddu ring",
         ring2=gear.Lehko_Or_Chirich2,
         back=gear.DRK_DA_Cape,
@@ -735,7 +735,8 @@ function init_gear_sets()
         head=gear.Sakpata_Head,
         body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
-        legs=gear.Sakpata_Legs,
+        -- legs=gear.Sakpata_Legs,
+        legs=gear.Nyame_Legs,
         feet=gear.Sakpata_Feet,
         ring2=gear.Moonlight_2,
     }

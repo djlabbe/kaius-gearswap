@@ -46,7 +46,7 @@ function user_setup()
     -- gear.Artifact_Head = { name="Pillager's Bonnet +2" }
     gear.Artifact_Body = { name="Pillager's Vest +3" }
     -- gear.Artifact_Hands = { name="Pillager's Armlets +1" }
-    gear.Artifact_Legs = { name="Pillager's Culottes +2" }
+    -- gear.Artifact_Legs = { name="Pillager's Culottes +2" }
     gear.Artifact_Feet = { name="Pillager's Poulaines +3" }
 
     gear.Relic_Head = { name="Plunderer's Bonnet +3" }
@@ -69,20 +69,6 @@ function user_setup()
 
     send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
-
-    send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad9 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad4 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad1 input /equip Main "Irradiance Blade";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
 
     send_command('bind !F1 input /ja "Perfect Dodge" <me>')
     send_command('bind !F2 input /ja "Larceny" <t>')
@@ -177,7 +163,6 @@ function init_gear_sets()
         ear2="Tuisto Earring",
         ring1="Asklepian Ring",
         ring2="Gelatinous Ring +1",
-        waist="Gishdubar Sash",
     }
 
     sets.precast.Waltz['Healing Waltz'] = {}
@@ -216,9 +201,9 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Savage Blade'] = {
-        ammo="Aurgelmir Orb +1",
+        ammo="Coiste Bodhar",
         head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
+        body=gear.Empyrean_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
@@ -233,7 +218,6 @@ function init_gear_sets()
 
     sets.precast.WS.Critical = {
         ammo="Yetshila +1",
-        ear1="Odr Earring",
     }
 
     sets.precast.WS['Rudra\'s Storm'] = {
@@ -261,28 +245,25 @@ function init_gear_sets()
 
      sets.precast.WS["Rudra's Storm"].SA = set_combine(sets.precast.WS["Rudra's Storm"],{
         ammo="Yetshila +1",
-        ear1="Odr Earring",
     })
 
     sets.precast.WS["Rudra's Storm"].PDLSA = set_combine(sets.precast.WS["Rudra's Storm"].PDL, sets.precast.WS["Rudra's Storm"].SA)
 
     sets.precast.WS["Rudra's Storm"].TA = set_combine(sets.precast.WS["Rudra's Storm"],{
         ammo="Yetshila +1",
-        ear1="Odr Earring",
     })
 
     sets.precast.WS["Rudra's Storm"].PDLTA = set_combine(sets.precast.WS["Rudra's Storm"].PDL, sets.precast.WS["Rudra's Storm"].TA)
 
     sets.precast.WS["Rudra's Storm"].SATA = set_combine(sets.precast.WS["Rudra's Storm"],{
         ammo="Yetshila +1",
-        ear1="Odr Earring",
     })
 
     sets.precast.WS["Rudra's Storm"].PDLSATA = set_combine(sets.precast.WS["Rudra's Storm"].PDL, sets.precast.WS["Rudra's Storm"].SATA)
 
     sets.precast.WS['Evisceration'] = {
         ammo="Yetshila +1",
-        head="Blistering Sallet +1",
+        head=gear.Empyrean_Head,
         neck="Fotia Gorget",
         body=gear.Relic_Body,
         hands=gear.Gleti_Hands,
@@ -296,8 +277,24 @@ function init_gear_sets()
         back=gear.THF_CRIT_Cape,
     }
 
+    sets.precast.WS['Evisceration'].PDL = {
+        ammo="Yetshila +1",
+        head=gear.Empyrean_Head,
+        neck="Fotia Gorget",
+        body=gear.Relic_Body,
+        hands=gear.Gleti_Hands,
+        waist="Fotia Belt",
+        legs=gear.Gleti_Legs,
+        feet=gear.Gleti_Feet,
+        ear1="Odr Earring",
+        ear2="Mache Earring +1",
+        ring1="Regal Ring",
+        ring2="Gere Ring",
+        back=gear.THF_CRIT_Cape,
+    }
+
     sets.precast.WS['Exenterator'] = {
-        ammo="Aurgelmir Orb +1",
+        ammo="Coiste Bodhar",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Nyame_Hands,
@@ -320,8 +317,7 @@ function init_gear_sets()
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
-        -- feet=gear.Nyame_Feet,
-        feet=gear.Empyrean_Feet,
+        feet=gear.Nyame_Feet,
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
@@ -331,17 +327,6 @@ function init_gear_sets()
     })
 
     sets.midcast.FastRecast = sets.precast.FC
-
-
-    sets.defense.PDT = {
-
-    }
-
-    sets.defense.MDT = {
-
-    }
-
-    sets.Kiting = { feet=gear.Artifact_Feet }
 
     sets.engaged = {
         ammo="Aurgelmir Orb +1",
@@ -360,9 +345,6 @@ function init_gear_sets()
     }
 
 
-    -- * DNC Native DW Trait: 30% DW
-    -- * DNC Job Points DW Gift: 5% DW
-
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
         ammo="Aurgelmir Orb +1",
@@ -372,61 +354,20 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Relic_Feet,
         neck="Asn. Gorget +2",
-        ear1="Dedition Earring",
+        ear1="Sherida Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Hetairoi,
+        ring2=gear.Lehko_Or_Chirich2,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
-    } -- 41%
+    }
 
     sets.engaged.DW.ExtraHaste = set_combine(sets.engaged.DW, {
         hands=gear.Adhemar_A_Hands,
     })
 
-    -- 15% Magic Haste (67% DW to cap)
-    sets.engaged.DW.LowHaste = {
-        ammo="Aurgelmir Orb +1",
-        head=gear.Empyrean_Head,
-        body=gear.Artifact_Body,
-        hands=gear.Gleti_Hands,
-        legs=gear.Gleti_Legs,
-        feet=gear.Relic_Feet,
-        neck="Asn. Gorget +2",
-        ear1="Dedition Earring",
-        ear2="Skulker's Earring +1",
-        ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Hetairoi,
-        back=gear.THF_TP_Cape,
-        waist="Reiki Yotai", 
-    } -- 37%
 
-    sets.engaged.DW.LowHaste.ExtraHaste = set_combine(sets.engaged.DW.LowHaste, {
-        hands=gear.Adhemar_A_Hands,
-    })
-
-    -- 30% Magic Haste (56% DW to cap)
-    sets.engaged.DW.MidHaste = {
-        ammo="Aurgelmir Orb +1",
-        head=gear.Empyrean_Head,
-        body=gear.Artifact_Body,
-        hands=gear.Gleti_Hands,
-        legs=gear.Gleti_Legs,
-        feet=gear.Relic_Feet,
-        neck="Asn. Gorget +2",
-        ear1="Dedition Earring",
-        ear2="Skulker's Earring +1",
-        ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Hetairoi,
-        back=gear.THF_TP_Cape,
-        waist="Reiki Yotai", 
-    } -- 26%
-
-    sets.engaged.DW.MidHaste.ExtraHaste = set_combine(sets.engaged.DW.MidHaste, {
-        hands=gear.Adhemar_A_Hands,
-    })
-
-    -- 35% Magic Haste (51% DW to cap)
+    -- 35% Magic Haste (21% DW on gear to cap)
     sets.engaged.DW.HighHaste = {
         ammo="Aurgelmir Orb +1",
         head=gear.Empyrean_Head,
@@ -435,19 +376,19 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Relic_Feet,
         neck="Asn. Gorget +2",
-        ear1="Dedition Earring",
+        ear1="Sherida Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Hetairoi,
+        ring2=gear.Lehko_Or_Chirich2,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
-    } -- 22%
+    } 
 
     sets.engaged.DW.HighHaste.ExtraHaste = set_combine(sets.engaged.DW.HighHaste, {
         hands=gear.Adhemar_A_Hands,
     })
 
-    -- 45% Magic Haste (36% DW to cap)
+    -- 45% Magic Haste (6% DW on gear to cap)
     sets.engaged.DW.MaxHaste = {
         ammo="Aurgelmir Orb +1",
         head=gear.Empyrean_Head,
@@ -456,11 +397,9 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Relic_Feet,
         neck="Asn. Gorget +2",
-        -- ear1="Dedition Earring",
         ear1="Sherida Earring",
         ear2="Skulker's Earring +1",
         ring1="Gere Ring",
-        -- ring2=gear.Lehko_Or_Hetairoi,
         ring2=gear.Lehko_Or_Chirich2,
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", 
@@ -473,6 +412,15 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         body=gear.Malignance_Body, --9/9
+        feet=gear.Malignance_Feet, --4/4
+        ring1=gear.Moonlight_1, --5/5
+        ring2=gear.Moonlight_2, --5/5
+    }
+
+    sets.engaged.Hybrid.ExtraHaste = {
+        body=gear.Malignance_Body, --9/9
+        hands=gear.Malignance_Hands,
+        feet=gear.Empyrean_Feet, --4/4
         ring2=gear.Moonlight_2, --5/5
     }
 
@@ -484,7 +432,7 @@ function init_gear_sets()
         legs=gear.Malignance_Legs, --7/7
         feet=gear.Malignance_Feet, --7/7
         neck="Asn. Gorget +2",
-        -- ring1="Vengeful Ring", 
+        ring1="Vengeful Ring", 
         ring2="Ilabrat Ring", 
         -- waist="Sveltesse Gouriz +1",
         waist="Reiki Yotai",
@@ -496,23 +444,15 @@ function init_gear_sets()
     sets.engaged.Evasion = set_combine(sets.engaged, sets.engaged.HybridEvasion)
    
     sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.ExtraHaste = set_combine(sets.engaged.DW.ExtraHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.DT.ExtraHaste = set_combine(sets.engaged.DW.ExtraHaste, sets.engaged.Hybrid.ExtraHaste)
     sets.engaged.DW.Evasion = set_combine(sets.engaged.DW, sets.engaged.HybridEvasion)
   
-    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.LowHaste.ExtraHaste = set_combine(sets.engaged.DW.LowHaste.ExtraHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Evasion.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.HybridEvasion)
-
-    sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.MidHaste.ExtraHaste = set_combine(sets.engaged.DW.MidHaste.ExtraHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.Evasion.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.HybridEvasion)
-
     sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.HighHaste.ExtraHaste = set_combine(sets.engaged.DW.HighHaste.ExtraHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.DT.HighHaste.ExtraHaste = set_combine(sets.engaged.DW.HighHaste.ExtraHaste, sets.engaged.Hybrid.ExtraHaste)
     sets.engaged.DW.Evasion.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.HybridEvasion)
 
     sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.MaxHaste.ExtraHaste = set_combine(sets.engaged.DW.MaxHaste.ExtraHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.DT.MaxHaste.ExtraHaste = set_combine(sets.engaged.DW.MaxHaste.ExtraHaste, sets.engaged.Hybrid.ExtraHaste)
     sets.engaged.DW.Evasion.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.HybridEvasion)
 
     sets.buff.Doom = {
@@ -563,17 +503,22 @@ function init_gear_sets()
         back=gear.THF_TP_Cape, 
     })
 
-    -- sets.idle.Town = sets.precast.WS["Rudra's Storm"]
-    -- sets.idle.Town = sets.engaged.DW.MaxHaste
-    sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        sub="Sm. Escutcheon",
-        body="Blacksmith's Apron",
-        hands="Smithy's Mitts",
-        neck="Smithy's Torque",
-        ring1="Craftmaster's Ring",
-        ring2="Confectioner's Ring",
-        waist="Blacksmith's Belt"
-    })
+    sets.defense.PDT = sets.idle.DT
+
+    sets.defense.MDT =sets.idle.DT
+
+    sets.Kiting = { feet=gear.Artifact_Feet }
+
+    sets.idle.Town = sets.engaged.DW.MaxHaste
+    -- sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
+    --     sub="Sm. Escutcheon",
+    --     body="Blacksmith's Apron",
+    --     hands="Smithy's Mitts",
+    --     neck="Smithy's Torque",
+    --     ring1="Craftmaster's Ring",
+    --     ring2="Confectioner's Ring",
+    --     waist="Blacksmith's Belt"
+    -- })
 
 end
 
@@ -778,11 +723,7 @@ function determine_haste_group()
             classes.CustomMeleeGroups:append('MaxHaste')
         elseif DW_needed > 7 and DW_needed <= 22 then
             classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 22 and DW_needed <= 26 then
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif DW_needed > 26 and DW_needed <= 37 then
-            classes.CustomMeleeGroups:append('LowHaste')
-        elseif DW_needed > 37 then
+        elseif DW_needed > 22 then
             classes.CustomMeleeGroups:append('')
         end
     end

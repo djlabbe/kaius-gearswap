@@ -432,8 +432,7 @@ function init_gear_sets()
     sets.midcast.SongEnfeeble = {
         main="Carnwenhan",
         sub="Ammurapi Shield",
-        -- range="Gjallarhorn",
-        range="Daurdabla", -- Skillup!
+        range="Gjallarhorn",
         head=gear.Artifact_Head,
         body=gear.Artifact_Body,
         hands=gear.Artifact_Hands,
@@ -486,6 +485,7 @@ function init_gear_sets()
     sets.midcast["Army's Paeon IV"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
     sets.midcast["Army's Paeon III"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
     sets.midcast["Army's Paeon II"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
+    sets.midcast["Army's Paeon"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
 
     -- Other general spells and classes.
     sets.midcast.Cure = {

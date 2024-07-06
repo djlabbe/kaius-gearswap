@@ -716,7 +716,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1="Beithir Ring",
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Epaminondas's Ring",
         back=gear.BST_WS1_Cape,
         waist="Orpheus's Sash",
@@ -867,7 +867,7 @@ function init_gear_sets()
         feet=gear.Nyame_Feet
     }
 
-    sets.idle.Town = sets.idle.Pet.Engaged
+    sets.idle.Town = sets.engaged.DW.MaxHaste
 
     ----------------
     -- OTHER SETS --

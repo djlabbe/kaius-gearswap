@@ -385,7 +385,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Moonshade Earring",
         ring1="Freke Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.RDM_WS1_Cape,
         waist="Orpheus's Sash",
     }
@@ -435,7 +435,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Ishvara Earring",
         ring1="Sroda Ring",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.RDM_WS1_Cape,
         waist="Sailfi Belt +1",
     }
@@ -451,7 +451,7 @@ function init_gear_sets()
         ear1="Regal Earring",
         ear2="Moonshade Earring",
         ring1="Metamorph Ring +1",
-        ring2="Cornelia's Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.RDM_WS1_Cape,
         waist="Sailfi Belt +1",
     }
@@ -541,54 +541,64 @@ function init_gear_sets()
     sets.midcast['Enhancing Magic'] = {
         main=gear.Colada_ENH,
         sub="Ammurapi Shield",
-        ammo="Regal Gem",
-        -- head="Befouled Crown",
-        head=gear.Carmine_D_Head,
-        body=gear.Relic_Body,
-        hands=gear.Artifact_Hands,
-        legs=gear.Artifact_Legs,
-        feet=gear.Empyrean_Feet,
-        neck="Incanter's Torque",
-        ear1="Mimir Earring",
-        ear2="Andoaa Earring",
-        ring1=gear.Stikini_1,
-        ring2=gear.Stikini_2,
-        back=gear.RDM_ENH_Cape,
-        waist="Embla Sash",
-    }
-
-    sets.midcast.EnhancingDuration = {
-        main=gear.Colada_ENH,
-        sub="Ammurapi Shield",
+        ammo="Staunch Tathlum +1",
         head=gear.Telchine_ENH_Head,
         body=gear.Relic_Body,
         hands=gear.Artifact_Hands,
         legs=gear.Telchine_ENH_Legs,
         feet=gear.Empyrean_Feet,
+        ring1="Gelatinous Ring +1",
+        ring2="Defending Ring",
+        ear1="Odnowa Earring +1",
         ear2="Leth. Earring +1",
         neck="Duelist's Torque +2",
         back=gear.RDM_ENH_Cape,
         waist="Embla Sash",
     }
 
+    -- sets.midcast.EnhancingDuration = {
+    --     main=gear.Colada_ENH,
+    --     sub="Ammurapi Shield",
+    --     ammo="Staunch Tathlum +1",
+    --     head=gear.Telchine_ENH_Head,
+    --     body=gear.Relic_Body,
+    --     hands=gear.Artifact_Hands,
+    --     legs=gear.Telchine_ENH_Legs,
+    --     feet=gear.Empyrean_Feet,
+    --     ring1="Gelatinous Ring +1",
+    --     ring2="Defending Ring",
+    --     ear1="Odnowa Earring +1",
+    --     ear2="Leth. Earring +1",
+    --     neck="Duelist's Torque +2",
+    --     back=gear.RDM_ENH_Cape,
+    --     waist="Embla Sash",
+    -- }
+
+    sets.buff.ComposureOther = set_combine(sets.midcast['Enhancing Magic'], {
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        legs=gear.Empyrean_Legs,
+    })
+
     sets.midcast.EnhancingSkill = {
         main="Pukulatmuj +1",
         sub="Pukulatmuj",
-        -- head="Befouled Crown",
-        head=gear.Carmine_D_Head,
+        ammo="Staunch Tathlum +1",
+        head="Befouled Crown",
+        body=gear.Relic_Body,
+        hands=gear.Relic_Hands,
+        legs=gear.Artifact_Legs,
+        feet=gear.Empyrean_Feet,
         neck="Incanter's Torque",
         ear1="Mimir Earring",
         ear2="Andoaa Earring",
-        hands=gear.Relic_Hands,
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back=gear.RDM_ENH_Cape,
         waist="Olympus Sash",
-        legs=gear.Artifact_Legs,
-        feet=gear.Empyrean_Feet,
     }
 
-    sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
+    sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
         main="Bolelabunga",
         sub="Ammurapi Shield",
         head=gear.Telchine_ENH_Head,
@@ -598,7 +608,7 @@ function init_gear_sets()
         feet=gear.Telchine_ENH_Feet,
     })
 
-    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
+    sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
         head=gear.Amalric_A_Head, -- +2
         body=gear.Artifact_Body, -- +3
         legs=gear.Empyrean_Legs, -- +2
@@ -608,12 +618,12 @@ function init_gear_sets()
         waist="Gishdubar Sash",
     }
 
-    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {
+    sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
         neck="Nodens Gorget",
         waist="Siegel Sash",
     })
 
-    sets.midcast.PhalanxSelf = set_combine(sets.midcast.EnhancingDuration, {
+    sets.midcast.PhalanxSelf = set_combine(sets.midcast['Enhancing Magic'], {
         main="Sakpata's Sword",
         body=gear.Taeon_Phalanx_Body, --3(10)
         hands=gear.Taeon_Phalanx_Hands, --3(10)
@@ -621,7 +631,7 @@ function init_gear_sets()
         feet=gear.Taeon_Phalanx_Feet, --3(10)
     })
 
-    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
+    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
         ammo="Staunch Tathlum +1",
         head=gear.Amalric_A_Head,
         hands="Regal Cuffs",
@@ -631,11 +641,11 @@ function init_gear_sets()
         waist="Emphatikos Rope",
     })
 
-    sets.midcast.Storm = sets.midcast.EnhancingDuration
-    sets.midcast.GainSpell = {hands=gear.Relic_Hands}
-    sets.midcast.SpikesSpell = {legs=gear.Relic_Pants}
+    sets.midcast.Storm = sets.midcast['Enhancing Magic']
+    sets.midcast.GainSpell = set_combine(sets.midcast['Enhancing Magic'], {hands=gear.Relic_Hands})
+    sets.midcast.SpikesSpell = set_combine(sets.midcast['Enhancing Magic'], {legs=gear.Relic_Pants})
 
-    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
+    sets.midcast.Protect = set_combine(sets.midcast['Enhancing Magic'], {
         ring2="Sheltered Ring"
     })
     
@@ -898,12 +908,7 @@ function init_gear_sets()
 
     sets.midcast.Trust = sets.precast.FC
 
-    sets.buff.ComposureOther = set_combine(sets.midcast.EnhancingDuration, {
-        head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet,
-    });
+
 
     sets.buff.Saboteur = {hands=gear.Empyrean_Hands}
 
@@ -1169,7 +1174,7 @@ end
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == 'Enhancing Magic' then
         if classes.NoSkillSpells:contains(spell.english) then
-            equip(sets.midcast.EnhancingDuration)
+            equip(sets.midcast['Enhancing Magic'])
             if spellMap == 'Refresh' then
                 equip(sets.midcast.Refresh)
                 if spell.target.type == 'SELF' then
@@ -1188,6 +1193,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             end
         end
         if (spell.target.type == 'PLAYER' or spell.target.type == 'NPC') and buffactive.Composure then
+            add_to_chat("Comp other")
             equip(sets.buff.ComposureOther)
         end
     end

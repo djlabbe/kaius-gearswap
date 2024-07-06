@@ -142,7 +142,7 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT', 'MDT')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Maxentius', 'Nuking'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Tizona', 'Naegling', 'Maxentius', 'Nuking'}
     state.WeaponLock = M(false, 'Weapon Lock')
     include('Global-Binds.lua')
 
@@ -183,22 +183,25 @@ function user_setup()
     send_command('bind !b input /ma "Battery Charge" <me>')
 
     if player.sub_job == 'RDM' then
-        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 2')
-        send_command('bind ^numpad9 gs c set WeaponSet Nuking;input /macro set 3')
+        send_command('bind ^numpad7 gs c set WeaponSet Tizona;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Naegling;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Maxentius;input /macro set 3')
+        send_command('bind ^numpad4 gs c set WeaponSet Nuking;input /macro set 4')
         send_command('bind !p input /ma "Protect III" <me>')
         send_command('bind !o input /ma "Shell III" <me>')
         send_command('bind !i input /ma "Phalanx" <me>')
         set_macro_page(1, 16)
     elseif player.sub_job == 'WAR' then
-        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 4')
-        send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 5')
-        send_command('bind ^numpad9 gs c set WeaponSet Nuking;input /macro set 6')
+        send_command('bind ^numpad7 gs c set WeaponSet Tizona;input /macro set 5')
+        send_command('bind ^numpad8 gs c set WeaponSet Naegling;input /macro set 6')
+        send_command('bind ^numpad9 gs c set WeaponSet Maxentius;input /macro set 7')
+        send_command('bind ^numpad4 gs c set WeaponSet Nuking;input /macro set 8')
         set_macro_page(4, 16)
     else
-        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 2')
-        send_command('bind ^numpad9 gs c set WeaponSet Nuking;input /macro set 3')
+        send_command('bind ^numpad7 gs c set WeaponSet Tizona;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Naegling;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Maxentius;input /macro set 3')
+        send_command('bind ^numpad4 gs c set WeaponSet Nuking;input /macro set 4')
         set_macro_page(1, 16)
     end
     
@@ -736,7 +739,7 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Malignance_Feet,
         neck="Mirage Stole +2",
-        ear1="Dedition Earring",
+        ear1="Telos Earring",
         ear2="Hashishin Earring +1",
         ring1=gear.Lehko_Or_Chirich1,
         ring2="Epona's Ring",
@@ -752,7 +755,7 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Malignance_Feet,
         neck="Mirage Stole +2",
-        ear1="Dedition Earring",
+        ear1="Telos Earring",
         ear2="Hashishin Earring +1",
         ring1=gear.Lehko_Or_Chirich1,
         ring2="Epona's Ring",
@@ -768,9 +771,9 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Malignance_Feet,
         neck="Mirage Stole +2",
-        ear1="Dedition Earring",
+        ear1="Telos Earring",
         ear2="Hashishin Earring +1",
-          ring1=gear.Lehko_Or_Chirich1,
+        ring1=gear.Lehko_Or_Chirich1,
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Sailfi Belt +1", 
@@ -784,9 +787,9 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Malignance_Feet,
         neck="Mirage Stole +2",
-        ear1="Dedition Earring",
+        ear1="Telos Earring",
         ear2="Hashishin Earring +1",
-          ring1=gear.Lehko_Or_Chirich1,
+        ring1=gear.Lehko_Or_Chirich1,
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Sailfi Belt +1", 
@@ -800,7 +803,7 @@ function init_gear_sets()
         legs=gear.Gleti_Legs,
         feet=gear.Malignance_Feet,
         neck="Mirage Stole +2",
-        ear1="Dedition Earring",
+        ear1="Telos Earring",
         ear2="Hashishin Earring +1",
         ring1=gear.Lehko_Or_Chirich1,
         ring2="Epona's Ring",
@@ -868,7 +871,7 @@ function init_gear_sets()
         waist="Plat. Mog. Belt",
     }
 
-    sets.idle.Town = sets.midcast['Blue Magic'].Magical
+    sets.idle.Town =  sets.engaged.DW.DT.MaxHaste
     sets.idle.Weak = sets.idle.DT
 
     if (item_available("Shneddick Ring +1")) then
@@ -921,6 +924,7 @@ function init_gear_sets()
         waist="Gishdubar Sash",
     }
 
+    sets.Tizona = {main="Tizona", sub="Thibron"}
     sets.Naegling = {main="Naegling", sub="Thibron"}
     sets.Maxentius = {main="Maxentius", sub="Thibron"}
     sets.Nuking = {main="Maxentius", sub="Bunzi's Rod"}
