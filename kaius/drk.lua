@@ -23,7 +23,6 @@ function job_setup()
     state.Buff.Hasso = buffactive.Hasso or false
     state.Buff.Souleater = buffactive.souleater or false
     state.Buff['Last Resort'] = buffactive['Last Resort'] or false
-    state.Buff.AM = false
     state.Buff.Doom = false
     custom_weapon_list = S{"Liberator"}
 end
@@ -832,14 +831,6 @@ function job_buff_change(buff,gain)
             state.Buff.Doom = false
         end
     end
-
-    if buff == "Aftermath: Lv.3" then
-        if gain then
-            state.Buff.AM = true
-        else
-            state.Buff.AM = false
-        end
-    end
 end
 
 -- Called by the 'update' self-command, for common needs.
@@ -936,12 +927,6 @@ end
 
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
-
-    -- if state.Buff.AM == false and player.tp == 3000 then
-    --     send_command("input /ws 'Torcleaver' <t>")
-    -- elseif state.Buff.AM == true and player.tp > 1000 then
-    --     send_command("input /ws 'Torcleaver' <t>")
-    -- end
 end
 
 function gearinfo(cmdParams, eventArgs)

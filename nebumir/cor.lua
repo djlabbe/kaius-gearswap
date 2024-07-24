@@ -79,9 +79,9 @@ function user_setup()
     -- gear.QDbullet = "Hauksbok Bullet"
     options.ammo_warning_limit = 10
 
-    gear.Rostam_A = { name="Rostam", augments={'Path: B',}} -- No path A yet, just use B
-    gear.Rostam_B = { name="Rostam", augments={'Path: B',}}
-    gear.Rostam_C = { name="Rostam", augments={'Path: C',}}
+    gear.Rostam_A = { name="Rostam", augments={'Path: B',}, bag="wardrobe2"}
+    gear.Rostam_B = { name="Rostam", augments={'Path: B',}, bag="wardrobe2"}
+    gear.Rostam_C = { name="Rostam", augments={'Path: C',}, bag="wardrobe3"}
 
     gear.Artifact_Head = { name= "Laksamana's Tricorne +3" }
     gear.Artifact_Body = { name= "Laksamana's Frac +3" }

@@ -462,7 +462,7 @@ function init_gear_sets()
         ring1="Metamorph Ring +1",
         ear2="Regal Earring",
         hands=gear.Artifact_Hands,
-        feet=gear.Artifact_Feet,
+        feet=gear.Empyrean_Feet,
     })
 
     sets.midcast['Elemental Magic'] = {

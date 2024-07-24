@@ -68,7 +68,7 @@ function user_setup()
     gear.Artifact_Body = { name="Atrophy Tabard +3" }
     gear.Artifact_Hands = { name="Atrophy Gloves +3" }
     gear.Artifact_Legs = { name="Atrophy Tights +3" }
-    gear.Artifact_Feet = { name="Atrophy Boots +2" }
+    gear.Artifact_Feet = { name="Atrophy Boots +3" }
 
     gear.Relic_Head = { name="Vitiation Chapeau +3" }
     gear.Relic_Body = { name="Vitiation Tabard +3" }
@@ -504,7 +504,7 @@ function init_gear_sets()
     })
 
     sets.midcast.CureSelf = set_combine(sets.midcast.Cure, {
-        -- neck="Phalaina Locket", -- 4(4)
+        neck="Phalaina Locket", -- 4(4)
         ring2="Asklepian Ring", -- (3)
         waist="Gishdubar Sash", -- (10)
     })
@@ -1193,7 +1193,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             end
         end
         if (spell.target.type == 'PLAYER' or spell.target.type == 'NPC') and buffactive.Composure then
-            add_to_chat("Comp other")
             equip(sets.buff.ComposureOther)
         end
     end

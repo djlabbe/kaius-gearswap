@@ -28,8 +28,8 @@ end
 
 function user_setup()
     state.OffenseMode:options('Normal')
-    state.HybridMode:options('Normal', 'DD')
     state.WeaponskillMode:options('Normal')
+    state.HybridMode:options('Normal', 'DD')
     state.CastingMode:options('Normal')
     state.PhysicalDefenseMode:options('PDT')
     state.MagicalDefenseMode:options('MDT')
@@ -66,7 +66,6 @@ function user_setup()
 
     send_command('bind @f10 gs c toggle EquipShield')
     send_command('bind @w gs c toggle WeaponLock')
-    send_command('bind @e gs c cycle WeaponSet')
 
     send_command('bind ^p gs c toggle PhalanxMode')
 
@@ -103,6 +102,7 @@ function user_unload()
     send_command('unbind !f11')
     send_command('unbind @f10')
     send_command('unbind @f11')
+    send_command('lua u azureSets')
     unbind_numpad()
 end
 
@@ -134,12 +134,12 @@ function init_gear_sets()
     sets.precast.JA['Chivalry'] = {hands=gear.Relic_Hands }
 
     sets.precast.FC = {
-        -- main="Sakpata's Sword", --10
+        main="Sakpata's Sword", --10
         ammo="Sapience Orb", --2
         head=gear.Empyrean_Head, --9 
         body=gear.Artifact_Body, --10
-        hands="Leyline Gloves", --6
         legs=gear.Eschite_D_Legs, --5
+        hands="Leyline Gloves", --6
         feet=gear.Empyrean_Feet, --13
         neck={name="Unmoving Collar +1", priority=200},
         waist={name="Platinum Moogle Belt", priority=999},
@@ -166,6 +166,7 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Atonement'] = {
+      ammo="Staunch Tathlum +1",
       head="Loess Barbuta +1",
       body=gear.Souveran_C_Body,
       hands=gear.Souveran_C_Hands,
@@ -254,7 +255,7 @@ function init_gear_sets()
         neck={name="Unmoving Collar +1", priority=200},
         waist={name="Platinum Moogle Belt", priority=999},
         ear1={name="Tuisto Earring", priority=150},
-        ear2="Knightly Earring",
+        ear2={name="Odnowa Earring +1", priority=110},
         ring1="Apeile Ring +1",
         ring2={name="Gelatinous Ring +1", priority=135},
         back=gear.PLD_SIRD_Cape,
@@ -284,8 +285,6 @@ function init_gear_sets()
         ring2=gear.Stikini_2,
     }, sets.Phalanx)
 
-
-
 	sets.midcast.Reprisal = {
         ammo="Staunch Tathlum +1",
         head=gear.Souveran_C_Head,
@@ -297,11 +296,12 @@ function init_gear_sets()
         waist={name="Platinum Moogle Belt", priority=999},
         ear1={name="Tuisto Earring", priority=150},
         ear2="Etiolation Earring",
+        ring1="Kishar Ring",
         ring2={name="Gelatinous Ring +1", priority=135},
         back=gear.PLD_SIRD_Cape,
     }
 
-    sets.idle = {
+    sets.engaged = {
         ammo="Staunch Tathlum +1",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
@@ -315,11 +315,44 @@ function init_gear_sets()
         ring1=gear.Moonlight_1,
         ring2={name="Gelatinous Ring +1", priority=135},
         back=gear.PLD_Idle_Cape,
+    } --49% DT
+
+    sets.Hybrid = {
+        ammo="Coiste Bodhar",
+        head=gear.Sakpata_Head,
+        body=gear.Sakpata_Body,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Sakpata_Legs,
+        feet=gear.Sakpata_Feet,
+        neck="Vim Torque +1",
+        waist="Sailfi Belt +1",
+        ear1="Dedition Earring",
+        ear2="Telos Earring",
+        ring1=gear.Moonlight_1,
+        ring2=gear.Moonlight_2,
+        back=gear.PLD_DA_Cape,
+    }
+
+    sets.engaged.DD = set_combine(sets.engaged, sets.Hybrid)
+
+    sets.idle = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Artifact_Feet,
+        neck={name="Unmoving Collar +1", priority=200},
+        ear1={name="Tuisto Earring", priority=150},
+        ear2={name="Odnowa Earring +1", priority=110},
+        ring1=gear.Moonlight_1,
+        ring2={name="Gelatinous Ring +1", priority=135},
+        waist={name="Platinum Moogle Belt", priority=999},
+        back=gear.PLD_Idle_Cape,
     } --3594 w/ Schneddick Ring
 
     sets.idle.Town = set_combine(sets.idle, {})
     sets.Kiting = { ring1="Shneddick Ring" }
-    sets.latent_refresh = {waist="Fucho-no-obi"}
     
     -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here when activating or changing defense mode:
     sets.PhysicalShield = {sub="Srivatsa"}
@@ -358,40 +391,6 @@ function init_gear_sets()
         back=gear.PLD_Idle_Cape,
         waist={name="Platinum Moogle Belt", priority=999},
     }
-
-    sets.engaged = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Artifact_Feet,
-        neck={name="Unmoving Collar +1", priority=200},
-        waist={name="Platinum Moogle Belt", priority=999},
-        ear1={name="Tuisto Earring", priority=150},
-        ear2={name="Odnowa Earring +1", priority=110},
-        ring1=gear.Moonlight_1,
-        ring2={name="Gelatinous Ring +1", priority=135},
-        back=gear.PLD_Idle_Cape,
-    } --49% DT
-
-    sets.Hybrid = {
-        ammo="Coiste Bodhar",
-        head=gear.Sakpata_Head,
-        body=gear.Sakpata_Body,
-        hands=gear.Sakpata_Hands,
-        legs=gear.Sakpata_Legs,
-        feet=gear.Sakpata_Feet,
-        neck="Rep. Plat. Medal",
-        waist="Sailfi Belt +1",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
-        ring1=gear.Moonlight_1,
-        ring2="Petrov Ring",
-        back=gear.PLD_DA_Cape,
-    }
-
-    sets.engaged.DD = set_combine(sets.engaged, sets.Hybrid)
     
     sets.buff.Cover = {
         head=gear.Artifact_Head, 
@@ -458,9 +457,6 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if player.mpp < 51 then
-        idleSet = set_combine(idleSet, sets.latent_refresh)
-    end
     if state.PhalanxMode.value == true then
         idleSet = set_combine(idleSet, sets.Phalanx)
     end

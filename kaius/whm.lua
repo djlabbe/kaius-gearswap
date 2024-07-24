@@ -755,7 +755,7 @@ function customize_idle_set(idleSet)
     if state.Buff['Sublimation: Activated'] then
         idleSet = set_combine(idleSet, sets.buff.Sublimation)
     end
-    if player.mpp < 51 then
+    if player.mpp < 20 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
     if state.Buff.Doom then

@@ -415,7 +415,12 @@ function init_gear_sets()
 
     sets.idle.Town = sets.engaged
 
-    sets.Kiting = { ring1="Shneddick Ring +1" }
+   
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Danzo Sune-Ate" }
+    end
 
     sets.defense.PDT = {
         ammo="Staunch Tathlum +1",

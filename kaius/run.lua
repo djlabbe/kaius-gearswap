@@ -282,10 +282,11 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck={name="Unmoving Collar +1", priority=200},
-        ear1="Moonshade Earring",
+        ear1="Telos Earring",
         ear2="Erilaz Earring +1", --15 acc
         ring1="Regal Ring",
-        ring2="Niqmaddu Ring",
+        -- ring2="Niqmaddu Ring",
+        ring="Ephramad's Ring",
         back=gear.RUN_WS1_Cape,
         waist={name="Platinum Moogle Belt", priority=999}, 
     })

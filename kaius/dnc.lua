@@ -71,6 +71,7 @@ function user_setup()
     send_command('bind @4 input /ja "Feather Step" <t>')
     send_command('bind !t input /ja "Animated Flourish" <t>')
     send_command('bind !h input /ja "Haste Samba" <me>')
+    send_command('bind !p input /ja "Presto" <me>')
     
     send_command('bind ^numpad7 gs c set WeaponSet Twash_TP')
     send_command('bind ^numpad8 gs c set WeaponSet Twash_Gleti')
@@ -117,6 +118,7 @@ function user_unload()
     send_command('unbind ^,')
     send_command('unbind @f')
     send_command('unbind @c')
+    send_command('unbind !p')
     unbind_numpad()
 end
 
@@ -435,8 +437,11 @@ function init_gear_sets()
     sets.engaged.Regain = set_combine(sets.engaged, {
         head="Turms Cap +1",
         hands="Regal Gloves",
-        ring1=gear.Chirich_1,
+        ear1="Dedition Earring",
+        ear2="Crepuscular Earring",
+        ring1="Roller's Ring",
         ring2=gear.Chirich_2,
+        waist="Sweordfaetels +1",
     })
 
      ------------------------------------------------------------------------------------------------
@@ -446,19 +451,19 @@ function init_gear_sets()
     sets.resting = {}
 
     sets.idle = {
-        ammo="Staunch Tathlum +1",
+        ammo="Aurgelmir Orb +1",
         head='Turms Cap +1',
         body=gear.Gleti_Body,
         hands="Regal Gloves",
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
         neck="Loricate Torque +1",
-        ear1="Tuisto Earring",
+        ear1="Dedition Earring",
         ear2="Odnowa Earring +1",
         ring1="Roller's Ring",
         ring2="Defending Ring",
         back=gear.DNC_STP_Cape,
-        waist="Engraved Belt",
+        waist="Sweordfaetels +1",
     }
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -476,6 +481,15 @@ function init_gear_sets()
     })
 
     sets.idle.Town = sets.idle
+    -- sets.idle.Town = set_combine(sets.precast.WS['Ruthless Stroke'], {
+    --     sub="Sm. Escutcheon",
+    --     body="Blacksmith's Apron",
+    --     hands="Smithy's Mitts",
+    --     neck="Smithy's Torque",
+    --     ring1="Craftmaster's Ring",
+    --     ring2="Confectioner's Ring",
+    --     waist="Blacksmith's Belt"
+    -- })
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------

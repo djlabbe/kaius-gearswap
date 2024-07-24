@@ -249,7 +249,7 @@ function init_gear_sets()
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
         ear1="Magnetic Earring",
-        ear2="Azimuth Earring +1",
+        ear2="Azimuth Earring +2",
         neck="Incanter's Torque",
         ring1="Gelatinous Ring +1",
         ring2="Defending Ring",
@@ -272,7 +272,7 @@ function init_gear_sets()
         feet="Vanya Clogs",
         neck="Incanter's Torque",
         ear1="Meili Earring",
-        ear2="Azimuth Earring +1",
+        ear2="Azimuth Earring +2",
         ring1="Metamorph Ring +1",
         ring2="Haoma's Ring",
         back="Solemnity Cape",
@@ -435,7 +435,7 @@ function init_gear_sets()
         neck="Sibyl Scarf",
         waist="Acuity Belt +1",
         ear1="Malignance Earring",
-        ear2="Regal Earring",     
+        ear2="Azimuth Earring +2",     
         ring1="Freke Ring",
         ring2="Metamor. Ring +1",
         back=gear.GEO_MAB_Cape,
@@ -459,7 +459,7 @@ function init_gear_sets()
         neck="Sibyl Scarf",
         waist="Acuity Belt +1",
         ear1="Malignance Earring",
-        ear2="Regal Earring",     
+        ear2="Azimuth Earring +2", 
         ring1="Freke Ring",
         ring2="Metamorph Ring +1",
         back=gear.GEO_MAB_Cape,
@@ -482,7 +482,7 @@ function init_gear_sets()
         feet=gear.Relic_Feet,
         neck="Bagua Charm +2",
         ear1="Etiolation Earring",
-        ear2="Azimuth Earring +1", --5
+        ear2="Azimuth Earring +2", --7
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back=gear.GEO_Idle_Cape,
@@ -523,16 +523,16 @@ function init_gear_sets()
         ammo="Hasty Pinion +1",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
-        hands=gear.Nyame_Hands,
+        hands=gear.Artifact_Hands, -- Pet DT
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck="Rep. Plat. Medal",
+        neck="Bagua Charm +2", -- Pet Absorb
         ear1="Crepuscular Earring",
         ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
-        waist="Windbuffet Belt +1",
-        back="Aurist's Cape +1"
+        waist="Isa Belt", -- Pet DT
+        back=gear.GEO_Idle_Cape, -- Pet Regen
     }
 
     sets.buff.Doom = {
@@ -544,7 +544,13 @@ function init_gear_sets()
 
     sets.Obi = { waist="Hachirin-no-Obi" }
     
-    sets.idle.Town = sets.MagicBurst
+    sets.idle.Town = set_combine(sets.MagicBurst, {
+        head=gear.Agwu_Head,
+        body=gear.Agwu_Body,
+        hands=gear.Agwu_Hands,
+        legs=gear.Agwu_Legs,
+        feet=gear.Agwu_Feet,
+    })
 end
 
 function job_pretarget(spell, spellMap, eventArgs)

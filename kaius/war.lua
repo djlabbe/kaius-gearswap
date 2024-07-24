@@ -28,7 +28,7 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal', 'Regen')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Chango', 'Helheim', 'ShiningOne', 'Naegling', 'Loxotic' }
+    state.WeaponSet= M{['description']='Weapon Set', 'Chango', 'Helheim', 'ShiningOne', 'Naegling', 'Loxotic' }
     state.WeaponLock = M(true, 'Weapon Lock')
 
     include('Global-Binds.lua')
@@ -521,6 +521,22 @@ function init_gear_sets()
     sets.precast.WS['Judgment'].PDL = set_combine(sets.precast.WS['Savage Blade'], {
         body=gear.Sakpata_Body,
     })
+
+    sets.precast.WS['Cataclysm'] = { --MAB26
+        ammo="Knobkierrie", --WSD6
+        head="Pixie Hairpin +1", --DMAB28
+        body=gear.Nyame_Body, --MAB30 WSD12
+        hands=gear.Nyame_Hands, --MAB30 WSD10
+        legs=gear.Nyame_Legs, --MAB30 WSD11
+        feet=gear.Nyame_Feet, --MAB30 WSD10
+        neck="Sanctity Necklace", --MAB10
+        waist="Orpheus's Sash", 
+        ear1="Moonshade Earring", --TPB250 MAB4
+        ear2="Friomisi Earring", --MAB10
+        ring1="Archon Ring", --DMAB5
+        ring2="Epaminondas's Ring",
+        back=gear.WAR_WS1_Cape,
+    } --TPB250 MAB170 DMAB33 WSD59
    
     --------------------------------------------------------
     --------------------- IDLE, ETC ------------------------

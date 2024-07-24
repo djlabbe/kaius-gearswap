@@ -28,7 +28,7 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Chango', 'ShiningOne', 'Naegling', 'Loxotic' }
+    state.WeaponSet = M{['description']='Weapon Set', 'Chango', 'ShiningOne', 'Naegling', 'Loxotic',  }
     state.WeaponLock = M(true, 'Weapon Lock')
 
     include('Global-Binds.lua')
@@ -49,9 +49,9 @@ function user_setup()
     gear.Empyrean_Body = { name= "Boii Lorica +3" }
     gear.Empyrean_Hands = { name= "Boii Mufflers +3" }
     gear.Empyrean_Legs = { name= "Boii Cuisses +3" }
-    gear.Empyrean_Feet = { name= "Boii Calligae +2" }
+    gear.Empyrean_Feet = { name= "Boii Calligae +3" }
 
-    gear.WAR_TP_Cape = { name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20', 'DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+    gear.WAR_TP_Cape = { name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20', 'DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.WAR_WS1_Cape = { name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
     gear.WAR_WS2_Cape = { name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
 
@@ -511,6 +511,22 @@ function init_gear_sets()
     sets.precast.WS['Judgment'].PDL = set_combine(sets.precast.WS['Savage Blade'], {
         body=gear.Sakpata_Body,
     })
+
+    sets.precast.WS['Cataclysm'] = { --MAB26
+        ammo="Knobkierrie", --WSD6
+        head="Pixie Hairpin +1", --DMAB28
+        body=gear.Nyame_Body, --MAB30 WSD12
+        hands=gear.Nyame_Hands, --MAB30 WSD10
+        legs=gear.Nyame_Legs, --MAB30 WSD11
+        feet=gear.Nyame_Feet, --MAB30 WSD10
+        neck="Sanctity Necklace", --MAB10
+        waist="Orpheus's Sash", 
+        ear1="Moonshade Earring", --TPB250 MAB4
+        ear2="Friomisi Earring", --MAB10
+        ring1="Archon Ring", --DMAB5
+        ring2="Epaminondas's Ring",
+        back=gear.WAR_WS1_Cape,
+    } --TPB250 MAB170 DMAB33 WSD59
    
     --------------------------------------------------------
     --------------------- IDLE, ETC ------------------------
