@@ -388,7 +388,7 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'] = {
         head="Blistering Sallet +1",
         body="Meghanada Cuirie +2",
-        hands=gear.Adhemar_B_Hands,
+        hands=gear.Empyrean_Hands,
         legs="Zoar Subligar +1",
         feet=gear.Nyame_Feet,
         feet=gear.Adhemar_D_Feet,
@@ -469,6 +469,25 @@ function init_gear_sets()
     }
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
+    
+    sets.midcast['Absorb-TP'] = {
+        main="Idris",
+        sub="Ammurapi Shield",
+        ammo="Pemphredo Tathlum",
+        head=gear.Empyrean_Head,
+        body=gear.Artifact_Body,
+        hands=gear.Artifact_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Erra Pendant", --
+        ear1="Crepuscular Earring", --
+        ear2="Skulker's Earring +1", --
+        ring1=gear.Stikini_1, --
+        ring2=gear.Stikini_2, --
+        back="Aurist's Cape +1", --
+        waist="Kwahu Kachina Belt +1", --
+    }
+
 
     sets.midcast.CorsairShot = {
         ammo=gear.QDbullet,

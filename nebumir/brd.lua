@@ -384,7 +384,7 @@ function init_gear_sets()
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
     -- Gear to enhance certain classes of songs.
-    sets.midcast.Ballad = { legs=gear.Empyrean_Legs }
+    -- sets.midcast.Ballad = { legs=gear.Empyrean_Legs }
     -- sets.midcast.Carol = { hands="Mousai Gages +1" }
     -- sets.midcast.Etude = { head="Mousai Turban +1" }
     sets.midcast.HonorMarch = { range="Marsyas", hands=gear.Empyrean_Hands }

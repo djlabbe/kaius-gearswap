@@ -28,7 +28,7 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'PDL')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponSet = M{['description']='Weapon Set',  'Twash_TP', 'Twash_Gleti', 'Twash_Crep', 'Mpu', "Aeneas", "Tauret"  }
+    state.WeaponSet = M{['description']='Weapon Set',  'Mpu_TP', 'Mpu_Gleti', 'Mpu_Crep', 'Twash_TP', 'Twash_Gleti', 'Twash_Crep', "Aeneas", "Tauret"  }
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name= "Maxixi Tiara +3" }
@@ -73,12 +73,14 @@ function user_setup()
     send_command('bind !h input /ja "Haste Samba" <me>')
     send_command('bind !p input /ja "Presto" <me>')
     
-    send_command('bind ^numpad7 gs c set WeaponSet Twash_TP')
-    send_command('bind ^numpad8 gs c set WeaponSet Twash_Gleti')
-    send_command('bind ^numpad9 gs c set WeaponSet Twash_Crep')
-    send_command('bind ^numpad4 gs c set WeaponSet Mpu')
-    send_command('bind ^numpad5 gs c set WeaponSet Aeneas')
-    send_command('bind ^numpad6 gs c set WeaponSet Tauret')
+    send_command('bind ^numpad7 gs c set WeaponSet Mpu_TP')
+    send_command('bind ^numpad8 gs c set WeaponSet Mpu_Gleti')
+    send_command('bind ^numpad9 gs c set WeaponSet Mpu_Crep')
+    send_command('bind ^numpad4 gs c set WeaponSet Twash_TP')
+    send_command('bind ^numpad5 gs c set WeaponSet Twash_Gleti')
+    send_command('bind ^numpad6 gs c set WeaponSet Twash_Crep')
+    send_command('bind ^numpad1 gs c set WeaponSet Aeneas')
+    send_command('bind ^numpad2 gs c set WeaponSet Tauret')
 
     if player.sub_job == 'DRG' then
         send_command('bind !c input /ja "Ancient Circle" <me>')
@@ -224,7 +226,7 @@ function init_gear_sets()
     sets.precast.Flourish2['Reverse Flourish'] = {hands=gear.Empyrean_Hands, back="Toetapper Mantle"}
     sets.precast.Flourish3 = {}
     sets.precast.Flourish3['Striking Flourish'] = {body=gear.Empyrean_Body}
-    sets.precast.Flourish3['Climactic Flourish'] = {head=gear.Empyrean_Head, ammo="Charis feather"}
+    sets.precast.Flourish3['Climactic Flourish'] = {head=gear.Empyrean_Head}
 
     sets.precast.FC = {
         ammo="Sapience Orb",
@@ -232,7 +234,7 @@ function init_gear_sets()
         body=gear.Taeon_FC_Body, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
-        feet=gear.Nyame_Feet, --2
+        feet=gear.Nyame_Feet, 
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
@@ -303,7 +305,6 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Ruthless Stroke'].PDL = set_combine(sets.precast.WS['Ruthless Stroke'], {
-        ear2="Maculele Earring +1",
         body=gear.Gleti_Body,
     })
 
@@ -311,7 +312,7 @@ function init_gear_sets()
         ammo="Coiste Bodhar",
         head=gear.Empyrean_Head,
         body=gear.Relic_Body,
-        hands=gear.Adhemar_B_Hands,
+        hands=gear.Gleti_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Fotia Gorget",
@@ -451,6 +452,22 @@ function init_gear_sets()
     sets.resting = {}
 
     sets.idle = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Gleti_Head,
+        body=gear.Gleti_Body,
+        hands=gear.Gleti_Hands,
+        legs=gear.Gleti_Legs,
+        feet=gear.Gleti_Feet,
+        neck="Warder's Charm +1",
+        ear1="Infused Earring",
+        ear2="Sanare Earring",
+        ring1=gear.Chirich_1,
+        ring2=gear.Chirich_2,
+        back=gear.DNC_STP_Cape,
+        waist="Platinum Moogle Belt",
+    }
+
+    sets.idle.Regain = {
         ammo="Aurgelmir Orb +1",
         head='Turms Cap +1',
         body=gear.Gleti_Body,
@@ -512,7 +529,7 @@ function init_gear_sets()
 
     sets.buff['Saber Dance'] = {legs=gear.Relic_Legs}
     sets.buff['Fan Dance'] = {hands=gear.Relic_Hands}
-    sets.buff['Climactic Flourish'] = {head=gear.Empyrean_Head}
+    sets.buff['Climactic Flourish'] = {head=gear.Empyrean_Head, ammo="Charis Feather"}
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -521,13 +538,16 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
+    sets.Mpu_TP = { main="Mpu Gandring", sub="Centovente" }
+    sets.Mpu_Gleti = { main="Mpu Gandring", sub="Gleti's Knife" }
+    sets.Mpu_Crep = { main="Mpu Gandring", sub="Crepuscular Knife" }
+
     sets.Twash_TP = { main="Twashtar", sub="Centovente" }
     sets.Twash_Gleti = { main="Twashtar", sub="Gleti's Knife" }
     sets.Twash_Crep = { main="Twashtar", sub="Crepuscular Knife" }
-    sets.Mpu = { main="Mpu Gandring", sub="Centovente" }
+   
     sets.Aeneas = { main="Aeneas", sub="Centovente" }
     sets.Tauret = { main="Tauret", sub="Gleti's Knife" }
-
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
@@ -636,6 +656,10 @@ function get_custom_wsmode(spell, action, spellMap)
 end
 
 function customize_idle_set(idleSet)
+    if state.HybridMode.value == 'Regain' then
+        idleSet = set_combine(idleSet, sets.idle.Regain)
+    end
+    
     if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end

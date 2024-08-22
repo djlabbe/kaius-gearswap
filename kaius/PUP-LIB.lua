@@ -143,10 +143,8 @@ ${current_pet_skills|- No Skills To Track}
 ]]
 
     hub_mode_std = [[ \cs(255, 115, 0)======= Mode ============\cr
--\cs(125, 125, 0)${key_bind_offense} Off Mode :\cr ${player_current_offense|MasterPet}
+-\cs(125, 125, 0)${key_bind_offense} Off Mode :\cr ${player_current_offense|MasterAutomaton}
 -\cs(125, 125, 0)${key_bind_hybrid} Hybrid Mode :\cr ${player_current_hybrid|Normal}
--\cs(125, 125, 0)${key_bind_physical} PDT Mode :\cr ${player_current_physical|PetDT}
--\cs(125, 125, 0)${key_bind_idle} Idle Mode :\cr ${player_current_idle|Idle}
 ]]
 
     hub_options_std = [[ \cs(255, 115, 0)======= Options ==========\cr
@@ -172,7 +170,7 @@ ${current_pet_skills|- No Skills To Track}
 ]]
 
     hub_mode_lte = [[ 
-\cs(255, 115, 0)= Mode: \cr-\cs(125, 125, 0)${key_bind_idle} Idle Mode :\cr ${player_current_idle|Idle}-\cs(125, 125, 0)${key_bind_offense} Offense Mode :\cr ${player_current_offense|MasterPet}-\cs(125, 125, 0)${key_bind_physical} Physical Mode :\cr ${player_current_physical|PetDT}-\cs(125, 125, 0)${key_bind_hybrid} Hybrid Mode :\cr ${player_current_hybrid|Normal} 
+\cs(255, 115, 0)= Mode: \cr-\cs(125, 125, 0)${key_bind_idle} Idle Mode :\cr ${player_current_idle|Idle}-\cs(125, 125, 0)${key_bind_offense} Offense Mode :\cr ${player_current_offense|MasterAutomaton}-\cs(125, 125, 0)${key_bind_physical} Physical Mode :\cr ${player_current_physical|PetPDT}-\cs(125, 125, 0)${key_bind_hybrid} Hybrid Mode :\cr ${player_current_hybrid|Normal} 
 ]]
 
     hub_options_lte = [[ 
@@ -215,7 +213,7 @@ function validateTextInformation()
         main_text_hub.toggle_auto_maneuver = const_off
     end
 
-    if state.LockPetDT.value then
+    if state.LockPetPDT.value then
         main_text_hub.toggle_lock_pet_dt_set = const_on
     else
         main_text_hub.toggle_lock_pet_dt_set = const_off
@@ -609,7 +607,7 @@ end
 --Used to determine what Hybrid Mode to use when Player is engaged for trusts only and Pet is Engaged
 function user_customize_melee_set(meleeSet)
     
-    if (Master_State:lower() == const_stateEngaged:lower() and state.OffenseMode.value == "Trusts") and Pet_State:lower() == const_stateEngaged:lower() then
+    if (Master_State:lower() == const_stateEngaged:lower() and state.OffenseMode.value == "Automaton") and Pet_State:lower() == const_stateEngaged:lower() then
         if state.HybridMode.current == "Normal" then --If Hybrid Mode is Normal then simply return the set
             meleeSet = sets.idle.Pet.Engaged
             return meleeSet
@@ -625,7 +623,7 @@ end
 function job_precast(spell, action, spellMap, eventArgs)
     if spell.english == "Activate" or spell.english == "Deus Ex Automata" then
         calculateTotalState()
-        determinePuppetType()
+        -- determinePuppetType()
     elseif string.find(spell.english, "Maneuver") then
         equip(sets.precast.JA.Maneuver)
     elseif sets.precast.JA[spell.english] then
@@ -696,7 +694,7 @@ function job_status_change(new, old)
 
             --Gets the current target we have focus on and make sure it isn't null
             --We are also keeping track of the current monster just in case we auto switch
-            if windower.ffxi.get_mob_by_target('t').id then
+            if windower.ffxi.get_mob_by_target('t') ~= nil then
                 currentTargetedMonster = windower.ffxi.get_mob_by_target('t').id
             end
 
@@ -792,8 +790,8 @@ function job_self_command(command, eventArgs)
         state.AutoMan:toggle()
         validateTextInformation()
 
-    elseif command[1]:lower() == "predict" then --Predict Command
-        determinePuppetType()
+    -- elseif command[1]:lower() == "predict" then --Predict Command
+    --     determinePuppetType()
 
     elseif command[1]:lower() == "hub" or command[1]:lower() == "hide" then --First variable is hide lets find out what
         if command[2]:lower() == "mode" then --Hides the Mode
@@ -964,7 +962,7 @@ windower.register_event(
                     previousTargetedMonster = currentTargetedMonster
 
                     --Get the new current target
-                    if windower.ffxi.get_mob_by_target('t').id then
+                    if windower.ffxi.get_mob_by_target('t') ~= nil then
                         currentTargetedMonster = windower.ffxi.get_mob_by_target('t').id
                     end
 
@@ -999,7 +997,7 @@ windower.register_event(
                      or state.PetStyleCycle.value:lower() == "dd" 
                      or state.PetModeCycle.value:lower() == "dd" 
                      or state.PetStyleCycle.value:lower() == "bone") and
-                    (Master_State:lower() == "idle" or state.OffenseMode.value == "Trusts")
+                    (Master_State:lower() == "idle" or state.OffenseMode.value == "Automaton")
              then
                 --Now if pet has more than 1000 tp and pet is engaged and didn't just finish a weaponskill and we have not locked the pet out this set
                 if pet.tp >= 850 and Pet_State == const_stateEngaged and justFinishedWeaponSkill == false and petWeaponSkillLock == false then
@@ -1248,13 +1246,10 @@ function display_current_job_state(eventArgs)
         msg = msg .. ", Pet Style: (" .. state.PetStyleCycle.value .. ")"
     end
 
-    calculateTotalState()
-    determinePuppetType()
     handle_equipping_gear(player.status, Pet_State)
-
     add_to_chat(122, msg)
 end
 
 function sub_job_change(new, old)
-    determinePuppetType()
+    -- determinePuppetType()
 end

@@ -485,10 +485,10 @@ function init_gear_sets()
         sub="Khonsu",
         ammo="Epitaph",
         head=gear.Empyrean_Head,
-        neck="Caller's Pendant",
+        neck="Summoner's Collar +2",
         ear1="Lugalbanda Earring",
         ear2="Beckoner's Earring +2",
-        body=gear.Apogee_A_Body,
+        body="Shomonjijoe +1",
         hands="Asteria Mitts +1",
         ring1=gear.Stikini_1,
         ring2="Defending Ring",
@@ -503,10 +503,10 @@ function init_gear_sets()
         sub="Khonsu",
         ammo="Epitaph",
         head=gear.Empyrean_Head,
-        neck="Caller's Pendant",
+        neck="Summoner's Collar +2",
         ear1="Evans Earring",
         ear2="Beckoner's Earring +2",
-        body=gear.Apogee_A_Body,
+        body=gear.Bunzi_Body,
         hands="Asteria Mitts +1",
         ring1=gear.Gerubu_Or_Stikini1,
         ring2="Defending Ring",
@@ -525,7 +525,7 @@ function init_gear_sets()
         hands="Asteria Mitts +1",
         legs="Assid. Pants +1", --3
         feet="Baayami Sabots +1",
-        neck="Caller's Pendant", --1
+        neck="Summoner's Collar +2", --1
         ear1="Lugalbanda Earring",
         ear2="Beckoner's Earring +2", --(6)
         ring1=gear.Gerubu_Or_Stikini1,
@@ -539,7 +539,7 @@ function init_gear_sets()
         sub="Elan Strap +1",
         ammo="Epitaph",
         head=gear.Empyrean_Head,
-        neck="Caller's Pendant",
+        neck="Summoner's Collar +2",
         ear1="Evans Earring",
         ear2="Beckoner's Earring +2",
         body=gear.Apogee_A_Body,
@@ -557,7 +557,7 @@ function init_gear_sets()
         sub="Elan Strap +1",
         ammo="Epitaph",
         head=gear.Empyrean_Head,
-        neck="Caller's Pendant",
+        neck="Summoner's Collar +2",
         ear1="Evans Earring",
         ear2="Beckoner's Earring +2",
         body=gear.Apogee_A_Body,
@@ -581,24 +581,7 @@ function init_gear_sets()
         legs=gear.Empyrean_Legs
     }
 
-    sets.idle.Town = {
-        main="Gridarvor",
-        sub="Khonsu",
-        ammo="Epitaph",
-        head=gear.Bunzi_Head,
-        body=gear.Bunzi_Body,
-        hands=gear.Bunzi_Hands,
-        legs=gear.Bunzi_Legs,
-        feet=gear.Bunzi_Feet,
-        neck="Summoner's Collar +2",
-        ear1="Lugalbanda Earring",
-        ear2="Beckoner's Earring +2",
-        ring1=gear.Gerubu_Or_Stikini1,
-        ring2="Cath Palug Ring",
-        back=gear.SMN_Magic_Cape,
-        waist="Regal Belt",
-    }
-
+    sets.idle.Town = sets.idle
   
         
     sets.perp = {}
@@ -822,15 +805,21 @@ end
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_update(cmdParams, eventArgs)
+    
+    -- Without this, gearinfo will switch back to idle gear in between pet starting an action and the action actually hitting
+    if pet_midaction() then
+        return true
+    end
+
     handle_equipping_gear(player.status)
-    -- classes.CustomIdleGroups:clear()
-    -- if pet.isvalid then
-    --     if avatars:contains(pet.name) then
-    --         classes.CustomIdleGroups:append('Avatar')
-    --     elseif spirits:contains(pet.name) then
-    --         classes.CustomIdleGroups:append('Spirit')
-    --     end
-    -- end
+    classes.CustomIdleGroups:clear()
+    if pet.isvalid then
+        if avatars:contains(pet.name) then
+            classes.CustomIdleGroups:append('Avatar')
+        elseif spirits:contains(pet.name) then
+            classes.CustomIdleGroups:append('Spirit')
+        end
+    end
 end
 
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.
@@ -845,7 +834,7 @@ end
 
 -- Called for custom player commands.
 function job_self_command(cmdParams, eventArgs)
-    -- gearinfo(cmdParams, eventArgs)
+    gearinfo(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'petweather' then
         handle_petweather()
         eventArgs.handled = true
@@ -1031,17 +1020,17 @@ function create_pact_timer(spell_name)
 end
 
 
--- function gearinfo(cmdParams, eventArgs)
---     if cmdParams[1] == 'gearinfo' then
---         if type(cmdParams[4]) == 'string' then
---             if cmdParams[4] == 'true' then
---                 moving = true
---             elseif cmdParams[4] == 'false' then
---                 moving = false
---             end
---         end
---         if not midaction() then
---             job_update()
---         end
---     end
--- end
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end

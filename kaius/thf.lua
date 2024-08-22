@@ -330,7 +330,7 @@ function init_gear_sets()
 
     sets.engaged = {
         ammo="Aurgelmir Orb +1",
-        head=gear.Adhemar_A_Head,
+        head=gear.Empyrean_Head,
         body=gear.Artifact_Body,
         hands=gear.Gleti_Hands,
         legs=gear.Malignance_Legs,
@@ -412,16 +412,15 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         body=gear.Malignance_Body, --9/9
+        hands-gear.Malignance_Hands --5/5
         feet=gear.Malignance_Feet, --4/4
-        ring1=gear.Moonlight_1, --5/5
         ring2=gear.Moonlight_2, --5/5
     }
 
     sets.engaged.Hybrid.ExtraHaste = {
         body=gear.Malignance_Body, --9/9
         hands=gear.Malignance_Hands,
-        feet=gear.Empyrean_Feet, --4/4
-        ring2=gear.Moonlight_2, --5/5
+        feet=gear.Empyrean_Feet,
     }
 
     sets.engaged.HybridEvasion = {
@@ -488,23 +487,22 @@ function init_gear_sets()
     }
 
     sets.idle.DT = set_combine(sets.idle, {
-        ammo="Staunch Tathlum +1", --3/3
-        head=gear.Malignance_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
-        neck="Warder's Charm +1",
-        ear1="Eabani Earring",
-        ear2="Etiolation Earring",
-        ring1="Purity Ring", --0/4
-        ring2="Defending Ring", --10/10
-        waist="Platinum Moogle Belt",
-        back=gear.THF_TP_Cape, 
+        ammo="Aurgelmir Orb +1",
+        head=gear.Empyrean_Head,
+        body=gear.Malignance_Body,
+        hands=gear.Malignance_Hands,
+        legs=gear.Gleti_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Asn. Gorget +2",
+        ear1="Sherida Earring",
+        ear2="Skulker's Earring +1",
+        ring1=gear.Moonlight_1,
+        ring2=gear.Moonlight_2,
+        back=gear.THF_TP_Cape,
+        waist="Reiki Yotai", 
     })
 
     sets.defense.PDT = sets.idle.DT
-
     sets.defense.MDT =sets.idle.DT
 
     sets.Kiting = { feet=gear.Artifact_Feet }

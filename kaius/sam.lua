@@ -183,10 +183,13 @@ function init_gear_sets()
         back=gear.SAM_TP_Cape,
     } --25/20 (Need Auspice)
 
-    -- Base 35%
     sets.engaged.Hybrid = {
-        back=gear.SAM_TP_Cape,
-    } -- 45% Physical
+        ammo="Coiste Bodhar",
+        ear1="Schere Earring",
+        hands=gear.Mpaca_Hands,
+        feet=gear.Mpaca_Feet,
+        waist="Sailfi Belt +1",
+    }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
@@ -413,7 +416,7 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
     })
 
-    sets.idle.Town = sets.engaged
+    sets.idle.Town = sets.engaged.DT
 
    
     if (item_available("Shneddick Ring +1")) then

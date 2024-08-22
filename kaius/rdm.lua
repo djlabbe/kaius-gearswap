@@ -59,7 +59,7 @@ function user_setup()
     state.BarStatus = M{['description']='BarStatus', 'Baramnesia', 'Barvirus', 'Barparalyze', 'Barsilence', 'Barpetrify', 'Barpoison', 'Barblind', 'Barsleep'}
     state.GainSpell = M{['description']='GainSpell', 'Gain-STR', 'Gain-INT', 'Gain-AGI', 'Gain-VIT', 'Gain-DEX', 'Gain-MND', 'Gain-CHR'}
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Maxentius', 'Tauret', 'CroceaLight', 'CroceaDark'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Excalibur', 'Maxentius', 'Tauret', 'CroceaLight', 'CroceaDark', 'Caster'}
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(true, 'Magic Burst')
     state.EnspellMode = M(false, 'Enspell Melee Mode')
@@ -155,19 +155,30 @@ function user_setup()
 
     if player.sub_job == 'NIN' then
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Excalibur;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet Maxentius;input /macro set 3')
         send_command('bind ^numpad4 gs c set WeaponSet CroceaLight;input /macro set 2')
         send_command('bind ^numpad5 gs c set WeaponSet CroceaDark;input /macro set 2')
-        send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 3')
-        send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 4')
+        send_command('bind ^numpad6 gs c set WeaponSet Tauret;input /macro set 4')
+        send_command('bind ^numpad0 gs c set WeaponSet Caster;input /macro set 7')
         set_macro_page(1, 5)
     elseif player.sub_job == 'SCH' then
+        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 7')
+        send_command('bind ^numpad8 gs c set WeaponSet Excalibur;input /macro set 7')
+        send_command('bind ^numpad9 gs c set WeaponSet Maxentius;input /macro set 7')
+        send_command('bind ^numpad4 gs c set WeaponSet CroceaLight;input /macro set 7')
+        send_command('bind ^numpad5 gs c set WeaponSet CroceaDark;input /macro set 7')
+        send_command('bind ^numpad6 gs c set WeaponSet Tauret;input /macro set 7')
+        send_command('bind ^numpad0 gs c set WeaponSet Caster;input /macro set 7')
         set_macro_page(7, 5)
     else
         send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Excalibur;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet Maxentius;input /macro set 3')
         send_command('bind ^numpad4 gs c set WeaponSet CroceaLight;input /macro set 2')
         send_command('bind ^numpad5 gs c set WeaponSet CroceaDark;input /macro set 2')
-        send_command('bind ^numpad8 gs c set WeaponSet Maxentius;input /macro set 3')
-        send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 4')
+        send_command('bind ^numpad6 gs c set WeaponSet Tauret;input /macro set 4')
+        send_command('bind ^numpad0 gs c set WeaponSet Caster;input /macro set 7')
         set_macro_page(1, 5)
     end
 
@@ -232,7 +243,7 @@ function init_gear_sets()
         body=gear.Relic_Body, --15
         neck="Orunmila's Torque", --5
         ear1="Malignance Earring", --4
-        ear2="Leth. Earring +1", --8 
+        ear2="Lethargy Earring +2", --8 
         feet=gear.Carmine_B_Feet, --8
         waist="Embla Sash" --5
     } --61
@@ -489,7 +500,7 @@ function init_gear_sets()
         feet=gear.Kaykaus_B_Feet, --11(+2)/(-12)
         neck="Incanter's Torque",
         ear1="Meili Earring",
-        ear2="Lethargy Earring +1",
+        ear2="Lethargy Earring +2",
         ring1=gear.Janniston_Or_Haomas,
         ring2="Menelaus's Ring",
         back=gear.RDM_ENF_Cape, --(-10)
@@ -550,7 +561,7 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1",
         ring2="Defending Ring",
         ear1="Odnowa Earring +1",
-        ear2="Leth. Earring +1",
+        ear2="Lethargy Earring +2",
         neck="Duelist's Torque +2",
         back=gear.RDM_ENH_Cape,
         waist="Embla Sash",
@@ -568,7 +579,7 @@ function init_gear_sets()
     --     ring1="Gelatinous Ring +1",
     --     ring2="Defending Ring",
     --     ear1="Odnowa Earring +1",
-    --     ear2="Leth. Earring +1",
+    --     ear2="Lethargy Earring +2",
     --     neck="Duelist's Torque +2",
     --     back=gear.RDM_ENH_Cape,
     --     waist="Embla Sash",
@@ -938,7 +949,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Duelist's Torque +2",
         ear1="Malignance Earring",
-        ear2="Regal Earring",
+        ear2="Lethargy Earring +2",
         ring1=gear.Stikini_1,
         ring2=gear.Gerubu_Or_Stikini2,
         back=gear.RDM_IDLE_Cape,
@@ -1136,6 +1147,7 @@ function init_gear_sets()
     sets.DefaultShield = { sub="Genmei Shield" }
     
     sets.Naegling = {main="Naegling", sub="Thibron"}
+    sets.Excalibur = {main="Excalibur", sub="Thibron"}
     sets.Maxentius = { main="Maxentius", sub="Thibron" }
     sets.Tauret = { main="Tauret", sub="Gleti's Knife" }
     sets.CroceaDark = { main="Crocea Mors", sub="Bunzi's Rod" }

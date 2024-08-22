@@ -134,6 +134,9 @@ function user_setup()
     send_command ('bind !t input /ja "Triple Shot" <me>')
 
     -- ALT + Numpad ===> Rolls --
+    -- send_command('bind !numpad7 input /ja "Tactician\'s Roll" <me>')  
+    -- send_command('bind !numpad8 input /ja "Miser\'s Roll" <me>')
+
     send_command('bind !numpad7 gs c set WeaponLock false;input /ja "Samurai Roll" <me>')
     send_command('bind !numpad8 gs c set WeaponLock false;input /ja "Chaos Roll" <me>')
     send_command('bind !numpad9 gs c set WeaponLock false;input /ja "Tactician\'s Roll" <me>')  
@@ -233,7 +236,7 @@ function init_gear_sets()
         neck="Regal Necklace",
         ear1="Etiolation Earring", --0/3
         ear2="Odnowa Earring +1", --3/5
-        ring1="Gelatinous Ring +1", --7/(-1)
+        ring1="Barataria Ring", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.COR_SNP_Cape,
         waist="Platinum Moogle Belt",
@@ -674,12 +677,12 @@ function init_gear_sets()
     sets.FullTP = {ear1="Crematio Earring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
 
-    sets.DeathPenalty_M = {main="Demersal Degen +1", sub="Blurred Knife +1", ranged="Molybdosis"}
-    sets.DeathPenalty_R = {main="Demersal Degen +1", sub="Blurred Knife +1", ranged="Molybdosis"}
-    sets.Armageddon_M = {main="Demersal Degen +1", sub="Blurred Knife +1", ranged="Molybdosis"}
-    sets.Armageddon_R = {main="Demersal Degen +1", sub="Blurred Knife +1", ranged="Molybdosis"}
-    sets.Fomalhaut_M = {main="Demersal Degen +1", sub="Blurred Knife +1", ranged="Molybdosis"}
-    sets.Fomalhaut_R = {main="Demersal Degen +1", sub="Blurred Knife +1", ranged="Molybdosis"}
+    sets.DeathPenalty_M = {main="Naegling", sub="Demersal Degen +1", ranged="Molybdosis"}
+    sets.DeathPenalty_R = {main="Naegling", sub="Demersal Degen +1", ranged="Molybdosis"}
+    sets.Armageddon_M = {main="Naegling", sub="Demersal Degen +1", ranged="Molybdosis"}
+    sets.Armageddon_R = {main="Naegling", sub="Demersal Degen +1", ranged="Molybdosis"}
+    sets.Fomalhaut_M = {main="Naegling", sub="Demersal Degen +1", ranged="Molybdosis"}
+    sets.Fomalhaut_R = {main="Naegling", sub="Demersal Degen +1", ranged="Molybdosis"}
     sets.Naegling_Gleti = {main="Naegling", sub="Gleti's Knife", ranged="Molybdosis"}
     sets.Naegling_Crep = {main="Naegling", sub="Crepuscular Knife", ranged="Molybdosis"}
 

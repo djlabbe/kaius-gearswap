@@ -212,7 +212,7 @@ function init_gear_sets()
         ammo="Coiste Bodhar",
         head="Mpaca's Cap",
         body=gear.Malignance_Body,
-        hands=gear.Adhemar_B_Hands,
+        hands=gear.Nyame_Hands,
         legs=gear.Mpaca_Legs,
         feet=gear.Nyame_Feet,
         neck="Fotia Gorget",
@@ -273,7 +273,7 @@ function init_gear_sets()
 
   sets.precast.WS['Blade: Ku'] = {
         ammo="Seeth. Bomblet +1",
-        head=gear.Adhemar_B_Head,
+        head=gear.Mpaca_Head,
         body=gear.Nyame_Body,
         hands=gear.Relic_Hands,
         legs=gear.Nyame_Legs,
@@ -514,7 +514,7 @@ function init_gear_sets()
         neck="Ninja Nodowa +2",
         ear1="Dedition Earring",
         ear2="Hattori Earring +1",
-        body=gear.Adhemar_A_Body, --6
+        body=gear.Malignance_Body,
         hands=gear.Adhemar_A_Hands,
         ring1="Gere Ring",
         ring2=gear.Lehko_Or_Chirich2,

@@ -319,7 +319,7 @@ function init_gear_sets()
 
     sets.precast.WS['Chant du Cygne'] = {
         ammo="Aurgelmir Orb +1",
-        head=gear.Adhemar_A_Head,
+        head=gear.Nyame_Head,
         body=gear.Gleti_Body,
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
@@ -478,7 +478,7 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].PhysicalVit = sets.midcast['Blue Magic'].Physical
 
     sets.midcast['Blue Magic'].PhysicalAgi = set_combine(sets.midcast['Blue Magic'].Physical, {
-        hands=gear.Adhemar_B_Hands,
+        hands=gear.Gleti_Hands,
         ring2="Ilabrat Ring",
     })
 
@@ -731,8 +731,8 @@ function init_gear_sets()
 
     sets.engaged = {
         ammo="Coiste Bodhar",
-        head=gear.Adhemar_A_Head,
-        body=gear.Adhemar_A_Body,
+        head=gear.Malignance_Head,
+        body=gear.Gleti_Body,
         hands=gear.Adhemar_A_Hands,
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,

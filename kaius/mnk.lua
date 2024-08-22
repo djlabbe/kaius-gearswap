@@ -140,7 +140,7 @@ function init_gear_sets()
     
     sets.precast.WS = {
         ammo="Knobkierrie",
-		head=gear.Adhemar_B_Head,
+		head=gear.Mpaca_Head,
 		body=gear.Nyame_Body,
 		hands=gear.Empyrean_Hands,
 		legs=gear.Mpaca_Legs,
@@ -304,7 +304,7 @@ function init_gear_sets()
 
     sets.precast.WS['Ascetic\'s Fury'] = {
         ammo="Crepuscular Pebble",
-		head=gear.Adhemar_B_Head,
+		head=gear.Mpaca_Head,
 		body=gear.Empyrean_Body,
 		hands=gear.Empyrean_Hands,
 		legs=gear.Mpaca_Legs,
@@ -350,7 +350,7 @@ function init_gear_sets()
 
     sets.engaged = {
         ammo="Coiste Bodhar",
-		head=gear.Adhemar_B_Head,
+		head=gear.Malignance_Head,
 		body=gear.Mpaca_Body,
 		hands=gear.Adhemar_A_Hands,
 		legs=gear.Empyrean_Legs,

@@ -544,10 +544,13 @@ function init_gear_sets()
         ring1=gear.Gerubu_Or_Stikini1,
         ring2=gear.Stikini_2,
         back=gear.WHM_Cure_Cape, --10 
-        waist=gear.Platinum_Moogle_Belt, --3
+        waist="Platinum Moogle Belt", --3
     }  --57 (11 Refresh)
 
-    sets.idle.Town = sets.idle
+    sets.idle.Town = set_combine(sets.idle, {
+        main="Yagrush",
+        sub="Ammurapi Shield"
+    })
 
     sets.defense.PDT = set_combine(sets.idle, {
 

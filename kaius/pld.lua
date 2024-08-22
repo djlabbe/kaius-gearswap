@@ -36,7 +36,7 @@ function user_setup()
     
     state.PhalanxMode = M(false, 'Equip Phalanx Gear')
     state.EquipShield = M(true, 'Equip Shield w/Defense')
-    state.WeaponSet = M{['description']='Weapon Set', 'Sakpata', 'Naegling'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Excalibur', 'Sakpata', 'Naegling'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name="Reverence Coronet +2" }
@@ -85,17 +85,19 @@ function user_setup()
 
     if player.sub_job == 'BLU' then
         send_command('lua l azureSets')
-        send_command('bind ^numpad7 gs c set WeaponSet Sakpata;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad7 gs c set WeaponSet Excalibur;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Sakpata;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 1')
         set_macro_page(1, 7)
     elseif player.sub_job == 'SCH' then
-        send_command('bind ^numpad7 gs c set WeaponSet Sakpata;input /macro set 2')
-        send_command('bind ^numpad8 gs c set WeaponSet Naegling;input /macro set 2')
+        send_command('bind ^numpad7 gs c set WeaponSet Excalibur;input /macro set 2')
+        send_command('bind ^numpad8 gs c set WeaponSet Sakpata;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 2')
         set_macro_page(2, 7)
     else
         set_macro_page(1, 7)
     end
-
+    
     send_command('wait 3; input /lockstyleset 7')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
@@ -352,10 +354,10 @@ function init_gear_sets()
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Sakpata_Feet,
+        feet=gear.Artifact_Feet,
         neck={name="Unmoving Collar +1", priority=200},
         ear1={name="Tuisto Earring", priority=150},
-        ear2={name="Odnowa Earring +1", priority=110},
+        ear2={name="Chevalier's Earring +1", priority=1},
         ring1=gear.Moonlight_1,
         ring2={name="Gelatinous Ring +1", priority=135},
         waist={name="Platinum Moogle Belt", priority=999},
@@ -422,6 +424,7 @@ function init_gear_sets()
 
     sets.Sakpata = { main="Sakpata's Sword", sub="Srivatsa" }
     sets.Naegling = { main="Naegling", sub="Srivatsa"}
+    sets.Excalibur = { main="Excalibur", sub="Srivatsa"}
 end
 
 function job_midcast(spell, action, spellMap, eventArgs)

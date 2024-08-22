@@ -250,7 +250,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Abyssal Beads +2",
         ear1="Lugra Earring +1",
-        ear2="Heathen's Earring +1",
+        ear2="Heathen's Earring +2",
         ring1="Epaminondas's Ring",
         ring2=gear.Cornelia_Or_Niqmaddu,
         waist="Sailfi Belt +1",
@@ -283,7 +283,7 @@ function init_gear_sets()
 
     sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS['Cross Reaper'], {})
     sets.precast.WS['Cross Reaper'].PDL = set_combine(sets.precast.WS['Cross Reaper'], {
-        ear2="Heathen's Earring +1",
+        ear2="Heathen's Earring +2",
         ring1="Sroda Ring",
     })
 
@@ -310,7 +310,7 @@ function init_gear_sets()
         hands=gear.Sakpata_Hands,
         legs=gear.Sakpata_Legs,
         ring1="Sroda Ring",
-        ear2="Heathen's Earring +1"
+        ear2="Heathen's Earring +2"
     })
 
     sets.precast.WS['Insurgency'] = {
@@ -322,7 +322,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
-        ear2="Heathen's Earring +1",
+        ear2="Heathen's Earring +2",
         ring1=gear.Cornelia_Or_Regal,
         ring2="Niqmaddu Ring",
         waist="Sailfi Belt +1",
@@ -345,7 +345,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
-        ear2="Heathen's Earring +1",
+        ear2="Heathen's Earring +2",
         ring1=gear.Cornelia_Or_Regal,
         ring2="Niqmaddu Ring",
         waist="Sailfi Belt +1",
@@ -414,7 +414,7 @@ function init_gear_sets()
     sets.precast.WS['Fimbulvetr'].PDL = set_combine(sets.precast.WS['Fimbulvetr'], {
         head=gear.Empyrean_Head,
         ring1="Epaminondas's Ring",
-        ear2="Heathen's Earring +1",
+        ear2="Heathen's Earring +2",
     })
 
     sets.precast.WS['Torcleaver'] = {
@@ -436,7 +436,7 @@ function init_gear_sets()
     sets.precast.WS['Torcleaver'].Acc = set_combine(sets.precast.WS['Torcleaver'], {})
     sets.precast.WS['Torcleaver'].PDL = set_combine(sets.precast.WS['Torcleaver'], {
         head=gear.Empyrean_Head,
-        ear2="Heathen's Earring +1",
+        ear2="Heathen's Earring +2",
     })
 
     sets.precast.WS['Resolution'] = {
@@ -471,7 +471,7 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         waist="Fotia Belt",
         ear1="Crepuscular Earring",
-        ear2="Heathen's Earring +1",
+        ear2="Heathen's Earring +2",
         ring1="Metamorph Ring +1",
         ring2=gear.Stikini_2,
         back= gear.DRK_WS1_Cape,
@@ -492,7 +492,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
-        ear2="Heathen's Earring +1",
+        ear2="Heathen's Earring +2",
         ring1="Epaminondas's Ring",
         ring2=gear.Cornelia_Or_Regal,
         waist="Sailfi Belt +1",
@@ -519,7 +519,7 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
-        ear2="Heathen's Earring +1",
+        ear2="Heathen's Earring +2",
         ring1="Gelatinous Ring +1",
         ring2="Niqmaddu Ring", --5
         back= gear.DRK_WS2_Cape, --10
@@ -535,7 +535,7 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         waist="Fotia Belt",
         ear1="Moonshade Earring",
-        ear2="Heathen's Earring +1",
+        ear2="Heathen's Earring +2",
         ring1="Niqmaddu Ring",
         ring2="Regal Ring",
         back= gear.DRK_WS1_Cape,
@@ -727,7 +727,7 @@ function init_gear_sets()
     sets.engaged.Caladbolg.Subtle = sets.engaged.Subtle
 
     sets.engaged.Acc = set_combine(sets.engaged, {
-        ear2="Heathen's Earring +1"
+        ear2="Heathen's Earring +2"
     })
 
     sets.engaged.Hybrid = {
