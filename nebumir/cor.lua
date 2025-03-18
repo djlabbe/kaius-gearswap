@@ -374,7 +374,6 @@ function init_gear_sets()
         hands=gear.Adhemar_B_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        feet=gear.Adhemar_D_Feet,
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Odr Earring",

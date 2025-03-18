@@ -267,8 +267,6 @@ function init_gear_sets()
         feet=gear.Artifact_Feet,
         neck="Mnbw. Whistle +1",
         ear1="Odnowa Earring +1",
-        ear1="Gelatinous Ring +1",
-        ear2="Odnowa Earring +1",
         ring1=gear.Moonlight_1,
         ring2="Defending Ring",
         waist="Platinum Moogle Belt",

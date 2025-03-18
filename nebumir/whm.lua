@@ -277,7 +277,6 @@ function init_gear_sets()
     sets.midcast['Enhancing Magic'] = {
         main=gear.Gada_ENH,
         sub="Ammurapi Shield",
-        back=gear.WHM_Cure_Cape, --25
         head=gear.Telchine_ENH_Head,
         body=gear.Telchine_ENH_Body,
         hands=gear.Telchine_ENH_Hands,

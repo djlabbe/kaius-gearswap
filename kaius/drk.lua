@@ -675,7 +675,7 @@ function init_gear_sets()
     sets.engaged.Caladbolg.Aftermath = {
         body="Dagon Breastplate",
         ear1="Schere Earring",
-        ear1="Balder Earring +1",      
+        ear2="Balder Earring +1",      
         ring2=gear.Lehko_Or_Hetairoi,
     }
 

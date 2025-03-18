@@ -582,8 +582,6 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         main="Mpaca's Staff",
         sub="Irenic Strap +1",
-        main="Bunzi's Rod",
-        sub="Ammurapi Shield",
         ammo="Staunch Tathlum +1",
         head=gear.Empyrean_Head,
         body="Shamash Robe", 
