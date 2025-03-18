@@ -990,7 +990,6 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
-        ring1="Ilabrat Ring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         back=gear.RDM_DW_Cape, --10
