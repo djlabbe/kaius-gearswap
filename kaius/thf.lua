@@ -412,7 +412,7 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         body=gear.Malignance_Body, --9/9
-        hands-gear.Malignance_Hands --5/5
+        hands-gear.Malignance_Hands, --5/5
         feet=gear.Malignance_Feet, --4/4
         ring2=gear.Moonlight_2, --5/5
     }

@@ -869,7 +869,6 @@ function init_gear_sets()
         ear2="Odnowa Earring +1",
         ring1="Shadow Ring",
         ring2="Defending Ring",
-        back=gear.BLU_MAB_Cape,
         back=gear.BLU_TP_Cape,
         waist="Plat. Mog. Belt",
     }
@@ -886,7 +885,6 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         ring1="Shadow Ring",
         ring2="Defending Ring",
-        back=gear.BLU_MAB_Cape,
         back=gear.BLU_TP_Cape,
         waist="Plat. Mog. Belt",
     }

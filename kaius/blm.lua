@@ -531,18 +531,6 @@ function init_gear_sets()
         waist="Shinjutsu-no-Obi +1",
     }
 
-    sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT
-
-    if (item_available("Shneddick Ring +1")) then
-        sets.Kiting = { ring1="Shneddick Ring +1" }
-    else
-        sets.Kiting = { feet="Herald's Gaiters" }
-    end
-    
-    
-    sets.latent_refresh = { waist="Fucho-no-obi" }
-
     sets.engaged = {
         ammo="Hasty Pinion +1",
         head="Blistering Sallet +1",
@@ -576,8 +564,6 @@ function init_gear_sets()
     sets.idle = {
         main="Mpaca's Staff",
         sub="Irenic Strap +1",
-        main="Bunzi's Rod",
-        sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Empyrean_Head,
         body="Shamash Robe",
@@ -649,6 +635,19 @@ function init_gear_sets()
         legs=gear.Agwu_Legs,
         feet=gear.Agwu_Feet,
     })
+
+    sets.defense.PDT = sets.idle.DT
+    sets.defense.MDT = sets.idle.DT
+
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Herald's Gaiters" }
+    end
+    
+    
+    sets.latent_refresh = { waist="Fucho-no-obi" }
+
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.

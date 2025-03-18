@@ -443,7 +443,6 @@ function init_gear_sets()
         feet=gear.Artifact_Feet,
         neck="Moonbow Whistle +1",
         ear1="Enchanter's Earring +1",
-        ear1="Etiolation Earring",
         ear2="Odnowa Earring +1",
         ring1=gear.Moonlight_1,
         ring2="Defending Ring",

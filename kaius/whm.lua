@@ -282,7 +282,6 @@ function init_gear_sets()
         main=gear.Gada_ENH,
         sub="Genmei Shield",
         ammo="Staunch Tathlum +1",
-        back=gear.WHM_Cure_Cape,
         head=gear.Telchine_ENH_Head,
         body=gear.Nyame_Body,
         hands=gear.Telchine_ENH_Hands,
@@ -611,7 +610,7 @@ function init_gear_sets()
     if (item_available("Shneddick Ring +1")) then
         sets.Kiting = { ring1="Shneddick Ring +1" }
     else
-        -- sets.Kiting = { feet="Herald's Gaiters" }
+        sets.Kiting = { feet="Herald's Gaiters" }
     end
 
     sets.latent_refresh = { waist="Fucho-no-obi" }

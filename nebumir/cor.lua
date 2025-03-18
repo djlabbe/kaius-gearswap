@@ -574,12 +574,12 @@ function init_gear_sets()
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
         neck="Warder's Charm +1",
-        ear1="Arete Del Luna +1",
+        ear1="Eabani Earring",
         ear2="Sanare Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
-        back=gear.COR_SNP_Cape,
-        waist="Platinum Moogle Belt",
+        back="Null Shawl",
+        waist="Null Belt",
     }
     
     sets.idle.Refresh = set_combine(sets.idle, {
@@ -593,7 +593,14 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
     })
 
-    sets.idle.Town = sets.engaged.DW
+    sets.idle.Town = set_combine(sets.idle, {
+        head="Shaded Spectacles",
+        neck="Goldsmith's Torque",
+        body="Goldsmith's Apron",
+        ring1="Craftmaster's Ring",
+        ring2="Orvail Ring",
+        legs=gear.Carmine_D_Legs,
+    })
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = {

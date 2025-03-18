@@ -116,7 +116,6 @@ function init_gear_sets()
         feet=gear.Souveran_D_Feet,
         ear1={name="Cryptic Earring", priority=40},
         ear2={name="Trux Earring", priority=1},
-        body={name="Emet Harness +1", priority=61}, --10
         hands={name="Kurys Gloves", priority=25}, --9
         ring1="Apeile Ring +1",
         ring2="Eihwaz Ring",
@@ -293,12 +292,11 @@ function init_gear_sets()
     sets.precast.WS["Upheaval"].MightyStrikes = { 
         ammo="Yetshila +1",
         head=gear.Relic_Head,
-        neck="Fotia Gorget",
+        neck="Warrior's bead necklace +2",
         body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
         legs=gear.Sakpata_Legs,
         feet=gear.Empyrean_Feet,
-        neck="Warrior's bead necklace +2",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
         ring1=gear.Cornelia_Or_Regal,
