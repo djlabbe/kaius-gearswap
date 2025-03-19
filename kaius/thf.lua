@@ -40,7 +40,7 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'PDL')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Twashtar_Gleti', 'Twashtar_Crep', 'Twashtar_TP', 'Tauret_Gleti', 'Gandring', 'Savage'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Mpu_Gleti', 'Mpu_Crep', 'Mpu_TP', 'Twashtar_Gleti', 'Twashtar_Crep', 'Twashtar_TP', 'Tauret_Gleti', 'Gandring', 'Savage'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
     -- gear.Artifact_Head = { name="Pillager's Bonnet +2" }
@@ -90,12 +90,15 @@ function user_setup()
         set_macro_page(1, 6)
     end
 
-    send_command('bind ^numpad7 gs c set WeaponSet Twashtar_Gleti;')
-    send_command('bind ^numpad8 gs c set WeaponSet Twashtar_Crep;')
-    send_command('bind ^numpad9 gs c set WeaponSet Twashtar_TP;')
-    send_command('bind ^numpad4 gs c set WeaponSet Tauret_Gleti;')
-    send_command('bind ^numpad5 gs c set WeaponSet Gandring;')
-    send_command('bind ^numpad6 gs c set WeaponSet Savage;')
+    send_command('bind ^numpad7 gs c set WeaponSet Mpu_Gleti;')
+    send_command('bind ^numpad8 gs c set WeaponSet Mpu_Crep;')
+    send_command('bind ^numpad9 gs c set WeaponSet Mpu_TP;')
+    send_command('bind ^numpad4 gs c set WeaponSet Twashtar_Gleti;')
+    send_command('bind ^numpad5 gs c set WeaponSet Twashtar_Crep;')
+    send_command('bind ^numpad6 gs c set WeaponSet Twashtar_TP;')
+    send_command('bind ^numpad1 gs c set WeaponSet Tauret_Gleti;')
+    send_command('bind ^numpad2 gs c set WeaponSet Gandring;')
+    send_command('bind ^numpad3 gs c set WeaponSet Savage;')
 
     send_command('wait 3; input /lockstyleset 6')
     
@@ -355,7 +358,7 @@ function init_gear_sets()
         feet=gear.Relic_Feet,
         neck="Asn. Gorget +2",
         ear1="Sherida Earring",
-        ear2="Skulker's Earring +1",
+        ear2="Skulker's Earring +2",
         ring1="Gere Ring",
         ring2=gear.Lehko_Or_Chirich2,
         back=gear.THF_TP_Cape,
@@ -377,7 +380,7 @@ function init_gear_sets()
         feet=gear.Relic_Feet,
         neck="Asn. Gorget +2",
         ear1="Sherida Earring",
-        ear2="Skulker's Earring +1",
+        ear2="Skulker's Earring +2",
         ring1="Gere Ring",
         ring2=gear.Lehko_Or_Chirich2,
         back=gear.THF_TP_Cape,
@@ -398,7 +401,7 @@ function init_gear_sets()
         feet=gear.Relic_Feet,
         neck="Asn. Gorget +2",
         ear1="Sherida Earring",
-        ear2="Skulker's Earring +1",
+        ear2="Skulker's Earring +2",
         ring1="Gere Ring",
         ring2=gear.Lehko_Or_Chirich2,
         back=gear.THF_TP_Cape,
@@ -412,7 +415,7 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         body=gear.Malignance_Body, --9/9
-        hands-gear.Malignance_Hands, --5/5
+        hands=gear.Malignance_Hands, --5/5
         feet=gear.Malignance_Feet, --4/4
         ring2=gear.Moonlight_2, --5/5
     }
@@ -461,6 +464,9 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
+    sets.Mpu_Gleti = {main="Mpu Gandring", sub="Gleti's Knife"}
+    sets.Mpu_Crep = {main="Mpu Gandring", sub="Crepuscular Knife"}
+    sets.Mpu_TP = {main="Mpu Gandring", sub="Centovente"}
     sets.Twashtar_Gleti = {main="Twashtar", sub="Gleti's Knife"}
     sets.Twashtar_Crep = {main="Twashtar", sub="Crepuscular Knife"}
     sets.Twashtar_TP = {main="Twashtar", sub="Centovente"}
@@ -495,7 +501,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Asn. Gorget +2",
         ear1="Sherida Earring",
-        ear2="Skulker's Earring +1",
+        ear2="Skulker's Earring +2",
         ring1=gear.Moonlight_1,
         ring2=gear.Moonlight_2,
         back=gear.THF_TP_Cape,
@@ -508,6 +514,7 @@ function init_gear_sets()
     sets.Kiting = { feet=gear.Artifact_Feet }
 
     sets.idle.Town = sets.engaged.DW.MaxHaste
+
     -- sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
     --     sub="Sm. Escutcheon",
     --     body="Blacksmith's Apron",

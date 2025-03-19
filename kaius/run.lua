@@ -51,7 +51,7 @@ function user_setup()
     state.MagicalDefenseMode:options('MDT')
 
     state.PhalanxMode = M(false, 'Equip Phalanx Gear')
-    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Lycurgos'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Helheim', 'Lycurgos'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
     state.Runes = M{['description']='Runes', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda', 'Lux', 'Tenebrae'}
@@ -74,11 +74,12 @@ function user_setup()
     gear.Empyrean_Legs = { name="Erilaz Leg Guards +3", priority=100 }
     gear.Empyrean_Feet = { name="Erilaz Greaves +3", priority=48 }
 
-    gear.RUN_TANK_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Parrying rate+5%'}, priority=60}
-    gear.RUN_FC_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}, priority=60}
-    gear.RUN_SIRD_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Enmity+10','Spell interruption rate down-10%',}, priority=60}
-    gear.RUN_TP_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}, priority=60}
-    gear.RUN_WS1_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Weapon skill damage +10%','Phys. dmg. taken-10%',}, priority=60}
+    gear.RUN_TANK_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Parrying rate+5%'}, priority=60} --X
+    gear.RUN_FC_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Phys. dmg. taken-10%',}, priority=80} --X
+    gear.RUN_SIRD_Cape = { name="Ogma's Cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','Enmity+10','Spell interruption rate down-10%',}, priority=80} --X
+    gear.RUN_TP_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}, priority=1} --X
+    gear.RUN_WS1_Cape = { name="Ogma's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}, priority=1} --X
+    gear.RUN_MAB_Cape = { name="Ogma's Cape", augments={'HP+60','Mag. Acc+20 /Mag. Dmg.+20','Magic Damage +10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}, priority=60} --X
 
     include('Global-Binds.lua')
 
@@ -118,15 +119,18 @@ function user_setup()
 
     if player.sub_job == 'SCH' then
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 2')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 2')
         send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 2')
         set_macro_page(2, 22)
     elseif player.sub_job == 'BLU' then 
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 1')
         send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 1')
         send_command('lua l azureSets')
         set_macro_page(1, 22)
     else 
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 2')
         send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 1')
         set_macro_page(1, 22)
     end
@@ -197,13 +201,13 @@ function init_gear_sets()
         hands=gear.Agwu_Hands,
         legs=gear.Agwu_Legs,
         feet=gear.Agwu_Feet,
-        neck={name="Unmoving Collar +1", priority=200},
+        neck="Baetyl Pendant",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Mujin Band",
         ring2="Fenrir Ring +1",
-        back=gear.RUN_TANK_Cape,
-        waist={name="Platinum Moogle Belt", priority=999}, 
+        back=gear.RUN_MAB_Cape,
+        waist="Orpheus's Sash", 
     }
 
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
@@ -281,14 +285,13 @@ function init_gear_sets()
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck={name="Unmoving Collar +1", priority=200},
+        neck={name="Null Loop", priority=50},
         ear1="Telos Earring",
         ear2="Erilaz Earring +1", --15 acc
         ring1="Regal Ring",
-        -- ring2="Niqmaddu Ring",
-        ring="Ephramad's Ring",
+        ring=gear.Ephramad_Or_Moonlight2,
         back=gear.RUN_WS1_Cape,
-        waist={name="Platinum Moogle Belt", priority=999}, 
+        waist="Null Belt", 
     })
 
     sets.precast.WS['Herculean Slash'] = set_combine(sets.precast.WS, sets.precast.JA['Lunge'])
@@ -368,7 +371,7 @@ function init_gear_sets()
     sets.midcast.EnhancingDuration = sets.midcast['Enhancing Magic']
 
     sets.Phalanx = {
-        -- main="Deacon Sword", --4
+        main="Deacon Sword", --4
         head=gear.Relic_Head, --7
         body=gear.Herc_PHLX_Body, --4
         hands=gear.Herc_PHLX_Hands, --4
@@ -544,7 +547,7 @@ function init_gear_sets()
     sets.Obi = {waist="Hachirin-no-Obi"}
 
     sets.Epeolatry = { main="Epeolatry", sub="Refined Grip +1" }
-    sets.Helheim = { main="Helheim", sub="Utu Grip" }
+    sets.Helheim = { main="Helheim", sub="Refined Grip +1" }
     sets.Lycurgos = {main="Lycurgos", sub="Utu Grip"}
 end
 

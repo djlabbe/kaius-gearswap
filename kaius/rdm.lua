@@ -59,7 +59,7 @@ function user_setup()
     state.BarStatus = M{['description']='BarStatus', 'Baramnesia', 'Barvirus', 'Barparalyze', 'Barsilence', 'Barpetrify', 'Barpoison', 'Barblind', 'Barsleep'}
     state.GainSpell = M{['description']='GainSpell', 'Gain-STR', 'Gain-INT', 'Gain-AGI', 'Gain-VIT', 'Gain-DEX', 'Gain-MND', 'Gain-CHR'}
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Excalibur', 'Maxentius', 'Tauret', 'CroceaLight', 'CroceaDark', 'Caster'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Excalibur', 'Maxentius', 'Mpu', 'CroceaLight', 'CroceaDark', 'Caster'}
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(true, 'Magic Burst')
     state.EnspellMode = M(false, 'Enspell Melee Mode')
@@ -159,7 +159,7 @@ function user_setup()
         send_command('bind ^numpad9 gs c set WeaponSet Maxentius;input /macro set 3')
         send_command('bind ^numpad4 gs c set WeaponSet CroceaLight;input /macro set 2')
         send_command('bind ^numpad5 gs c set WeaponSet CroceaDark;input /macro set 2')
-        send_command('bind ^numpad6 gs c set WeaponSet Tauret;input /macro set 4')
+        send_command('bind ^numpad6 gs c set WeaponSet Mpu;input /macro set 4')
         send_command('bind ^numpad0 gs c set WeaponSet Caster;input /macro set 7')
         set_macro_page(1, 5)
     elseif player.sub_job == 'SCH' then
@@ -168,7 +168,7 @@ function user_setup()
         send_command('bind ^numpad9 gs c set WeaponSet Maxentius;input /macro set 7')
         send_command('bind ^numpad4 gs c set WeaponSet CroceaLight;input /macro set 7')
         send_command('bind ^numpad5 gs c set WeaponSet CroceaDark;input /macro set 7')
-        send_command('bind ^numpad6 gs c set WeaponSet Tauret;input /macro set 7')
+        send_command('bind ^numpad6 gs c set WeaponSet Mpu;input /macro set 7')
         send_command('bind ^numpad0 gs c set WeaponSet Caster;input /macro set 7')
         set_macro_page(7, 5)
     else
@@ -177,7 +177,7 @@ function user_setup()
         send_command('bind ^numpad9 gs c set WeaponSet Maxentius;input /macro set 3')
         send_command('bind ^numpad4 gs c set WeaponSet CroceaLight;input /macro set 2')
         send_command('bind ^numpad5 gs c set WeaponSet CroceaDark;input /macro set 2')
-        send_command('bind ^numpad6 gs c set WeaponSet Tauret;input /macro set 4')
+        send_command('bind ^numpad6 gs c set WeaponSet Mpu;input /macro set 4')
         send_command('bind ^numpad0 gs c set WeaponSet Caster;input /macro set 7')
         set_macro_page(1, 5)
     end
@@ -1149,7 +1149,7 @@ function init_gear_sets()
     sets.Naegling = {main="Naegling", sub="Thibron"}
     sets.Excalibur = {main="Excalibur", sub="Thibron"}
     sets.Maxentius = { main="Maxentius", sub="Thibron" }
-    sets.Tauret = { main="Tauret", sub="Gleti's Knife" }
+    sets.Mpu = { main="Mpu Gandring", sub="Gleti's Knife" }
     sets.CroceaDark = { main="Crocea Mors", sub="Bunzi's Rod" }
     sets.CroceaLight = { main="Crocea Mors", sub="Daybreak" }
 end

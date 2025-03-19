@@ -104,8 +104,8 @@ function user_setup()
     gear.Empyrean_Legs = { name= "Chasseur's Culottes +3" }
     gear.Empyrean_Feet = { name= "Chasseur's Bottes +3" }
 
-    gear.COR_SNP_Cape = { name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10','Mag. Evasion+15',}}        
-    gear.COR_RA_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10','Phys. dmg. taken-10%',}}
+    gear.COR_SNP_Cape = { name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Snapshot"+10','Mag. Evasion+15',}} --X        
+    gear.COR_RA_Cape = { name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10','Phys. dmg. taken-10%',}} --X
     gear.COR_DW_Cape = { name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}} --X
     gear.COR_SB_Cape = { name="Camulus's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
     gear.COR_LEAD_Cape = { name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
@@ -470,21 +470,18 @@ function init_gear_sets()
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
     
     sets.midcast['Absorb-TP'] = {
-        main="Idris",
-        sub="Ammurapi Shield",
-        ammo="Pemphredo Tathlum",
         head=gear.Empyrean_Head,
-        body=gear.Artifact_Body,
-        hands=gear.Artifact_Hands,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
-        neck="Erra Pendant", --
-        ear1="Crepuscular Earring", --
-        ear2="Skulker's Earring +1", --
-        ring1=gear.Stikini_1, --
-        ring2=gear.Stikini_2, --
-        back="Aurist's Cape +1", --
-        waist="Kwahu Kachina Belt +1", --
+        neck="Erra Pendant",
+        ear1="Crepuscular Earring", 
+        ear2="Chasseur's Earring +1", 
+        ring1=gear.Stikini_1,
+        ring2=gear.Stikini_2,
+        back="Null Shawl",
+        waist="Null Belt",
     }
 
 

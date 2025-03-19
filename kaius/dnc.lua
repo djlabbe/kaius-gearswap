@@ -52,8 +52,8 @@ function user_setup()
     gear.DNC_STP_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','"Regen"+5',}} --X
     gear.DNC_TP_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.DNC_WS1_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
-    gear.DNC_WS2_Cape = { name="Senuna's Mantle", augments={'STR+20','Accuracy+20 Attack+20', 'Weapon skill damage +10%','Phys. dmg. taken-10%',}} -- Needs Dye (STR)
-    gear.DNC_WS3_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Crit.hit rate+10','Phys. dmg. taken-10%',}}  -- Needs Dye (Dex)
+    gear.DNC_WS2_Cape = { name="Senuna's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
+    gear.DNC_WS3_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10','Phys. dmg. taken-10%',}} --X
 
     include('Global-Binds.lua')
 
@@ -453,18 +453,18 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head=gear.Gleti_Head,
+        head="Null Masque",
         body=gear.Gleti_Body,
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
         neck="Warder's Charm +1",
-        ear1="Infused Earring",
+        ear1="Eabani Earring",
         ear2="Sanare Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
-        back=gear.DNC_STP_Cape,
-        waist="Platinum Moogle Belt",
+        back="Null Shawl",
+        waist="Null Belt",
     }
 
     sets.idle.Regain = {

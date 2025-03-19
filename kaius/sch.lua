@@ -716,7 +716,7 @@ function init_gear_sets()
         main="Mpaca's Staff",
         sub="Khonsu",
         ammo="Homiliary",
-        head=gear.Nyame_Head,
+        head="Null Masque",
         body=gear.Empyrean_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Empyrean_Legs,
@@ -726,8 +726,8 @@ function init_gear_sets()
         ear2="Lugalbanda Earring",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
-        back=gear.SCH_MAB_Cape,
-        waist="Platinum Moogle Belt",
+        back="Null Shawl",
+        waist="Null Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {

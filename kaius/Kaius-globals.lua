@@ -28,6 +28,7 @@ function define_global_sets()
     gear.Ephramad_Or_Ilabrat = { name = "Ilabrat Ring" }
     gear.Ephramad_Or_Epaminondas = { name = "Epaminondas's Ring" }
     gear.Ephramad_Or_Sroda = { name = "Sroda Ring" }
+    gear.Ephramad_Or_Moonlight2 = { name="Moonlight Ring", bag="wardrobe8" }
 
     gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe7"}
     gear.Lehko_Or_Chirich2 = {name="Chirich Ring +1", bag="wardrobe8"}
@@ -36,7 +37,7 @@ function define_global_sets()
     gear.Lehko_Or_Hetairoi = {name="Hetairoi Ring"}
     gear.Lehko_Or_Moonlight2 = {name="Moonlight Ring", bag="wardrobe8"}
     gear.Lehko_Or_Petrov = {name="Petrov Ring"}
-    gear.Lehko_Or_GEre = {name="Gere Ring"}
+    gear.Lehko_Or_Gere = {name="Gere Ring"}
 
     gear.Gerubu_Or_Stikini1 = {name="Stikini Ring +1", bag="wardrobe7"}
     gear.Gerubu_Or_Stikini2 = {name="Stikini Ring +1", bag="wardrobe8"}
@@ -60,6 +61,7 @@ function define_global_sets()
         gear.Ephramad_Or_Ilabrat = { name = "Ephramad's Ring" }
         gear.Ephramad_Or_Epaminondas = { name = "Ephramad's Ring" }
         gear.Ephramad_Or_Sroda = { name = "Ephramad's Ring" }
+        gear.Ephramad_Or_Moonlight2 = { name = "Ephramad's Ring" }
     end
 
     if item_available("Lehko Habhoka's Ring") then
