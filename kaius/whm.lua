@@ -198,7 +198,7 @@ function init_gear_sets()
         head=gear.Empyrean_Head, --(CP-22)
         neck={name="Clr. Torque +2", priority=1}, --(CP-10) (Enm-25)
         ear1={name="Glorious Earring", priority=1}, -- (CPII-2) (Enm-5) 
-        ear2={name="Ebers Earring +1", priority=1}, --(DT-5)
+        ear2={name="Ebers Earring +2", priority=1}, --(DT-5)
         body=gear.Empyrean_Body,
         hands=gear.Artifact_Hands, -- (CPII-4) (Enm-7)
         legs=gear.Empyrean_Legs, --(DT-13)
@@ -267,7 +267,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Debilis Medallion", --15
         ear1="Meili Earring",
-        ear2="Ebers Earring +1", --3/3
+        ear2="Ebers Earring +2", --3/3
         ring1="Haoma's Ring", --15
         ring2="Menelaus's Ring", --20
         back=gear.WHM_Cure_Cape, --25
@@ -289,7 +289,7 @@ function init_gear_sets()
         feet=gear.Artifact_Feet,
         neck="Incanter's Torque",
         ear1="Mimir Earring",
-        ear2="Ebers Earring +1",
+        ear2="Ebers Earring +2",
         ring1="Defending Ring",
         ring2="Gelatinous Ring +1",
         back=gear.WHM_Cure_Cape,
@@ -309,7 +309,7 @@ function init_gear_sets()
         ring1="Defending Ring",
         ring2="Gelatinous Ring +1",
         ear1="Tuisto Earring",
-        ear2="Ebers Earring +1",
+        ear2="Ebers Earring +2",
         waist="Embla Sash",
         back=gear.WHM_Cure_Cape,
     }
@@ -325,7 +325,7 @@ function init_gear_sets()
         feet=gear.Bunzi_Feet,
         neck="Incanter's Torque",
         ear1="Tuisto Earring",
-        ear2="Ebers Earring +1",
+        ear2="Ebers Earring +2",
         ring1="Defending Ring",
         ring2="Gelatinous Ring +1",
         back="Solemnity Cape",
@@ -406,7 +406,7 @@ function init_gear_sets()
         feet=gear.Artifact_Feet,
         neck="Erra Pendant",
         ear1="Regal Earring",
-        ear2="Ebers Earring +1",
+        ear2="Ebers Earring +2",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,
         back="Aurist's Cape +1",
@@ -462,7 +462,7 @@ function init_gear_sets()
         feet=gear.Artifact_Feet,
         neck="Erra Pendant",
         ear1="Regal Earring",
-        ear2="Ebers Earring +1",
+        ear2="Ebers Earring +2",
         ring1="Kishar Ring",
         ring2="Metamorph Ring +1",
         back="Aurist's Cape +1",
@@ -589,7 +589,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet, --11
         neck="Sibyl Scarf",
         ear1="Hearty Earring",
-        ear2="Ebers Earring +1", --5
+        ear2="Ebers Earring +2", --5
         ring1=gear.Gerubu_Or_Stikini1,
         ring2=gear.Stikini_2,
         back=gear.WHM_Cure_Cape, --10 

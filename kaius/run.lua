@@ -118,20 +118,20 @@ function user_setup()
     end
 
     if player.sub_job == 'SCH' then
-        send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 2')
-        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 2')
-        send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 2')
+        send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 3')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 4')
+        send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 5')
         set_macro_page(2, 22)
     elseif player.sub_job == 'BLU' then 
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 1')
-        send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 2')
         send_command('lua l azureSets')
         set_macro_page(1, 22)
     else 
-        send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 2')
-        send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 1')
+        send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 3')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 4')
+        send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 5')
         set_macro_page(1, 22)
     end
 

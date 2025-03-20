@@ -462,7 +462,7 @@ function init_gear_sets()
         ear1="Eabani Earring",
         ear2="Sanare Earring",
         ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
+        ring2="Purity Ring",
         back="Null Shawl",
         waist="Null Belt",
     }
@@ -498,15 +498,6 @@ function init_gear_sets()
     })
 
     sets.idle.Town = sets.idle
-    -- sets.idle.Town = set_combine(sets.precast.WS['Ruthless Stroke'], {
-    --     sub="Sm. Escutcheon",
-    --     body="Blacksmith's Apron",
-    --     hands="Smithy's Mitts",
-    --     neck="Smithy's Torque",
-    --     ring1="Craftmaster's Ring",
-    --     ring2="Confectioner's Ring",
-    --     waist="Blacksmith's Belt"
-    -- })
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
@@ -514,13 +505,6 @@ function init_gear_sets()
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
-
-    if (item_available("Shneddick Ring +1")) then
-        sets.Kiting = { ring1="Shneddick Ring +1" }
-    else
-        sets.Kiting = { feet="Skadi's Jambeaux +1" }
-    end
-
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -537,6 +521,13 @@ function init_gear_sets()
         ring2="Purity Ring", --20
         waist="Gishdubar Sash", --10
     }
+
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Skadi's Jambeaux +1" }
+    end
+
 
     sets.Mpu_TP = { main="Mpu Gandring", sub="Centovente" }
     sets.Mpu_Gleti = { main="Mpu Gandring", sub="Gleti's Knife" }

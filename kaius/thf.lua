@@ -478,18 +478,18 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head=gear.Gleti_Head, --6/6
-        body=gear.Gleti_Body, --9/0
-        hands=gear.Gleti_Hands, --5/5
-        legs=gear.Gleti_Legs, --7/7
-        feet=gear.Empyrean_Feet, --11/11
+        head="Null Masque",
+        body=gear.Gleti_Body, 
+        hands=gear.Gleti_Hands,
+        legs=gear.Gleti_Legs,
+        feet=gear.Empyrean_Feet,
         neck="Warder's Charm +1",
         ear1="Eabani Earring",
         ear2="Sanare Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
-        back=gear.THF_TP_Cape,
-        waist="Platinum Moogle Belt",
+        back="Null Shawl",
+        waist="Null Belt",
     }
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -513,17 +513,17 @@ function init_gear_sets()
 
     sets.Kiting = { feet=gear.Artifact_Feet }
 
-    sets.idle.Town = sets.engaged.DW.MaxHaste
+    -- sets.idle.Town = sets.engaged.DW.MaxHaste
 
-    -- sets.idle.Town = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-    --     sub="Sm. Escutcheon",
-    --     body="Blacksmith's Apron",
-    --     hands="Smithy's Mitts",
-    --     neck="Smithy's Torque",
-    --     ring1="Craftmaster's Ring",
-    --     ring2="Confectioner's Ring",
-    --     waist="Blacksmith's Belt"
-    -- })
+    sets.idle.Town = set_combine(sets.engaged.DW.MaxHaste, {
+        sub="Sm. Escutcheon",
+        body="Blacksmith's Apron",
+        hands="Smithy's Mitts",
+        neck="Smithy's Torque",
+        ring1="Craftmaster's Ring",
+        ring2="Confectioner's Ring",
+        waist="Blacksmith's Belt"
+    })
 
 end
 

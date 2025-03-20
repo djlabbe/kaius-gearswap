@@ -171,7 +171,7 @@ function user_setup()
     gear.Relic_Feet = { name= "Ankusa Gaiters +3" }
 
     gear.Empyrean_Head = { name= "Nukumi Cabasset +2" }
-    gear.Empyrean_Body = { name= "Nukumi Gausape +2" }
+    gear.Empyrean_Body = { name= "Nukumi Gausape +3" }
     gear.Empyrean_Hands = { name= "Nukumi Manoplas +2" }
     gear.Empyrean_Legs = { name= "Nukumi Quijotes +1" }
     gear.Empyrean_Feet = { name= "Nukumi Ocreae +2" }
