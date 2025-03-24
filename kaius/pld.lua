@@ -36,7 +36,7 @@ function user_setup()
     
     state.PhalanxMode = M(false, 'Equip Phalanx Gear')
     state.EquipShield = M(true, 'Equip Shield w/Defense')
-    state.WeaponSet = M{['description']='Weapon Set', 'Excalibur', 'Sakpata', 'Naegling'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Burtgang', 'Sakpata', 'Naegling'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name="Reverence Coronet +2" }
@@ -86,16 +86,19 @@ function user_setup()
 
     if player.sub_job == 'BLU' then
         send_command('lua l azureSets')
-        send_command('bind ^numpad7 gs c set WeaponSet Excalibur;input /macro set 1')
+        send_command('bind ^numpad7 gs c set WeaponSet Burtgang;input /macro set 1')
         send_command('bind ^numpad8 gs c set WeaponSet Sakpata;input /macro set 1')
         send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 1')
         set_macro_page(1, 7)
     elseif player.sub_job == 'SCH' then
-        send_command('bind ^numpad7 gs c set WeaponSet Excalibur;input /macro set 2')
+        send_command('bind ^numpad7 gs c set WeaponSet Burtgang;input /macro set 2')
         send_command('bind ^numpad8 gs c set WeaponSet Sakpata;input /macro set 2')
         send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 2')
         set_macro_page(2, 7)
     else
+        send_command('bind ^numpad7 gs c set WeaponSet Burtgang;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Sakpata;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 1')
         set_macro_page(1, 7)
     end
     
@@ -423,9 +426,9 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
+    sets.Burtgang = { main="Burtgang", sub="Srivatsa"}
     sets.Sakpata = { main="Sakpata's Sword", sub="Srivatsa" }
     sets.Naegling = { main="Naegling", sub="Srivatsa"}
-    sets.Excalibur = { main="Excalibur", sub="Srivatsa"}
 end
 
 function job_midcast(spell, action, spellMap, eventArgs)

@@ -170,10 +170,10 @@ function user_setup()
     gear.Relic_Legs = { name= "Ankusa Trousers +3" }
     gear.Relic_Feet = { name= "Ankusa Gaiters +3" }
 
-    gear.Empyrean_Head = { name= "Nukumi Cabasset +2" }
+    gear.Empyrean_Head = { name= "Nukumi Cabasset +3" }
     gear.Empyrean_Body = { name= "Nukumi Gausape +3" }
-    gear.Empyrean_Hands = { name= "Nukumi Manoplas +2" }
-    gear.Empyrean_Legs = { name= "Nukumi Quijotes +1" }
+    gear.Empyrean_Hands = { name= "Nukumi Manoplas +3" }
+    gear.Empyrean_Legs = { name= "Nukumi Quijotes +2" }
     gear.Empyrean_Feet = { name= "Nukumi Ocreae +2" }
 
     send_command('bind @w gs c toggle WeaponLock')
@@ -305,7 +305,7 @@ function init_gear_sets()
         head=gear.Empyrean_Head,
         body=gear.Nyame_Body,
         hands=gear.Empyrean_Hands,
-        legs=gear.Relic_Legs,
+        legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
         neck="Shulmanu Collar",
         ear1="Sroda Earring",
@@ -317,6 +317,8 @@ function init_gear_sets()
     }
 
     sets.midcast.Pet.MultiStrike = set_combine(sets.midcast.Pet, {
+        head=gear.Emicho_C_Head,
+        ring1=gear.Varar_1,
         neck="Beastmaster Collar +2",
     })
     
@@ -336,6 +338,8 @@ function init_gear_sets()
         waist="Incarnation Sash",       
         back="Argocham Mantle",
     }
+
+    sets.midcast.Pet.MagicAtkReady.TPBonus = sets.midcast.Pet.MagicAtkRead
 
     sets.midcast.Pet.MagicAccReady = {
         ammo="Hesperiidae",
@@ -368,100 +372,6 @@ function init_gear_sets()
         waist="Incarnation Sash",
         back=gear.BST_DW_Cape,
     }
-
-
-    ------------------
-    -- DEFENSE SETS --
-    ------------------
-
-    -- Pet PDT and MDT sets:
-    sets.defense.PetPDT = {
-        ammo="Hesperiidae",
-        head=gear.Nyame_Head,
-        neck="Beastmaster Collar +2",
-        ear1="Handler's Earring +1",
-        ear2="Enmerkar Earring",
-        body=gear.Nyame_Body,
-        hands=gear.Gleti_Hands,
-        ring1=gear.Moonlight_1,
-        ring2="Defending Ring",
-        back=gear.BST_DW_Cape,
-        waist="Isa Belt",
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet
-    }
-
-    sets.defense.PetMDT = {
-        ammo="Hesperiidae",
-        head=gear.Nyame_Head,
-        neck="Beastmaster Collar +2",
-        ear1="Enmerkar Earring",
-        ear2="Nukumi Earring +1",
-        body=gear.Nyame_Body,
-        hands=gear.Gleti_Hands,
-        ring1=gear.Moonlight_1,
-        ring2="Defending Ring",
-        back=gear.BST_DW_Cape,
-        waist="Isa Belt",
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-    }
-
-    -- Master PDT and MDT sets:
-    sets.defense.PDT = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Gleti_Head,
-        neck="Loricate Torque +1",
-        ear1="Tuisto Earring",
-        ear2="Odnowa Earring +1",
-        body=gear.Gleti_Body,
-        hands=gear.Gleti_Hands,
-        ring1=gear.Moonlight_1,
-        ring2="Defending Ring",
-        back=gear.BST_DW_Cape,
-        waist="Platinum Moogle Belt",
-        legs=gear.Gleti_Legs,
-        feet=gear.Gleti_Feet
-    }
-
-    sets.defense.MDT = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Malignance_Head,
-        neck="Loricate Torque +1",
-        ear1="Etiolation Earring",
-        ear2="Eabani Earring",
-        body=gear.Gleti_Body,
-        hands=gear.Malignance_Hands,
-        ring1="Defending Ring",
-        ring2="Purity Ring",
-        back=gear.BST_DW_Cape,
-        waist="Engraved Belt",
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
-    }
-
-    sets.defense.MEva = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Malignance_Head,
-        neck="Warder's Charm +1",
-        ear1="Etiolation Earring",
-        ear2="Eabani Earring",
-        body=gear.Malignance_Body,
-        hands=gear.Malignance_Hands,
-        ring1="Defending Ring",
-        ring2="Purity Ring",
-        back=gear.BST_DW_Cape,
-        waist="Engraved Belt",
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
-    }
-
-    if (item_available("Shneddick Ring +1")) then
-        sets.Kiting = { ring1="Shneddick Ring +1" }
-    else
-        sets.Kiting = { feet="Skadi's Jambeaux +1" }
-    end
-
 
     --------------------
     -- FAST CAST SETS --
@@ -559,9 +469,9 @@ function init_gear_sets()
         hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Malignance_Feet,
-        neck="Anu Torque",
+        neck="Beastmaster Collar +2",
         ear1="Sherida Earring",
-        ear2="Telos Earring",    
+        ear2="Nukumi Earring +1",    
         ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.BST_DW_Cape,
@@ -842,33 +752,6 @@ function init_gear_sets()
     sets.midcast.ExtraMAB = {ear1="Crematio Earring"}
     sets.midcast.ExtraWSDMG = {ear1="Ishvara Earring"}
 
-    ---------------
-    -- IDLE SETS --
-    ---------------/
-
-    sets.idle = sets.engaged.DW.MaxHaste
-
-
-    sets.idle.Pet = sets.idle
-
-    sets.idle.Pet.Engaged = {
-        ammo="Hesperiidae",
-        head=gear.Empyrean_Head,
-        neck="Beastmaster Collar +2",
-        ear1="Enmerkar Earring",
-        ear2="Nukumi Earring +1",
-        body=gear.Relic_Body,
-        hands=gear.Emicho_C_Hands,
-        ring1=gear.Varar_1,
-        ring2=gear.Varar_2,
-        back=gear.BST_PETTP_Cape,
-        waist="Incarnation Sash",
-        legs=gear.Relic_Legs,
-        feet=gear.Nyame_Feet
-    }
-
-    sets.idle.Town = sets.engaged.DW.MaxHaste
-
     ----------------
     -- OTHER SETS --
     ----------------
@@ -922,14 +805,133 @@ function init_gear_sets()
 
     sets.buff['Killer Instinct'] = {body=gear.Empyrean_Body}
 
+      ------------------
+    -- DEFENSE SETS --
+    ------------------
+
+    -- Pet PDT and MDT sets:
+    sets.defense.PetPDT = {
+        ammo="Hesperiidae",
+        head=gear.Nyame_Head,
+        neck="Beastmaster Collar +2",
+        ear1="Handler's Earring +1",
+        ear2="Enmerkar Earring",
+        body=gear.Nyame_Body,
+        hands=gear.Gleti_Hands,
+        ring1=gear.Moonlight_1,
+        ring2="Defending Ring",
+        back=gear.BST_DW_Cape,
+        waist="Isa Belt",
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet
+    }
+
+    sets.defense.PetMDT = {
+        ammo="Hesperiidae",
+        head=gear.Nyame_Head,
+        neck="Beastmaster Collar +2",
+        ear1="Enmerkar Earring",
+        ear2="Nukumi Earring +1",
+        body=gear.Nyame_Body,
+        hands=gear.Gleti_Hands,
+        ring1=gear.Moonlight_1,
+        ring2="Defending Ring",
+        back=gear.BST_DW_Cape,
+        waist="Isa Belt",
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+    }
+
+    -- Master PDT and MDT sets:
+    sets.defense.PDT = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Gleti_Head,
+        neck="Loricate Torque +1",
+        ear1="Tuisto Earring",
+        ear2="Odnowa Earring +1",
+        body=gear.Gleti_Body,
+        hands=gear.Gleti_Hands,
+        ring1=gear.Moonlight_1,
+        ring2="Defending Ring",
+        back=gear.BST_DW_Cape,
+        waist="Platinum Moogle Belt",
+        legs=gear.Gleti_Legs,
+        feet=gear.Gleti_Feet
+    }
+
+    sets.defense.MDT = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Malignance_Head,
+        neck="Loricate Torque +1",
+        ear1="Etiolation Earring",
+        ear2="Eabani Earring",
+        body=gear.Gleti_Body,
+        hands=gear.Malignance_Hands,
+        ring1="Defending Ring",
+        ring2="Purity Ring",
+        back=gear.BST_DW_Cape,
+        waist="Engraved Belt",
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+    }
+
+    sets.defense.MEva = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Malignance_Head,
+        neck="Warder's Charm +1",
+        ear1="Etiolation Earring",
+        ear2="Eabani Earring",
+        body=gear.Malignance_Body,
+        hands=gear.Malignance_Hands,
+        ring1="Defending Ring",
+        ring2="Purity Ring",
+        back=gear.BST_DW_Cape,
+        waist="Engraved Belt",
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+    }
+
+    ---------------
+    -- IDLE SETS --
+    ---------------
+
+    sets.idle = {
+
+    }
+
+
+    sets.idle.Pet = sets.idle
+
+    sets.idle.Pet.Engaged = {
+        ammo="Hesperiidae",
+        head=gear.Empyrean_Head,
+        neck="Beastmaster Collar +2",
+        ear1="Enmerkar Earring",
+        ear2="Nukumi Earring +1",
+        body=gear.Relic_Body,
+        hands=gear.Emicho_C_Hands,
+        ring1=gear.Varar_1,
+        ring2=gear.Varar_2,
+        back=gear.BST_PETTP_Cape,
+        waist="Incarnation Sash",
+        legs=gear.Relic_Legs,
+        feet=gear.Nyame_Feet
+    }
+
+    sets.idle.Town = sets.engaged.DW.MaxHaste
+
+    
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Skadi's Jambeaux +1" }
+    end
+
+
     sets.Pangu = {main="Pangu", sub="Ikenga's Axe"}
     sets.Dolichenus = {main="Dolichenus", sub="Ikenga's Axe" }    
     sets.Tauret = {main="Tauret", sub="Agwu's Axe" }
     sets.DefaultShield = {sub="Adapa Shield"}
-    
-    sets.midcast.Pet.MagicAtkReady = {}
-    sets.midcast.Pet.MagicAtkReady.TPBonus = {}
-
 end
 
 -------------------------------------------------------------------------------------------------------------------

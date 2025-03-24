@@ -617,7 +617,11 @@ function init_gear_sets()
         waist="Carrier's Sash",
     }
 
-    sets.Kiting = { ring1="Shneddick Ring" }
+    if (item_available("Shneddick Ring")) then
+        sets.Kiting = { ring1="Shneddick Ring" }
+    else
+        sets.Kiting = { legs=gear.Carmine_D_Legs }
+    end
     
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
