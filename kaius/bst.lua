@@ -173,8 +173,8 @@ function user_setup()
     gear.Empyrean_Head = { name= "Nukumi Cabasset +3" }
     gear.Empyrean_Body = { name= "Nukumi Gausape +3" }
     gear.Empyrean_Hands = { name= "Nukumi Manoplas +3" }
-    gear.Empyrean_Legs = { name= "Nukumi Quijotes +2" }
-    gear.Empyrean_Feet = { name= "Nukumi Ocreae +2" }
+    gear.Empyrean_Legs = { name= "Nukumi Quijotes +3" }
+    gear.Empyrean_Feet = { name= "Nukumi Ocreae +3" }
 
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @e gs c cycle WeaponSet')
@@ -226,8 +226,9 @@ end
 -- BST gearsets
 function init_gear_sets()
 
+    gear.BST_TP_Cape = { name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.BST_DW_Cape = { name="Artio's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
-    gear.BST_WS1_Cape = { name="Artio's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
+    gear.BST_WS1_Cape = { name="Artio's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.BST_PETMACC_Cape = { name="Artio's Mantle", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Eva.+20 /Mag. Eva.+20','Pet: Mag. Acc.+10','"Fast Cast"+10','Phys. dmg. taken-10%',}}
     gear.BST_PETTP_Cape = { name="Artio's Mantle", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Eva.+20 /Mag. Eva.+20','Pet: Haste+10','System: 1 ID: 1246 Val: 4',}}
 
@@ -427,7 +428,7 @@ function init_gear_sets()
         ear2="Telos Earring",    
         ring1="Gere Ring",
         ring2="Epona's Ring",
-        back=gear.BST_WS1_Cape,
+        back=gear.BST_TP_Cape,
         waist="Sailfi Belt +1",
     }
 

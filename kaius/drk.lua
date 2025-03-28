@@ -65,6 +65,7 @@ function user_setup()
     gear.DRK_WS2_Cape = { name="Ankou's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
     gear.DRK_FC_Cape = { name="Ankou's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10',}}
     gear.DRK_MB_Cape = { name="Ankou's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
+    
     gear.DRK_DRK_Cape = { name="Niht Mantle", augments={'Attack+15','Dark magic skill +10','"Drain" and "Aspir" potency +23',}}
 
     send_command('bind @w gs c toggle WeaponLock')

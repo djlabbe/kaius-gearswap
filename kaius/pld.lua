@@ -55,7 +55,7 @@ function user_setup()
     gear.Empyrean_Body = { name="Chevalier's Cuirass +3", priority=151 }
     gear.Empyrean_Hands = { name="Chevalier's Gauntlets +3", priority=64 }
     gear.Empyrean_Legs = { name="Chevalier's Cuisses +3", priority=127 }
-    gear.Empyrean_Feet = { name="Chevalier's Sabatons +2", priority=52 }
+    gear.Empyrean_Feet = { name="Chevalier's Sabatons +3", priority=52 }
 
     gear.PLD_Idle_Cape = { name="Rudianos's Mantle", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}, priority=1} --X
     gear.PLD_FC_Cape = { name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Mag. Evasion+15',}, priority=80} --X
@@ -340,8 +340,8 @@ function init_gear_sets()
         body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
         legs=gear.Sakpata_Legs,
-        feet=gear.Sakpata_Feet,
-        neck="Vim Torque +1",
+        feet=gear.Nyame_Feet,
+        neck="Bathy Choker +1",
         waist="Sailfi Belt +1",
         ear1="Dedition Earring",
         ear2="Telos Earring",
