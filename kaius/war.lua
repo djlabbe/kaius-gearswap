@@ -49,7 +49,7 @@ function user_setup()
     gear.Empyrean_Body = { name= "Boii Lorica +3" }
     gear.Empyrean_Hands = { name= "Boii Mufflers +3" }
     gear.Empyrean_Legs = { name= "Boii Cuisses +3" }
-    gear.Empyrean_Feet = { name= "Boii Calligae +2" }
+    gear.Empyrean_Feet = { name= "Boii Calligae +3" }
 
     gear.WAR_TP_Cape = { name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20', 'DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.WAR_WS1_Cape = { name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
@@ -412,8 +412,9 @@ function init_gear_sets()
 
     sets.precast.WS["Fimbulvetr"].PDL = set_combine(sets.precast.WS["Fimbulvetr"], {
         body=gear.Sakpata_Body,
-        legs=gear.Sakpata_Legs,
-        feet=gear.Sakpata_Feet,
+        legs=gear.Empyrean_Legs,
+        ring1=gear.Ephramad_Or_Sroda,
+        ring2="Epaminondas's Ring",
     })
 
     --------------------------------------------------------

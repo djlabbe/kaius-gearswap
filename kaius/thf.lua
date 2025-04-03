@@ -543,12 +543,13 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         if state.Buff['Sneak Attack'] == true or state.Buff['Trick Attack'] == true then
             equip(sets.precast.WS.Critical)
         end
-    end
-    if spell.type == 'WeaponSkill' then
         if spell.english == 'Aeolian Edge' then
             -- Matching double weather (w/o day conflict).
             if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
                 equip({waist="Hachirin-no-Obi"})
+            end
+            if state.TreasureMode.value == 'Fulltime' then
+                equip(sets.TreasureHunter)
             end
         end
     end
@@ -754,6 +755,7 @@ end
 
 function gearinfo(cmdParams, eventArgs)
     -- send_command('input /lastsynth')
+    -- send_command('input /item "Pluton Box" <me>')
     if cmdParams[1] == 'gearinfo' then
         if type(tonumber(cmdParams[2])) == 'number' then
             if tonumber(cmdParams[2]) ~= DW_needed then

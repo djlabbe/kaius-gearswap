@@ -187,6 +187,7 @@ function define_global_sets()
     gear.Herc_PHLX_Hands = { name="Herculean Gloves", augments={'"Fast Cast"+2','Attack+25','Phalanx +4','Mag. Acc.+13 "Mag.Atk.Bns."+13',}}
     gear.Herc_PHLX_Feet = { name="Herculean Boots", augments={'"Mag.Atk.Bns."+3','DEX+15','Phalanx +5',}}
 
+    gear.Valo_PHLX_Body = { name="Valorous Mail", augments={'VIT+5','Potency of "Cure" effect received+2%','Phalanx +5','Accuracy+8 Attack+8','Mag. Acc.+14 "Mag.Atk.Bns."+14',}}
     gear.Valo_PET_Body = {name="Valorous Mail", augments={'Pet: Mag. Acc.+24','Pet: "Dbl.Atk."+4 Pet: Crit.hit rate +4','Pet: MND+8','Pet: Accuracy+12 Pet: Rng. Acc.+12',}}
     gear.Valo_QA_Body = { name="Valorous Mail", augments={'Crit.hit rate+5','STR+8','Quadruple Attack +2','Accuracy+19 Attack+19',}}
     gear.Valo_STP_Body = { name="Valorous Mail", augments={'Mag. Acc.+12','"Store TP"+8','AGI+3','Accuracy+8','Attack+5',}}

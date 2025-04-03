@@ -298,7 +298,7 @@ function init_gear_sets()
     -- Pact delay reduction gear
     sets.precast.BloodPactWard = {
         main="Espiritus",
-        sub="Elan Strap +1",
+        sub="Vox Grip",
         ammo="Epitaph",
         head="Baayami Hat +1",
         neck="Incanter's Torque",
@@ -317,7 +317,7 @@ function init_gear_sets()
     sets.precast.BloodPactRage = {
         main="Espiritus",
         sub="Elan Strap +1",
-        ammo="Sancus Sachet +1",
+        ammo="Epitaph",
         head=gear.Empyrean_Head,
         neck="Incanter's Torque",
         ear1="C. Palug Earring",
@@ -383,8 +383,7 @@ function init_gear_sets()
     -- Avatar pact sets.  All pacts are Ability type.
     sets.midcast.Pet.BloodPactWard = {
         main="Espiritus",
-        sub="Elan Strap +1",
-        ammo="Epitaph",
+        sub="Vox Grip",
         head="Baayami Hat +1",
         neck="Incanter's Torque",
         body="Baayami Robe +1",
@@ -492,8 +491,8 @@ function init_gear_sets()
         hands="Asteria Mitts +1",
         ring1=gear.Stikini_1,
         ring2="Defending Ring",
-        back=gear.SMN_Magic_Cape,
-        waist="Lucidity Sash",
+        back="Null Shawl",
+        waist="Null Belt",
         legs="Assid. Pants +1",
         feet="Baayami Sabots +1",
     }
@@ -522,10 +521,10 @@ function init_gear_sets()
         ammo="Epitaph",
         head=gear.Empyrean_Head, --(10)
         body=gear.Empyrean_Body, --7 --(6)
-        hands="Asteria Mitts +1",
+        hands="Asteria Mitts +1", --2
         legs="Assid. Pants +1", --3
-        feet="Baayami Sabots +1",
-        neck="Summoner's Collar +2", --1
+        feet=gear.Nyame_Feet,
+        neck="Summoner's Collar +2", --(5) 
         ear1="Lugalbanda Earring",
         ear2="Beckoner's Earring +2", --(6)
         ring1=gear.Gerubu_Or_Stikini1,
@@ -1021,6 +1020,7 @@ end
 
 
 function gearinfo(cmdParams, eventArgs)
+    -- send_command('input /item "Pluton Box" <me>')
     if cmdParams[1] == 'gearinfo' then
         if type(cmdParams[4]) == 'string' then
             if cmdParams[4] == 'true' then

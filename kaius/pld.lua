@@ -36,7 +36,7 @@ function user_setup()
     
     state.PhalanxMode = M(false, 'Equip Phalanx Gear')
     state.EquipShield = M(true, 'Equip Shield w/Defense')
-    state.WeaponSet = M{['description']='Weapon Set', 'Burtgang', 'Sakpata', 'Naegling'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Burtgang', 'Naegling'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name="Reverence Coronet +2" }
@@ -87,17 +87,14 @@ function user_setup()
     if player.sub_job == 'BLU' then
         send_command('lua l azureSets')
         send_command('bind ^numpad7 gs c set WeaponSet Burtgang;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Sakpata;input /macro set 1')
         send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 1')
         set_macro_page(1, 7)
     elseif player.sub_job == 'SCH' then
         send_command('bind ^numpad7 gs c set WeaponSet Burtgang;input /macro set 2')
-        send_command('bind ^numpad8 gs c set WeaponSet Sakpata;input /macro set 2')
         send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 2')
         set_macro_page(2, 7)
     else
         send_command('bind ^numpad7 gs c set WeaponSet Burtgang;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Sakpata;input /macro set 1')
         send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 1')
         set_macro_page(1, 7)
     end
@@ -151,7 +148,7 @@ function init_gear_sets()
     sets.precast.JA['Chivalry'] = {hands=gear.Relic_Hands }
 
     sets.precast.FC = {
-        main="Sakpata's Sword", --10
+        -- main="Sakpata's Sword", --10
         ammo="Sapience Orb", --2
         head=gear.Empyrean_Head, --9 
         body=gear.Artifact_Body, --10
@@ -160,12 +157,12 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet, --13
         neck={name="Unmoving Collar +1", priority=200},
         waist={name="Platinum Moogle Belt", priority=999},
-        ear1={name="Tuisto Earring", priority=150},
+        ear1="Enchanter's Earring +1", --2
         ear2={name="Odnowa Earring +1", priority=110},
-        ring1={name="Gelatinous Ring +1", priority=135}, 
-        ring2="Kishar Ring", --4
+        ring1="Kishar Ring", --4
+        ring2={name="Gelatinous Ring +1", priority=135}, 
         back=gear.PLD_FC_Cape, --10
-    } --63/73% FC, 3428 HP
+    } --64% FC, 3598 HP
 
     sets.precast.WS = {
         ammo="Crepuscular Pebble",
@@ -204,8 +201,6 @@ function init_gear_sets()
     }
 
     sets.midcast.Flash = {
-        main="Brilliance",
-        sub="Srivatsa",
         ammo="Staunch Tathlum +1", -- SIRD 11
         head="Loess Barbuta +1",
         body=gear.Empyrean_Body, -- SIRD 20
@@ -223,7 +218,6 @@ function init_gear_sets()
     sets.midcast.Stun = sets.midcast.Flash
     
     sets.midcast.Cure = { -- Cure/SIRD/Enmity/PDT
-        main="Sakpata's Sword",
         ammo="Staunch Tathlum +1",                           --00/00/00/10
         head=gear.Souveran_C_Head,                           --00/20/09/08
         body=gear.Empyrean_Body,                             --11/20/16/00
@@ -240,8 +234,6 @@ function init_gear_sets()
     }                                --3659 HP               --46/111/52/53     +10 SIRD Merit =121
 
     sets.midcast.Blue = { --SIRD/Enmity
-        main="Sakpata's Sword",
-        sub="Srivatsa",
         ammo="Staunch Tathlum +1",      --11/00
         head=gear.Souveran_C_Head,      --20/09
         body=gear.Empyrean_Body,        --20/00
@@ -285,7 +277,7 @@ function init_gear_sets()
         main="Sakpata's Sword",
         sub="Priwen",
         head=gear.Yorium_PHLX_Head,
-        body=gear.Yorium_PHLX_Body,
+        body=gear.Valo_PHLX_Body,
         hands=gear.Souveran_C_Hands,
         legs=gear.Sakpata_Legs,
         feet=gear.Souveran_D_Feet,
@@ -352,34 +344,6 @@ function init_gear_sets()
 
     sets.engaged.DD = set_combine(sets.engaged, sets.Hybrid)
     
-    sets.idle = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Artifact_Feet,
-        neck={name="Unmoving Collar +1", priority=200},
-        ear1={name="Tuisto Earring", priority=150},
-        ear2={name="Chevalier's Earring +1", priority=1},
-        ring1=gear.Moonlight_1,
-        ring2={name="Gelatinous Ring +1", priority=135},
-        waist={name="Platinum Moogle Belt", priority=999},
-        back=gear.PLD_Idle_Cape,
-    } --3594 w/ Schneddick Ring
-
-    sets.idle.Town = set_combine(sets.idle, {})    
-
-    if (item_available("Shneddick Ring +1")) then
-        sets.Kiting = { ring1="Shneddick Ring +1" }
-    else
-        sets.Kiting = { legs=gear.Carmine_A_Legs }
-    end
-    
-    -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here when activating or changing defense mode:
-    sets.PhysicalShield = {sub="Ochain"}
-    sets.MagicalShield = {sub="Aegis"}
-
     -- Basic defense sets.
         
     sets.defense.PDT = {
@@ -426,8 +390,37 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
+    sets.idle = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Empyrean_Head,
+        body=gear.Sakpata_Body,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Sakpata_Feet,
+        -- neck={name="Unmoving Collar +1", priority=200},
+        neck="Warder's Charm +1",
+        ear1={name="Tuisto Earring", priority=150},
+        ear2={name="Chevalier's Earring +1", priority=1},
+        -- ring1=gear.Moonlight_1,
+        ring1="Fortified Ring",
+        ring2={name="Gelatinous Ring +1", priority=135},
+        waist={name="Platinum Moogle Belt", priority=999},
+        back=gear.PLD_Idle_Cape,
+    } --3594 w/ Schneddick Ring
+
+    sets.idle.Town = sets.idle  
+
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { legs=gear.Carmine_A_Legs }
+    end
+    
+    -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here when activating or changing defense mode:
+    sets.PhysicalShield = {sub="Ochain"}
+    sets.MagicalShield = {sub="Aegis"}
+
     sets.Burtgang = { main="Burtgang", sub="Srivatsa"}
-    sets.Sakpata = { main="Sakpata's Sword", sub="Srivatsa" }
     sets.Naegling = { main="Naegling", sub="Srivatsa"}
 end
 

@@ -85,7 +85,7 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT', 'PetPDT')
     state.MagicalDefenseMode:options('MDT', 'PetMDT')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Pangu', 'Dolichenus', 'Tauret'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Guttler', 'Pangu', 'Dolichenus', 'Tauret'}
     state.WeaponLock = M(false, 'Weapon Lock')
     include('Global-Binds.lua')
 
@@ -177,7 +177,6 @@ function user_setup()
     gear.Empyrean_Feet = { name= "Nukumi Ocreae +3" }
 
     send_command('bind @w gs c toggle WeaponLock')
-    send_command('bind @e gs c cycle WeaponSet')
 
     send_command('bind !F1 input /ja "Familiar" <me>')
     send_command('bind !F2 input /ja "Unleash" <me>')
@@ -185,13 +184,17 @@ function user_setup()
     send_command('bind !l input /pet Leave <me>')
     send_command('bind !h input /pet Heel <me>')
 
-    if player.sub_job == 'DNC' then
-        send_command('bind ^` input /ja "Chocobo Jig" <me>')
+    if player.sub_job == 'WAR' then
+        send_command('bind !t input /ja Provoke <t>')
+        send_command('bind ^numpad7 gs c set WeaponSet Guttler;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Pangu;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Dolichenus;input /macro set 3')
+        send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 4')
         set_macro_page(1, 9)
     elseif player.sub_job == 'NIN' then
         set_macro_page(2, 9)
-    elseif player.sub_job == 'WAR' then
-        send_command('bind !t input /ja Provoke <t>')
+    elseif player.sub_job == 'DNC' then
+        send_command('bind ^` input /ja "Chocobo Jig" <me>')
         set_macro_page(3, 9)
     end
 
@@ -260,9 +263,9 @@ function init_gear_sets()
 
     sets.precast.JA['Bestial Loyalty'] = sets.precast.JA['Call Beast']
 
-    -- sets.precast.JA.Tame = {
-    --     head=gear.Artifact_Head,
-    -- }
+    sets.precast.JA.Tame = {
+        head=gear.Artifact_Head,
+    }
 
     sets.precast.JA.Spur = {
         feet=gear.Empyrean_Feet
@@ -284,7 +287,7 @@ function init_gear_sets()
     }
 
     sets.precast.JA.Charm = {
-        -- head=gear.Artifact_Head,
+        head=gear.Artifact_Head,
         neck="Unmoving Collar +1",
         ear2="Enchanter's Earring +1",
         body=gear.Relic_Body,
@@ -607,10 +610,10 @@ function init_gear_sets()
         neck="Beastmaster Collar +2",
         ear1="Lugra Earring +1",
         ear2="Nukumi Earring +1",
-        body=gear.Gleti_Body,
-        hands=gear.Artifact_Hands,
-        ring1="Epaminondas's Ring",
-        ring2="Ilabrat Ring",
+        body=gear.Empyrean_Body,
+        hands=gear.Nyame_Hands,
+        ring1="Gere Ring",
+        ring2=gear.Ephramad_Or_Regal,
         back=gear.BST_WS1_Cape,
         waist="Sailfi Belt +1",
         legs=gear.Nyame_Legs,
@@ -897,7 +900,19 @@ function init_gear_sets()
     ---------------
 
     sets.idle = {
-
+        ammo="Staunch Tathlum +1",
+        head="Null Masque",
+        neck="Warder's Charm +1",
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
+        body="Adamantite Armor",
+        hands=gear.Gleti_Hands,
+        ring1=gear.Chirich_1,
+        ring2="Purity Ring",
+        back="Null Shawl",
+        waist="Null Belt",
+        legs=gear.Gleti_Legs,
+        feet=gear.Gleti_Feet,
     }
 
 
@@ -929,19 +944,17 @@ function init_gear_sets()
     end
 
 
+    sets.Guttler = {main="Guttler", sub="Ikenga's Axe"}
     sets.Pangu = {main="Pangu", sub="Ikenga's Axe"}
     sets.Dolichenus = {main="Dolichenus", sub="Ikenga's Axe" }    
     sets.Tauret = {main="Tauret", sub="Agwu's Axe" }
-    sets.DefaultShield = {sub="Adapa Shield"}
+    sets.DefaultShield = {sub="Deliverance +1"}
 end
 
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks that are called to process player actions at specific points in time.
 -------------------------------------------------------------------------------------------------------------------
 
-function job_pretarget(spell)
-    
-end
 
 function job_precast(spell, action, spellMap, eventArgs)
     if spell.type == "Monster" and not spell.interrupted then
@@ -1121,7 +1134,6 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
     update_combat_form()
     determine_haste_group()
-    -- get_melee_groups()
     check_moving()
     pet_info_update()
     update_display_mode_info()
@@ -1561,44 +1573,7 @@ function checkblocking(spell)
         cancel_spell()
         return
     end 
-    if spell.english == "Double-Up" then
-        if not buffactive["Double-Up Chance"] then 
-            add_to_chat(3,'Canceling Action - No ability to Double Up')
-            cancel_spell()
-            return
-        end
-    end
-    if spell.name ~= 'Ranged' and spell.type ~= 'WeaponSkill' and spell.type ~= 'Scholar' and spell.type ~= 'Monster' then
-        if spell.action_type == 'Ability' then
-            if buffactive.Amnesia then
-                cancel_spell()
-                add_to_chat(3,'Canceling Ability - Currently have Amnesia')
-                return
-            else
-                recasttime = windower.ffxi.get_ability_recasts()[spell.recast_id] 
-                if spell and (recasttime >= 1) then
-                    --add_to_chat(3,'Ability Canceled:'..spell.name..' - Waiting on Recast:(seconds) '..recasttime..'')
-                    cancel_spell()
-                    return
-                end
-            end
-        end
-    end
-    --if spell.type == 'WeaponSkill' and player.tp < 1000 then
-    --    cancel_spell()
-    --    add_to_chat(3,'Canceled WS:'..spell.name..' - Current TP is less than 1000.')
-    --    return
-    --end
-    --if spell.type == 'WeaponSkill' and buffactive.Amnesia then
-    --    cancel_spell()
-    --    add_to_chat(3,'Canceling Ability - Currently have Amnesia.')
-    --    return	  
-    --end
-    --if spell.name == 'Utsusemi: Ichi' and (buffactive['Copy Image (3)'] or buffactive ['Copy Image (4+)']) then
-    --    cancel_spell()
-    --    add_to_chat(3,'Canceling Utsusemi - Already have maximum shadows (3).')
-    --    return
-    --end
+
     if spell.type == 'Monster' or spell.name == 'Reward' then
         if pet.isvalid then
             if spell.name == 'Fireball' and pet.status ~= "Engaged" then
@@ -1642,6 +1617,7 @@ end
 
 
 function gearinfo(cmdParams, eventArgs)
+    
     if cmdParams[1] == 'gearinfo' then
         if type(tonumber(cmdParams[2])) == 'number' then
             if tonumber(cmdParams[2]) ~= DW_needed then
@@ -1703,5 +1679,26 @@ function check_weaponset()
     equip(sets[state.WeaponSet.current])
     if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
        equip(sets.DefaultShield)
+    end
+end
+
+function is_pet_idle()
+    local pet = windower.ffxi.get_mob_by_target("pet")
+    if pet and pet.status == 1 then  -- Status 1 = Engaged
+        return false
+    else
+        return true
+    end
+end
+
+-- Automatically use Fight on WeaponSkill 
+function job_pretarget(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' and is_pet_idle() then
+        local allRecasts = windower.ffxi.get_ability_recasts()
+        local fightCooldown = allRecasts[102]
+        if player.main_job_level >= 77 and fightCooldown < 1 then
+            cast_delay(1.1)
+            send_command('input /pet "Fight" <t>')
+        end
     end
 end

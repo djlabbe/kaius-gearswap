@@ -28,7 +28,7 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'PDL')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponSet = M{['description']='Weapon Set',  'Mpu_TP', 'Mpu_Gleti', 'Mpu_Crep', 'Twash_TP', 'Twash_Gleti', 'Twash_Crep', "Aeneas", "Tauret"  }
+    state.WeaponSet = M{['description']='Weapon Set', 'Mpu_TP', 'Mpu_Gleti', 'Mpu_Crep', 'Twash_TP', 'Twash_Gleti', 'Twash_Crep', "Aeneas", "Tauret"  }
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name= "Maxixi Tiara +3" }
@@ -61,6 +61,7 @@ function user_setup()
 
     send_command('bind !F1 input /ja "Trance" <me>')
     send_command('bind !F2 input /ja "Grand Pas" <me>')
+    send_command('bind !F3 gs c VolteHarness')
 
     send_command('bind !` input /ja "Saber Dance" <me>')
     send_command('bind ^` input /ja "Fan Dance" <me>')
@@ -700,12 +701,19 @@ end
 
 
 function job_self_command(cmdParams, eventArgs)
+
     if cmdParams[1] == 'step' then
         send_command('@input /ja "'..state['MainStep'].current..'" <t>')
     end
 
     if cmdParams[1] == 'step2' then
         send_command('@input /ja "'..state['AltStep'].current..'" <t>')
+    end
+
+    if cmdParams[1] == 'VolteHarness' then
+        equip({body="Volte Harness"})
+        disable('body')
+        send_command('pause 7;@input /item "Volte Harness" <me>;wait 0.5;@input //gs enable body')
     end
 
     gearinfo(cmdParams, eventArgs)
