@@ -105,7 +105,6 @@ function user_setup()
     end
 
     set_macro_page(1, 21)
-    add_to_chat("Hello")
     send_command('wait 3; input /lockstyleset 21')
 
     state.Auto_Kite = M(false, 'Auto_Kite')

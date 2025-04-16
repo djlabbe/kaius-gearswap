@@ -931,7 +931,7 @@ function init_gear_sets()
         legs=gear.Bunzi_Legs,
         feet=gear.Bunzi_Feet,
         neck="Sibyl Scarf",
-        ear1="Sanare Earring",
+        ear1="Arete Del Luna +1",
         ear2="Etiolation Earring",
         ring1=gear.Stikini_1,
         ring2=gear.Stikini_2,

@@ -138,7 +138,7 @@ function init_gear_sets()
     sets.precast.JA["Ancient Circle"] = { legs=gear.Artifact_Legs }
 
     sets.precast.JA["Spirit Link"] = {
-        -- head=gear.Artifact_Head,
+        head=gear.Artifact_Head,
         hands=gear.Empyrean_Hands,
         feet=gear.Relic_Feet,
     }
