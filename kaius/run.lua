@@ -375,7 +375,7 @@ function init_gear_sets()
         head=gear.Relic_Head, --7
         body=gear.Herc_PHLX_Body, --4
         hands=gear.Herc_PHLX_Hands, --4
-        legs=gear.Taeon_Phalanx_Legs, --3(10)
+        legs=ggear.Herc_PHLX_Legs, --6
         feet=gear.Herc_PHLX_Feet, --5
     }
 
