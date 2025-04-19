@@ -455,16 +455,16 @@ function init_gear_sets()
         main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
-        head=gear.Artifact_Head;
-        body=gear.Artifact_Body,
-        hands="Regal Cuffs",
+        head=gear.Empyrean_Head;
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
         legs=gear.Chironic_ENF_Legs,
         feet=gear.Artifact_Feet,
-        neck="Erra Pendant",
+        neck="Null Loop",
         ear1="Regal Earring",
         ear2="Ebers Earring +2",
         ring1="Kishar Ring",
-        ring2="Metamorph Ring +1",
+        ring2=gear.Stikini_2,
         back="Aurist's Cape +1",
         waist="Obstinate Sash",
     }

@@ -840,7 +840,7 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         waist="Plat. Mog. Belt",
         ear1="Eabani Earring",
-        ear2="Balder Earring +1",
+        ear2="Sanare Earring",
         ring1="Vengeful Ring",
         ring2="Gelatinous Ring +1",
         back=gear.BLU_EVA_Cape,

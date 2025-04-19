@@ -502,6 +502,13 @@ function init_gear_sets()
         neck="Loricate Torque +1",       
     }
 
+    sets.midcast["Army's Paeon VI"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
+    sets.midcast["Army's Paeon V"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
+    sets.midcast["Army's Paeon IV"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
+    sets.midcast["Army's Paeon III"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
+    sets.midcast["Army's Paeon II"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
+    sets.midcast["Army's Paeon"] = set_combine(sets.midcast.SongPlaceholder, { range="Daurdabla",})
+
     -- Other general spells and classes.
     sets.midcast.Cure = {
         main="Daybreak", --30
@@ -754,6 +761,22 @@ function init_gear_sets()
         waist="Platinum Moogle Belt",
     }
 
+    sets.idle.Refresh = {
+        range="Daurdabla",
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Warder's Charm +1",
+        ear1="Arete Del Luna +1",
+        ear2="Eabani Earring",
+        ring1=gear.Stikini_1,
+        ring2=gear.Stikini_2,
+        back=gear.BRD_DW_Cape,
+        waist="Platinum Moogle Belt",
+    }
+
     sets.idle.DT = {
         main=gear.Ipetam_Eva,
         sub="Genmei Shield",
@@ -787,7 +810,7 @@ function init_gear_sets()
         waist="Platinum Moogle Belt",
     }
 
-    sets.idle.Town = sets.engaged.DW.MaxHaste
+    sets.idle.Town = sets.idle
 
     sets.SongDWDuration = { main="Carnwenhan", sub=gear.Kali_Idle }
 

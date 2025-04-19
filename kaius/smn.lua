@@ -1020,7 +1020,6 @@ end
 
 
 function gearinfo(cmdParams, eventArgs)
-    -- send_command('input /item "Pluton Box" <me>')
     if cmdParams[1] == 'gearinfo' then
         if type(cmdParams[4]) == 'string' then
             if cmdParams[4] == 'true' then

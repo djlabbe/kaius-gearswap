@@ -367,6 +367,21 @@ function init_gear_sets()
         back=gear.BRD_WS2_Cape,
     }
 
+    sets.precast.WS['Shell Crusher'] = {
+        head=gear.Empyrean_Head,
+        neck="Moonlight Necklace",
+        ear1="Crepuscular Earring",
+        ear2="Fili Earring +1",
+        body=gear.Empyrean_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        ring1=gear.Stikini_1,
+        ring2="Metamorph Ring +1",
+        back=gear.BRD_Song_Cape,
+        waist="Acuity Belt +1",
+    }
+
 
     -- General set for recast times.
     sets.midcast.FastRecast = sets.precast.FC
@@ -384,9 +399,9 @@ function init_gear_sets()
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
     -- Gear to enhance certain classes of songs.
-    -- sets.midcast.Ballad = { legs=gear.Empyrean_Legs }
-    -- sets.midcast.Carol = { hands="Mousai Gages +1" }
-    -- sets.midcast.Etude = { head="Mousai Turban +1" }
+    sets.midcast.Ballad = { legs=gear.Empyrean_Legs }
+    sets.midcast.Carol = { hands="Mousai Gages +1" }
+    sets.midcast.Etude = { head="Mousai Turban +1" }
     sets.midcast.HonorMarch = { range="Marsyas", hands=gear.Empyrean_Hands }
     sets.midcast.Lullaby = {
         body=gear.Empyrean_Body,
@@ -394,12 +409,12 @@ function init_gear_sets()
     }
     sets.midcast.Lullaby = { body=gear.Empyrean_Body }
     sets.midcast.Madrigal = { head=gear.Empyrean_Head }
-    -- sets.midcast.Mambo = { feet="Mousai Crackows +1" }
+    sets.midcast.Mambo = { feet="Mousai Crackows +1" }
     sets.midcast.March = { hands=gear.Empyrean_Hands }
-    -- sets.midcast.Minne = { legs="Mousai Seraweels +1" }
+    sets.midcast.Minne = { legs="Mousai Seraweels +1" }
     sets.midcast.Minuet = { body=gear.Empyrean_Body }
     sets.midcast.Paeon = { head=gear.Artifact_Head }
-    -- sets.midcast.Threnody = { body="Mousai Manteel +1" }
+    sets.midcast.Threnody = { body="Mousai Manteel +1" }
     sets.midcast['Adventurer\'s Dirge'] = { range="Marsyas", hands=gear.Relic_Hands }
     sets.midcast['Adventurer\'s Dirge'] = { range="Marsyas" }
     sets.midcast['Foe Sirvente'] = { head=gear.Relic_Head }
@@ -424,8 +439,6 @@ function init_gear_sets()
         waist="Platinum Moogle Belt",
         back=gear.BRD_Song_Cape,
     }
-
-
 
     -- For song debuffs (duration primary, accuracy secondary)
     sets.midcast.SongEnfeeble = {
@@ -593,8 +606,14 @@ function init_gear_sets()
         waist="Shinjutsu-no-Obi +1"
     })
 
+    sets.defense.PDT = sets.idle.DT
+    sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = { feet=gear.Empyrean_Feet }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet=gear.Empyrean_Feet }
+    end
 
     sets.latent_refresh = { waist="Fucho-no-obi" }
 
@@ -749,6 +768,9 @@ function init_gear_sets()
     }
 
     sets.idle.DT = {
+        main=gear.Ipetam_Eva,
+        sub="Genmei Shield",
+        range=gear.Linos_EVA,
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
@@ -777,9 +799,6 @@ function init_gear_sets()
         back=gear.BRD_Song_Cape, --6/6
         waist="Platinum Moogle Belt",
     }
-
-    sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT
 
     sets.idle.Town = sets.idle
 

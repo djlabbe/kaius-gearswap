@@ -695,7 +695,7 @@ function init_gear_sets()
         legs=gear.Empyrean_Legs,
         feet=gear.Malignance_Feet,
         neck="Warder's Charm +1",
-        ear1="Arete Del Luna +1",
+        ear1="Sanare Earring",
         ear2="Eabani Earring",
         ring1="Defending Ring",
         ring2="Shadow Ring",
