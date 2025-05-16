@@ -50,7 +50,7 @@ function user_setup()
     gear.Relic_Legs = { name="Hesychast's Hose +3" }
     gear.Relic_Feet = { name="Hesychast's Gaiters +3" }
 
-    gear.Empyrean_Head = { name="Bhikku Crown +2" }
+    gear.Empyrean_Head = { name="Bhikku Crown +3" }
     gear.Empyrean_Body = { name="Bhikku Cyclas +3" }
     gear.Empyrean_Hands = { name="Bhikku Gloves +3" }
     gear.Empyrean_Legs = { name="Bhikku Hose +3" }

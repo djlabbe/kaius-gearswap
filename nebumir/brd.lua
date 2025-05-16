@@ -88,10 +88,10 @@ function user_setup()
     gear.Linos_WS = { name="Linos", augments={'Attack+16','Weapon skill damage +3%','STR+6 VIT+6',}} -- BAD STR, Could use more attack or attack/acc
     gear.Linos_MATK = { name="Linos", augments={'"Mag.Atk.Bns."+15',}}
 
-    gear.Artifact_Head = { name= "Brioso Roundlet +1" }
-    gear.Artifact_Body = { name= "Brioso Justaucorps +2" }
-    gear.Artifact_Hands = { name= "Brioso Cuffs +1" }
-    gear.Artifact_Legs = { name= "Brioso Cannions +1" }
+    gear.Artifact_Head = { name= "Brioso Roundlet +3" }
+    gear.Artifact_Body = { name= "Brioso Justaucorps +3" }
+    gear.Artifact_Hands = { name= "Brioso Cuffs +3" }
+    gear.Artifact_Legs = { name= "Brioso Cannions +3" }
     gear.Artifact_Feet = { name= "Brioso Slippers +3" }
 
     gear.Relic_Head = { name= "Bihu Roundlet +3" }
@@ -442,8 +442,8 @@ function init_gear_sets()
 
     -- For song debuffs (duration primary, accuracy secondary)
     sets.midcast.SongEnfeeble = {
-        main="Carnwenhan",
-        sub="Ammurapi Shield",
+        -- main="Carnwenhan",
+        -- sub="Ammurapi Shield",
         range="Gjallarhorn",
         head=gear.Artifact_Head,
         body=gear.Artifact_Body,
@@ -584,8 +584,8 @@ function init_gear_sets()
     sets.midcast.Shellra = sets.midcast.Shell
 
     sets.midcast['Enfeebling Magic'] = {
-        main="Carnwenhan",
-        sub="Ammurapi Shield",
+        -- main="Carnwenhan",
+        -- sub="Ammurapi Shield",
         head=empty;
         body="Cohort Cloak +1",
         hands=gear.Artifact_Hands,
@@ -605,17 +605,6 @@ function init_gear_sets()
         sub="Ammurapi Shield", 
         waist="Shinjutsu-no-Obi +1"
     })
-
-    sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT
-
-    if (item_available("Shneddick Ring +1")) then
-        sets.Kiting = { ring1="Shneddick Ring +1" }
-    else
-        sets.Kiting = { feet=gear.Empyrean_Feet }
-    end
-
-    sets.latent_refresh = { waist="Fucho-no-obi" }
 
     sets.engaged = {
         range=gear.Linos_STP,
@@ -799,6 +788,18 @@ function init_gear_sets()
         back=gear.BRD_Song_Cape, --6/6
         waist="Platinum Moogle Belt",
     }
+
+    sets.defense.PDT = sets.idle.DT
+    sets.defense.MDT = sets.idle.DT
+
+    if (item_available("Shneddick Ring")) then
+        sets.Kiting = { ring1="Shneddick Ring" }
+    else
+        sets.Kiting = { feet=gear.Empyrean_Feet }
+    end
+
+    sets.latent_refresh = { waist="Fucho-no-obi" }
+
 
     sets.idle.Town = sets.idle
 

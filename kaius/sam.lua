@@ -31,8 +31,8 @@ function job_setup()
 end
 
 function user_setup()
-    state.OffenseMode:options('Normal', 'Acc', 'Subtle')
-    state.WeaponskillMode:options('Normal', 'Acc')
+    state.OffenseMode:options('Normal', 'PDL', 'Subtle')
+    state.WeaponskillMode:options('Normal', 'PDL')
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal', 'DT')
     
@@ -40,10 +40,10 @@ function user_setup()
     state.WeaponLock = M(true, 'Weapon Lock')
 
     gear.Artifact_Head = { name= "Wakido Kabuto +3" }
-    -- gear.Artifact_Body = { name= "Wakido Domaru +3" }
+    gear.Artifact_Body = { name= "Wakido Domaru +3" }
     gear.Artifact_Hands = { name= "Wakido Kote +3" }
     gear.Artifact_Legs = { name= "Wakido Haidate +3" }
-    -- gear.Artifact_Feet = { name= "Wakido Sune-Ate +3" }
+    gear.Artifact_Feet = { name= "Wakido Sune-Ate +3" }
 
     gear.Relic_Head = { name= "Sakonji Kabuto +3" }
     gear.Relic_Body = { name= "Sakonji Domaru +3" }
@@ -150,22 +150,14 @@ function init_gear_sets()
         hands=gear.Tatenashi_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Ryuo_C_Feet,
-        neck="Sam. Nodowa +2",
+        neck="Samurai's Nodowa +2",
         waist="Sweordfaetels +1",
         ear1="Dedition Earring",
         ear2="Kasuga Earring +1",
-        ring1="Niqmaddu Ring",
-        ring2=gear.Chirich_2,
-        back=gear.SAM_TP_Cape,
+        ring1=gear.Chirich_1,
+        ring2="Niqmaddu Ring",
+        back=gear.SAM_STP_Cape,
     }
-
-    sets.engaged.Acc = set_combine(sets.engaged, {
-        ammo="Coiste Bodhar",
-        hands=gear.Artifact_Hands,
-        ear1="Schere Earring",
-        back=gear.SAM_TP_Cape,
-    })
-
 
     sets.engaged.Subtle = {
         ammo="Aurgelmir Orb +1",
@@ -177,22 +169,19 @@ function init_gear_sets()
         neck="Samurai's Nodowa +2",
         ear1="Dedition Earring", --3
         ear2="Telos Earring", --5
-        ring1="Niqmaddu Ring", --(5)
-        ring2="Chirich Ring +1", --10
+        ring1=gear.Chirich_1, --10
+        ring2="Niqmaddu Ring", --(5)
         waist="Sailfi Belt +1",
         back=gear.SAM_TP_Cape,
     } --25/20 (Need Auspice)
 
     sets.engaged.Hybrid = {
-        ammo="Coiste Bodhar",
-        ear1="Schere Earring",
-        hands=gear.Mpaca_Hands,
-        feet=gear.Mpaca_Feet,
-        waist="Sailfi Belt +1",
+        hands=gear.Nyame_Hands,
+        feet=gear.Nyame_Feet,
+        back="Null Shawl",
     }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
 
     sets.precast.WS = {
         ammo="Knobkierrie",
@@ -201,16 +190,16 @@ function init_gear_sets()
         hands=gear.Empyrean_Hands,
         legs= gear.Nyame_Legs,
         feet=gear.Nyame_Feet, 
-        neck="Sam. Nodowa +2",
+        neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
-        ear1="Thrud Earring",
-        ear2="Moonshade Earring",
+        ear1="Moonshade Earring",
+        ear2="Thrud Earring",
         ring1="Regal Ring",
         ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.SAM_WS_Cape,
     }
 
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
+    sets.precast.WS.PDL = set_combine(sets.precast.WS, {})
 
     sets.precast.WS.HighTP = set_combine(sets.precast.WS, {
         ear2="Lugra Earring +1",
@@ -220,6 +209,50 @@ function init_gear_sets()
         head=gear.Nyame_Head,
     })
 
+    
+    sets.precast.WS["Tachi: Kaiten"] = {
+        ammo="Knobkierrie",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Empyrean_Hands, 
+        legs= gear.Nyame_Legs, 
+        feet=gear.Nyame_Feet,
+        neck="Samurai's Nodowa +2",
+        waist="Sailfi Belt +1",
+        ear1="Schere Earring",
+        ear2="Thrud Earring",
+        ring1=gear.Cornelia_Or_Sroda,
+        ring2="Niqmaddu Ring", 
+        back=gear.SAM_WS_Cape,
+    }
+
+    sets.precast.WS["Tachi: Kaiten"].PLD = set_combine( sets.precast.WS["Tachi: Kaiten"], {
+        ring1=gear.Ephramad_Or_Sroda,
+        feet=gear.Empyrean_Feet,
+    })
+
+    sets.precast.WS["Tachi: Mumei"] = {
+        ammo="Knobkierrie",
+        head=gear.Mpaca_Head,
+        body=gear.Relic_Body,
+        hands=gear.Empyrean_Hands, 
+        legs= gear.Nyame_Legs, 
+        feet=gear.Nyame_Feet,
+        neck="Samurai's Nodowa +2",
+        waist="Sailfi Belt +1",
+        ear1="Moonshade Earring",
+        ear2="Thrud Earring",
+        ring1=gear.Cornelia_Or_Epaminondas, 
+        ring2=gear.Ephramad_Or_Regal,
+        back=gear.SAM_WS_Cape,
+    }
+
+    sets.precast.WS["Tachi: Mumei"].PLD = set_combine( sets.precast.WS["Tachi: Mumei"], {
+        body=gear.Nyame_Body,
+        feet=gear.Empyrean_Feet,
+    })
+
+
     sets.precast.WS["Tachi: Fudo"] = {
         ammo="Knobkierrie",
         head=gear.Mpaca_Head,
@@ -227,17 +260,17 @@ function init_gear_sets()
         hands=gear.Empyrean_Hands, 
         legs= gear.Nyame_Legs, 
         feet=gear.Nyame_Feet,
-        neck="Sam. Nodowa +2",
+        neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
-        ear1="Thrud Earring",
-        ear2="Moonshade Earring",
-        ring1=gear.Cornelia_Or_Regal,
-        ring2="Epaminondas's Ring", 
+        ear1="Moonshade Earring",
+        ear2="Thrud Earring",
+        ring1=gear.Cornelia_Or_Epaminondas,
+        ring2="Niqmaddu Ring", 
         back=gear.SAM_WS_Cape,
     }
 
     sets.precast.WS["Tachi: Fudo"].PDL = set_combine( sets.precast.WS["Tachi: Fudo"], {
-        ring2="Sroda Ring",
+        ring2=gear.Ephramad_Or_Sroda,
         feet=gear.Empyrean_Feet,
     })
 
@@ -253,20 +286,60 @@ function init_gear_sets()
         head=gear.Mpaca_Head,
         body=gear.Nyame_Body,
         hands=gear.Empyrean_Hands, 
-        legs= gear.Nyame_Legs, 
-        feet=gear.Nyame_Feet,
-        neck="Sam. Nodowa +2",
+        legs=gear.Mpaca_Legs, 
+        feet=gear.Empyrean_Feet,
+        neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
-        ear1="Thrud Earring",
-        ear2="Moonshade Earring",
+        ear1="Moonshade Earring",
+        ear2="Thrud Earring",
         ring1=gear.Cornelia_Or_Sroda,
         ring2="Epaminondas's Ring",
         back=gear.SAM_WS_Cape,
     }
 
-    sets.precast.WS["Tachi: Shoha"].PDL = set_combine( sets.precast.WS["Tachi: Shoha"], {
-        ammo="Crepuscular Pebble",
-        feet=gear.Empyrean_Feet,
+    sets.precast.WS["Tachi: Shoha"].PDL = set_combine( sets.precast.WS["Tachi: Shoha"], { 
+        -- No change
+    })
+
+    sets.precast.WS['Tachi: Jinpu'] = {
+        ammo="Knobkierrie",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Fotia Gorget",
+        ear1="Moonshade Earring",
+        ear2="Schere Earring",
+        ring1=gear.Cornelia_Or_Epaminondas,
+        ring2="Niqmaddu Ring",
+        back=gear.SAM_WS_Cape,
+        waist="Orpheus's Sash",
+    };
+
+    sets.precast.WS['Tachi: Jinpu'].PDL = set_combine( sets.precast.WS['Tachi: Jinpu'], {
+        neck="Samurai's Nodowa +2",
+    })
+
+    sets.precast.WS['Tachi: Koki'] = {
+        ammo="Knobkierrie",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Fotia Gorget",
+        ear1="Moonshade Earring",
+        ear2="Schere Earring",
+        -- ring="Weatherspoon Ring +1",
+        ring1=gear.Cornelia_Or_Epaminondas,
+        ring2="Niqmaddu Ring",
+        back=gear.SAM_WS_Cape,
+        waist="Fotia Belt",
+    };
+
+    sets.precast.WS['Tachi: Koki'].PDL = set_combine( sets.precast.WS['Tachi: Koki'], {
+       -- No change
     })
 
     sets.precast.WS["Tachi: Rana"] = {
@@ -276,30 +349,22 @@ function init_gear_sets()
         hands=gear.Empyrean_Hands, 
         legs= gear.Nyame_Legs, 
         feet=gear.Mpaca_Feet,
-        neck="Sam. Nodowa +2",
+        neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Lugra Earring +1",
         ear2="Schere Earring",
-        ring1="Niqmaddu Ring",
-        ring2="Regal Ring", 
+        ring1="Regal Ring", 
+        ring2="Niqmaddu Ring",
         back=gear.SAM_WS_Cape,
     } 
 
-    sets.precast.WS['Tachi: Jinpu'] = {
-        ammo="Knobkierrie",
-        head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-        neck="Sam. Nodowa +2",
-        ear1="Schere Earring",
-        ear2="Moonshade Earring",
-        ring1=gear.Cornelia_Or_Regal,
-        ring2="Epaminondas's Ring",
-        back=gear.SAM_WS_Cape,
-        waist="Orpheus's Sash",
-    };
+    sets.precast.WS["Tachi: Rana"].PDL = set_combine( sets.precast.WS["Tachi: Rana"], {
+        ammo="Crepuscular Pebble",
+        head="Flamma Zucchetto +2",
+        legs=gear.Mpaca_Legs,
+        ring1=gear.Ephramad_Or_Sroda,
+        feet=gear.Empyrean_Feet,
+    })
 
     sets.precast.WS['Tachi: Kagero'] = {
         ammo="Knobkierrie",
@@ -309,8 +374,8 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
         neck="Sibyl Scarf",
-        ear1="Friomisi Earring",
-        ear2="Moonshade Earring",
+        ear1="Moonshade Earring",
+        ear2="Friomisi Earring",
         ring1=gear.Cornelia_Or_Regal,
         ring2="Epaminondas's Ring",
         back=gear.SAM_WS_Cape,
@@ -324,13 +389,13 @@ function init_gear_sets()
         hands=gear.Empyrean_Legs,
         legs=gear.Empyrean_Legs,
         feet=gear.Empyrean_Feet,
-        neck="Sanctity Necklace",
+        neck="Null Loop",
         ear1="Crepuscular Earring",
         ear2="Kasuga Earring +1",
         ring1=gear.Stikini_1,
         ring2="Metamorph Ring +1",
         back=gear.SAM_WS_Cape,
-        waist="Eschan Stone",
+        waist="Null Belt",
     }
 
     sets.precast.WS['Impulse Drive'] = {
@@ -340,16 +405,14 @@ function init_gear_sets()
         hands=gear.Empyrean_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck="Sam. Nodowa +2",
-        ear1="Thrud Earring",
-        ear2="Moonshade Earring",
-        ring1="Niqmaddu Ring",
-        ring2="Begrudging Ring",
+        neck="Samurai's Nodowa +2",
+        ear1="Moonshade Earring",
+        ear2="Thrud Earring",
+        ring1="Begrudging Ring",
+        ring2="Niqmaddu Ring",
         back=gear.SAM_WS_Cape,
         waist="Sailfi Belt +1",
     }
-
-    sets.precast.WS['Impulse Drive'].PDL = sets.precast.WS['Impulse Drive']
 
     sets.precast.WS['Impulse Drive'].HighTP = set_combine(sets.precast.WS['Impulse Drive'], {
         head="Blistering Sallet +1",
@@ -357,7 +420,17 @@ function init_gear_sets()
         ring1="Regal Ring",
     })
 
-    sets.precast.WS['Sonic Thrust'] = sets.precast.WS['Impulse Drive']
+    sets.precast.WS["Impulse Drive"].PDL = set_combine( sets.precast.WS["Impulse Drive"], {
+        legs=gear.Mpaca_Legs,
+        feet=gear.Empyrean_Feet,
+        ring1=gear.Ephramad_Or_Sroda,
+    })
+
+    sets.precast.WS['Impulse Drive'].PDL.HighTP = set_combine(sets.precast.WS['Impulse Drive'].PDL, {
+        head="Blistering Sallet +1",
+        ear1="Ishvara Earring",
+    })
+
 
     sets.precast.WS['Stardiver'] = {
         ammo="Coiste Bodhar", --6
@@ -369,11 +442,14 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Schere Earring",
         ear2="Moonshade Earring",
-        ring1="Niqmaddu Ring",
-        ring2="Regal Ring",
+        ring1="Regal Ring",
+        ring2="Niqmaddu Ring",
         back=gear.SAM_WS_Cape,
         waist="Fotia Belt",
     }
+
+    sets.precast.WS['Sonic Thrust'] = sets.precast.WS['Tachi: Fudo']
+    sets.precast.WS['Sonic Thrust'].PDL = sets.precast.WS['Tachi: Fudo'].PDL
 
      sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS, {
         ammo="Knobkierrie",
@@ -385,45 +461,12 @@ function init_gear_sets()
         neck="Sibyl Scarf",
         ear1="Friomisi Earring",
         ear2="Moonshade Earring",
-        ring1="Metamor. Ring +1",
+        ring1="Metamorph Ring +1",
         ring2="Epaminondas's Ring",
         back=gear.SAM_WS_Cape,
         waist="Orpheus's Sash",
     })
 
-    sets.idle = {
-        ammo="Staunch Tathlum +1",
-        head=gear.Artifact_Head,
-        body="Sacro Breastplate",
-        hands=gear.Mpaca_Hands,
-        legs=gear.Mpaca_Legs,
-        feet=gear.Mpaca_Feet,
-        neck="Warder's Charm +1",
-        waist="Platinum Moogle Belt",
-        ear1="Arete Del Luna +1",
-        ear2="Eabani Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.SAM_TP_Cape,
-    }
-
-    sets.idle.DT = set_combine(sets.idle, {
-        head=gear.Mpaca_Head, --7/0
-        body=gear.Mpaca_Body, --10/0
-        hands=gear.Mpaca_Hands, --8/0
-        legs=gear.Mpaca_Legs, --9/0
-        feet=gear.Mpaca_Feet, --6/0
-        ring2="Defending Ring", --10/10
-    })
-
-    sets.idle.Town = sets.engaged.DT
-
-   
-    if (item_available("Shneddick Ring +1")) then
-        sets.Kiting = { ring1="Shneddick Ring +1" }
-    else
-        sets.Kiting = { feet="Danzo Sune-Ate" }
-    end
 
     sets.defense.PDT = {
         ammo="Staunch Tathlum +1",
@@ -468,6 +511,40 @@ function init_gear_sets()
         ring2="Purity Ring",
         waist="Gishdubar Sash",
     }
+
+    sets.idle = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Artifact_Head,
+        body="Sacro Breastplate",
+        hands=gear.Mpaca_Hands,
+        legs=gear.Mpaca_Legs,
+        feet=gear.Mpaca_Feet,
+        neck="Warder's Charm +1",
+        waist="Platinum Moogle Belt",
+        ear1="Sanare Earring",
+        ear2="Eabani Earring",
+        ring1=gear.Chirich_1,
+        ring2=gear.Chirich_2,
+        back=gear.SAM_TP_Cape,
+    }
+
+    sets.idle.DT = set_combine(sets.idle, {
+        head=gear.Mpaca_Head, --7/0
+        body=gear.Mpaca_Body, --10/0
+        hands=gear.Mpaca_Hands, --8/0
+        legs=gear.Mpaca_Legs, --9/0
+        feet=gear.Mpaca_Feet, --6/0
+        ring2="Defending Ring", --10/10
+    })
+
+    sets.idle.Town = sets.engaged.DT
+
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Danzo Sune-Ate" }
+    end
+
 end
 
 function job_precast(spell, action, spellMap, eventArgs)
@@ -556,8 +633,8 @@ end
 
 function get_custom_wsmode(spell, action, spellMap)
     local wsmode
-    if state.OffenseMode.value == 'Acc' then
-        wsmode = 'Acc'
+    if state.OffenseMode.value == 'PDL' then
+        wsmode = 'PDL'
     end
 
     return wsmode

@@ -198,9 +198,9 @@ function user_setup()
 
     gear.Empyrean_Head = { name="Beckoner's Horn +3" }
     gear.Empyrean_Body = { name="Beckoner's Doublet +2" }
-    gear.Empyrean_Hands = { name="Beckoner's Bracers +2" }
-    gear.Empyrean_Legs = { name="Beckoner's Spats +2" }
-    gear.Empyrean_Feet = { name="Beckoner's Pigaches +2"}
+    gear.Empyrean_Hands = { name="Beckoner's Bracers +3" }
+    gear.Empyrean_Legs = { name="Beckoner's Spats +3" }
+    gear.Empyrean_Feet = { name="Beckoner's Pigaches +3"}
 
     gear.SMN_Magic_Cape = { name="Campestres's Cape", augments={
         'Pet: M.Acc.+20 Pet: M.Dmg.+20',

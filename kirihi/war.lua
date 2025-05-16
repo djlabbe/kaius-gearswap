@@ -578,8 +578,8 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
-    if (item_available("Shneddick Ring +1")) then
-        sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring")) then
+        sets.Kiting = { ring1="Shneddick Ring" }
     else
         sets.Kiting = { feet="Hermes' Sandals" }
     end

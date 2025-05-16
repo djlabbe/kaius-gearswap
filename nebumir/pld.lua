@@ -352,7 +352,12 @@ function init_gear_sets()
     } --3594 w/ Schneddick Ring
 
     sets.idle.Town = set_combine(sets.idle, {})
-    sets.Kiting = { ring1="Shneddick Ring" }
+
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { legs=gear.Carmine_D_Legs }
+    end
     
     -- If EquipShield toggle is on (Win+F10 or Win+F11), equip the weapon/shield combos here when activating or changing defense mode:
     sets.PhysicalShield = {sub="Srivatsa"}

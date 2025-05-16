@@ -37,7 +37,7 @@ function user_setup()
     gear.Artifact_Head = { name= "Geomancy Galero +2" }
     gear.Artifact_Body = { name= "Geomancy Tunic +3" }
     gear.Artifact_Hands = { name= "Geomancy Mitaines +3" }
-    gear.Artifact_Legs = { name= "Geomancy Pants +2" }
+    gear.Artifact_Legs = { name= "Geomancy Pants +3" }
     gear.Artifact_Feet = { name= "Geomancy Sandals +3" }
 
     gear.Relic_Head = { name= "Bagua Galero +3" }

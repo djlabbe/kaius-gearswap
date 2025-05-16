@@ -580,8 +580,7 @@ function init_gear_sets()
     sets.idle = {
         main="Mpaca's Staff",
         sub="Irenic Strap +1",
-       -- ammo="Homiliary",
-        ammo="Staunch Tathlum +1",
+        ammo="Staunch Tathlum +1", --3
         head=gear.Bunzi_Head, --7
         body=gear.Empyrean_Body,
         hands=gear.Bunzi_Hands, --8
@@ -592,12 +591,15 @@ function init_gear_sets()
         ear2="Ebers Earring +2", --5
         ring1=gear.Gerubu_Or_Stikini1,
         ring2=gear.Stikini_2,
-        back=gear.WHM_Cure_Cape, --10 
+        back="Null Shawl", --10 
         waist=gear.Platinum_Moogle_Belt, --3
-    } --57 (11 Refresh)
+    } --50 (11 Refresh)
 
 
-    sets.idle.Town = sets.idle
+    sets.idle.Town = set_combine(sets.idle, {
+        main="Yagrush",
+        sub="Genmei Shield",
+    })
 
     sets.defense.PDT = set_combine(sets.idle, {
 

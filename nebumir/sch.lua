@@ -726,7 +726,8 @@ function init_gear_sets()
         body=gear.Empyrean_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Empyrean_Legs,
-        feet=gear.Nyame_Feet,
+        -- feet=gear.Nyame_Feet,
+        feet="Merlinic Crackows",
         neck="Sibyl Scarf",
         ear1="Etiolation Earring",
         ear2="Lugalbanda Earring",
@@ -751,7 +752,12 @@ function init_gear_sets()
         waist="Shinjutsu-no-Obi +1",
     })
 
-    sets.Kiting = { ring1="Shneddick Ring" }
+    if (item_available("Shneddick Ring")) then
+        sets.Kiting = { ring1="Shneddick Ring" }
+    else
+        sets.Kiting = { feet="Herald's Gaiters" }
+    end
+
     sets.latent_refresh = { waist="Fucho-no-obi" }
 
     sets.engaged = sets.idle -- For normal idle refresh when engaging with trusts

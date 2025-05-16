@@ -54,7 +54,7 @@ function user_setup()
     gear.Relic_Feet = { name= "Fallen's Sollerets +3" }
 
     gear.Empyrean_Head = { name= "Heathen's Burgeonet +3" }
-    gear.Empyrean_Body = { name= "Heathen's Cuirass +2" }
+    gear.Empyrean_Body = { name= "Heathen's Cuirass +3" }
     gear.Empyrean_Hands = { name= "Heathen's Gauntlets +2" }
     gear.Empyrean_Legs = { name= "Heathen's Flanchard +2" }
     gear.Empyrean_Feet = { name= "Heathen's Sollerets +3" }

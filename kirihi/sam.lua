@@ -154,7 +154,7 @@ function init_gear_sets()
         waist="Sweordfaetels +1",
         ear1="Dedition Earring",
         ear2="Kasuga Earring +1",
-        ring1="Niqmaddu Ring",
+        ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         back=gear.SAM_TP_Cape,
     }
@@ -419,8 +419,8 @@ function init_gear_sets()
     sets.idle.Town = sets.engaged.DT
 
    
-    if (item_available("Shneddick Ring +1")) then
-        sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring")) then
+        sets.Kiting = { ring1="Shneddick Ring" }
     else
         sets.Kiting = { feet="Danzo Sune-Ate" }
     end

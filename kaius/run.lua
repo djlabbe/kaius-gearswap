@@ -59,7 +59,7 @@ function user_setup()
     gear.Artifact_Head = { name="Runeist Bandeau +3", priority=109 }
     gear.Artifact_Body = { name="Runeist Coat +3", priority=218 }
     gear.Artifact_Hands = { name="Runeist Mitons +3", priority=85 }
-    gear.Artifact_Legs = { name="Runeist Trousers +2", priority=80 }
+    gear.Artifact_Legs = { name="Runeist Trousers +3", priority=80 }
     gear.Artifact_Feet = { name="Runeist Bottes +2", priority=74 }
 
     gear.Relic_Head = { name="Futhark Bandeau +3", priority=56 }
@@ -375,7 +375,7 @@ function init_gear_sets()
         head=gear.Relic_Head, --7
         body=gear.Herc_PHLX_Body, --4
         hands=gear.Herc_PHLX_Hands, --4
-        legs=ggear.Herc_PHLX_Legs, --6
+        legs=gear.Herc_PHLX_Legs, --6
         feet=gear.Herc_PHLX_Feet, --5
     }
 

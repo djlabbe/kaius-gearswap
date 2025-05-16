@@ -478,8 +478,8 @@ function init_gear_sets()
         neck="Loricate Torque +1",
         ear1="Dedition Earring",
         ear2="Odnowa Earring +1",
-        ring1="Roller's Ring",
-        ring2="Defending Ring",
+        ring1="Defending Ring",
+        ring2="Roller's Ring",
         back=gear.DNC_STP_Cape,
         waist="Sweordfaetels +1",
     }
@@ -493,8 +493,8 @@ function init_gear_sets()
         feet=gear.Gleti_Feet,
         neck="Warder's Charm +1",
         ear2="Etiolation Earring",
-        ring1="Purity Ring", --0/4
-        ring2="Defending Ring", --10/10
+        ring1="Defending Ring", --10/10
+        ring2="Purity Ring", --0/4
         back=gear.DNC_TP_Cape,
     })
 

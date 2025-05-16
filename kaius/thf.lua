@@ -82,23 +82,33 @@ function user_setup()
     
     if player.sub_job == 'WAR' then
         send_command('bind !t input /ja "Provoke" <t>')
+        send_command('bind ^numpad7 gs c set WeaponSet Mpu_Gleti;/input macro set 1;')
+        send_command('bind ^numpad8 gs c set WeaponSet Mpu_Crep;/input macro set 1;')
+        send_command('bind ^numpad9 gs c set WeaponSet Mpu_TP;/input macro set 1;')
+        send_command('bind ^numpad4 gs c set WeaponSet Twashtar_Gleti;/input macro set 2;')
+        send_command('bind ^numpad5 gs c set WeaponSet Twashtar_Crep;/input macro set 2;')
+        send_command('bind ^numpad6 gs c set WeaponSet Twashtar_TP;/input macro set 2;')
+        send_command('bind ^numpad1 gs c set WeaponSet Tauret_Gleti;/input macro set 2;')
+        send_command('bind ^numpad2 gs c set WeaponSet Gandring;/input macro set 2;')
+        send_command('bind ^numpad3 gs c set WeaponSet Savage;/input macro set 3;')
         set_macro_page(1, 6)
     elseif player.sub_job == 'DNC' then
         send_command('bind !t input /ja "Animated Flourish" <t>')
-        set_macro_page(2, 6)
+        send_command('bind ^numpad7 gs c set WeaponSet Mpu_Gleti;/input macro set 4;')
+        send_command('bind ^numpad8 gs c set WeaponSet Mpu_Crep;/input macro set 4;')
+        send_command('bind ^numpad9 gs c set WeaponSet Mpu_TP;/input macro set 4;')
+        send_command('bind ^numpad4 gs c set WeaponSet Twashtar_Gleti;/input macro set 5;')
+        send_command('bind ^numpad5 gs c set WeaponSet Twashtar_Crep;/input macro set 5;')
+        send_command('bind ^numpad6 gs c set WeaponSet Twashtar_TP;/input macro set 5;')
+        send_command('bind ^numpad1 gs c set WeaponSet Tauret_Gleti;/input macro set 5;')
+        send_command('bind ^numpad2 gs c set WeaponSet Gandring;/input macro set 5;')
+        send_command('bind ^numpad3 gs c set WeaponSet Savage;/input macro set 6;')
+        set_macro_page(4, 6)
     else
         set_macro_page(1, 6)
     end
 
-    send_command('bind ^numpad7 gs c set WeaponSet Mpu_Gleti;')
-    send_command('bind ^numpad8 gs c set WeaponSet Mpu_Crep;')
-    send_command('bind ^numpad9 gs c set WeaponSet Mpu_TP;')
-    send_command('bind ^numpad4 gs c set WeaponSet Twashtar_Gleti;')
-    send_command('bind ^numpad5 gs c set WeaponSet Twashtar_Crep;')
-    send_command('bind ^numpad6 gs c set WeaponSet Twashtar_TP;')
-    send_command('bind ^numpad1 gs c set WeaponSet Tauret_Gleti;')
-    send_command('bind ^numpad2 gs c set WeaponSet Gandring;')
-    send_command('bind ^numpad3 gs c set WeaponSet Savage;')
+   
 
     send_command('wait 3; input /lockstyleset 6')
     
@@ -263,6 +273,49 @@ function init_gear_sets()
     })
 
     sets.precast.WS["Rudra's Storm"].PDLSATA = set_combine(sets.precast.WS["Rudra's Storm"].PDL, sets.precast.WS["Rudra's Storm"].SATA)
+
+    -- 
+
+    sets.precast.WS['Ruthless Stroke'] = {
+        ammo="Coiste Bodhar",
+        head=gear.Nyame_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Asn. Gorget +2",
+        ear1="Sherida Earring",
+        ear2="Moonshade Earring",
+        ring1=gear.Cornelia_Or_Ilabrat,
+        ring2=gear.Ephramad_Or_Regal,
+        waist="Kentarch Belt +1",
+        back=gear.THF_WSD_Cape,
+    }
+
+    sets.precast.WS["Ruthless Stroke"].PDL = set_combine(sets.precast.WS["Ruthless Stroke"], {
+        ammo="Crepuscular Pebble",
+        ear1="Odr Earring",
+        hands=gear.Gleti_Hands,
+        legs=gear.Gleti_Legs,
+     })
+
+     sets.precast.WS["Ruthless Stroke"].SA = set_combine(sets.precast.WS["Ruthless Stroke"],{
+        ammo="Yetshila +1",
+    })
+
+    sets.precast.WS["Ruthless Stroke"].PDLSA = set_combine(sets.precast.WS["Ruthless Stroke"].PDL, sets.precast.WS["Ruthless Stroke"].SA)
+
+    sets.precast.WS["Ruthless Stroke"].TA = set_combine(sets.precast.WS["Ruthless Stroke"],{
+        ammo="Yetshila +1",
+    })
+
+    sets.precast.WS["Ruthless Stroke"].PDLTA = set_combine(sets.precast.WS["Ruthless Stroke"].PDL, sets.precast.WS["Ruthless Stroke"].TA)
+
+    sets.precast.WS["Ruthless Stroke"].SATA = set_combine(sets.precast.WS["Ruthless Stroke"],{
+        ammo="Yetshila +1",
+    })
+
+    sets.precast.WS["Ruthless Stroke"].PDLSATA = set_combine(sets.precast.WS["Ruthless Stroke"].PDL, sets.precast.WS["Ruthless Stroke"].SATA)
 
     sets.precast.WS['Evisceration'] = {
         ammo="Yetshila +1",
@@ -511,19 +564,23 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT =sets.idle.DT
 
-    sets.Kiting = { feet=gear.Artifact_Feet }
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting =  { feet=gear.Artifact_Feet }
+    end
 
-    -- sets.idle.Town = sets.engaged.DW.MaxHaste
+    sets.idle.Town = sets.engaged.DW.MaxHaste
 
-    sets.idle.Town = set_combine(sets.engaged.DW.MaxHaste, {
-        sub="Sm. Escutcheon",
-        body="Blacksmith's Apron",
-        hands="Smithy's Mitts",
-        neck="Smithy's Torque",
-        ring1="Craftmaster's Ring",
-        ring2="Confectioner's Ring",
-        waist="Blacksmith's Belt"
-    })
+    -- sets.idle.Town = set_combine(sets.engaged.DW.MaxHaste, {
+    --     sub="Sm. Escutcheon",
+    --     body="Blacksmith's Apron",
+    --     hands="Smithy's Mitts",
+    --     neck="Smithy's Torque",
+    --     ring1="Craftmaster's Ring",
+    --     ring2="Confectioner's Ring",
+    --     waist="Blacksmith's Belt"
+    -- })
 
 end
 

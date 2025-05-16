@@ -34,7 +34,7 @@ function job_setup()
 
     state.AutoAmmoMode = M(true,'Auto Ammo Mode')
     tickdelay = os.clock() + 5
-    ammostock = 98
+    ammostock = 300
     useItem = false
 	useItemName = ''
     prevItemName = ''
@@ -125,7 +125,7 @@ function user_setup()
     gear.Artifact_Body = { name="Orion Jerkin +2" }
     gear.Artifact_Legs = { name="Orion Braccae +2" }
     gear.Artifact_Hands = { name="Orion Bracers +3" }
-    gear.Artifact_Feet = { name="Orion Socks +2" }
+    gear.Artifact_Feet = { name="Orion Socks +3" }
 
     gear.Relic_Head = { name="Arcadian Beret +3" }
     gear.Relic_Body = { name="Arcadian Jerkin +3" }
@@ -355,10 +355,16 @@ function init_gear_sets()
 
 
     sets.TrueShot_RA = {
+        head=gear.Ikenga_Head,
         body="Nisroch Jerkin",
+        hands=gear.Ikenga_Hands,
         legs=gear.Empyrean_Legs,
-        waist="Tellen Belt",
         feet=gear.Ikenga_Feet,
+        waist="Tellen Belt",
+        ear1="Odr Earring",
+        ear2="Amini Earring +1",
+        ring1=gear.Lehko_Or_Begrudging,
+        ring2="Regal Ring",
     }
 
     sets.TrueShot_WS = {
@@ -373,9 +379,9 @@ function init_gear_sets()
         feet=gear.Malignance_Feet,
         neck="Iskur Gorget",
         ear1="Sherida Earring",
-        ear2="Dedition Earring",
-        ring1="Hetairoi Ring",
-        ring2="Epona's Ring",
+        ear2="Telos Earring",
+        ring1=gear.Chirich_1,
+        ring2=gear.Chirich_2,
         back=gear.RNG_TP_Cape,
         waist="Sailfi Belt +1",
     }
@@ -641,6 +647,21 @@ function init_gear_sets()
         waist="Skrymir Cord +1",
     }
 
+    sets.precast.WS["Namas Arrow"] = {
+        head=gear.Artifact_Head,
+        body=gear.Ikenga_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Scout's Gorget +2",
+        ear1="Telos Earring",
+        ear2="Ishvara Earring",
+        ring1="Sroda Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
+        back=gear.RNG_LS_Cape,
+        waist="Fotia Belt",
+    }
+
     sets.precast.WS['Savage Blade'] = {
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
@@ -754,7 +775,8 @@ function init_gear_sets()
     sets.Fomalhaut = {main="Perun +1", sub="Ternion Dagger +1", ranged="Fomalhaut", ammo="Chrono Bullet"}
     sets.Fomalhaut_HS = {main=gear.Malevolence_B, sub=gear.Malevolence_A, ranged="Fomalhaut", ammo="Chrono Bullet"}
     sets.Armageddon = {main="Perun +1", sub="Gleti's Knife", ranged="Armageddon", ammo="Chrono Bullet"}
-    sets.Gastraphetes = {main=gear.Malevolence_B, sub=gear.Malevolence_A, ranged="Gastraphetes", ammo="Quelling Bolt"}
+    -- sets.Gastraphetes = {main=gear.Malevolence_B, sub=gear.Malevolence_A, ranged="Gastraphetes", ammo="Quelling Bolt"}
+    sets.Gastraphetes = {main="Crepuscular Knife", sub=gear.Malevolence_A, ranged="Gastraphetes", ammo="Quelling Bolt"}
     
     sets.Gandiva = {main="Perun +1", sub="Gleti's Knife", ranged="Gandiva", ammo="Chrono Arrow"}
 

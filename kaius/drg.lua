@@ -307,14 +307,15 @@ function init_gear_sets()
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck="Dgn. Collar +2",
+        -- neck="Dgn. Collar +2",
+        neck="Warder's Charm +1",
         waist="Fotia Belt",
         ear1="Thrud Earring",   
         ear2="Moonshade Earring",
         ring1="Niqmaddu ring",
         ring2=gear.Cornelia_Or_Regal,
         back=gear.DRG_WS1_Cape,
-    }
+    } --22 SC Bonus from Nyame
 
     sets.precast.WS["Camlann\'s Torment"].Acc = set_combine(sets.precast.WS["Camlann\'s Torment"], {})
 
@@ -389,11 +390,12 @@ function init_gear_sets()
         hands=gear.Gleti_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Gleti_Feet,
-        neck="Dgn. Collar +2",
+        -- neck="Dgn. Collar +2",
+        neck="Warder's Charm +1",
         ear1="Moonshade Earring",
         ear2="Peltast's Earring +1",
         ring1="Niqmaddu Ring",
-        ring2="Begrudging Ring",
+        ring2=gear.Ephramad_Or_Sroda,
         back=gear.DRG_WS1_Cape,
         waist="Sailfi Belt +1",
     }
@@ -529,10 +531,10 @@ function init_gear_sets()
 
     sets.engaged = {
         ammo="Coiste Bodhar",
-        head="Flamma Zucchetto +2",
-        body=gear.Empyrean_Body,
-        hands=gear.Gleti_Hands,
-        legs=gear.Relic_Legs,
+        head="Hjarrandi Helm",
+        body=gear.Gleti_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Gleti_Legs,
         feet="Flamma Gambieras +2",
         -- neck="Vim Torque +1",
         neck="Dragoon's Collar +2",

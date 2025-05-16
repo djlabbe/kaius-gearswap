@@ -351,8 +351,8 @@ function init_gear_sets()
     sets.midcast.Shellra = sets.midcast.Protect
 
     sets.midcast.MndEnfeebles = {
-        main="Idris",
-        sub="Ammurapi Shield",
+        -- main="Idris",
+        -- sub="Ammurapi Shield",
         head=gear.Artifact_Head,
         body=gear.Artifact_Body,
         hands=gear.Artifact_Hands,
@@ -506,8 +506,8 @@ function init_gear_sets()
         ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
-        waist="Windbuffet Belt +1",
-        back="Aurist's Cape +1"
+        waist="Cornelia's Belt",
+        back="Null Shawl"
     }
 
     sets.buff.Doom = {

@@ -158,7 +158,7 @@ function user_setup()
     enmity_plus_moves = S{'Provoke','Berserk','Warcry','Aggressor','Holy Circle','Sentinel','Last Resort',
         'Souleater','Vallation','Swordplay'}
 
-    gear.Artifact_Head = { name= "Totemic Helm +2" }
+    gear.Artifact_Head = { name= "Totemic Helm +3" }
     gear.Artifact_Body = { name= "Totemic Jackcoat +2" }
     gear.Artifact_Hands = { name= "Totemic Gloves +3" }
     gear.Artifact_Legs = { name= "Totemic Trousers +2" }

@@ -166,9 +166,6 @@ function define_global_sets()
     gear.Telchine_REGEN_Feet = { name="Telchine Pigaches", augments={'Mag. Evasion+25','Song spellcasting time -6%','"Regen" potency+3',}}
     gear.Telchine_CURE_Hands = { name="Telchine Gloves", augments={'Mag. Evasion+19','"Cure" potency +8%','MND+9',}}
 
-    gear.Yorium_PHLX_Head = {name="Yorium Barbuta", augments={'Phalanx +3',}}
-    gear.Yorium_PHLX_Body = {name="Yorium Cuirass", augments={'Phalanx +3',}}
-
     --------------------------
     -- ESCHA AUGMENTED GEAR --
     --------------------------
@@ -188,6 +185,7 @@ function define_global_sets()
     gear.Herc_PHLX_Legs = { name="Herculean Trousers", augments={'"Dual Wield"+4','AGI+1','Phalanx +5',}}
     gear.Herc_PHLX_Feet = { name="Herculean Boots", augments={'"Mag.Atk.Bns."+3','DEX+15','Phalanx +5',}}
 
+    gear.Valo_PHLX_Head = { name="Valorous Mask", augments={'Accuracy+18','MND+5','Phalanx +5','Accuracy+19 Attack+19',}}
     gear.Valo_PHLX_Body = { name="Valorous Mail", augments={'VIT+5','Potency of "Cure" effect received+2%','Phalanx +5','Accuracy+8 Attack+8','Mag. Acc.+14 "Mag.Atk.Bns."+14',}}
     gear.Valo_PET_Body = {name="Valorous Mail", augments={'Pet: Mag. Acc.+24','Pet: "Dbl.Atk."+4 Pet: Crit.hit rate +4','Pet: MND+8','Pet: Accuracy+12 Pet: Rng. Acc.+12',}}
     gear.Valo_QA_Body = { name="Valorous Mail", augments={'Crit.hit rate+5','STR+8','Quadruple Attack +2','Accuracy+19 Attack+19',}}
