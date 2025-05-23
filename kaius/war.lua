@@ -517,9 +517,7 @@ function init_gear_sets()
     }
 
     sets.precast.WS["Judgment"].Acc = set_combine(sets.precast.WS["Judgment"], {})
-    sets.precast.WS['Judgment'].PDL = set_combine(sets.precast.WS['Savage Blade'], {
-        body=gear.Sakpata_Body,
-    })
+    sets.precast.WS['Judgment'].PDL = sets.precast.WS['Savage Blade'].PDL
 
     sets.precast.WS['Cataclysm'] = { --MAB26
         ammo="Knobkierrie", --WSD6

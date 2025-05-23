@@ -30,7 +30,7 @@ function job_setup()
     state.Buff.Innin = buffactive.Innin or false
     state.Buff.Futae = buffactive.Futae or false
     state.Buff.Sange = buffactive.Sange or false
-    include('Mote-TreasureHunter')
+    -- include('Mote-TreasureHunter')
     info.default_ja_ids = S{35, 204}
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
     lugra_ws = S{'Blade: Kamu', 'Blade: Shun', 'Blade: Ten'}
@@ -62,7 +62,7 @@ function user_setup()
     gear.Relic_Feet = { name="Mochizuki Kyahan +3" }
 
     -- gear.Empyrean_Body = { name = "Hattori Ningi +1" }
-    gear.Empyrean_Hands = { name="Hattori Tekko +2" }
+    gear.Empyrean_Hands = { name="Hattori Tekko +3" }
     gear.Empyrean_Feet = { name="Hattori Kyahan +3" }
 
     gear.NIN_TP_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}}
@@ -77,7 +77,7 @@ function user_setup()
     send_command('bind ^` input /ja "Yonin" <me>')
     send_command('bind !t input /ja "Provoke" <t>')
 
-    send_command('bind ^= gs c cycle treasuremode')
+    -- send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @q gs c toggle MagicBurst')
 
@@ -593,7 +593,8 @@ function init_gear_sets()
     sets.idle = {
         ammo="Date Shuriken",
         head=gear.Mpaca_Head,
-        body="Hizamaru Haramaki +2",
+        -- body="Hizamaru Haramaki +2",
+        body=gear.Mpaca_Body,
         hands=gear.Mpaca_Hands,
         legs=gear.Mpaca_Legs,
         feet=gear.Mpaca_Feet,
@@ -622,18 +623,23 @@ function init_gear_sets()
     
     -- sets.idle.Town = sets.precast.WS["Blade: Chi"]
 
-    sets.TreasureHunter = {
-        ammo="Perfect Lucky Egg",
-        head="Volte Cap",
-        hands="Volte Bracers",
-        waist="Chaac Belt",
-    }
+    -- sets.TreasureHunter = {
+    --     ammo="Perfect Lucky Egg",
+    --     head="Volte Cap",
+    --     hands="Volte Bracers",
+    --     waist="Chaac Belt",
+    -- }
 
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.DayMovement = { feet="Danzo Sune-Ate" }
-    sets.NightMovement = { feet="Hachiya Kyahan +3" }
+    if (item_available("Shneddick Ring +1")) then
+        sets.DayMovement = { ring1="Shneddick Ring +1" }
+        sets.NightMovement = { ring1="Shneddick Ring +1" }
+    else
+        sets.DayMovement = { feet="Hermes' Sandals" }
+        sets.NightMovement = { feet="Hachiya Kyahan +3" }
+    end
 
     sets.Kikoku = {main="Kikoku", sub="Gleti's Knife"}
     sets.Heishi = {main="Heishi Shorinken", sub="Gleti's Knife"}
@@ -756,7 +762,7 @@ end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
-    th_update(cmdParams, eventArgs)
+    -- th_update(cmdParams, eventArgs)
 end
 
 function update_combat_form()
@@ -792,9 +798,9 @@ function customize_melee_set(meleeSet)
     if state.Buff.Sange then
         meleeSet = set_combine(meleeSet, sets.buff.Sange)
     end
-    if state.TreasureMode.value == 'Fulltime' then
-        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
-    end
+    -- if state.TreasureMode.value == 'Fulltime' then
+    --     meleeSet = set_combine(meleeSet, sets.TreasureHunter)
+    -- end
     check_weaponset()
     return meleeSet
 end
@@ -945,15 +951,15 @@ end
 -- Check for various actions that we've specified in user code as being used with TH gear.
 -- This will only ever be called if TreasureMode is not 'None'.
 -- Category and Param are as specified in the action event packet.
-function th_action_check(category, param)
-    if category == 2 or -- any ranged attack
-        --category == 4 or -- any magic action
-        (category == 3 and param == 30) or -- Aeolian Edge
-        (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
-        (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
-        then return true
-    end
-end
+-- function th_action_check(category, param)
+--     if category == 2 or -- any ranged attack
+--         --category == 4 or -- any magic action
+--         (category == 3 and param == 30) or -- Aeolian Edge
+--         (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
+--         (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
+--         then return true
+--     end
+-- end
 
 function check_weaponset()
     equip(sets[state.WeaponSet.current])

@@ -122,8 +122,8 @@ function user_setup()
     include('Global-Binds.lua')
 
     gear.Artifact_Head = { name="Orion Beret +3" }
-    gear.Artifact_Body = { name="Orion Jerkin +2" }
-    gear.Artifact_Legs = { name="Orion Braccae +2" }
+    gear.Artifact_Body = { name="Orion Jerkin +3" }
+    gear.Artifact_Legs = { name="Orion Braccae +3" }
     gear.Artifact_Hands = { name="Orion Bracers +3" }
     gear.Artifact_Feet = { name="Orion Socks +3" }
 

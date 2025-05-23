@@ -200,7 +200,7 @@ function init_gear_sets()
    
     sets.precast.WS['Shijin Spiral'] = {
         ammo="Knobkierrie",
-		head="Adhemar Bonnet +1",
+		head=gear.Nyame_Head,
 		body=gear.Nyame_Body,
 		hands=gear.Malignance_Hands,
 		legs=gear.Nyame_Legs,
@@ -464,12 +464,12 @@ function init_gear_sets()
         hands=gear.Malignance_Hands,
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
-        ear1="Arete Del Luna +1",
+        ear1="Sanare Earring",
         ear2="Eabani Earring",
-        neck="Bathy Choker +1",
+        neck="Warder's Charm +1",
         ring1=gear.Chirich_1,
         ring2=gear.Gerubu_Or_Shadow,
-        back=gear.MNK_DEX_DA_Cape,
+        back="Null Shawl",
         waist="Moonbow Belt +1",
     }
 

@@ -444,7 +444,7 @@ function init_gear_sets()
     sets.midcast.SongEnfeeble = {
         -- main="Carnwenhan",
         -- sub="Ammurapi Shield",
-        range="Gjallarhorn",
+        -- range="Gjallarhorn",
         head=gear.Artifact_Head,
         body=gear.Artifact_Body,
         hands=gear.Artifact_Hands,

@@ -86,7 +86,7 @@ function user_setup()
     gear.Rostam_B = { name="Rostam", augments={'Path: B',}, bag="wardrobe2"}
     gear.Rostam_C = { name="Rostam", augments={'Path: C',}, bag="wardrobe3"}
 
-    gear.Artifact_Head = { name= "Laksamana's Tricorne +2" }
+    gear.Artifact_Head = { name= "Laksamana's Tricorne +3" }
     gear.Artifact_Body = { name= "Laksamana's Frac +3" }
     gear.Artifact_Hands = { name= "Laksamana's Gants +2" }
     gear.Artifact_Legs = { name= "Laksamana's Trews +2" }
@@ -247,7 +247,6 @@ function init_gear_sets()
 
     sets.precast.Waltz = {
         neck="Unmoving Collar +1",
-        ear1="Handler's Earring +1",
         ear2="Tuisto Earring",
         body="Passion Jacket",
         ring1="Asklepian Ring",
@@ -1142,6 +1141,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
     end
 
     local available_bullets = player.inventory[bullet_name] or player.wardrobe[bullet_name]
+
 
     -- If no ammo is available, give appropriate warning and end.
     if not available_bullets then
