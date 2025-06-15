@@ -60,7 +60,7 @@ function user_setup()
     gear.Artifact_Body = { name="Runeist Coat +3", priority=218 }
     gear.Artifact_Hands = { name="Runeist Mitons +3", priority=85 }
     gear.Artifact_Legs = { name="Runeist Trousers +3", priority=80 }
-    gear.Artifact_Feet = { name="Runeist Bottes +2", priority=74 }
+    gear.Artifact_Feet = { name="Runeist Bottes +3", priority=74 }
 
     gear.Relic_Head = { name="Futhark Bandeau +3", priority=56 }
     gear.Relic_Body = { name="Futhark Coat +3", priority=119 }

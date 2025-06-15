@@ -445,7 +445,7 @@ function init_gear_sets()
         ring1="Defending Ring",
         ring2="Gelatinous Ring +1",
         back=gear.MNK_DEX_DA_Cape,
-        waist="Engraved Belt",
+        waist="Null Belt",
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
     }

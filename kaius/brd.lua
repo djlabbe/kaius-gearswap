@@ -75,7 +75,7 @@ function user_setup()
         'Spirited Etude', 'Logical Etude', 'Enchanting Etude', 'Bewitching Etude'}
 
     state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Twashtar', 'Tauret', 'Carnwenhan', 'Staff' }
-    state.WeaponLock = M(true, 'Weapon Lock')
+    state.WeaponLock = M(false, 'Weapon Lock')
 
  
     info.ExtraSongInstrument = 'Daurdabla'
@@ -106,7 +106,7 @@ function user_setup()
     gear.Empyrean_Body = { name= "Fili Hongreline +3" }
     gear.Empyrean_Hands = { name= "Fili Manchettes +3" }
     gear.Empyrean_Legs = { name= "Fili Rhingrave +3" }
-    gear.Empyrean_Feet = { name= "Fili Cothurnes +2" }
+    gear.Empyrean_Feet = { name= "Fili Cothurnes +3" }
 
     gear.BRD_Song_Cape = { name="Intarabus's Cape", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
     gear.BRD_DW_Cape = { name="Intarabus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Phys. dmg. taken-10%',}} --X

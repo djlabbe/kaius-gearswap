@@ -76,8 +76,8 @@ function job_setup()
 end
 
 function user_setup()
-    state.OffenseMode:options('Normal')
-    state.WeaponskillMode:options('Normal')
+    state.OffenseMode:options('Normal', 'PDL')
+    state.WeaponskillMode:options('Normal', 'PDL')
     state.HybridMode:options('Normal')
     state.CastingMode:options('Normal')
     state.IdleMode:options('Normal')
@@ -85,7 +85,7 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT', 'PetPDT')
     state.MagicalDefenseMode:options('MDT', 'PetMDT')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Guttler', 'Pangu', 'Dolichenus', 'Tauret'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Ikenga', 'Guttler', 'Pangu', 'Dolichenus', 'Tauret'}
     state.WeaponLock = M(false, 'Weapon Lock')
     include('Global-Binds.lua')
 
@@ -159,10 +159,10 @@ function user_setup()
         'Souleater','Vallation','Swordplay'}
 
     gear.Artifact_Head = { name= "Totemic Helm +3" }
-    gear.Artifact_Body = { name= "Totemic Jackcoat +2" }
+    gear.Artifact_Body = { name= "Totemic Jackcoat +3" }
     gear.Artifact_Hands = { name= "Totemic Gloves +3" }
-    gear.Artifact_Legs = { name= "Totemic Trousers +2" }
-    gear.Artifact_Feet = { name= "Totemic Gaiters +2" }
+    gear.Artifact_Legs = { name= "Totemic Trousers +3" }
+    gear.Artifact_Feet = { name= "Totemic Gaiters +3" }
 
     gear.Relic_Head = { name= "Ankusa Helm +3" }
     gear.Relic_Body = { name= "Ankusa Jackcoat +3" }
@@ -186,13 +186,19 @@ function user_setup()
 
     if player.sub_job == 'WAR' then
         send_command('bind !t input /ja Provoke <t>')
-        send_command('bind ^numpad7 gs c set WeaponSet Guttler;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Pangu;input /macro set 2')
+        send_command('bind ^numpad7 gs c set WeaponSet Ikenga;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Guttler;input /macro set 1')
         send_command('bind ^numpad9 gs c set WeaponSet Dolichenus;input /macro set 3')
-        send_command('bind ^numpad9 gs c set WeaponSet Tauret;input /macro set 4')
+        send_command('bind ^numpad4 gs c set WeaponSet Pangu;input /macro set 2')
+        send_command('bind ^numpad5 gs c set WeaponSet Tauret;input /macro set 4')
         set_macro_page(1, 9)
     elseif player.sub_job == 'NIN' then
         set_macro_page(2, 9)
+        send_command('bind ^numpad7 gs c set WeaponSet Ikenga;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Guttler;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet Dolichenus;input /macro set 3')
+        send_command('bind ^numpad4 gs c set WeaponSet Pangu;input /macro set 2')
+        send_command('bind ^numpad5 gs c set WeaponSet Tauret;input /macro set 4')
     elseif player.sub_job == 'DNC' then
         send_command('bind ^` input /ja "Chocobo Jig" <me>')
         set_macro_page(3, 9)
@@ -527,7 +533,7 @@ function init_gear_sets()
     sets.precast.WS['Mistral Axe'] = {
         ammo="Coiste Bodhar",
         head=gear.Relic_Head,
-        body=gear.Nyame_Body,
+        body=gear.Empyrean_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
@@ -539,6 +545,12 @@ function init_gear_sets()
         back=gear.BST_WS1_Cape,
         waist="Sailfi Belt +1",
     }
+
+    sets.precast.WS['Mistral Axe'].PDL = set_combine(sets.precast.WS['Mistral Axe'], {
+        ring1=gear.Ephramad_Or_Sroda,
+        ear2="Nukumi Earring +1",
+        feet=gear.Empyrean_Feet,
+    })
 
     sets.precast.WS['Calamity'] = {
         ammo="Coiste Bodhar",
@@ -874,7 +886,7 @@ function init_gear_sets()
         ring1="Defending Ring",
         ring2="Purity Ring",
         back=gear.BST_DW_Cape,
-        waist="Engraved Belt",
+        waist="Null Belt",
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
     }
@@ -890,7 +902,7 @@ function init_gear_sets()
         ring1="Defending Ring",
         ring2="Purity Ring",
         back=gear.BST_DW_Cape,
-        waist="Engraved Belt",
+        waist="Null Belt",
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
     }
@@ -944,6 +956,7 @@ function init_gear_sets()
     end
 
 
+    sets.Ikenga = {main="Ikenga's Axe", sub="Crepuscular Knife"}
     sets.Guttler = {main="Guttler", sub="Ikenga's Axe"}
     sets.Pangu = {main="Pangu", sub="Ikenga's Axe"}
     sets.Dolichenus = {main="Dolichenus", sub="Ikenga's Axe" }    
@@ -1089,6 +1102,15 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Customization hook for idle and melee sets.
 -------------------------------------------------------------------------------------------------------------------
+
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if state.OffenseMode.value == 'PDL' then
+        wsmode = 'PDL'
+    end
+
+    return wsmode
+end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)

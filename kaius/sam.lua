@@ -153,7 +153,7 @@ function init_gear_sets()
         neck="Samurai's Nodowa +2",
         waist="Sweordfaetels +1",
         ear1="Dedition Earring",
-        ear2="Kasuga Earring +1",
+        ear2="Kasuga Earring +2",
         ring1=gear.Chirich_1,
         ring2="Niqmaddu Ring",
         back=gear.SAM_STP_Cape,
@@ -179,6 +179,7 @@ function init_gear_sets()
         hands=gear.Nyame_Hands,
         feet=gear.Nyame_Feet,
         back="Null Shawl",
+        waist="Sailfi Belt +1",
     }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
@@ -193,7 +194,7 @@ function init_gear_sets()
         neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
-        ear2="Thrud Earring",
+        ear2="Kasuga Earring +2",
         ring1="Regal Ring",
         ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.SAM_WS_Cape,
@@ -220,7 +221,7 @@ function init_gear_sets()
         neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Schere Earring",
-        ear2="Thrud Earring",
+        ear2="Kasuga Earring +2",
         ring1=gear.Cornelia_Or_Sroda,
         ring2="Niqmaddu Ring", 
         back=gear.SAM_WS_Cape,
@@ -241,7 +242,7 @@ function init_gear_sets()
         neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
-        ear2="Thrud Earring",
+        ear2="Kasuga Earring +2",
         ring1=gear.Cornelia_Or_Epaminondas, 
         ring2=gear.Ephramad_Or_Regal,
         back=gear.SAM_WS_Cape,
@@ -263,11 +264,11 @@ function init_gear_sets()
         neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
-        ear2="Thrud Earring",
+        ear2="Kasuga Earring +2",
         ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Niqmaddu Ring", 
         back=gear.SAM_WS_Cape,
-    }
+    } --SC Bonus 16 Trait + 7+6+5+3 = 34
 
     sets.precast.WS["Tachi: Fudo"].PDL = set_combine( sets.precast.WS["Tachi: Fudo"], {
         ring2=gear.Ephramad_Or_Sroda,
@@ -291,7 +292,7 @@ function init_gear_sets()
         neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
-        ear2="Thrud Earring",
+        ear2="Kasuga Earring +2",
         ring1=gear.Cornelia_Or_Sroda,
         ring2="Epaminondas's Ring",
         back=gear.SAM_WS_Cape,
@@ -360,7 +361,6 @@ function init_gear_sets()
 
     sets.precast.WS["Tachi: Rana"].PDL = set_combine( sets.precast.WS["Tachi: Rana"], {
         ammo="Crepuscular Pebble",
-        head="Flamma Zucchetto +2",
         legs=gear.Mpaca_Legs,
         ring1=gear.Ephramad_Or_Sroda,
         feet=gear.Empyrean_Feet,
@@ -391,7 +391,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Null Loop",
         ear1="Crepuscular Earring",
-        ear2="Kasuga Earring +1",
+        ear2="Kasuga Earring +2",
         ring1=gear.Stikini_1,
         ring2="Metamorph Ring +1",
         back=gear.SAM_WS_Cape,
@@ -407,7 +407,7 @@ function init_gear_sets()
         feet=gear.Nyame_Feet,
         neck="Samurai's Nodowa +2",
         ear1="Moonshade Earring",
-        ear2="Thrud Earring",
+        ear2="Kasuga Earring +2",
         ring1="Begrudging Ring",
         ring2="Niqmaddu Ring",
         back=gear.SAM_WS_Cape,

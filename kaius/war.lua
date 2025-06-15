@@ -551,8 +551,8 @@ function init_gear_sets()
         ear2="Odnowa Earring +1",
         ring1=gear.Moonlight_1,
         ring2="Shadow Ring",
-        back=gear.WAR_TP_Cape,
-        waist="Engraved Belt",
+        back="Null Shawl",
+        waist="Null Belt",
     }
 
     sets.idle.Regen = {

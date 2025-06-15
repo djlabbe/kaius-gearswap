@@ -43,7 +43,7 @@ function user_setup()
 
     gear.Artifact_Head = { name= "Ignominy Burgeonet +3" }
     gear.Artifact_Body = { name= "Ignominy Cuirass +3" }
-    gear.Artifact_Hands = { name= "Ignominy Gauntlets +2" }
+    gear.Artifact_Hands = { name= "Ignominy Gauntlets +3" }
     gear.Artifact_Legs = { name= "Ignominy Flanchard +3" }
     gear.Artifact_Feet = { name= "Ignominy Sollerets +3" }
 

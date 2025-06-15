@@ -75,7 +75,7 @@ function user_setup()
         'Spirited Etude', 'Logical Etude', 'Enchanting Etude', 'Bewitching Etude'}
 
     state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Tauret', 'Carnwenhan' }
-    state.WeaponLock = M(true, 'Weapon Lock')
+    state.WeaponLock = M(false, 'Weapon Lock')
 
  
     info.ExtraSongInstrument = 'Daurdabla'
@@ -399,9 +399,10 @@ function init_gear_sets()
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
     -- Gear to enhance certain classes of songs.
-    sets.midcast.Ballad = { legs=gear.Empyrean_Legs }
+    sets.midcast.Ballad = { range="Miracle Cheer", legs=gear.Empyrean_Legs }
     sets.midcast.Carol = { hands="Mousai Gages +1" }
     sets.midcast.Etude = { head="Mousai Turban +1" }
+    sets.midcast.March = { range="Miracle Cheer", hands=gear.Empyrean_Hands }
     sets.midcast.HonorMarch = { range="Marsyas", hands=gear.Empyrean_Hands }
     sets.midcast.Lullaby = {
         body=gear.Empyrean_Body,
@@ -410,7 +411,6 @@ function init_gear_sets()
     sets.midcast.Lullaby = { body=gear.Empyrean_Body }
     sets.midcast.Madrigal = { head=gear.Empyrean_Head }
     sets.midcast.Mambo = { feet="Mousai Crackows +1" }
-    sets.midcast.March = { hands=gear.Empyrean_Hands }
     sets.midcast.Minne = { legs="Mousai Seraweels +1" }
     sets.midcast.Minuet = { body=gear.Empyrean_Body }
     sets.midcast.Paeon = { head=gear.Artifact_Head }
@@ -611,7 +611,7 @@ function init_gear_sets()
         head=gear.Bunzi_Head,
         body="Ashera Harness",
         hands=gear.Bunzi_Hands, --(8/8)
-        legs=gear.Nyame_Legs,
+        legs="Volte Tights",
         feet=gear.Nyame_Feet,
         neck="Bard's Charm +2",
         ear1="Telos Earring",
@@ -637,7 +637,7 @@ function init_gear_sets()
         head=gear.Bunzi_Head,
         body="Ashera Harness",
         hands=gear.Bunzi_Hands, --(8/8)
-        legs=gear.Nyame_Legs,
+        legs="Volte Tights",
         feet=gear.Nyame_Feet, --(7/7)
         neck="Bard's Charm +2",
         ear1="Eabani Earring", --4
@@ -670,7 +670,7 @@ function init_gear_sets()
         head="Ayanmo Zucchetto +2",
         body="Ashera Harness",
         hands=gear.Bunzi_Hands, --(8/8)
-        legs=gear.Nyame_Legs,
+        legs="Volte Tights",
         feet=gear.Nyame_Feet, --(7/7)
         neck="Bard's Charm +2",
         ear1="Telos Earring", --4
@@ -898,7 +898,7 @@ end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.type == 'BardSong' then
-        if player.status ~= 'Engaged' and state.WeaponLock.value == false and (player.sub_job == 'DNC' or player.sub_job == 'NIN') then
+        if player.status ~= 'Engaged' and state.WeaponLock.value == false and (player.sub_job == 'DNC' or player.sub_job == 'NIN') and spell.english ~= "Carnage Elegy" then
             equip(sets.SongDWDuration)
         end
     end

@@ -44,7 +44,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
     state.PhysicalDefenseMode:options('PDT', 'Evasion')
 
-    state.WeaponSet = M{['description'] = 'Weapon Set', 'Heishi', 'Kikoku', 'Naegling', 'Aeolian'}
+    state.WeaponSet = M{['description'] = 'Weapon Set', 'Heishi', 'HeishiDarkBlade', 'Naegling', 'Aeolian'}
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
 
@@ -61,8 +61,9 @@ function user_setup()
     gear.Relic_Hands = { name="Mochizuki Tekko +3" }
     gear.Relic_Feet = { name="Mochizuki Kyahan +3" }
 
-    -- gear.Empyrean_Body = { name = "Hattori Ningi +1" }
+    gear.Empyrean_Body = { name = "Hattori Ningi +3" }
     gear.Empyrean_Hands = { name="Hattori Tekko +3" }
+    gear.Empyrean_Legs = { name="Hattori Hakama +3" }
     gear.Empyrean_Feet = { name="Hattori Kyahan +3" }
 
     gear.NIN_TP_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}}
@@ -81,30 +82,30 @@ function user_setup()
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @q gs c toggle MagicBurst')
 
-    -- send_command('bind !numpad7 input /ma "Jubaku: Ichi" <t>')
-    -- send_command('bind !numpad8 input /ma "Hojo: Ni" <t>')
-    -- send_command('bind !numpad9 input /ma "Aisha: Ichi" <t>')  
-    -- send_command('bind !numpad1 input /ma "Yurin Ichi" <t>')
-    -- send_command('bind !numpad2 input /ma "Kurayami: Ni" <t>')
-    -- send_command('bind !numpad3 input /ma "Dokumori: Ichi" <t>')   
+    send_command('bind !numpad7 input /ma "Jubaku: Ichi" <t>')
+    send_command('bind !numpad8 input /ma "Hojo: Ni" <t>')
+    send_command('bind !numpad9 input /ma "Aisha: Ichi" <t>')  
+    send_command('bind !numpad1 input /ma "Yurin Ichi" <t>')
+    send_command('bind !numpad2 input /ma "Kurayami: Ni" <t>')
+    send_command('bind !numpad3 input /ma "Dokumori: Ichi" <t>')   
 
-    send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad9 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad4 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad1 input /equip Main "Irradiance Blade";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad9 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad4 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad1 input /equip Main "Irradiance Blade";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
 
 
     send_command('bind ^numpad7 gs c set WeaponSet Heishi; ;input /macro set 1')
-    send_command('bind ^numpad8 gs c set WeaponSet Kikoku; ;input /macro set 2')
+    send_command('bind ^numpad8 gs c set WeaponSet HeishiDarkBlade; ;input /macro set 2')
     send_command('bind ^numpad9 gs c set WeaponSet Naegling; ;input /macro set 3')
 
     send_command('bind ^numpad4 gs c set WeaponSet Aeolian;input /macro set 4')
@@ -474,7 +475,7 @@ function init_gear_sets()
     -- * NIN Native DW Trait: 35% DW
     -- No Magic Haste (74% DW to cap)
     sets.engaged = {
-        ammo="Date Shuriken",
+        ammo="Seki Shuriken",
         head=gear.Malignance_Head,
         neck="Ninja Nodowa +2",
         ear1="Dedition Earring",
@@ -491,7 +492,7 @@ function init_gear_sets()
 
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.LowHaste = {
-        ammo="Date Shuriken",
+        ammo="Seki Shuriken",
         head=gear.Malignance_Head,
         body=gear.Relic_Body, --10
         hands=gear.Adhemar_A_Hands,
@@ -509,7 +510,7 @@ function init_gear_sets()
 
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.MidHaste = {
-        ammo="Date Shuriken",
+        ammo="Seki Shuriken",
         head=gear.Malignance_Head,
         neck="Ninja Nodowa +2",
         ear1="Dedition Earring",
@@ -526,7 +527,7 @@ function init_gear_sets()
 
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.HighHaste = {
-        ammo="Date Shuriken",
+        ammo="Seki Shuriken",
         head=gear.Malignance_Head,
         neck="Ninja Nodowa +2",
         ear1="Dedition Earring",
@@ -543,7 +544,7 @@ function init_gear_sets()
 
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.MaxHaste = {
-        ammo="Date Shuriken",
+        ammo="Seki Shuriken",
         head=gear.Malignance_Head,
         neck="Ninja Nodowa +2",
         ear1="Dedition Earring",
@@ -591,20 +592,19 @@ function init_gear_sets()
     }
 
     sets.idle = {
-        ammo="Date Shuriken",
-        head=gear.Mpaca_Head,
-        -- body="Hizamaru Haramaki +2",
-        body=gear.Mpaca_Body,
-        hands=gear.Mpaca_Hands,
-        legs=gear.Mpaca_Legs,
-        feet=gear.Mpaca_Feet,
-        neck="Bathy Choker +1",
+        ammo="Seki Shuriken",
+        head="Null Masque",
+        body="Adamantite Armor",
+        hands=gear.Malignance_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Malignance_Feet,
+        neck="Warder's Charm +1",
         ear1="Eabani Earring",
         ear2="Sanare Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.NIN_TP_Cape,
-        waist="Engraved Belt",
+        ring1="Purity Ring",
+        ring2="Fortified Ring",
+        back="Null Shawl",
+        waist="Null Belt",
     }
 
 
@@ -641,8 +641,8 @@ function init_gear_sets()
         sets.NightMovement = { feet="Hachiya Kyahan +3" }
     end
 
-    sets.Kikoku = {main="Kikoku", sub="Gleti's Knife"}
     sets.Heishi = {main="Heishi Shorinken", sub="Gleti's Knife"}
+    sets.HeishiDarkBlade = {main="Heishi Shorinken", sub="Yagyu Darkblade"}
     sets.Naegling = {main="Naegling", sub="Uzura +2"}
     sets.Aeolian = {main="Tauret", sub="Gleti's Knife"}
 

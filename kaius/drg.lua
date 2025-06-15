@@ -32,19 +32,19 @@ end
 function user_setup()
     include('Global-Binds.lua')
 
-    state.OffenseMode:options('Normal', 'Acc', 'PDL')
-    state.WeaponskillMode:options('Normal', 'Acc', 'PDL')
+    state.OffenseMode:options('Normal', 'PDL')
+    state.WeaponskillMode:options('Normal', 'PDL')
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal', 'DT')
 
     state.WeaponSet = M{["description"]='Weapon Set', 'Trishula', 'ShiningOne', 'Aram', 'Naegling', 'Mafic' }
     state.WeaponLock = M(false, 'Weapon Lock')  
 
-    gear.Artifact_Head = { name="Vishap Armet +2" }
+    gear.Artifact_Head = { name="Vishap Armet +3" }
     gear.Artifact_Body = { name="Vishap Mail +3" }
     gear.Artifact_Hands = { name="Vishap Finger Gauntlets +3" }
     gear.Artifact_Legs = { name="Vishap Brais +3" }
-    gear.Artifact_Feet = { name="Vishap Greaves +2" }
+    gear.Artifact_Feet = { name="Vishap Greaves +3" }
 
     gear.Relic_Head = { name="Pteroslaver Armet +3" }
     gear.Relic_Body = { name="Pteroslaver Mail +3" }
@@ -205,7 +205,6 @@ function init_gear_sets()
         back=gear.DRG_WS1_Cape,
     }
 
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
     sets.precast.WS.PDL = set_combine(sets.precast.WS, {})
 
     ------------------
@@ -278,8 +277,6 @@ function init_gear_sets()
         waist="Fotia Belt",
     }
 
-    sets.precast.WS["Stardiver"].Acc = set_combine(sets.precast.WS["Stardiver"], {})
-    sets.precast.WS["Stardiver"]["Shining One"].Acc = set_combine(sets.precast.WS["Stardiver"]["Shining One"], {})
     sets.precast.WS["Stardiver"].PDL = set_combine(sets.precast.WS["Stardiver"], {
         hands=gear.Gleti_Hands,
         body=gear.Gleti_Body,
@@ -307,7 +304,7 @@ function init_gear_sets()
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        -- neck="Dgn. Collar +2",
+        -- neck="Dragoon's Collar +2",
         neck="Warder's Charm +1",
         waist="Fotia Belt",
         ear1="Thrud Earring",   
@@ -316,8 +313,6 @@ function init_gear_sets()
         ring2=gear.Cornelia_Or_Regal,
         back=gear.DRG_WS1_Cape,
     } --22 SC Bonus from Nyame
-
-    sets.precast.WS["Camlann\'s Torment"].Acc = set_combine(sets.precast.WS["Camlann\'s Torment"], {})
 
      sets.precast.WS["Camlann\'s Torment"].PDL = set_combine(sets.precast.WS["Camlann\'s Torment"], {
         body=gear.Gleti_Body,
@@ -333,7 +328,7 @@ function init_gear_sets()
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck="Dgn. Collar +2",
+        neck="Dragoon's Collar +2",
         waist="Sailfi Belt +1",
         ear1="Sherida Earring",    
         ear2="Moonshade Earring",
@@ -342,7 +337,6 @@ function init_gear_sets()
         back=gear.DRG_WS1_Cape,
     }
 
-    sets.precast.WS["Sonic Thrust"].Acc = set_combine(sets.precast.WS["Sonic Thrust"], {})
     sets.precast.WS["Sonic Thrust"].PDL = set_combine(sets.precast.WS["Sonic Thrust"], {
         ring2=gear.Ephramad_Or_Epaminondas,
     })
@@ -353,7 +347,7 @@ function init_gear_sets()
         hands=gear.Gleti_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Nyame_Feet,
-        neck="Dgn. Collar +2",
+        neck="Dragoon's Collar +2",
         ear1="Peltast's Earring +1",
         ear2="Moonshade Earring",
         ring1="Niqmaddu Ring",
@@ -361,10 +355,6 @@ function init_gear_sets()
         back=gear.DRG_WS1_Cape,
         waist="Sailfi Belt +1",
     }
-
-    sets.precast.WS["Impulse Drive"].Acc = set_combine(sets.precast.WS["Impulse Drive"], {
-        legs=gear.Artifact_Legs,
-    })
 
     sets.precast.WS["Impulse Drive"].PDL = set_combine(sets.precast.WS["Impulse Drive"], {
         body=gear.Gleti_Body,
@@ -390,7 +380,7 @@ function init_gear_sets()
         hands=gear.Gleti_Hands,
         legs=gear.Empyrean_Legs,
         feet=gear.Gleti_Feet,
-        -- neck="Dgn. Collar +2",
+        -- neck="Dragoon's Collar +2",
         neck="Warder's Charm +1",
         ear1="Moonshade Earring",
         ear2="Peltast's Earring +1",
@@ -444,7 +434,6 @@ function init_gear_sets()
         back=gear.DRG_WS3_Cape,
     }
 
-    sets.precast.WS["Geirskogul"].Acc = set_combine(sets.precast.WS["Geirskogul"], {})
     sets.precast.WS["Geirskogul"].PDL = set_combine(sets.precast.WS["Geirskogul"], {
         ear1="Peltast's Earring +1", 
         ring2="Epaminondas's Ring",
@@ -467,7 +456,6 @@ function init_gear_sets()
         ring2="Crepuscular Ring",
     })
 
-    sets.precast.WS["Leg Sweep"].Acc = set_combine(sets.precast.WS["Leg Sweep"], {})
     sets.precast.WS["Leg Sweep"].PDL = set_combine(sets.precast.WS["Leg Sweep"], {})
 
     sets.precast.WS["Raiden Thrust"] = {
@@ -493,7 +481,7 @@ function init_gear_sets()
         head=gear.Relic_Head,
         legs=gear.Artifact_Legs,
         feet=gear.Relic_Feet,
-        neck="Dgn. Collar +2",
+        neck="Dragoon's Collar +2",
         ring1=gear.Moonlight_1,
         ring2="Defending Ring",
         back="Updraft Mantle",
@@ -501,16 +489,18 @@ function init_gear_sets()
 
     sets.defense.PDT = {
         ammo="Coiste Bodhar",
-        head=gear.Gleti_Head, --10
-        body=gear.Gleti_Body, --9
-        hands=gear.Empyrean_Hands, --11
-        legs=gear.Relic_Legs,
-        feet="Flamma Gambieras +2",
-        neck="Dragoon's Collar +2",
-        ring1=gear.Moonlight_1, --5
-        ring2=gear.Moonlight_2, --5
-        waist="Sailfi Belt +1",
-        back=gear.DRG_TP_Cape --10
+        head=gear.Gleti_Head, 
+        body=gear.Gleti_Body, 
+        hands=gear.Empyrean_Hands, 
+        legs=gear.Nyame_Legs, 
+        feet=gear.Nyame_Feet, 
+        neck="Loricate Torque +1",
+        ear1="Tuisto Earring", 
+        ear2="Odnowa Earring +1",
+        ring1=gear.Moonlight_1,
+        ring2=gear.Moonlight_2,
+        waist="Platinum Moogle Belt",
+        back=gear.DRG_TP_Cape
     } --50
 
     sets.defense.MDT = {
@@ -585,22 +575,8 @@ function init_gear_sets()
         ear2="Sroda Earring",
     }
 
-    sets.engaged.Acc = set_combine(sets.engaged, {
-        neck="Dragoon's Collar +2",
-    })
-
-    sets.engaged.Aram.Acc = set_combine(sets.engaged.Aram, {
-        neck="Dragoon's Collar +2",
-    })
-
-    sets.engaged.Naegling.Acc = set_combine(sets.engaged.Naegling, {
-        neck="Dragoon's Collar +2",
-    })
-
-    sets.engaged["Mafic Cudgel"].Acc = sets.engaged.Naegling.Acc
-
     sets.engaged.Hybrid = {
-        neck="Dgn. Collar +2", -- Keep Pet Alive
+        neck="Dragoon's Collar +2", -- Keep Pet Alive
         head="Hjarrandi Helm", --7
         body=gear.Gleti_Body, --9/0
         legs=gear.Gleti_Legs, --8/0
@@ -617,32 +593,27 @@ function init_gear_sets()
         feet=gear.Nyame_Feet,
     })
 
-    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
-    sets.engaged.Naegling.Acc.DT = set_combine(sets.engaged.Naegling, sets.engaged.Hybrid)
-    sets.engaged["Mafic Cudgel"].Acc.DT = sets.engaged.Naegling.Acc.DT
-    sets.engaged.Aram.Acc.DT = sets.engaged.Aram.DT
-
     sets.idle = {
-        ammo="Staunch Tathlum +1", --3/3
+        ammo="Staunch Tathlum +1",
         head=gear.Gleti_Head,
-        body="Sacro Breastplate",
-        hands=gear.Gleti_Hands, --5/5
+        body="Adamantite Armor",
+        hands=gear.Gleti_Hands,
         legs=gear.Gleti_Legs,
         feet=gear.Gleti_Feet,
-        neck="Dgn. Collar +2",
-        ear1="Tuisto Earring",
+        neck="Dragoon's Collar +2",
+        ear1="Eabani Earring",
         ear2="Sanare Earring",
-        ring1=gear.Moonlight_1,
+        ring1="Purity Ring",
         ring2="Shadow Ring",
-        back=gear.DRG_TP_Cape, --6/6
-        waist="Platinum Moogle Belt",
+        back="Null Shawl",
+        waist="Null Belt",
     }
 
     sets.idle.DT = sets.idle
 
     sets.idle.Pet = set_combine(sets.idle, {
         head=gear.Empyrean_Head,
-        neck="Dgn. Collar +2",
+        neck="Dragoon's Collar +2",
     })
 
     sets.idle.DT.Pet = sets.idle.Pet
@@ -747,9 +718,7 @@ end
 
 function get_custom_wsmode(spell, action, spellMap)
     local wsmode
-    if state.OffenseMode.value == 'Acc' then
-        wsmode = 'Acc'
-    elseif state.OffenseMode.value == 'PDL' then
+    if state.OffenseMode.value == 'PDL' then
         wsmode = 'PDL'
     end
 
