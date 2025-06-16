@@ -1,401 +1,183 @@
--------------------------------------------------------------------------------------------------------------------
---  Keybinds
--------------------------------------------------------------------------------------------------------------------
+-- Load and initialize the include file.
+include('Kaius-Include')
+include('gear/Gear')
 
---  Modes:      [ F9 ]              Cycle Offense Mode
---              [ F10 ]             Emergency -PDT Mode
---              [ ALT+F10 ]         Toggle Kiting Mode
---              [ F11 ]             Emergency -MDT Mode
---              [ CTRL+F11 ]        Cycle Casting Modes
---              [ F12 ]             Update Current Gear / Report Current Status
---              [ CTRL+F12 ]        Cycle Idle Modes
---              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
---
---  Abilities:  [ CTRL+` ]          Afflatus Solace
---              [ ALT+` ]           Afflatus Misery
---              [ ALT+- ]           Light Arts + Add White
---              [ ALT+= ]           Dark Arts + Add Dark
---              [ CTRL+; ]           Speed
---              [ CTRL+[ ]           AOE
---              [ ALT+; ]            Cost
---              [ ALT+[ ]            Power
---
---  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
--------------------------------------------------------------------------------------------------------------------
+--Set to ingame lockstyle and Macro Book/Set
+LockStylePallet = "3"
+MacroBook = "3"
+MacroSet = "1"
 
+-- Use "gs c food" to use the specified food item 
+Food = "Miso Ramen"
+
+--Uses Items Automatically
+AutoItem = false
+
+--Upon Job change will use a random lockstyleset
+Random_Lockstyle = false
+
+--Lockstyle sets to randomly equip
+Lockstyle_List = {1,2,6,12}
+
+-- 'TP','ACC','DT' are standard Default modes.  You may add more and assigne equipsets for them ( Idle.X and OffenseMode.X )
+state.OffenseMode:options('TP','ACC','DT','PDT','MEVA')
+state.OffenseMode:set('DT')
+
+-- Set to true to run organizer on job changes
+Organizer = false
+
+--Weapons options
+state.WeaponMode:options('Black Halo','Asclepius','Unlocked')
+state.WeaponMode:set('Unlocked')
+
+--Command to Lock Style and Set the correct macros
+jobsetup (LockStylePallet,MacroBook,MacroSet)
+
+-- Balance 2100 HP / 1500 MP
 function get_sets()
-    mote_include_version = 2
-    include('Mote-Include.lua')
-end
 
-function job_setup()
-    state.Buff['Afflatus Solace'] = buffactive['Afflatus Solace'] or false
-    state.Buff['Afflatus Misery'] = buffactive['Afflatus Misery'] or false
-    state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
-    state.Buff.Doom = false
-end
+	-- Weapon setup
+	sets.Weapons = {}
 
-function user_setup()
-    state.OffenseMode:options('Normal')
-    state.CastingMode:options('Normal')
-    state.IdleMode:options('Normal', 'DT')
+	sets.Weapons['Black Halo'] = { main="Maxentius", sub="Sindri" }
 
-    state.BarElement = M{['description']='BarElement', 'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
-    state.BarStatus = M{['description']='BarStatus', 'Baramnesra', 'Barvira', 'Barparalyzra', 'Barsilencera', 'Barpetra', 'Barpoisonra', 'Barblindra', 'Barsleepra'}
-    state.BoostSpell = M{['description']='BoostSpell', 'Boost-STR', 'Boost-INT', 'Boost-AGI', 'Boost-VIT', 'Boost-DEX', 'Boost-MND', 'Boost-CHR'}
+	sets.Weapons['Asclepius'] = { main="Asclepius"}
 
-    state.WeaponLock = M(false, 'Weapon Lock')
-    state.WeaponSet = M{['description']='Weapon Set', 'Maxentius', 'Yagrush' }
+	-- Will swap weapons based off sets below
+	sets.Weapons['Unlocked'] = { }
 
-    gear.Artifact_Head = { name="Theophany Cap +3", priority=64 }
-    gear.Artifact_Body = { name="Theophany Bliaut +3", priority=91 }
-    gear.Artifact_Hands = { name="Theophany Mitts +3", priority=43 }
-    gear.Artifact_Legs = { name="Theophany Pantaloons +3", priority=74 }
-    gear.Artifact_Feet = { name="Theophany Duckbills +3", priority=74 }
+	sets.Weapons.Shield = { sub="Genmei Shield" }
 
-    gear.Relic_Head = { name="Piety Cap +3" }
-    gear.Relic_Body = { name="Piety Bliaut +3" }
-    gear.Relic_Hands = { name="Piety Mitts +3" }
-    gear.Relic_Legs = { name="Piety Pantaloons +3" }
-    gear.Relic_Feet = { name="Piety Duckbills +3" }
+	-- Standard Idle set with -DT,Refresh,Regen and movement gear
+	sets.Idle = {
+	    main="Mpaca's Staff",
+        sub="Irenic Strap +1",
+		ammo="Staunch Tathlum +1", --3
+	    head=gear.Head.Bunzi, --7
+        body=gear.Body.Ebers,
+        hands=gear.Hands.Bunzi, --8
+        legs=gear.Legs.Ebers, --13
+        feet=gear.Feet.Ebers, --11
+		neck="Sibyl Scarf",
+        ear1="Hearty Earring",
+        ear2="Ebers Earring +2", --5
+        ring1=gear.Ring.Gerubu_Or_Stikini1,
+        ring2=gear.Ring.Stikini_2,
+        back="Null Shawl", --10 
+        waist=gear.Waist.PlatinumMoogle, --3
+    }
 
-    gear.Empyrean_Head = { name="Ebers Cap +3", priority=64 }
-    gear.Empyrean_Body = { name="Ebers Bliaut +3", priority=127 }
-    gear.Empyrean_Hands = { name="Ebers Mitts +3", priority=65 }
-    gear.Empyrean_Legs = { name="Ebers Pantaloons +3", priority=71 }
-    gear.Empyrean_Feet = { name="Ebers Duckbills +3", priority=71 }
+	-- 'TP','PDL','ACC','DT','PDT','MEVA'
+	sets.Idle.TP = set_combine(sets.Idle, {})
+	sets.Idle.ACC = set_combine(sets.Idle, {})
+	sets.Idle.DT = set_combine(sets.Idle, {})
+	sets.Idle.PDT = set_combine(sets.Idle, {})
+	sets.Idle.MEVA = set_combine(sets.Idle, {
+		neck="Warder's Charm +1",
+		waist="Null Belt",
+	})
+	-- Set is only applied when sublimation is charging
+	sets.Idle.Sublimation = set_combine(sets.Idle, {
+	    waist="Embla Sash", -- +3 Submlimation when active
+	})
 
-    gear.WHM_Cure_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
-    gear.WHM_DW_Cape = { name="Alaunus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
+	-- Set to swap out when MP is low
+	sets.Idle.Refresh = set_combine(sets.Idle, {
+        waist="Fucho-no-obi"
+    })
 
-    include('Global-Binds.lua')
+	sets.Idle.Resting = set_combine(sets.Idle, {})
 
-    send_command('bind !F1 input /ja "Benediction" <me>')
-    send_command('bind !F2 input /ja "Asylum" <me>')
+	-- Movement Gear
+    if (item_available("Shneddick Ring +1")) then
+        sets.Movement = { ring1="Shneddick Ring +1" }
+    else
+        sets.Movement = { feet="Herald's Gaiters" }
+    end
 
-    send_command('bind !` input /ja "Afflatus Solace" <me>')
-    send_command('bind ^` input /ja "Afflatus Misery" <me>')
+	sets.Cursna_Received = {
+	    neck="Nicander's Necklace", --20
+        ring1="Eshmun's Ring", --20
+        ring2="Purity Ring", --20
+        waist="Gishdubar Sash", --10
+	}
 
-    send_command('bind !- gs c scholar light')
-    send_command('bind != gs c scholar dark')
+	sets.OffenseMode = {
+		 ammo="Hasty Pinion +1",
+        head=gear.Head.Bunzi,
+        body=gear.Body.Nyame,
+        hands=gear.Hands.Bunzi,
+        legs=gear.Legs.Nyame,
+        feet=gear.Feet.Nyame,
+        neck="Rep. Plat. Medal",
+        ear1="Crepuscular Earring",
+        ear2="Telos Earring",
+        ring1=gear.Ring.Chirich_1,
+        ring2=gear.Ring.Chirich_2,
+        back=gear.WHM_DW,
+        waist="Windbuffet Belt +1",
+	}
 
-    send_command('bind ^[ gs c scholar aoe')
-    send_command('bind ^; gs c scholar speed')   
-    send_command('bind !; gs c scholar cost')
+	sets.OffenseMode.TP = set_combine(sets.OffenseMode,{ })
+	sets.OffenseMode.DT = set_combine(sets.OffenseMode,{ })
+	sets.OffenseMode.ACC = set_combine(sets.OffenseMode,{ })
+	sets.OffenseMode.PDT = set_combine(sets.OffenseMode, { })
+	sets.OffenseMode.MEVA = set_combine(sets.OffenseMode, { })
 
-    send_command('bind !numpad7 input /ma "Paralyze" <t>')
-    send_command('bind !numpad8 input /ma "Slow" <t>')
-    send_command('bind !numpad9 input /ma "Silence" <t>')  
-    send_command('bind !insert gs c cycleback BoostSpell')
-    send_command('bind !delete gs c cycle BoostSpell')
-    send_command('bind !home gs c cycleback BarElement')
-    send_command('bind !end gs c cycle BarElement')
-    send_command('bind !pageup gs c cycleback BarStatus')
-    send_command('bind !pagedown gs c cycle BarStatus')
+	sets.Precast = {}
 
-    send_command('bind !s input /ja Sublimation <me>')
-    send_command('bind !d input /ja "Divine Seal" <me>')
-    send_command('bind !p input /ma "Protectra V" <me>')
-    send_command('bind !o input /ma "Shellra V" <me>')
-    send_command('bind ^p input /ma "Protect V" <stpc>')
-    send_command('bind ^o input /ma "Shell V" <stpc>')
-    send_command('bind !h input /ma "Haste" <stpc>')
-    send_command('bind !u input /ma "Aquaveil" <me>')
-
-    send_command('bind @w gs c toggle WeaponLock')
-
-    send_command('bind ^numpad7 gs c set WeaponSet Maxentius;')
-    send_command('bind ^numpad8 gs c set WeaponSet Yagrush;')
-
-    set_macro_page(1, 3)
-    send_command('wait 3; input /lockstyleset 3')
-
-    state.Auto_Kite = M(false, 'Auto_Kite')
-    DW = false
-    moving = false
-    update_combat_form()
-end
-
-function user_unload()
-    send_command('unbind !`')
-    send_command('unbind ^`')
-    send_command('unbind !s')
-
-    send_command('unbind !-')
-    send_command('unbind !=')
-
-    send_command('unbind !-')
-    send_command('unbind !=')
-
-    send_command('unbind ^;')   
-    send_command('unbind ^[')
-    send_command('unbind !;')
-
-    send_command('unbind !insert')
-    send_command('unbind !delete')
-    send_command('unbind !home')
-    send_command('unbind !end')
-    send_command('unbind !pageup')
-    send_command('unbind !pagedown')
-
-    send_command('unbind !d')
-    send_command('unbind !p')
-    send_command('unbind !o')
-    send_command('unbind !h')
-
-    send_command('unbind @r')
-    send_command('unbind @w')
-    unbind_numpad()
-end
-
-function init_gear_sets()
-
-    sets.precast.FC = {
-        ammo={name="Impatiens", priority=1}, 
-        head=gear.Bunzi_Head, --10
+	-- Used for Magic Spells (Cap 80%)
+	sets.Precast.FastCast = {
+		ammo={name="Impatiens", priority=1}, 
+        head=gear.Head.Bunzi, --10
+        body={name="Pinga Tunic +1", priority=101}, --15
+        hands={name="Volte gloves", priority=1}, --6
+        legs={name="Pinga Pants +1", priority=84}, --13
+        feet={name="Regal Pumps +1", priority=13}, --7
         neck={name="Cleric's Torque +2", priority=1}, --10
         ear1={name="Malignance earring", priority=1}, --4
         ear2={name="Loquac. Earring", priority=1}, --2
-        body={name="Pinga Tunic +1", priority=101}, --15
-        hands={name="Volte gloves", priority=1}, --6
         ring1={name="Lebeche Ring", priority=1},
         ring2={name="Kishar Ring", priority=1}, --4
         back={name="Fi Follet Cape +1", priority=1}, --10
-        waist=gear.Platinum_Moogle_Belt,
-        legs={name="Pinga Pants +1", priority=84}, --13
-        feet={name="Regal Pumps +1", priority=13} --7
-    } --81
+        waist=gear.Waist.PlatinumMoogle,
+	} -- 81%
 
-    sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
-        waist="Siegel Sash",
-    })
+	-- Cap is 10% Quick Magic - used for Raises and Cures
+	sets.Precast.QuickMagic = set_combine(sets.Precast.FastCast, {
+		ammo="Impatiens", -- 2
+		ring2="Lebeche Ring", -- 2
+		waist="Witful Belt", -- 3
+	})
 
-    sets.precast.FC.Cure = set_combine(sets.precast.FC, {      
-        feet=gear.Kaykaus_C_Feet,
-        back="Perimede Cape",
-    })
+	-- Used for Cure cast
+	sets.Precast.Cure = set_combine(sets.Precast.FastCast, sets.Precast.QuickMagic,  {
 
-    sets.precast.FC.Curaga = sets.precast.FC.Cure
-    sets.precast.FC.CureSolace = sets.precast.FC.Cure
+	})
 
-    sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {
-        main="Daybreak", 
-        sub="Ammurapi Shield"
-    })
+	-- Used for Enhancing cast
+	sets.Precast.Enhancing = set_combine(sets.Precast.FastCast, sets.Precast.QuickMagic,  {
 
-    sets.precast.FC.Impact = set_combine(sets.precast.FC, {
-        head=empty, 
-        body="Crepuscular Cloak", 
-        waist="Shinjutsu-no-Obi +1"
-    })
+	})
 
-    sets.midcast.FC = sets.precast.FC
-
-    sets.midcast.CureSolace = {
-        main="Asclepius",
-        sub={name="Genmei Shield", priority=1},-- (DT-10)
-        ammo={name="Staunch Tathlum +1", priority=1}, -- (DT-3) (SIRD-11)
-        head=gear.Empyrean_Head, --(CP-22)
-        neck={name="Clr. Torque +2", priority=1}, --(CP-10) (Enm-25)
-        ear1={name="Glorious Earring", priority=1}, -- (CPII-2) (Enm-5) 
-        ear2={name="Ebers Earring +2", priority=1}, --(DT-5)
-        body=gear.Empyrean_Body,
-        hands=gear.Artifact_Hands, -- (CPII-4) (Enm-7)
-        legs=gear.Empyrean_Legs, --(DT-13)
-        feet=gear.Empyrean_Feet, --(DT-11)
-        ring1=gear.Janniston_Or_Gelatinous, --(PDT-7)          
-        ring2={name="Mephitas's Ring +1", priority=1},
-        back=gear.WHM_Cure_Cape, -- (DT-10)
-        waist={name="Shinjutsu-no-Obi +1", priority=1},
-    } --55 CP | 20 CPII | 51% PDT | -34 Enmity
+	-- Job Abilities
+	sets.JA = {}
+	sets.JA["Benediction"] = {body=gear.Body.Piety}
+	sets.JA["Divine Seal"] = {}
+	sets.JA["Convert"] = {}
+	sets.JA["Devotion"] = {head=gear.Head.Piety}
+	sets.JA["Afflatus Solace"] = {}
+	sets.JA["Afflatus Misery"] = {}
+	sets.JA["Sacrosanctity"] = {}
+	sets.JA["Asylum"] = {}
 
 
+	-- ===================================================================================================================
+	--		sets.midcast
+	-- ===================================================================================================================
 
-    sets.midcast.CureSolaceWeather = set_combine(sets.midcast.CureSolace, {
-        hands=gear.Empyrean_Hands, --(DT-10)
-        back="Twilight Cape",
-        waist="Hachirin-no-Obi",
-    }) --51% DT
-
-    sets.midcast.CureNormal = set_combine(sets.midcast.CureSolace, {
-        body=gear.Artifact_Body,
-    })
-
-    sets.midcast.CureWeather = set_combine(sets.midcast.CureNormal, {
-        hands=gear.Empyrean_Hands, --(DT-10)
-        back="Twilight Cape",
-        waist="Hachirin-no-Obi",
-    })  --51% DT
-
-    sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
-        -- SIRD for Odyssey
-        legs=gear.Bunzi_Legs, --(DT-9) (20 SIRD)
-        feet=gear.Artifact_Feet, -- (29 SIRD)
-    })
-
-    sets.midcast.CuragaWeather = set_combine(sets.midcast.CureNormal, {
-        hands=gear.Empyrean_Hands, --(DT-10)
-        body=gear.Artifact_Body,
-        back="Twilight Cape",
-        waist="Hachirin-no-Obi",
-    }) --51% DT
-
-    sets.midcast.StatusRemoval = {
-        main="Yagrush",
-        sub="Genmei Shield",
-        head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body,
-        hands="Fanatic Gloves",
-        legs=gear.Artifact_Legs,
-        feet=gear.Empyrean_Feet,
-        neck="Loricate Torque +1",
-        ear1="Loquacious Earring",
-        ear2="Etiolation Earring",
-        ring1="Kishar Ring",
-        ring2="Defending Ring",
-        back=gear.WHM_Cure_Cape,
-        waist="Embla Sash",
-    }
-
-    sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
-        main="Yagrush",
-        sub="Genmei Shield",
-        head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body,
-        hands="Fanatic Gloves", --15
-        legs=gear.Artifact_Legs, --21
-        feet=gear.Empyrean_Feet,
-        neck="Debilis Medallion", --15
-        ear1="Meili Earring",
-        ear2="Ebers Earring +2", --3/3
-        ring1="Haoma's Ring", --15
-        ring2="Menelaus's Ring", --20
-        back=gear.WHM_Cure_Cape, --25
-        waist="Bishop's Sash",
-    })
-
-    sets.midcast.Erase = set_combine(sets.midcast.StatusRemoval, {
-        neck="Clr. Torque +2"
-    })
-
-    sets.midcast['Enhancing Magic'] = {
-        main=gear.Gada_ENH,
-        sub="Genmei Shield",
-        ammo="Staunch Tathlum +1",
-        head=gear.Telchine_ENH_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Telchine_ENH_Hands,
-        legs=gear.Telchine_ENH_Legs,
-        feet=gear.Artifact_Feet,
-        neck="Incanter's Torque",
-        ear1="Mimir Earring",
-        ear2="Ebers Earring +2",
-        ring1="Defending Ring",
-        ring2="Gelatinous Ring +1",
-        back=gear.WHM_Cure_Cape,
-        waist="Olympus Sash",
-    }
-
-    sets.midcast.EnhancingDuration = {
-        main=gear.Gada_ENH,
-        sub="Genmei Shield",
-        ammo="Staunch Tathlum +1",
-        head=gear.Telchine_ENH_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Telchine_ENH_Hands,
-        legs=gear.Telchine_ENH_Legs,
-        feet=gear.Artifact_Feet,
-        neck="Loricate Torque +1",
-        ring1="Defending Ring",
-        ring2="Gelatinous Ring +1",
-        ear1="Tuisto Earring",
-        ear2="Ebers Earring +2",
-        waist="Embla Sash",
-        back=gear.WHM_Cure_Cape,
-    }
-
-    sets.midcast.Regen = {
-        main="Bolelabunga",
-        sub="Ammurapi Shield",
-        ammo="Pemphredo Tathlum",
-        head="Inyanga Tiara +2",
-        body=gear.Relic_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Artifact_Legs,
-        feet=gear.Bunzi_Feet,
-        neck="Incanter's Torque",
-        ear1="Tuisto Earring",
-        ear2="Ebers Earring +2",
-        ring1="Defending Ring",
-        ring2="Gelatinous Ring +1",
-        back="Solemnity Cape",
-        waist="Embla Sash",
-    }
-
-    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
-        waist="Gishdubar Sash",
-    })
-
-    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {
-        neck="Nodens Gorget",
-        waist="Siegel Sash",
-    })
-
-    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
-        main="Vadose Rod",
-        sub="Genmei Shield",
-        ammo="Staunch Tathlum +1",
-        head="Chironic Hat",
-        body=gear.Bunzi_Body,
-        hands="Regal Cuffs",
-        legs="Shedir Seraweels",
-        feet=gear.Artifact_Feet,
-        ear1="Halasz Earring",
-        ear2="Magnetic Earring",
-        ring1="Freke Ring",
-        ring2="Evanescence Ring",
-        waist="Emphatikos Rope",
-    })
-
-    sets.midcast.Auspice = set_combine(sets.midcast.EnhancingDuration, {
-        feet=gear.Empyrean_Feet,
-    })
-
-    sets.midcast.BarElement = set_combine(sets.midcast['Enhancing Magic'], {
-        main="Beneficus",
-        sub="Ammurapi Shield",
-        ammo="Pemphredo Tathlum",
-        head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Relic_Legs,
-        feet=gear.Empyrean_Feet,
-        neck="Incanter's Torque",
-        ear1="Mimir Earring",
-        ear2="Andoaa Earring",
-        ring1=gear.Stikini_1,
-        ring2=gear.Stikini_2,
-        back="Fi Follet Cape +1",
-        waist="Embla Sash",
-    })
-
-    sets.midcast.BarStatus = set_combine(sets.midcast.BarElement, {
-        neck="Sroda Necklace",
-    });
-
-    sets.midcast.BoostStat = set_combine(sets.midcast['Enhancing Magic'], {
-        feet=gear.Empyrean_Feet,
-    })
-
-    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
-        ring1="Sheltered Ring",
-    })
-
-    sets.midcast.Protectra = sets.midcast.Protect
-    sets.midcast.Shell = sets.midcast.Protect
-    sets.midcast.Shellra = sets.midcast.Protect
-
-    sets.midcast['Divine Magic'] = {
+	--Base set for midcast - if not defined will notify and use your idle set for surviability
+	sets.Midcast = set_combine(sets.Idle, {
         main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
@@ -403,37 +185,148 @@ function init_gear_sets()
         body=gear.Artifact_Body,
         hands=gear.Relic_Hands,
         legs=gear.Artifact_Legs,
-        feet=gear.Artifact_Feet,
+        feet=gear.Feet.Theophany,
         neck="Erra Pendant",
         ear1="Regal Earring",
         ear2="Ebers Earring +2",
         ring1=gear.Stikini_1,
-        ring2=gear.Stikini_2,
+        ring2=gear.Ring.Stikini_2,
         back="Aurist's Cape +1",
         waist="Obstinate Sash",
+	})
+
+	--This set is used as base as is overwrote by specific gear changes (Spell Interruption Rate Down)
+	sets.Midcast.SIRD = {}
+
+	-- Cure Set
+	sets.Midcast.Cure = {
+		main="Asclepius",
+        sub={name="Genmei Shield", priority=1},-- (DT-10)
+        ammo={name="Staunch Tathlum +1", priority=1}, -- (DT-3) (SIRD-11)
+        head=gear.Empyrean_Head, --(CP-22)
+        neck={name="Clr. Torque +2", priority=1}, --(CP-10) (Enm-25)
+        ear1={name="Glorious Earring", priority=1}, -- (CPII-2) (Enm-5) 
+        ear2={name="Ebers Earring +2", priority=1}, --(DT-5)
+        body=gear.Body.Ebers,
+        hands=gear.Artifact_Hands, -- (CPII-4) (Enm-7)
+        legs=gear.Legs.Ebers, --(DT-13)
+        feet=gear.Feet.Ebers, --(DT-11)
+        ring1=gear.Janniston_Or_Gelatinous, --(PDT-7)          
+        ring2={name="Mephitas's Ring +1", priority=1},
+        back=gear.Back.WHM_Cure, -- (DT-10)
+        waist={name="Shinjutsu-no-Obi +1", priority=1},
     }
 
-    sets.midcast.Banish = {
-        main="Daybreak",
+    -- Used in custom hook
+    sets.Midcast.Cure.LightWeather = {
+        back="Twilight Cape",
+        waist="Hachirin-no-Obi",
+    }
+
+	-- For AoE cure
+	sets.Midcast.Curaga = set_combine(sets.Midcast.Cure, 
+	{
+		 -- SIRD for Odyssey
+        legs=gear.Bunzi_Legs, --(DT-9) (20 SIRD)
+        feet=gear.Feet.Theophany, -- (29 SIRD)
+	})
+
+	-- For Cura - foucs on DT
+	sets.Midcast.Cura = set_combine(sets.Midcast.Cure, {body="Theo. Bliaut +3",})
+
+	-- Enhancing Skill
+
+	-- Used for base duration
+	sets.Midcast.Enhancing = {
+		main=gear.Gada_ENH,
+        sub="Genmei Shield",
+        ammo="Staunch Tathlum +1",
+        head=gear.Telchine_ENH_Head,
+        body=gear.Body.Nyame,
+        hands=gear.Telchine_ENH_Hands,
+        legs=gear.Telchine_ENH_Legs,
+        feet=gear.Feet.Theophany,
+        neck="Incanter's Torque",
+        ear1="Mimir Earring",
+        ear2="Ebers Earring +2",
+        ring1="Defending Ring",
+        ring2="Gelatinous Ring +1",
+        back=gear.Back.WHM_Cure,
+        waist="Olympus Sash",
+	}
+
+	sets.Midcast.Enhancing.Others = set_combine(sets.Midcast.Enhancing, {
+        
+	});
+
+	--'Barfire','Barblizzard','Baraero','Barstone','Barthunder','Barwater','Barfira','Barblizzara','Baraera','Barstonra','Barthundra','Barwatera'
+	sets.Midcast.Enhancing.Elemental = set_combine(sets.Midcast.Enhancing, {
+	    main=gear.Gada_ENH,
+        sub="Genmei Shield",
+        ammo="Staunch Tathlum +1",
+        head=gear.Telchine_ENH_Head,
+        body=gear.Body.Nyame,
+        hands=gear.Telchine_ENH_Hands,
+        legs=gear.Telchine_ENH_Legs,
+        feet=gear.Feet.Theophany,
+        neck="Loricate Torque +1",
+        ring1="Defending Ring",
+        ring2="Gelatinous Ring +1",
+        ear1="Tuisto Earring",
+        ear2="Ebers Earring +2",
+        waist="Embla Sash",
+        back=gear.Back.WHM_Cure,
+	})
+
+	--'Barsleepra','Barpoisonra','Barparalyzra','Barblindra','Barvira','Barpetra','Baramnesra','Barsilencera','Barsleep','Barpoison','Barparalyze','Barblind','Barvirus','Barpetrify','Baramnesia','Barsilence'
+	sets.Midcast.Enhancing.Status = set_combine(sets.Midcast.Enhancing.Elemental, {
+	    neck="Sroda Necklace",
+	})
+
+	--'Temper','Temper II','Enaero','Enstone','Enthunder','Enwater','Enfire','Enblizzard','Boost-STR','Boost-DEX','Boost-VIT','Boost-AGI','Boost-INT','Boost-MND','Boost-CHR'
+	sets.Midcast.Enhancing.Skill = set_combine(sets.Midcast.Enhancing, {
+	    main=gear.Gada_ENH,
+        sub="Genmei Shield",
+        ammo="Staunch Tathlum +1",
+        head=gear.Telchine_ENH_Head,
+        body=gear.Body.Nyame,
+        hands=gear.Telchine_ENH_Hands,
+        legs=gear.Telchine_ENH_Legs,
+        feet=gear.Feet.Theophany,
+        neck="Incanter's Torque",
+        ear1="Mimir Earring",
+        ear2="Ebers Earring +2",
+        ring1="Defending Ring",
+        ring2="Gelatinous Ring +1",
+        back=gear.Back.WHM_Cure,
+        waist="Olympus Sash",
+	})
+
+	-- High MACC for landing spells
+	sets.Midcast.Enfeebling = {
+		main="Bunzi's Rod",
         sub="Ammurapi Shield",
-        ammo="Ghastly Tathlum +1",
-        head=gear.Bunzi_Head,
-        body="Shamash Robe",
-        hands=gear.Bunzi_Hands,
-        legs=gear.Bunzi_Legs,
-        feet=gear.Bunzi_Feet,
-        neck="Sibyl Scarf",
+        ammo="Pemphredo Tathlum",
+        head=gear.Empyrean_Head;
+        body=gear.Body.Ebers,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Chironic_ENF_Legs,
+        feet=gear.Feet.Theophany,
+        neck="Null Loop",
         ear1="Regal Earring",
-        ear2="Malignance Earring", 
-        ring1="Freke Ring",
-        ring2=gear.Stikini_2,
+        ear2="Ebers Earring +2",
+        ring1="Kishar Ring",
+        ring2=gear.Ring.Stikini_2,
         back="Aurist's Cape +1",
-        waist="Luminary Sash",
-    }
+        waist="Obstinate Sash",
+	}
 
-    sets.midcast.Holy = sets.midcast.Banish
+    --Handled in custom hook
+    sets.Midcast.IntEnfeebles = set_combine(sets.Midcast.MndEnfeebles, {
+        waist="Acuity Belt +1",
+    })
 
-    sets.midcast['Dark Magic'] = {
+	sets.Midcast.Dark = set_combine(sets.Midcast.Enfeebling, {
         main="Rubicundity",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
@@ -441,7 +334,7 @@ function init_gear_sets()
         body=gear.Artifact_Body,
         hands=gear.Artifact_Hands,
         legs=gear.Chironic_ENF_Legs,
-        feet=gear.Artifact_Feet,
+        feet=gear.Feet.Theophany,
         neck="Erra Pendant",
         ear1="Mani Earring",
         ear2="Malignance Earring",
@@ -449,440 +342,244 @@ function init_gear_sets()
         ring2="Archon Ring",
         back="Aurist's Cape +1",
         waist="Fucho-no-Obi",
-    }
+	})
 
-    sets.midcast.MndEnfeebles = {
-        main="Bunzi's Rod",
+	sets.Midcast.Dark.MACC = set_combine(sets.Midcast.Enfeebling.MACC, {
+
+	})
+
+	sets.Midcast.Dark.Absorb = set_combine(sets.Midcast.Enfeebling, {
+
+	})
+
+	sets.Midcast["Cursna"] = {
+		main="Yagrush",
+        sub="Genmei Shield",
+        head=gear.Empyrean_Head,
+        body=gear.Body.Ebers,
+        hands="Fanatic Gloves", --15
+        legs=gear.Artifact_Legs, --21
+        feet=gear.Feet.Ebers,
+        neck="Debilis Medallion", --15
+        ear1="Meili Earring",
+        ear2="Ebers Earring +2", --3/3
+        ring1="Haoma's Ring", --15
+        ring2="Menelaus's Ring", --20
+        back=gear.Back.WHM_Cure, --25
+        waist="Bishop's Sash",
+	}
+
+	sets.Midcast["Erase"] = set_combine(sets.Midcast, {
+		main="Yagrush",
+		neck="Cleric's Torque +2",
+	})
+
+	sets.Midcast["Esuna"] = set_combine(sets.Midcast, { main="Asclepius" })
+
+	sets.Midcast["Silena"] = set_combine(sets.Midcast, {
+		hands=gear.Hands.Ebers,
+		main="Yagrush"
+	})
+
+	sets.Midcast["Poisona"] = set_combine(sets.Midcast, {
+		hands=gear.Hands.Ebers,
+		main="Yagrush"
+	})
+
+	sets.Midcast["Paralyna"] = set_combine(sets.Midcast, {
+		hands=gear.Hands.Ebers,
+		main="Yagrush"
+	})
+
+	sets.Midcast["Stona"] = set_combine(sets.Midcast, {
+		hands=gear.Hands.Ebers,
+		main="Yagrush"
+	})
+
+	sets.Midcast["Blindna"] = set_combine(sets.Midcast, {
+		hands=gear.Hands.Ebers,
+		main="Yagrush"
+	})
+
+	sets.Midcast["Viruna"] = set_combine(sets.Midcast, {
+		hands=gear.Hands.Ebers,
+		main="Yagrush"
+	})
+
+	sets.Midcast["Auspice"] = set_combine(sets.Midcast, {
+		feet="Ebers Duckbills +3",
+	})
+
+	sets.Midcast["Aquaveil"] = set_combine(sets.Midcast.Enhancing, {
+		main="Vadose Rod",
+        sub="Genmei Shield",
+        ammo="Staunch Tathlum +1",
+        head="Chironic Hat",
+        body=gear.Bunzi_Body,
+        hands="Regal Cuffs",
+        legs="Shedir Seraweels",
+        feet=gear.Feet.Theophany,
+        ear1="Halasz Earring",
+        ear2="Magnetic Earring",
+        ring1="Freke Ring",
+        ring2="Evanescence Ring",
+        waist="Emphatikos Rope",
+	})
+
+	sets.Midcast.Regen = {
+		 main="Bolelabunga",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
-        head=gear.Empyrean_Head;
-        body=gear.Empyrean_Body,
+        head="Inyanga Tiara +2",
+        body=gear.Relic_Body,
         hands=gear.Empyrean_Hands,
-        legs=gear.Chironic_ENF_Legs,
-        feet=gear.Artifact_Feet,
-        neck="Null Loop",
-        ear1="Regal Earring",
-        ear2="Ebers Earring +2",
-        ring1="Kishar Ring",
-        ring2=gear.Stikini_2,
-        back="Aurist's Cape +1",
-        waist="Obstinate Sash",
-    }
-
-    sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-        waist="Acuity Belt +1",
-    })
-
-    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
-
-    sets.midcast.Impact = {
-        main="Yagrush",
-        sub="Ammurapi Shield",
-        head=empty,
-        body="Crepuscular Cloak",
-        hands=gear.Artifact_Hands,
         legs=gear.Artifact_Legs,
-        feet=gear.Artifact_Feet,
-        ring1="Freke Ring",
-        ring2="Archon Ring",
-    }
+        feet=gear.Bunzi_Feet,
+        neck="Cleric's Torque +2",
+        ear1="Tuisto Earring",
+        ear2="Ebers Earring +2",
+        ring1="Defending Ring",
+        ring2="Gelatinous Ring +1",
+        back="Solemnity Cape",
+        waist="Embla Sash",
+	}
 
-    sets.midcast.Trust = sets.precast.FC
+	-- Specific gear for spells
+	sets.Midcast["Stoneskin"] = {
+		waist="Siegel Sash",
+		neck="Nodens Gorget",
+	}
 
-    sets.engaged = {
-        ammo="Hasty Pinion +1",
-        head=gear.Bunzi_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Bunzi_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-        neck="Rep. Plat. Medal",
-        ear1="Crepuscular Earring",
-        ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.WHM_DW_Cape,
-        waist="Windbuffet Belt +1",
-    }
+	sets.Midcast.Refresh = {}
 
-    sets.engaged.DW = {
-        ammo="Hasty Pinion +1",
-        head=gear.Bunzi_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Bunzi_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-        neck="Rep. Plat. Medal",
-        ear1="Crepuscular Earring",
-        ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.WHM_DW_Cape,
-        waist="Windbuffet Belt +1",
-    }
-
-    sets.precast.WS = {
-        ammo="Oshasha's Treatise",
-        head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
+	sets.WS = {
+	    ammo="Oshasha's Treatise",
+        head=gear.Head.Nyame,
+        body=gear.Body.Nyame,
         hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
+        legs=gear.Legs.Nyame,
+        feet=gear.Feet.Nyame,
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
         ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Ilabrat Ring",
-        back=gear.WHM_Cure_Cape,
+        back=gear.Back.WHM_Cure,
         waist="Fotia Belt",
-    }
+	}
 
-    sets.precast.WS['Mystic Boon'] = {
-        ammo="Oshasha's Treatise",
-        head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-        neck="Fotia Gorget",
-        ear1="Moonshade Earring",
-        ear2="Regal Earring",
-        ring1=gear.Cornelia_Or_Epaminondas,
-        ring2="Metamorph Ring +1",
-        back=gear.WHM_Cure_Cape,
-        waist="Fotia Belt",
-    }
+	--This set is used when OffenseMode is ACC and a WS is used (Augments the WS base set)
+	sets.WS.ACC = {}
 
-    sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {
-        neck="Rep. Plat. Medal",
-    })
+	-- Note that the Mote library will unlock these gear spots when used.
+	sets.TreasureHunter = {}
 
-    sets.buff['Divine Caress'] = {
-        hands=gear.Empyrean_Hands, 
-        back="Mending Cape"
-    }
-
-    sets.buff['Devotion'] = { head=gear.Relic_Head }
-    sets.buff.Sublimation = { waist="Embla Sash" }
-    sets.buff.Doom = {
-        neck="Nicander's Necklace", --20
-        ring1="Eshmun's Ring", --20
-        ring2="Purity Ring", --20
-        waist="Gishdubar Sash", --10
-    }
-    sets.Obi = {waist="Hachirin-no-Obi"}
-
-    sets.resting = {
-        main="Chatoyant Staff",
-        waist="Shinjutsu-no-Obi +1",
-    }
-
-    sets.idle = {
-        main="Mpaca's Staff",
-        sub="Irenic Strap +1",
-        ammo="Staunch Tathlum +1", --3
-        head=gear.Bunzi_Head, --7
-        body=gear.Empyrean_Body,
-        hands=gear.Bunzi_Hands, --8
-        legs=gear.Empyrean_Legs, --13
-        feet=gear.Empyrean_Feet, --11
-        neck="Sibyl Scarf",
-        ear1="Hearty Earring",
-        ear2="Ebers Earring +2", --5
-        ring1=gear.Gerubu_Or_Stikini1,
-        ring2=gear.Stikini_2,
-        back="Null Shawl", --10 
-        waist=gear.Platinum_Moogle_Belt, --3
-    } --50 (11 Refresh)
-
-
-    sets.idle.Town = set_combine(sets.idle, {
-        main="Yagrush",
-        sub="Genmei Shield",
-    })
-
-    sets.defense.PDT = set_combine(sets.idle, {
-
-    })
-
-    sets.defense.MDT = set_combine(sets.idle, {
-    
-    })
-    
-    if (item_available("Shneddick Ring +1")) then
-        sets.Kiting = { ring1="Shneddick Ring +1" }
-    else
-        sets.Kiting = { feet="Herald's Gaiters" }
-    end
-
-    sets.latent_refresh = { waist="Fucho-no-obi" }
-    sets.DefaultShield = { sub="Genmei Shield" }
-
-    sets.Maxentius = { main="Maxentius", sub="Sindri" }
-    sets.Yagrush = { main="Yagrush", sub="Sindri" }
 end
 
-function job_post_precast(spell, action, spellMap, eventArgs)
-    if spell.name == 'Impact' then
-        equip(sets.precast.FC.Impact)
-    end
+-------------------------------------------------------------------------------------------------------------------
+-- DO NOT EDIT BELOW THIS LINE UNLESS YOU NEED TO MAKE JOB SPECIFIC RULES
+-------------------------------------------------------------------------------------------------------------------
+
+-- Called when the player's subjob changes.
+function sub_job_change_custom(new, old)
+	-- Typically used for Macro pallet changing
 end
 
-function job_post_midcast(spell, action, spellMap, eventArgs)
-    -- Apply Divine Caress boosting items as highest priority over other gear, if applicable.
-    if spellMap == 'StatusRemoval' and buffactive['Divine Caress'] then
-        equip(sets.buff['Divine Caress'])
-    end
-    if spellMap == 'Banish' or spellMap == "Holy" then
-        if (world.weather_element == 'Light' or world.day_element == 'Light') then
-            equip(sets.Obi)
-        end
-    end
-    if spell.skill == 'Enhancing Magic' then
-        if classes.NoSkillSpells:contains(spell.english) then
-            equip(sets.midcast.EnhancingDuration)
-            if spellMap == 'Refresh' then
-                equip(sets.midcast.Refresh)
-            end
-        end
-    end
+--Adjust custom precast actions
+function pretarget_custom(spell,action)
+
 end
 
-function job_aftercast(spell, action, spellMap, eventArgs)
-    if not spell.interrupted then
-        if spell.english == "Sleep II" then
-            send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
-        elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
-            send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
-        elseif spell.english == "Repose" then
-            send_command('@timers c "Repose ['..spell.target.name..']" 90 down spells/00098.png')
-        end
-    end
-    if player.status ~= 'Engaged' and state.WeaponLock.value == false then
-        check_weaponset()
-    end
+-- Augment basic equipment sets
+function precast_custom(spell)
+	local equipSet = {}
+
+	return equipSet
 end
 
-function job_buff_change(buff,gain)
-    if buff == "Sublimation: Activated" then
-        handle_equipping_gear(player.status)
-    end
+-- Augment basic equipment sets
+function midcast_custom(spell)
+	local equipSet = {}
 
-    if buff == "Doom" then
-        if gain then
-            state.Buff.Doom = true
-            send_command('@input /p Doomed.')
+    if ((world.weather_element == 'Light' or world.day_element == 'Light') and (spell.name:contains('Cure') or spell.name:contains('Cura'))) then
+        equipSet = set_combine(sets.Midcast.Cure, sets.Midcast.Cure.LightWeather)
+    elseif spell.skill == "Enfeebling Magic" then
+        if spell.type == 'DarkMagic' then
+            equipSet = set_combine(sets.Midcast.Enfeebling, sets.Midcast.IntEnfeebles)
         else
-            state.Buff.Doom = false
+            equipSet = sets.Midcast.Enfeebling
         end
     end
+    
+	return equipSet
 end
 
--- Handle notifications of general user state change.
-function job_state_change(stateField, newValue, oldValue)
-    if state.WeaponLock.value == true then
-        disable('main','sub')
-    else
-        enable('main','sub')
-    end
-    check_weaponset()
+-- Augment basic equipment sets
+function aftercast_custom(spell)
+	local equipSet = {}
+	if not buffactive['Afflatus Solace'] and not buffactive['Afflatus Misery'] then
+		add_to_chat(8,'You are not in a stance')
+	end
+	return equipSet
 end
 
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_handle_equipping_gear(playerStatus, eventArgs)
-    check_gear()
-    update_combat_form()
-    determine_haste_group()
-    check_moving()
+--Function is called when the player gains or loses a buff
+function buff_change_custom(name,gain)
+	local equipSet = {}
+
+	return equipSet
 end
 
-function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
-    update_sublimation()
+--This function is called when a update request the correct equipment set
+function choose_set_custom()
+	local equipSet = {}
+
+	return equipSet
 end
 
-function update_combat_form()
-    if DW == true then
-        state.CombatForm:set('DW')
-    elseif DW == false then
-        state.CombatForm:reset()
-    end
+--Function is called when the player changes states
+function status_change_custom(new,old)
+	local equipSet = {}
+
+	return equipSet
 end
 
--- Custom spell mapping.
-function job_get_spell_map(spell, default_spell_map)
-    if spell.action_type == 'Magic' then
-        if default_spell_map == 'Cure' then
-            if buffactive['Afflatus Solace'] then
-                if (world.weather_element == 'Light' or world.day_element == 'Light') then
-                    return "CureSolaceWeather"
-                else
-                    return "CureSolace"
-              end
-            else
-                if (world.weather_element == 'Light' or world.day_element == 'Light') then
-                    return "CureWeather"
-                else
-                    return "CureNormal"
-              end
-            end
-        elseif default_spell_map == 'Curaga' then
-            if (world.weather_element == 'Light' or world.day_element == 'Light') then
-                return "CuragaWeather"
-            else
-                return "CuragaNormal"
-            end
-        elseif spell.skill == "Enfeebling Magic" then
-            if spell.type == "WhiteMagic" then
-                return "MndEnfeebles"
-            else
-                return "IntEnfeebles"
-            end
-        end
-    end
+--Function is called when a self command is issued
+function self_command_custom(command)
+
 end
 
--- Modify the default melee set after it was constructed.
-function customize_melee_set(meleeSet)
-    if state.Buff.Doom then
-        meleeSet = set_combine(meleeSet, sets.buff.Doom)
-    end
-    check_weaponset()
-    return meleeSet
+-- Function is called when the job lua is unloaded
+function user_file_unload()
+
 end
 
-function customize_idle_set(idleSet)
-    if state.Buff['Sublimation: Activated'] then
-        idleSet = set_combine(idleSet, sets.buff.Sublimation)
-    end
-    if player.mpp < 20 then
-        idleSet = set_combine(idleSet, sets.latent_refresh)
-    end
-    if state.Buff.Doom then
-        idleSet = set_combine(idleSet, sets.buff.Doom)
-    end
-    if state.Auto_Kite.value == true then
-        idleSet = set_combine(idleSet, sets.Kiting)
-     end
-
-    return idleSet
+--Function used to automate Job Ability use - Checked first
+function check_buff_JA()
+	local buff = 'None'
+	return buff
 end
 
--- Function to display the current relevant user state when doing an update.
--- Return true if display was handled, and you don't want the default info shown.
-function display_current_job_state(eventArgs)
-    local c_msg = state.CastingMode.value
-
-    local d_msg = 'None'
-    if state.DefenseMode.value ~= 'None' then
-        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
-    end
-
-    local i_msg = state.IdleMode.value
-
-    local msg = ''
-    if state.Kiting.value then
-        msg = msg .. ' Kiting: On |'
-    end
-
-    add_to_chat(060, '| Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,002)..msg)
-
-    eventArgs.handled = true
+--Function used to automate Spell use
+function check_buff_SP()
+	local buff = 'None'
+	return buff
 end
 
-function job_self_command(cmdParams, eventArgs)
-    gearinfo(cmdParams, eventArgs)
-    if cmdParams[1]:lower() == 'scholar' then
-        handle_strategems(cmdParams)
-        eventArgs.handled = true
-    elseif cmdParams[1]:lower() == 'nuke' then
-        handle_nuking(cmdParams)
-        eventArgs.handled = true
-    elseif cmdParams[1]:lower() == 'barelement' then
-        send_command('@input /ma '..state.BarElement.value..' <me>')
-    elseif cmdParams[1]:lower() == 'barstatus' then
-        send_command('@input /ma '..state.BarStatus.value..' <me>')
-    elseif cmdParams[1]:lower() == 'boostspell' then
-        send_command('@input /ma '..state.BoostSpell.value..' <me>')
-    end
-
-    gearinfo(cmdParams, eventArgs)
+function pet_change_custom(pet,gain)
+	local equipSet = {}
+	
+	return equipSet
 end
 
-function gearinfo(cmdParams, eventArgs)
-    if cmdParams[1] == 'gearinfo' then
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
-    end
+function pet_aftercast_custom(spell)
+	local equipSet = {}
+
+	return equipSet
 end
 
-function update_sublimation()
-    state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
-end
+function pet_midcast_custom(spell)
+	local equipSet = {}
 
-function determine_haste_group()
-    classes.CustomMeleeGroups:clear()
-    if DW == true then
-        if DW_needed <= 11 then
-            classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 11 and DW_needed <= 27 then
-            classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 27 and DW_needed <= 31 then
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif DW_needed > 31 and DW_needed <= 42 then
-            classes.CustomMeleeGroups:append('LowHaste')
-        elseif DW_needed > 42 then
-            classes.CustomMeleeGroups:append('')
-        end
-    end
-end
-
-function gearinfo(cmdParams, eventArgs)
-    if cmdParams[1] == 'gearinfo' then
-        if type(tonumber(cmdParams[2])) == 'number' then
-            if tonumber(cmdParams[2]) ~= DW_needed then
-            DW_needed = tonumber(cmdParams[2])
-            DW = true
-            end
-        elseif type(cmdParams[2]) == 'string' then
-            if cmdParams[2] == 'false' then
-                DW_needed = 0
-                DW = false
-            end
-        end
-        if type(tonumber(cmdParams[3])) == 'number' then
-            if tonumber(cmdParams[3]) ~= Haste then
-                Haste = tonumber(cmdParams[3])
-            end
-        end
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
-    end
-end
-
-function check_weaponset()
-    equip(sets[state.WeaponSet.current])
-    if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
-       equip(sets.DefaultShield)
-    end
+	return equipSet
 end
