@@ -18,6 +18,7 @@ function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
 end
+
 function job_setup()
     geo_timer = ''
     indi_duration = 308
@@ -33,7 +34,7 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(true, 'Magic Burst')
 
-    gear.Artifact_Head = { name= "Geomancy Galero +3" }
+    gear.Artifact_Head = { name= "Geomancy Galero +2" }
     gear.Artifact_Body = { name= "Geomancy Tunic +3" }
     gear.Artifact_Hands = { name= "Geomancy Mitaines +3" }
     gear.Artifact_Legs = { name= "Geomancy Pants +3" }
@@ -50,9 +51,9 @@ function user_setup()
     gear.Empyrean_Hands = { name= "Azimuth Gloves +3" }
     gear.Empyrean_Legs = { name= "Azimuth Tights +3" }
     gear.Empyrean_Feet = { name= "Azimuth Gaiters +3" }
-    
-    gear.GEO_Idle_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10','Pet: "Regen"+5',}}
-    gear.GEO_MAB_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}}
+
+    gear.GEO_Idle_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10','Pet: "Regen"+5',}} --X
+    gear.GEO_MAB_Cape = { name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Mag. Evasion+15',}} --X
     
     include('Global-Binds.lua')
 
@@ -148,18 +149,18 @@ function init_gear_sets()
     sets.precast.FC = {
         ranged="Dunna", --3
         head=gear.Amalric_A_Head, --11
-        body=gear.Merlinic_MB_Body, --6
-        hands=gear.Merlinic_FC_hands, --7
+        body="Zendik Robe", --13
+        hands=gear.Agwu_Hands, --6
         legs=gear.Artifact_Legs, --15
-        feet="Regal Pumps +1", --4
-        neck="Baetyl Pendant", --4
+        feet=gear.Merlinic_FC_Feet, --12
+        neck="Orunmila's Torque", --5
         ear1="Malignance Earring", --4
         ear2="Etiolation Earring", --1
         ring1="Kishar Ring", --4
         ring2="Prolix Ring", --2
         back="Fi Follet Cape +1", --10
         waist="Shinjutsu-no-Obi +1", --5
-    }
+    } --91
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
         back="Perimede Cape",
@@ -175,9 +176,10 @@ function init_gear_sets()
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
-
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Crepuscular Cloak"})
 
     sets.precast.WS = {
+        ammo="Oshasha's Treatise",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
@@ -237,8 +239,6 @@ function init_gear_sets()
         waist="Orpheus's Sash",
     }
 
-
-
    sets.midcast.Geomancy = {
         main="Idris",
         sub="Genmei Shield",
@@ -250,7 +250,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         ear1="Magnetic Earring",
         ear2="Azimuth Earring +2",
-        neck="Bagua Charm +2",
+        neck="Incanter's Torque",
         ring1="Gelatinous Ring +1",
         ring2="Defending Ring",
         back="Fi Follet Cape +1",
@@ -263,14 +263,14 @@ function init_gear_sets()
     })
 
     sets.midcast.Cure = {
-        main="Daybreak",
+        main="Daybreak", 
         sub="Genmei Shield",
         head="Vanya Hood",
-        body="Vanya Robe",
-        hands="Vanya Cuffs",
-        legs="Vanya Slops",
+        body=gear.Agwu_Body, 
+        hands=gear.Telchine_ENH_Hands,
+        legs=gear.Nyame_Legs,
         feet="Vanya Clogs",
-        neck="Nodens Gorget",
+        neck="Incanter's Torque",
         ear1="Meili Earring",
         ear2="Azimuth Earring +2",
         ring1="Metamorph Ring +1",
@@ -285,6 +285,7 @@ function init_gear_sets()
     })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
+        hands="Hieros Mittens",
         neck="Debilis Medallion",
         ring1="Haoma's Ring",
         ring2="Menelaus's Ring",
@@ -351,14 +352,14 @@ function init_gear_sets()
     sets.midcast.Shellra = sets.midcast.Protect
 
     sets.midcast.MndEnfeebles = {
-        -- main="Idris",
-        -- sub="Ammurapi Shield",
-        head=gear.Artifact_Head,
-        body=gear.Artifact_Body,
+        main="Idris",
+        sub="Ammurapi Shield",
+        head=gear.Empyrean_Head,
+        body=gear.Empyrean_Body,
         hands=gear.Artifact_Hands,
         legs=gear.Artifact_Legs,
         feet=gear.Relic_Feet,
-        neck="Bagua Charm +2",
+        neck="Null Loop",
         ear1="Vor Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
@@ -373,16 +374,33 @@ function init_gear_sets()
         waist="Acuity Belt +1",
     }) -- INT/Magic accuracy
 
+    sets.midcast['Absorb-TP'] = {
+        main="Idris",
+        sub="Ammurapi Shield",
+        head=gear.Empyrean_Head,
+        body=gear.Artifact_Body,
+        hands=gear.Artifact_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Erra Pendant",
+        ear1="Mani Earring",
+        ear2="Regal Earring",
+        ring1="Archon Ring",
+        ring2="Metamorph Ring +1",
+        back="Aurist's Cape +1",
+        waist="Acuity Belt +1",
+    }
+
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
 
     sets.midcast['Dark Magic'] = {
         main="Rubicundity",
         sub="Ammurapi Shield",
-        head=gear.Artifact_Head,
-        body=gear.Artifact_Body,
-        hands=gear.Artifact_Hands,
-        legs=gear.Artifact_Legs,
-        feet=gear.Merlinic_MAB_feet,
+        head=gear.Agwu_Head,
+        body=gear.Agwu_Body,
+        hands=gear.Agwu_Hands,
+        legs=gear.Agwu_Legs,
+        feet=gear.Agwu_Feet,
         neck="Erra Pendant",
         ear1="Malignance Earring",
         ear2="Regal Earring",
@@ -406,7 +424,7 @@ function init_gear_sets()
     sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], { })
 
     sets.midcast['Elemental Magic'] = {
-        main="Idris",
+        main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Empyrean_Head,
@@ -419,11 +437,18 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Azimuth Earring +2",     
         ring1="Freke Ring",
-        ring2=gear.Medada_Or_Metamorph,
+        ring2="Metamor. Ring +1",
         back=gear.GEO_MAB_Cape,
     }
+
+    sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
+        head=empty,
+        body="Crepuscular Cloak",
+        ring2="Archon Ring",
+    })
+
     sets.MagicBurst = {
-        main="Idris",
+        main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Empyrean_Head,
@@ -434,9 +459,9 @@ function init_gear_sets()
         neck="Sibyl Scarf",
         waist="Acuity Belt +1",
         ear1="Malignance Earring",
-        ear2="Azimuth Earring +2",     
+        ear2="Azimuth Earring +2", 
         ring1="Freke Ring",
-        ring2=gear.Medada_Or_Metamorph,
+        ring2="Metamorph Ring +1",
         back=gear.GEO_MAB_Cape,
     }
 
@@ -451,15 +476,15 @@ function init_gear_sets()
         sub="Genmei Shield", --10
         ranged="Dunna",
         head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body, --10
+        body="Shamash Robe", --10
         hands=gear.Artifact_Hands,
-        legs=gear.Empyrean_Legs, --7
+        legs=gear.Agwu_Legs, --7
         feet=gear.Relic_Feet,
         neck="Bagua Charm +2",
         ear1="Etiolation Earring",
-        ear2="Azimuth Earring +2", --5
+        ear2="Azimuth Earring +2", --7
         ring1=gear.Stikini_1,
-        ring2="Defending Ring", --10
+        ring2=gear.Stikini_2,
         back=gear.GEO_Idle_Cape,
         waist="Isa Belt",
     }
@@ -471,7 +496,7 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         main="Idris",
         sub="Genmei Shield",
-        body=gear.Empyrean_Body,
+        body="Shamash Robe",
         hands=gear.Artifact_Hands,
         legs=gear.Nyame_Legs,
         neck="Loricate Torque +1",
@@ -498,16 +523,16 @@ function init_gear_sets()
         ammo="Hasty Pinion +1",
         head=gear.Nyame_Head,
         body=gear.Nyame_Body,
-        hands=gear.Nyame_Hands,
+        hands=gear.Artifact_Hands, -- Pet DT
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
-        neck="Rep. Plat. Medal",
+        neck="Bagua Charm +2", -- Pet Absorb
         ear1="Crepuscular Earring",
         ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
-        waist="Cornelia's Belt",
-        back="Null Shawl"
+        waist="Isa Belt", -- Pet DT
+        back=gear.GEO_Idle_Cape, -- Pet Regen
     }
 
     sets.buff.Doom = {
@@ -519,7 +544,13 @@ function init_gear_sets()
 
     sets.Obi = { waist="Hachirin-no-Obi" }
     
-    sets.idle.Town = sets.MagicBurst
+    sets.idle.Town = set_combine(sets.MagicBurst, {
+        head=gear.Agwu_Head,
+        body=gear.Agwu_Body,
+        hands=gear.Agwu_Hands,
+        legs=gear.Agwu_Legs,
+        feet=gear.Agwu_Feet,
+    })
 end
 
 function job_pretarget(spell, spellMap, eventArgs)
@@ -579,7 +610,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     elseif spell.skill == 'Geomancy' then
         if buffactive.Entrust and spell.english:startswith('Indi-') then
-            equip({main=gear.Gada_GEO})
+            equip({main=gear.Gada_INDI})
         end
     end
 end
@@ -604,7 +635,7 @@ function job_buff_change(buff, gain)
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-             disable('ring1','ring2','waist')
+            disable('ring1','ring2','waist')
         else
             enable('ring1','ring2','waist')
             handle_equipping_gear(player.status)
@@ -728,11 +759,11 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
 end
 
 function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1]:lower() == 'scholar' then
-       handle_strategems(cmdParams)
-       eventArgs.handled = true
-   end
-   gearinfo(cmdParams, eventArgs)
+     if cmdParams[1]:lower() == 'scholar' then
+        handle_strategems(cmdParams)
+        eventArgs.handled = true
+    end
+    gearinfo(cmdParams, eventArgs)
 end
 
 function gearinfo(cmdParams, eventArgs)

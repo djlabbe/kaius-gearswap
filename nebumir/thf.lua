@@ -301,7 +301,7 @@ function init_gear_sets()
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
         neck="Baetyl Pendant",
         ear1="Friomisi Earring",
         ear2="Moonshade Earring",
@@ -371,9 +371,12 @@ function init_gear_sets()
     })
 
     sets.idle.Town = set_combine(sets.idle, {
-        body=gear.Artifact_Body,
-        legs=gear.Artifact_Legs,
-        feet=gear.Empyrean_Feet,
+        head="Shaded Spectacles",
+        neck="Goldsmith's Torque",
+        body="Goldsmith's Apron",
+        ring1="Craftmaster's Ring",
+        ring2="Orvail Ring",
+        feet="Jute Boots +1",
     })
 
     ------------------------------------------------------------------------------------------------
@@ -383,7 +386,7 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = { ring1="Shneddick Ring" }
+    sets.Kiting = { feet="Jute Boots +1" }
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Engaged Sets ------------------------------------------
