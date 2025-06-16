@@ -635,7 +635,7 @@ function init_gear_sets()
 
     if (item_available("Shneddick Ring +1")) then
         sets.DayMovement = { ring1="Shneddick Ring +1" }
-        sets.NightMovement = { ring1="Shneddick Ring +1" }
+        sets.NightMovement = { feet="Hachiya Kyahan +3" }
     else
         sets.DayMovement = { feet="Hermes' Sandals" }
         sets.NightMovement = { feet="Hachiya Kyahan +3" }
