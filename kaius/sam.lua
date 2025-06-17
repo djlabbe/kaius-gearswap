@@ -10,7 +10,6 @@ Food = "Grape Daifuki"
 AutoItem = false
 Random_Lockstyle = false
 Lockstyle_List = {1,2,6,12}
-Elemental_WS = S{'Aeolian Edge', 'Seraph Blade', 'Shining Blade','Red Lotus Blade', 'Burning Blade', 'Sanguine Blade', 'Energy Drain','Energy Steal','Cyclone','Gust Slash'}
 
 state.OffenseMode:options('TP','DT','PDL','SUB','MEVA')
 state.OffenseMode:set('TP')

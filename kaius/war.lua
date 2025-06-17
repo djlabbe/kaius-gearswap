@@ -10,9 +10,8 @@ Food = "Sublime Sushi"
 AutoItem = false
 Random_Lockstyle = false
 Lockstyle_List = {1,2,6,12}
-Elemental_WS = S{'Aeolian Edge', 'Seraph Blade', 'Shining Blade','Red Lotus Blade', 'Burning Blade', 'Sanguine Blade', 'Energy Drain','Energy Steal','Cyclone','Gust Slash'}
 
-state.OffenseMode:options('TP','DT','PDL', 'SUB', 'MEVA')
+state.OffenseMode:options('TP', 'DT', 'PDL', 'SUB', 'MEVA')
 state.OffenseMode:set('TP')
 
 state.WeaponMode:options('Chango', 'Shining One', 'Helheim', 'Naegling', 'Loxotic', 'Dolichenus', 'Unlocked')
@@ -28,6 +27,10 @@ send_command('bind ^numpad4 gs c WeaponMode Naegling;')
 send_command('bind ^numpad5 gs c WeaponMode Loxotic;')
 send_command('bind ^numpad6 gs c WeaponMode Dolichenus;')
 send_command('bind ^numpad0 gs c WeaponMode Unlocked;')
+
+send_command('bind !F1 input /ja "Mighty Strikes" <me>')
+send_command('bind !F2 input /ja "Brazen Rush" <me>')
+send_command('bind !t input /ja "Provoke" <t>')
 
 if player.sub_job == 'SAM' then
 	send_command('bind !c input /ja "Warding Circle" <me>')
@@ -49,7 +52,7 @@ function get_sets()
 	sets.Weapons['Loxotic'] = {main="Loxotic Mace +1",sub="Ikenga's Axe"}
 	sets.Weapons['Dolichenus'] = {main="Dolichenus",sub="Ikenga's Axe"}
 
-	-- This stops GS from chaning weapons (Abyssea Proc etc)
+	-- This stops GS from changing weapons (Abyssea Proc etc)
 	sets.Weapons['Unlocked'] ={ }
 
 	-- This is used when you do not have dual wield and is not a two handed weapon

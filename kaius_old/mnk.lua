@@ -482,9 +482,7 @@ function init_gear_sets()
     if (item_available("Shneddick Ring +1")) then
         sets.Kiting = { ring1="Shneddick Ring +1" }
     else
-        sets.Kiting = { 
-            feet="Hermes' Sandals" 
-        }
+        sets.Kiting = { feet="Hermes' Sandals" }
     end
     
     sets.Verethragna = { main="Verethragna" }
