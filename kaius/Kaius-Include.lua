@@ -2380,9 +2380,7 @@ do
 			windower.add_to_chat(8,UI_Name2..' - '..string.format('[%s]','Ctrl + F11'))
 		end
 
-		if jobsetup_custom then
-			jobsetup_custom()
-		end
+		
 	end
 
 	-- Called when the player's subjob changes.

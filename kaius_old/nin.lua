@@ -71,17 +71,13 @@ function user_setup()
     gear.NIN_DA_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.NIN_FC_Cape = { name="Andartia's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}}
 
-    -- send_command('bind !F1 input /ja "Mijin Gakure" <me>')
+    send_command('bind !F1 input /ja "Mijin Gakure" <me>')
     send_command('bind !F2 input /ja "Mikage" <me>')
-
     send_command('bind !` input /ja "Innin" <me>')
     send_command('bind ^` input /ja "Yonin" <me>')
     send_command('bind !t input /ja "Provoke" <t>')
-
-    -- send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @q gs c toggle MagicBurst')
-
     send_command('bind !numpad7 input /ma "Jubaku: Ichi" <t>')
     send_command('bind !numpad8 input /ma "Hojo: Ni" <t>')
     send_command('bind !numpad9 input /ma "Aisha: Ichi" <t>')  
@@ -107,7 +103,6 @@ function user_setup()
     send_command('bind ^numpad7 gs c set WeaponSet Heishi; ;input /macro set 1')
     send_command('bind ^numpad8 gs c set WeaponSet HeishiDarkBlade; ;input /macro set 2')
     send_command('bind ^numpad9 gs c set WeaponSet Naegling; ;input /macro set 3')
-
     send_command('bind ^numpad4 gs c set WeaponSet Aeolian;input /macro set 4')
 
     -- Whether a warning has been given for low ninja tools

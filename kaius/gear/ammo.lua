@@ -16,4 +16,5 @@ ammo.Impatiens = { name="Impatiens" }
 ammo.Homiliary = { name="Homiliary" }
 ammo.Epitaph = { name="Epitaph" }
 ammo.RegalGem = { name="Regal Gem" }
+ammo.Yamarang = { name="Yamarang" }
 ammo.StaunchTathlum = { name="Staunch Tathlum +1" }

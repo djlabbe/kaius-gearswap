@@ -49,28 +49,28 @@ feet.GEO_Relic = { name="Bagua Sandals +3" } -- Enhances "Radial Arcana" effect
 feet.RUN_Relic = { name="Futhark Boots +3" } -- Enhances "Rayke" effect
 
 -- Empyrean
-feet.WAR_Empy = { name="Boii Calligae +3" } -- Enhances "Warrior's Charge" effect
-feet.MNK_Empy = { name="Bhikku Gaiters +3" } -- Enhances "Mantra" effect
-feet.WHM_Empy = { name="Ebers Duckbills +3" } -- Enhances "Divine Caress" effect
-feet.BLM_Empy = { name="Wicce Sabots +3" } -- Enhances "Elemental Seal" effect
-feet.RDM_Empy = { name="Lethargy Houseaux +3" } -- Enhances "Composure" effect
-feet.THF_Empy = { name="Skulker's Poulaines +3" } -- Enhances "Perfect Dodge" effect
-feet.PLD_Empy = { name="Chevalier's Sabatons +3" } -- Enhances "Divine Emblem" effect
-feet.DRK_Empy = { name="Heathen's Sollerets +3" } -- Enhances "Dark Seal" effect
-feet.BST_Empy = { name="Nukumi Ocreae +3" } -- Enhances "Killer Instinct" effect
-feet.BRD_Empy = { name="Fili Cothurnes +3" } -- Enhances "Nightingale" effect
-feet.RNG_Empy = { name="Amini Bottillons +3" } -- Enhances "Unlimited Shot" effect
-feet.SAM_Empy = { name="Kasuga Sune-Ate +3" } -- Enhances "Ikishoten" effect
-feet.NIN_Empy = { name="Hattori Kyahan +3" } -- Enhances "Sange" effect
-feet.DRG_Empy = { name="Peltast's Schynbalds +3" } -- Enhances "Spirit Surge" effect
-feet.SMN_Empy = { name="Beckoner's Pigaches +3" } -- Enhances "Elemental Siphon" effect
-feet.BLU_Empy = { name="Hashishin Basmak +3" } -- Enhances "Diffusion" effect
-feet.COR_Empy = { name="Chasseur's Bottes +3" } -- Enhances "Random Deal" effect
-feet.PUP_Empy = { name="Karagoz Scarpe +3" } -- Enhances "Overdrive" effect
-feet.DNC_Empy = { name="Maculele Toe Shoes +3" } -- Enhances "Saber Dance" effect
-feet.SCH_Empy = { name="Arbatel Loafers +3" } -- Enhances "Tabula Rasa" effect
-feet.GEO_Empy = { name="Azimuth Gaiters +3" } -- Enhances "Bolster" effect
-feet.RUN_Empy = { name="Erilaz Greaves +3" } -- Enhances "Battuta" effect
+feet.WAR_Empyrean = { name="Boii Calligae +3" } -- Enhances "Warrior's Charge" effect
+feet.MNK_Empyrean = { name="Bhikku Gaiters +3" } -- Enhances "Mantra" effect
+feet.WHM_Empyrean = { name="Ebers Duckbills +3" } -- Enhances "Divine Caress" effect
+feet.BLM_Empyrean = { name="Wicce Sabots +3" } -- Enhances "Elemental Seal" effect
+feet.RDM_Empyrean = { name="Lethargy Houseaux +3" } -- Enhances "Composure" effect
+feet.THF_Empyrean = { name="Skulker's Poulaines +3" } -- Enhances "Perfect Dodge" effect
+feet.PLD_Empyrean = { name="Chevalier's Sabatons +3" } -- Enhances "Divine Emblem" effect
+feet.DRK_Empyrean = { name="Heathen's Sollerets +3" } -- Enhances "Dark Seal" effect
+feet.BST_Empyrean = { name="Nukumi Ocreae +3" } -- Enhances "Killer Instinct" effect
+feet.BRD_Empyrean = { name="Fili Cothurnes +3" } -- Enhances "Nightingale" effect
+feet.RNG_Empyrean = { name="Amini Bottillons +3" } -- Enhances "Unlimited Shot" effect
+feet.SAM_Empyrean = { name="Kasuga Sune-Ate +3" } -- Enhances "Ikishoten" effect
+feet.NIN_Empyrean = { name="Hattori Kyahan +3" } -- Enhances "Sange" effect
+feet.DRG_Empyrean = { name="Peltast's Schynbalds +3" } -- Enhances "Spirit Surge" effect
+feet.SMN_Empyrean = { name="Beckoner's Pigaches +3" } -- Enhances "Elemental Siphon" effect
+feet.BLU_Empyrean = { name="Hashishin Basmak +3" } -- Enhances "Diffusion" effect
+feet.COR_Empyrean = { name="Chasseur's Bottes +3" } -- Enhances "Random Deal" effect
+feet.PUP_Empyrean = { name="Karagoz Scarpe +3" } -- Enhances "Overdrive" effect
+feet.DNC_Empyrean = { name="Maculele Toe Shoes +3" } -- Enhances "Saber Dance" effect
+feet.SCH_Empyrean = { name="Arbatel Loafers +3" } -- Enhances "Tabula Rasa" effect
+feet.GEO_Empyrean = { name="Azimuth Gaiters +3" } -- Enhances "Bolster" effect
+feet.RUN_Empyrean = { name="Erilaz Greaves +3" } -- Enhances "Battuta" effect
 
 feet.Souveran_D = { name="Souveran Schuhs +1", augments={'HP+65','Attack+25','Magic dmg. taken -4',}, priority=187}
 feet.Nyame = {name="Nyame Sollerets", priority=68}

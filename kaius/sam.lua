@@ -11,12 +11,21 @@ MacroSet = "1"
 -- Use "gs c food" to use the specified food item 
 Food = "Grape Daifuki"
 
--- 'TP','ACC','DT' are standard Default modes.  You may add more and assigne equipsets for them ( Idle.X and OffenseMode.X )
-state.OffenseMode:options('TP','DT','SUB','PDL','MEVA')
+state.OffenseMode:options('TP','DT','PDL','SUB','MEVA')
 
 jobsetup (LockStylePallet,MacroBook,MacroSet)
 
---Weapons specific to Samurai
+send_command('bind !F1 input /ja "Meikyo Shisui" <me>')
+send_command('bind !F2 input /ja "Yaegasumi" <me>')
+send_command('bind !` input /ja "Hasso" <me>')
+send_command('bind ^` input /ja "Seigan" <me>')
+send_command('bind !c input /ja "Warding Circle" <me>')
+send_command('bind !a input /ja "Hamanoha" <me>')
+
+if player.sub_job == 'WAR' then
+    send_command('bind !t input /ja "Provoke" <t>')
+end
+
 state.WeaponMode:options('Masamune', 'Dojikiri', 'Shining One')
 state.WeaponMode:set('Masamune')
 
@@ -42,12 +51,10 @@ function get_sets()
     }
 
 	sets.Idle.TP = set_combine(sets.Idle, {})
-	sets.Idle.ACC = set_combine(sets.Idle, {})
 	sets.Idle.DT = set_combine(sets.Idle, {})
 	sets.Idle.PDL = set_combine(sets.Idle, {})
 	sets.Idle.SUB = set_combine(sets.Idle, {})
 	sets.Idle.MEVA = set_combine(sets.Idle, {})
-	sets.Idle.Resting = set_combine(sets.Idle, {})
 
 	if (item_available("Shneddick Ring +1")) then
         sets.Movement = { ring1="Shneddick Ring +1" }
@@ -67,9 +74,9 @@ function get_sets()
 		 ammo="Aurgelmir Orb +1",
         head=head.SAM_Empyrean,
         body=body.SAM_Empyrean,
-        hands=hands.Tatenashi_Hands,
+        hands=hands.Tatenashi,
         legs=legs.SAM_Empyrean,
-        feet=feet.Ryuo_C_Feet,
+        feet=feet.Ryuo_C,
         neck="Samurai's Nodowa +2",
         waist="Sweordfaetels +1",
         ear1="Dedition Earring",
@@ -83,8 +90,10 @@ function get_sets()
 
 	--This set is used when OffenseMode is DT and Enaged (Augments the TP base set)
 	sets.OffenseMode.DT = set_combine (sets.OffenseMode, {
-		ear2="Odnowa Earring +1",
-		ring1="Defending Ring",
+        hands=hands.Nyame,
+        feet=feet.Nyame,
+        back="Null Shawl",
+        waist="Sailfi Belt +1",
 	})
 
 
@@ -95,7 +104,7 @@ function get_sets()
         body="Dagon Breastplate", --(10)
         hands=hands.SAM_Artifact,
         legs=legs.Mpaca, --(5)
-        feet=feet.Ryuo_C_Feet, --8
+        feet=feet.Ryuo_C, --8
         neck="Samurai's Nodowa +2",
         ear1="Dedition Earring", --3
         ear2="Telos Earring", --5
@@ -207,17 +216,17 @@ function get_sets()
 
 	sets.WS["Tachi: Jinpu"] = {
         ammo="Knobkierrie",
-        head=head.Nyame_Head,
-        body=body.Nyame_Body,
-        hands=hands.Nyame_Hands,
-        legs=legs.Nyame_Legs,
-        feet=feet.Nyame_Feet,
+        head=head.Nyame,
+        body=body.Nyame,
+        hands=hands.Nyame,
+        legs=legs.Nyame,
+        feet=feet.Nyame,
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Schere Earring",
         ring1=ring.Cornelia_Or_Epaminondas,
         ring2="Niqmaddu Ring",
-        back=back.SAM_WS_Cape,
+        back=back.SAM_WS,
         waist="Orpheus's Sash",
     }
     sets.WS["Tachi: Jinpu"].PDL = set_combine(sets.WS["Tachi: Jinpu"], {
@@ -228,34 +237,34 @@ function get_sets()
 
 	sets.WS["Tachi: Kagero"] = {
         ammo="Knobkierrie",
-        head=head.Nyame_Head,
-        body=body.Nyame_Body,
-        hands=hands.Nyame_Hands,
-        legs=legs.Nyame_Legs,
-        feet=feet.Nyame_Feet,
+        head=head.Nyame,
+        body=body.Nyame,
+        hands=hands.Nyame,
+        legs=legs.Nyame,
+        feet=feet.Nyame,
         neck="Sibyl Scarf",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1=ring.Cornelia_Or_Regal,
         ring2="Epaminondas's Ring",
-        back=back.SAM_WS_Cape,
+        back=back.SAM_WS,
         waist="Orpheus's Sash",
     }
 
 	sets.WS["Tachi: Koki"] = {
          ammo="Knobkierrie",
-        head=head.Nyame_Head,
-        body=body.Nyame_Body,
-        hands=hands.Nyame_Hands,
-        legs=legs.Nyame_Legs,
-        feet=feet.Nyame_Feet,
+        head=head.Nyame,
+        body=body.Nyame,
+        hands=hands.Nyame,
+        legs=legs.Nyame,
+        feet=feet.Nyame,
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Schere Earring",
         -- ring="Weatherspoon Ring +1",
         ring1=ring.Cornelia_Or_Epaminondas,
         ring2="Niqmaddu Ring",
-        back=back.SAM_WS_Cape,
+        back=back.SAM_WS,
         waist="Fotia Belt",
     }
 
@@ -265,40 +274,40 @@ function get_sets()
 
 	sets.WS["Tachi: Rana"] = {
          ammo="Coiste Bodhar",
-        head=head.Mpaca_Head,
-        body=body.Relic_Body,
-        hands=hands.Empyrean_Hands, 
-        legs=legs.Nyame_Legs, 
-        feet=feet.Mpaca_Feet,
+        head=head.Mpaca,
+        body=body.Relic,
+        hands=hands.Empyrean, 
+        legs=legs.Nyame, 
+        feet=feet.Mpaca,
         neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Lugra Earring +1",
         ear2="Schere Earring",
         ring1="Regal Ring", 
         ring2="Niqmaddu Ring",
-        back=back.SAM_WS_Cape,
+        back=back.SAM_WS,
     }
 
     sets.WS["Tachi: Rana"].PDL = set_combine(sets.WS["Tachi: Rana"], {
         ammo="Crepuscular Pebble",
-        legs=legs.Mpaca_Legs,
+        legs=legs.Mpaca,
         ring1=ring.Ephramad_Or_Sroda,
-        feet=feet.Empyrean_Feet,
+        feet=feet.Empyrean,
     })
 
 	sets.WS["Tachi: Ageha"] = {
         ammo="Pemphredo Tathlum",
-        head=head.Empyrean_Head,
-        body=body.Empyrean_Body,
-        hands=hands.Empyrean_Legs,
-        legs=legs.Empyrean_Legs,
-        feet=feet.Empyrean_Feet,
+        head=head.Empyrean,
+        body=body.Empyrean,
+        hands=hands.Empyrean,
+        legs=legs.Empyrean,
+        feet=feet.Empyrean,
         neck="Null Loop",
         ear1="Crepuscular Earring",
         ear2="Kasuga Earring +2",
         ring1=ring.Stikini_1,
         ring2="Metamorph Ring +1",
-        back=back.SAM_WS_Cape,
+        back=back.SAM_WS,
         waist="Null Belt",
     }
 
@@ -325,55 +334,55 @@ function get_sets()
 
 	sets.WS["Tachi: Shoha"] = {
         ammo="Knobkierrie",
-        head=head.Mpaca_Head,
-        body=body.Nyame_Body,
-        hands=hands.Empyrean_Hands, 
-        legs=legs.Mpaca_Legs, 
-        feet=feet.Empyrean_Feet,
+        head=head.Mpaca,
+        body=body.Nyame,
+        hands=hands.Empyrean, 
+        legs=legs.Mpaca, 
+        feet=feet.Empyrean,
         neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
         ear2="Kasuga Earring +2",
         ring1=ring.Cornelia_Or_Sroda,
         ring2="Epaminondas's Ring",
-        back=back.SAM_WS_Cape,
+        back=back.SAM_WS,
     }
 
 	sets.WS["Impulse Drive"] = {
         ammo="Knobkierrie",
-        head=head.Mpaca_Head,
-        body=body.Nyame_Body,
-        hands=hands.Empyrean_Hands,
-        legs=legs.Nyame_Legs,
-        feet=feet.Nyame_Feet,
+        head=head.Mpaca,
+        body=body.Nyame,
+        hands=hands.Empyrean,
+        legs=legs.Nyame,
+        feet=feet.Nyame,
         neck="Samurai's Nodowa +2",
         ear1="Moonshade Earring",
         ear2="Kasuga Earring +2",
         ring1="Begrudging Ring",
         ring2="Niqmaddu Ring",
-        back=back.SAM_WS_Cape,
+        back=back.SAM_WS,
         waist="Sailfi Belt +1",
     }
 
     sets.WS["Impulse Drive"].PDL = set_combine(sets.WS["Impulse Drive"], {
-        legs=legs.Mpaca_Legs,
-        feet=feet.Empyrean_Feet,
+        legs=legs.Mpaca,
+        feet=feet.Empyrean,
         ring1=ring.Ephramad_Or_Sroda,
     })
 
     sets.WS["Stardiver"] = {
         ammo="Coiste Bodhar", --6
-        head=head.Mpaca_Head,
-        body=body.Mpaca_Body,
-        hands=hands.Empyrean_Hands,
-        legs=legs.Mpaca_Legs,
-        feet=feet.Mpaca_Feet,
+        head=head.Mpaca,
+        body=body.Mpaca,
+        hands=hands.Empyrean,
+        legs=legs.Mpaca,
+        feet=feet.Mpaca,
         neck="Fotia Gorget",
         ear1="Schere Earring",
         ear2="Moonshade Earring",
         ring1="Regal Ring",
         ring2="Niqmaddu Ring",
-        back=back.SAM_WS_Cape,
+        back=back.SAM_WS,
         waist="Fotia Belt",
     }
 
@@ -393,23 +402,6 @@ end
 -- DO NOT EDIT BELOW THIS LINE UNLESS YOU NEED TO MAKE JOB SPECIFIC RULES
 -------------------------------------------------------------------------------------------------------------------
 
--- This function is called when the job file is loaded.
--- It can be used to set up custom variables or settings.
-function jobsetup_custom()
-    send_command('bind !F1 input /ja "Meikyo Shisui" <me>')
-    send_command('bind !F2 input /ja "Yaegasumi" <me>')
-    send_command('bind !` input /ja "Hasso" <me>')
-    send_command('bind ^` input /ja "Seigan" <me>')
-
-    if player.sub_job == 'WAR' then
-        send_command('bind !t input /ja "Provoke" <t>')
-    end
-
-    send_command('bind @w gs c toggle WeaponLock')
-    send_command('bind !c input /ja "Warding Circle" <me>')
-    send_command('bind !a input /ja "Hamanoha" <me>')
-end
-
 -- Called when the player's subjob changes.
 function sub_job_change_custom(new, old)
 	-- Typically used for Macro pallet changing
@@ -423,7 +415,6 @@ end
 -- Augment basic equipment sets
 function precast_custom(spell)
 	local equipSet = {}
-
 	return equipSet
 end
 
@@ -460,8 +451,27 @@ end
 
 --Function is called when a self command is issued
 function self_command_custom(command)
-
+    if command == 'weaponmode' then
+        if player.sub_job == 'DRG' then
+            if state.WeaponMode.value == 'Masamune' then
+                send_command('input /macro set 1')
+            elseif state.WeaponMode.value == 'Dojikiri' then
+                send_command('input /macro set 1')
+            elseif state.WeaponMode.value == 'Shining One' then
+                send_command('input /macro set 2')
+            end
+        elseif player.sub_job == 'WAR' then
+            if state.WeaponMode.value == 'Masamune' then
+                send_command('input /macro set 3')
+            elseif state.WeaponMode.value == 'Dojikiri' then
+                send_command('input /macro set 3')
+            elseif state.WeaponMode.value == 'Shining One' then
+                send_command('input /macro set 4')
+            end
+        end
+    end
 end
+
 --Custom Function
 function choose_Seigan()
 	local equipSet = {}
@@ -500,7 +510,6 @@ function check_buff_JA()
 	return buff
 end
 
---Function used to automate Spell use
 function check_buff_SP()
 	local buff = 'None'
 	--local sp_recasts = windower.ffxi.get_spell_recasts()
@@ -510,7 +519,13 @@ end
 
 -- This function is called when the job file is unloaded
 function user_file_unload()
-
+    send_command('unbind !F1')
+    send_command('unbind !F2')
+    send_command('unbind !`')
+    send_command('unbind ^`')
+    send_command('unbind !t')
+    send_command('unbind !c')
+    send_command('unbind !a')
 end
 
 function pet_change_custom(pet,gain)
