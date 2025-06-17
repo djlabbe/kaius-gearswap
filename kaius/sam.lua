@@ -3,17 +3,26 @@ include('Kaius-Include')
 include('gear/gear')
 include('Global-Binds.lua')
 
---Set to ingame lockstyle and Macro Book/Set
 LockStylePallet = "12"
 MacroBook = "12"
 MacroSet = "1"
-
--- Use "gs c food" to use the specified food item 
 Food = "Grape Daifuki"
+AutoItem = false
+Random_Lockstyle = false
+Lockstyle_List = {1,2,6,12}
+Elemental_WS = S{'Aeolian Edge', 'Seraph Blade', 'Shining Blade','Red Lotus Blade', 'Burning Blade', 'Sanguine Blade', 'Energy Drain','Energy Steal','Cyclone','Gust Slash'}
 
 state.OffenseMode:options('TP','DT','PDL','SUB','MEVA')
+state.OffenseMode:set('TP')
+
+state.WeaponMode:options('Masamune', 'Dojikiri', 'Shining One')
+state.WeaponMode:set('Masamune')
 
 jobsetup (LockStylePallet,MacroBook,MacroSet)
+
+send_command('bind ^numpad7 gs c WeaponMode Masamune;')
+send_command('bind ^numpad8 gs c WeaponMode Dojikiri;')
+send_command('bind ^numpad9 gs c WeaponMode Shining One;')
 
 send_command('bind !F1 input /ja "Meikyo Shisui" <me>')
 send_command('bind !F2 input /ja "Yaegasumi" <me>')
@@ -26,8 +35,6 @@ if player.sub_job == 'WAR' then
     send_command('bind !t input /ja "Provoke" <t>')
 end
 
-state.WeaponMode:options('Masamune', 'Dojikiri', 'Shining One')
-state.WeaponMode:set('Masamune')
 
 function get_sets()
 	sets.Weapons['Dojikiri'] = {main="Dojikiri Yasutsuna", sub="Utu Grip"}
@@ -450,8 +457,9 @@ function status_change_custom(new,old)
 end
 
 --Function is called when a self command is issued
-function self_command_custom(command)
-    if command == 'weaponmode' then
+function self_command_custom(cmd)
+    local command = cmd:lower()
+	if command:contains('weaponmode') then
         if player.sub_job == 'DRG' then
             if state.WeaponMode.value == 'Masamune' then
                 send_command('input /macro set 1')
@@ -526,6 +534,7 @@ function user_file_unload()
     send_command('unbind !t')
     send_command('unbind !c')
     send_command('unbind !a')
+    unbind_numpad()
 end
 
 function pet_change_custom(pet,gain)

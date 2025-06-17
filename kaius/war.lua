@@ -3,33 +3,18 @@ include('Kaius-Include')
 include('gear/Gear')
 include('Global-Binds.lua')
 
---Set to ingame lockstyle and Macro Book/Set
 LockStylePallet = "1"
 MacroBook = "1"
 MacroSet = "1"
-
--- Use "gs c food" to use the specified food item 
 Food = "Sublime Sushi"
-
---Uses Items Automatically
 AutoItem = false
-
---Upon Job change will use a random lockstyleset
 Random_Lockstyle = false
-
---Lockstyle sets to randomly equip
 Lockstyle_List = {1,2,6,12}
-
--- This determines if a WS set is augmented with a sash
 Elemental_WS = S{'Aeolian Edge', 'Seraph Blade', 'Shining Blade','Red Lotus Blade', 'Burning Blade', 'Sanguine Blade', 'Energy Drain','Energy Steal','Cyclone','Gust Slash'}
 
--- 'TP','ACC','DT' are standard Default modes.  You may add more and assigne equipsets for them ( Idle.X and OffenseMode.X )
 state.OffenseMode:options('TP','DT','PDL', 'SUB', 'MEVA')
-
---Set default mode (TP,ACC,DT,PDL)
 state.OffenseMode:set('TP')
 
---Weapons options
 state.WeaponMode:options('Chango', 'Shining One', 'Helheim', 'Naegling', 'Loxotic', 'Dolichenus', 'Unlocked')
 state.WeaponMode:set('Chango')
 
