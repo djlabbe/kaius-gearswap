@@ -1,12 +1,11 @@
 -- Load and initialize the include file.
 include('Kaius-Include')
-include('Global-Binds.lua')
 include('Kaius-globals.lua')
 
 LockStylePallet = "1"
 MacroBook = "1"
 MacroSet = "1"
-Food = "Sublime Sushi"
+Food = "Grape Daifuku +1"
 AutoItem = false
 Random_Lockstyle = false
 Lockstyle_List = {1,2,6,12}
@@ -17,7 +16,8 @@ state.OffenseMode:set('TP')
 state.WeaponMode:options('Chango', 'Shining One', 'Helheim', 'Naegling', 'Loxotic', 'Dolichenus', 'Unlocked')
 state.WeaponMode:set('Chango')
 
--- Initialize Player
+elemental_ws = S{}
+
 jobsetup (LockStylePallet,MacroBook,MacroSet)
 
 send_command('bind ^numpad7 gs c WeaponMode Chango;')

@@ -244,7 +244,7 @@ function get_sets()
         neck="Samurai's Nodowa +2",
     })
 
-	sets.WS["Tachi: Goten"] = set_combine (sets.WS, {})
+	sets.WS["Tachi: Goten"] = set_combine(sets.WS, {})
 
 	sets.WS["Tachi: Kagero"] = {
         ammo="Knobkierrie",

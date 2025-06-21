@@ -42,15 +42,15 @@ function get_sets()
 	-- Idle sets
 	sets.Idle = {
 		ammo="Staunch Tathlum +1",
-        head=head.Malignance,
+        head="Malignance Chapeau",
         body="Adamantite Armor",
-        hands=hands.Malignance,
-        legs=legs.Malignance,
-        feet=feet.Malignance,
+        hands="Malignance Gloves",
+        legs="Malignance Tights",
+        feet="Malignance Boots",
         ear1="Sanare Earring",
         ear2="Eabani Earring",
         neck="Warder's Charm +1",
-        ring1=ring.Chirich_1,
+        ring1={name="Chirich Ring +1", bag="wardrobe7"},
         ring2=gear.Gerubu_Or_Shadow,
         back="Null Shawl",
         waist="Moonbow Belt +1",
@@ -68,42 +68,42 @@ function get_sets()
 	sets.OffenseMode = {}
 	sets.OffenseMode.TP = {
 		ammo="Coiste Bodhar",
-		head=head.Malignance,
-		body=body.Mpaca,
-		hands=hands.Adhemar_A,
-		legs=legs.MNK_Empyrean,
-		feet=feet.MNK_Empyrean,
+		head="Malignance Chapeau",
+		body="Mpaca's Cap",
+		hands="Mpaca's Gloves,
+		legs="Bhikku Hose +3",
+		feet="Bhikku Gaiters +3",
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
         ear1="Sherida Earring",
 		ear2="Schere Earring",
 		ring1=ring.Lehko_Or_Gere,
 		ring2="Niqmaddu Ring",
-		back=back.MNK_DEX_DA,
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
 	}
 
 	sets.OffenseMode.DT = set_combine(sets.OffenseMode.TP,{
-		head=head.Malignance,
-        hands=hands.Malignance,
-        legs=legs.MNK_Empyrean,
-        feet=feet.MNK_Empyrean,
+		head="Malignance Chapeau",
+        hands="Malignance Gloves",
+        legs="Bhikku Hose +3",
+        feet="Bhikku Gaiters +3",
 	})
 
 	sets.OffenseMode.PDL = set_combine(sets.OffenseMode.DT,{})
 
 	sets.OffenseMode.COUNTER = set_combine(sets.OffenseMode.DT, {
 		head=head.MNK_Empyrean,
-		body=body.Mpaca,
-		hands=hands.Malignance,
-		legs=legs.MNK_Empyrean,
-		feet=feet.MNK_Empyrean,
+		body="Mpaca's Cap",
+		hands="Malignance Gloves",
+		legs="Bhikku Hose +3",
+		feet="Bhikku Gaiters +3",
 		neck="Bathy Choker +1",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
 		ear2="Bhikku Earring +1",
 		ring1="Defending Ring",
 		ring2="Niqmaddu Ring",
-		back=back.MNK_DEX_DA
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}}
 	})
 
 	sets.OffenseMode.MEVA = set_combine(sets.OffenseMode.DT,{
@@ -111,7 +111,7 @@ function get_sets()
 	})
 
 	-- Augments the OffenseMode when in DT stance
-	sets.Foot_Work = { feet=feet.MNK_Artifact, }
+	sets.Foot_Work = { feet="Anchorite's Gaiters +3", }
 
 	--Used to swap into movement gear when the player is detected movement when not engaged
 	if (item_available("Shneddick Ring +1")) then
@@ -122,7 +122,7 @@ function get_sets()
 
 	--Impetus set has priority over any other modes
 	sets.Impetus = {
-		body=body.MNK_Empyrean,
+		body="Bhikku Cyclas +3",
 	}
 
 	sets.Boost = {
@@ -143,9 +143,9 @@ function get_sets()
 		neck="Moonlight Necklace", -- 15
 		body="Emet Harness +1", -- 10
 		hands="Kurys Gloves", -- 9
-		legs=legs.MNK_Empyrean,
+		legs="Bhikku Hose +3",
 		-- feet="Ahosi Leggings", -- 7
-		waist=waist.PlatinumMoogle,
+		waist="Platinum Moogle Belt",
 	    ear1="Cryptic Earring", -- 4
 		ear2="Trux Earring", -- 5
 		ring1="Eihwaz Ring", -- 5
@@ -154,20 +154,21 @@ function get_sets()
 
 	-- Used for Magic Spells
 	sets.Precast = {}
+
 	sets.Precast.FastCast = {
 		ammo="Sapience Orb", -- 2
-		head=head.Herc_FC, --13
-        body=body.Taeon_FC, --9
+		head={ name="Herculean Helm", augments={'"Mag.Atk.Bns."+1','"Fast Cast"+6','INT+3','Mag. Acc.+10',}}, --13
+        body={name="Taeon Tabard", augments={'"Fast Cast"+5',}}, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
 		feet={ name="Herculean Boots", augments={'"Fast Cast"+6',}}, --6
 		neck="Orunmila's Torque", --5
-		waist=waist.PlatinumMoogle,
+		waist="Platinum Moogle Belt",
 		ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
 		ring1="Prolix Ring", --3
 		ring2="Kishar Ring", --4
-		back=back.MNK_FC, --10
+		back={}, --TODO 10
 	} -- FC 66
 
 	--Base set for midcast - if not defined will notify and use your idle set for surviability
@@ -186,23 +187,23 @@ function get_sets()
 	sets.JA["Dodge"] = {}
 	sets.JA["Chakra"] = {
 		 ammo="Aurgelmir Orb +1",
-        head=head.Nyame,
+        head="Nyame Helm",
         neck="Unmoving Collar +1",
         ear1="Handler's Earring +1",
         ear2="Tuisto Earring",
-        body=body.MNK_Artifact,
-        hands=hands.Relic,
+        body="Anchorite's Cyclas +2",
+        hands="Hesychast's Gloves +3",
         ring1="Niqmaddu Ring",
         ring2="Gelatinous Ring +1",
         back="Moonlight Cape",
         waist="Platinum Moogle Belt",
-        legs=legs.Nyame,
-        feet=feet.MNK_Empyrean
+        legs="Nyame Flanchard",
+        feet="Bhikku Gaiters +3"
 	}
 
 	sets.JA["Boost"] = {}
 	sets.JA["Counterstance"] = {}
-	sets.JA["Chi Blast"] = {head=head.MNK_Relic}
+	sets.JA["Chi Blast"] = {head="Hesychast's Crown +3"}
 	sets.JA["Mantra"] = {}
 	sets.JA["Footwork"] = {}
 	sets.JA["Perfect Counter"] = {}
@@ -212,18 +213,18 @@ function get_sets()
 	--Default WS set base
 	sets.WS = { -- VS Base with Impetus Down
 		ammo="Knobkierrie",
-		head=head.Mpaca,
-		body=body.Nyame,
-		hands=hands.MNK_Empyrean,
-		legs=legs.Mpaca,
-		feet=feet.Mpaca,
+		head="Mpaca's Cap",
+		body="Nyame Mail",
+		hands="Bhikku Gloves +3",
+		legs="Mpaca's Hose",
+		feet="Mpaca's Boots",
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
 		ear2="Odr Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=back.MNK_DEX_DA,
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
 	}
 
 
@@ -245,132 +246,132 @@ function get_sets()
 
 	sets.WS["Raging Fists"] = {
 		ammo="Knobkierrie",
-		head=head.Mpaca,
-		body=body.Mpaca,
-		hands=hands.Tatenashi,
-		legs=legs.Nyame,
-		feet=feet.MNK_Artifact,
+		head="Mpaca's Cap",
+		body="Mpaca's Cap",
+		hands="Tatenashi Gote +1",
+		legs="Nyame Flanchard",
+		feet="Anchorite's Gaiters +3",
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Moonshade Earring",
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=back.MNK_DEX_DA,
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
 	}
 
 	sets.WS["Spinning Attack"] = set_combine(sets.WS,{})
 
 	sets.WS["Final Heaven"] = {
 		ammo="Knobkierrie",
-		head=head.Mpaca,
-		body=body.MNK_Empyrean,
-		hands=hands.Tatenashi,
-		legs=legs.Nyame,
-		feet=feet.Nyame,
+		head="Mpaca's Cap",
+		body="Bhikku Cyclas +3",
+		hands="Tatenashi Gote +1",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets",
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
 		ear2="Ishvara Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=back.MNK_DEX_DA,
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
 	}
 
 	sets.WS["Howling Fist"] =  {
 		ammo="Knobkierrie",
-		head=head.Mpaca,
-		body=body.Nyame,
-		hands=hands.Tatenashi,
-		legs=legs.Nyame,
-		feet=feet.Nyame,
+		head="Mpaca's Cap",
+		body="Nyame Mail",
+		hands="Tatenashi Gote +1",
+		legs="Nyame Flanchard",
+		feet="Nyame Sollerets",
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Moonshade Earring",
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=back.MNK_DEX_DA,
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
 	}
 
 	sets.WS["Dragon Kick"] = {
 		ammo="Knobkierrie",
-		head=head.Mpaca,
-		body=body.Nyame,
-		hands=hands.Nyame,
-		legs=legs.Nyame,
-		feet=feet.MNK_Artifact,
+		head="Mpaca's Cap",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Anchorite's Gaiters +3",
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Moonshade Earring",
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=back.MNK_DEX_DA,
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
 	}
 
 	sets.WS["Asuran Fists"] = set_combine(sets.WS,{})
 
 	sets.WS["Tornado Kick"] = {
 		ammo="Coiste Bodhar",
-		head=head.Mpaca,
-		body=body.Nyame,
-		hands=hands.Nyame,
-		legs=legs.Nyame,
-		feet=feet.MNK_Artifact,
+		head="Mpaca's Cap",
+		body="Nyame Mail",
+		hands="Nyame Gauntlets",
+		legs="Nyame Flanchard",
+		feet="Anchorite's Gaiters +3",
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Moonshade Earring",
 		ear2="Schere Earring",
 		ring1=ring.Cornelia_Or_Gere,
 		ring2="Niqmaddu Ring",
-		back=back.MNK_DEX_DA,
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
 	}
 
 	sets.WS["Victory Smite"] = {
 		ammo="Coiste Bodhar",
-		head=head.Mpaca,
-		body=body.MNK_Empyrean,
-		hands=hands.MNK_Empyrean,
-		legs=legs.Mpaca,
-		feet=feet.Mpaca,
+		head="Mpaca's Cap",
+		body="Bhikku Cyclas +3",
+		hands="Bhikku Gloves +3",
+		legs="Mpaca's Hose",
+		feet="Mpaca's Boots",
 		neck="Monk's Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
 		ear2="Schere Earring",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=back.MNK_STR_CRIT,
+		back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}},
 	}
 
 	sets.WS["Shijin Spiral"] = {
 		 ammo="Knobkierrie",
-		head=head.Nyame,
-		body=body.Nyame,
-		hands=hands.Malignance,
-		legs=legs.Nyame,
-		feet=feet.Malignance,
+		head="Nyame Helm",
+		body="Nyame Mail",
+		hands="Malignance Gloves",
+		legs="Nyame Flanchard",
+		feet="Malignance Boots",
 		neck="Mnk. Nodowa +2",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
 		ear2="Mache Earring +1",
 		ring1="Gere Ring",
 		ring2="Niqmaddu Ring",
-		back=back.MNK_DEX_DA,
+		back={ name="Segomo's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
 	}
 
 	 sets.WS['Shell Crusher'] = {
-        head=head.Malignance,
+        head="Malignance Chapeau",
         neck="Moonlight Necklace",
         ear1="Crepuscular Earring",
         ear2="Bhikku Earring +1",
-        body=body.Malignance,
-        hands=hands.Malignance,
-        legs=legs.Malignance,
-        feet=feet.Malignance,
-        ring1=ring.Stikini_1,
+        body="Malignance Tabard",
+        hands="Malignance Gloves",
+        legs="Malignance Tights",
+        feet="Malignance Boots",
+        ring1={name="Stikini Ring +1", bag="wardrobe7"},
         ring2="Metamorph Ring +1",
-        back=back.MNK_STR_CRIT,
+        back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}},
         waist="Acuity Belt +1",
     }
 
@@ -379,13 +380,13 @@ function get_sets()
         neck="Sibyl Scarf",
         ear1="Friomisi Earring",
         ear2="Moonshade Earring",
-        body=body.Nyame,
-        hands=hands.Nyame,
-        legs=legs.Nyame,
-        feet=feet.Nyame,
+        body="Nyame Mail",
+        hands="Nyame Gauntlets",
+        legs="Nyame Flanchard",
+        feet="Nyame Sollerets",
         ring1="Archon Ring",
         ring2="Metamorph Ring +1",
-        back=back.MNK_STR_CRIT,
+        back={ name="Segomo's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Crit.hit rate+10','Phys. dmg. taken-10%',}},
         waist="Orpheus's Sash",
     }
 
