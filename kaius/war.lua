@@ -1,6 +1,5 @@
 -- Load and initialize the include file.
 include('Kaius-Include')
-include('gear/Gear')
 include('Global-Binds.lua')
 
 LockStylePallet = "1"
@@ -42,6 +41,10 @@ end
 
 function get_sets()
 
+	local gear = {}
+	gear.TP_Cape = { name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20', 'DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
+
+
 	-- Weapon setup
 	sets.Weapons = {}
 
@@ -61,17 +64,17 @@ function get_sets()
 	-- Base set for when the player is not engaged or casting.  Other sets build off this set
 	sets.Idle = {
 		ammo="Staunch Tathlum +1",
-		head=head.Sakpata, 
-		body=body.Sakpata,
-		hands=hands.Sakpata,
-		legs=legs.Sakpata,
-		feet=feet.Sakpata,
+		head="Sakpata's Helm",
+		body="Sakpata's Breastplate",
+		hands="Sakpata's Breastplate",
+		legs="Sakpata's Cuisses",
+		feet="Sakpata's Leggings",
 		neck="Warder's Charm +1",
 		waist="Null Belt",
 		ear1="Eabani Earring",
 		ear2="Odnowa Earring +1",
-		ring1=ring.Moonlight_1,
-		ring2=ring.ShadowRing,
+		ring1={ name="Moonlight Ring", bag="wardrobe7" },
+		ring2="Shadow Ring",
 		back="Null Shawl",
     }
 
@@ -99,27 +102,28 @@ function get_sets()
 	--WAR Double attack
 	--28% Job Trait
 	--5% Merits
+	--33% Total
 
 	-- Sets the base equipset for OffenseMode
 	sets.OffenseMode = {
 		ammo="Coiste Bodhar",
-		head=head.Boii,
-		body=body.Sakpata,
-		hands=hands.Sakpata,
-		legs=legs.Sakpata,
-		feet=feet.Pummelers,
+		head="Boii Mask +3",
+		body="Sakpata's Breastplate",
+		hands="Sakpata's Breastplate",
+		legs="Sakpata's Cuisses",
+		feet="Pummeler's Calligae +3",
 		neck="Warrior's bead necklace +2",
 		waist="Sailfi Belt +1",
 	    ear1="Schere Earring",
         ear2="Boii Earring +1",
 		ring1="Niqmaddu Ring",
-		ring2=ring.Moonlight_2,
-		back=back.WAR_TP,
+		ring2={ name="Moonlight Ring", bag="wardrobe8" },
+		back=gear.TP_Cape,
 	}
 
 	sets.OffenseMode.TP = set_combine( sets.OffenseMode, {})
 	sets.OffenseMode.DT = set_combine( sets.OffenseMode, {
-		head=head.Sakpata, 
+		head="Sakpata's Helm", 
 		feet=feet.Sakpata,
 	})
 
@@ -168,7 +172,7 @@ function get_sets()
 	-- Used for Magic Spells
 	sets.Precast.FastCast = {
 		ammo="Sapience Orb", --2
-		head=head.Sakpata, --8
+		head="Sakpata's Helm", --8
 		body="Sacro Breastplate", --10
 		hands="Leyline Gloves", --8
 		neck="Orunmila's Torque", -- 5
@@ -215,30 +219,30 @@ function get_sets()
 
 	-- Job Abilities
 	sets.JA = {}
-	sets.JA["Mighty Strikes"] = {feet=feet.Boii}
-	sets.JA["Berserk"] = {body=body.WAR_Artifact, feet=feet.Agoge}
-	sets.JA["Warcry"] = {head=head.Agoge}
+	sets.JA["Mighty Strikes"] = {feet=feet.WAR_Empyrean}
+	sets.JA["Berserk"] = {body=body.WAR_Artifact, feet=feet.WAR_Relic}
+	sets.JA["Warcry"] = {head=head.WAR_Relic}
 	sets.JA["Defender"] = {}
-	sets.JA["Aggressor"] = {body=body.Agoge, head=head.Agoge}
+	sets.JA["Aggressor"] = {body=body.WAR_Relic, head=head.WAR_Relic}
 	sets.JA["Provoke"] = sets.Precast.Enmity
 	sets.JA["Tomahawk"] = {ammo="Throwing Tomahawk",} -- Need to add feet
 	sets.JA["Retaliation"] = {}
-	sets.JA["Restraint"] = {hands=hands.Boii}
-	sets.JA["Blood Rage"] = {body=body.Boii}
+	sets.JA["Restraint"] = {hands=hands.WAR_Empyrean}
+	sets.JA["Blood Rage"] = {body=body.WAR_Empyrean}
 	sets.JA["Brazen Rush"] = {}
 
 	--Default WS set base
 	sets.WS = {
-		head=head.Agoge,
+		head=head.WAR_Relic,
         body=body.Nyame,
-        hands=hands.Boii,
-        legs=legs.Nyame,
+        hands=hands.WAR_Empyrean,
+        legs=legs.WAR_Empyrean,
         feet=feet.Nyame,
-        neck="Fotia Gorget",
+        neck="Warrior's Bead Necklace +2",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
         ring1=ring.Cornelia_Or_Regal,
-        ring2="Niqmaddu Ring",
+        ring2="Epaminondas's Ring",
         ammo="Knobkierrie",
         back=back.WAR_WS1,
         waist="Sailfi Belt +1",
@@ -247,17 +251,17 @@ function get_sets()
 	sets.WS.WSD = {}
 
 	sets.WS.MEVA = set_combine(sets.WS, {
-		head=head.Sakpata,
-		body=body.Sakpata,
+		head="Sakpata's Helm",
+		body="Sakpata's Breastplate",
 	})
 
 	-- Modes
 	sets.WS.CRIT = {
 		ammo="Yetshila +1",
-		head=head.Sakpata,
+		head="Sakpata's Helm",
 		body="Hjarrandi Breast.",
-		hands=hands.Sakpata,
-		legs=legs.Sakpata,
+		hands="Sakpata's Breastplate",
+		legs="Sakpata's Cuisses",
 		feet=feet.Sakpata,
 		neck="Warrior's Bead Necklace +2",
 		waist="Sailfi Belt +1",
@@ -302,10 +306,10 @@ function get_sets()
 	-- Great Axe WS
 	sets.WS["Ukko's Fury"] = {
 	    ammo="Yetshila +1",
-		head=head.Sakpata,
-		body=body.Sakpata,
-		hands=hands.Sakpata,
-		legs=legs.Sakpata,
+		head="Sakpata's Helm",
+		body="Sakpata's Breastplate",
+		hands="Sakpata's Breastplate",
+		legs="Sakpata's Cuisses",
 		feet=feet.Sakpata,
 		neck="Warrior's Bead Necklace +2",
 		ear1="Schere Earring",
@@ -317,7 +321,7 @@ function get_sets()
 	}
 	sets.WS["Upheaval"] = {
 	    ammo="Knobkierrie",
-		head=head.Agoge,
+		head=head.WAR_Relic,
 		body=body.Nyame,
 		hands=hands.Nyame,
 		legs=legs.Nyame,
@@ -405,7 +409,7 @@ function get_sets()
 	 sets.WS['Cataclysm'] = { --MAB26
         ammo="Knobkierrie", --WSD6
         head="Pixie Hairpin +1", --DMAB28
-        body=body.Nyame.Body, --MAB30 WSD12
+        body=body.Nyame, --MAB30 WSD12
         hands=hands.Nyame, --MAB30 WSD10
         legs=legs.Nyame, --MAB30 WSD11
         feet=feet.Nyame, --MAB30 WSD10
@@ -419,6 +423,8 @@ function get_sets()
     } --TPB250 MAB170 DMAB33 WSD59
 
 	sets.TreasureHunter = {}
+
+	sets.MightyStrikes = { feet=feet.WAR_Empyrean }
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -453,28 +459,28 @@ end
 function aftercast_custom(spell)
 	equipSet = {}
 
-	return equipSet
+	return choose_gear()
 end
 
 --Function is called when the player gains or loses a buff
 function buff_change_custom(name, gain)
 	equipSet = {}
 
-	return equipSet
+	return choose_gear()
 end
 
 --This function is called when a update request the correct equipment set
 function choose_set_custom()
 	equipSet = {}
 
-	return equipSet
+	return choose_gear()
 end
 
 --Function is called when the player changes states
 function status_change_custom(new,old)
 	equipSet = {}
 
-	return equipSet
+	return choose_gear()
 end
 
 --Function is called when a self command is issued
@@ -519,6 +525,15 @@ function user_file_unload()
     send_command('unbind !t')
     send_command('unbind !`')
     send_command('unbind ^`')
+end
+
+--Custom Function
+function choose_gear()
+	local equipSet = {}
+	if buffactive['Mighty Strikes'] then
+		equipSet = set_combine(equipSet, sets.MightyStrikes)
+	end
+	return equipSet
 end
 
 function check_buff_JA()

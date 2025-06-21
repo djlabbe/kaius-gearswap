@@ -17,6 +17,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include("lib/movement.lua")
 end
 
 function job_setup()
@@ -28,9 +29,32 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal', 'Regen')
 
+    state.WeaponSet= M{['description']='Weapon Set', 'Chango', 'Helheim', 'ShiningOne', 'Naegling', 'Loxotic' }
     state.WeaponLock = M(true, 'Weapon Lock')
 
     include('Global-Binds.lua')
+
+    gear.Artifact_Head = { name= "Pummeler's Mask +2" }
+    gear.Artifact_Body = { name= "Pummeler's Lorica +2" }
+    -- gear.Artifact_Hands = { name= "Pummeler's Mufflers +1" }
+    gear.Artifact_Legs = { name= "Pummeler's Cuisses +3" }
+    gear.Artifact_Feet = { name= "Pummeler's Calligae +3" }
+
+    gear.Relic_Head = { name= "Agoge Mask +3" }
+    gear.Relic_Body = { name= "Agoge Lorica +3" }
+    gear.Relic_Hands = { name= "Agoge Mufflers +3" }
+    gear.Relic_Legs = { name= "Agoge Cuisses +3" }
+    gear.Relic_Feet = { name= "Agoge Calligae +3" }
+
+    gear.Empyrean_Head = { name= "Boii Mask +3" }
+    gear.Empyrean_Body = { name= "Boii Lorica +3" }
+    gear.Empyrean_Hands = { name= "Boii Mufflers +3" }
+    gear.Empyrean_Legs = { name= "Boii Cuisses +3" }
+    gear.Empyrean_Feet = { name= "Boii Calligae +3" }
+
+    gear.WAR_TP_Cape = { name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20', 'DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
+    gear.WAR_WS1_Cape = { name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
+    gear.WAR_WS2_Cape = { name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
 
     send_command('bind @w gs c toggle WeaponLock')
 
@@ -39,6 +63,8 @@ function user_setup()
     
     send_command('bind !t input /ja "Provoke" <t>')
 
+
+    send_command('bind !h input //send @others /ma "Horde Lullaby II" <t>')
 
     if player.sub_job == 'SAM' then
         send_command('bind !c input /ja "Warding Circle" <me>')
@@ -63,11 +89,11 @@ function user_setup()
     
     send_command('wait 3; input /lockstyleset 1' )
 
-    state.Auto_Kite = M(false, 'Auto_Kite')
+    -- state.Auto_Kite = M(false, 'Auto_Kite')
     Haste = 0
     DW_needed = 0
     DW = false
-    moving = false
+    -- moving = false
     update_combat_form()
     determine_haste_group()
 end
@@ -84,6 +110,74 @@ end
 
 function init_gear_sets()
     
+    sets.Enmity = {
+        ammo="Sapience Orb",
+        head={name="Halitus Helm", priority=88},
+        neck="Moonlight Necklace",
+        body=gear.Souveran_C_Body, --20
+        legs=gear.Souveran_C_Legs,
+        feet=gear.Souveran_D_Feet,
+        ear1={name="Cryptic Earring", priority=40},
+        ear2={name="Trux Earring", priority=1},
+        hands={name="Kurys Gloves", priority=25}, --9
+        ring1="Apeile Ring +1",
+        ring2="Eihwaz Ring",
+    }
+
+    sets.precast.JA["Provoke"] = sets.Enmity
+
+    sets.precast.JA["Berserk"] = {
+        body=gear.Artifact_Body,
+        feet=gear.Relic_Feet,
+    }
+
+    sets.precast.JA["Warcry"] = {
+        head=gear.Relic_Head
+    }
+
+    sets.precast.JA['Restraint'] = {
+        hands=gear.Empyrean_Hands,
+    }
+
+    sets.precast.JA['Blood Rage'] = {
+        body=gear.Empyrean_Body,
+    }
+    
+    sets.precast.JA['Aggressor'] = {
+        body=gear.Relic_Body,
+        head=gear.Relic_Head,
+    }
+
+    sets.buff.MightyStrikes = {
+        feet=gear.Empyrean_Feet,
+    }
+
+    sets.precast.FC = {
+        ammo="Sapience Orb", --2
+        head=gear.Sakpata_Head, --8
+        hands="Leyline Gloves", --8
+        neck="Orunmila's Torque", --5
+        ear1="Etiolation Earring", --1
+        ear2="Enchanter's Earring +1", --2
+        ring2="Prolix Ring",
+    }
+
+    sets.engaged = {
+        ammo="Coiste Bodhar", --3
+        head=gear.Empyrean_Head, --7
+        body=gear.Empyrean_Body,
+        hands=gear.Sakpata_Hands, --6
+        legs=gear.Sakpata_Legs, --7
+        feet=gear.Artifact_Feet, --9
+        neck="Warrior's bead necklace +2", --7
+        ear1="Schere Earring", --6
+        ear2="Boii Earring +1", --8
+        ring1="Niqmaddu Ring",
+        ring2=gear.Lehko_Or_Chirich2,
+        waist="Sailfi Belt +1", --5
+        back=gear.WAR_TP_Cape, --10
+    } -- 68% DA + 28% Traits + Gifts +5 % Merits = 101
+    -- 52% PDT
 
     sets.engaged.Acc = {
         ammo="Coiste Bodhar", --3
@@ -444,10 +538,52 @@ function init_gear_sets()
         back=gear.WAR_WS1_Cape,
     } --TPB250 MAB170 DMAB33 WSD59
    
+    --------------------------------------------------------
+    --------------------- IDLE, ETC ------------------------
+    --------------------------------------------------------
 
- 
+    sets.idle = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Sakpata_Head,
+        body=gear.Sakpata_Body,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Sakpata_Legs,
+        feet=gear.Sakpata_Feet,
+        neck="Warder's Charm +1",
+        ear1="Eabani Earring",
+        ear2="Odnowa Earring +1",
+        ring1=gear.Moonlight_1,
+        ring2="Shadow Ring",
+        back="Null Shawl",
+        waist="Null Belt",
+    }
 
+    sets.idle.Regen = {
+        body="Sacro Breastplate",    
+        ring1=gear.Chirich_1,
+        ring2=gear.Chirich_2,
+    }
 
+    sets.idle.Town = sets.engaged;
+
+    sets.buff.Doom = {
+        neck="Nicander's Necklace", --20
+        ring1="Eshmun's Ring", --20
+        ring2="Purity Ring", --20
+        waist="Gishdubar Sash", --10
+    }
+
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Hermes' Sandals" }
+    end
+
+    sets.Naegling = { main="Naegling", sub="Blurred Shield +1" }
+    sets.Loxotic = { main="Loxotic Mace +1", sub="Blurred Shield +1" }
+    sets.ShiningOne = { main="Shining One", sub="Utu Grip" }
+    sets.Chango = { main="Chango", sub="Utu Grip" }
+    sets.Helheim = { main="Helheim", sub="Utu Grip" }
 end
 
 -- function job_post_precast(spell, action, spellMap, eventArgs)
@@ -469,7 +605,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
     update_combat_form()
     determine_haste_group()
-    check_moving()
+    -- check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -527,9 +663,14 @@ function customize_idle_set(idleSet)
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
 
-    if state.Auto_Kite.value == true then
+    -- if state.Auto_Kite.value == true then
+    --    idleSet = set_combine(idleSet, sets.Kiting)
+    -- end
+    add_to_chat(167, 'Moving: ' .. tostring(moving))
+    if moving == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
+    
 
     return idleSet
 end
@@ -595,7 +736,7 @@ function display_current_job_state(eventArgs)
 end
 
 function job_self_command(cmdParams, eventArgs)
-    gearinfo(cmdParams, eventArgs)
+    -- gearinfo(cmdParams, eventArgs)
 end
 
 function determine_haste_group()
@@ -615,36 +756,36 @@ function determine_haste_group()
     end
 end
 
-function gearinfo(cmdParams, eventArgs)
-    if cmdParams[1] == 'gearinfo' then
-        if type(tonumber(cmdParams[2])) == 'number' then
-            if tonumber(cmdParams[2]) ~= DW_needed then
-            DW_needed = tonumber(cmdParams[2])
-            DW = true
-            end
-        elseif type(cmdParams[2]) == 'string' then
-            if cmdParams[2] == 'false' then
-                DW_needed = 0
-                DW = false
-            end
-        end
-        if type(tonumber(cmdParams[3])) == 'number' then
-            if tonumber(cmdParams[3]) ~= Haste then
-                Haste = tonumber(cmdParams[3])
-            end
-        end
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
-    end
-end
+-- function gearinfo(cmdParams, eventArgs)
+--     if cmdParams[1] == 'gearinfo' then
+--         if type(tonumber(cmdParams[2])) == 'number' then
+--             if tonumber(cmdParams[2]) ~= DW_needed then
+--             DW_needed = tonumber(cmdParams[2])
+--             DW = true
+--             end
+--         elseif type(cmdParams[2]) == 'string' then
+--             if cmdParams[2] == 'false' then
+--                 DW_needed = 0
+--                 DW = false
+--             end
+--         end
+--         if type(tonumber(cmdParams[3])) == 'number' then
+--             if tonumber(cmdParams[3]) ~= Haste then
+--                 Haste = tonumber(cmdParams[3])
+--             end
+--         end
+--         if type(cmdParams[4]) == 'string' then
+--             if cmdParams[4] == 'true' then
+--                 moving = true
+--             elseif cmdParams[4] == 'false' then
+--                 moving = false
+--             end
+--         end
+--         if not midaction() then
+--             job_update()
+--         end
+--     end
+-- end
 
 function check_weaponset()
     equip(sets[state.WeaponSet.current])

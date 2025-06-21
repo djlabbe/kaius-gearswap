@@ -691,7 +691,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         range="Ullr",
         ammo=empty,
-        head=gear.Relic_Head, -- TODO Should be AF
+        head=gear.Artifact_Head,
         body=gear.Artifact_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Empyrean_Legs,

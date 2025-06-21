@@ -151,19 +151,7 @@ end
 function init_gear_sets()
 
     sets.precast.FC = {
-        ammo={name="Impatiens", priority=1}, 
-        head=head.Bunzi, --10
-        body={name="Pinga Tunic +1", priority=101}, --15
-        hands={name="Volte gloves", priority=1}, --6
-        legs={name="Pinga Pants +1", priority=84}, --13
-        feet={name="Regal Pumps +1", priority=13}, --7
-        neck={name="Cleric's Torque +2", priority=1}, --10
-        ear1={name="Malignance earring", priority=1}, --4
-        ear2={name="Loquac. Earring", priority=1}, --2
-        ring1={name="Lebeche Ring", priority=1},
-        ring2={name="Kishar Ring", priority=1}, --4
-        back={name="Fi Follet Cape +1", priority=1}, --10
-        waist=gear.Waist.PlatinumMoogle,
+       
     } --81
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -523,7 +511,9 @@ function init_gear_sets()
     }
 
     sets.buff['Devotion'] = { head=gear.Relic_Head }
+
     sets.buff.Sublimation = { waist="Embla Sash" }
+
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
         ring1="Eshmun's Ring", --20
@@ -531,7 +521,23 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
     }
 
-
+    sets.Idle = {
+	    main="Mpaca's Staff",
+        sub="Irenic Strap +1",
+		ammo="Staunch Tathlum +1", --3
+	    head=gear.Bunzi_Head, --7
+        body=gear.Empyrean_Body,
+        hands=gear.Bunzi_Hands, --8
+        legs=gear.Empyrean_Legs, --13
+        feet=gear.Empyrean_Feet, --11
+		neck="Sibyl Scarf",
+        ear1="Hearty Earring",
+        ear2="Ebers Earring +2", --5
+        ring1=gear.Gerubu_Or_Stikini1,
+        ring2=gear.Stikini_2,
+        back="Null Shawl", --10 
+        waist=gear.Platinum_Moogle_Belt, --3
+    }
 
     sets.idle.Town = set_combine(sets.idle, {
         main="Yagrush",

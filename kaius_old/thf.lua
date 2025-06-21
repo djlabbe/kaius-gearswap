@@ -105,6 +105,15 @@ function user_setup()
         send_command('bind ^numpad3 gs c set WeaponSet Savage;/input macro set 6;')
         set_macro_page(4, 6)
     else
+        send_command('bind ^numpad7 gs c set WeaponSet Mpu_Gleti;/input macro set 4;')
+        send_command('bind ^numpad8 gs c set WeaponSet Mpu_Crep;/input macro set 4;')
+        send_command('bind ^numpad9 gs c set WeaponSet Mpu_TP;/input macro set 4;')
+        send_command('bind ^numpad4 gs c set WeaponSet Twashtar_Gleti;/input macro set 5;')
+        send_command('bind ^numpad5 gs c set WeaponSet Twashtar_Crep;/input macro set 5;')
+        send_command('bind ^numpad6 gs c set WeaponSet Twashtar_TP;/input macro set 5;')
+        send_command('bind ^numpad1 gs c set WeaponSet Tauret_Gleti;/input macro set 5;')
+        send_command('bind ^numpad2 gs c set WeaponSet Gandring;/input macro set 5;')
+        send_command('bind ^numpad3 gs c set WeaponSet Savage;/input macro set 6;')
         set_macro_page(1, 6)
     end
 

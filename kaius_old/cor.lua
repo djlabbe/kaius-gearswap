@@ -23,6 +23,7 @@ function get_sets()
 end
 
 function job_setup()
+
     state.QD = M{['description']='Primary Shot', 'Fire Shot', 'Ice Shot', 'Wind Shot', 'Earth Shot', 'Thunder Shot', 'Water Shot'}
     state.QDMode = M{['description']='Quick Draw Mode', 'Enhance', 'Potency'}
     state.LuzafRing = M(true, "Luzaf's Ring")
@@ -895,6 +896,7 @@ end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
+    display_box_update()
 end
 
 function get_custom_wsmode(spell, action, spellMap)
@@ -1030,6 +1032,7 @@ function job_self_command(cmdParams, eventArgs)
     end
 
     gearinfo(cmdParams, eventArgs)
+    
 end
 
 function gearinfo(cmdParams, eventArgs)
@@ -1406,3 +1409,70 @@ function handle_forceequip(cmdParams)
 	end
 end
 
+function init_hud()
+    res = require('resources')
+    config = require('config')
+    local default = { visible = true, debug = false, info = true, warn = true,
+		Display_Box = {text={size=10,font='Consolas',red=255,green=255,blue=255,alpha=255},pos={x=1636,y=803},bg={visible=true,red=0,green=0,blue=0,alpha=102},},}
+
+    local settings = config.load(default)
+
+    local gs_status = texts.new("",settings.Display_Box)
+    if settings.visible then gs_status:show() end
+
+    -- UI for displaying the current states
+    function display_box_update()
+        local width = 25
+        local dialog = {}
+        dialog[1] = {description = 'Weapon', value = state.WeaponSet.value}
+        dialog[2] = {description = 'Offense', value = state.OffenseMode.value}
+        dialog[3] = {description = 'Hybrid', value = state.HybridMode.value}
+        dialog[4] = {description = 'QD', value = state.QD.value}
+        local lines = T{}
+        for k, v in next, dialog do
+            lines:insert(v.description ..string.format('[%s]',tostring(v.value)):lpad(' ',width-string.len(tostring(v.description))))
+        end
+        local maxWidth = math.max(1, table.reduce(lines, function(a, b) return math.max(a, #b) end, '1'))
+        -- Pad each entry
+        for i,line in ipairs(lines) do lines[i] = lines[i]:rpad(' ', maxWidth) end
+        gs_status:text(lines:concat('\n'))
+    end
+
+    coroutine.schedule(display_box_update, 2)
+end
+
+
+
+-- main_engine_time = os.clock()
+-- Location = {x=0, y=0, z=0}
+
+-- function movement_engine()
+--     local now = os.clock()
+--     -- Make sure not update faster than .1 seconds
+-- 	if now - main_engine_time < .1 then return end
+--     if not player or player.status == "Dead" or player.status == "Engaged dead" or buffactive['Charm'] or buffactive['Sleep'] then return end
+--     local position = windower.ffxi.get_mob_by_id(player.id)
+--     if position and not buffactive['Mounted'] and not is_Busy then
+--         local movement = math.sqrt( (position.x-Location.x)^2 + (position.y-Location.y)^2 + (position.z-Location.z)^2 ) > 0.5
+--         if movement and not moving then
+--             if player.status ~= "Engaged" then
+--                 moving = true
+--                 -- add_to_chat(122, 'You are now moving.')
+--             end
+--         elseif not movement and moving then
+--             moving = false
+--             -- add_to_chat(122, 'You are now stopped.')
+--         end
+--         Location.x = position.x
+--         Location.y = position.y
+--         Location.z = position.z
+--     end
+
+--     main_engine_time = os.clock()
+-- end
+
+
+init_hud()
+
+-- coroutine.schedule(movement_engine, 2)
+-- windower.raw_register_event('outgoing chunk', movement_engine)

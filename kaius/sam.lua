@@ -281,8 +281,8 @@ function get_sets()
 	sets.WS["Tachi: Rana"] = {
          ammo="Coiste Bodhar",
         head=head.Mpaca,
-        body=body.Relic,
-        hands=hands.Empyrean, 
+        body=body.SAM_Relic,
+        hands=hands.SAM_Empyrean, 
         legs=legs.Nyame, 
         feet=feet.Mpaca,
         neck="Samurai's Nodowa +2",
@@ -298,16 +298,16 @@ function get_sets()
         ammo="Crepuscular Pebble",
         legs=legs.Mpaca,
         ring1=ring.Ephramad_Or_Sroda,
-        feet=feet.Empyrean,
+        feet=feet.SAM_Empyrean,
     })
 
 	sets.WS["Tachi: Ageha"] = {
         ammo="Pemphredo Tathlum",
-        head=head.Empyrean,
-        body=body.Empyrean,
-        hands=hands.Empyrean,
-        legs=legs.Empyrean,
-        feet=feet.Empyrean,
+        head=head.SAM_Empyrean,
+        body=body.SAM_Empyrean,
+        hands=hands.SAM_Empyrean,
+        legs=legs.SAM_Empyrean,
+        feet=feet.SAM_Empyrean,
         neck="Null Loop",
         ear1="Crepuscular Earring",
         ear2="Kasuga Earring +2",
@@ -342,9 +342,9 @@ function get_sets()
         ammo="Knobkierrie",
         head=head.Mpaca,
         body=body.Nyame,
-        hands=hands.Empyrean, 
+        hands=hands.SAM_Empyrean, 
         legs=legs.Mpaca, 
-        feet=feet.Empyrean,
+        feet=feet.SAM_Empyrean,
         neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
@@ -358,7 +358,7 @@ function get_sets()
         ammo="Knobkierrie",
         head=head.Mpaca,
         body=body.Nyame,
-        hands=hands.Empyrean,
+        hands=hands.SAM_Empyrean,
         legs=legs.Nyame,
         feet=feet.Nyame,
         neck="Samurai's Nodowa +2",
@@ -372,7 +372,7 @@ function get_sets()
 
     sets.WS["Impulse Drive"].PDL = set_combine(sets.WS["Impulse Drive"], {
         legs=legs.Mpaca,
-        feet=feet.Empyrean,
+        feet=feet.SAM_Empyrean,
         ring1=ring.Ephramad_Or_Sroda,
     })
 
@@ -380,7 +380,7 @@ function get_sets()
         ammo="Coiste Bodhar", --6
         head=head.Mpaca,
         body=body.Mpaca,
-        hands=hands.Empyrean,
+        hands=hands.SAM_Empyrean,
         legs=legs.Mpaca,
         feet=feet.Mpaca,
         neck="Fotia Gorget",

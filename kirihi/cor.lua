@@ -624,7 +624,7 @@ function init_gear_sets()
         head=gear.Malignance_Head,
         body="Adamantite Armor",
         hands=gear.Malignance_Hands,
-        legs=gear.Empyrean_Legs,
+        legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
         neck="Warder's Charm +1",
         ear1="Eabani Earring",
