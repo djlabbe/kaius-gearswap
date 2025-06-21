@@ -88,7 +88,7 @@ function user_setup()
     -- gear.Rostam_B = { name="Rostam", augments={'Path: B',}, bag="wardrobe3"}
 
     gear.Artifact_Head = { name= "Laksamana's Tricorne +2" }
-    gear.Artifact_Body = { name= "Laksamana's Frac +3" }
+    gear.Artifact_Body = { name= "Laksamana's Frac +4" }
     gear.Artifact_Hands = { name= "Laksamana's Gants +2" }
     gear.Artifact_Legs = { name= "Laksamana's Trews +2" }
     gear.Artifact_Feet = { name= "Laksamana's Bottes +2" }

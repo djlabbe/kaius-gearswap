@@ -89,7 +89,7 @@ function user_setup()
     gear.Linos_MATK = { name="Linos", augments={'"Mag.Atk.Bns."+15',}}
 
     gear.Artifact_Head = { name= "Brioso Roundlet +3" }
-    gear.Artifact_Body = { name= "Brioso Justaucorps +3" }
+    gear.Artifact_Body = { name= "Brioso Justaucorps +4" }
     gear.Artifact_Hands = { name= "Brioso Cuffs +3" }
     gear.Artifact_Legs = { name= "Brioso Cannions +3" }
     gear.Artifact_Feet = { name= "Brioso Slippers +3" }

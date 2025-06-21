@@ -1,6 +1,5 @@
 -- Load and initialize the include file.
 include('Kaius-Include')
-include('gear/gear')
 include('Global-Binds.lua')
 
 LockStylePallet = "12"
@@ -42,18 +41,18 @@ function get_sets()
 
 	-- Standard Idle set with -DT, Refresh and Regen gear
 	sets.Idle = {
-		head=head.SAM_Artifact,
+		head="Wakido Kabuto +3",
         body="Sacro Breastplate",
-        hands=hands.Mpaca,
-        legs=legs.Mpaca,
-        feet=feet.Mpaca,
+        hands={name="Mpaca's Gloves", priority=61},
+        legs={name="Mpaca's Hose", priority=72},
+        feet={name="Mpaca's Boots", priority=50},
         neck="Warder's Charm +1",
         waist="Platinum Moogle Belt",
         ear1="Sanare Earring",
         ear2="Eabani Earring",
-        ring1=ring.Chirich_1,
-        ring2=ring.Chirich_2,
-        back=back.SAM_TP,
+        ring1={name="Chirich Ring +1", bag="wardrobe7"},
+        ring2={name="Chirich Ring +1", bag="wardrobe8"},
+        back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
     }
 
 	sets.Idle.TP = set_combine(sets.Idle, {})
@@ -77,27 +76,27 @@ function get_sets()
 
 	--Base TP set to build off
 	sets.OffenseMode = {
-		 ammo="Aurgelmir Orb +1",
-        head=head.SAM_Empyrean,
-        body=body.SAM_Empyrean,
-        hands=hands.Tatenashi,
-        legs=legs.SAM_Empyrean,
-        feet=feet.Ryuo_C,
+		ammo="Aurgelmir Orb +1",
+        head="Kasuga Kabuto +3",
+        body="Kasuga Domaru +3",
+        hands="Tatenashi Gote +1",
+        legs="Takaha Mantle",
+        feet={name="Ryuo Sune-Ate +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}},
         neck="Samurai's Nodowa +2",
         waist="Sweordfaetels +1",
         ear1="Dedition Earring",
         ear2="Kasuga Earring +2",
-        ring1=ring.Chirich_1,
+        ring1={name="Chirich Ring +1", bag="wardrobe7"},
         ring2="Niqmaddu Ring",
-        back=back.SAM_STP,
+        back="Takaha Mantle",
 	}
 
 	sets.OffenseMode.TP = set_combine (sets.OffenseMode, {})
 
 	--This set is used when OffenseMode is DT and Enaged (Augments the TP base set)
 	sets.OffenseMode.DT = set_combine (sets.OffenseMode, {
-        hands=hands.Nyame,
-        feet=feet.Nyame,
+        hands="Nyame Gauntlets",
+        feet="Nyame Sollerets",
         back="Null Shawl",
         waist="Sailfi Belt +1",
 	})
@@ -106,25 +105,25 @@ function get_sets()
 	--This set is used when OffenseMode is ACC and Enaged (Augments the TP base set)
 	sets.OffenseMode.SUB = set_combine (sets.OffenseMode, {
 		ammo="Aurgelmir Orb +1",
-        head=head.SAM_Empyrean,
+        head="Kasuga Kabuto +3",
         body="Dagon Breastplate", --(10)
-        hands=hands.SAM_Artifact,
-        legs=legs.Mpaca, --(5)
-        feet=feet.Ryuo_C, --8
+        hands="Wakido Kote +3",
+        legs={name="Mpaca's Hose", priority=72}, --(5)
+        feet={name="Ryuo Sune-Ate +1", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}}, --8
         neck="Samurai's Nodowa +2",
         ear1="Dedition Earring", --3
         ear2="Telos Earring", --5
-        ring1=ring.Chirich_1, --10
+        ring1={name="Chirich Ring +1", bag="wardrobe7"}, --10
         ring2="Niqmaddu Ring", --(5)
         waist="Sailfi Belt +1",
-        back=back.SAM_TP,
+        back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
 	})
 
 	sets.OffenseMode.PDL = set_combine(sets.OffenseMode.TP, {});
 
 	sets.OffenseMode.MEVA = set_combine(sets.OffenseMode.DT, {
-	    hands=hands.Nyame,
-        feet=feet.Nyame,
+	    hands="Nyame Gauntlets",
+        feet="Nyame Sollerets",
         back="Null Shawl",
         waist="Sailfi Belt +1",
 	});
@@ -149,20 +148,26 @@ function get_sets()
 	sets.Midcast = set_combine(sets.Idle, {})
 
 	--Job Abilities
-	sets.JA["Meikyo Shisui"] = {feet=feet.SAM_Relic}
+	sets.JA["Meikyo Shisui"] = {feet="Sakonji Sune-Ate +3"}
 	sets.JA["Berserk"] = {}
 	sets.JA["Warcry"] = {}
 	sets.JA["Defender"] = {}
 	sets.JA["Aggressor"] = {}
 	sets.JA["Provoke"] = sets.Enmity
-	sets.JA["Third Eye"] = {legs=legs.SAM_Relic}
-	sets.JA["Meditate"] = {head=head.SAM_Artifact, hands=hands.SAM_Relic, back=back.SAM_TP}
-	sets.JA["Warding Circle"] = {head=head.SAM_Artifact}
+	sets.JA["Third Eye"] = {legs="Sakonji Haidate +3"}
+
+	sets.JA["Meditate"] = {
+        head="Wakido Kabuto +3", 
+        hands="Sakonji Kote +3", 
+        back={ name="Smertrios's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}}
+    }
+
+	sets.JA["Warding Circle"] = {head="Wakido Kabuto +3"}
 	sets.JA["Shikikoyo"] = {}
 	sets.JA["Hasso"] = {}
 	sets.JA["Seigan"] = {}
-	sets.JA["Sengikori"] = {feet=feet.SAM_Empyrean,}
-	sets.JA["Sekkanoki"] = {hands=hands.SAM_Empyrean,}
+	sets.JA["Sengikori"] = {feet="Kasuga Sune-Ate +3",}
+	sets.JA["Sekkanoki"] = {hands="Kasuga Kote +3",}
 	sets.JA["Hamanoha"] = {}
 	sets.JA["Hagakure"] = {}
 	sets.JA["Konzen-ittai"] = {}
@@ -171,23 +176,23 @@ function get_sets()
 	--Default Weapon Skill set base
 	sets.WS = {
 		ammo="Knobkierrie",
-        head=head.Mpaca,
-        body=body.SAM_Empyrean,
-        hands=hands.SAM_Empyrean,
-        legs=legs.Nyame,
-        feet=feet.Nyame, 
+        head="Mpaca's Cap",
+        body="Kasuga Domaru +3",
+        hands="Kasuga Kote +3",
+        legs="Nyame Flanchard",
+        feet="Nyame Sollerets", 
         neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
         ear2="Kasuga Earring +2",
         ring1="Regal Ring",
-        ring2=ring.Cornelia_Or_Epaminondas,
-        back=back.SAM_WS,
+        ring2=gear.Cornelia_Or_Epaminondas,
+        back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
 	}
 
     sets.WS.PDL = {
-        ring2=ring.Ephramad_Or_Sroda,
-        feet=feet.SAM_Empyrean,
+        ring2=gear.Ephramad_Or_Sroda,
+        feet="Kasuga Sune-Ate +3",
     }
 
 	sets.WS.AM3 = {}
@@ -195,17 +200,17 @@ function get_sets()
 
 	sets.WS.MAB = set_combine(sets.WS, {		
 		ammo="Knobkierrie",
-        head=head.Nyame,
-        body=body.Nyame,
-        hands=hands.Nyame,
-        legs=legs.Nyame,
-        feet=feet.Nyame,
+        head="Nyame Helm",
+        body="Nyame Mail",
+        hands="Nyame Gauntlets",
+        legs="Nyame Flanchard",
+        feet="Nyame Sollerets",
         neck="Sibyl Scarf",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1=ring.Cornelia_Or_Regal,
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Epaminondas's Ring",
-        back=back.SAM_WS,
+        back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
         waist="Orpheus's Sash",
 	})
 
@@ -222,17 +227,17 @@ function get_sets()
 
 	sets.WS["Tachi: Jinpu"] = {
         ammo="Knobkierrie",
-        head=head.Nyame,
-        body=body.Nyame,
-        hands=hands.Nyame,
-        legs=legs.Nyame,
-        feet=feet.Nyame,
+        head="Nyame Helm",
+        body="Nyame Mail",
+        hands="Nyame Gauntlets",
+        legs="Nyame Flanchard",
+        feet="Nyame Sollerets",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Schere Earring",
-        ring1=ring.Cornelia_Or_Epaminondas,
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Niqmaddu Ring",
-        back=back.SAM_WS,
+        back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
         waist="Orpheus's Sash",
     }
     sets.WS["Tachi: Jinpu"].PDL = set_combine(sets.WS["Tachi: Jinpu"], {
@@ -243,34 +248,34 @@ function get_sets()
 
 	sets.WS["Tachi: Kagero"] = {
         ammo="Knobkierrie",
-        head=head.Nyame,
-        body=body.Nyame,
-        hands=hands.Nyame,
-        legs=legs.Nyame,
-        feet=feet.Nyame,
+        head="Nyame Helm",
+        body="Nyame Mail",
+        hands="Nyame Gauntlets",
+        legs="Nyame Flanchard",
+        feet="Nyame Sollerets",
         neck="Sibyl Scarf",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1=ring.Cornelia_Or_Regal,
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Epaminondas's Ring",
-        back=back.SAM_WS,
+        back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
         waist="Orpheus's Sash",
     }
 
 	sets.WS["Tachi: Koki"] = {
-         ammo="Knobkierrie",
-        head=head.Nyame,
-        body=body.Nyame,
-        hands=hands.Nyame,
-        legs=legs.Nyame,
-        feet=feet.Nyame,
+        ammo="Knobkierrie",
+        head="Nyame Helm",
+        body="Nyame Mail",
+        hands="Nyame Gauntlets",
+        legs="Nyame Flanchard",
+        feet="Nyame Sollerets",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Schere Earring",
         -- ring="Weatherspoon Ring +1",
-        ring1=ring.Cornelia_Or_Epaminondas,
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Niqmaddu Ring",
-        back=back.SAM_WS,
+        back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
         waist="Fotia Belt",
     }
 
@@ -279,116 +284,116 @@ function get_sets()
 	sets.WS["Tachi: Kasha"] = set_combine (sets.WS, {})
 
 	sets.WS["Tachi: Rana"] = {
-         ammo="Coiste Bodhar",
-        head=head.Mpaca,
-        body=body.SAM_Relic,
-        hands=hands.SAM_Empyrean, 
-        legs=legs.Nyame, 
-        feet=feet.Mpaca,
+        ammo="Coiste Bodhar",
+        head="Mpaca's Cap",
+        body="Sakonji Domaru +3",
+        hands="Kasuga Kote +3", 
+        legs="Nyame Flanchard", 
+        feet={name="Mpaca's Boots", priority=50},
         neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Lugra Earring +1",
         ear2="Schere Earring",
         ring1="Regal Ring", 
         ring2="Niqmaddu Ring",
-        back=back.SAM_WS,
+        back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
 
     sets.WS["Tachi: Rana"].PDL = set_combine(sets.WS["Tachi: Rana"], {
         ammo="Crepuscular Pebble",
-        legs=legs.Mpaca,
-        ring1=ring.Ephramad_Or_Sroda,
-        feet=feet.SAM_Empyrean,
+        legs={name="Mpaca's Hose", priority=72},
+        ring1=gear.Ephramad_Or_Sroda,
+        feet="Kasuga Sune-Ate +3",
     })
 
 	sets.WS["Tachi: Ageha"] = {
         ammo="Pemphredo Tathlum",
-        head=head.SAM_Empyrean,
-        body=body.SAM_Empyrean,
-        hands=hands.SAM_Empyrean,
-        legs=legs.SAM_Empyrean,
-        feet=feet.SAM_Empyrean,
+        head="Kasuga Kabuto +3",
+        body="Kasuga Domaru +3",
+        hands="Kasuga Kote +3",
+        legs="Takaha Mantle",
+        feet="Kasuga Sune-Ate +3",
         neck="Null Loop",
         ear1="Crepuscular Earring",
         ear2="Kasuga Earring +2",
-        ring1=ring.Stikini_1,
+        ring1={name="Stikini Ring +1", bag="wardrobe7"},
         ring2="Metamorph Ring +1",
-        back=back.SAM_WS,
+        back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
         waist="Null Belt",
     }
 
 	sets.WS["Tachi: Fudo"] = {
         ammo="Knobkierrie",
-        head=head.Mpaca,
-        body=body.Nyame,
-        hands=hands.SAM_Empyrean, 
-        legs=legs.Nyame, 
-        feet=feet.Nyame,
+        head="Mpaca's Cap",
+        body="Nyame Mail",
+        hands="Kasuga Kote +3", 
+        legs="Nyame Flanchard", 
+        feet="Nyame Sollerets",
         neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
         ear2="Kasuga Earring +2",
-        ring1=ring.Cornelia_Or_Epaminondas,
+        ring1=gear.Cornelia_Or_Epaminondas,
         ring2="Niqmaddu Ring", 
-        back=back.SAM_WS,
+        back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
 
     sets.WS["Tachi: Fudo"].PDL = set_combine(sets.WS["Tachi: Fudo"], {
-        ring2=ring.Ephramad_Or_Sroda,
-        feet=feet.SAM_Empyrean,
+        ring2=gear.Ephramad_Or_Sroda,
+        feet="Kasuga Sune-Ate +3",
     })
 
 	sets.WS["Tachi: Shoha"] = {
         ammo="Knobkierrie",
-        head=head.Mpaca,
-        body=body.Nyame,
-        hands=hands.SAM_Empyrean, 
-        legs=legs.Mpaca, 
-        feet=feet.SAM_Empyrean,
+        head="Mpaca's Cap",
+        body="Nyame Mail",
+        hands="Kasuga Kote +3", 
+        legs={name="Mpaca's Hose", priority=72}, 
+        feet="Kasuga Sune-Ate +3",
         neck="Samurai's Nodowa +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
         ear2="Kasuga Earring +2",
-        ring1=ring.Cornelia_Or_Sroda,
+        ring1=gear.Cornelia_Or_Sroda,
         ring2="Epaminondas's Ring",
-        back=back.SAM_WS,
+        back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
 
 	sets.WS["Impulse Drive"] = {
         ammo="Knobkierrie",
-        head=head.Mpaca,
-        body=body.Nyame,
-        hands=hands.SAM_Empyrean,
-        legs=legs.Nyame,
-        feet=feet.Nyame,
+        head="Mpaca's Cap",
+        body="Nyame Mail",
+        hands="Kasuga Kote +3",
+        legs="Nyame Flanchard",
+        feet="Nyame Sollerets",
         neck="Samurai's Nodowa +2",
         ear1="Moonshade Earring",
         ear2="Kasuga Earring +2",
         ring1="Begrudging Ring",
         ring2="Niqmaddu Ring",
-        back=back.SAM_WS,
+        back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
         waist="Sailfi Belt +1",
     }
 
     sets.WS["Impulse Drive"].PDL = set_combine(sets.WS["Impulse Drive"], {
-        legs=legs.Mpaca,
-        feet=feet.SAM_Empyrean,
-        ring1=ring.Ephramad_Or_Sroda,
+        legs={name="Mpaca's Hose", priority=72},
+        feet="Kasuga Sune-Ate +3",
+        ring1=gear.Ephramad_Or_Sroda,
     })
 
     sets.WS["Stardiver"] = {
         ammo="Coiste Bodhar", --6
-        head=head.Mpaca,
-        body=body.Mpaca,
-        hands=hands.SAM_Empyrean,
-        legs=legs.Mpaca,
-        feet=feet.Mpaca,
+        head="Mpaca's Cap",
+        body="Mpaca's Doublet",
+        hands="Kasuga Kote +3",
+        legs={name="Mpaca's Hose", priority=72},
+        feet={name="Mpaca's Boots", priority=50},
         neck="Fotia Gorget",
         ear1="Schere Earring",
         ear2="Moonshade Earring",
         ring1="Regal Ring",
         ring2="Niqmaddu Ring",
-        back=back.SAM_WS,
+        back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
         waist="Fotia Belt",
     }
 
@@ -397,8 +402,8 @@ function get_sets()
 
 	--Custome sets for each jobsetup
 	sets.Seigan = {
-		head=head.SAM_Empyrean,
-		body=body.SAM_Empyrean,
+		head="Kasuga Kabuto +3",
+		body="Kasuga Domaru +3",
 	}
 
 	sets.ThirdEye = {}

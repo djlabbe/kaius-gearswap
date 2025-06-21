@@ -4,6 +4,23 @@ Mirdain_GS = '1.5.1'
 -- Modes is the include file for a mode-tracking variable class.  Used for state vars, below.
 include('Modes')
 
+-- Optional version of include().  If file does not exist, does not
+-- attempt to load, and does not throw an error.
+-- filenames takes an array of possible file names to include and checks
+-- each one.
+function optional_include(filenames)
+    for _,v in pairs(filenames) do
+        local path = gearswap.pathsearch({v})
+        if path then
+            include(v)
+            return true
+        end
+    end
+end
+
+optional_include({'user-globals.lua'})
+optional_include({player.name..'-globals.lua'})
+
 function item_available(item)
 	if player.inventory[item] or player.wardrobe[item] or player.wardrobe2[item] or player.wardrobe3[item] or player.wardrobe4[item] or player.wardrobe5[item] or player.wardrobe6[item] or player.wardrobe7[item] or player.wardrobe8[item] then
 		return true

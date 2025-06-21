@@ -1,6 +1,7 @@
 -- Load and initialize the include file.
 include('Kaius-Include')
 include('Global-Binds.lua')
+include('Kaius-globals.lua')
 
 LockStylePallet = "1"
 MacroBook = "1"
@@ -41,10 +42,6 @@ end
 
 function get_sets()
 
-	local gear = {}
-	gear.TP_Cape = { name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20', 'DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
-
-
 	-- Weapon setup
 	sets.Weapons = {}
 
@@ -73,7 +70,7 @@ function get_sets()
 		waist="Null Belt",
 		ear1="Eabani Earring",
 		ear2="Odnowa Earring +1",
-		ring1={ name="Moonlight Ring", bag="wardrobe7" },
+		ring1=gear.Moonlight_1,
 		ring2="Shadow Ring",
 		back="Null Shawl",
     }
@@ -111,39 +108,39 @@ function get_sets()
 		body="Sakpata's Breastplate",
 		hands="Sakpata's Breastplate",
 		legs="Sakpata's Cuisses",
-		feet="Pummeler's Calligae +3",
+		feet="Pummeler's Calligae",
 		neck="Warrior's bead necklace +2",
 		waist="Sailfi Belt +1",
 	    ear1="Schere Earring",
         ear2="Boii Earring +1",
 		ring1="Niqmaddu Ring",
 		ring2={ name="Moonlight Ring", bag="wardrobe8" },
-		back=gear.TP_Cape,
+		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20', 'DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
 	}
 
 	sets.OffenseMode.TP = set_combine( sets.OffenseMode, {})
 	sets.OffenseMode.DT = set_combine( sets.OffenseMode, {
 		head="Sakpata's Helm", 
-		feet=feet.Sakpata,
+		feet="Sakpata's Leggings",
 	})
 
 	sets.OffenseMode.PDL = set_combine(sets.OffenseMode, {})
 
 	sets.OffenseMode.MEVA = set_combine(sets.OffenseMode, {
-		feet=feet.Sakpata,
+		feet="Sakpata's Leggings",
 		neck="Warder's Charm +1",
 	})
 
 	sets.Subtle_Blow = {
 		body="Dagon Breastplate", -- 10 SB II
-		feet=feet.Sakpata, -- 15 SB I
+		feet="Sakpata's Leggings", -- 15 SB I
 		ear1="Schere Earring", -- 3 SB I
 		ear2="Boii Earring +1", -- 8 SB I
 		ring1="Niqmaddu Ring", -- 5 SB II
 	}
 
 	-- Max SUB set (SUB 50 and SUBII 15) Need auspice (29) to cap
-	sets.OffenseMode.SUB = set_combine(sets.OffenseMode.DT, sets.Subtle_Blow, { })
+	sets.OffenseMode.SUB = set_combine(sets.OffenseMode.DT, sets.Subtle_Blow)
 
 	--These base set are used when an aftermath is active and player is enaged and correct weapon type set (Augments the current OffenseMode)
 	--If you don't specify a weapon mode it will use it regardless of Mythic,Empy,Relic,Aeonic
@@ -184,11 +181,11 @@ function get_sets()
 
 	sets.Precast.Enmity = {
 		ammo="Sapience Orb", -- 2
-		head=head.Souveran_C, --9
-		body=body.Souveran_C, --20
-		hands=hands.Souveran_C, --9
-		legs=legs.Souveran_C, --9
-		feet=feet.Souveran_D, --9
+		head={ name="Souveran Schaller +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=280}, --9
+		body={ name="Souveran Cuirass +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=171}, --20
+		hands={ name="Souveran Handschuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=239}, --9
+		legs={ name="Souveran Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=163}, --9
+		feet={ name="Souveran Schuhs +1", augments={'HP+65','Attack+25','Magic dmg. taken -4',}, priority=187}, --9
 		neck="Moonlight Necklace", --15
 		ear1="Cryptic Earring", --4
 		ear2={name="Trux Earring", priority=1},
@@ -205,7 +202,7 @@ function get_sets()
 	--This set is used as base as is overwrote by specific gear changes (Spell Interruption Rate Down)
 	sets.Midcast.SIRD = {
 	    ammo="Staunch Tathlum +1", --11
-		feet=feet.Ody_CURE,
+		feet=gear.Ody_CURE_Feet,
 		neck="Moonlight Necklace", --15
 		ear1="Magnetic Earring", --8
 		waist="Audumbla Sash", --10
@@ -219,32 +216,32 @@ function get_sets()
 
 	-- Job Abilities
 	sets.JA = {}
-	sets.JA["Mighty Strikes"] = {feet=feet.WAR_Empyrean}
-	sets.JA["Berserk"] = {body=body.WAR_Artifact, feet=feet.WAR_Relic}
-	sets.JA["Warcry"] = {head=head.WAR_Relic}
+	sets.JA["Mighty Strikes"] = {feet="Boii Calligae +3"}
+	sets.JA["Berserk"] = {body="Pummeler's Lorica +2", feet="Agoge Calligae +3"}
+	sets.JA["Warcry"] = {head="Agoge Mask +3"}
 	sets.JA["Defender"] = {}
-	sets.JA["Aggressor"] = {body=body.WAR_Relic, head=head.WAR_Relic}
+	sets.JA["Aggressor"] = {body="Agoge Lorica +3", head="Agoge Mask +3"}
 	sets.JA["Provoke"] = sets.Precast.Enmity
 	sets.JA["Tomahawk"] = {ammo="Throwing Tomahawk",} -- Need to add feet
 	sets.JA["Retaliation"] = {}
-	sets.JA["Restraint"] = {hands=hands.WAR_Empyrean}
-	sets.JA["Blood Rage"] = {body=body.WAR_Empyrean}
+	sets.JA["Restraint"] = {hands="Boii Mufflers +3"}
+	sets.JA["Blood Rage"] = {body="Boii Lorica +3"}
 	sets.JA["Brazen Rush"] = {}
 
 	--Default WS set base
 	sets.WS = {
-		head=head.WAR_Relic,
-        body=body.Nyame,
-        hands=hands.WAR_Empyrean,
-        legs=legs.WAR_Empyrean,
-        feet=feet.Nyame,
+		head="Agoge Mask +3",
+        body={name="Nyame Mail", priority=136},
+        hands="Boii Mufflers +3",
+        legs="Boii Cuisses +3",
+        feet={name="Nyame Sollerets", priority=68},
         neck="Warrior's Bead Necklace +2",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
-        ring1=ring.Cornelia_Or_Regal,
+        ring1=gear.Cornelia_Or_Regal,
         ring2="Epaminondas's Ring",
         ammo="Knobkierrie",
-        back=back.WAR_WS1,
+        back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
         waist="Sailfi Belt +1",
 	}
 
@@ -262,14 +259,14 @@ function get_sets()
 		body="Hjarrandi Breast.",
 		hands="Sakpata's Breastplate",
 		legs="Sakpata's Cuisses",
-		feet=feet.Sakpata,
+		feet="Sakpata's Leggings",
 		neck="Warrior's Bead Necklace +2",
 		waist="Sailfi Belt +1",
 		ear1="Schere Earring",
 		ear2="Boii Earring +1",
 		ring1="Niqmaddu Ring",
 		ring2="Begrudging Ring",
-		back=back.WAR_WS1,
+		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
 	}
 	sets.WS.CRIT.RA = {}
 
@@ -310,45 +307,45 @@ function get_sets()
 		body="Sakpata's Breastplate",
 		hands="Sakpata's Breastplate",
 		legs="Sakpata's Cuisses",
-		feet=feet.Sakpata,
+		feet="Sakpata's Leggings",
 		neck="Warrior's Bead Necklace +2",
 		ear1="Schere Earring",
 		ear2="Boii Earring +1",
 		ring1="Niqmaddu Ring",
-		ring2=ring.Ephramad_Or_Regal,
+		ring2=gear.Ephramad_Or_Regal,
 		waist="Sailfi Belt +1",
-		back=back.WAR_WS1,
+		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
 	}
 	sets.WS["Upheaval"] = {
 	    ammo="Knobkierrie",
-		head=head.WAR_Relic,
-		body=body.Nyame,
-		hands=hands.Nyame,
-		legs=legs.Nyame,
-		feet=feet.Nyame,
+		head=gear.WAR_Relic,
+		body={name="Nyame Mail", priority=136},
+		hands={name="Nyame Gauntlets", priority=91},
+		legs={name="Nyame Flanchard", priority=114},
+		feet={name="Nyame Sollerets", priority=68},
 		neck="Warrior's Bead Necklace +2",
 		ear1="Moonshade Earring",
 		ear2="Thrud Earring",
 		ring1="Niqmaddu Ring",
 		ring2="Regal Ring",
 		waist="Sailfi Belt +1",
-		back=back.WAR_WS1,
+		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
 	}
 	
 	sets.WS["Full Break"] = {
 		 ammo="Pemphredo Tathlum",
-		head=head.Nyame,
-		body=body.Nyame,
-		hands=hands.Nyame,
-		legs=legs.Nyame,
-		feet=feet.Nyame,
+		head={name="Nyame Flanchard", priority=114},
+		body={name="Nyame Mail", priority=136},
+		hands={name="Nyame Gauntlets", priority=91},
+		legs={name="Nyame Flanchard", priority=114},
+		feet={name="Nyame Sollerets", priority=68},
 		neck="Null Loop",
 		waist="Null Belt",
 		ear1="Moonshade Earring",
         ear2="Boii Earring +1",
-		ring1=ring.Stikini_1,
+		ring1=gear.Stikini_1,
 		ring2="Regal Ring",
-		back=back.WAR_WS1,
+		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
 	}
 
 	sets.WS["Armor Break"] = sets.WS["Full Break"]
@@ -392,39 +389,39 @@ function get_sets()
 	--Polearm
 	sets.WS["Impulse Drive"] = sets.WS.CRIT
 	sets.WS["Leg Sweep"] = {
-		head=head.Nyame,
-		body=body.Nyame,
-		hands=hands.Nyame,
-		legs=legs.Nyame,
-		feet=feet.Nyame,
+		head=gear.Nyame_Head,
+		body={name="Nyame Mail", priority=136},
+		hands={name="Nyame Gauntlets", priority=91},
+		legs={name="Nyame Flanchard", priority=114},
+		feet={name="Nyame Sollerets", priority=68},
 		neck="Warrior's Bead Necklace +2",
 		waist="Sailfi Belt +1",
 		ear1="Moonshade Earring",
 		ear2="Boii Earring +1",
-		ring1=ring.Stikini_1,
+		ring1=gear.Stikini_1,
 		ring2="Regal Ring",
-		back=back.WAR_WS1,
+		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
 	}
 
 	 sets.WS['Cataclysm'] = { --MAB26
         ammo="Knobkierrie", --WSD6
         head="Pixie Hairpin +1", --DMAB28
-        body=body.Nyame, --MAB30 WSD12
-        hands=hands.Nyame, --MAB30 WSD10
-        legs=legs.Nyame, --MAB30 WSD11
-        feet=feet.Nyame, --MAB30 WSD10
+        body={name="Nyame Mail", priority=136}, --MAB30 WSD12
+        hands={name="Nyame Gauntlets", priority=91}, --MAB30 WSD10
+        legs={name="Nyame Flanchard", priority=114}, --MAB30 WSD11
+        feet={name="Nyame Sollerets", priority=68}, --MAB30 WSD10
         neck="Sanctity Necklace", --MAB10
         waist="Orpheus's Sash", 
         ear1="Moonshade Earring", --TPB250 MAB4
         ear2="Friomisi Earring", --MAB10
         ring1="Archon Ring", --DMAB5
         ring2="Epaminondas's Ring",
-        back=back.WAR_WS1,
+        back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     } --TPB250 MAB170 DMAB33 WSD59
 
 	sets.TreasureHunter = {}
 
-	sets.MightyStrikes = { feet=feet.WAR_Empyrean }
+	sets.MightyStrikes = { feet=gear.WAR_Empyrean }
 end
 
 -------------------------------------------------------------------------------------------------------------------

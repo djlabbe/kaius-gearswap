@@ -23,6 +23,9 @@
 --              [ CTRL+Numpad6 ]     Holy Water
 --
 -------------------------------------------------------------------------------------------------------------------
+send_command('bind !q input //sm all follow')
+send_command('bind !w input //sm mirror')
+send_command('bind !e input //sm all toggle')
 
 if player.main_job == 'DNC' or player.sub_job == 'DNC' then
     send_command('bind !, input /ja "Spectral Jig" <me>')
