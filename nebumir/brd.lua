@@ -95,7 +95,7 @@ function user_setup()
     gear.Artifact_Feet = { name= "Brioso Slippers +3" }
 
     gear.Relic_Head = { name= "Bihu Roundlet +3" }
-    gear.Relic_Body = { name= "Bihu Justaucorps +3" }
+    gear.Relic_Body = { name= "Bihu Justaucorps +4" }
     gear.Relic_Hands = { name= "Bihu Cuffs +3" }
     gear.Relic_Legs = { name= "Bihu Cannions +3" }
     gear.Relic_Feet = { name= "Bihu Slippers +3" }
@@ -271,7 +271,7 @@ function init_gear_sets()
     sets.precast.WS = {
         range=gear.Linos_WS,
         head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
+        body=gear.Relic_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
@@ -348,13 +348,13 @@ function init_gear_sets()
         ear1="Friomisi Earring",
         ear2="Moonshade Earring",
         waist="Orpheus's Sash",
-        back=gear.BRD_WS2_Capem
+        back=gear.BRD_WS2_Cape
     }
 
     sets.precast.WS['Savage Blade'] = {
         range=gear.Linos_WS,
         head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
+        body=gear.Relic_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,

@@ -13,11 +13,11 @@ function movement_engine()
         if movement and not moving then
             if player.status ~= "Engaged" then
                 moving = true
-                add_to_chat(122, 'You are now moving.')
+                windower.send_command("gs c update auto")
             end
         elseif not movement and moving then
             moving = false
-            add_to_chat(122, 'You are now stopped.')
+            windower.send_command("gs c update auto")
         end
         Location.x = position.x
         Location.y = position.y

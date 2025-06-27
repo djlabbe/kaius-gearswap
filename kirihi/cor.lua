@@ -72,14 +72,14 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'Acc', 'PDL')
     state.IdleMode:options('Normal')
 
-    -- state.WeaponSet = M{['description']='Weapon Set', 'DeathPenalty_M', 'DeathPenalty_R', 'Armageddon_M', 'Armageddon_R', 'Fomalhaut_M', 'Fomalhaut_R', 'Naegling_Gleti', 'Naegling_Crep'}
-    state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Onion'}
+    state.WeaponSet = M{['description']='Weapon Set', 'DeathPenalty_M', 'DeathPenalty_R', 'Armageddon_M', 'Armageddon_R', 'Fomalhaut_M', 'Fomalhaut_R', 'Naegling_Gleti', 'Naegling_Crep'}
+    -- state.WeaponSet = M{['description']='Weapon Set', 'Naegling', 'Onion'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
-    gear.RAbullet = "Decimating Bullet"
-    gear.RAccbullet = "Decimating Bullet"
-    gear.WSbullet = "Decimating Bullet"
-    gear.MAbullet = "Decimating Bullet"
+    gear.RAbullet = "Chrono Bullet"
+    gear.RAccbullet = "Chrono Bullet"
+    gear.WSbullet = "Chrono Bullet"
+    gear.MAbullet = "Chrono Bullet"
     gear.QDbullet = "Hauksbok Bullet"
     options.ammo_warning_limit = 10
 
@@ -87,11 +87,11 @@ function user_setup()
     -- gear.Rostam_A = { name="Rostam", augments={'Path: A',}, bag="wardrobe2"}
     -- gear.Rostam_B = { name="Rostam", augments={'Path: B',}, bag="wardrobe3"}
 
-    gear.Artifact_Head = { name= "Laksamana's Tricorne +2" }
-    gear.Artifact_Body = { name= "Laksamana's Frac +4" }
-    gear.Artifact_Hands = { name= "Laksamana's Gants +2" }
-    gear.Artifact_Legs = { name= "Laksamana's Trews +2" }
-    gear.Artifact_Feet = { name= "Laksamana's Bottes +2" }
+    gear.Artifact_Head = { name="Laksamana's Tricorne +2" }
+    gear.Artifact_Body = { name="Laksa. Frac +4" }
+    gear.Artifact_Hands = { name="Laksamana's Gants +2" }
+    gear.Artifact_Legs = { name="Laksamana's Trews +2" }
+    gear.Artifact_Feet = { name="Laksamana's Bottes +2" }
 
     gear.Relic_Head = { name= "Lanun Tricorne +3" }
     gear.Relic_Body = { name= "Lanun Frac +3" }
@@ -145,21 +145,39 @@ function user_setup()
     send_command('bind !numpad0 gs c set WeaponLock false;input /ja "Evoker\'s Roll" <me>')
     send_command('bind !numpad+ gs c set WeaponLock false;input /ja "Crooked Cards" <me>')
 
-    if player.sub_job == 'NIN' then
-        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 3')
-        send_command('bind ^numpad8 gs c set WeaponSet Onion;input /macro set 3')
-        set_macro_page(3, 17)
+   if player.sub_job == 'NIN' then
+        send_command('bind ^numpad7 gs c set WeaponSet DeathPenalty_M;input /macro set 3')
+        send_command('bind ^numpad8 gs c set WeaponSet DeathPenalty_R;input /macro set 3')
+        send_command('bind ^numpad4 gs c set WeaponSet Armageddon_M;input /macro set 2')
+        send_command('bind ^numpad5 gs c set WeaponSet Armageddon_R;input /macro set 2')
+        send_command('bind ^numpad1 gs c set WeaponSet Fomalhaut_M;input /macro set 2')
+        send_command('bind ^numpad2 gs c set WeaponSet Fomalhaut_R;input /macro set 2')
+        send_command('bind ^numpad0 gs c set WeaponSet Naegling_Gleti;input /macro set 1')
+        send_command('bind ^numpad. gs c set WeaponSet Naegling_Crep;input /macro set 1')
+        set_macro_page(2, 17)
     elseif player.sub_job == 'DNC' then
         send_command('bind @1 input /ja "Box Step" <t>')
         send_command('bind @2 input /ja "Stutter Step" <t>')
 
-        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 6')
-        send_command('bind ^numpad8 gs c set WeaponSet Onion;input /macro set 6')
-        set_macro_page(6, 17)
+        send_command('bind ^numpad7 gs c set WeaponSet DeathPenalty_M;input /macro set 6')
+        send_command('bind ^numpad8 gs c set WeaponSet DeathPenalty_R;input /macro set 6')
+        send_command('bind ^numpad4 gs c set WeaponSet Armageddon_M;input /macro set 5')
+        send_command('bind ^numpad5 gs c set WeaponSet Armageddon_R;input /macro set 5')
+        send_command('bind ^numpad1 gs c set WeaponSet Fomalhaut_M;input /macro set 5')
+        send_command('bind ^numpad2 gs c set WeaponSet Fomalhaut_R;input /macro set 5')
+        send_command('bind ^numpad0 gs c set WeaponSet Naegling_Gleti;input /macro set 4')
+        send_command('bind ^numpad. gs c set WeaponSet Naegling_Crep;input /macro set 4')
+        set_macro_page(5, 17)
     else
-        send_command('bind ^numpad7 gs c set WeaponSet Naegling;input /macro set 3')
-        send_command('bind ^numpad8 gs c set WeaponSet Onion;input /macro set 3')
-        set_macro_page(3, 17)
+        send_command('bind ^numpad7 gs c set WeaponSet DeathPenalty_M;input /macro set 3')
+        send_command('bind ^numpad8 gs c set WeaponSet DeathPenalty_R;input /macro set 3')
+        send_command('bind ^numpad4 gs c set WeaponSet Armageddon_M;input /macro set 2')
+        send_command('bind ^numpad5 gs c set WeaponSet Armageddon_R;input /macro set 2')
+        send_command('bind ^numpad1 gs c set WeaponSet Fomalhaut_M;input /macro set 2')
+        send_command('bind ^numpad2 gs c set WeaponSet Fomalhaut_R;input /macro set 2')
+        send_command('bind ^numpad0 gs c set WeaponSet Naegling_Gleti;input /macro set 1')
+        send_command('bind ^numpad. gs c set WeaponSet Naegling_Crep;input /macro set 1')
+        set_macro_page(2, 17)
     end
    
     send_command('wait 3; input /lockstyleset 17')
@@ -622,7 +640,7 @@ function init_gear_sets()
     sets.idle = {
         ammo=gear.MAbullet,
         head=gear.Malignance_Head,
-        body="Adamantite Armor",
+        body=gear.Malignance_Body,
         hands=gear.Malignance_Hands,
         legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
@@ -669,8 +687,14 @@ function init_gear_sets()
     sets.FullTP = {ear1="Crematio Earring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
 
-    sets.Onion = {main="Onion Sword III", sub="Blurred Knife +1", ranged="Death Penalty"}
-    sets.Naegling = {main="Naegling", sub="Blurred Knife +1", ranged="Anarchy +3"}
+    sets.DeathPenalty_M = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.DeathPenalty_R = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.Armageddon_M = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.Armageddon_R = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.Fomalhaut_M = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.Fomalhaut_R = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.Naegling_Gleti = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.Naegling_Crep = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
 
     sets.DefaultShield = {sub="Nusku Shield"}
 

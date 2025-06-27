@@ -29,6 +29,44 @@ function item_available(item)
 	end
 end
 
+elemental_degrade_array = {
+    ['Aspirs'] = {'Aspir','Aspir II','Aspir III'},
+    ['Earth'] = {'Stone','Stone II','Stone III','Stone IV','Stone V','Stone VI'},
+    ['Water'] = {'Water','Water II','Water III','Water IV','Water V','Water VI'},
+    ['Wind'] = {'Aero','Aero II','Aero III','Aero IV','Aero V','Aero VI'},
+    ['Fire'] = {'Fire','Fire II','Fire III','Fire IV','Fire V','Fire VI'},
+    ['Ice'] = {'Blizzard','Blizzard II','Blizzard III','Blizzard IV','Blizzard V','Blizzard VI'},
+    ['Lightning'] = {'Thunder','Thunder II','Thunder III','Thunder IV','Thunder V','Thunder VI'},
+    ['Sleeps'] = {'Sleep','Sleep II',},
+}
+
+function refine_various_spells(spell, action, spellMap, eventArgs)
+    local newSpell = spell.english
+    local spell_recasts = windower.ffxi.get_spell_recasts()
+    local cancelling = 'All '..spell.english..' are on cooldown. Cancelling.'
+    local spell_index
+
+    if spell_recasts[spell.recast_id] > 0 then
+        if spell.skill == 'Elemental Magic' and spellMap ~= 'GeoElem' then
+            spell_index = table.find(elemental_degrade_array[spell.element],spell.name)
+            if spell_index ~= nil and spell_index > 1 then
+                newSpell = elemental_degrade_array[spell.element][spell_index - 1]
+                send_command('@input /ma "'..newSpell..'" '..tostring(spell.target.raw))
+                eventArgs.cancel = true
+            end
+        elseif spell.name:startswith('Aspir') then
+            spell_index = table.find(elemental_degrade_array['Aspirs'],spell.name)
+            if spell_index > 1 then
+                newSpell = elemental_degrade_array['Aspirs'][spell_index - 1]
+                send_command('@input /ma '..newSpell..' '..tostring(spell.target.raw))
+                eventArgs.cancel = true
+            end
+        end
+    end
+end
+
+-- Start of Mirdain based section
+
 -- Weapons
 sets.Weapons = {}
 sets.Weapons.Sleep = {}
@@ -3153,6 +3191,10 @@ do
 					if sets.Idle.Sublimation then
 						built_set = set_combine(built_set, sets.Idle.Sublimation)
 					else warn('sets.Idle.Sublimation not found!') end
+				end
+				-- Equip Town gear
+				if Cities:contains(world.area) and sets.Idle.Town then
+					built_set = set_combine(built_set, sets.Idle.Town)
 				end
 				-- Equip movement gear
 				if is_moving then

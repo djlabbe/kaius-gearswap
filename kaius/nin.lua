@@ -1,57 +1,598 @@
--- Load and initialize the include file.
-include('Kaius-Include')
-include('Global-Binds.lua')
-
-LockStylePallet = "13"
-MacroBook = "13"
-MacroSet = "1"
-Food = "Grape Daifuku"
-AutoItem = false
-Random_Lockstyle = false
-Lockstyle_List = {1,2,6,12}
-
-state.OffenseMode:options('TP','DT','PDL','MEVA')
-state.OffenseMode:set('DT')
-
-state.WeaponMode:options('Heishi_Gleti','Heishi_Darkblade','Naegling','Aeolian','Unlocked')
-state.WeaponMode:set('Heishi_Gleti')
-
-elemental_ws = S{'Aeolian', 'Blade: Teki', 'Blade: To', 'Blade: Chi', 'Blade: Ei', 'Blade: Yu'}
-
-jobsetup (LockStylePallet,MacroBook,MacroSet)
-
-send_command('bind !F1 input /ja "Mijin Gakure" <me>')
-send_command('bind !F2 input /ja "Mikage" <me>')
-send_command('bind !` input /ja "Innin" <me>')
-send_command('bind ^` input /ja "Yonin" <me>')
-send_command('bind !t input /ja "Provoke" <t>')
-send_command('bind @w gs c toggle WeaponLock')
-send_command('bind @q gs c toggle MagicBurst')
-send_command('bind !numpad7 input /ma "Jubaku: Ichi" <t>')
-send_command('bind !numpad8 input /ma "Hojo: Ni" <t>')
-send_command('bind !numpad9 input /ma "Aisha: Ichi" <t>')  
-send_command('bind !numpad1 input /ma "Yurin Ichi" <t>')
-send_command('bind !numpad2 input /ma "Kurayami: Ni" <t>')
-send_command('bind !numpad3 input /ma "Dokumori: Ichi" <t>')
+-------------------------------------------------------------------------------------------------------------------
+--  Keybinds
+-------------------------------------------------------------------------------------------------------------------
+--
+--  Modes:      [ F9 ]              Cycle Offense Modes
+--              [ CTRL+F9 ]         Cycle Hybrid Modes
+--              [ WIN+F9 ]          Cycle Weapon Skill Modes
+--              [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ CTRL+F11 ]        Cycle Casting Modes
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ ALT+` ]           Toggle Magic Burst Mode
+--
+-------------------------------------------------------------------------------------------------------------------
 
 function get_sets()
-	sets.Weapons = {}
-	sets.Weapons['Heishi_Gleti'] = {main="Heishi Shorinken",sub="Gleti's Knife"}
-    sets.Weapons['Heishi_Darkblade'] = {main="Heishi Shorinken",sub="Yagyu Darkblade"}
-	sets.Weapons['Naegling'] = {main="Naegling",sub="Uzura +2",}
-	sets.Weapons['Aeolian'] = {main="Tauret",sub="Naegling"}
-	sets.Weapons['Unlocked'] = { }
+    mote_include_version = 2
+    include('Mote-Include.lua')
+end
 
-	sets.Weapons.Shield = {}
-	sets.Weapons.Sleep = {}
+function job_setup()
+    info.default_ja_ids = S{35, 204}
+    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
+    state.Buff.Migawari = buffactive.migawari or false
+    state.Buff.Doom = buffactive.doom or false
+    state.Buff.Yonin = buffactive.Yonin or false
+    state.Buff.Innin = buffactive.Innin or false
+    state.Buff.Futae = buffactive.Futae or false
+    state.Buff.Sange = buffactive.Sange or false
+    -- include('Mote-TreasureHunter')
+    info.default_ja_ids = S{35, 204}
+    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
+    lugra_ws = S{'Blade: Kamu', 'Blade: Shun', 'Blade: Ten'}
+end
 
-	sets.Idle = {
-		ammo="Seki Shuriken",
+function user_setup()
+    state.OffenseMode:options('Normal')
+    state.HybridMode:options('Normal', 'DT')
+    state.WeaponskillMode:options('Normal')
+    state.CastingMode:options('Normal')
+    state.IdleMode:options('Normal', 'DT')
+    state.PhysicalDefenseMode:options('PDT', 'Evasion')
+
+    state.WeaponSet = M{['description'] = 'Weapon Set', 'Heishi', 'HeishiDarkBlade', 'Naegling', 'Aeolian'}
+    state.WeaponLock = M(false, 'Weapon Lock')
+    state.MagicBurst = M(false, 'Magic Burst')
+
+    options.ninja_tool_warning_limit = 10
+
+    include('Global-Binds.lua')
+   
+    gear.Artifact_Head = { name="Hachiya Hatsu. +3" }
+    gear.Artifact_Feet = { name="Hachiya Kyahan +3" }
+
+    gear.Relic_Head = { name="Mochizuki Hatsuburi +3" }
+    gear.Relic_Body = { name="Mochizuki Chainmail +3" }
+    -- gear.Relic_Legs = { name= "Mochizuki Hakama +3" }
+    gear.Relic_Hands = { name="Mochizuki Tekko +3" }
+    gear.Relic_Feet = { name="Mochizuki Kyahan +3" }
+
+    gear.Empyrean_Body = { name = "Hattori Ningi +3" }
+    gear.Empyrean_Hands = { name="Hattori Tekko +3" }
+    gear.Empyrean_Legs = { name="Hattori Hakama +3" }
+    gear.Empyrean_Feet = { name="Hattori Kyahan +3" }
+
+    gear.NIN_TP_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}}
+    gear.NIN_WS_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}} --X
+    gear.NIN_DA_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
+    gear.NIN_FC_Cape = { name="Andartia's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}}
+
+    send_command('bind !F1 input /ja "Mijin Gakure" <me>')
+    send_command('bind !F2 input /ja "Mikage" <me>')
+    send_command('bind !` input /ja "Innin" <me>')
+    send_command('bind ^` input /ja "Yonin" <me>')
+    send_command('bind !t input /ja "Provoke" <t>')
+    send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind @q gs c toggle MagicBurst')
+    send_command('bind !numpad7 input /ma "Jubaku: Ichi" <t>')
+    send_command('bind !numpad8 input /ma "Hojo: Ni" <t>')
+    send_command('bind !numpad9 input /ma "Aisha: Ichi" <t>')  
+    send_command('bind !numpad1 input /ma "Yurin Ichi" <t>')
+    send_command('bind !numpad2 input /ma "Kurayami: Ni" <t>')
+    send_command('bind !numpad3 input /ma "Dokumori: Ichi" <t>')   
+
+    -- send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad9 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad4 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad1 input /equip Main "Irradiance Blade";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
+
+
+    send_command('bind ^numpad7 gs c set WeaponSet Heishi; ;input /macro set 1')
+    send_command('bind ^numpad8 gs c set WeaponSet HeishiDarkBlade; ;input /macro set 2')
+    send_command('bind ^numpad9 gs c set WeaponSet Naegling; ;input /macro set 3')
+    send_command('bind ^numpad4 gs c set WeaponSet Aeolian;input /macro set 4')
+
+    -- Whether a warning has been given for low ninja tools
+    state.warned = M(false)
+    set_macro_page(1, 13)
+
+
+
+
+    send_command('wait 3; input /lockstyleset 13')
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    Haste = 0
+    DW_needed = 0
+    DW = false
+    moving = false
+    update_combat_form()
+    determine_haste_group()
+end
+
+function user_unload()
+    send_command('unbind ^`')
+    send_command('unbind ^=')
+    send_command('unbind !`')
+    send_command('unbind ^`>')
+    send_command('unbind !t')
+    send_command('unbind @w')
+    send_command('unbind @e')
+    send_command('unbind @q')
+    unbind_numpad()
+end
+
+function init_gear_sets()
+    sets.Enmity = {
+        ammo="Sapience Orb", --2
+        body="Emet Harness +1", --10
+        hands="Kurys Gloves", --9
+        feet="Mochi. Kyahan +3", --8
+        neck="Moonlight Necklace", --15
+        ear1="Cryptic Earring", --4
+        ear2="Trux Earring", --5
+        -- ring1="Pernicious Ring", --5
+        ring2="Eihwaz Ring", --5
+        waist="Kasiri Belt", --3
+    }
+
+    sets.precast.JA['Provoke'] = sets.Enmity
+    sets.precast.JA['Mijin Gakure'] = { legs=gear.Relic_Legs }
+    sets.precast.JA['Futae'] = { hands=gear.Empyrean_Hands }
+    sets.precast.JA['Sange'] = { body=gear.Relic_Body }
+    sets.precast.JA['Innin'] = { head=gear.Relic_Head }
+    sets.precast.JA['Yonin'] = { head=gear.Relic_Head }
+
+    sets.precast.Waltz = {
+        ammo="Yamarang",
+        body="Passion Jacket",
+        legs="Dashing Subligar",
+        ring1="Asklepian Ring",
+        waist="Gishdubar Sash",
+    }
+
+    sets.precast.Waltz['Healing Waltz'] = {}
+
+    sets.precast.FC = {
+        ammo="Sapience Orb", --2
+        head=gear.Herc_FC_Head, --13
+        body=gear.Taeon_FC_Body, --9
+        hands="Leyline Gloves", --8
+        legs="Rawhide Trousers", --5
+        neck="Orunmila's Torque", --5
+        ear1="Loquacious Earring", --2
+        ear2="Enchntr. Earring +1", --2
+        ring1="Kishar Ring", --4
+        ring2="Prolix Ring", --2
+        back=gear.NIN_FC_Cape, --10
+        waist="Sailfi Belt +1",
+    } -- 63 FC
+
+    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
+        body=gear.Relic_Body, --14
+        neck="Magoraga Beads",
+    })
+
+    sets.precast.RA = {}
+
+    sets.precast.WS = {
+        ammo="Coiste Bodhar",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Ninja Nodowa +2",
+        ear1="Moonshade Earring",
+        ear2="Ishvara Earring",
+        ring1="Epaminondas's Ring",
+        ring2=gear.Cornelia_Or_Regal,
+        back=gear.NIN_WS_Cape,
+        waist="Fotia Belt",
+    }
+
+    sets.precast.WS['Blade: Shun'] = {
+        ammo="Coiste Bodhar",
+        head="Mpaca's Cap",
+        body=gear.Malignance_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Mpaca_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Fotia Gorget",
+        waist="Fotia Belt",
+        ear1="Moonshade Earring",
+        ear2="Hattori Earring +1",
+        ring1="Gere Ring",
+        ring2=gear.Cornelia_Or_Regal,
+        back=gear.NIN_DA_Cape,
+    }
+
+    sets.precast.WS['Blade: Ten'] = {
+        ammo="Coiste Bodhar",
+        head=gear.Mpaca_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Rep. Plat. Medal",
+        waist="Sailfi Belt +1",
+        ear1="Moonshade Earring",
+        ear2="Lugra Earring +1",
+        ring1="Gere Ring",
+        ring2=gear.Cornelia_Or_Regal,
+        back=gear.NIN_WS_Cape,
+    }
+
+    sets.precast.WS['Blade: Hi'] = {
+        ammo="Yetshila +1",
+        head=gear.Relic_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        feet=gear.Nyame_Feet,
+        neck="Ninja Nodowa +2",
+        waist="Sailfi Belt +1",
+        ear1="Odr Earring",
+        ear2="Lugra Earring +1",
+        ring1="Gere Ring",
+        ring2=gear.Cornelia_Or_Regal,
+        back=gear.NIN_WS_Cape,
+    }
+
+    sets.precast.WS['Blade: Metsu'] = {
+        ammo="Coiste Bodhar",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Ninja Nodowa +2",
+        waist="Sailfi Belt +1",
+        ear1="Odr Earring",
+        ear2="Lugra Earring +1",
+        ring1="Gere Ring",
+        ring2=gear.Cornelia_Or_Regal,
+        back=gear.NIN_WS_Cape,
+    }
+
+  sets.precast.WS['Blade: Ku'] = {
+        ammo="Seeth. Bomblet +1",
+        head=gear.Mpaca_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Relic_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Fotia Gorget",
+        waist="Fotia Belt",
+        ear1="Mache Earring +1",
+        ear2="Lugra Earring +1",
+        ring1="Gere Ring",
+        ring2=gear.Cornelia_Or_Regal,
+        back=gear.NIN_DA_Cape,
+    }
+
+    sets.precast.WS['Blade: Kamu'] = {
+        ammo="Crepuscular Pebble",
+        head=gear.Mpaca_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Mpaca_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Rep. Plat. Medal",
+        waist="Sailfi Belt +1", 
+        ear1="Moonshade Earring",
+        ear2="Lugra Earring +1",
+        ring1="Gere Ring",
+        ring2=gear.Cornelia_Or_Sroda,
+        back=gear.NIN_TP_Cape,
+    }
+
+    sets.precast.Hybrid = {
+        ammo="Seeth. Bomblet +1",
+        head=gear.Nyame_Head,
+        neck="Fotia Gorget",
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        feet=gear.Nyame_Feet,
+        legs=gear.Nyame_Legs,        
+        ear1="Moonshade Earring",
+        ear2="Lugra Earring +1",
+        ring1="Gere Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
+        waist="Orpheus's Sash",
+        back=gear.NIN_WS_Cape,
+    }
+
+    sets.precast.WS['Blade: Teki'] = sets.precast.Hybrid
+    sets.precast.WS['Blade: To'] = sets.precast.Hybrid
+    sets.precast.WS['Blade: Chi'] = sets.precast.Hybrid
+
+    sets.precast.WS['Blade: Yu'] = {
+        ammo="Seeth. Bomblet +1",
+        head="Hachiya Hatsu. +3",
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Baetyl Pendant",
+        -- ear1="Crematio Earring",
+        ear2="Friomisi Earring",
+        ring1="Dingir Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
+        back=gear.NIN_MAB_Cape,
+        waist="Skrymir Cord +1",
+    }
+
+    sets.precast.WS['Blade: Ei'] = {
+        ammo="Seeth. Bomblet +1",
+        head="Pixie Hairpin +1",
+        neck="Sibyl Scarf",
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        feet=gear.Nyame_Feet,
+        legs=gear.Nyame_Legs,        
+        ear1="Moonshade Earring",
+        ear2="Friomisi Earring",
+        ring1=gear.Cornelia_Or_Epaminondas,
+        ring2="Archon Ring",
+        waist="Orpheus's Sash",
+        back=gear.NIN_WS_Cape,
+    }
+
+    sets.precast.WS['Savage Blade'] = {
+        ammo="Seething Bomblet +1",
+        head=gear.Mpaca_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Rep. Plat. Medal",
+        waist="Sailfi Belt +1",
+        ear1="Moonshade Earring",
+        ear2="Lugra Earring +1",
+        ring1="Gere Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
+        back=gear.NIN_WS_Cape,
+    }
+
+    sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS, {
+        ammo="Seeth. Bomblet +1",
+        head="Pixie Hairpin +1",
+        neck="Sibyl Scarf",
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        feet=gear.Nyame_Feet,
+        legs=gear.Nyame_Legs,        
+        ear1="Moonshade Earring",
+        ear2="Friomisi Earring",
+        ring1="Dingir Ring",
+        ring2="Epaminondas's Ring",
+        waist="Orpheus's Sash",
+        back=gear.NIN_WS_Cape,
+    })
+
+    sets.Lugra = { ear2="Lugra Earring +1" }
+
+    sets.midcast.FastRecast = sets.precast.FC
+
+    sets.midcast.SpellInterrupt = {
+        ammo="Staunch Tathlum +1", --11
+        body=gear.Taeon_Phalanx_Body, --10
+        hands="Rawhide Gloves", --15
+        legs=gear.Taeon_Phalanx_Legs, --10
+        feet=gear.Taeon_Phalanx_Feet, --10
+        neck="Moonlight Necklace", --15
+        ear1="Halasz Earring", --5
+        ear2="Magnetic Earring", --8
+        ring1="Evanescence Ring", --5
+        back=gear.NIN_FC_Cape,
+        waist="Audumbla Sash", --10
+    } -- 109 + 10 == 110
+
+    -- Specific spells
+      sets.midcast.Utsusemi = set_combine(sets.midcast.SpellInterrupt, {
+        feet=gear.Empyrean_Feet, -- Minus 10
+        ring2="Defending Ring",
+    })
+
+    sets.midcast.ElementalNinjutsu = {
+        ammo="Ghastly Tathlum +1",
+        head=gear.Relic_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Relic_Feet,
+        neck="Sibyl Scarf",
+        waist="Skrymir Cord +1",
+        ear1="Friomisi Earring",
+        ear2="Hattori Earring +1",
+        ring1="Metamorph Ring +1",
+        ring2="Dingir Ring",
+        back=gear.NIN_TP_Cape,
+    }
+
+    sets.midcast.EnfeeblingNinjutsu = {
+        ammo="Yamarang",
+        head=gear.Artifact_Head,
+        body=gear.Malignance_Body,
+        hands=gear.Malignance_Hands,
+        legs=gear.Malignance_Legs,
+        feet=gear.Artifact_Feet,
+        neck="Sanctity Necklace",
+        ear1="Crepuscular Earring",
+        ear2="Hattori Earring +1",
+        ring1=gear.Stikini_1,
+        ring2=gear.Stikini_2,
+        -- back=gear.NIN_MAB_Cape,
+        waist="Skrymir Cord +1",
+    }
+
+    sets.midcast.EnhancingNinjutsu = {
+        head=gear.Artifact_Head,
+        feet=gear.Relic_Feet,
+        neck="Incanter's Torque",
+        -- ear1="Stealth Earring",
+        ring1=gear.Stikini_1,
+        ring2=gear.Stikini_2,
+        -- back="Astute Cape",
+        -- waist="Cimmerian Sash",
+    }
+
+    sets.midcast.Stun = sets.midcast.EnfeeblingNinjutsu
+
+    sets.midcast.RA = {
+        head=gear.Malignance_Head,
+        body=gear.Malignance_Body,
+        hands=gear.Malignance_Hands,
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+        neck="Iskur Gorget",
+        ear1="Telos Earring",
+        ear2="Hattori Earring +1",
+        ring1="Dingir Ring",
+        ring2="Crepuscular Ring",
+        back=gear.NIN_TP_Cape,
+        waist="Yemaya Belt",
+    }
+
+    -- * NIN Native DW Trait: 35% DW
+    -- No Magic Haste (74% DW to cap)
+    sets.engaged = {
+        ammo="Seki Shuriken",
+        head=gear.Malignance_Head,
+        neck="Ninja Nodowa +2",
+        ear1="Dedition Earring",
+        ear2="Hattori Earring +1",
+        body=gear.Relic_Body, --10
+        hands=gear.Malignance_Hands,
+        ring1="Gere Ring",
+        ring2=gear.Lehko_Or_Chirich2,
+        back=gear.NIN_TP_Cape,
+        waist="Sailfi Belt +1",        
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+    } -- 38%
+
+    -- 15% Magic Haste (67% DW to cap)
+    sets.engaged.LowHaste = {
+        ammo="Seki Shuriken",
+        head=gear.Malignance_Head,
+        body=gear.Relic_Body, --10
+        hands=gear.Adhemar_A_Hands,
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+        neck="Ninja Nodowa +2",
+        ear1="Dedition Earring",
+        ear2="Hattori Earring +1",
+        ring1="Gere Ring",
+        ring2=gear.Lehko_Or_Chirich2,
+        back=gear.NIN_TP_Cape,
+        waist="Sailfi Belt +1",        
+    } -- 30%
+
+
+    -- 30% Magic Haste (56% DW to cap)
+    sets.engaged.MidHaste = {
+        ammo="Seki Shuriken",
+        head=gear.Malignance_Head,
+        neck="Ninja Nodowa +2",
+        ear1="Dedition Earring",
+        ear2="Hattori Earring +1",
+        body=gear.Malignance_Body,
+        hands=gear.Adhemar_A_Hands,
+        ring1="Gere Ring",
+        ring2=gear.Lehko_Or_Chirich2,
+        back=gear.NIN_TP_Cape,
+        waist="Sailfi Belt +1",           
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+    } -- 22%
+
+    -- 35% Magic Haste (51% DW to cap)
+    sets.engaged.HighHaste = {
+        ammo="Seki Shuriken",
+        head=gear.Malignance_Head,
+        neck="Ninja Nodowa +2",
+        ear1="Dedition Earring",
+        ear2="Hattori Earring +1",
+        body=gear.Malignance_Body,
+        hands=gear.Adhemar_A_Hands,
+        ring1="Gere Ring",
+        ring2=gear.Lehko_Or_Chirich2,
+        back=gear.NIN_TP_Cape,
+        waist="Sailfi Belt +1",               
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+    } -- 16%
+
+    -- 45% Magic Haste (36% DW to cap)
+    sets.engaged.MaxHaste = {
+        ammo="Seki Shuriken",
+        head=gear.Malignance_Head,
+        neck="Ninja Nodowa +2",
+        ear1="Dedition Earring",
+        ear2="Hattori Earring +1",
+        body=gear.Mpaca_Body,
+        hands=gear.Mpaca_Hands,
+        ring1="Gere Ring",
+        ring2=gear.Lehko_Or_Chirich2,
+        back=gear.NIN_TP_Cape,
+        waist="Sailfi Belt +1",        
+        legs=gear.Mpaca_Legs,
+        feet=gear.Malignance_Feet,
+    } -- 0%
+
+    sets.engaged.Hybrid = {
+        head=gear.Malignance_Head, --6/6
+        legs=gear.Malignance_Legs, --8/8
+        body=gear.Mpaca_Body,
+        hands=gear.Malignance_Hands, --5/5
+        feet=gear.Malignance_Feet, --4/4
+    }
+
+    sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+    sets.engaged.DT.LowHaste = set_combine(sets.engaged.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DT.MidHaste = set_combine(sets.engaged.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DT.HighHaste = set_combine(sets.engaged.HighHaste, sets.engaged.Hybrid)
+    sets.engaged.DT.MaxHaste = set_combine(sets.engaged.MaxHaste, sets.engaged.Hybrid)
+
+    sets.buff.Migawari = { }
+    sets.buff.Yonin = {}
+    sets.buff.Innin = {}
+    -- sets.buff.Sange = { ammo="Hachiya Shuriken" }
+
+    sets.magic_burst = {
+        feet=gear.Artifact_Feet,
+        neck="Warder's Charm +1",
+        ring2="Mujin Band",
+    }
+
+    sets.buff.Doom = {
+        neck="Nicander's Necklace",
+        ring1="Eshmun's Ring",
+        ring2="Purity Ring",
+        waist="Gishdubar Sash",
+    }
+
+    sets.idle = {
+        ammo="Seki Shuriken",
         head="Null Masque",
         body="Adamantite Armor",
-        hands="Malignance Gloves",
-        legs="Hattori Hakama +3",
-        feet="Malignance Boots",
+        hands=gear.Malignance_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Malignance_Feet,
         neck="Warder's Charm +1",
         ear1="Eabani Earring",
         ear2="Sanare Earring",
@@ -61,509 +602,360 @@ function get_sets()
         waist="Null Belt",
     }
 
-	sets.Idle.TP = set_combine(sets.Idle, {})
-	sets.Idle.DT = set_combine(sets.Idle, {})
-	sets.Idle.PDL = set_combine(sets.Idle, {})
-	sets.Idle.MEVA = set_combine(sets.Idle, {})
 
-	--Defined below based off time of day
-	sets.Movement = {}
+    sets.idle.DT = set_combine(sets.idle, {
+        head=gear.Malignance_Head, --6/6
+        body=gear.Malignance_Body, --9/9
+        hands=gear.Malignance_Hands, --5/5
+        legs=gear.Malignance_Legs, --7/7
+        feet=gear.Malignance_Feet, --4/4
+        neck="Warder's Charm +1",
+        ear2="Etiolation Earring",
+        ring1="Purity Ring", --0/4
+        ring2="Defending Ring", --10/10
+        back="Moonlight Cape", --6/6
+    })
+    
+    -- sets.idle.Town = sets.precast.WS["Blade: Chi"]
 
+    -- sets.TreasureHunter = {
+    --     ammo="Perfect Lucky Egg",
+    --     head="Volte Cap",
+    --     hands="Volte Bracers",
+    --     waist="Chaac Belt",
+    -- }
+
+    sets.defense.PDT = sets.idle.DT
+    sets.defense.MDT = sets.idle.DT
 
     if (item_available("Shneddick Ring +1")) then
-        sets.Movement.Day = { ring1="Shneddick Ring +1" }
+        sets.DayMovement = { ring1="Shneddick Ring +1" }
+        sets.NightMovement = { feet="Hachiya Kyahan +3" }
     else
-        sets.Movement.Day = { feet="Danzo Sune-Ate" }
+        sets.DayMovement = { feet="Hermes' Sandals" }
+        sets.NightMovement = { feet="Hachiya Kyahan +3" }
     end
 
-	sets.Movement.Night = {
-		feet=feet.NIN_Artifact,
-	}
-	sets.Movement.Dusk = {
-		feet=feet.NIN_Artifact,
-	}
-
-	sets.Cursna_Received = {
-	    neck="Nicander's Necklace",
-        ring1="Eshmun's Ring",
-        ring2="Purity Ring",
-        waist="Gishdubar Sash",
-	}
-
-	sets.OffenseMode = {}
-
-	--Base TP set to build off
-	sets.OffenseMode.TP = {
-		ammo="Seki Shuriken",
-        head="Malignance Chapeau",
-        body="Mpaca's Cap",
-        hands="Mpaca's Gloves",
-        legs="Mpaca's Hose",
-        feet="Malignance Boots",
-        neck="Ninja Nodowa +2",
-        ear1="Dedition Earring",
-        ear2="Hattori Earring +1",
-        ring1="Gere Ring",
-        ring2=ring.Lehko_Or_Chirich2,
-        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}},
-        waist="Sailfi Belt +1",        
-	}
-
-	--This set is used when OffenseMode is DT and Enaged (Augments the TP base set)
-	sets.OffenseMode.DT = set_combine (sets.OffenseMode.TP, {
-	    head="Malignance Chapeau",
-		body="Mpaca's Cap",
-		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
-	})
-
-	sets.OffenseMode.PDL = set_combine (sets.OffenseMode.TP, {
-	    head="Malignance Chapeau",
-		body="Malignance Tabard",
-		hands="Malignance Gloves",
-		legs="Malignance Tights",
-		feet="Malignance Boots",
-	})
-
-	sets.OffenseMode.MEVA = set_combine(sets.OffenseMode.DT,{
-		neck="Warder's Charm +1"
-	})
-
-	sets.DualWield = {}
-
-	sets.Precast = {}
-	-- Used for Magic Spells
-	sets.Precast.FastCast = {
-	    ammo="Sapience Orb", --2
-        head={ name="Herculean Helm", augments={'"Mag.Atk.Bns."+1','"Fast Cast"+6','INT+3','Mag. Acc.+10',}}, --13
-        body={name="Taeon Tabard", augments={'"Fast Cast"+5',}}, --9
-        hands="Leyline Gloves", --8
-        legs="Rawhide Trousers", --5
-        neck="Orunmila's Torque", --5
-        ear1="Loquacious Earring", --2
-        ear2="Enchanter's Earring +1", --2
-        ring1="Kishar Ring", --4
-        ring2="Prolix Ring", --2
-        back={ name="Andartia's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}}, --10
-        waist="Platinum Moogle Belt",
-	} -- 67
-
-	sets.Precast.Utsusemi = {
-		ammo="Staunch Tathlum +1", --11
-        body={ name="Mochizuki Chainmail +3" },
-        hands="Rawhide Gloves", --15
-        legs={name="Taeon Tights", augments={'Mag. Evasion+16','Spell interruption rate down -8%','Phalanx +3',}}, --10
-        feet={name="Taeon Boots", augments={'Mag. Evasion+15','Spell interruption rate down -9%','Phalanx +3',}}, --10
-        neck="Magoraga Beads", -- 10 FC (+6)
-        ear1="Halasz Earring", --5
-        ear2="Magnetic Earring", --8
-        ring1="Evanescence Ring", --5
-        back={ name="Andartia's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}},
-        waist="Audumbla Sash", --10
-	}
-
-	sets.Precast.QuickMagic = {
-
-	}
-
-	sets.Enmity = { -- Head and Back upgrade slots
-		ammo="Sapience Orb", --2
-		body="Emet Harness +1", --10
-		hands="Kurys Gloves", --9
-		--="Zoar Subligar +1", --6
-		-- feet="Ahosi Leggings", --7
-		neck="Moonlight Necklace", --15
-		waist="Kasiri Belt", --3
-		ear1="Cryptic Earring", --4
-		ear2="Friomisi Earring", --2
-		ring1="Petrov Ring", --4
-		ring2="Eihwaz Ring", --5
-	}
-
-	--Base set for midcast - if not defined will notify and use your idle set for surviability
-	sets.Midcast = set_combine(sets.Idle, {
-	
-	})
-	-- Utsusemi Set
-	sets.Midcast.Utsusemi = {
-		back={ name="Andartia's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}},
-		feet="Hattori Kyahan +3",
-	}
-	--This set is used as base as is overwrote by specific gear changes (Spell Interruption Rate Down)
-	sets.Midcast.SIRD = {}
-	-- Cure Set
-	sets.Midcast.Cure = {}
-	-- Enhancing Skill
-	sets.Midcast.Enhancing = {
-		head="Hachiya Hatsu. +3",
-        feet="Hattori Kyahan +3",
-        neck="Incanter's Torque",
-        -- ear1="Stealth Earring",
-        ring1={name="Stikini Ring +1", bag="wardrobe7"},
-        ring2={name="Stikini Ring +1", bag="wardrobe8"},
-        -- back="Astute Cape",
-        -- waist="Cimmerian Sash",
-	}
-
-	-- High MACC for landing spells
-	sets.Midcast.Enfeebling = {
-		ammo="Yamarang",
-        head="Hachiya Hatsu. +3",
-        body="Malignance Tabard",
-        hands="Malignance Gloves",
-        legs="Malignance Tights",
-        feet=feet.NIN_Artifact,
-        neck="Sanctity Necklace",
-        ear1="Crepuscular Earring",
-        ear2="Hattori Earring +1",
-        ring1={name="Stikini Ring +1", bag="wardrobe7"},
-        ring2={name="Stikini Ring +1", bag="wardrobe8"},
-        back={}, -- TODO
-        waist="Skrymir Cord +1",
-	}
-    
-	-- High MAB for spells
-	sets.Midcast.Nuke = {
-		ammo="Ghastly Tathlum +1",
-        head="Mochizuki Hatsuburi +3",
-        body="Nyame Mail",
-        hands="Nyame Gauntlets",
-        legs="Nyame Flanchard",
-        feet="Mochizuki Kyahan +3",
-        neck="Sibyl Scarf",
-        waist="Skrymir Cord +1",
-        ear1="Friomisi Earring",
-        ear2="Hattori Earring +1",
-        ring1="Metamorph Ring +1",
-        ring2="Dingir Ring",
-        back={}, --TODO
-	}
-
-	sets.JA = {}
-	sets.JA["Futae"] = { hands="Hattori Tekko +3" } --hands="Hattori Tekko"
-	sets.JA["Berserk"] = {}
-	sets.JA["Warcry"] = {}
-	sets.JA["Defender"] = {}
-	sets.JA["Aggressor"] = {}
-	sets.JA["Provoke"] = sets.Enmity
-	sets.JA["Mijin Gakure"] = {}
-	sets.JA["Yonin"] = { head="Mochizuki Hatsuburi +3" }
-	sets.JA["Innin"] = { head="Mochizuki Hatsuburi +3" }
-	sets.JA["Issekigan"] = {}
-	sets.JA["Mikage"] = {}
-
-	--Default WS set base
-	sets.WS = {
-		ammo="Coiste Bodhar",
-        head="Nyame Helm",
-        body="Nyame Mail",
-        hands="Nyame Gauntlets",
-        legs="Nyame Flanchard",
-        feet="Nyame Sollerets",
-        neck="Ninja Nodowa +2",
-        ear1="Moonshade Earring",
-        ear2="Ishvara Earring",
-        ring1="Epaminondas's Ring",
-        ring2=gear.Cornelia_Or_Regal,
-        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}},
-        waist="Fotia Belt",
-	}
-
-	--This set is used when OffenseMode is ACC and a WS is used (Augments the WS base set)
-
-	sets.WS.Hybrid = {
-        ammo="Seeth. Bomblet +1",
-        head="Nyame Helm",
-        neck="Fotia Gorget",
-        body="Nyame Mail",
-        hands="Nyame Gauntlets",
-        feet="Nyame Sollerets",
-        legs="Nyame Flanchard",        
-        ear1="Moonshade Earring",
-        ear2="Lugra Earring +1",
-        ring1="Gere Ring",
-        ring2=gear.Cornelia_Or_Epaminondas,
-        waist="Orpheus's Sash",
-        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}},
-    }
-
-	sets.WS["Blade: Teki"] = sets.WS.Hybrid
-	sets.WS["Blade: To"] = sets.WS.Hybrid
-	sets.WS["Blade: Chi"] = sets.WS.Hybrid
-
-	sets.WS["Blade: Metsu"] = {
-		ammo="Coiste Bodhar",
-        head="Nyame Helm",
-        body="Nyame Mail",
-        hands="Nyame Gauntlets",
-        legs="Nyame Flanchard",
-        feet="Nyame Sollerets",
-        neck="Ninja Nodowa +2",
-        waist="Sailfi Belt +1",
-        ear1="Odr Earring",
-        ear2="Lugra Earring +1",
-        ring1="Gere Ring",
-        ring2=gear.Cornelia_Or_Regal,
-        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}},
-	}
-
-	sets.WS["Blade: Rin"] = {}
-	sets.WS["Blade: Retsu"] = {}
-
-	sets.WS["Blade: Ei"] = {
-		ammo="Seeth. Bomblet +1",
-        head="Pixie Hairpin +1",
-        neck="Sibyl Scarf",
-        body="Nyame Mail",
-        hands="Nyame Gauntlets",
-        feet="Nyame Sollerets",
-        legs="Nyame Flanchard",        
-        ear1="Moonshade Earring",
-        ear2="Friomisi Earring",
-        ring1=gear.Cornelia_Or_Epaminondas,
-        ring2="Archon Ring",
-        waist="Orpheus's Sash",
-        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}},
-	}
-
-	sets.WS["Blade: Jin"] = {}
-
-	sets.WS["Blade: Ten"] = {
-		ammo="Coiste Bodhar",
-        head="Mpaca's Cap",
-        body="Nyame Mail",
-        hands="Nyame Gauntlets",
-        legs="Nyame Flanchard",
-        feet="Nyame Sollerets",
-        neck="Rep. Plat. Medal",
-        waist="Sailfi Belt +1",
-        ear1="Moonshade Earring",
-        ear2="Lugra Earring +1",
-        ring1="Gere Ring",
-        ring2=gear.Cornelia_Or_Regal,
-        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}},
-	}
-
-	sets.WS["Blade: Ku"] = {
-		ammo="Seeth. Bomblet +1",
-        head="Mpaca's Cap",
-        body="Nyame Mail",
-        hands="Mochizuki Tekko +3",
-        legs="Nyame Flanchard",
-        feet="Nyame Sollerets",
-        neck="Fotia Gorget",
-        waist="Fotia Belt",
-        ear1="Mache Earring +1",
-        ear2="Lugra Earring +1",
-        ring1="Gere Ring",
-        ring2=gear.Cornelia_Or_Regal,
-        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
-	}
-
-	sets.WS["Blade: Kamu"] = {
-		ammo="Crepuscular Pebble",
-        head="Mpaca's Cap",
-        body="Nyame Mail",
-        hands="Nyame Gauntlets",
-        legs="Mpaca's Hose",
-        feet="Nyame Sollerets",
-        neck="Rep. Plat. Medal",
-        waist="Sailfi Belt +1", 
-        ear1="Moonshade Earring",
-        ear2="Lugra Earring +1",
-        ring1="Gere Ring",
-        ring2=gear.Cornelia_Or_Sroda,
-        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}},
-	}
-
-	sets.WS["Blade: Yu"] = {
-		ammo="Seeth. Bomblet +1",
-        head="Hachiya Hatsu. +3",
-        body="Nyame Mail",
-        hands="Nyame Gauntlets",
-        legs="Nyame Flanchard",
-        feet="Nyame Sollerets",
-        neck="Baetyl Pendant",
-        ear1="Crematio Earring",
-        ear2="Friomisi Earring",
-        ring1="Dingir Ring",
-        ring2=gear.Cornelia_Or_Epaminondas,
-        back={}, -- TODO
-        waist="Skrymir Cord +1",
-	}
-
-	sets.WS["Blade: Hi"] = {
-		ammo="Yetshila +1",
-        head="Mochizuki Hatsuburi +3",
-        body="Nyame Mail",
-        hands="Nyame Gauntlets",
-        feet="Nyame Sollerets",
-        neck="Ninja Nodowa +2",
-        waist="Sailfi Belt +1",
-        ear1="Odr Earring",
-        ear2="Lugra Earring +1",
-        ring1="Gere Ring",
-        ring2=gear.Cornelia_Or_Regal,
-        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}},
-	}
-
-	sets.WS["Blade: Shun"] = {
-		ammo="Coiste Bodhar",
-        head="Mpaca's Cap",
-        body="Malignance Tabard",
-        hands="Nyame Gauntlets",
-        legs="Mpaca's Hose",
-        feet="Nyame Sollerets",
-        neck="Fotia Gorget",
-        waist="Fotia Belt",
-        ear1="Moonshade Earring",
-        ear2="Hattori Earring +1",
-        ring1="Gere Ring",
-        ring2=gear.Cornelia_Or_Regal,
-        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
-	}
-
-	sets.WS["Savage Blade"] = {
-	    ammo="Seething Bomblet +1",
-        head="Mpaca's Cap",
-        body="Nyame Mail",
-        hands="Nyame Gauntlets",
-        legs="Nyame Flanchard",
-        feet="Nyame Sollerets",
-        neck="Rep. Plat. Medal",
-        waist="Sailfi Belt +1",
-        ear1="Moonshade Earring",
-        ear2="Lugra Earring +1",
-        ring1="Gere Ring",
-        ring2=gear.Cornelia_Or_Epaminondas,
-        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}},
-	}
-
-	sets.WS['Aeolian Edge'] = {
-        ammo="Seeth. Bomblet +1",
-        head="Pixie Hairpin +1",
-        neck="Sibyl Scarf",
-        body="Nyame Mail",
-        hands="Nyame Gauntlets",
-        feet="Nyame Sollerets",
-        legs="Nyame Flanchard",        
-        ear1="Moonshade Earring",
-        ear2="Friomisi Earring",
-        ring1="Dingir Ring",
-        ring2="Epaminondas's Ring",
-        waist="Orpheus's Sash",
-        back={ name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Damage taken-5%',}},
-    }
+    sets.Heishi = {main="Heishi Shorinken", sub="Gleti's Knife"}
+    sets.HeishiDarkBlade = {main="Heishi Shorinken", sub="Yagyu Darkblade"}
+    sets.Naegling = {main="Naegling", sub="Uzura +2"}
+    sets.Aeolian = {main="Tauret", sub="Gleti's Knife"}
 
 end
 
--------------------------------------------------------------------------------------------------------------------
--- DO NOT EDIT BELOW THIS LINE UNLESS YOU NEED TO MAKE JOB SPECIFIC RULES
--------------------------------------------------------------------------------------------------------------------
-
--- Called when the player's subjob changes.
-function sub_job_change_custom(new, old)
-	-- Typically used for Macro pallet changing
+function job_precast(spell, action, spellMap, eventArgs)
+    if spell.skill == "Ninjutsu" then
+        do_ninja_tool_checks(spell, spellMap, eventArgs)
+    end
+    if spellMap == 'Utsusemi' then
+        if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
+            cancel_spell()
+            add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
+            eventArgs.handled = true
+            return
+        elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
+            send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+        end
+    end
 end
 
---Adjust custom precast actions
-function pretarget_custom(spell,action)
+function job_post_precast(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' then
+        if lugra_ws:contains(spell.english) and (world.time >= (17*60) or world.time <= (7*60)) then
+            equip(sets.Lugra)
+        end
+        if spell.english == 'Blade: Yu' and (world.weather_element == 'Water' or world.day_element == 'Water') then
+            equip(sets.Obi)
+        end
+    end
 
-end
--- Augment basic equipment sets
-function precast_custom(spell)
-	equipSet = {}
-
-	return equipSet
-end
--- Augment basic equipment sets
-function midcast_custom(spell)
-	equipSet = {}
-
-	return equipSet
-end
--- Augment basic equipment sets
-function aftercast_custom(spell)
-	equipSet = {}
-	return equipSet
-end
---Function is called when the player gains or loses a buff
-function buff_change_custom(name,gain)
-	equipSet = {}
-	return equipSet
-end
---This function is called when a update request the correct equipment set
-function choose_set_custom()
-	equipSet = {}
-	return equipSet
-end
---Function is called when the player changes states
-function status_change_custom(new,old)
-	equipSet = {}
-	return equipSet
-end
---Function is called by the gearswap command
-function self_command_custom(command)
-
+    if spellMap == 'ElementalNinjutsu' then
+        if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
+            equip({waist="Hachirin-no-Obi"})
+        -- Target distance under 1.7 yalms.
+        elseif spell.target.distance < (1.7 + spell.target.model_size) then
+            equip({waist="Orpheus's Sash"})
+        -- Matching day and weather.
+        elseif spell.element == world.day_element and spell.element == world.weather_element then
+            equip({waist="Hachirin-no-Obi"})
+        -- Target distance under 8 yalms.
+        elseif spell.target.distance < (8 + spell.target.model_size) then
+            equip({waist="Orpheus's Sash"})
+        -- Match day or weather.
+        elseif spell.element == world.day_element or spell.element == world.weather_element then
+            equip({waist="Hachirin-no-Obi"})
+        end
+    end
 end
 
--- This function is called when the job file is unloaded
-function user_file_unload()
-
+-- Run after the general midcast() is done.
+-- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
+function job_post_midcast(spell, action, spellMap, eventArgs)
+    if spellMap == 'ElementalNinjutsu' then
+        if state.MagicBurst.value then
+            equip(sets.magic_burst)
+        end
+        if (spell.element == world.day_element or spell.element == world.weather_element) then
+            equip(sets.Obi)
+        end
+        if state.Buff.Futae then
+            equip(sets.precast.JA['Futae'])
+        end
+        if state.Buff.Doom then
+            equip(sets.buff.Doom)
+        end
+    end
 end
 
-function check_buff_JA()
-	buff = 'None'
-	local ja_recasts = windower.ffxi.get_ability_recasts()
-	if player.sub_job == 'WAR' then
-		if not buffactive['Berserk'] and ja_recasts[1] == 0 then
-			buff = "Berserk"
-		elseif not buffactive['Aggressor'] and ja_recasts[4] == 0 then
-			buff = "Aggressor"
-		elseif not buffactive['Warcry'] and ja_recasts[2] == 0 then
-			buff = "Warcry"
-		end
-	end
-	return buff
+-- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
+function job_aftercast(spell, action, spellMap, eventArgs)
+    if not spell.interrupted and spell.english == "Migawari: Ichi" then
+        state.Buff.Migawari = true
+    end
+    if player.status ~= 'Engaged' and state.WeaponLock.value == false then
+        check_weaponset()
+    end
 end
 
-function check_buff_SP()
-	buff = 'None'
-	--local sp_recasts = windower.ffxi.get_spell_recasts()
-	return buff
+-- Called when a player gains or loses a buff.
+-- buff == buff gained or lost
+-- gain == true if the buff was gained, false if it was lost.
+function job_buff_change(buff, gain)
+    if buff == "Migawari" and not gain then
+        add_to_chat(61, "*** MIGAWARI DOWN ***")
+    end
+
+    if buff == "doom" then
+        if gain then
+            equip(sets.buff.Doom)
+            send_command('@input /p Doomed.')
+            disable('neck','ring1','ring2','waist')
+        else
+            enable('neck','ring1','ring2','waist')
+            handle_equipping_gear(player.status)
+        end
+    end
 end
 
-Cycle_Time = 1
-function Cycle_Timer()
-	if world.time >= 17*60 or world.time <= 7*60 then
-		if world.time >= (18*60) or world.time <= (6*60) then
-			sets.Movement = set_combine(sets.Movement, sets.Movement.Night)
-			log('Night')
-		else
-			sets.Movement = set_combine(sets.Movement, sets.Movement.Dusk)
-			log('Dusk')
-		end
-	else
-		sets.Movement = set_combine(sets.Movement, sets.Movement.Day)
-		log('Day')
-	end
+-- Handle notifications of general user state change.
+function job_state_change(stateField, newValue, oldValue)
+    if state.WeaponLock.value == true then
+        disable('main','sub')
+    else
+        enable('main','sub')
+    end
+
+    check_weaponset()
 end
 
-function pet_change_custom(pet,gain)
-	equipSet = {}
-	
-	return equipSet
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
+    update_combat_form()
+    determine_haste_group()
+    check_moving()
 end
 
-function pet_aftercast_custom(spell)
-	equipSet = {}
-
-	return equipSet
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+    -- th_update(cmdParams, eventArgs)
 end
 
-function pet_midcast_custom(spell)
-	equipSet = {}
+function update_combat_form()
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
+end
 
-	return equipSet
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
+        wsmode = 'Acc'
+    end
+
+    return wsmode
+end
+
+function customize_idle_set(idleSet)
+    if state.Auto_Kite.value == true then
+        if world.time >= (17*60) or world.time <= (7*60) then
+            idleSet = set_combine(idleSet, sets.NightMovement)
+        else
+            idleSet = set_combine(idleSet, sets.DayMovement)
+        end
+    end
+
+    return idleSet
+end
+
+function customize_melee_set(meleeSet)
+    if state.Buff.Sange then
+        meleeSet = set_combine(meleeSet, sets.buff.Sange)
+    end
+    -- if state.TreasureMode.value == 'Fulltime' then
+    --     meleeSet = set_combine(meleeSet, sets.TreasureHunter)
+    -- end
+    check_weaponset()
+    return meleeSet
+end
+
+function display_current_job_state(eventArgs)
+
+    local cf_msg = ''
+    if state.CombatForm.has_value then
+        cf_msg = ' (' ..state.CombatForm.value.. ')'
+    end
+
+    local m_msg = state.OffenseMode.value
+    if state.HybridMode.value ~= 'Normal' then
+        m_msg = m_msg .. '/' ..state.HybridMode.value
+    end
+
+    local ws_msg = state.WeaponskillMode.value
+
+    local c_msg = state.CastingMode.value
+
+    local d_msg = 'None'
+    if state.DefenseMode.value ~= 'None' then
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
+    end
+
+    local i_msg = state.IdleMode.value
+
+    local msg = ''
+    if state.MagicBurst.value then
+        msg = ' Burst: On |'
+    end
+    if state.Kiting.value then
+        msg = msg .. ' Kiting: On |'
+    end
+
+    add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,060).. ' Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
+
+    eventArgs.handled = true
+end
+
+function determine_haste_group()
+    classes.CustomMeleeGroups:clear()
+    if DW == true then
+        if DW_needed <= 1 then
+            classes.CustomMeleeGroups:append('MaxHaste')
+        elseif DW_needed > 1 and DW_needed <= 16 then
+            classes.CustomMeleeGroups:append('HighHaste')
+        elseif DW_needed > 16 and DW_needed <= 21 then
+            classes.CustomMeleeGroups:append('MidHaste')
+        elseif DW_needed > 21 and DW_needed <= 34 then
+            classes.CustomMeleeGroups:append('LowHaste')
+        elseif DW_needed > 34 then
+            classes.CustomMeleeGroups:append('')
+        end
+    end
+end
+
+function job_self_command(cmdParams, eventArgs)
+    gearinfo(cmdParams, eventArgs)
+end
+
+function gearinfo(cmdParams, eventArgs)
+    --   send_command('input /item "Linen Coin Purse" <me>')
+    if cmdParams[1] == 'gearinfo' then
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+                DW_needed = 0
+                DW = false
+            end
+        end
+        if type(tonumber(cmdParams[3])) == 'number' then
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
+            end
+        end
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
+
+-- Determine whether we have sufficient tools for the spell being attempted.
+function do_ninja_tool_checks(spell, spellMap, eventArgs)
+    local ninja_tool_name
+    local ninja_tool_min_count = 1
+
+    -- Only checks for universal tools and shihei
+    if spell.skill == "Ninjutsu" then
+        if spellMap == 'Utsusemi' then
+            ninja_tool_name = "Shihei"
+        elseif spellMap == 'ElementalNinjutsu' then
+            ninja_tool_name = "Inoshishinofuda"
+        elseif spellMap == 'EnfeeblingNinjutsu' then
+            ninja_tool_name = "Chonofuda"
+        elseif spellMap == 'EnhancingNinjutsu' then
+            ninja_tool_name = "Shikanofuda"
+        else
+            return
+        end
+    end
+
+    local available_ninja_tools = player.inventory[ninja_tool_name] or player.wardrobe[ninja_tool_name]
+
+    -- If no tools are available, end.
+    if not available_ninja_tools then
+        if spell.skill == "Ninjutsu" then
+            return
+        end
+    end
+
+    -- Low ninja tools warning.
+    if spell.skill == "Ninjutsu" and state.warned.value == false
+        and available_ninja_tools.count > 1 and available_ninja_tools.count <= options.ninja_tool_warning_limit then
+        local msg = '*****  LOW TOOLS WARNING: '..ninja_tool_name..' *****'
+        --local border = string.repeat("*", #msg)
+        local border = ""
+        for i = 1, #msg do
+            border = border .. "*"
+        end
+
+        add_to_chat(104, border)
+        add_to_chat(104, msg)
+        add_to_chat(104, border)
+
+        state.warned:set()
+    elseif available_ninja_tools.count > options.ninja_tool_warning_limit and state.warned then
+        state.warned:reset()
+    end
+end
+
+-- Check for various actions that we've specified in user code as being used with TH gear.
+-- This will only ever be called if TreasureMode is not 'None'.
+-- Category and Param are as specified in the action event packet.
+-- function th_action_check(category, param)
+--     if category == 2 or -- any ranged attack
+--         --category == 4 or -- any magic action
+--         (category == 3 and param == 30) or -- Aeolian Edge
+--         (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
+--         (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
+--         then return true
+--     end
+-- end
+
+function check_weaponset()
+    equip(sets[state.WeaponSet.current])
 end

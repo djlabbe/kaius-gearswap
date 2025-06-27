@@ -1,575 +1,701 @@
--- Load and initialize the include file.
-include('Kaius-Include')
-include('Kaius-globals.lua')
-
-LockStylePallet = "1"
-MacroBook = "1"
-MacroSet = "1"
-Food = "Grape Daifuku +1"
-AutoItem = false
-Random_Lockstyle = false
-Lockstyle_List = {1,2,6,12}
-
-state.OffenseMode:options('TP', 'DT', 'PDL', 'SUB', 'MEVA')
-state.OffenseMode:set('TP')
-
-state.WeaponMode:options('Chango', 'Shining One', 'Helheim', 'Naegling', 'Loxotic', 'Dolichenus', 'Unlocked')
-state.WeaponMode:set('Chango')
-
-elemental_ws = S{}
-
-jobsetup (LockStylePallet,MacroBook,MacroSet)
-
-send_command('bind ^numpad7 gs c WeaponMode Chango;')
-send_command('bind ^numpad8 gs c WeaponMode Helheim;')
-send_command('bind ^numpad9 gs c WeaponMode Shining One;')
-send_command('bind ^numpad4 gs c WeaponMode Naegling;')
-send_command('bind ^numpad5 gs c WeaponMode Loxotic;')
-send_command('bind ^numpad6 gs c WeaponMode Dolichenus;')
-send_command('bind ^numpad0 gs c WeaponMode Unlocked;')
-
-send_command('bind !F1 input /ja "Mighty Strikes" <me>')
-send_command('bind !F2 input /ja "Brazen Rush" <me>')
-send_command('bind !t input /ja "Provoke" <t>')
-
-if player.sub_job == 'SAM' then
-	send_command('bind !c input /ja "Warding Circle" <me>')
-	send_command('bind !` input /ja "Hasso" <me>')
-	send_command('bind ^` input /ja "Seigan" <me>')
-elseif player.sub_job == 'DRG' then
-	send_command('bind !c input /ja "Ancient Circle" <me>')
-end
+-------------------------------------------------------------------------------------------------------------------
+--  Keybinds
+-------------------------------------------------------------------------------------------------------------------
+--
+--  Modes:      [ F9 ]              Cycle Offense Modes
+--              [ CTRL+F9 ]         Cycle Hybrid Modes
+--              [ WIN+F9 ]          Cycle Weapon Skill Modes
+--              [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--
+-------------------------------------------------------------------------------------------------------------------
 
 function get_sets()
+    mote_include_version = 2
+    include('Mote-Include.lua')
+    include("lib/movement.lua")
+    include("lib/enchantment.lua")
+    include("lib/hud.lua")
+end
 
-	-- Weapon setup
-	sets.Weapons = {}
+function job_setup()
+end
 
-	sets.Weapons['Chango'] = {main="Chango", sub="Utu Grip"}
-	sets.Weapons['Shining One'] = {main="Shining One", sub="Utu Grip"}
-	sets.Weapons['Helheim'] = {main="Helheim",sub="Utu Grip"}
-	sets.Weapons['Naegling'] = {main="Naegling",sub="Ikenga's Axe"}
-	sets.Weapons['Loxotic'] = {main="Loxotic Mace +1",sub="Ikenga's Axe"}
-	sets.Weapons['Dolichenus'] = {main="Dolichenus",sub="Ikenga's Axe"}
+function user_setup()
+    state.OffenseMode:options('Normal', 'Acc', 'PDL')
+    state.WeaponskillMode:options('Normal', 'Acc', 'PDL')
+    state.HybridMode:options('Normal', 'DT')
+    state.IdleMode:options('Normal', 'Regen')
 
-	-- This stops GS from changing weapons (Abyssea Proc etc)
-	sets.Weapons['Unlocked'] ={ }
+    state.WeaponSet= M{['description']='Weapon Set', 'Chango', 'Helheim', 'ShiningOne', 'Naegling', 'Loxotic' }
+    state.WeaponLock = M(false, 'Weapon Lock')
 
-	-- This is used when you do not have dual wield and is not a two handed weapon
-	sets.Weapons.Shield = {sub="Blurred Shield +1"}
+    gear.Artifact_Head = { name= "Pummeler's Mask +3" }
+    gear.Artifact_Body = { name= "Pummeler's Lorica +3" }
+    gear.Artifact_Hands = { name= "Pummeler's Mufflers +3" }
+    gear.Artifact_Legs = { name= "Pummeler's Cuisses +4" }
+    gear.Artifact_Feet = { name= "Pummeler's Calligae" }
 
-	-- Base set for when the player is not engaged or casting.  Other sets build off this set
-	sets.Idle = {
-		ammo="Staunch Tathlum +1",
-		head="Sakpata's Helm",
-		body="Sakpata's Breastplate",
-		hands="Sakpata's Breastplate",
-		legs="Sakpata's Cuisses",
-		feet="Sakpata's Leggings",
-		neck="Warder's Charm +1",
-		waist="Null Belt",
-		ear1="Eabani Earring",
-		ear2="Odnowa Earring +1",
-		ring1=gear.Moonlight_1,
-		ring2="Shadow Ring",
-		back="Null Shawl",
+    gear.Relic_Head = { name= "Agoge Mask +4" }
+    gear.Relic_Body = { name= "Agoge Lorica +3" }
+    gear.Relic_Hands = { name= "Agoge Mufflers +3" }
+    gear.Relic_Legs = { name= "Agoge Cuisses +3" }
+    gear.Relic_Feet = { name= "Agoge Calligae +3" }
+
+    gear.Empyrean_Head = { name= "Boii Mask +3" }
+    gear.Empyrean_Body = { name= "Boii Lorica +3" }
+    gear.Empyrean_Hands = { name= "Boii Mufflers +3" }
+    gear.Empyrean_Legs = { name= "Boii Cuisses +3" }
+    gear.Empyrean_Feet = { name= "Boii Calligae +3" }
+
+    gear.WAR_TP_Cape = { name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20', 'DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
+    gear.WAR_WS1_Cape = { name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
+    gear.WAR_WS2_Cape = { name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
+    
+    include('Global-Binds.lua')
+    send_command('bind @w gs c toggle WeaponLock')
+
+    send_command('bind !F1 input /ja "Mighty Strikes" <me>')
+    send_command('bind !F2 input /ja "Brazen Rush" <me>')
+    
+    send_command('bind !t input /ja "Provoke" <t>')
+
+    send_command('bind !h input //send @others /ma "Horde Lullaby II" <t>')
+
+    if player.sub_job == 'SAM' then
+        send_command('bind !c input /ja "Warding Circle" <me>')
+        send_command('bind !` input /ja "Hasso" <me>')
+        send_command('bind ^` input /ja "Seigan" <me>')
+        send_command('bind ^numpad7 gs c set WeaponSet Chango;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 5')
+        send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 4')
+        send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 2')
+        send_command('bind ^numpad5 gs c set WeaponSet Loxotic;input /macro set 3')
+        
+        set_macro_page(1, 1)
+    elseif player.sub_job == 'DRG' then
+        send_command('bind !c input /ja "Ancient Circle" <me>')
+        send_command('bind ^numpad7 gs c set WeaponSet Chango;input /macro set 6')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 10')
+        send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 9')
+        send_command('bind ^numpad4 gs c set WeaponSet Naegling;input /macro set 7')
+        send_command('bind ^numpad5 gs c set WeaponSet Loxotic;input /macro set 8')
+        set_macro_page(6, 1)
+    end
+    
+    send_command('wait 3; input /lockstyleset 1' )
+end
+
+function user_unload()
+    send_command('unbind @w')
+    send_command('unbind !F1')
+    send_command('unbind !F2')    
+    send_command('unbind !t')
+    send_command('unbind !`')
+    send_command('unbind ^`')
+    send_command('unbind !h')
+    unbind_numpad()
+end
+
+function init_gear_sets()
+    
+    sets.Enmity = {
+        ammo="Sapience Orb",
+        head={name="Halitus Helm", priority=88},
+        neck="Moonlight Necklace",
+        body=gear.Souveran_C_Body, --20
+        legs=gear.Souveran_C_Legs,
+        feet=gear.Souveran_D_Feet,
+        ear1={name="Cryptic Earring", priority=40},
+        ear2={name="Trux Earring", priority=1},
+        hands={name="Kurys Gloves", priority=25}, --9
+        ring1="Apeile Ring +1",
+        ring2="Eihwaz Ring",
     }
 
-	sets.Idle.TP = set_combine(sets.Idle, {})
-	sets.Idle.DT = set_combine(sets.Idle, {})
-	sets.Idle.PDL = set_combine(sets.Idle, {})
-	sets.Idle.SUB = set_combine(sets.Idle, {})
-	sets.Idle.MEVA = set_combine(sets.Idle, {})
+    sets.precast.JA["Provoke"] = sets.Enmity
 
-	--Used to swap into movement gear when the player is detected movement when not engaged
-	 if (item_available("Shneddick Ring +1")) then
-        sets.Movement = { ring1="Shneddick Ring +1" }
-    else
-        sets.Movement = { feet="Hermes' Sandals" }
-    end
+    sets.precast.JA["Berserk"] = {
+        body=gear.Artifact_Body,
+        feet=gear.Relic_Feet,
+    }
 
-	-- Set to be used if you get 
-	sets.Cursna_Received = {
-	    neck="Nicander's Necklace",
-	    ring1="Eshmun's Ring",
-		ring2="Purity Ring",
-		waist="Gishdubar Sash",
-	}
+    sets.precast.JA["Warcry"] = {
+        head=gear.Relic_Head
+    }
 
-	--WAR Double attack
-	--28% Job Trait
-	--5% Merits
-	--33% Total
+    sets.precast.JA['Restraint'] = {
+        hands=gear.Empyrean_Hands,
+    }
 
-	-- Sets the base equipset for OffenseMode
-	sets.OffenseMode = {
-		ammo="Coiste Bodhar",
-		head="Boii Mask +3",
-		body="Sakpata's Breastplate",
-		hands="Sakpata's Breastplate",
-		legs="Sakpata's Cuisses",
-		feet="Pummeler's Calligae",
-		neck="Warrior's bead necklace +2",
-		waist="Sailfi Belt +1",
-	    ear1="Schere Earring",
+    sets.precast.JA['Blood Rage'] = {
+        body=gear.Empyrean_Body,
+    }
+    
+    sets.precast.JA['Aggressor'] = {
+        body=gear.Relic_Body,
+        head=gear.Relic_Head,
+    }
+
+    sets.buff.MightyStrikes = {
+        feet=gear.Empyrean_Feet,
+    }
+
+    sets.precast.FC = {
+        ammo="Sapience Orb", --2
+        head=gear.Sakpata_Head, --8
+        hands="Leyline Gloves", --8
+        neck="Orunmila's Torque", --5
+        ear1="Etiolation Earring", --1
+        ear2="Enchanter's Earring +1", --2
+        ring2="Prolix Ring",
+    }
+
+    sets.engaged = {
+        ammo="Coiste Bodhar", 
+        head="Hjarrandi Helm", 
+        body=gear.Empyrean_Body,
+        hands=gear.Sakpata_Hands, 
+        legs=gear.Artifact_Legs, 
+        feet=gear.Artifact_Feet, 
+        neck="Warrior's bead necklace +2", 
+        ear1="Schere Earring", 
+        ear2="Boii Earring +1", 
+        ring1="Petrov Ring",
+        ring2=gear.Lehko_Or_Chirich2,
+        waist="Ioskeha Belt +1", 
+        back=gear.WAR_TP_Cape,
+    } -- 68% DA + 28% Traits + Gifts +5 % Merits = 101
+    -- 52% PDT
+
+    sets.engaged.Acc = {
+        ammo="Coiste Bodhar", --3
+        head=gear.Empyrean_Head, --7
+        body=gear.Empyrean_Body,
+        hands=gear.Sakpata_Hands, --6
+        legs=gear.Artifact_Legs, --7
+        feet=gear.Artifact_Feet, --9
+        neck="Warrior's bead necklace +2", --7
+        ear1="Schere Earring", --6
+        ear2="Boii Earring +1", --8
+        ring1="Regal Ring",
+        ring2=gear.Chirich_2,
+        waist="Sailfi Belt +1", --5
+        back=gear.WAR_TP_Cape, --10
+    }
+
+    sets.engaged.SingleWield = {
+        ammo="Coiste Bodhar", --3
+        head=gear.Empyrean_Head, --7
+        body=gear.Empyrean_Body, 
+        hands=gear.Sakpata_Hands, --6
+        legs=gear.Sakpata_Legs, --7
+        feet=gear.Artifact_Feet, --9
+        neck="Warrior's bead necklace +2", --7
+        ear1="Schere Earring", --6
+        ear2="Boii Earring +1", --8
+        ring1="Niqmaddu Ring",
+        ring2="Petrov Ring", --1
+        waist="Sailfi Belt +1", --5
+        back=gear.WAR_TP_Cape,
+    }
+
+    sets.engaged.DW = {
+        ammo="Coiste Bodhar",
+        head=gear.Empyrean_Head,
+        body=gear.Relic_Body,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Sakpata_Legs,
+        feet=gear.Artifact_Feet,
+        neck="Warrior's bead necklace +2",
+        waist="Reiki Yotai",
+        ear1="Eabani Earring",
         ear2="Boii Earring +1",
-		ring1="Niqmaddu Ring",
-		ring2={ name="Moonlight Ring", bag="wardrobe8" },
-		back={ name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20', 'DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
-	}
+        ring1="Niqmaddu Ring",
+        ring2="Petrov Ring",
+        back=gear.WAR_TP_Cape,
+    }
 
-	sets.OffenseMode.TP = set_combine( sets.OffenseMode, {})
-	sets.OffenseMode.DT = set_combine( sets.OffenseMode, {
-		head="Sakpata's Helm", 
-		feet="Sakpata's Leggings",
-	})
+    sets.engaged.DW.LowHaste = sets.engaged.DW
+    sets.engaged.DW.MidHaste = sets.engaged.DW
+    sets.engaged.DW.MaxHaste = sets.engaged.DW
+    sets.engaged.DW.MaxHaste = sets.engaged.DW
 
-	sets.OffenseMode.PDL = set_combine(sets.OffenseMode, {})
+    sets.engaged.Hybrid = {
+        head=gear.Sakpata_Head,
+        body=gear.Sakpata_Body,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Sakpata_Legs,
+        feet=gear.Sakpata_Feet,
+    }
+    
+    sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
 
-	sets.OffenseMode.MEVA = set_combine(sets.OffenseMode, {
-		feet="Sakpata's Leggings",
-		neck="Warder's Charm +1",
-	})
+    sets.precast.WS = {
+        head=gear.Relic_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Fotia Gorget",
+        ring1=gear.Cornelia_Or_Regal,
+        ring2="Niqmaddu Ring",
+        ear1="Moonshade Earring",
+        ear2="Thrud Earring",
+        waist="Sailfi Belt +1",
+        ammo="Knobkierrie",
+        back=gear.WAR_WS1_Cape,
+    }
 
-	sets.Subtle_Blow = {
-		body="Dagon Breastplate", -- 10 SB II
-		feet="Sakpata's Leggings", -- 15 SB I
-		ear1="Schere Earring", -- 3 SB I
-		ear2="Boii Earring +1", -- 8 SB I
-		ring1="Niqmaddu Ring", -- 5 SB II
-	}
+    sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+        -- TODO
+    })
 
-	-- Max SUB set (SUB 50 and SUBII 15) Need auspice (29) to cap
-	sets.OffenseMode.SUB = set_combine(sets.OffenseMode.DT, sets.Subtle_Blow)
+    sets.precast.WS.PDL = set_combine(sets.precast.WS, {
+        -- TODO
+    })
 
-	--These base set are used when an aftermath is active and player is enaged and correct weapon type set (Augments the current OffenseMode)
-	--If you don't specify a weapon mode it will use it regardless of Mythic,Empy,Relic,Aeonic
-
-	sets.OffenseMode.AM = {}  -- This is for Relic AM only
-	sets.OffenseMode.AM1 = {} -- All AM1 Types
-	sets.OffenseMode.AM2 = {} -- All AM2 Types
-	sets.OffenseMode.AM3 = {} -- All AM3 Types
-
-	-- This is how you specify a Weapon Mode AM set by Weapon Mode (examples)
-	sets.OffenseMode.AM['Bravura'] = {}
-	sets.OffenseMode.AM1['Ukonvasara'] = {}
-	sets.OffenseMode.AM2['Ukonvasara'] = {}
-	sets.OffenseMode.AM3['Ukonvasara'] = {}
-	sets.OffenseMode.AM3['Farsha'] = {}
-	sets.OffenseMode.AM1['Conqueror'] = {}
-	sets.OffenseMode.AM2['Laphria'] = {}
-
-	sets.DualWield = {
-		waist="Reiki Yotai",
-		ear2="Eabani Earring",
-	}
-
-	sets.Precast = set_combine(sets.Idle, {})
-
-	-- Used for Magic Spells
-	sets.Precast.FastCast = {
-		ammo="Sapience Orb", --2
-		head="Sakpata's Helm", --8
-		body="Sacro Breastplate", --10
-		hands="Leyline Gloves", --8
-		neck="Orunmila's Torque", -- 5
-		ear1="Etiolation Earring", --1
-		ear2="Loquacious Earring", -- 3
-		ring1="Prolix Ring", -- 2
-		ring2="Gelatinous Ring +1",
-	} --44%
-
-	sets.Precast.Enmity = {
-		ammo="Sapience Orb", -- 2
-		head={ name="Souveran Schaller +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=280}, --9
-		body={ name="Souveran Cuirass +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=171}, --20
-		hands={ name="Souveran Handschuhs +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=239}, --9
-		legs={ name="Souveran Diechlings +1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}, priority=163}, --9
-		feet={ name="Souveran Schuhs +1", augments={'HP+65','Attack+25','Magic dmg. taken -4',}, priority=187}, --9
-		neck="Moonlight Necklace", --15
-		ear1="Cryptic Earring", --4
-		ear2={name="Trux Earring", priority=1},
-		ring1="Petrov Ring", --4
-		ring2="Eihwaz Ring", --5
-	} --91
-
-	sets.Precast['Utsusemi: Ichi'] = {}
-	sets.Precast['Utsusemi: Ni'] = {}
-
-	--Base set for midcast - if not defined will notify and use your idle set for surviability
-	sets.Midcast = set_combine(sets.Idle, {})
-
-	--This set is used as base as is overwrote by specific gear changes (Spell Interruption Rate Down)
-	sets.Midcast.SIRD = {
-	    ammo="Staunch Tathlum +1", --11
-		feet=gear.Ody_CURE_Feet,
-		neck="Moonlight Necklace", --15
-		ear1="Magnetic Earring", --8
-		waist="Audumbla Sash", --10
-	}
-
-	sets.Midcast.Enhancing = {}
-	sets.Midcast.Enhancing.Others = {}
-	
-	sets.Midcast['Utsusemi: Ichi'] = {}
-	sets.Midcast['Utsusemi: Ni'] = {}
-
-	-- Job Abilities
-	sets.JA = {}
-	sets.JA["Mighty Strikes"] = {feet="Boii Calligae +3"}
-	sets.JA["Berserk"] = {body="Pummeler's Lorica +2", feet="Agoge Calligae +3"}
-	sets.JA["Warcry"] = {head="Agoge Mask +3"}
-	sets.JA["Defender"] = {}
-	sets.JA["Aggressor"] = {body="Agoge Lorica +3", head="Agoge Mask +3"}
-	sets.JA["Provoke"] = sets.Precast.Enmity
-	sets.JA["Tomahawk"] = {ammo="Throwing Tomahawk",} -- Need to add feet
-	sets.JA["Retaliation"] = {}
-	sets.JA["Restraint"] = {hands="Boii Mufflers +3"}
-	sets.JA["Blood Rage"] = {body="Boii Lorica +3"}
-	sets.JA["Brazen Rush"] = {}
-
-	--Default WS set base
-	sets.WS = {
-		head="Agoge Mask +3",
-        body={name="Nyame Mail", priority=136},
-        hands="Boii Mufflers +3",
-        legs="Boii Cuisses +3",
-        feet={name="Nyame Sollerets", priority=68},
-        neck="Warrior's Bead Necklace +2",
+    sets.precast.WS["Upheaval"] = {
+        ammo="Knobkierrie",
+        head=gear.Relic_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Warrior's bead necklace +2",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
         ring1=gear.Cornelia_Or_Regal,
-        ring2="Epaminondas's Ring",
-        ammo="Knobkierrie",
-        back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
+        ring2="Niqmaddu Ring",
         waist="Sailfi Belt +1",
-	}
+        back=gear.WAR_WS2_Cape,
+    }
 
-	sets.WS.WSD = {}
+    sets.precast.WS["Upheaval"].Acc = set_combine(sets.precast.WS["Upheaval"], {})
+    sets.precast.WS["Upheaval"].PDL = set_combine(sets.precast.WS["Upheaval"], {
+        ring1=gear.Ephramad_Or_Sroda
+    })
 
-	sets.WS.MEVA = set_combine(sets.WS, {
-		head="Sakpata's Helm",
-		body="Sakpata's Breastplate",
-	})
+    sets.precast.WS["Upheaval"].MightyStrikes = { 
+        ammo="Yetshila +1",
+        head=gear.Relic_Head,
+        neck="Warrior's bead necklace +2",
+        body=gear.Sakpata_Body,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Sakpata_Legs,
+        feet=gear.Empyrean_Feet,
+        ear1="Moonshade Earring",
+        ear2="Thrud Earring",
+        ring1=gear.Cornelia_Or_Regal,
+        ring2="Niqmaddu Ring",
+        waist="Sailfi Belt +1",
+        back=gear.WAR_WS2_Cape,
+    }
 
-	-- Modes
-	sets.WS.CRIT = {
-		ammo="Yetshila +1",
-		head="Sakpata's Helm",
-		body="Hjarrandi Breast.",
-		hands="Sakpata's Breastplate",
-		legs="Sakpata's Cuisses",
-		feet="Sakpata's Leggings",
-		neck="Warrior's Bead Necklace +2",
-		waist="Sailfi Belt +1",
-		ear1="Schere Earring",
-		ear2="Boii Earring +1",
-		ring1="Niqmaddu Ring",
-		ring2="Begrudging Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
-	}
-	sets.WS.CRIT.RA = {}
-
-	sets.WS.ACC = {}
-	sets.WS.ACC.RA = {}
-
-	sets.WS.SUB = set_combine(sets.Subtle_Blow, {
-
-	})
-
-	sets.WS.SUB.RA = {}
-
-	sets.WS.PDL = {}
-	sets.WS.PDL.RA = {}
-
-	--These set are used when a weaponskill is used with that level of aftermath with the correct weapon
-	--They Augment any built weaponskill set - Same formatting as the OffenseModes
-	-- sets.WS.AM = {}
-	-- sets.WS.AM1 = {}
-	-- sets.WS.AM2 = {}
-	-- sets.WS.AM3 = {}
-	-- sets.WS.AM1['Ukonvasara'] = {}
-	-- sets.WS.AM2['Ukonvasara'] = {}
-	-- sets.WS.AM3['Ukonvasara'] = {}
-
-	-- sets.WS.AM.RA = {}
-	-- sets.WS.AM1.RA = {}
-	-- sets.WS.AM2.RA = {}
-	-- sets.WS.AM3.RA = {}
-	-- sets.WS.AM1.RA['Ukonvasara'] = {}
-	-- sets.WS.AM2.RA['Ukonvasara'] = {}
-	-- sets.WS.AM3.RA['Ukonvasara'] = {}
-
-	-- Great Axe WS
-	sets.WS["Ukko's Fury"] = {
-	    ammo="Yetshila +1",
-		head="Sakpata's Helm",
-		body="Sakpata's Breastplate",
-		hands="Sakpata's Breastplate",
-		legs="Sakpata's Cuisses",
-		feet="Sakpata's Leggings",
-		neck="Warrior's Bead Necklace +2",
-		ear1="Schere Earring",
-		ear2="Boii Earring +1",
-		ring1="Niqmaddu Ring",
-		ring2=gear.Ephramad_Or_Regal,
-		waist="Sailfi Belt +1",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
-	}
-	sets.WS["Upheaval"] = {
-	    ammo="Knobkierrie",
-		head=gear.WAR_Relic,
-		body={name="Nyame Mail", priority=136},
-		hands={name="Nyame Gauntlets", priority=91},
-		legs={name="Nyame Flanchard", priority=114},
-		feet={name="Nyame Sollerets", priority=68},
-		neck="Warrior's Bead Necklace +2",
-		ear1="Moonshade Earring",
-		ear2="Thrud Earring",
-		ring1="Niqmaddu Ring",
-		ring2="Regal Ring",
-		waist="Sailfi Belt +1",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
-	}
-	
-	sets.WS["Full Break"] = {
-		 ammo="Pemphredo Tathlum",
-		head={name="Nyame Flanchard", priority=114},
-		body={name="Nyame Mail", priority=136},
-		hands={name="Nyame Gauntlets", priority=91},
-		legs={name="Nyame Flanchard", priority=114},
-		feet={name="Nyame Sollerets", priority=68},
-		neck="Null Loop",
-		waist="Null Belt",
-		ear1="Moonshade Earring",
+    sets.precast.WS["Ukko's Fury"] = {
+        ammo="Yetshila +1",
+        head=gear.Empyrean_Head,
+        body=gear.Sakpata_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Warrior's bead necklace +2",
+        ear1="Moonshade Earring",
         ear2="Boii Earring +1",
-		ring1=gear.Stikini_1,
-		ring2="Regal Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
-	}
+        ring1="Niqmaddu Ring",
+        ring2=gear.Ephramad_Or_Regal,
+        waist="Sailfi Belt +1",
+        back=gear.WAR_WS2_Cape,
+    }
 
-	sets.WS["Armor Break"] = sets.WS["Full Break"]
+    sets.precast.WS["Ukko's Fury"].Acc = set_combine(sets.precast.WS["Ukko's Fury"], {})
+    sets.precast.WS["Ukko's Fury"].PDL = set_combine(sets.precast.WS["Ukko's Fury"], {
+        hands=gear.Sakpata_Hands,
+    })
+
+    sets.precast.WS["Fel Cleave"] = {
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Warrior's bead necklace +2",
+        ring1=gear.Cornelia_Or_Regal,
+        ring2="Epaminondas's Ring",
+        ear1="Moonshade Earring",
+        ear2="Thrud Earring",
+        waist="Sailfi Belt +1",
+        ammo="Knobkierrie",
+        back=gear.WAR_WS1_Cape,
+    }
+
+    sets.precast.WS["Fel Cleave"].Acc = set_combine(sets.precast.WS["Fel Cleave"], {})
+    sets.precast.WS["Fel Cleave"].PDL = set_combine(sets.precast.WS["Fel Cleave"], {
+        ring1=gear.Ephramad_Or_Regal,
+    })
+
+    sets.precast.WS["Armor Break"] = {
+        ammo="Pemphredo Tathlum",
+        head=gear.Sakpata_Head,
+        body=gear.Sakpata_Body,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Sakpata_Feet,
+        neck="Moonlight Necklace",
+        waist="Eschan Stone",
+        ear1="Moonshade Earring",
+        ear2="Boii Earring +1",
+        ring1=gear.Stikini_1,
+        ring2="Metamorph Ring +1",
+        back=gear.WAR_WS1_Cape,
+    }
 
 
-	--Axe WS
-	sets.WS["Ragin Axe"] = {}
-	sets.WS["Smash Axe"] = {}
-	sets.WS["Gale Axe"] = {}
-	sets.WS["Avalanche Axe"] = {}
-	sets.WS["Spinning Axe"] = {}
-	sets.WS["Rampage"] = {}
-	sets.WS["Calamity"] = {}
-	sets.WS["Mistral Axe"] = {}
-	sets.WS["Decimation"] = sets.WS.CRIT
-	sets.WS["Bora Axe"] = {}
-	sets.WS["Cloudsplitter"] = {}
+    sets.precast.WS["Resolution"] = {
+        ammo="Yetshila +1",
+        head=gear.Empyrean_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Sakpata_Feet,
+        neck="Fotia Gorget",
+        ear1="Moonshade Earring",
+        ear2="Lugra Earring +1",
+        ring1="Niqmaddu Ring",
+        ring2="Regal Ring",
+        waist="Fotia Belt",
+        back=gear.WAR_WS1_Cape,
+    }
 
-	--Sword WS
-	sets.WS["Fast Blade"] = {}
-	sets.WS["Burning Blade"] = {}
-	sets.WS["Red Lotus Blade"] = {}
-	sets.WS["Flat Blade"] = {}
-	sets.WS["Shining Blade"] = {}
-	sets.WS["Seraph Blade"] = {}
-	sets.WS["Circle Blade"] = {}
-	sets.WS["Spirits Within"] = {}
-	sets.WS["Vorpal Blade"] = {}
-	sets.WS["Savage Blade"] = sets.WS.WSD
-	sets.WS["Sanguine Blade"] = {}
-	sets.WS["Requiescat"] = {}
+    sets.precast.WS["Resolution"].Acc = set_combine(sets.precast.WS["Resolution"], {})
 
-	--Great Sword WS
-	sets.WS["Fimbulvetr"] = {}
-	sets.WS["Resolution"] = {}
+    sets.precast.WS["Resolution"].PDL = set_combine(sets.precast.WS["Resolution"], {
+        ammo="Seething Bomblet +1",
+        body=gear.Sakpata_Body,
+        legs=gear.Sakpata_Legs,
+        feet=gear.Sakpata_Feet,
+    })
 
-	--Club WS
-	sets.WS["Judgment"] = {}
-	sets.WS["Black Halo"] = {}
+    sets.precast.WS["Fimbulvetr"] = {
+        ammo="Knobkierrie",
+        head=gear.Relic_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Warrior's bead necklace +2",
+        ear1="Moonshade Earring",
+        ear2="Thrud Earring",
+        ring1=gear.Cornelia_Or_Niqmaddu,
+        ring2="Regal Ring",
+        waist="Sailfi Belt +1",
+        back=gear.WAR_WS1_Cape,
+    }
 
-	--Polearm
-	sets.WS["Impulse Drive"] = sets.WS.CRIT
-	sets.WS["Leg Sweep"] = {
-		head=gear.Nyame_Head,
-		body={name="Nyame Mail", priority=136},
-		hands={name="Nyame Gauntlets", priority=91},
-		legs={name="Nyame Flanchard", priority=114},
-		feet={name="Nyame Sollerets", priority=68},
-		neck="Warrior's Bead Necklace +2",
-		waist="Sailfi Belt +1",
-		ear1="Moonshade Earring",
-		ear2="Boii Earring +1",
-		ring1=gear.Stikini_1,
-		ring2="Regal Ring",
-		back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
-	}
+    sets.precast.WS["Fimbulvetr"].Acc = set_combine(sets.precast.WS["Fimbulvetr"], {})
 
-	 sets.WS['Cataclysm'] = { --MAB26
+    sets.precast.WS["Fimbulvetr"].PDL = set_combine(sets.precast.WS["Fimbulvetr"], {
+        body=gear.Sakpata_Body,
+        legs=gear.Empyrean_Legs,
+        ring1=gear.Ephramad_Or_Sroda,
+        ring2="Epaminondas's Ring",
+    })
+
+    sets.precast.WS["Stardiver"] = {
+        ammo="Yetshila +1",
+        head=gear.Empyrean_Head,
+        body=gear.Sakpata_Body,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Empyrean_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Fotia Gorget",
+        ear1="Moonshade Earring",
+        ear2="Boii Earring +1",
+        ring1="Niqmaddu Ring",
+        ring2="Begrudging Ring",
+        waist="Fotia Belt",
+        back=gear.WAR_WS1_Cape,
+    }
+
+    sets.precast.WS["Stardiver"].Acc = set_combine(sets.precast.WS["Stardiver"], {})
+
+    sets.precast.WS["Stardiver"].PDL = set_combine(sets.precast.WS["Stardiver"], {
+        body=gear.Sakpata_Body,
+        ring2="Sroda Ring",
+    })
+
+    sets.precast.WS["Impulse Drive"] = {
+        ammo="Yetshila +1",
+        head=gear.Empyrean_Head,
+        body=gear.Sakpata_Body,
+        hands=gear.Empyrean_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Warrior's bead necklace +2",
+        ear1="Moonshade Earring",
+        ear2="Boii Earring +1",
+        ring1="Niqmaddu Ring",
+        ring2="Begrudging Ring",
+        waist="Fotia Belt",
+        back=gear.WAR_WS1_Cape,
+    }
+
+    sets.precast.WS["Impulse Drive"].Acc = set_combine(sets.precast.WS["Impulse Drive"], {})
+
+    sets.precast.WS["Impulse Drive"].PDL = set_combine(sets.precast.WS["Impulse Drive"], {
+        head="Blistering Sallet +1",
+        body=gear.Sakpata_Body,
+        legs=gear.Empyrean_Legs,
+        ring2="Sroda Ring",
+    })
+
+    sets.precast.WS['Savage Blade'] = {
+        ammo="Knobkierrie",
+        head=gear.Relic_Head,
+        body=gear.Nyame_Body, 
+        hands=gear.Empyrean_Hands, 
+        legs=gear.Empyrean_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Warrior's Bead Necklace +2",
+        waist="Sailfi Belt +1",
+        ear1="Moonshade Earring", 
+        ear2="Thrud Earring",
+        ring1=gear.Cornelia_Or_Epaminondas,
+        ring2=gear.Ephramad_Or_Regal,       
+        back=gear.WAR_WS1_Cape,
+    }
+
+    sets.precast.WS["Savage Blade"].Acc = set_combine(sets.precast.WS["Savage Blade"], {})
+    sets.precast.WS['Savage Blade'].PDL = set_combine(sets.precast.WS['Savage Blade'], {
+        body=gear.Sakpata_Body,
+        ring1=gear.Ephramad_Or_Epaminondas,
+        ring2="Sroda Ring",
+    })
+
+    sets.precast.WS['Judgment'] = {
+        ammo="Knobkierrie",
+        head=gear.Relic_Head,
+        body=gear.Nyame_Body, 
+        hands=gear.Empyrean_Hands, 
+        legs=gear.Empyrean_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Warrior's Bead Necklace +2",
+        ear1="Moonshade Earring", 
+        ear2="Thrud Earring",
+        ring1=gear.Cornelia_Or_Epaminondas,
+        ring2="Regal Ring",       
+        waist="Sailfi Belt +1",
+        back=gear.WAR_WS1_Cape,
+    }
+
+    sets.precast.WS["Judgment"].Acc = set_combine(sets.precast.WS["Judgment"], {})
+    sets.precast.WS['Judgment'].PDL = sets.precast.WS['Savage Blade'].PDL
+
+    sets.precast.WS['Cataclysm'] = { --MAB26
         ammo="Knobkierrie", --WSD6
         head="Pixie Hairpin +1", --DMAB28
-        body={name="Nyame Mail", priority=136}, --MAB30 WSD12
-        hands={name="Nyame Gauntlets", priority=91}, --MAB30 WSD10
-        legs={name="Nyame Flanchard", priority=114}, --MAB30 WSD11
-        feet={name="Nyame Sollerets", priority=68}, --MAB30 WSD10
+        body=gear.Nyame_Body, --MAB30 WSD12
+        hands=gear.Nyame_Hands, --MAB30 WSD10
+        legs=gear.Nyame_Legs, --MAB30 WSD11
+        feet=gear.Nyame_Feet, --MAB30 WSD10
         neck="Sanctity Necklace", --MAB10
         waist="Orpheus's Sash", 
         ear1="Moonshade Earring", --TPB250 MAB4
         ear2="Friomisi Earring", --MAB10
         ring1="Archon Ring", --DMAB5
         ring2="Epaminondas's Ring",
-        back={ name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
+        back=gear.WAR_WS1_Cape,
     } --TPB250 MAB170 DMAB33 WSD59
 
-	sets.TreasureHunter = {}
+    sets.idle = {
+        ammo="Staunch Tathlum +1",
+        head=gear.Sakpata_Head,
+        body=gear.Sakpata_Body,
+        hands=gear.Sakpata_Hands,
+        legs=gear.Sakpata_Legs,
+        feet=gear.Sakpata_Feet,
+        neck="Loricate Torque +1",
+        ear1="Eabani Earring",
+        ear2="Odnowa Earring +1",
+        ring1=gear.Moonlight_1,
+        ring2="Fortified Ring",
+        back="Null Shawl",
+        waist="Null Belt",
+    }
 
-	sets.MightyStrikes = { feet=gear.WAR_Empyrean }
+    sets.idle.Regen = {
+        body="Sacro Breastplate",    
+        ring1=gear.Chirich_1,
+        ring2=gear.Chirich_2,
+    }
+
+    sets.idle.Town = sets.idle
+
+    sets.buff.Doom = {
+        neck="Nicander's Necklace", --20
+        ring1="Eshmun's Ring", --20
+        ring2="Purity Ring", --20
+        waist="Gishdubar Sash", --10
+    }
+
+    if (item_available("Shneddick Ring +1")) then
+        sets.Kiting = { ring1="Shneddick Ring +1" }
+    else
+        sets.Kiting = { feet="Hermes' Sandals" }
+    end
+
+    sets.Naegling = { main="Naegling", sub="Blurred Shield +1" }
+    sets.Loxotic = { main="Loxotic Mace +1", sub="Blurred Shield +1" }
+    sets.ShiningOne = { main="Shining One", sub="Utu Grip" }
+    sets.Chango = { main="Chango", sub="Utu Grip" }
+    sets.Helheim = { main="Helheim", sub="Utu Grip" }
 end
 
--------------------------------------------------------------------------------------------------------------------
--- DO NOT EDIT BELOW THIS LINE UNLESS YOU NEED TO MAKE JOB SPECIFIC RULES
--------------------------------------------------------------------------------------------------------------------
-
--- Called when the player's subjob changes.
-function sub_job_change_custom(new, old)
-	-- Typically used for Macro pallet changing
-end
-
---Adjust custom precast actions
-function pretarget_custom(spell,action)
-
-end
-
--- Augment basic equipment sets
-function precast_custom(spell)
-	equipSet = {}
-
-	return equipSet
-end
-
--- Augment basic equipment sets
-function midcast_custom(spell)
-	equipSet = {}
-
-	return equipSet
-end
-
--- Augment basic equipment sets
-function aftercast_custom(spell)
-	equipSet = {}
-
-	return choose_gear()
-end
-
---Function is called when the player gains or loses a buff
-function buff_change_custom(name, gain)
-	equipSet = {}
-
-	return choose_gear()
-end
-
---This function is called when a update request the correct equipment set
-function choose_set_custom()
-	equipSet = {}
-
-	return choose_gear()
-end
-
---Function is called when the player changes states
-function status_change_custom(new,old)
-	equipSet = {}
-
-	return choose_gear()
-end
-
---Function is called when a self command is issued
-function self_command_custom(cmd)
-	local command = cmd:lower()
-	if command:contains('weaponmode') then
-        if player.sub_job == 'SAM' then
-            if state.WeaponMode.value == 'Chango' then
-                send_command('input /macro set 1')
-            elseif state.WeaponMode.value == 'Shining One' then
-                send_command('input /macro set 4')
-            elseif state.WeaponMode.value == 'Helheim' then
-                send_command('input /macro set 5')
-			elseif state.WeaponMode.value == 'Naegling' then
-                send_command('input /macro set 2')
-			elseif state.WeaponMode.value == 'Loxotic' then
-                send_command('input /macro set 3')
-			elseif state.WeaponMode.value == 'Doilichenus' then
-                send_command('input /macro set 3')
-            end
-        elseif player.sub_job == 'DRG' then
-            if state.WeaponMode.value == 'Chango' then
-                send_command('input /macro set 6')
-            elseif state.WeaponMode.value == 'Shining One' then
-                send_command('input /macro set 9')
-            elseif state.WeaponMode.value == 'Helheim' then
-                send_command('input /macro set 10')
-			elseif state.WeaponMode.value == 'Naegling' then
-                send_command('input /macro set 7')
-			elseif state.WeaponMode.value == 'Loxotic' then
-                send_command('input /macro set 8')
-			elseif state.WeaponMode.value == 'Doilichenus' then
-                send_command('input /macro set 8')
-            end
-        end
+-- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
+function job_aftercast(spell, action, spellMap, eventArgs)
+    if player.status ~= 'Engaged' and state.WeaponLock.value == false then
+        check_weaponset()
     end
 end
 
-function user_file_unload()
-	send_command('unbind !F1')
-    send_command('unbind !F2')    
-    send_command('unbind !t')
-    send_command('unbind !`')
-    send_command('unbind ^`')
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
+    display_box_update()
 end
 
---Custom Function
-function choose_gear()
-	local equipSet = {}
-	if buffactive['Mighty Strikes'] then
-		equipSet = set_combine(equipSet, sets.MightyStrikes)
-	end
-	return equipSet
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
 end
 
-function check_buff_JA()
-	buff = 'None'
-	local ja_recasts = windower.ffxi.get_ability_recasts()
-	if not buffactive['Berserk'] and ja_recasts[1] == 0 then
-		buff = "Berserk"
-	elseif not buffactive['Aggressor'] and ja_recasts[4] == 0 then
-		buff = "Aggressor"
-	elseif not buffactive['Warcry'] and ja_recasts[2] == 0 then
-		buff = "Warcry"
-	end
-	if player.sub_job == 'SAM' then
-		if not buffactive['Hasso'] and not buffactive['Seigan'] and ja_recasts[138] == 0 then
-			buff = "Hasso"
-		end
-	end
-	return buff
+
+function job_buff_change(buff, gain)
+    if buff == "Doom" then
+        if gain then
+            equip(sets.buff.Doom)
+            send_command('@input /p Doomed.')
+            disable('ring1','ring2','waist')
+        else
+            enable('ring1','ring2','waist')
+            handle_equipping_gear(player.status)
+        end
+    end
+
+    if buff == "Mighty Strikes" then
+        if gain then
+            equip(sets.buff.MightyStrikes)
+            disable('feet')
+        else
+            enable('feet')
+            handle_equipping_gear(player.status)
+        end
+    end
+
+    if buff == 'Hasso' and not gain then
+        add_to_chat(167, 'Hasso just expired!')
+    end
 end
 
-function check_buff_SP()
-	buff = 'None'
-	--local sp_recasts = windower.ffxi.get_spell_recasts()
-	return buff
+-- Handle notifications of general user state change.
+function job_state_change(stateField, newValue, oldValue)
+    if state.WeaponLock.value == true then
+        disable('main','sub')
+    else
+        enable('main','sub')
+    end
+    check_weaponset()
 end
 
-function pet_change_custom(pet,gain)
-	equipSet = {}
-	return equipSet
+-- Modify the default idle set after it was constructed.
+function customize_idle_set(idleSet)
+    if state.Buff.Doom then
+        idleSet = set_combine(idleSet, sets.buff.Doom)
+    end
+
+    if moving then
+       idleSet = set_combine(idleSet, sets.Kiting)
+    end
+
+    return idleSet
 end
 
-function pet_aftercast_custom(spell)
-	equipSet = {}
-
-	return equipSet
+-- Modify the default melee set after it was constructed.
+function customize_melee_set(meleeSet)
+    check_weaponset()
+    if (player.equipment.main == "Naegling" or player.equipment.main == "Loxotic Mace +1") and DW == false then
+        meleeSet = set_combine(meleeSet, sets.engaged.SingleWield)
+    end
+    if state.Buff.Doom then
+        meleeSet = set_combine(meleeSet, sets.buff.Doom)
+    end
+    return meleeSet
 end
 
-function pet_midcast_custom(spell)
-	equipSet = {}
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if state.OffenseMode.value == 'Acc' then
+        wsmode = (wsmode or '') .. 'Acc'
+    end
+    if state.OffenseMode.value == 'PDL' then
+        wsmode = (wsmode or '') .. 'PDL'
+    end
 
-	return equipSet
+    return wsmode
+end
+
+-- Function to display the current relevant user state when doing an update.
+-- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
+function display_current_job_state(eventArgs)
+    local cf_msg = ''
+    if state.CombatForm.has_value then
+        cf_msg = ' (' ..state.CombatForm.value.. ')'
+    end
+
+    local m_msg = state.OffenseMode.value
+    if state.HybridMode.value ~= 'Normal' then
+        m_msg = m_msg .. '/' ..state.HybridMode.value
+    end
+
+    local ws_msg = state.WeaponskillMode.value
+
+    local d_msg = 'None'
+    if state.DefenseMode.value ~= 'None' then
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
+    end
+
+    local i_msg = state.IdleMode.value
+
+    local msg = ''
+    if state.Kiting.value then
+        msg = msg .. ' Kiting: On |'
+    end
+
+    add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
+
+    eventArgs.handled = true
+end
+
+function job_self_command(cmdParams, eventArgs)
+    if cmdParams[1] == 'update' then
+        check_weaponset()
+    end
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams[2], eventArgs)
+    end
+    -- if not midaction() then
+    --     job_update()
+    -- end
+end
+
+
+function check_weaponset()
+    equip(sets[state.WeaponSet.current])
 end

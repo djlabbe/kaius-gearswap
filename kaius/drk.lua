@@ -17,6 +17,9 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include("lib/movement.lua")
+    include("lib/enchantment.lua")
+    include("lib/hud.lua")
 end
 
 function job_setup()
@@ -30,13 +33,13 @@ end
 function user_setup()
     include('Global-Binds.lua')    
 
-    state.OffenseMode:options('Normal', 'Acc', 'PDL', 'Subtle')
+    state.OffenseMode:options('Normal', 'PDL', 'Subtle')
     state.HybridMode:options('Normal', 'DT')
-    state.WeaponskillMode:options('Normal', 'Acc', 'PDL')
+    state.WeaponskillMode:options('Normal', 'PDL')
     state.PhysicalDefenseMode:options('PDT', 'MDT')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Liberator', 'Caladbolg', 'Helheim', 'Apocalypse', 'Loxotic', 'Lycurgos', 'Naegling'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Caladbolg', 'Helheim', 'Liberator', 'Apocalypse', 'Loxotic', 'Lycurgos', 'Naegling'}
 
     state.MagicBurst = M(false, 'Magic Burst')
     state.WeaponLock = M(false, 'Weapon Lock')
@@ -83,8 +86,10 @@ function user_setup()
     send_command('bind !a input /ja "Arcane Crest" <t>')
     send_command('bind !c input /ja "Arcane Circle" <me>')
 
-    send_command('bind !h input /ma "Dread Spikes" <me>')
-    send_command('bind !j input /ma "Endark II" <me>')
+    send_command('bind !j input /ma "Dread Spikes" <me>')
+    send_command('bind !k input /ma "Endark II" <me>')
+
+    send_command('bind !h input //send @others /ma "Horde Lullaby II" <t>')
 
     if player.sub_job == 'SAM' then
         send_command('bind !` input /ja "Hasso" <me>')
@@ -134,9 +139,6 @@ function user_setup()
     send_command('bind !numpad1 input /ma "Absorb-MND" <t>')
     send_command('bind !numpad2 input /ma "Absorb-CHR" <t>')
 
-
-    state.Auto_Kite = M(false, 'Auto_Kite')
-    moving = false
     send_command('wait 3; input /lockstyleset 8')
     get_combat_weapon()
 end
@@ -230,9 +232,6 @@ function init_gear_sets()
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-     
-    })
 
     sets.precast.WS.PDL = set_combine(sets.precast.WS, {
     
@@ -252,13 +251,12 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         ear1="Lugra Earring +1",
         ear2="Heathen's Earring +2",
-        ring1="Epaminondas's Ring",
-        ring2=gear.Cornelia_Or_Niqmaddu,
+        ring1=gear.Cornelia_Or_Niqmaddu,
+        ring2="Epaminondas's Ring",
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
     }
 
-     sets.precast.WS['Catastrophe'].Acc = set_combine(sets.precast.WS['Catastrophe'], {})
      sets.precast.WS['Catastrophe'].PDL = set_combine(sets.precast.WS['Catastrophe'], {
         head=gear.Empyrean_Head,
         ear="Thrud Earring",
@@ -276,13 +274,12 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
-        ring1=gear.Cornelia_Or_Epaminondas,
-        ring2="Niqmaddu Ring",
+        ring1="Niqmaddu Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS['Cross Reaper'], {})
     sets.precast.WS['Cross Reaper'].PDL = set_combine(sets.precast.WS['Cross Reaper'], {
         ear2="Heathen's Earring +2",
         ring1="Sroda Ring",
@@ -298,13 +295,12 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Schere Earring",
-        ring1="Metamorph Ring +1",
-        ring2="Niqmaddu Ring",
+        ring1="Niqmaddu Ring",
+        ring2="Metamorph Ring +1",
         waist="Fotia Belt",
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Entropy'].Acc = set_combine(sets.precast.WS['Entropy'], {})
     sets.precast.WS['Entropy'].PDL = set_combine(sets.precast.WS['Entropy'], {
         ammo="Crepuscular Pebble",
         body=gear.Sakpata_Body,
@@ -324,13 +320,12 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
         ear2="Heathen's Earring +2",
-        ring1=gear.Cornelia_Or_Regal,
-        ring2="Niqmaddu Ring",
+        ring1="Niqmaddu Ring",
+        ring2=gear.Cornelia_Or_Regal,
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Insurgency'].Acc = set_combine(sets.precast.WS['Insurgency'], {})
     sets.precast.WS['Insurgency'].PDL = set_combine(sets.precast.WS['Insurgency'], {
         hands=gear.Sakpata_Hands,
         body=gear.Sakpata_Body,
@@ -347,13 +342,12 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
         ear2="Heathen's Earring +2",
-        ring1=gear.Cornelia_Or_Regal,
-        ring2="Niqmaddu Ring",
+        ring1="Niqmaddu Ring",
+        ring2=gear.Cornelia_Or_Regal,
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Quietus'].Acc = set_combine(sets.precast.WS['Quietus'], {})
     sets.precast.WS['Quietus'].PDL = set_combine(sets.precast.WS['Quietus'], {
         head=gear.Empyrean_Head,
         legs=gear.Sakpata_Legs,
@@ -405,17 +399,14 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
-        ear2="Thrud Earring",
-        ring1="Regal Ring",
-        ring2=gear.Cornelia_Or_Niqmaddu,
+        ear2="Heathen's Earring +2",
+        ring1=gear.Cornelia_Or_Niqmaddu,
+        ring2=gear.Ephramad_Or_Regal,
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Fimbulvetr'].Acc = set_combine(sets.precast.WS['Fimbulvetr'], {})
     sets.precast.WS['Fimbulvetr'].PDL = set_combine(sets.precast.WS['Fimbulvetr'], {
         head=gear.Empyrean_Head,
-        ring1="Epaminondas's Ring",
-        ear2="Heathen's Earring +2",
     })
 
     sets.precast.WS['Torcleaver'] = {
@@ -428,16 +419,14 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
-        ear2="Thrud Earring", --3
-        ring1="Regal Ring",
+        ear2="Heathen's Earring +2", --3
+        ring1=gear.Ephramad_Or_Regal,
         ring2=gear.Cornelia_Or_Epaminondas,
         back= gear.DRK_WS2_Cape, --10
     }
 
-    sets.precast.WS['Torcleaver'].Acc = set_combine(sets.precast.WS['Torcleaver'], {})
     sets.precast.WS['Torcleaver'].PDL = set_combine(sets.precast.WS['Torcleaver'], {
         head=gear.Empyrean_Head,
-        ear2="Heathen's Earring +2",
     })
 
     sets.precast.WS['Resolution'] = {
@@ -451,12 +440,11 @@ function init_gear_sets()
         waist="Fotia Belt",
         ear1="Moonshade Earring",
         ear2="Schere Earring", --3
-        ring1="Regal Ring",
-        ring2="Niqmaddu Ring", --5
+        ring1="Niqmaddu Ring", --5
+        ring2="Regal Ring",
         back= gear.DRK_WS2_Cape, --10
     } --79% WSD
 
-    sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {})
     sets.precast.WS['Resolution'].PDL = set_combine(sets.precast.WS['Resolution'], {
         ammo="Crepuscular Pebble",
         legs=gear.Sakpata_Legs,
@@ -478,8 +466,6 @@ function init_gear_sets()
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Shockwave'].Acc = set_combine(sets.precast.WS['Shockwave'], {})
-
     -------------
     -- CLUB WS --
     -------------
@@ -500,7 +486,6 @@ function init_gear_sets()
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Judgment'].Acc = set_combine(sets.precast.WS['Judgment'], {})
     sets.precast.WS['Judgment'].PDL = set_combine(sets.precast.WS['Judgment'], {
         head=gear.Empyrean_Head,
         ring2="Sroda Ring",
@@ -521,8 +506,8 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
         ear2="Heathen's Earring +2",
-        ring1="Gelatinous Ring +1",
-        ring2="Niqmaddu Ring", --5
+        ring1="Niqmaddu Ring", --5
+        ring2="Gelatinous Ring +1",
         back= gear.DRK_WS2_Cape, --10
     }
     
@@ -533,13 +518,13 @@ function init_gear_sets()
         hands=gear.Sakpata_Hands,
         legs=gear.Sakpata_Legs,
         feet=gear.Sakpata_Feet, 
-        neck="Abyssal Beads +2",
-        waist="Fotia Belt",
+        neck="Null Loop",
+        waist="Null Belt",
         ear1="Moonshade Earring",
         ear2="Heathen's Earring +2",
         ring1="Niqmaddu Ring",
         ring2="Regal Ring",
-        back= gear.DRK_WS1_Cape,
+        back="Null Shawl",
     }
 
     sets.midcast.FastRecast = sets.precast.FC
@@ -660,53 +645,40 @@ function init_gear_sets()
         head="Flamma Zucchetto +2",
         body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
-        legs=gear.Artifact_Legs,
+        legs=gear.Sakpata_Legs,
         feet="Flamma Gambieras +2",
         neck="Abyssal Beads +2",
         waist="Sailfi Belt +1",
         ear1="Telos Earring",      
         ear2="Balder Earring +1",
         ring1="Niqmaddu ring",
-        ring2=gear.Lehko_Or_Chirich2,
+        ring2=gear.Lehko_Or_Moonlight2,
         back=gear.DRK_DA_Cape,
     }
 
     sets.engaged.Caladbolg = sets.engaged
 
     sets.engaged.Caladbolg.Aftermath = {
-        body="Dagon Breastplate",
-        ear1="Schere Earring",
-        ear2="Balder Earring +1",      
+        ear1="Schere Earring", 
         ring2=gear.Lehko_Or_Hetairoi,
     }
 
-    sets.engaged.Liberator = {
-        ammo="Coiste Bodhar",
-        head="Flamma Zucchetto +2",
-        body=gear.Sakpata_Body,
-        hands=gear.Sakpata_Hands,
-        legs=gear.Artifact_Legs,
-        feet="Flamma Gambieras +2",
-        neck="Abyssal Beads +2",
-        waist="Sailfi Belt +1",
-        ear1="Telos Earring",
-        ear2="Balder Earring +1", 
-        ring1="Niqmaddu ring",
-        ring2="Hetairoi Ring",
-        back= gear.DRK_TP_Cape,
-    }
+    sets.engaged.Liberator = sets.engaged
 
     sets.engaged.Liberator.Aftermath = {
         ammo="Aurgelmir Orb +1",
+        head="Hjarrandi Helm",
         body="Hjarrandi Breastplate",
-        legs=gear.Ody_STP_Legs,
+        hands=gear.Sakpata_Hands,
+        legs="Volte Tights",
         feet=gear.Valo_STP_Feet,
+        neck="Abyssal Beads +2",
         ear1="Telos Earring",      
         ear2="Dedition Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
+        ring1=gear.Moonlight_1,
+        ring2=gear.Moonlight_2,
         back= gear.DRK_TP_Cape,
-    }
+    } --4 Hit / 48 DT
 
     sets.engaged.Subtle = {
         ammo="Coiste Bodhar",
@@ -727,22 +699,16 @@ function init_gear_sets()
     
     sets.engaged.Caladbolg.Subtle = sets.engaged.Subtle
 
-    sets.engaged.Acc = set_combine(sets.engaged, {
-        ear2="Heathen's Earring +2"
-    })
-
     sets.engaged.Hybrid = {
         head=gear.Sakpata_Head,
         body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
-        -- legs=gear.Sakpata_Legs,
-        legs=gear.Nyame_Legs,
+        legs=gear.Sakpata_Legs,
         feet=gear.Sakpata_Feet,
         ring2=gear.Moonlight_2,
     }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
@@ -813,16 +779,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     end
 end
 
-
-function job_state_change(field, new_value, old_value)
-    if state.WeaponLock.value == true then
-        disable('main','sub','range')
-    else
-        enable('main','sub','range')
-    end
-    check_weaponset()
-end
-
 function job_buff_change(buff,gain)
     if buff == "Doom" then
         if gain then
@@ -834,11 +790,20 @@ function job_buff_change(buff,gain)
     end
 end
 
+function job_state_change(field, new_value, old_value)
+    if state.WeaponLock.value == true then
+        disable('main','sub','range')
+    else
+        enable('main','sub','range')
+    end
+    check_weaponset()
+end
+
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    check_moving()
+    display_box_update()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -859,13 +824,10 @@ function get_custom_wsmode(spell, action, spellMap)
 end
 
 function customize_idle_set(idleSet)
-    if player.mpp < 51 then
-        idleSet = set_combine(idleSet, sets.latent_refresh)
-    end
     if state.Buff.Doom then
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
-    if state.Auto_Kite.value == true then
+    if moving then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
 
@@ -927,21 +889,11 @@ function get_combat_weapon()
 end
 
 function job_self_command(cmdParams, eventArgs)
-    gearinfo(cmdParams, eventArgs)
-end
-
-function gearinfo(cmdParams, eventArgs)
-    if cmdParams[1] == 'gearinfo' then
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
+     if not midaction() then
+        job_update()
+    end
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams[2], eventArgs)
     end
 end
 
