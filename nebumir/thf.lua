@@ -366,14 +366,7 @@ function init_gear_sets()
         back=gear.THF_TP_Cape, 
     })
 
-    sets.idle.Town = set_combine(sets.idle, {
-        head="Shaded Spectacles",
-        neck="Goldsmith's Torque",
-        body="Goldsmith's Apron",
-        ring1="Craftmaster's Ring",
-        ring2="Orvail Ring",
-        feet="Jute Boots +1",
-    })
+    sets.idle.Town = sets.idle
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------

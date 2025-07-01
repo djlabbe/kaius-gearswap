@@ -80,6 +80,7 @@ function user_setup()
     send_command('bind !a input /ja "Hamanoha" <me>')
 
     send_command('bind !h input //send @others /ma "Horde Lullaby II" <t>')
+    send_command('bind @s input //send @others //sm script')
    
     if player.sub_job == 'DRG' then
         send_command('bind ^numpad7 gs c set WeaponSet Masamune;input /macro set 1')
@@ -652,22 +653,18 @@ function display_current_job_state(eventArgs)
 
     local i_msg = state.IdleMode.value
 
-    local msg = ''
-    if state.Kiting.value then
-        msg = msg .. ' Kiting: On |'
-    end
+
 
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,002)..msg)
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002))
 
     eventArgs.handled = true
 end
 
 function job_self_command(cmdParams, eventArgs)
-     if not midaction() then
+    if not midaction() then
         job_update()
     end
     if (cmdParams[1]:lower() == 'enchantment') then

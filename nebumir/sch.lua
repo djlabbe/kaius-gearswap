@@ -87,7 +87,7 @@ function user_setup()
     gear.Artifact_Feet = { name= "Academic's Loafers +3" }
 
     gear.Relic_Head = { name= "Pedagogy Mortarboard +3" }
-    gear.Relic_Body = { name= "Pedagogy Gown +3" }
+    gear.Relic_Body = { name= "Pedagogy Gown +4" }
     gear.Relic_Hands = { name= "Pedagogy Bracers +3" }
     gear.Relic_Legs = { name= "Pedagogy Pants +3" }
     gear.Relic_Feet = { name= "Pedagogy Loafers +3" }
@@ -287,7 +287,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Regal Earring",
         ring1="Epaminondas's Ring",
-        ring2="Medada's Ring",
+        ring2=gear.Medada_Or_Freke,
         back=gear.SCH_MAB_Cape,
         waist="Orpheus's Sash",
     }
@@ -318,7 +318,7 @@ function init_gear_sets()
         neck="Argute Stole +2",
         ear1="Malignance Earring",
         ear2="Regal Earring",
-        ring1="Medada's Ring",
+        ring1=gear.Medada_Or_Freke,
         ring2="Metamorph Ring +1",
         back=gear.SCH_MAB_Cape,
         waist="Orpheus's Sash",
@@ -498,7 +498,6 @@ function init_gear_sets()
         hands="Regal Cuffs",
         ear1="Halasz Earring",
         ear2="Magnetic Earring",
-        ring1="Medada's Ring",
         waist="Emphatikos Rope",
     })
 
@@ -585,7 +584,7 @@ function init_gear_sets()
         neck="Argute Stole +2", 
         ear1="Malignance Earring",
         ear2="Regal Earring",
-        ring1="Medada's Ring",
+        ring1=gear.Medada_Or_Freke,
         ring2="Archon Ring",
         back=gear.SCH_MAB_Cape,
         waist="Acuity Belt +1",
@@ -627,7 +626,7 @@ function init_gear_sets()
         neck="Argute Stole +2",
         ear1="Malignance Earring",
         ear2="Regal Earring",
-        ring1="Medada's Ring",
+        ring1=gear.Medada_Or_Freke,
         ring2="Metamor. Ring +1",
         back=gear.SCH_MAB_Cape,
         waist="Acuity Belt +1",
@@ -644,7 +643,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
-        ring1="Medada's Ring",
+        ring1=gear.Medada_Or_Freke,
         ring2="Fenrir Ring +1",
         back=gear.SCH_MAB_Cape,
         waist="Skrymir Cord",
@@ -680,7 +679,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
-        ring1="Medada's Ring",
+        ring1=gear.Medada_Or_Freke,
         ring2="Metamorph Ring +1",
         back=gear.SCH_MAB_Cape,
         waist="Acuity Belt +1",
@@ -704,7 +703,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
-        ring1="Medada's Ring",
+        ring1=gear.Medada_Or_Freke,
         ring2="Mujin Band",
         back=gear.SCH_MAB_Cape,
         waist="Skrymir Cord",
@@ -726,7 +725,6 @@ function init_gear_sets()
         body=gear.Empyrean_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Empyrean_Legs,
-        -- feet=gear.Nyame_Feet,
         feet="Merlinic Crackows",
         neck="Sibyl Scarf",
         ear1="Etiolation Earring",
@@ -788,7 +786,7 @@ function init_gear_sets()
     sets.buff['Alacrity'] = {feet=gear.Relic_Feet}
     sets.buff['Klimaform'] = {feet=gear.Empyrean_Feet}
 
-    sets.buff.FullSublimation = {
+    sets.buff.Sublimation = {
        head=gear.Artifact_Head, --4
        body=gear.Relic_Body, --5
        ear1="Savant's Earring", --1
@@ -983,7 +981,7 @@ end
 
 function customize_idle_set(idleSet)
     if state.Buff['Sublimation: Activated'] then
-        idleSet = set_combine(idleSet, sets.buff.FullSublimation)
+        idleSet = set_combine(idleSet, sets.buff.Sublimation)
     end
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)

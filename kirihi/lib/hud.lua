@@ -1,15 +1,13 @@
 function init_hud()
     res = require('resources')
     config = require('config')
-    local default = { 
-        visible = true, debug = false, info = true, warn = true,
-		Display_Box = {text={size=10,font='Consolas',red=255,green=255,blue=255,alpha=255},pos={x=1636,y=803},bg={visible=true,red=0,green=0,blue=0,alpha=102},},
-    }
+    local default = { visible = true, debug = false, info = true, warn = true,
+		Display_Box = {text={size=10,font='Consolas',red=255,green=255,blue=255,alpha=255},pos={x=500,y=803},bg={visible=true,red=0,green=0,blue=0,alpha=102},},}
 
-    local settings = config.load(default)
+    hud_settings = config.load(default)
 
-    local gs_status = texts.new("",settings.Display_Box)
-    if settings.visible then gs_status:show() end
+    local gs_status = texts.new("",hud_settings.Display_Box)
+    if hud_settings.visible then gs_status:show() end
 
     -- UI for displaying the current states
     function display_box_update()
@@ -32,5 +30,7 @@ function init_hud()
 
     coroutine.schedule(display_box_update, 2)
 end
+
+
 
 init_hud()

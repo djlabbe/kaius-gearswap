@@ -53,22 +53,21 @@ function user_setup()
     gear.Relic_Head = { name= "Fallen's Burgeonet +3" }
     gear.Relic_Body = { name= "Fallen's Cuirass +3" }
     gear.Relic_Hands = { name= "Fallen's Finger Gauntlets +3" }
-    gear.Relic_Legs = { name= "Fallen's Flanchard +3" }
+    gear.Relic_Legs = { name= "Fallen's Flanchard +4" }
     gear.Relic_Feet = { name= "Fallen's Sollerets +3" }
 
     gear.Empyrean_Head = { name= "Heathen's Burgeonet +3" }
     gear.Empyrean_Body = { name= "Heathen's Cuirass +3" }
     gear.Empyrean_Hands = { name= "Heathen's Gauntlets +2" }
-    gear.Empyrean_Legs = { name= "Heathen's Flanchard +2" }
+    gear.Empyrean_Legs = { name= "Heathen's Flanchard +3" }
     gear.Empyrean_Feet = { name= "Heathen's Sollerets +3" }
 
     gear.DRK_TP_Cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}} --X
     gear.DRK_DA_Cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.DRK_WS1_Cape = { name="Ankou's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
     gear.DRK_WS2_Cape = { name="Ankou's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
-    gear.DRK_FC_Cape = { name="Ankou's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10',}}
-    gear.DRK_MB_Cape = { name="Ankou's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
-    
+    gear.DRK_FC_Cape = { name="Ankou's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
+    gear.DRK_MB_Cape = { name="Ankou's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}} --X
     gear.DRK_DRK_Cape = { name="Niht Mantle", augments={'Attack+15','Dark magic skill +10','"Drain" and "Aspir" potency +23',}}
 
     send_command('bind @w gs c toggle WeaponLock')
@@ -102,7 +101,7 @@ function user_setup()
         send_command('bind ^numpad5 gs c set WeaponSet Lycurgos;input /macro set 3')
         send_command('bind ^numpad6 gs c set WeaponSet Naegling;input /macro set 5')
         send_command('bind ^numpad1 gs c set WeaponSet Loxotic;input /macro set 4')
-        set_macro_page(2, 8)
+        set_macro_page(1, 8)
     elseif player.sub_job == 'DRG' then   
         send_command('bind ^numpad7 gs c set WeaponSet Caladbolg;input /macro set 6')
         send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 6')
@@ -111,7 +110,7 @@ function user_setup()
         send_command('bind ^numpad5 gs c set WeaponSet Lycurgos;input /macro set 8')
         send_command('bind ^numpad6 gs c set WeaponSet Naegling;input /macro set 9')
         send_command('bind ^numpad1 gs c set WeaponSet Loxotic;input /macro set 10')
-        set_macro_page(7, 8)
+        set_macro_page(6, 8)
     else
         send_command('bind ^numpad7 gs c set WeaponSet Caladbolg;input /macro set 6')
         send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 6')
@@ -120,7 +119,7 @@ function user_setup()
         send_command('bind ^numpad5 gs c set WeaponSet Lycurgos;input /macro set 8')
         send_command('bind ^numpad6 gs c set WeaponSet Naegling;input /macro set 9')
         send_command('bind ^numpad5 gs c set WeaponSet Loxotic;input /macro set 10')
-        set_macro_page(7, 8)
+        set_macro_page(6, 8)
     end
 
     send_command('bind @1 input /ma "Stone II" <t>')
@@ -658,14 +657,14 @@ function init_gear_sets()
 
     sets.engaged.Caladbolg = sets.engaged
 
-    sets.engaged.Caladbolg.Aftermath = {
+    sets.CaladbolgAM3 = {
         ear1="Schere Earring", 
         ring2=gear.Lehko_Or_Hetairoi,
     }
 
     sets.engaged.Liberator = sets.engaged
 
-    sets.engaged.Liberator.Aftermath = {
+    sets.LiberatorAM3 = {
         ammo="Aurgelmir Orb +1",
         head="Hjarrandi Helm",
         body="Hjarrandi Breastplate",
@@ -738,7 +737,7 @@ function init_gear_sets()
         back="Moonlight Cape", --6/6
     })
 
-    sets.idle.Town = sets.precast.WS['Fimbulvetr'].PDL
+    sets.idle.Town = sets.precast.WS['Torcleaver'].PDL
     -- sets.idle.Town = sets.precast.WS['Insurgency']
 
     sets.latent_refresh = { waist="Fucho-no-obi" }
@@ -835,10 +834,11 @@ function customize_idle_set(idleSet)
 end
 
 function customize_melee_set(meleeSet)
+    
     if (buffactive['Aftermath: Lv.3'] and player.equipment.main == "Caladbolg" and state.OffenseMode ~= "Subtle") then
-        meleeSet = set_combine(meleeSet, sets.engaged.Caladbolg.Aftermath)
+        meleeSet = set_combine(meleeSet, sets.CaladbolgAM3)
     elseif (buffactive['Aftermath: Lv.3'] and player.equipment.main == "Liberator" and state.OffenseMode ~= "Subtle") then
-        meleeSet = set_combine(meleeSet, sets.engaged.Liberator.Aftermath)
+        meleeSet = set_combine(meleeSet, sets.LiberatorAM3)
     end
     if state.Buff.Doom then
         meleeSet = set_combine(meleeSet, sets.buff.Doom)

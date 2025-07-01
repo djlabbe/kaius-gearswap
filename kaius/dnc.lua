@@ -37,7 +37,7 @@ function user_setup()
 
     gear.Artifact_Head = { name= "Maxixi Tiara +3" }
     gear.Artifact_Body = { name= "Maxixi Casaque +3" }
-    gear.Artifact_Hands = { name= "Maxixi Bangles +3" }
+    gear.Artifact_Hands = { name= "Maxixi Bangles +4" }
     gear.Artifact_Legs = { name= "Maxixi Tights +3" }
     gear.Artifact_Feet = { name= "Maxixi Toe shoes +3" }
 
@@ -422,7 +422,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Etoile Gorget +2",
         ear1="Sherida Earring",
-        ear2="Maculele Earring +1",
+        ear2="Telos Earring",
         ring1="Gere Ring",
         ring2="Ilabrat Ring",
         back=gear.DNC_TP_Cape,

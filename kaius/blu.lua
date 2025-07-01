@@ -17,6 +17,9 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include("lib/movement.lua")
+    include("lib/enchantment.lua")
+    include("lib/hud.lua")
 end
 
 function job_setup()
@@ -218,13 +221,6 @@ function user_setup()
     end
     
     send_command('wait 3; input /lockstyleset 16')
-
-    state.Auto_Kite = M(false, 'Auto_Kite')
-    -- Haste = 0
-    -- DW_needed = 0
-    DW = false
-    moving = false
-    update_combat_form()
 end
 
 function user_unload()
@@ -1026,8 +1022,7 @@ end
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    update_combat_form()
-    check_moving()
+    display_box_update()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -1067,10 +1062,7 @@ function get_custom_wsmode(spell, action, spellMap)
 end
 
 function customize_idle_set(idleSet)
-    -- if player.mpp < 51 then
-    --     idleSet = set_combine(idleSet, sets.latent_refresh)
-    -- end
-    if state.Auto_Kite.value == true then
+    if moving then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
     return idleSet
@@ -1115,49 +1107,26 @@ function display_current_job_state(eventArgs)
 
     local i_msg = state.IdleMode.value
 
-    local msg = ''
-    if state.Kiting.value then
-        msg = msg .. ' Kiting: On |'
-    end
 
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,060).. ' Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
         ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,002)..msg)
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002))
 
     eventArgs.handled = true
 end
 
 
 function job_self_command(cmdParams, eventArgs)
-    gearinfo(cmdParams, eventArgs)
-end
-
-function gearinfo(cmdParams, eventArgs)
-    if cmdParams[1] == 'gearinfo' then
-        if type(tonumber(cmdParams[2])) == 'number' then
-            if tonumber(cmdParams[2]) ~= DW_needed then
-            DW = true
-            end
-        elseif type(cmdParams[2]) == 'string' then
-            if cmdParams[2] == 'false' then
-                DW = false
-            end
-        end
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
+    if not midaction() then
+        job_update()
+    end
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams[2], eventArgs)
     end
 end
+
 
 function update_active_abilities()
     state.Buff['Burst Affinity'] = buffactive['Burst Affinity'] or false

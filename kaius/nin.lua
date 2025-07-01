@@ -19,6 +19,9 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include("lib/movement.lua")
+    include("lib/enchantment.lua")
+    include("lib/hud.lua")
 end
 
 function job_setup()
@@ -30,9 +33,6 @@ function job_setup()
     state.Buff.Innin = buffactive.Innin or false
     state.Buff.Futae = buffactive.Futae or false
     state.Buff.Sange = buffactive.Sange or false
-    -- include('Mote-TreasureHunter')
-    info.default_ja_ids = S{35, 204}
-    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
     lugra_ws = S{'Blade: Kamu', 'Blade: Shun', 'Blade: Ten'}
 end
 
@@ -57,7 +57,7 @@ function user_setup()
 
     gear.Relic_Head = { name="Mochizuki Hatsuburi +3" }
     gear.Relic_Body = { name="Mochizuki Chainmail +3" }
-    -- gear.Relic_Legs = { name= "Mochizuki Hakama +3" }
+    gear.Relic_Legs = { name= "Mochizuki Hakama +3" }
     gear.Relic_Hands = { name="Mochizuki Tekko +3" }
     gear.Relic_Feet = { name="Mochizuki Kyahan +3" }
 
@@ -71,33 +71,35 @@ function user_setup()
     gear.NIN_DA_Cape = { name="Andartia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.NIN_FC_Cape = { name="Andartia's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}}
 
+    send_command('bind @w gs c toggle WeaponLock')
     send_command('bind !F1 input /ja "Mijin Gakure" <me>')
     send_command('bind !F2 input /ja "Mikage" <me>')
     send_command('bind !` input /ja "Innin" <me>')
     send_command('bind ^` input /ja "Yonin" <me>')
     send_command('bind !t input /ja "Provoke" <t>')
-    send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @q gs c toggle MagicBurst')
-    send_command('bind !numpad7 input /ma "Jubaku: Ichi" <t>')
-    send_command('bind !numpad8 input /ma "Hojo: Ni" <t>')
-    send_command('bind !numpad9 input /ma "Aisha: Ichi" <t>')  
-    send_command('bind !numpad1 input /ma "Yurin Ichi" <t>')
-    send_command('bind !numpad2 input /ma "Kurayami: Ni" <t>')
-    send_command('bind !numpad3 input /ma "Dokumori: Ichi" <t>')   
 
-    -- send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad9 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad4 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad1 input /equip Main "Irradiance Blade";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
-    -- send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
+
+    -- send_command('bind !numpad7 input /ma "Jubaku: Ichi" <t>')
+    -- send_command('bind !numpad8 input /ma "Hojo: Ni" <t>')
+    -- send_command('bind !numpad9 input /ma "Aisha: Ichi" <t>')  
+    -- send_command('bind !numpad1 input /ma "Yurin Ichi" <t>')
+    -- send_command('bind !numpad2 input /ma "Kurayami: Ni" <t>')
+    -- send_command('bind !numpad3 input /ma "Dokumori: Ichi" <t>')   
+
+    send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad9 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad4 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad1 input /equip Main "Irradiance Blade";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
+    send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
 
 
     send_command('bind ^numpad7 gs c set WeaponSet Heishi; ;input /macro set 1')
@@ -109,18 +111,7 @@ function user_setup()
     state.warned = M(false)
     set_macro_page(1, 13)
 
-
-
-
     send_command('wait 3; input /lockstyleset 13')
-
-    state.Auto_Kite = M(false, 'Auto_Kite')
-    Haste = 0
-    DW_needed = 0
-    DW = false
-    moving = false
-    update_combat_form()
-    determine_haste_group()
 end
 
 function user_unload()
@@ -467,78 +458,7 @@ function init_gear_sets()
         waist="Yemaya Belt",
     }
 
-    -- * NIN Native DW Trait: 35% DW
-    -- No Magic Haste (74% DW to cap)
     sets.engaged = {
-        ammo="Seki Shuriken",
-        head=gear.Malignance_Head,
-        neck="Ninja Nodowa +2",
-        ear1="Dedition Earring",
-        ear2="Hattori Earring +1",
-        body=gear.Relic_Body, --10
-        hands=gear.Malignance_Hands,
-        ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Chirich2,
-        back=gear.NIN_TP_Cape,
-        waist="Sailfi Belt +1",        
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
-    } -- 38%
-
-    -- 15% Magic Haste (67% DW to cap)
-    sets.engaged.LowHaste = {
-        ammo="Seki Shuriken",
-        head=gear.Malignance_Head,
-        body=gear.Relic_Body, --10
-        hands=gear.Adhemar_A_Hands,
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
-        neck="Ninja Nodowa +2",
-        ear1="Dedition Earring",
-        ear2="Hattori Earring +1",
-        ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Chirich2,
-        back=gear.NIN_TP_Cape,
-        waist="Sailfi Belt +1",        
-    } -- 30%
-
-
-    -- 30% Magic Haste (56% DW to cap)
-    sets.engaged.MidHaste = {
-        ammo="Seki Shuriken",
-        head=gear.Malignance_Head,
-        neck="Ninja Nodowa +2",
-        ear1="Dedition Earring",
-        ear2="Hattori Earring +1",
-        body=gear.Malignance_Body,
-        hands=gear.Adhemar_A_Hands,
-        ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Chirich2,
-        back=gear.NIN_TP_Cape,
-        waist="Sailfi Belt +1",           
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
-    } -- 22%
-
-    -- 35% Magic Haste (51% DW to cap)
-    sets.engaged.HighHaste = {
-        ammo="Seki Shuriken",
-        head=gear.Malignance_Head,
-        neck="Ninja Nodowa +2",
-        ear1="Dedition Earring",
-        ear2="Hattori Earring +1",
-        body=gear.Malignance_Body,
-        hands=gear.Adhemar_A_Hands,
-        ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Chirich2,
-        back=gear.NIN_TP_Cape,
-        waist="Sailfi Belt +1",               
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
-    } -- 16%
-
-    -- 45% Magic Haste (36% DW to cap)
-    sets.engaged.MaxHaste = {
         ammo="Seki Shuriken",
         head=gear.Malignance_Head,
         neck="Ninja Nodowa +2",
@@ -552,7 +472,9 @@ function init_gear_sets()
         waist="Sailfi Belt +1",        
         legs=gear.Mpaca_Legs,
         feet=gear.Malignance_Feet,
-    } -- 0%
+    } -- 38%
+
+
 
     sets.engaged.Hybrid = {
         head=gear.Malignance_Head, --6/6
@@ -563,10 +485,6 @@ function init_gear_sets()
     }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-    sets.engaged.DT.LowHaste = set_combine(sets.engaged.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.DT.MidHaste = set_combine(sets.engaged.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.DT.HighHaste = set_combine(sets.engaged.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DT.MaxHaste = set_combine(sets.engaged.MaxHaste, sets.engaged.Hybrid)
 
     sets.buff.Migawari = { }
     sets.buff.Yonin = {}
@@ -750,9 +668,7 @@ end
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    update_combat_form()
-    determine_haste_group()
-    check_moving()
+    display_box_update()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -770,15 +686,11 @@ end
 
 function get_custom_wsmode(spell, action, spellMap)
     local wsmode
-    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
-        wsmode = 'Acc'
-    end
-
     return wsmode
 end
 
 function customize_idle_set(idleSet)
-    if state.Auto_Kite.value == true then
+    if moving == true then
         if world.time >= (17*60) or world.time <= (7*60) then
             idleSet = set_combine(idleSet, sets.NightMovement)
         else
@@ -793,9 +705,6 @@ function customize_melee_set(meleeSet)
     if state.Buff.Sange then
         meleeSet = set_combine(meleeSet, sets.buff.Sange)
     end
-    -- if state.TreasureMode.value == 'Fulltime' then
-    --     meleeSet = set_combine(meleeSet, sets.TreasureHunter)
-    -- end
     check_weaponset()
     return meleeSet
 end
@@ -827,70 +736,25 @@ function display_current_job_state(eventArgs)
     if state.MagicBurst.value then
         msg = ' Burst: On |'
     end
-    if state.Kiting.value then
-        msg = msg .. ' Kiting: On |'
-    end
+
 
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,060).. ' Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
         ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,002)..msg)
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002))
 
     eventArgs.handled = true
 end
 
-function determine_haste_group()
-    classes.CustomMeleeGroups:clear()
-    if DW == true then
-        if DW_needed <= 1 then
-            classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 1 and DW_needed <= 16 then
-            classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 16 and DW_needed <= 21 then
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif DW_needed > 21 and DW_needed <= 34 then
-            classes.CustomMeleeGroups:append('LowHaste')
-        elseif DW_needed > 34 then
-            classes.CustomMeleeGroups:append('')
-        end
-    end
-end
+
 
 function job_self_command(cmdParams, eventArgs)
-    gearinfo(cmdParams, eventArgs)
-end
-
-function gearinfo(cmdParams, eventArgs)
-    --   send_command('input /item "Linen Coin Purse" <me>')
-    if cmdParams[1] == 'gearinfo' then
-        if type(tonumber(cmdParams[2])) == 'number' then
-            if tonumber(cmdParams[2]) ~= DW_needed then
-            DW_needed = tonumber(cmdParams[2])
-            DW = true
-            end
-        elseif type(cmdParams[2]) == 'string' then
-            if cmdParams[2] == 'false' then
-                DW_needed = 0
-                DW = false
-            end
-        end
-        if type(tonumber(cmdParams[3])) == 'number' then
-            if tonumber(cmdParams[3]) ~= Haste then
-                Haste = tonumber(cmdParams[3])
-            end
-        end
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
+    if not midaction() then
+        job_update()
+    end
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams[2], eventArgs)
     end
 end
 
@@ -943,18 +807,7 @@ function do_ninja_tool_checks(spell, spellMap, eventArgs)
     end
 end
 
--- Check for various actions that we've specified in user code as being used with TH gear.
--- This will only ever be called if TreasureMode is not 'None'.
--- Category and Param are as specified in the action event packet.
--- function th_action_check(category, param)
---     if category == 2 or -- any ranged attack
---         --category == 4 or -- any magic action
---         (category == 3 and param == 30) or -- Aeolian Edge
---         (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
---         (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
---         then return true
---     end
--- end
+
 
 function check_weaponset()
     equip(sets[state.WeaponSet.current])

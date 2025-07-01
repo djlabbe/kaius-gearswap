@@ -162,12 +162,12 @@ function init_gear_sets()
         hands=gear.Sakpata_Hands, 
         legs=gear.Artifact_Legs, 
         feet=gear.Artifact_Feet, 
-        neck="Warrior's bead necklace +2", 
+        neck="Vim Torque +1", 
         ear1="Schere Earring", 
         ear2="Boii Earring +1", 
-        ring1="Petrov Ring",
-        ring2=gear.Lehko_Or_Chirich2,
-        waist="Ioskeha Belt +1", 
+        ring1="Niqmaddu Ring",
+        ring2=gear.Moonlight_2,
+        waist="Sailfi Belt +1", 
         back=gear.WAR_TP_Cape,
     } -- 68% DA + 28% Traits + Gifts +5 % Merits = 101
     -- 52% PDT

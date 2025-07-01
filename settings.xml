@@ -1,45 +1,6 @@
 <?xml version="1.1" ?>
 <settings>
     <global>
-        <Debug_Box>
-            <bg>
-                <alpha>102</alpha>
-                <blue>0</blue>
-                <green>0</green>
-                <red>0</red>
-                <visible>true</visible>
-            </bg>
-            <flags>
-                <bold>false</bold>
-                <bottom>false</bottom>
-                <draggable>true</draggable>
-                <italic>false</italic>
-                <right>false</right>
-            </flags>
-            <padding>0</padding>
-            <pos>
-                <x>1470</x>
-                <y>764</y>
-            </pos>
-            <text>
-                <alpha>255</alpha>
-                <blue>255</blue>
-                <font>Consolas</font>
-                <fonts>
-
-                </fonts>
-                <green>255</green>
-                <red>255</red>
-                <size>10</size>
-                <stroke>
-                    <alpha>255</alpha>
-                    <blue>0</blue>
-                    <green>0</green>
-                    <red>0</red>
-                    <width>0</width>
-                </stroke>
-            </text>
-        </Debug_Box>
         <Display_Box>
             <bg>
                 <alpha>102</alpha>
@@ -80,6 +41,45 @@
             </text>
         </Display_Box>
         <debug>false</debug>
+        <debug_box>
+            <bg>
+                <alpha>102</alpha>
+                <blue>0</blue>
+                <green>0</green>
+                <red>0</red>
+                <visible>true</visible>
+            </bg>
+            <flags>
+                <bold>false</bold>
+                <bottom>false</bottom>
+                <draggable>true</draggable>
+                <italic>false</italic>
+                <right>false</right>
+            </flags>
+            <padding>0</padding>
+            <pos>
+                <x>1470</x>
+                <y>764</y>
+            </pos>
+            <text>
+                <alpha>255</alpha>
+                <blue>255</blue>
+                <font>Consolas</font>
+                <fonts>
+
+                </fonts>
+                <green>255</green>
+                <red>255</red>
+                <size>10</size>
+                <stroke>
+                    <alpha>255</alpha>
+                    <blue>0</blue>
+                    <green>0</green>
+                    <red>0</red>
+                    <width>0</width>
+                </stroke>
+            </text>
+        </debug_box>
         <info>true</info>
         <visible>true</visible>
         <warn>true</warn>
@@ -92,4 +92,17 @@
             </pos>
         </Display_Box>
     </kaius>
+    <kirihi>
+        <Display_Box>
+            <pos>
+                <x>2101</x>
+                <y>816</y>
+            </pos>
+            <text>
+                <fonts>
+
+                </fonts>
+            </text>
+        </Display_Box>
+    </kirihi>
 </settings>
