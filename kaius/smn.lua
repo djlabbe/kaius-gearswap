@@ -44,6 +44,7 @@ function get_sets()
 
     -- Load and initialize the include file.
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
 end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
@@ -834,7 +835,10 @@ end
 -- Called for custom player commands.
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
-    if cmdParams[1]:lower() == 'petweather' then
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'petweather' then
         handle_petweather()
         eventArgs.handled = true
     elseif cmdParams[1]:lower() == 'siphon' then

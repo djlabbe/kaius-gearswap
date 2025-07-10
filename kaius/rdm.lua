@@ -27,6 +27,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
 end
 
 function job_setup()
@@ -923,43 +924,7 @@ function init_gear_sets()
 
     sets.buff.Saboteur = {hands=gear.Empyrean_Hands}
 
-    sets.idle = {
-        ammo="Homiliary",
-        head=gear.Relic_Head,
-        body=gear.Empyrean_Body,
-        hands=gear.Bunzi_Hands,
-        legs=gear.Bunzi_Legs,
-        feet=gear.Bunzi_Feet,
-        neck="Sibyl Scarf",
-        ear1="Sanare Earring",
-        ear2="Etiolation Earring",
-        ring1=gear.Stikini_1,
-        ring2=gear.Stikini_2,
-        back=gear.RDM_IDLE_Cape,
-        waist="Platinum Moogle Belt",
-    }
-    
 
-    sets.idle.Town = {
-        ammo="Regal Gem",
-        head=gear.Empyrean_Head,
-        body=gear.Empyrean_Body,
-        hands=gear.Empyrean_Hands,
-        legs=gear.Empyrean_Legs,
-        feet=gear.Empyrean_Feet,
-        neck="Duelist's Torque +2",
-        ear1="Malignance Earring",
-        ear2="Lethargy Earring +2",
-        ring1=gear.Stikini_1,
-        ring2=gear.Gerubu_Or_Stikini2,
-        back=gear.RDM_IDLE_Cape,
-        waist="Acuity Belt +1",
-    }
-
-    sets.resting = set_combine(sets.idle, {
-        main="Chatoyant Staff",
-        waist="Shinjutsu-no-Obi +1",
-    })
 
     sets.defense.PDT = {
         head=gear.Bunzi_Head, --6/6
@@ -1134,6 +1099,30 @@ function init_gear_sets()
         neck="Duelist's Torque +2",
         waist="Orpheus's Sash",
     }
+
+    sets.idle = {
+        ammo="Homiliary",
+        head=gear.Relic_Head,
+        body=gear.Empyrean_Body,
+        hands=gear.Bunzi_Hands,
+        legs=gear.Bunzi_Legs,
+        feet=gear.Bunzi_Feet,
+        neck="Sibyl Scarf",
+        ear1="Sanare Earring",
+        ear2="Etiolation Earring",
+        ring1=gear.Stikini_1,
+        ring2=gear.Stikini_2,
+        back=gear.RDM_IDLE_Cape,
+        waist="Platinum Moogle Belt",
+    }
+    
+
+    sets.idle.Town = sets.engaged.DW.MaxHaste
+
+    sets.resting = set_combine(sets.idle, {
+        main="Chatoyant Staff",
+        waist="Shinjutsu-no-Obi +1",
+    })
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -1489,7 +1478,10 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
 end
 
 function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1]:lower() == 'scholar' then
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'scholar' then
         handle_strategems(cmdParams)
         eventArgs.handled = true
     elseif cmdParams[1]:lower() == 'nuke' then

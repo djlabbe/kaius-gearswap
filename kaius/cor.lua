@@ -18,6 +18,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
     res = require('resources')
     extdata = require('extdata')
 end
@@ -96,7 +97,7 @@ function user_setup()
     gear.Relic_Body = { name= "Lanun Frac +3" }
     gear.Relic_Hands = { name= "Lanun Gants +3" }
     gear.Relic_Legs = { name= "Lanun Trews +3" }
-    gear.Relic_Feet = { name= "Lanun Bottes +3" }
+    gear.Relic_Feet = { name= "Lanun Bottes +4" }
 
     gear.Empyrean_Head = { name= "Chasseur's Tricorne +3" }
     gear.Empyrean_Body = { name= "Chasseur's Frac +3" }
@@ -1021,7 +1022,10 @@ function determine_haste_group()
 end
 
 function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1] == 'qd' then
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
+    elseif cmdParams[1] == 'qd' then
         send_command('@input /ja "'..state.QD.current..'" <t>')
     end
 

@@ -17,6 +17,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
 end
 
 function job_setup()
@@ -36,13 +37,13 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT', 'MDT')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Liberator', 'Caladbolg', 'Helheim', 'Apocalypse', 'Loxotic', 'Lycurgos', 'Naegling'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Helheim', 'Caladbolg', 'Liberator', 'Apocalypse', 'Loxotic', 'Lycurgos', 'Naegling'}
 
     state.MagicBurst = M(false, 'Magic Burst')
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name= "Ignominy Burgeonet +3" }
-    gear.Artifact_Body = { name= "Ignominy Cuirass +3" }
+    gear.Artifact_Body = { name= "Ignominy Cuirass +4" }
     gear.Artifact_Hands = { name= "Ignominy Gauntlets +3" }
     gear.Artifact_Legs = { name= "Ignominy Flanchard +3" }
     gear.Artifact_Feet = { name= "Ignominy Sollerets +3" }
@@ -50,13 +51,13 @@ function user_setup()
     gear.Relic_Head = { name= "Fallen's Burgeonet +3" }
     gear.Relic_Body = { name= "Fallen's Cuirass +3" }
     gear.Relic_Hands = { name= "Fallen's Finger Gauntlets +3" }
-    gear.Relic_Legs = { name= "Fallen's Flanchard +3" }
+    gear.Relic_Legs = { name= "Fallen's Flanchard +4" }
     gear.Relic_Feet = { name= "Fallen's Sollerets +3" }
 
     gear.Empyrean_Head = { name= "Heathen's Burgeonet +3" }
     gear.Empyrean_Body = { name= "Heathen's Cuirass +3" }
     gear.Empyrean_Hands = { name= "Heathen's Gauntlets +2" }
-    gear.Empyrean_Legs = { name= "Heathen's Flanchard +2" }
+    gear.Empyrean_Legs = { name= "Heathen's Flanchards +3" }
     gear.Empyrean_Feet = { name= "Heathen's Sollerets +3" }
 
     gear.DRK_TP_Cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}} --X
@@ -83,39 +84,39 @@ function user_setup()
     send_command('bind !a input /ja "Arcane Crest" <t>')
     send_command('bind !c input /ja "Arcane Circle" <me>')
 
-    send_command('bind !h input /ma "Dread Spikes" <me>')
-    send_command('bind !j input /ma "Endark II" <me>')
+    send_command('bind !j input /ma "Dread Spikes" <me>')
+    send_command('bind !k input /ma "Endark II" <me>')
 
     if player.sub_job == 'SAM' then
         send_command('bind !` input /ja "Hasso" <me>')
         send_command('bind ^` input /ja "Seigan" <me>')
         send_command('bind ^c input /ja "Warding Circle" <me>')
-        send_command('bind ^numpad7 gs c set WeaponSet Caladbolg;input /macro set 1')
-        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 1')
+        send_command('bind ^numpad7 gs c set WeaponSet Helheim;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Caladbolg;input /macro set 1')
         send_command('bind ^numpad9 gs c set WeaponSet Liberator;input /macro set 2')
         send_command('bind ^numpad4 gs c set WeaponSet Apocalypse;input /macro set 2')
         send_command('bind ^numpad5 gs c set WeaponSet Lycurgos;input /macro set 3')
         send_command('bind ^numpad6 gs c set WeaponSet Naegling;input /macro set 5')
         send_command('bind ^numpad1 gs c set WeaponSet Loxotic;input /macro set 4')
-        set_macro_page(2, 8)
+        set_macro_page(1, 8)
     elseif player.sub_job == 'DRG' then   
-        send_command('bind ^numpad7 gs c set WeaponSet Caladbolg;input /macro set 6')
-        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 6')
+        send_command('bind ^numpad7 gs c set WeaponSet Helheim;input /macro set 6')
+        send_command('bind ^numpad8 gs c set WeaponSet Caladbolg;input /macro set 6')
         send_command('bind ^numpad9 gs c set WeaponSet Liberator;input /macro set 7')
         send_command('bind ^numpad4 gs c set WeaponSet Apocalypse;input /macro set 7')
         send_command('bind ^numpad5 gs c set WeaponSet Lycurgos;input /macro set 8')
         send_command('bind ^numpad6 gs c set WeaponSet Naegling;input /macro set 9')
         send_command('bind ^numpad1 gs c set WeaponSet Loxotic;input /macro set 10')
-        set_macro_page(7, 8)
+        set_macro_page(6, 8)
     else
-        send_command('bind ^numpad7 gs c set WeaponSet Caladbolg;input /macro set 6')
-        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 6')
+        send_command('bind ^numpad7 gs c set WeaponSet Helheim;input /macro set 6')
+        send_command('bind ^numpad8 gs c set WeaponSet Caladbolg;input /macro set 6')
         send_command('bind ^numpad9 gs c set WeaponSet Liberator;input /macro set 7')
         send_command('bind ^numpad4 gs c set WeaponSet Apocalypse;input /macro set 7')
         send_command('bind ^numpad5 gs c set WeaponSet Lycurgos;input /macro set 8')
         send_command('bind ^numpad6 gs c set WeaponSet Naegling;input /macro set 9')
         send_command('bind ^numpad5 gs c set WeaponSet Loxotic;input /macro set 10')
-        set_macro_page(7, 8)
+        set_macro_page(6, 8)
     end
 
     send_command('bind @1 input /ma "Stone II" <t>')
@@ -134,6 +135,7 @@ function user_setup()
     send_command('bind !numpad1 input /ma "Absorb-MND" <t>')
     send_command('bind !numpad2 input /ma "Absorb-CHR" <t>')
 
+    send_command('bind !h input //send @others /ma "Horde Lullaby" <t>')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
     moving = false
@@ -150,6 +152,9 @@ function user_unload()
     send_command('unbind !m')
     send_command('unbind !a')
     send_command('unbind !c')
+    send_command('unbind !h')
+    send_command('unbind !j')
+    send_command('unbind !k')
     send_command('unbind ^c')
     send_command('unbind @a')
     send_command('unbind @e')
@@ -252,8 +257,8 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         ear1="Lugra Earring +1",
         ear2="Heathen's Earring +2",
-        ring1="Epaminondas's Ring",
-        ring2=gear.Cornelia_Or_Niqmaddu,
+        ring1=gear.Cornelia_Or_Niqmaddu,
+        ring2="Epaminondas's Ring",
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
     }
@@ -276,8 +281,8 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
-        ring1=gear.Cornelia_Or_Epaminondas,
-        ring2="Niqmaddu Ring",
+        ring1="Niqmaddu Ring",
+        ring2=gear.Cornelia_Or_Epaminondas,
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
     }
@@ -298,8 +303,8 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Schere Earring",
-        ring1="Metamorph Ring +1",
-        ring2="Niqmaddu Ring",
+        ring1="Niqmaddu Ring",
+        ring2="Metamorph Ring +1",
         waist="Fotia Belt",
         back= gear.DRK_WS1_Cape,
     }
@@ -317,15 +322,15 @@ function init_gear_sets()
     sets.precast.WS['Insurgency'] = {
         ammo="Knobkierrie",
         head=gear.Empyrean_Head,
-        body=gear.Nyame_Body,
+        body=gear.Artifact_Body,
         hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
+        legs=gear.Relic_Legs,
         feet=gear.Empyrean_Feet,
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
         ear2="Heathen's Earring +2",
-        ring1=gear.Cornelia_Or_Regal,
-        ring2="Niqmaddu Ring",
+        ring1="Niqmaddu Ring",
+        ring2=gear.Cornelia_Or_Regal,
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
     }
@@ -340,15 +345,15 @@ function init_gear_sets()
     sets.precast.WS['Quietus'] = {
         ammo="Knobkierrie",
         head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
+        body=gear.Artifact_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
         ear2="Heathen's Earring +2",
-        ring1=gear.Cornelia_Or_Regal,
-        ring2="Niqmaddu Ring",
+        ring1="Niqmaddu Ring",
+        ring2=gear.Cornelia_Or_Regal,
         waist="Sailfi Belt +1",
         back= gear.DRK_WS1_Cape,
     }
@@ -398,30 +403,28 @@ function init_gear_sets()
     sets.precast.WS['Fimbulvetr'] = {
         ammo="Knobkierrie",
         head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
+        body=gear.Artifact_Body,
         hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
+        legs=gear.Relic_Legs,
         feet=gear.Empyrean_Feet,
         neck="Abyssal Beads +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
-        ear2="Thrud Earring",
-        ring1="Regal Ring",
-        ring2=gear.Cornelia_Or_Niqmaddu,
+        ear2="Heathen's Earring +2",
+        ring1=gear.Cornelia_Or_Niqmaddu,
+        ring2=gear.Ephramad_Or_Regal,
         back= gear.DRK_WS1_Cape,
     }
 
     sets.precast.WS['Fimbulvetr'].Acc = set_combine(sets.precast.WS['Fimbulvetr'], {})
     sets.precast.WS['Fimbulvetr'].PDL = set_combine(sets.precast.WS['Fimbulvetr'], {
         head=gear.Empyrean_Head,
-        ring1="Epaminondas's Ring",
-        ear2="Heathen's Earring +2",
     })
 
     sets.precast.WS['Torcleaver'] = {
         ammo="Knobkierrie", --6
         head=gear.Nyame_Head, --10
-        body=gear.Nyame_Body, --12
+        body=gear.Artifact_Body, --12
         hands=gear.Nyame_Hands, --10
         legs=gear.Nyame_Legs, --11
         feet=gear.Empyrean_Feet, --12 
@@ -451,8 +454,8 @@ function init_gear_sets()
         waist="Fotia Belt",
         ear1="Moonshade Earring",
         ear2="Schere Earring", --3
-        ring1="Regal Ring",
-        ring2="Niqmaddu Ring", --5
+        ring1="Niqmaddu Ring", --5
+        ring2="Regal Ring",
         back= gear.DRK_WS2_Cape, --10
     } --79% WSD
 
@@ -487,7 +490,7 @@ function init_gear_sets()
     sets.precast.WS['Judgment'] = {
         ammo="Knobkierrie",
         head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
+        body=gear.Artifact_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
@@ -521,8 +524,8 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
         ear2="Heathen's Earring +2",
-        ring1="Gelatinous Ring +1",
-        ring2="Niqmaddu Ring", --5
+        ring1="Niqmaddu Ring", --5
+        ring2="Gelatinous Ring +1",
         back= gear.DRK_WS2_Cape, --10
     }
     
@@ -735,8 +738,8 @@ function init_gear_sets()
         head=gear.Sakpata_Head,
         body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
-        -- legs=gear.Sakpata_Legs,
-        legs=gear.Nyame_Legs,
+        legs=gear.Sakpata_Legs,
+        -- legs=gear.Nyame_Legs,
         feet=gear.Sakpata_Feet,
         ring2=gear.Moonlight_2,
     }
@@ -927,6 +930,10 @@ function get_combat_weapon()
 end
 
 function job_self_command(cmdParams, eventArgs)
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
+    end
     gearinfo(cmdParams, eventArgs)
 end
 

@@ -48,11 +48,11 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')
     state.WeaponSet = M{['description']='Weapon Set', 'Maxentius', 'Yagrush' }
 
-    gear.Artifact_Head = { name="Theophany Cap +3", priority=64 }
-    gear.Artifact_Body = { name="Theophany Bliaut +3", priority=91 }
-    gear.Artifact_Hands = { name="Theophany Mitts +3", priority=43 }
-    gear.Artifact_Legs = { name="Theophany Pantaloons +3", priority=74 }
-    gear.Artifact_Feet = { name="Theophany Duckbills +3", priority=74 }
+    gear.Artifact_Head = { name="Theophany Cap +2", priority=64 }
+    gear.Artifact_Body = { name="Theophany Bliaut +2", priority=91 }
+    gear.Artifact_Hands = { name="Theophany Mitts +4", priority=43 }
+    gear.Artifact_Legs = { name="Theophany Pantaloons +2", priority=74 }
+    gear.Artifact_Feet = { name="Theophany Duckbills +2", priority=74 }
 
     gear.Relic_Head = { name="Piety Cap +3" }
     gear.Relic_Body = { name="Piety Bliaut +3" }
@@ -60,11 +60,11 @@ function user_setup()
     gear.Relic_Legs = { name="Piety Pantaloons +3" }
     gear.Relic_Feet = { name="Piety Duckbills +3" }
 
-    gear.Empyrean_Head = { name="Ebers Cap +3", priority=64 }
-    gear.Empyrean_Body = { name="Ebers Bliaut +3", priority=127 }
-    gear.Empyrean_Hands = { name="Ebers Mitts +3", priority=65 }
-    gear.Empyrean_Legs = { name="Ebers Pantaloons +3", priority=71 }
-    gear.Empyrean_Feet = { name="Ebers Duckbills +3", priority=71 }
+    gear.Empyrean_Head = { name="Ebers Cap +2", priority=64 }
+    gear.Empyrean_Body = { name="Ebers Bliaut +2", priority=127 }
+    gear.Empyrean_Hands = { name="Ebers Mitts +2", priority=65 }
+    gear.Empyrean_Legs = { name="Ebers Pantaloons +2", priority=71 }
+    gear.Empyrean_Feet = { name="Ebers Duckbills +2", priority=71 }
 
     gear.WHM_Cure_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
     gear.WHM_DW_Cape = { name="Alaunus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
@@ -157,13 +157,13 @@ function init_gear_sets()
         neck={name="Cleric's Torque +2", priority=1}, --10
         ear1={name="Malignance earring", priority=1}, --4
         ear2={name="Loquac. Earring", priority=1}, --2
-        body={name="Pinga Tunic +1", priority=101}, --15
+        body="Inyanga Jubbah +2", --14
         hands={name="Volte gloves", priority=1}, --6
         ring1={name="Lebeche Ring", priority=1},
         ring2={name="Kishar Ring", priority=1}, --4
         back={name="Fi Follet Cape +1", priority=1}, --10
         waist=gear.Platinum_Moogle_Belt,
-        legs={name="Pinga Pants +1", priority=84}, --13
+        legs="Aya. Cosciales +2", --6
         feet={name="Regal Pumps +1", priority=13} --7
     } --81
 
@@ -184,22 +184,16 @@ function init_gear_sets()
         sub="Ammurapi Shield"
     })
 
-    sets.precast.FC.Impact = set_combine(sets.precast.FC, {
-        head=empty, 
-        body="Crepuscular Cloak", 
-        waist="Shinjutsu-no-Obi +1"
-    })
-
     sets.midcast.FC = sets.precast.FC
 
     sets.midcast.CureSolace = {
-        main="Asclepius",
+        main="Daybreak",
         sub={name="Genmei Shield", priority=1},-- (DT-10)
         ammo={name="Staunch Tathlum +1", priority=1}, -- (DT-3) (SIRD-11)
         head=gear.Empyrean_Head, --(CP-22)
         neck={name="Clr. Torque +2", priority=1}, --(CP-10) (Enm-25)
         ear1={name="Glorious Earring", priority=1}, -- (CPII-2) (Enm-5) 
-        ear2={name="Ebers Earring +2", priority=1}, --(DT-5)
+        ear2="Mendicant's Earring"
         body=gear.Empyrean_Body,
         hands=gear.Artifact_Hands, -- (CPII-4) (Enm-7)
         legs=gear.Empyrean_Legs, --(DT-13)
@@ -419,7 +413,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Bunzi_Head,
-        body="Shamash Robe",
+        body=gear.Empyrean_Body,
         hands=gear.Bunzi_Hands,
         legs=gear.Bunzi_Legs,
         feet=gear.Bunzi_Feet,
@@ -435,7 +429,7 @@ function init_gear_sets()
     sets.midcast.Holy = sets.midcast.Banish
 
     sets.midcast['Dark Magic'] = {
-        main="Rubicundity",
+        -- main="Rubicundity",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Pixie Hairpin +1",
@@ -476,87 +470,7 @@ function init_gear_sets()
 
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
 
-    sets.midcast.Impact = {
-        main="Yagrush",
-        sub="Ammurapi Shield",
-        head=empty,
-        body="Crepuscular Cloak",
-        hands=gear.Artifact_Hands,
-        legs=gear.Artifact_Legs,
-        feet=gear.Artifact_Feet,
-        ring1="Freke Ring",
-        ring2="Archon Ring",
-    }
-
     sets.midcast.Trust = sets.precast.FC
-
-    sets.engaged = {
-        ammo="Hasty Pinion +1",
-        head=gear.Bunzi_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Bunzi_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-        neck="Rep. Plat. Medal",
-        ear1="Crepuscular Earring",
-        ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.WHM_DW_Cape,
-        waist="Windbuffet Belt +1",
-    }
-
-    sets.engaged.DW = {
-        ammo="Hasty Pinion +1",
-        head=gear.Bunzi_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Bunzi_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-        neck="Rep. Plat. Medal",
-        ear1="Crepuscular Earring",
-        ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.WHM_DW_Cape,
-        waist="Windbuffet Belt +1",
-    }
-
-    sets.precast.WS = {
-        ammo="Oshasha's Treatise",
-        head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-        neck="Fotia Gorget",
-        ear1="Moonshade Earring",
-        ear2="Ishvara Earring",
-        ring1=gear.Cornelia_Or_Epaminondas,
-        ring2="Ilabrat Ring",
-        back=gear.WHM_Cure_Cape,
-        waist="Fotia Belt",
-    }
-
-    sets.precast.WS['Mystic Boon'] = {
-        ammo="Oshasha's Treatise",
-        head=gear.Nyame_Head,
-        body=gear.Nyame_Body,
-        hands=gear.Nyame_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-        neck="Fotia Gorget",
-        ear1="Moonshade Earring",
-        ear2="Regal Earring",
-        ring1=gear.Cornelia_Or_Epaminondas,
-        ring2="Metamorph Ring +1",
-        back=gear.WHM_Cure_Cape,
-        waist="Fotia Belt",
-    }
-
-    sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {
-        neck="Rep. Plat. Medal",
-    })
 
     sets.buff['Divine Caress'] = {
         hands=gear.Empyrean_Hands, 
@@ -579,17 +493,17 @@ function init_gear_sets()
     }
 
     sets.idle = {
-        main="Mpaca's Staff",
-        sub="Irenic Strap +1",
+        main="Daybreak",
+        sub="Genmei Shield",
         ammo="Staunch Tathlum +1", --3
         head=gear.Bunzi_Head, --7
         body=gear.Empyrean_Body,
-        hands=gear.Bunzi_Hands, --8
+        hands=gear.Artifact_Hands, --8
         legs=gear.Empyrean_Legs, --13
-        feet=gear.Empyrean_Feet, --11
+        feet=gear.Nyame_Feet, 
         neck="Sibyl Scarf",
         ear1="Hearty Earring",
-        ear2="Ebers Earring +2", --5
+        ear2="Etiolation Earring",
         ring1=gear.Gerubu_Or_Stikini1,
         ring2=gear.Stikini_2,
         back="Null Shawl", --10 
@@ -597,10 +511,7 @@ function init_gear_sets()
     } --50 (11 Refresh)
 
 
-    sets.idle.Town = set_combine(sets.idle, {
-        main="Yagrush",
-        sub="Genmei Shield",
-    })
+    sets.idle.Town = sets.idle
 
     sets.defense.PDT = set_combine(sets.idle, {
 
@@ -610,8 +521,8 @@ function init_gear_sets()
     
     })
     
-    if (item_available("Shneddick Ring +1")) then
-        sets.Kiting = { ring1="Shneddick Ring +1" }
+    if (item_available("Shneddick Ring")) then
+        sets.Kiting = { ring1="Shneddick Ring" }
     else
         sets.Kiting = { feet="Herald's Gaiters" }
     end
@@ -624,9 +535,7 @@ function init_gear_sets()
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
-    if spell.name == 'Impact' then
-        equip(sets.precast.FC.Impact)
-    end
+
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
@@ -812,6 +721,7 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1]:lower() == 'boostspell' then
         send_command('@input /ma '..state.BoostSpell.value..' <me>')
     end
+
     gearinfo(cmdParams, eventArgs)
 end
 
@@ -851,6 +761,36 @@ function determine_haste_group()
     end
 end
 
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+                DW_needed = 0
+                DW = false
+            end
+        end
+        if type(tonumber(cmdParams[3])) == 'number' then
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
+            end
+        end
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
 
 function check_weaponset()
     equip(sets[state.WeaponSet.current])

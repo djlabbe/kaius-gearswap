@@ -17,6 +17,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
 end
 
 function job_setup()
@@ -36,10 +37,10 @@ function user_setup()
     gear.Artifact_Head = { name= "Pummeler's Mask +2" }
     gear.Artifact_Body = { name= "Pummeler's Lorica +2" }
     -- gear.Artifact_Hands = { name= "Pummeler's Mufflers +1" }
-    gear.Artifact_Legs = { name= "Pummeler's Cuisses +3" }
-    gear.Artifact_Feet = { name= "Pummeler's Calligae +3" }
+    gear.Artifact_Legs = { name= "Pummeler's Cuisses +4" }
+    gear.Artifact_Feet = { name= "Pummeler's Calligae" }
 
-    gear.Relic_Head = { name= "Agoge Mask +3" }
+    gear.Relic_Head = { name= "Agoge Mask +4" }
     gear.Relic_Body = { name= "Agoge Lorica +3" }
     gear.Relic_Hands = { name= "Agoge Mufflers +3" }
     gear.Relic_Legs = { name= "Agoge Cuisses +3" }
@@ -83,6 +84,7 @@ function user_setup()
         send_command('bind ^numpad5 gs c set WeaponSet Loxotic;input /macro set 8')
         set_macro_page(6, 1)
     end
+    
     
     send_command('wait 3; input /lockstyleset 1' )
 
@@ -728,6 +730,10 @@ function display_current_job_state(eventArgs)
 end
 
 function job_self_command(cmdParams, eventArgs)
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
+    end
     gearinfo(cmdParams, eventArgs)
 end
 

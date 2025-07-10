@@ -29,6 +29,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
     res = require 'resources'
 end
 
@@ -106,6 +107,9 @@ function user_setup()
 
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind ^p gs c toggle PhalanxMode')
+
+    send_command('bind !h input //send @others /ja "Bolter\'s Roll" <me>')
+
 
     if player.sub_job == 'SCH' then
         send_command('bind !- gs c scholar light')
@@ -832,6 +836,9 @@ function job_self_command(cmdParams, eventArgs)
                     ..string.char(129,121).. ' Damage: ' .. r_dmg .. ' ' ..string.char(129,122)  )
     elseif cmdParams[1]:lower() == 'scholar' then
         handle_strategems(cmdParams)
+        eventArgs.handled = true
+    elseif (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
         eventArgs.handled = true
     end
 end

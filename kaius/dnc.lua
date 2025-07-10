@@ -16,6 +16,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
 end
 
 function job_setup()
@@ -46,7 +47,7 @@ function user_setup()
     gear.Empyrean_Head = { name= "Maculele Tiara +3" }
     gear.Empyrean_Body = { name= "Maculele Casaque +2" }
     gear.Empyrean_Hands = { name= "Maculele Bangles +2" }
-    gear.Empyrean_Legs = { name= "Maculele Tights +2" }
+    gear.Empyrean_Legs = { name= "Maculele Tights +3" }
     gear.Empyrean_Feet = { name= "Maculele Toe shoes +3" }
 
     gear.DNC_STP_Cape = { name="Senuna's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','"Regen"+5',}} --X
@@ -331,7 +332,8 @@ function init_gear_sets()
     })
 
     sets.precast.WS['Evisceration'] = {
-        ammo="Charis Feather",
+        -- ammo="Charis Feather",
+        ammo="Coiste Bodhar",
         head="Blistering Sallet +1",
         body=gear.Gleti_Body,
         hands=gear.Gleti_Hands,
@@ -514,7 +516,10 @@ function init_gear_sets()
 
     sets.buff['Saber Dance'] = {legs=gear.Relic_Legs}
     sets.buff['Fan Dance'] = {hands=gear.Relic_Hands}
-    sets.buff['Climactic Flourish'] = {head=gear.Empyrean_Head, ammo="Charis Feather"}
+    sets.buff['Climactic Flourish'] = {
+        head=gear.Empyrean_Head,
+        -- ammo="Charis Feather",
+    }
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -701,16 +706,14 @@ end
 
 
 function job_self_command(cmdParams, eventArgs)
-
-    if cmdParams[1] == 'step' then
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
+    else if cmdParams[1] == 'step' then
         send_command('@input /ja "'..state['MainStep'].current..'" <t>')
-    end
-
-    if cmdParams[1] == 'step2' then
+    elseif cmdParams[1] == 'step2' then
         send_command('@input /ja "'..state['AltStep'].current..'" <t>')
-    end
-
-    if cmdParams[1] == 'VolteHarness' then
+    elseif cmdParams[1] == 'VolteHarness' then
         equip({body="Volte Harness"})
         disable('body')
         send_command('pause 7;@input /item "Volte Harness" <me>;wait 0.5;@input //gs enable body')

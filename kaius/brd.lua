@@ -42,6 +42,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
 end
 
 function job_setup()
@@ -967,7 +968,10 @@ function update_combat_form()
 end
 
 function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1]:lower() == 'etude' then
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'etude' then
         send_command('@input /ma '..state.Etude.value..' <stpc>')
     elseif cmdParams[1]:lower() == 'carol' then
         send_command('@input /ma '..state.Carol.value..' <stpc>')

@@ -17,6 +17,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
 end
 
 function job_setup()
@@ -846,7 +847,7 @@ function init_gear_sets()
         back=gear.BLU_EVA_Cape,
     }
 
-    sets.idle.Town =  sets.engaged.DW.DT
+    sets.idle.Town =  sets.idle
     sets.idle.Weak = sets.idle.DT
 
     if (item_available("Shneddick Ring +1")) then
@@ -1132,6 +1133,10 @@ end
 
 
 function job_self_command(cmdParams, eventArgs)
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
+    end
     gearinfo(cmdParams, eventArgs)
 end
 

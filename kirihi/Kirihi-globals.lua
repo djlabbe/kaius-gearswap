@@ -28,19 +28,19 @@ function define_global_sets()
     gear.Ephramad_Or_Ilabrat = { name = "Ilabrat Ring" }
     gear.Ephramad_Or_Epaminondas = { name = "Epaminondas's Ring" }
     gear.Ephramad_Or_Sroda = { name = "Sroda Ring" }
-    gear.Ephramad_Or_Moonlight2 = { name="Moonlight Ring", bag="wardrobe8" }
+    gear.Ephramad_Or_Moonlight2 = { name="Moonlight Ring", bag="wardrobe3" }
 
     gear.Lehko_Or_Chirich1 = {name="Chirich Ring +1", bag="wardrobe1"}
     gear.Lehko_Or_Chirich2 = {name="Chirich Ring +1", bag="wardrobe2"}
     gear.Lehko_Or_Begrudging = {name="Begrudging Ring" }
     gear.Lehko_Or_Dingir = {name="Dingir Ring" }
     gear.Lehko_Or_Hetairoi = {name="Hetairoi Ring"}
-    gear.Lehko_Or_Moonlight2 = {name="Moonlight Ring", bag="wardrobe8"}
+    gear.Lehko_Or_Moonlight2 = {name="Moonlight Ring", bag="wardrobe3"}
     gear.Lehko_Or_Petrov = {name="Petrov Ring"}
     gear.Lehko_Or_Gere = {name="Gere Ring"}
 
-    gear.Gerubu_Or_Stikini1 = {name="Stikini Ring +1", bag="wardrobe7"}
-    gear.Gerubu_Or_Stikini2 = {name="Stikini Ring +1", bag="wardrobe8"}
+    gear.Gerubu_Or_Stikini1 = {name="Stikini Ring +1", bag="wardrobe1"}
+    gear.Gerubu_Or_Stikini2 = {name="Stikini Ring +1", bag="wardrobe2"}
     gear.Gerubu_Or_Shadow = { name = "Shadow Ring" }
 
     gear.Medada_Or_Freke = { name = "Freke Ring" }
@@ -105,17 +105,17 @@ function define_global_sets()
     -- DUPLICATE RINGS --
     ---------------------
 
-    gear.Stikini_1 = {name="Stikini Ring +1", bag="wardrobe7"}
-    gear.Stikini_2 = {name="Stikini Ring +1", bag="wardrobe8"}
+    gear.Stikini_1 = {name="Stikini Ring +1", bag="wardrobe2"}
+    gear.Stikini_2 = {name="Stikini Ring +1", bag="wardrobe3"}
 
-    gear.Chirich_1 = {name="Chirich Ring +1", bag="wardrobe"}
-    gear.Chirich_2 = {name="Chirich Ring +1", bag="wardrobe2"}
+    gear.Chirich_1 = {name="Chirich Ring +1", bag="wardrobe2"}
+    gear.Chirich_2 = {name="Chirich Ring +1", bag="wardrobe3"}
 
-    gear.Moonlight_1 = {name="Moonlight Ring", bag="wardrobe7", priority=110}
-    gear.Moonlight_2 = {name="Moonlight Ring", bag="wardrobe8", priority=110}
+    gear.Moonlight_1 = {name="Moonlight Ring", bag="wardrobe2", priority=110}
+    gear.Moonlight_2 = {name="Moonlight Ring", bag="wardrobe3", priority=110}
 
-    gear.Varar_1 = {name="Varar Ring +1", bag="wardrobe7"}
-    gear.Varar_2 = {name="Varar Ring +1", bag="wardrobe8"}
+    gear.Varar_1 = {name="Varar Ring +1", bag="wardrobe2"}
+    gear.Varar_2 = {name="Varar Ring +1", bag="wardrobe3"}
 
     -----------------------
     ----- PRIO. ITEMS -----
@@ -534,7 +534,7 @@ function check_moving()
 end
 
 function item_available(item)
-	if player.inventory[item] or player.wardrobe[item] or player.wardrobe2[item] or player.wardrobe3[item] or player.wardrobe4[item] or player.wardrobe5[item] or player.wardrobe6[item] or player.wardrobe7[item] or player.wardrobe8[item] then
+	if player.inventory[item] or player.wardrobe[item] or player.wardrobe2[item] or player.wardrobe3[item] or player.wardrobe4[item] or player.wardrobe5[item] or player.wardrobe6[item] or player.wardrobe7[item] or player.wardrobe3[item] then
 		return true
 	else
 		return false

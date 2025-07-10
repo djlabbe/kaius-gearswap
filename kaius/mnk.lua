@@ -17,6 +17,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
 end
 
 function job_setup()
@@ -640,6 +641,10 @@ end
 
 
 function job_self_command(cmdParams, eventArgs)
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
+    end
     gearinfo(cmdParams, eventArgs)
 end
 

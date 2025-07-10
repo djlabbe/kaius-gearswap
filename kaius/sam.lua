@@ -17,6 +17,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
     res = require 'resources'
 end
 
@@ -690,6 +691,10 @@ function display_current_job_state(eventArgs)
 end
 
 function job_self_command(cmdParams, eventArgs)
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
+    end
     gearinfo(cmdParams, eventArgs)
 end
 

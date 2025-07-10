@@ -58,6 +58,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
 end
 
 function job_setup()
@@ -80,14 +81,14 @@ function user_setup()
 
     include('Global-Binds.lua') 
 
-    gear.Artifact_Head = { name= "Academic's Mortarboard +3" }
-    gear.Artifact_Body = { name= "Academic's Gown +3" }
+    gear.Artifact_Head = { name= "Academic's Mortarboard +4" }
+    gear.Artifact_Body = { name= "Academic's Gown +4" }
     gear.Artifact_Hands = { name= "Academic's Bracers +3" }
     gear.Artifact_Legs = { name= "Academic's Pants +3" }
     gear.Artifact_Feet = { name= "Academic's Loafers +3" }
 
     gear.Relic_Head = { name= "Pedagogy Mortarboard +3" }
-    gear.Relic_Body = { name= "Pedagogy Gown +3" }
+    gear.Relic_Body = { name= "Pedagogy Gown +4" }
     gear.Relic_Hands = { name= "Pedagogy Bracers +3" }
     gear.Relic_Legs = { name= "Pedagogy Pants +3" }
     gear.Relic_Feet = { name= "Pedagogy Loafers +3" }
@@ -98,6 +99,7 @@ function user_setup()
     gear.Empyrean_Legs = { name= "Arbatel Pants +3" }
     gear.Empyrean_Feet = { name= "Arbatel Loafers +3" }
 
+    gear.SCH_IDLE_Cape = { name="Lugh's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Haste+10','Phys. dmg. taken-10%',}}
     gear.SCH_MAB_Cape = { name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Mag. Evasion+15',}}
     gear.SCH_REGEN_Cape = { name="Bookworm's Cape", augments={'INT+3','MND+1','Helix eff. dur. +16','"Regen" potency+9',}}
 
@@ -287,7 +289,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Regal Earring",
         ring1="Epaminondas's Ring",
-        ring2="Medada's Ring",
+        ring2=gear.Medada_Or_Freke,
         back=gear.SCH_MAB_Cape,
         waist="Orpheus's Sash",
     }
@@ -726,14 +728,13 @@ function init_gear_sets()
         body=gear.Empyrean_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Empyrean_Legs,
-        -- feet=gear.Nyame_Feet,
-        feet="Merlinic Crackows",
+        feet=gear.Nyame_Feet,
         neck="Sibyl Scarf",
         ear1="Etiolation Earring",
         ear2="Lugalbanda Earring",
-        ring1=gear.Stikini_1,
+        ring1=gear.Gerubu_Or_Stikini1,
         ring2=gear.Stikini_2,
-        back=gear.SCH_MAB_Cape,
+        back="Null Shawl",
         waist="Plat. Mog. Belt",
     }
 
@@ -793,6 +794,9 @@ function init_gear_sets()
        body=gear.Relic_Body, --5
        ear1="Savant's Earring", --1
        waist="Embla Sash", --5
+       -- Keep 50% DT while sublimating...
+       back=gear.SCH_IDLE_Cape,
+       ring2="Defending Ring",
     }
 
     sets.buff.Doom = {
@@ -1037,8 +1041,10 @@ function display_current_job_state(eventArgs)
 end
 
 function job_self_command(cmdParams, eventArgs)
-    gearinfo(cmdParams, eventArgs)
-    if cmdParams[1]:lower() == 'scholar' then
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'scholar' then
         handle_strategems(cmdParams)
         eventArgs.handled = true
     elseif cmdParams[1]:lower() == 'skillchain' then
@@ -1052,6 +1058,7 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1]:lower() == 'barstatus' then
         send_command('@input /ma '..state.BarStatus.value..' <me>')
     end
+    gearinfo(cmdParams, eventArgs)
 end
 
 function gearinfo(cmdParams, eventArgs)

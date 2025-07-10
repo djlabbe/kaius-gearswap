@@ -18,6 +18,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
+    include('lib/enchantments.lua')
 end
 
 
@@ -53,7 +54,7 @@ function user_setup()
     gear.Relic_Body = { name="Plunderer's Vest +3" }
     gear.Relic_Hands = { name="Plunderer's Armlets +3" }
     gear.Relic_Legs = { name="Plunderer's Culottes +3" }
-    gear.Relic_Feet = { name="Plunderer's Poulaines +3" }
+    gear.Relic_Feet = { name="Plunderer's Poulaines +4" }
 
     gear.Empyrean_Head = { name="Skulker's Bonnet +3" }
     gear.Empyrean_Body = { name="Skulker's Vest +3" }
@@ -813,6 +814,10 @@ function check_gear_haste()
 end
 
 function job_self_command(cmdParams, eventArgs)
+    if (cmdParams[1]:lower() == 'enchantment') then
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
+    end
     gearinfo(cmdParams, eventArgs)
 
     -- if (player.target ~= nil and player.target.distance < 5.0) then

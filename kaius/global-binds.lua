@@ -24,6 +24,14 @@
 --
 -------------------------------------------------------------------------------------------------------------------
 
+send_command('bind !q input //sm all follow')
+send_command('bind !w input //sm mirror')
+send_command('bind !e input //sm all toggle')
+send_command('bind !f5 input //send @others //gs c enchantment holla;wait 1;input //gs c enchantment holla')
+send_command('bind !f6 input //send @others //gs c enchantment dem;wait 1;input //gs c enchantment dem')
+send_command('bind !f7 input //send @others //gs c enchantment mea;wait 1;input //gs c enchantment mea')
+send_command('bind !f8 input //send @others //gs c enchantment warp;wait 1;input //gs c enchantment warp')
+
 if player.main_job == 'DNC' or player.sub_job == 'DNC' then
     send_command('bind !, input /ja "Spectral Jig" <me>')
     send_command('unbind !.')
@@ -69,3 +77,5 @@ send_command('bind @numpad2 input /ma "Arciela II" <me>')
 send_command('bind @numpad3 input /ma "Sylvie (UC)" <me>')
 send_command('bind @numpad0 input /ma "Monberaux" <me>')
 send_command('bind @numpad. input /ma "Cornelia" <me>')
+
+
