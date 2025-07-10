@@ -125,7 +125,7 @@ function init_gear_sets()
     }
 
     sets.precast.FC = {
-        ammo="Sapience Orb", --2
+        ammo="Sapience Orb", --2a
         head=gear.Herc_FC_Head, --13
         body=gear.Taeon_FC_Body, --9
         hands="Leyline Gloves", --8
@@ -167,7 +167,6 @@ function init_gear_sets()
 		legs=gear.Mpaca_Legs,
 		feet=gear.Mpaca_Feet,
 		neck="Monk's Nodowa +2",
-        -- neck="Fotia Gorget",
 		waist="Moonbow Belt +1",
 		ear1="Sherida Earring",
 		ear2="Schere Earring",
@@ -483,9 +482,7 @@ function init_gear_sets()
     if (item_available("Shneddick Ring +1")) then
         sets.Kiting = { ring1="Shneddick Ring +1" }
     else
-        sets.Kiting = { 
-            feet="Hermes' Sandals" 
-        }
+        sets.Kiting = { feet="Hermes' Sandals" }
     end
     
     sets.Verethragna = { main="Verethragna" }

@@ -30,9 +30,13 @@ function user_setup()
     state.IdleMode:options('Normal', 'Regen')
 
     state.WeaponSet= M{['description']='Weapon Set', 'Chango', 'Helheim', 'ShiningOne', 'Naegling', 'Loxotic' }
-    state.WeaponLock = M(true, 'Weapon Lock')
+    state.WeaponLock = M(false, 'Weapon Lock')
 
-    include('Global-Binds.lua')
+    gear.Artifact_Head = { name= "Pummeler's Mask +3" }
+    gear.Artifact_Body = { name= "Pummeler's Lorica +3" }
+    gear.Artifact_Hands = { name= "Pummeler's Mufflers +3" }
+    gear.Artifact_Legs = { name= "Pummeler's Cuisses +4" }
+    gear.Artifact_Feet = { name= "Pummeler's Calligae" }
 
     gear.Artifact_Head = { name= "Pummeler's Mask +2" }
     gear.Artifact_Body = { name= "Pummeler's Lorica +2" }
@@ -55,7 +59,8 @@ function user_setup()
     gear.WAR_TP_Cape = { name="Cichol's Mantle", augments={'DEX+20','Accuracy+20 Attack+20', 'DEX+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.WAR_WS1_Cape = { name="Cichol's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
     gear.WAR_WS2_Cape = { name="Cichol's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
-
+    
+    include('Global-Binds.lua')
     send_command('bind @w gs c toggle WeaponLock')
 
     send_command('bind !F1 input /ja "Mighty Strikes" <me>')
@@ -63,6 +68,7 @@ function user_setup()
     
     send_command('bind !t input /ja "Provoke" <t>')
 
+    send_command('bind !h input //send @others /ma "Horde Lullaby II" <t>')
 
     if player.sub_job == 'SAM' then
         send_command('bind !c input /ja "Warding Circle" <me>')
@@ -87,14 +93,6 @@ function user_setup()
     
     
     send_command('wait 3; input /lockstyleset 1' )
-
-    state.Auto_Kite = M(false, 'Auto_Kite')
-    Haste = 0
-    DW_needed = 0
-    DW = false
-    moving = false
-    update_combat_form()
-    determine_haste_group()
 end
 
 function user_unload()
@@ -104,6 +102,7 @@ function user_unload()
     send_command('unbind !t')
     send_command('unbind !`')
     send_command('unbind ^`')
+    send_command('unbind !h')
     unbind_numpad()
 end
 
@@ -162,19 +161,19 @@ function init_gear_sets()
     }
 
     sets.engaged = {
-        ammo="Coiste Bodhar", --3
-        head=gear.Empyrean_Head, --7
+        ammo="Coiste Bodhar", 
+        head="Hjarrandi Helm", 
         body=gear.Empyrean_Body,
-        hands=gear.Sakpata_Hands, --6
-        legs=gear.Sakpata_Legs, --7
-        feet=gear.Artifact_Feet, --9
-        neck="Warrior's bead necklace +2", --7
-        ear1="Schere Earring", --6
-        ear2="Boii Earring +1", --8
+        hands=gear.Sakpata_Hands, 
+        legs=gear.Artifact_Legs, 
+        feet=gear.Artifact_Feet, 
+        neck="Vim Torque +1", 
+        ear1="Schere Earring", 
+        ear2="Boii Earring +1", 
         ring1="Niqmaddu Ring",
-        ring2=gear.Lehko_Or_Chirich2,
-        waist="Sailfi Belt +1", --5
-        back=gear.WAR_TP_Cape, --10
+        ring2=gear.Moonlight_2,
+        waist="Sailfi Belt +1", 
+        back=gear.WAR_TP_Cape,
     } -- 68% DA + 28% Traits + Gifts +5 % Merits = 101
     -- 52% PDT
 
@@ -265,10 +264,6 @@ function init_gear_sets()
     sets.precast.WS.PDL = set_combine(sets.precast.WS, {
         -- TODO
     })
-
-    --------------------------------------------------------
-    ---------------------- GREAT AXE -----------------------
-    --------------------------------------------------------
 
     sets.precast.WS["Upheaval"] = {
         ammo="Knobkierrie",
@@ -365,9 +360,6 @@ function init_gear_sets()
         back=gear.WAR_WS1_Cape,
     }
 
-    --------------------------------------------------------
-    --------------------- GREAT SWORD ----------------------
-    --------------------------------------------------------
 
     sets.precast.WS["Resolution"] = {
         ammo="Yetshila +1",
@@ -419,10 +411,6 @@ function init_gear_sets()
         ring2="Epaminondas's Ring",
     })
 
-    --------------------------------------------------------
-    ----------------------- POLEARM ------------------------
-    --------------------------------------------------------
-
     sets.precast.WS["Stardiver"] = {
         ammo="Yetshila +1",
         head=gear.Empyrean_Head,
@@ -471,10 +459,6 @@ function init_gear_sets()
         ring2="Sroda Ring",
     })
 
-    --------------------------------------------------------
-    ------------------------ SWORD -------------------------
-    --------------------------------------------------------
-
     sets.precast.WS['Savage Blade'] = {
         ammo="Knobkierrie",
         head=gear.Relic_Head,
@@ -487,7 +471,7 @@ function init_gear_sets()
         ear1="Moonshade Earring", 
         ear2="Thrud Earring",
         ring1=gear.Cornelia_Or_Epaminondas,
-        ring2="Regal Ring",       
+        ring2=gear.Ephramad_Or_Regal,       
         back=gear.WAR_WS1_Cape,
     }
 
@@ -497,10 +481,6 @@ function init_gear_sets()
         ring1=gear.Ephramad_Or_Epaminondas,
         ring2="Sroda Ring",
     })
-
-    --------------------------------------------------------
-    ------------------------ CLUB --------------------------
-    --------------------------------------------------------
 
     sets.precast.WS['Judgment'] = {
         ammo="Knobkierrie",
@@ -536,10 +516,6 @@ function init_gear_sets()
         ring2="Epaminondas's Ring",
         back=gear.WAR_WS1_Cape,
     } --TPB250 MAB170 DMAB33 WSD59
-   
-    --------------------------------------------------------
-    --------------------- IDLE, ETC ------------------------
-    --------------------------------------------------------
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
@@ -548,11 +524,11 @@ function init_gear_sets()
         hands=gear.Sakpata_Hands,
         legs=gear.Sakpata_Legs,
         feet=gear.Sakpata_Feet,
-        neck="Warder's Charm +1",
+        neck="Loricate Torque +1",
         ear1="Eabani Earring",
         ear2="Odnowa Earring +1",
         ring1=gear.Moonlight_1,
-        ring2="Shadow Ring",
+        ring2="Fortified Ring",
         back="Null Shawl",
         waist="Null Belt",
     }
@@ -563,7 +539,7 @@ function init_gear_sets()
         ring2=gear.Chirich_2,
     }
 
-    sets.idle.Town = sets.engaged;
+    sets.idle.Town = sets.idle
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -585,14 +561,6 @@ function init_gear_sets()
     sets.Helheim = { main="Helheim", sub="Utu Grip" }
 end
 
--- function job_post_precast(spell, action, spellMap, eventArgs)
---     if spell.type == 'WeaponSkill' then
---         if (spell.english == 'Upheaval' and buffactive['Mighty Strikes']) then
---             equip(sets.precast.WS["Upheaval"].MightyStrikes)
---         end
---     end
--- end
-
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
     if player.status ~= 'Engaged' and state.WeaponLock.value == false then
@@ -602,25 +570,16 @@ end
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    update_combat_form()
-    determine_haste_group()
-    check_moving()
+    display_box_update()
 end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
 end
 
-function update_combat_form()
-    if DW == true then
-        state.CombatForm:set('DW')
-    elseif DW == false then
-        state.CombatForm:reset()
-    end
-end
 
 function job_buff_change(buff, gain)
-    if buff == "doom" then
+    if buff == "Doom" then
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
@@ -662,7 +621,7 @@ function customize_idle_set(idleSet)
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
 
-    if state.Auto_Kite.value == true then
+    if moving then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
 
@@ -737,53 +696,6 @@ function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
 end
 
-function determine_haste_group()
-    classes.CustomMeleeGroups:clear()
-    if DW == true then
-        if DW_needed <= 14 then
-            classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 15 and DW_needed <= 26 then
-            classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 26 and DW_needed <= 32 then
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif DW_needed > 32 and DW_needed <= 43 then
-            classes.CustomMeleeGroups:append('LowHaste')
-        elseif DW_needed > 43 then
-            classes.CustomMeleeGroups:append('')
-        end
-    end
-end
-
-function gearinfo(cmdParams, eventArgs)
-    if cmdParams[1] == 'gearinfo' then
-        if type(tonumber(cmdParams[2])) == 'number' then
-            if tonumber(cmdParams[2]) ~= DW_needed then
-            DW_needed = tonumber(cmdParams[2])
-            DW = true
-            end
-        elseif type(cmdParams[2]) == 'string' then
-            if cmdParams[2] == 'false' then
-                DW_needed = 0
-                DW = false
-            end
-        end
-        if type(tonumber(cmdParams[3])) == 'number' then
-            if tonumber(cmdParams[3]) ~= Haste then
-                Haste = tonumber(cmdParams[3])
-            end
-        end
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
-    end
-end
 
 function check_weaponset()
     equip(sets[state.WeaponSet.current])

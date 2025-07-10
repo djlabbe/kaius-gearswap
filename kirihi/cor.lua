@@ -24,6 +24,7 @@ function get_sets()
 end
 
 function job_setup()
+
     state.QD = M{['description']='Primary Shot', 'Fire Shot', 'Ice Shot', 'Wind Shot', 'Earth Shot', 'Thunder Shot', 'Water Shot'}
     state.QDMode = M{['description']='Quick Draw Mode', 'Enhance', 'Potency'}
     state.LuzafRing = M(true, "Luzaf's Ring")
@@ -67,10 +68,10 @@ end
 function user_setup()
     include('Global-Binds.lua') 
 
-    state.OffenseMode:options('Normal', 'Acc', 'PDL')
+    state.OffenseMode:options('Normal', 'PDL')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('Normal', 'Critical')
-    state.WeaponskillMode:options('Normal', 'Acc', 'PDL')
+    state.WeaponskillMode:options('Normal', 'PDL')
     state.IdleMode:options('Normal')
 
     state.WeaponSet = M{['description']='Weapon Set', 'DeathPenalty_M', 'DeathPenalty_R', 'Armageddon_M', 'Armageddon_R', 'Fomalhaut_M', 'Fomalhaut_R', 'Naegling_Gleti', 'Naegling_Crep'}
@@ -83,9 +84,9 @@ function user_setup()
     gear.QDbullet = "Hauksbok Bullet"
     options.ammo_warning_limit = 10
 
-    gear.Rostam_C = { name="Rostam", augments={'Path: C',}}
-    -- gear.Rostam_A = { name="Rostam", augments={'Path: A',}, bag="wardrobe2"}
-    -- gear.Rostam_B = { name="Rostam", augments={'Path: B',}, bag="wardrobe3"}
+    -- gear.Rostam_A = { name="Rostam", augments={'Path: A',}, bag="wardrobe1"}
+    -- gear.Rostam_B = { name="Rostam", augments={'Path: B',}, bag="wardrobe2"}
+    gear.Rostam_C = { name="Rostam", augments={'Path: C',}, bag="wardrobe1"}
 
     gear.Artifact_Head = { name= "Laksamana's Tricorne +2" }
     gear.Artifact_Body = { name= "Laksamana Frac +4" }
@@ -181,14 +182,6 @@ function user_setup()
     end
    
     send_command('wait 3; input /lockstyleset 17')
-
-    state.Auto_Kite = M(false, 'Auto_Kite')
-    Haste = 0
-    DW_needed = 0
-    DW = false
-    moving = false
-    update_combat_form()
-    determine_haste_group()
 end
 
 function user_unload()
@@ -229,7 +222,8 @@ function init_gear_sets()
         neck="Regal Necklace",
         ear1="Etiolation Earring", --0/3
         ear2="Odnowa Earring +1", --3/5
-        -- ring1="Defending Ring",
+        ring1="Gelatinous Ring +1", --7/(-1)
+        ring2="Defending Ring", --10/10
         back=gear.COR_SNP_Cape,
         waist="Platinum Moogle Belt",
     }
@@ -246,14 +240,12 @@ function init_gear_sets()
     sets.precast.FoldDoubleBust = {hands=gear.Relic_Hands}
 
     sets.precast.Waltz = {
-        -- neck="Unmoving Collar +1",
-        -- ear1="Handler's Earring +1",
-        -- ear2="Tuisto Earring",
-        -- body="Passion Jacket",
-        legs="Dashing Subligar",
-        -- ring1="Asklepian Ring",
-        -- ring2="Gelatinous Ring +1",
-        -- waist="Gishdubar Sash",
+        neck="Unmoving Collar +1",
+        ear2="Tuisto Earring",
+        body="Passion Jacket",
+        ring1="Asklepian Ring",
+        ring2="Gelatinous Ring +1",
+        waist="Gishdubar Sash",
     }
 
     sets.precast.Waltz['Healing Waltz'] = {}
@@ -386,6 +378,21 @@ function init_gear_sets()
         waist="Skrymir Cord +1",
     }
 
+    sets.precast.WS['Evisceration'] = {
+        head="Blistering Sallet +1",
+        body="Meghanada Cuirie +2",
+        hands=gear.Empyrean_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Fotia Gorget",
+        ear1="Moonshade Earring",
+        ear2="Odr Earring",
+        ring1="Ilabrat Ring",
+        ring2="Regal Ring",
+        back=gear.COR_DW_Cape,
+        waist="Fotia Belt",
+    }
+
     sets.precast.WS['Savage Blade'] = {
         ammo=gear.WSbullet,
         head=gear.Nyame_Head,
@@ -400,24 +407,6 @@ function init_gear_sets()
         ring2="Epaminondas's Ring",
         back=gear.COR_SB_Cape,
         waist="Sailfi Belt +1",
-    }
-
-    sets.precast.WS['Fast Blade II'] = sets.precast.WS['Savage Blade'] 
-
-    sets.precast.WS['Savage Blade'].Acc = {
-        ammo=gear.WSbullet,
-        head=gear.Nyame_Head,
-        body=gear.Nyame_Body, -- If you are using that shiny R30 Ikenga for tp bonus, it has 0 melee acc (vs 40 on nyame)
-        hands=gear.Empyrean_Hands,
-        legs=gear.Nyame_Legs,
-        feet=gear.Nyame_Feet,
-        neck="Rep. Plat. Medal",
-        ear1="Moonshade Earring",
-        ear2="Telos Earring", -- +10
-        ring1=gear.Cornelia_Or_Epaminondas, -- Prefer Ephram Ring here (+22-23 Acc and 10 PDL vs 5 WS on a plain Epam ring!! if we ARE attack cap thats a holy shit upgrade)
-        ring2="Regal Ring",
-        back=gear.COR_SB_Cape,
-        waist="Kentarch Belt +1", -- Trade 15 attack for 15 acc (compared to sailfi)
     }
 
     sets.precast.WS['Savage Blade'].PDL = set_combine(sets.precast.WS['Savage Blade'], {
@@ -586,67 +575,22 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
     }
 
-    sets.engaged.Acc = sets.engaged
-
-    -- * DNC Subjob DW Trait: +15%
-    -- * NIN Subjob DW Trait: +25%
-
-    -- No Magic Haste (74% DW to cap)
-    sets.engaged.DW = {
-        ammo=gear.RAbullet,
-        head=gear.Malignance_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
-        neck="Iskur Gorget",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.COR_DW_Cape,
-        waist="Sailfi Belt +1",
-    } -- 48%
-
-    sets.engaged.DW.Acc = {
-        ammo=gear.RAbullet,
-        head=gear.Malignance_Head, --6/6
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        legs=gear.Malignance_Legs, --7/7
-        feet=gear.Malignance_Feet, --4/4
-        neck="Iskur Gorget",
-        -- ear1="Dedition Earring",
-        ear1="Eabani Earring",
-        ear2="Suppanomimi",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.COR_DW_Cape,
-        waist="Reiki Yotai",
-    }
-
     sets.engaged.Hybrid = {
         head=gear.Malignance_Head
     }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-    sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
-
 
     sets.idle = {
         ammo=gear.MAbullet,
         head=gear.Malignance_Head,
         body=gear.Ikenga_Body,
         hands=gear.Malignance_Hands,
-        legs=gear.Empyrean_Legs,
+        legs=gear.Malignance_Legs,
         feet=gear.Malignance_Feet,
         neck="Warder's Charm +1",
         ear1="Eabani Earring",
-        ear2="Etiolation Earring",
+        ear2="Sanare Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         back=gear.COR_SNP_Cape,
@@ -878,9 +822,7 @@ end
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    update_combat_form()
-    determine_haste_group()
-    check_moving()
+    display_box_update()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -898,14 +840,6 @@ function get_custom_wsmode(spell, action, spellMap)
     return wsmode
 end
 
-function update_combat_form()
-    if DW == true then
-        state.CombatForm:set('DW')
-    elseif DW == false then
-        state.CombatForm:reset()
-    end
-end
-
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
     if state.Buff.Doom then
@@ -921,7 +855,7 @@ function customize_idle_set(idleSet)
     if state.Buff.Doom then
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
-    if state.Auto_Kite.value == true then
+    if moving then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
 
@@ -930,10 +864,6 @@ end
 
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.
 function display_current_job_state(eventArgs)
-    local cf_msg = ''
-    if state.CombatForm.has_value then
-        cf_msg = ' (' ..state.CombatForm.value.. ')'
-    end
 
     local m_msg = state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
@@ -952,17 +882,11 @@ function display_current_job_state(eventArgs)
 
     local i_msg = state.IdleMode.value
 
-    local msg = ''
-    if state.Kiting.value then
-        msg = msg .. ' Kiting: On |'
-    end
 
-    add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
+    add_to_chat(string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,060).. ' QD' ..qd_msg.. ' |'
         ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,002)..msg)
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002))
 
     eventArgs.handled = true
 end
@@ -993,22 +917,6 @@ windower.register_event('action',
         end
     end)
 
-function determine_haste_group()
-    classes.CustomMeleeGroups:clear()
-    if DW == true then
-        if DW_needed <= 11 then
-            classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 12 and DW_needed <= 27 then
-            classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 27 and DW_needed <= 31 then
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif DW_needed > 31 and DW_needed <= 42 then
-            classes.CustomMeleeGroups:append('LowHaste')
-        elseif DW_needed > 42 then
-            classes.CustomMeleeGroups:append('')
-        end
-    end
-end
 
 function job_self_command(cmdParams, eventArgs)
     if (cmdParams[1]:lower() == 'enchantment') then
@@ -1020,41 +928,12 @@ function job_self_command(cmdParams, eventArgs)
         handle_forceequip(cmdParams)
     end
 
-    gearinfo(cmdParams, eventArgs)
+    -- if cmdParams[1] == 'save' then
+	-- 	config.save(hud_settings, windower.ffxi.get_player().name:lower())
+    --     add_to_chat(122, 'HUD settings saved.')
+    -- end
 end
 
-function gearinfo(cmdParams, eventArgs)
-    -- send_command('input /item "Barrels of Fun" <me>')
-
-    if cmdParams[1] == 'gearinfo' then
-        if type(tonumber(cmdParams[2])) == 'number' then
-            if tonumber(cmdParams[2]) ~= DW_needed then
-            DW_needed = tonumber(cmdParams[2])
-            DW = true
-            end
-        elseif type(cmdParams[2]) == 'string' then
-            if cmdParams[2] == 'false' then
-                DW_needed = 0
-                DW = false
-            end
-        end
-        if type(tonumber(cmdParams[3])) == 'number' then
-            if tonumber(cmdParams[3]) ~= Haste then
-                Haste = tonumber(cmdParams[3])
-            end
-        end
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
-    end
-end
 
 function define_roll_values()
     rolls = {
@@ -1134,6 +1013,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
     end
 
     local available_bullets = player.inventory[bullet_name] or player.wardrobe[bullet_name]
+
 
     -- If no ammo is available, give appropriate warning and end.
     if not available_bullets then
@@ -1397,4 +1277,3 @@ function handle_forceequip(cmdParams)
 		handle_equipping_gear(player.status)
 	end
 end
-

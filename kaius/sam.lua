@@ -17,8 +17,9 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
-    include('lib/enchantments.lua')
-    res = require 'resources'
+    include("lib/movement.lua")
+    include("lib/enchantment.lua")
+    include("lib/hud.lua")
 end
 
 function job_setup()
@@ -37,8 +38,8 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal', 'DT')
     
-    state.WeaponSet = M{['description']='Weapon Set', 'Masamune', 'Dojikiri', 'ShiningOne', 'AeolianEdge'}
-    state.WeaponLock = M(true, 'Weapon Lock')
+    state.WeaponSet = M{['description']='Weapon Set', 'Masamune', 'Dojikiri', 'ShiningOne'}
+    state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name= "Wakido Kabuto +3" }
     gear.Artifact_Body = { name= "Wakido Domaru +3" }
@@ -77,31 +78,29 @@ function user_setup()
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind !c input /ja "Warding Circle" <me>')
     send_command('bind !a input /ja "Hamanoha" <me>')
+
+    send_command('bind !h input //send @others /ma "Horde Lullaby II" <t>')
+    send_command('bind @s input //send @others //sm script')
    
     if player.sub_job == 'DRG' then
         send_command('bind ^numpad7 gs c set WeaponSet Masamune;input /macro set 1')
         send_command('bind ^numpad8 gs c set WeaponSet Dojikiri;input /macro set 1')
         send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 2')
-        send_command('bind ^numpad4 gs c set WeaponSet AeolianEdge;input /macro set 5')
         set_macro_page(1, 12)
     elseif player.sub_job == 'WAR' then
         send_command('bind !t input /ja "Provoke" <t>')     
         send_command('bind ^numpad7 gs c set WeaponSet Masamune;input /macro set 3')
         send_command('bind ^numpad8 gs c set WeaponSet Dojikiri;input /macro set 3')
         send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 4')
-        send_command('bind ^numpad4 gs c set WeaponSet AeolianEdge;input /macro set 6')
         set_macro_page(3, 12)
     else
         send_command('bind ^numpad7 gs c set WeaponSet Masamune;input /macro set 1')
         send_command('bind ^numpad8 gs c set WeaponSet Dojikiri;input /macro set 1')
         send_command('bind ^numpad9 gs c set WeaponSet ShiningOne;input /macro set 2')
-        send_command('bind ^numpad4 gs c set WeaponSet AeolianEdge;input /macro set 5')
         set_macro_page(1, 12)
     end
 
     send_command('wait 3; input /lockstyleset 12')
-    state.Auto_Kite = M(false, 'Auto_Kite')
-    moving = false
 end
 
 function user_unload()
@@ -112,39 +111,14 @@ function user_unload()
     send_command('unbind !t')
     send_command('unbind !c')
     send_command('unbind !a')
+    send_command('unbind !h')
     send_command('unbind @w')
     unbind_numpad()
 end
 
 function init_gear_sets()
 
-    sets.precast.FC = {
-        body="Sacro Breastplate",
-        hands="Leyline Gloves",
-        neck="Orunmila's Torque", --5
-        ear1="Loquacious Earring", --2
-        ear2="Etiolation Earring", --2
-        ring2="Prolix Ring", --2
-    }
-
-    sets.precast.JA.Meditate = {
-        head=gear.Artifact_Head,
-        hands=gear.Relic_Hands,
-        back=gear.SAM_WS_Cape,
-    }
-
-    sets.buff['Meikyo Shisui'] = {feet=gear.Relic_Feet}
-    sets.precast.JA.Sekkanoki = { hands=gear.Empyrean_Hands }
-    sets.precast.JA.Sengikori = { feet=gear.Empyrean_Feet }
-    sets.precast.JA['Warding Circle'] = {head=gear.Artifact_Helm}
-    sets.precast.JA['Third Eye'] = {legs=gear.Relic_Legs}
-
-    sets.Masamune = { main="Masamune", sub="Utu Grip" }
-    sets.Dojikiri = { main="Dojikiri Yasutsuna", sub="Utu Grip" }
-    sets.ShiningOne = { main="Shining One", sub="Utu Grip" }
-    sets.AeolianEdge = { main=gear.Malevolence_A }
-
-    sets.engaged = {
+      sets.engaged = {
         ammo="Aurgelmir Orb +1",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
@@ -546,6 +520,9 @@ function init_gear_sets()
         sets.Kiting = { feet="Danzo Sune-Ate" }
     end
 
+    sets.Masamune = { main="Masamune", sub="Utu Grip" }
+    sets.Dojikiri  = { main="Dojikiri Yasutsuna", sub="Utu Grip" }
+    sets.ShiningOne = { main="Shining One", sub="Utu Grip" }
 end
 
 function job_precast(spell, action, spellMap, eventArgs)
@@ -625,7 +602,7 @@ end
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    check_moving()
+    display_box_update()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -642,7 +619,7 @@ function get_custom_wsmode(spell, action, spellMap)
 end
 
 function customize_idle_set(idleSet)
-    if state.Auto_Kite.value == true then
+    if moving then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
     return idleSet
@@ -676,16 +653,12 @@ function display_current_job_state(eventArgs)
 
     local i_msg = state.IdleMode.value
 
-    local msg = ''
-    if state.Kiting.value then
-        msg = msg .. ' Kiting: On |'
-    end
+
 
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,002)..msg)
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002))
 
     eventArgs.handled = true
 end
@@ -712,6 +685,7 @@ function gearinfo(cmdParams, eventArgs)
         end
     end
 end
+
 
 function check_weaponset()
     equip(sets[state.WeaponSet.current])

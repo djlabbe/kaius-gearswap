@@ -31,9 +31,9 @@ end
 function user_setup()
     include('Global-Binds.lua')    
 
-    state.OffenseMode:options('Normal', 'Acc', 'PDL', 'Subtle')
+    state.OffenseMode:options('Normal', 'PDL', 'Subtle')
     state.HybridMode:options('Normal', 'DT')
-    state.WeaponskillMode:options('Normal', 'Acc', 'PDL')
+    state.WeaponskillMode:options('Normal', 'PDL')
     state.PhysicalDefenseMode:options('PDT', 'MDT')
     state.IdleMode:options('Normal', 'DT')
 
@@ -64,9 +64,8 @@ function user_setup()
     gear.DRK_DA_Cape = { name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}} --X
     gear.DRK_WS1_Cape = { name="Ankou's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
     gear.DRK_WS2_Cape = { name="Ankou's Mantle", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}} --X
-    gear.DRK_FC_Cape = { name="Ankou's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10',}}
-    gear.DRK_MB_Cape = { name="Ankou's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
-    
+    gear.DRK_FC_Cape = { name="Ankou's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
+    gear.DRK_MB_Cape = { name="Ankou's Mantle", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10','Phys. dmg. taken-10%',}} --X
     gear.DRK_DRK_Cape = { name="Niht Mantle", augments={'Attack+15','Dark magic skill +10','"Drain" and "Aspir" potency +23',}}
 
     send_command('bind @w gs c toggle WeaponLock')
@@ -235,9 +234,6 @@ function init_gear_sets()
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-     
-    })
 
     sets.precast.WS.PDL = set_combine(sets.precast.WS, {
     
@@ -263,7 +259,6 @@ function init_gear_sets()
         back= gear.DRK_WS1_Cape,
     }
 
-     sets.precast.WS['Catastrophe'].Acc = set_combine(sets.precast.WS['Catastrophe'], {})
      sets.precast.WS['Catastrophe'].PDL = set_combine(sets.precast.WS['Catastrophe'], {
         head=gear.Empyrean_Head,
         ear="Thrud Earring",
@@ -287,7 +282,6 @@ function init_gear_sets()
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS['Cross Reaper'], {})
     sets.precast.WS['Cross Reaper'].PDL = set_combine(sets.precast.WS['Cross Reaper'], {
         ear2="Heathen's Earring +2",
         ring1="Sroda Ring",
@@ -309,7 +303,6 @@ function init_gear_sets()
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Entropy'].Acc = set_combine(sets.precast.WS['Entropy'], {})
     sets.precast.WS['Entropy'].PDL = set_combine(sets.precast.WS['Entropy'], {
         ammo="Crepuscular Pebble",
         body=gear.Sakpata_Body,
@@ -335,7 +328,6 @@ function init_gear_sets()
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Insurgency'].Acc = set_combine(sets.precast.WS['Insurgency'], {})
     sets.precast.WS['Insurgency'].PDL = set_combine(sets.precast.WS['Insurgency'], {
         hands=gear.Sakpata_Hands,
         body=gear.Sakpata_Body,
@@ -358,7 +350,6 @@ function init_gear_sets()
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Quietus'].Acc = set_combine(sets.precast.WS['Quietus'], {})
     sets.precast.WS['Quietus'].PDL = set_combine(sets.precast.WS['Quietus'], {
         head=gear.Empyrean_Head,
         legs=gear.Sakpata_Legs,
@@ -416,7 +407,6 @@ function init_gear_sets()
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Fimbulvetr'].Acc = set_combine(sets.precast.WS['Fimbulvetr'], {})
     sets.precast.WS['Fimbulvetr'].PDL = set_combine(sets.precast.WS['Fimbulvetr'], {
         head=gear.Empyrean_Head,
     })
@@ -431,16 +421,14 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         waist="Sailfi Belt +1",
         ear1="Moonshade Earring",
-        ear2="Thrud Earring", --3
-        ring1="Regal Ring",
+        ear2="Heathen's Earring +2", --3
+        ring1=gear.Ephramad_Or_Regal,
         ring2=gear.Cornelia_Or_Epaminondas,
         back= gear.DRK_WS2_Cape, --10
     }
 
-    sets.precast.WS['Torcleaver'].Acc = set_combine(sets.precast.WS['Torcleaver'], {})
     sets.precast.WS['Torcleaver'].PDL = set_combine(sets.precast.WS['Torcleaver'], {
         head=gear.Empyrean_Head,
-        ear2="Heathen's Earring +2",
     })
 
     sets.precast.WS['Resolution'] = {
@@ -459,7 +447,6 @@ function init_gear_sets()
         back= gear.DRK_WS2_Cape, --10
     } --79% WSD
 
-    sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {})
     sets.precast.WS['Resolution'].PDL = set_combine(sets.precast.WS['Resolution'], {
         ammo="Crepuscular Pebble",
         legs=gear.Sakpata_Legs,
@@ -481,8 +468,6 @@ function init_gear_sets()
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Shockwave'].Acc = set_combine(sets.precast.WS['Shockwave'], {})
-
     -------------
     -- CLUB WS --
     -------------
@@ -503,7 +488,6 @@ function init_gear_sets()
         back= gear.DRK_WS1_Cape,
     }
 
-    sets.precast.WS['Judgment'].Acc = set_combine(sets.precast.WS['Judgment'], {})
     sets.precast.WS['Judgment'].PDL = set_combine(sets.precast.WS['Judgment'], {
         head=gear.Empyrean_Head,
         ring2="Sroda Ring",
@@ -536,13 +520,13 @@ function init_gear_sets()
         hands=gear.Sakpata_Hands,
         legs=gear.Sakpata_Legs,
         feet=gear.Sakpata_Feet, 
-        neck="Abyssal Beads +2",
-        waist="Fotia Belt",
+        neck="Null Loop",
+        waist="Null Belt",
         ear1="Moonshade Earring",
         ear2="Heathen's Earring +2",
         ring1="Niqmaddu Ring",
         ring2="Regal Ring",
-        back= gear.DRK_WS1_Cape,
+        back="Null Shawl",
     }
 
     sets.midcast.FastRecast = sets.precast.FC
@@ -663,53 +647,40 @@ function init_gear_sets()
         head="Flamma Zucchetto +2",
         body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
-        legs=gear.Artifact_Legs,
+        legs=gear.Sakpata_Legs,
         feet="Flamma Gambieras +2",
         neck="Abyssal Beads +2",
         waist="Sailfi Belt +1",
         ear1="Telos Earring",      
         ear2="Balder Earring +1",
         ring1="Niqmaddu ring",
-        ring2=gear.Lehko_Or_Chirich2,
+        ring2=gear.Lehko_Or_Moonlight2,
         back=gear.DRK_DA_Cape,
     }
 
     sets.engaged.Caladbolg = sets.engaged
 
-    sets.engaged.Caladbolg.Aftermath = {
-        body="Dagon Breastplate",
-        ear1="Schere Earring",
-        ear2="Balder Earring +1",      
+    sets.CaladbolgAM3 = {
+        ear1="Schere Earring", 
         ring2=gear.Lehko_Or_Hetairoi,
     }
 
-    sets.engaged.Liberator = {
-        ammo="Coiste Bodhar",
-        head="Flamma Zucchetto +2",
-        body=gear.Sakpata_Body,
-        hands=gear.Sakpata_Hands,
-        legs=gear.Artifact_Legs,
-        feet="Flamma Gambieras +2",
-        neck="Abyssal Beads +2",
-        waist="Sailfi Belt +1",
-        ear1="Telos Earring",
-        ear2="Balder Earring +1", 
-        ring1="Niqmaddu ring",
-        ring2="Hetairoi Ring",
-        back= gear.DRK_TP_Cape,
-    }
+    sets.engaged.Liberator = sets.engaged
 
-    sets.engaged.Liberator.Aftermath = {
+    sets.LiberatorAM3 = {
         ammo="Aurgelmir Orb +1",
+        head="Hjarrandi Helm",
         body="Hjarrandi Breastplate",
-        legs=gear.Ody_STP_Legs,
+        hands=gear.Sakpata_Hands,
+        legs="Volte Tights",
         feet=gear.Valo_STP_Feet,
+        neck="Abyssal Beads +2",
         ear1="Telos Earring",      
         ear2="Dedition Earring",
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
+        ring1=gear.Moonlight_1,
+        ring2=gear.Moonlight_2,
         back= gear.DRK_TP_Cape,
-    }
+    } --4 Hit / 48 DT
 
     sets.engaged.Subtle = {
         ammo="Coiste Bodhar",
@@ -730,22 +701,16 @@ function init_gear_sets()
     
     sets.engaged.Caladbolg.Subtle = sets.engaged.Subtle
 
-    sets.engaged.Acc = set_combine(sets.engaged, {
-        ear2="Heathen's Earring +2"
-    })
-
     sets.engaged.Hybrid = {
         head=gear.Sakpata_Head,
         body=gear.Sakpata_Body,
         hands=gear.Sakpata_Hands,
         legs=gear.Sakpata_Legs,
-        -- legs=gear.Nyame_Legs,
         feet=gear.Sakpata_Feet,
         ring2=gear.Moonlight_2,
     }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
-    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
@@ -775,7 +740,7 @@ function init_gear_sets()
         back="Moonlight Cape", --6/6
     })
 
-    sets.idle.Town = sets.precast.WS['Fimbulvetr'].PDL
+    sets.idle.Town = sets.precast.WS['Torcleaver'].PDL
     -- sets.idle.Town = sets.precast.WS['Insurgency']
 
     sets.latent_refresh = { waist="Fucho-no-obi" }
@@ -816,16 +781,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     end
 end
 
-
-function job_state_change(field, new_value, old_value)
-    if state.WeaponLock.value == true then
-        disable('main','sub','range')
-    else
-        enable('main','sub','range')
-    end
-    check_weaponset()
-end
-
 function job_buff_change(buff,gain)
     if buff == "Doom" then
         if gain then
@@ -837,11 +792,20 @@ function job_buff_change(buff,gain)
     end
 end
 
+function job_state_change(field, new_value, old_value)
+    if state.WeaponLock.value == true then
+        disable('main','sub','range')
+    else
+        enable('main','sub','range')
+    end
+    check_weaponset()
+end
+
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    check_moving()
+    display_box_update()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -862,13 +826,10 @@ function get_custom_wsmode(spell, action, spellMap)
 end
 
 function customize_idle_set(idleSet)
-    if player.mpp < 51 then
-        idleSet = set_combine(idleSet, sets.latent_refresh)
-    end
     if state.Buff.Doom then
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
-    if state.Auto_Kite.value == true then
+    if moving then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
 
@@ -876,10 +837,11 @@ function customize_idle_set(idleSet)
 end
 
 function customize_melee_set(meleeSet)
+    
     if (buffactive['Aftermath: Lv.3'] and player.equipment.main == "Caladbolg" and state.OffenseMode ~= "Subtle") then
-        meleeSet = set_combine(meleeSet, sets.engaged.Caladbolg.Aftermath)
+        meleeSet = set_combine(meleeSet, sets.CaladbolgAM3)
     elseif (buffactive['Aftermath: Lv.3'] and player.equipment.main == "Liberator" and state.OffenseMode ~= "Subtle") then
-        meleeSet = set_combine(meleeSet, sets.engaged.Liberator.Aftermath)
+        meleeSet = set_combine(meleeSet, sets.LiberatorAM3)
     end
     if state.Buff.Doom then
         meleeSet = set_combine(meleeSet, sets.buff.Doom)

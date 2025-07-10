@@ -27,14 +27,14 @@ function user_setup()
     state.OffenseMode:options('Normal', 'PDL')
     state.HybridMode:options('Normal', 'DT', 'Regain')
     state.WeaponskillMode:options('Normal', 'PDL')
-    state.IdleMode:options('Normal', 'DT')
+    state.IdleMode:options('Normal', 'Eva', 'Meva')
 
     state.WeaponSet = M{['description']='Weapon Set', 'Mpu_TP', 'Mpu_Gleti', 'Mpu_Crep', 'Twash_TP', 'Twash_Gleti', 'Twash_Crep', "Aeneas", "Tauret"  }
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.Artifact_Head = { name= "Maxixi Tiara +3" }
     gear.Artifact_Body = { name= "Maxixi Casaque +3" }
-    gear.Artifact_Hands = { name= "Maxixi Bangles +3" }
+    gear.Artifact_Hands = { name= "Maxixi Bangles +4" }
     gear.Artifact_Legs = { name= "Maxixi Tights +3" }
     gear.Artifact_Feet = { name= "Maxixi Toe shoes +3" }
 
@@ -100,9 +100,6 @@ function user_setup()
     end
     
     send_command('wait 3; input /lockstyleset 19')
-
-    state.Auto_Kite = M(false, 'Auto_Kite')
-    moving = false
 end
 
 
@@ -423,7 +420,7 @@ function init_gear_sets()
         feet=gear.Empyrean_Feet,
         neck="Etoile Gorget +2",
         ear1="Sherida Earring",
-        ear2="Maculele Earring +1",
+        ear2="Telos Earring",
         ring1="Gere Ring",
         ring2="Ilabrat Ring",
         back=gear.DNC_TP_Cape,
@@ -470,6 +467,22 @@ function init_gear_sets()
         waist="Null Belt",
     }
 
+    sets.idle.Eva = {
+        ammo="Yamarang",
+        head="Null Masque",
+        body=gear.Malignance_Body,
+        hands=gear.Malignance_Hands,
+        legs=gear.Malignance_Legs,
+        feet=gear.Malignance_Feet,
+        neck="Bathy Choker +1",
+        ear1="Eabani Earring",
+        ear2="Balder Earring +1",
+        ring1="Vengeful Ring",
+        ring2="Ilabrat Ring",
+        back="Null Shawl",
+        waist="Null Belt",
+    }
+
     sets.idle.Regain = {
         ammo="Aurgelmir Orb +1",
         head='Turms Cap +1',
@@ -486,7 +499,7 @@ function init_gear_sets()
         waist="Sweordfaetels +1",
     }
 
-    sets.idle.DT = set_combine(sets.idle, {
+    sets.idle.Meva = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
         head=gear.Gleti_Head,
         body=gear.Gleti_Body,
@@ -583,23 +596,32 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     if player.status ~= 'Engaged' and state.WeaponLock.value == false then
         check_weaponset()
     end
+end
 
-    if (spell.english == "Box Step") then
-        send_command('@timers c "Box Step ['..spell.target.name..']" 120 down spells/00288.png')
-        send_command('@timers c "USE BOX STEP" 40 down spells/00288.png')
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
+    display_box_update()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+end
+
+function job_buff_change(buff,gain)
+    if buff == 'Saber Dance' or buff == 'Climactic Flourish' or buff == 'Fan Dance' then
+        handle_equipping_gear(player.status)
     end
-    if (spell.english == "Quickstep") then
-        send_command('@timers c "Quickstep ['..spell.target.name..']" 120 down spells/00290.png')
-        send_command('@timers c "USE QUICKSTEP" 40 down spells/00290.png')
+    if buff == "doom" then
+        if gain then
+            equip(sets.buff.Doom)
+            send_command('@input /p Doomed.')
+            disable('ring1','ring2','waist')
+        else
+            enable('ring1','ring2','waist')
+            handle_equipping_gear(player.status)
+        end
     end
-    if (spell.english == "Stutter Step") then
-        send_command('@timers c "Stutter Step  ['..spell.target.name..']" 120 down spells/00292.png')
-        send_command('@timers c "USE STUTTER STEP" 40 down spells/00292.png')
-    end
-    if (spell.english == "Feather Step") then
-        send_command('@timers c "Feather Step ['..spell.target.name..']" 120 down spells/00289.png')
-        send_command('@timers c "USE FEATHER STEP" 40 down spells/00289.png')
-    end
+
 end
 
 function job_state_change(field, new_value, old_value)
@@ -611,53 +633,12 @@ function job_state_change(field, new_value, old_value)
     check_weaponset()
 end
 
--- Called when a player gains or loses a buff.
--- buff == buff gained or lost
--- gain == true if the buff was gained, false if it was lost.
-function job_buff_change(buff,gain)
-    if buff == 'Saber Dance' or buff == 'Climactic Flourish' or buff == 'Fan Dance' then
-        handle_equipping_gear(player.status)
-    end
-    if buff == "doom" then
-        if gain then
-            equip(sets.buff.Doom)
-            send_command('@input /p Doomed.')
-             disable('ring1','ring2','waist')
-        else
-            enable('ring1','ring2','waist')
-            handle_equipping_gear(player.status)
-        end
-    end
-
-end
-
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_handle_equipping_gear(playerStatus, eventArgs)
-    check_gear()
-    check_moving()
-end
-
-function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
-end
-
-
-function get_custom_wsmode(spell, action, spellMap)
-    local wsmode
-    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
-        wsmode = 'Acc'
-    end
-
-    return wsmode
-end
-
 function customize_idle_set(idleSet)
     if state.HybridMode.value == 'Regain' then
         idleSet = set_combine(idleSet, sets.idle.Regain)
     end
     
-    if state.Auto_Kite.value == true then
+    if moving then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
 
@@ -667,6 +648,16 @@ end
 function customize_melee_set(meleeSet)
     return meleeSet
 end
+
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if state.OffenseMode.value == 'PDL' then
+        wsmode = (wsmode or '') .. 'PDL'
+    end
+    return wsmode
+end
+
+
 
 -- Function to display the current relevant user state when doing an update.
 -- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
@@ -690,16 +681,11 @@ function display_current_job_state(eventArgs)
 
     local i_msg = state.IdleMode.value
 
-    local msg = ''
-    if state.Kiting.value then
-        msg = msg .. ' Kiting: On |'
-    end
 
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,002)..msg)
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002))
 
     eventArgs.handled = true
 end
@@ -718,25 +704,7 @@ function job_self_command(cmdParams, eventArgs)
         disable('body')
         send_command('pause 7;@input /item "Volte Harness" <me>;wait 0.5;@input //gs enable body')
     end
-
-    gearinfo(cmdParams, eventArgs)
 end
-
-function gearinfo(cmdParams, eventArgs)
-    if cmdParams[1] == 'gearinfo' then
-        if type(cmdParams[4]) == 'string' then
-            if cmdParams[4] == 'true' then
-                moving = true
-            elseif cmdParams[4] == 'false' then
-                moving = false
-            end
-        end
-        if not midaction() then
-            job_update()
-        end
-    end
-end
-
 
 -- Automatically use Presto for steps when it's available 
 function job_pretarget(spell, action, spellMap, eventArgs)

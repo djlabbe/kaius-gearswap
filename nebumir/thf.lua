@@ -39,8 +39,6 @@
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-
-    -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
 
@@ -59,8 +57,6 @@ function job_setup()
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
     state.Ambush = M(false, 'Ambush')
-
-    lockstyleset = 1
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -370,14 +366,7 @@ function init_gear_sets()
         back=gear.THF_TP_Cape, 
     })
 
-    sets.idle.Town = set_combine(sets.idle, {
-        head="Shaded Spectacles",
-        neck="Goldsmith's Torque",
-        body="Goldsmith's Apron",
-        ring1="Craftmaster's Ring",
-        ring2="Orvail Ring",
-        feet="Jute Boots +1",
-    })
+    sets.idle.Town = sets.idle
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------

@@ -11,7 +11,6 @@
 --              [ F12 ]             Update Current Gear / Report Current Status
 --              [ CTRL+F12 ]        Cycle Idle Modes
 --              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
---              [ ALT+- ]           Cycle Treasure Hunter Mode
 --
 -------------------------------------------------------------------------------------------------------------------
 
@@ -21,12 +20,7 @@ function get_sets()
     include('lib/enchantments.lua')
 end
 
-
-function job_setup()
-    include('Mote-TreasureHunter')
-    info.default_ja_ids = S{35, 204}
-    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
-    
+function job_setup()    
     state.Buff['Sneak Attack'] = buffactive['sneak attack'] or false
     state.Buff['Trick Attack'] = buffactive['trick attack'] or false
     state.Buff['Feint'] = buffactive['feint'] or false
@@ -36,10 +30,10 @@ end
 
 function user_setup()
     state.OffenseMode:options('Normal', 'Acc', 'PDL')
-    state.HybridMode:options('Normal', 'DT', 'Evasion')
-    state.RangedMode:options('Normal')
     state.WeaponskillMode:options('Normal', 'PDL')
-    state.IdleMode:options('Normal', 'DT')
+    state.RangedMode:options('Normal')
+    state.HybridMode:options('Normal', 'DT', 'TH', 'Evasion')
+    state.IdleMode:options('Normal')
 
     state.WeaponSet = M{['description']='Weapon Set', 'Mpu_Gleti', 'Mpu_Crep', 'Mpu_TP', 'Twashtar_Gleti', 'Twashtar_Crep', 'Twashtar_TP', 'Tauret_Gleti', 'Gandring', 'Savage'}
     state.WeaponLock = M(false, 'Weapon Lock')
@@ -67,8 +61,6 @@ function user_setup()
     gear.THF_CRIT_Cape = { name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10','Phys. dmg. taken-10%',}} --X
 
     include('Global-Binds.lua')
-
-    send_command('bind ^= gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
 
     send_command('bind !F1 input /ja "Perfect Dodge" <me>')
@@ -106,6 +98,15 @@ function user_setup()
         send_command('bind ^numpad3 gs c set WeaponSet Savage;/input macro set 6;')
         set_macro_page(4, 6)
     else
+        send_command('bind ^numpad7 gs c set WeaponSet Mpu_Gleti;/input macro set 4;')
+        send_command('bind ^numpad8 gs c set WeaponSet Mpu_Crep;/input macro set 4;')
+        send_command('bind ^numpad9 gs c set WeaponSet Mpu_TP;/input macro set 4;')
+        send_command('bind ^numpad4 gs c set WeaponSet Twashtar_Gleti;/input macro set 5;')
+        send_command('bind ^numpad5 gs c set WeaponSet Twashtar_Crep;/input macro set 5;')
+        send_command('bind ^numpad6 gs c set WeaponSet Twashtar_TP;/input macro set 5;')
+        send_command('bind ^numpad1 gs c set WeaponSet Tauret_Gleti;/input macro set 5;')
+        send_command('bind ^numpad2 gs c set WeaponSet Gandring;/input macro set 5;')
+        send_command('bind ^numpad3 gs c set WeaponSet Savage;/input macro set 6;')
         set_macro_page(1, 6)
     end
 
@@ -126,15 +127,6 @@ function user_setup()
    
 
     send_command('wait 3; input /lockstyleset 6')
-    
-    state.Auto_Kite = M(false, 'Auto_Kite')
-    Haste = 0
-    DW_needed = 0
-    DW = false
-    moving = false
-    update_combat_form()
-    determine_haste_group()
-    check_gear_haste()
 end
 
 function user_unload()
@@ -159,12 +151,8 @@ function init_gear_sets()
     sets.buff['Sneak Attack'] = {}
     sets.buff['Trick Attack'] = {}
 
-    sets.precast.Step = sets.TreasureHunter
-    sets.precast.Flourish1 = sets.TreasureHunter
-    sets.precast.JA.Provoke = sets.TreasureHunter
-
     sets.precast.JA['Accomplice'] = { head=gear.Empyrean_Head }
-    sets.precast.JA['Collaborator'] = set_combine(sets.TreasureHunter, { head=gear.Empyrean_Head })
+    sets.precast.JA['Collaborator'] = { head=gear.Empyrean_Head }
     sets.precast.JA['Flee'] = { feet=gear.Artifact_Feet }
     sets.precast.JA['Hide'] = { body=gear.Artifact_Body }
 
@@ -400,25 +388,7 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.engaged = {
-        ammo="Aurgelmir Orb +1",
-        head=gear.Empyrean_Head,
-        body=gear.Artifact_Body,
-        hands=gear.Gleti_Hands,
-        legs=gear.Malignance_Legs,
-        feet=gear.Relic_Feet,
-        neck="Asn. Gorget +2",
-        ear1="Sherida Earring",
-        ear2="Dedition Earring",
-        ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Hetairoi,
-        back=gear.THF_TP_Cape,
-        waist="Windbuffet Belt +1",
-    }
-
-
-    -- No Magic Haste (74% DW to cap)
-    sets.engaged.DW = {
-        ammo="Aurgelmir Orb +1",
+         ammo="Aurgelmir Orb +1",
         head=gear.Empyrean_Head,
         body=gear.Artifact_Body,
         hands=gear.Gleti_Hands,
@@ -433,51 +403,7 @@ function init_gear_sets()
         waist="Reiki Yotai", 
     }
 
-    sets.engaged.DW.ExtraHaste = set_combine(sets.engaged.DW, {
-        hands=gear.Adhemar_A_Hands,
-    })
-
-
-    -- 35% Magic Haste (21% DW on gear to cap)
-    sets.engaged.DW.HighHaste = {
-        ammo="Aurgelmir Orb +1",
-        head=gear.Empyrean_Head,
-        body=gear.Artifact_Body,
-        hands=gear.Gleti_Hands,
-        legs=gear.Gleti_Legs,
-        feet=gear.Relic_Feet,
-        neck="Asn. Gorget +2",
-        ear1="Sherida Earring",
-        ear2="Skulker's Earring +2",
-        ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Chirich2,
-        back=gear.THF_TP_Cape,
-        waist="Reiki Yotai", 
-    } 
-
-    sets.engaged.DW.HighHaste.ExtraHaste = set_combine(sets.engaged.DW.HighHaste, {
-        hands=gear.Adhemar_A_Hands,
-    })
-
-    -- 45% Magic Haste (6% DW on gear to cap)
-    sets.engaged.DW.MaxHaste = {
-        ammo="Aurgelmir Orb +1",
-        head=gear.Empyrean_Head,
-        body=gear.Artifact_Body,
-        hands=gear.Gleti_Hands,
-        legs=gear.Gleti_Legs,
-        feet=gear.Relic_Feet,
-        neck="Asn. Gorget +2",
-        ear1="Sherida Earring",
-        ear2="Skulker's Earring +2",
-        ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Chirich2,
-        back=gear.THF_TP_Cape,
-        waist="Reiki Yotai", 
-    } -- 6%
-    
-
-    sets.engaged.DW.MaxHaste.ExtraHaste = set_combine(sets.engaged.DW.MaxHaste, {
+    sets.engaged.ExtraHaste = set_combine(sets.engaged.DW, {
         hands=gear.Adhemar_A_Hands,
     })
 
@@ -512,18 +438,9 @@ function init_gear_sets()
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Evasion = set_combine(sets.engaged, sets.engaged.HybridEvasion)
-   
-    sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.ExtraHaste = set_combine(sets.engaged.DW.ExtraHaste, sets.engaged.Hybrid.ExtraHaste)
-    sets.engaged.DW.Evasion = set_combine(sets.engaged.DW, sets.engaged.HybridEvasion)
-  
-    sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.HighHaste.ExtraHaste = set_combine(sets.engaged.DW.HighHaste.ExtraHaste, sets.engaged.Hybrid.ExtraHaste)
-    sets.engaged.DW.Evasion.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.HybridEvasion)
+    sets.engaged.TH = set_combine(sets.engaged, sets.TreasureHunter)
 
-    sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.MaxHaste.ExtraHaste = set_combine(sets.engaged.DW.MaxHaste.ExtraHaste, sets.engaged.Hybrid.ExtraHaste)
-    sets.engaged.DW.Evasion.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.HybridEvasion)
+    sets.engaged.DT.ExtraHaste = set_combine(sets.engaged.ExtraHaste, sets.engaged.Hybrid.ExtraHaste)
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -585,17 +502,7 @@ function init_gear_sets()
         sets.Kiting =  { feet=gear.Artifact_Feet }
     end
 
-    sets.idle.Town = sets.engaged.DW.MaxHaste
-
-    -- sets.idle.Town = set_combine(sets.engaged.DW.MaxHaste, {
-    --     sub="Sm. Escutcheon",
-    --     body="Blacksmith's Apron",
-    --     hands="Smithy's Mitts",
-    --     neck="Smithy's Torque",
-    --     ring1="Craftmaster's Ring",
-    --     ring2="Confectioner's Ring",
-    --     waist="Blacksmith's Belt"
-    -- })
+    sets.idle.Town = sets.engaged
 
 end
 
@@ -619,9 +526,6 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             -- Matching double weather (w/o day conflict).
             if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
                 equip({waist="Hachirin-no-Obi"})
-            end
-            if state.TreasureMode.value == 'Fulltime' then
-                equip(sets.TreasureHunter)
             end
         end
     end
@@ -648,9 +552,21 @@ function job_post_aftercast(spell, action, spellMap, eventArgs)
     check_buff('Feint', eventArgs)
 end
 
--- Called when a player gains or loses a buff.
--- buff == buff gained or lost
--- gain == true if the buff was gained, false if it was lost.
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
+    display_box_update()
+    -- Check for SATA when equipping gear.  If either is active, equip
+    -- that gear specifically, and block equipping default gear.
+    check_buff('Sneak Attack', eventArgs)
+    check_buff('Trick Attack', eventArgs)
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+    -- th_update(cmdParams, eventArgs)
+end
+
+
 function job_buff_change(buff,gain)
     if buff == "Doom" then
         if gain then
@@ -668,10 +584,6 @@ function job_buff_change(buff,gain)
             state.Buff.AM = false
         end
     end
-
-    if not midaction() then
-        handle_equipping_gear(player.status)
-    end
 end
 
 -- Handle notifications of general user state change.
@@ -681,36 +593,28 @@ function job_state_change(stateField, newValue, oldValue)
     else
         enable('main','sub')
     end
-
     check_weaponset()
 end
 
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_handle_equipping_gear(playerStatus, eventArgs)
-    check_gear()
-    update_combat_form()
-    determine_haste_group()
-    check_gear_haste()
-    check_moving()
-
-    -- Check for SATA when equipping gear.  If either is active, equip
-    -- that gear specifically, and block equipping default gear.
-    check_buff('Sneak Attack', eventArgs)
-    check_buff('Trick Attack', eventArgs)
-end
-
-function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
-    th_update(cmdParams, eventArgs)
-end
-
-function update_combat_form()
-    if DW == true then
-        state.CombatForm:set('DW')
-    elseif DW == false then
-        state.CombatForm:reset()
+function customize_idle_set(idleSet)
+    if state.Buff.Doom then
+        idleSet = set_combine(idleSet, sets.buff.Doom)
     end
+
+    if moving then
+       idleSet = set_combine(idleSet, sets.Kiting)
+    end
+
+    return idleSet
+end
+
+function customize_melee_set(meleeSet)
+    check_weaponset()
+
+    if state.Buff.Doom then
+        meleeSet = set_combine(meleeSet, sets.buff.Doom)
+    end
+    return meleeSet
 end
 
 function get_custom_wsmode(spell, action, spellMap)
@@ -729,30 +633,6 @@ function get_custom_wsmode(spell, action, spellMap)
     end
 
     return wsmode
-end
-
-function customize_idle_set(idleSet)
-    if state.Buff.Doom then
-        idleSet = set_combine(idleSet, sets.buff.Doom)
-    end
-    if state.Auto_Kite.value == true then
-       idleSet = set_combine(idleSet, sets.Kiting)
-    end
-
-    return idleSet
-end
-
-function customize_melee_set(meleeSet)
-    if state.TreasureMode.value == 'Fulltime' then
-        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
-    end
-    if state.Buff.Doom then
-        meleeSet = set_combine(meleeSet, sets.buff.Doom)
-    end
-
-    check_weaponset()
-
-    return meleeSet
 end
 
 -- Function to display the current relevant user state when doing an update.
@@ -777,39 +657,19 @@ function display_current_job_state(eventArgs)
 
     local i_msg = state.IdleMode.value
 
-    local msg = ''
-    if state.TreasureMode.value ~= 'None' then
-        msg = msg .. ' TH: ' ..state.TreasureMode.value.. ' |'
-    end
-    if state.Kiting.value then
-        msg = msg .. ' Kiting: On |'
-    end
-
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
         ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
-        ..string.char(31,002)..msg)
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002))
 
     eventArgs.handled = true
-end
-
-function determine_haste_group()
-    classes.CustomMeleeGroups:clear()
-    if DW == true then
-        if DW_needed <= 7 then
-            classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 7 and DW_needed <= 22 then
-            classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 22 then
-            classes.CustomMeleeGroups:append('')
-        end
-    end
 end
 
 function check_gear_haste()
     if player.equipment.sub == "Centovente" then
         classes.CustomMeleeGroups:append('ExtraHaste')
+    else
+        classes.CustomMeleeGroups:clear()
     end
 end
 
@@ -866,25 +726,10 @@ end
 function check_buff(buff_name, eventArgs)
     if state.Buff[buff_name] then
         equip(sets.buff[buff_name] or {})
-        if state.TreasureMode.value == 'SATA' or state.TreasureMode.value == 'Fulltime' then
-            equip(sets.TreasureHunter)
-        end
         eventArgs.handled = true
     end
 end
 
--- Check for various actions that we've specified in user code as being used with TH gear.
--- This will only ever be called if TreasureMode is not 'None'.
--- Category and Param are as specified in the action event packet.
-function th_action_check(category, param)
-    if category == 2 or -- any ranged attack
-        --category == 4 or -- any magic action
-        (category == 3 and param == 30) or -- Aeolian Edge
-        (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
-        (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
-        then return true
-    end
-end
 
 function check_weaponset()
     equip(sets[state.WeaponSet.current])
