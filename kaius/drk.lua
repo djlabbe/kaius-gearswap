@@ -652,17 +652,18 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         waist="Sailfi Belt +1",
         ear1="Telos Earring",      
-        ear2="Balder Earring +1",
+        -- ear2="Balder Earring +1",
+        ear2="Schere Earring",
         ring1="Niqmaddu ring",
         ring2=gear.Lehko_Or_Moonlight2,
-        back=gear.DRK_DA_Cape,
+        back="Null Shawl",
     }
 
     sets.engaged.Caladbolg = sets.engaged
 
     sets.CaladbolgAM3 = {
-        ear1="Schere Earring", 
         ring2=gear.Lehko_Or_Hetairoi,
+        ear2="Schere Earring", 
     }
 
     sets.engaged.Liberator = sets.engaged
@@ -805,7 +806,7 @@ end
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    display_box_update()
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -829,7 +830,7 @@ function customize_idle_set(idleSet)
     if state.Buff.Doom then
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
-    if moving then
+    if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
 

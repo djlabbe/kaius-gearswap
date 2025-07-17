@@ -17,9 +17,7 @@
 function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
-    include("lib/movement.lua")
-    include("lib/enchantment.lua")
-    include("lib/hud.lua")
+    include("lib/enchantments.lua")
 end
 
 function job_setup()
@@ -48,7 +46,7 @@ function user_setup()
     gear.Artifact_Feet = { name= "Wakido Sune-Ate +3" }
 
     gear.Relic_Head = { name= "Sakonji Kabuto +3" }
-    gear.Relic_Body = { name= "Sakonji Domaru +3" }
+    gear.Relic_Body = { name= "Sakonji Domaru +4" }
     gear.Relic_Hands = { name= "Sakonji Kote +3" }
     gear.Relic_Legs = { name= "Sakonji Haidate +3" }
     gear.Relic_Feet = { name= "Sakonji Sune-Ate +3" }
@@ -602,7 +600,7 @@ end
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    display_box_update()
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -619,7 +617,7 @@ function get_custom_wsmode(spell, action, spellMap)
 end
 
 function customize_idle_set(idleSet)
-    if moving then
+    if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
     return idleSet

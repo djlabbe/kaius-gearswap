@@ -142,6 +142,9 @@ function user_setup()
     send_command('wait 3; input /lockstyleset 22')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
+    Haste = 0
+    DW_needed = 0
+    DW = false
     moving = false
 end
 
@@ -673,7 +676,6 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
     check_moving()
-    
 end
 
 function job_update(cmdParams, eventArgs)

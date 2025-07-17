@@ -57,8 +57,8 @@ function user_setup()
     gear.Relic_Head = { name="Piety Cap +3" }
     gear.Relic_Body = { name="Piety Bliaut +3" }
     gear.Relic_Hands = { name="Piety Mitts +3" }
-    gear.Relic_Legs = { name="Piety Pantaloons +3" }
-    gear.Relic_Feet = { name="Piety Duckbills +3" }
+    gear.Relic_Legs = { name="Piety Pantaloons +4" }
+    gear.Relic_Feet = { name="Piety Duckbills +4" }
 
     gear.Empyrean_Head = { name="Ebers Cap +2", priority=64 }
     gear.Empyrean_Body = { name="Ebers Bliaut +2", priority=127 }
@@ -161,7 +161,7 @@ function init_gear_sets()
         hands={name="Volte gloves", priority=1}, --6
         ring1={name="Lebeche Ring", priority=1},
         ring2={name="Kishar Ring", priority=1}, --4
-        back={name="Fi Follet Cape +1", priority=1}, --10
+        back=gear.WHM_Cure_Cape, --10
         waist=gear.Platinum_Moogle_Belt,
         legs="Aya. Cosciales +2", --6
         feet={name="Regal Pumps +1", priority=13} --7
@@ -193,7 +193,7 @@ function init_gear_sets()
         head=gear.Empyrean_Head, --(CP-22)
         neck={name="Clr. Torque +2", priority=1}, --(CP-10) (Enm-25)
         ear1={name="Glorious Earring", priority=1}, -- (CPII-2) (Enm-5) 
-        ear2="Mendicant's Earring"
+        ear2="Mendicant's Earring",
         body=gear.Empyrean_Body,
         hands=gear.Artifact_Hands, -- (CPII-4) (Enm-7)
         legs=gear.Empyrean_Legs, --(DT-13)
@@ -506,7 +506,7 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         ring1=gear.Gerubu_Or_Stikini1,
         ring2=gear.Stikini_2,
-        back="Null Shawl", --10 
+        back=gear.WHM_Cure_Cape, --10 
         waist=gear.Platinum_Moogle_Belt, --3
     } --50 (11 Refresh)
 

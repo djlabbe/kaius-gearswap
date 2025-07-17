@@ -127,6 +127,9 @@ function user_setup()
    
 
     send_command('wait 3; input /lockstyleset 6')
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    moving = false
 end
 
 function user_unload()
@@ -554,11 +557,11 @@ end
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    display_box_update()
     -- Check for SATA when equipping gear.  If either is active, equip
     -- that gear specifically, and block equipping default gear.
     check_buff('Sneak Attack', eventArgs)
     check_buff('Trick Attack', eventArgs)
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -601,7 +604,7 @@ function customize_idle_set(idleSet)
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
 
-    if moving then
+    if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
 

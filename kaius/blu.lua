@@ -1020,7 +1020,7 @@ end
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    display_box_update()
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -1060,7 +1060,7 @@ function get_custom_wsmode(spell, action, spellMap)
 end
 
 function customize_idle_set(idleSet)
-    if moving then
+   if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
     return idleSet

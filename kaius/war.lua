@@ -38,12 +38,6 @@ function user_setup()
     gear.Artifact_Legs = { name= "Pummeler's Cuisses +4" }
     gear.Artifact_Feet = { name= "Pummeler's Calligae" }
 
-    gear.Artifact_Head = { name= "Pummeler's Mask +2" }
-    gear.Artifact_Body = { name= "Pummeler's Lorica +2" }
-    -- gear.Artifact_Hands = { name= "Pummeler's Mufflers +1" }
-    gear.Artifact_Legs = { name= "Pummeler's Cuisses +4" }
-    gear.Artifact_Feet = { name= "Pummeler's Calligae" }
-
     gear.Relic_Head = { name= "Agoge Mask +4" }
     gear.Relic_Body = { name= "Agoge Lorica +3" }
     gear.Relic_Hands = { name= "Agoge Mufflers +3" }
@@ -91,7 +85,14 @@ function user_setup()
         set_macro_page(6, 1)
     end
     
-    
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    Haste = 0
+    DW_needed = 0
+    DW = false
+    moving = false
+    update_combat_form()
+    determine_haste_group()
+
     send_command('wait 3; input /lockstyleset 1' )
 end
 
@@ -397,7 +398,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Thrud Earring",
         ring1=gear.Cornelia_Or_Niqmaddu,
-        ring2="Regal Ring",
+        ring2=gear.Ephramad_Or_Regal,
         waist="Sailfi Belt +1",
         back=gear.WAR_WS1_Cape,
     }
@@ -407,8 +408,8 @@ function init_gear_sets()
     sets.precast.WS["Fimbulvetr"].PDL = set_combine(sets.precast.WS["Fimbulvetr"], {
         body=gear.Sakpata_Body,
         legs=gear.Empyrean_Legs,
-        ring1=gear.Ephramad_Or_Sroda,
-        ring2="Epaminondas's Ring",
+        ring1="Epaminondas's Ring",
+        ring2=gear.Ephramad_Or_Sroda,
     })
 
     sets.precast.WS["Stardiver"] = {
@@ -570,13 +571,22 @@ end
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    display_box_update()
+    update_combat_form()
+    determine_haste_group()
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
 end
 
+function update_combat_form()
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
+end
 
 function job_buff_change(buff, gain)
     if buff == "Doom" then
@@ -621,7 +631,7 @@ function customize_idle_set(idleSet)
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
 
-    if moving then
+    if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
 
@@ -699,4 +709,52 @@ end
 
 function check_weaponset()
     equip(sets[state.WeaponSet.current])
+end
+
+function determine_haste_group()
+    classes.CustomMeleeGroups:clear()
+    if DW == true then
+        if DW_needed <= 14 then
+            classes.CustomMeleeGroups:append('MaxHaste')
+        elseif DW_needed > 15 and DW_needed <= 26 then
+            classes.CustomMeleeGroups:append('HighHaste')
+        elseif DW_needed > 26 and DW_needed <= 32 then
+            classes.CustomMeleeGroups:append('MidHaste')
+        elseif DW_needed > 32 and DW_needed <= 43 then
+            classes.CustomMeleeGroups:append('LowHaste')
+        elseif DW_needed > 43 then
+            classes.CustomMeleeGroups:append('')
+        end
+    end
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+                DW_needed = 0
+                DW = false
+            end
+        end
+        if type(tonumber(cmdParams[3])) == 'number' then
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
+            end
+        end
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
 end

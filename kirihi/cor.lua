@@ -180,7 +180,13 @@ function user_setup()
         send_command('bind ^numpad. gs c set WeaponSet Naegling_Crep;input /macro set 1')
         set_macro_page(2, 17)
     end
-   
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    Haste = 0
+    DW_needed = 0
+    DW = false
+    moving = false
+    update_combat_form()
     send_command('wait 3; input /lockstyleset 17')
 end
 
@@ -509,13 +515,13 @@ function init_gear_sets()
         legs=gear.Empyrean_Legs,
         feet=gear.Ikenga_Feet,
         neck="Iskur Gorget",
-        ear1="Crepuscular Earring",
-        -- ear2="Telos Earring",
+        -- ear1="Crepuscular Earring",
+        ear1="Telos Earring",
         ear2="Beyla Earring",
         ring1="Crepuscular Ring",
         ring2=gear.Ephramad_Or_Ilabrat,
         back=gear.COR_RA_Cape,
-        waist="Tellen Belt",
+        waist="Kwahu Kachina Belt +1",
     }
 
     sets.midcast.RA.Critical = {
@@ -822,12 +828,22 @@ end
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    display_box_update()
+    update_combat_form()
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
 end
+
+function update_combat_form()
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
+end
+
 
 function get_custom_wsmode(spell, action, spellMap)
     local wsmode
@@ -855,7 +871,7 @@ function customize_idle_set(idleSet)
     if state.Buff.Doom then
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
-    if moving then
+    if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
 
@@ -900,8 +916,8 @@ windower.register_event('action',
         isTarget = false
         for _, target in ipairs(actionTargets) do
             if playerId == target.id then
-                isTarget = true
-            end
+                    isTarget = true
+                end
         end
         if isTarget == true then
             if act.category == 4 then
@@ -927,11 +943,7 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1]:lower() == 'forceequip' then
         handle_forceequip(cmdParams)
     end
-
-    -- if cmdParams[1] == 'save' then
-	-- 	config.save(hud_settings, windower.ffxi.get_player().name:lower())
-    --     add_to_chat(122, 'HUD settings saved.')
-    -- end
+    gearinfo(cmdParams, eventArgs)
 end
 
 
@@ -1070,6 +1082,37 @@ function check_weaponset()
     equip(sets[state.WeaponSet.current])
     if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
         equip(sets.DefaultShield)
+    end
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+                DW_needed = 0
+                DW = false
+            end
+        end
+        if type(tonumber(cmdParams[3])) == 'number' then
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
+            end
+        end
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
     end
 end
 

@@ -181,6 +181,13 @@ function user_setup()
         set_macro_page(2, 17)
     end
    
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    Haste = 0
+    DW_needed = 0
+    DW = false
+    moving = false
+    
+
     send_command('wait 3; input /lockstyleset 17')
 end
 
@@ -821,11 +828,20 @@ end
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    display_box_update()
+    update_combat_form()
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
+end
+
+function update_combat_form()
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
 end
 
 function get_custom_wsmode(spell, action, spellMap)
@@ -854,7 +870,7 @@ function customize_idle_set(idleSet)
     if state.Buff.Doom then
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
-    if moving then
+   if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
 
@@ -1069,7 +1085,7 @@ function check_weaponset()
     end
 end
 
-------- AUTO AMMO ------
+-- ------- AUTO AMMO ------
 
 -- This was really the first main chunk I found when trying to reverse engineer Auto-Ammo. There are many references to other data and functions,
 -- but we can see that the idea is:

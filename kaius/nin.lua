@@ -666,7 +666,7 @@ end
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    display_box_update()
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -688,7 +688,7 @@ function get_custom_wsmode(spell, action, spellMap)
 end
 
 function customize_idle_set(idleSet)
-    if moving == true then
+    if state.Auto_Kite.value == true then
         if world.time >= (17*60) or world.time <= (7*60) then
             idleSet = set_combine(idleSet, sets.NightMovement)
         else

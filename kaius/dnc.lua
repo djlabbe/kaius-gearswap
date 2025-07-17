@@ -100,6 +100,9 @@ function user_setup()
     end
     
     send_command('wait 3; input /lockstyleset 19')
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    moving = false
 end
 
 
@@ -600,7 +603,7 @@ end
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
-    display_box_update()
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -638,7 +641,7 @@ function customize_idle_set(idleSet)
         idleSet = set_combine(idleSet, sets.idle.Regain)
     end
     
-    if moving then
+    if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
 
@@ -695,7 +698,7 @@ function job_self_command(cmdParams, eventArgs)
     if (cmdParams[1]:lower() == 'enchantment') then
         handle_enchantment_command(cmdParams)
         eventArgs.handled = true
-    else if cmdParams[1] == 'step' then
+    elseif cmdParams[1] == 'step' then
         send_command('@input /ja "'..state['MainStep'].current..'" <t>')
     elseif cmdParams[1] == 'step2' then
         send_command('@input /ja "'..state['AltStep'].current..'" <t>')

@@ -195,6 +195,22 @@ function init_gear_sets()
         ring2={name="Gelatinous Ring +1", priority=135},        
         back=gear.PLD_SIRD_Cape,        --10/10
       }
+    
+      sets.precast.WS['Savage Blade'] = {
+        ammo="Coiste Bodhar",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Knight's Bead Necklace +2",
+        waist="Sailfi Belt +1",
+        ear1="Thrud Earring",
+        ear2="Moonshade Earring",
+        ring1="Epaminondas's Ring",
+        ring2=gear.Ephramad_Or_Sroda,
+    }
+
 
     sets.precast.WS['Sanguine Blade'] = {
         ear1="Friomisi Earring",
