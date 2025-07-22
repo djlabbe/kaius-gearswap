@@ -659,5 +659,5 @@ function init_gear_sets()
     sets.Verethragna = { main="Verethragna" }
     sets.Godhands = { main="Godhands" }
 
-    sets.idle.Town = sets.engaged.Master
+    sets.idle.Town = sets.idle
 end

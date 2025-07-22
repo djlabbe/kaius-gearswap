@@ -99,6 +99,9 @@ function user_setup()
     end
 
     send_command('wait 3; input /lockstyleset 12')
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    moving = false
 end
 
 function user_unload()

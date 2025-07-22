@@ -122,7 +122,7 @@ function user_setup()
 
     include('Global-Binds.lua')
 
-    gear.Artifact_Head = { name="Orion Beret +3" }
+    gear.Artifact_Head = { name="Orion Beret +4" }
     gear.Artifact_Body = { name="Orion Jerkin +3" }
     gear.Artifact_Legs = { name="Orion Braccae +3" }
     gear.Artifact_Hands = { name="Orion Bracers +3" }
@@ -531,8 +531,8 @@ function init_gear_sets()
         ear2="Amini Earring +1",
         body=gear.Empyrean_Body,
         hands=gear.Empyrean_Hands,
-        ring1=gear.Lehko_Or_Dingir,
-        ring2="Regal Ring",
+        ring1="Regal Ring",
+        ring2=gear.Ephramad_Or_Dingir,
         back=gear.RNG_CRIT_Cape,
         waist="Fotia Belt",
         legs=gear.Empyrean_Legs,

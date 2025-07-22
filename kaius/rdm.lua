@@ -191,7 +191,6 @@ function user_setup()
     DW = false
     moving = false
     update_combat_form()
-    determine_haste_group()
 end
 
 function user_unload()
@@ -298,6 +297,22 @@ function init_gear_sets()
         waist="Fotia Belt",
     }
 
+     sets.precast.WS['Ruthless Stroke'] = {
+        ammo="Coiste Bodhar",
+        head=gear.Nyame_Head,
+        body=gear.Nyame_Body,
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Empyrean_Feet,
+        neck="Rep. Plat. Medal",
+        ear1="Ishvara Earring",
+        ear2="Moonshade Earring",
+        ring1="Metamorph Ring +1",
+        ring2="Ilabrat Ring",
+        back=gear.RDM_WS1_Cape,
+        waist="Kentarch Belt +1",
+    }
+
     sets.precast.WS['Chant du Cygne'] =  {
         ammo="Yetshila +1",
         head="Blistering Sallet +1",
@@ -323,9 +338,9 @@ function init_gear_sets()
         legs=gear.Nyame_Legs,
         feet=gear.Empyrean_Feet,
         neck="Rep. Plat. Medal",
-        ear1="Sherida Earring",
+        ear1="Ishvara Earring",
         ear2="Moonshade Earring",
-        ring1="Sroda Ring",
+        ring1=gear.Ephramad_Or_Sroda,
         ring2=gear.Cornelia_Or_Epaminondas,
         back=gear.RDM_WS1_Cape,
         waist="Sailfi Belt +1",
@@ -1000,75 +1015,6 @@ function init_gear_sets()
     -- No Magic Haste (74% DW to cap) (49% DW Needed)
     sets.engaged.DW = {
         ammo="Coiste Bodhar",
-        head=gear.Bunzi_Head,
-        body=gear.Malignance_Body,
-        hands=gear.Malignance_Hands,
-        legs=gear.Carmine_D_Legs, --6
-        feet=gear.Malignance_Feet,
-        neck="Anu Torque",
-        ear1="Sherida Earring",
-        ear2="Suppanomimi", --5
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.RDM_DW_Cape, --10
-        waist="Sailfi Belt +1",
-    } --41
-
-    -- 15% Magic Haste (67% DW to cap) (42% DW Needed)
-    sets.engaged.DW.LowHaste = set_combine(sets.engaged.DW, {
-        ammo="Coiste Bodhar",
-        head=gear.Bunzi_Head,
-        body=gear.Malignance_Body,
-        hands=gear.Malignance_Hands,
-        legs=gear.Carmine_D_Legs, --6
-        feet=gear.Malignance_Feet,
-        neck="Anu Torque",
-        ear1="Sherida Earring",
-        ear2="Suppanomimi", --5
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.RDM_DW_Cape, --10
-        waist="Sailfi Belt +1",
-    }) --41
-
-    -- 30% Magic Haste (56% DW to cap) (31% DW Needed)
-    -- This is self haste II only, no external buffs.
-    sets.engaged.DW.MidHaste = set_combine(sets.engaged.DW, {
-        ammo="Coiste Bodhar",
-        head=gear.Bunzi_Head,
-        body=gear.Malignance_Body,
-        hands=gear.Malignance_Hands,
-        legs=gear.Carmine_D_Legs, --6
-        feet=gear.Malignance_Feet,
-        neck="Anu Torque",
-        ear1="Sherida Earring",
-        ear2="Suppanomimi", --5
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.RDM_DW_Cape, --10
-        waist="Sailfi Belt +1",
-    }) --31
-
-    -- 35% Magic Haste (51% DW to cap)
-    sets.engaged.DW.HighHaste = {
-        ammo="Coiste Bodhar",
-        head=gear.Bunzi_Head,
-        body=gear.Malignance_Body,
-        hands=gear.Malignance_Hands,
-        legs=gear.Malignance_Legs,
-        feet=gear.Malignance_Feet,
-        neck="Anu Torque",
-        ear1="Sherida Earring",
-        ear2="Suppanomimi", --5
-        ring1=gear.Chirich_1,
-        ring2=gear.Chirich_2,
-        back=gear.RDM_DW_Cape, --10
-        waist="Sailfi Belt +1",
-    } --22
-
-    -- 45% Magic Haste (36% DW to cap) (11% DW Needed)
-    sets.engaged.DW.MaxHaste = {
-        ammo="Coiste Bodhar",
         head=gear.Bunzi_Head, --7DT
         body=gear.Malignance_Body, --9DT
         hands=gear.Malignance_Hands, --5DT
@@ -1080,8 +1026,9 @@ function init_gear_sets()
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         back=gear.RDM_DW_Cape, --10DW 10PDT
-        waist="Sailfi Belt +1",
-    } --42% PDT
+        waist="Windbuffet Belt +1",
+    } --41
+
 
     sets.engaged.Hybrid = {
         ring2="Defending Ring",
@@ -1089,10 +1036,6 @@ function init_gear_sets()
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
 
     sets.engaged.Enspell = {
         hands="Ayanmo Manopolas +2",
@@ -1263,7 +1206,6 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
     update_combat_form()
-    determine_haste_group()
     check_moving()
 end
 
@@ -1396,23 +1338,6 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
-
-function determine_haste_group()
-    classes.CustomMeleeGroups:clear()
-    if DW == true then
-        if DW_needed <= 11 then
-            classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 11 and DW_needed <= 26 then
-            classes.CustomMeleeGroups:append('HighHaste')
-        elseif DW_needed > 26 and DW_needed <= 32 then
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif DW_needed > 32 and DW_needed <= 43 then
-            classes.CustomMeleeGroups:append('LowHaste')
-        elseif DW_needed > 43 then
-            classes.CustomMeleeGroups:append('')
-        end
-    end
-end
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then

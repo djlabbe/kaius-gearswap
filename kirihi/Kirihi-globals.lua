@@ -154,17 +154,17 @@ function define_global_sets()
     gear.Taeon_Pet_Legs = {name="Taeon Tights", augments={'Pet: Accuracy+18 Pet: Rng. Acc.+18','Pet: "Dbl. Atk."+4','Pet: Damage taken -4%',}}
     gear.Taeon_Pet_Feet = {name="Taeon Boots", augments={'Pet: Accuracy+21 Pet: Rng. Acc.+21','Pet: "Dbl. Atk."+4','Pet: Damage taken -4%',}}
     
-    gear.Telchine_ENH_Head = {name="Telchine Cap", augments={'Mag. Evasion+24','"Conserve MP"+3','Enh. Mag. eff. dur. +10',}}
-    gear.Telchine_ENH_Body = {name="Telchine Chas.", augments={'Mag. Evasion+20','"Conserve MP"+5','Enh. Mag. eff. dur. +10',}}
-    gear.Telchine_ENH_Hands= {name="Telchine Gloves", augments={'Mag. Evasion+20','"Conserve MP"+5','Enh. Mag. eff. dur. +10',}}
-    gear.Telchine_ENH_Legs = {name="Telchine Braconi", augments={'Mag. Evasion+23','"Conserve MP"+5','Enh. Mag. eff. dur. +10',}}
-    gear.Telchine_ENH_Feet = {name="Telchine Pigaches", augments={'Mag. Evasion+19','"Conserve MP"+4','Enh. Mag. eff. dur. +10',}}
+    gear.Telchine_ENH_Head = {name="Telchine Cap", augments={'Enh. Mag. eff. dur. +9',}}
+    gear.Telchine_ENH_Body = {name="Telchine Chas.", augments={'Enh. Mag. eff. dur. +10',}}
+    gear.Telchine_ENH_Hands= {name="Telchine Gloves", augments={'Enh. Mag. eff. dur. +9',}}
+    gear.Telchine_ENH_Legs = {name="Telchine Braconi", augments={'Enh. Mag. eff. dur. +10',}}
+    -- gear.Telchine_ENH_Feet = {name="Telchine Pigaches", augments={'Mag. Evasion+19','"Conserve MP"+4','Enh. Mag. eff. dur. +10',}}
 
-    gear.Telchine_REGEN_Body = { name="Telchine Chas.", augments={'"Regen" potency+3',}}
-    gear.Telchine_REGEN_Hands = { name="Telchine Gloves", augments={'"Regen" potency+3',}}
-    gear.Telchine_REGEN_Legs = { name="Telchine Braconi", augments={'"Regen" potency+3',}}
-    gear.Telchine_REGEN_Feet = { name="Telchine Pigaches", augments={'Mag. Evasion+25','Song spellcasting time -6%','"Regen" potency+3',}}
-    gear.Telchine_CURE_Hands = { name="Telchine Gloves", augments={'Mag. Evasion+19','"Cure" potency +8%','MND+9',}}
+    -- gear.Telchine_REGEN_Body = { name="Telchine Chas.", augments={'"Regen" potency+3',}}
+    -- gear.Telchine_REGEN_Hands = { name="Telchine Gloves", augments={'"Regen" potency+3',}}
+    -- gear.Telchine_REGEN_Legs = { name="Telchine Braconi", augments={'"Regen" potency+3',}}
+    -- gear.Telchine_REGEN_Feet = { name="Telchine Pigaches", augments={'Mag. Evasion+25','Song spellcasting time -6%','"Regen" potency+3',}}
+    -- gear.Telchine_CURE_Hands = { name="Telchine Gloves", augments={'Mag. Evasion+19','"Cure" potency +8%','MND+9',}}
 
     gear.Yorium_PHLX_Head = {name="Yorium Barbuta", augments={'Phalanx +3',}}
     gear.Yorium_PHLX_Body = {name="Yorium Cuirass", augments={'Phalanx +3',}}

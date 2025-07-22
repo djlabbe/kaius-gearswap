@@ -707,6 +707,7 @@ function job_self_command(cmdParams, eventArgs)
         disable('body')
         send_command('pause 7;@input /item "Volte Harness" <me>;wait 0.5;@input //gs enable body')
     end
+    gearinfo(cmdParams, eventArgs)
 end
 
 -- Automatically use Presto for steps when it's available 
@@ -723,4 +724,19 @@ end
 
 function check_weaponset()
     equip(sets[state.WeaponSet.current])
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
 end

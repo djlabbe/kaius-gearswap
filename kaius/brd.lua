@@ -103,7 +103,7 @@ function user_setup()
     gear.Relic_Legs = { name= "Bihu Cannions +3" }
     gear.Relic_Feet = { name= "Bihu Slippers +3" }
 
-    gear.Empyrean_Head = { name= "Fili Calot +2" }
+    gear.Empyrean_Head = { name= "Fili Calot +3" }
     gear.Empyrean_Body = { name= "Fili Hongreline +3" }
     gear.Empyrean_Hands = { name= "Fili Manchettes +3" }
     gear.Empyrean_Legs = { name= "Fili Rhingrave +3" }

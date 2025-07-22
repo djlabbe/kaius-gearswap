@@ -815,6 +815,7 @@ function init_gear_sets()
 
     sets.Obi = { waist="Hachirin-no-Obi" }
     sets.Naegling = { main="Naegling", sub="Fusetto +2" }
+    -- sets.Naegling = { main="Naegling", sub="Gleti's Knife" }
     sets.Carnwenhan = { main="Carnwenhan", sub="Gleti's Knife" }
     sets.Tauret = { main="Tauret", sub="Gleti's Knife" }
     sets.DefaultShield = { sub="Genmei Shield" }
