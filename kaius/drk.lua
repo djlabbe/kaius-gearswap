@@ -653,8 +653,8 @@ function init_gear_sets()
         neck="Null Loop",
         waist="Sailfi Belt +1",
         ear1="Telos Earring",      
-        -- ear2="Balder Earring +1",
-        ear2="Schere Earring",
+        ear2="Balder Earring +1",
+        -- ear2="Schere Earring",
         ring1="Niqmaddu ring",
         ring2=gear.Lehko_Or_Moonlight2,
         back="Null Shawl",
@@ -664,7 +664,7 @@ function init_gear_sets()
 
     sets.CaladbolgAM3 = {
         ring2=gear.Lehko_Or_Hetairoi,
-        ear2="Schere Earring", 
+        -- ear2="Schere Earring", 
     }
 
     sets.engaged.Liberator = sets.engaged

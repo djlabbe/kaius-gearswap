@@ -944,6 +944,8 @@ function job_self_command(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'forceequip' then
         handle_forceequip(cmdParams)
     end
+
+    gearinfo(cmdParams, eventArgs)
 end
 
 
@@ -1082,6 +1084,38 @@ function check_weaponset()
     equip(sets[state.WeaponSet.current])
     if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
         equip(sets.DefaultShield)
+    end
+end
+
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+                DW_needed = 0
+                DW = false
+            end
+        end
+        if type(tonumber(cmdParams[3])) == 'number' then
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
+            end
+        end
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
     end
 end
 

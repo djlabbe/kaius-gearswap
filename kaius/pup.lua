@@ -28,7 +28,7 @@ function job_setup()
 end
 
 function user_setup()
-    include('Global-Binds.lua')
+    -- include('Global-Binds.lua')
 
     state.WeaponLock = M(false, 'Weapon Lock')
     state.WeaponSet = M{['description']='Weapon Set', 'Xiucoatl', 'Verethragna', 'Godhands'}
@@ -160,10 +160,10 @@ function init_gear_sets()
     gear.Animator_P1 = "Animator P +1"
     gear.Animator_Neo = "Neo Animator"
 
-    gear.Artifact_Head = { name="Foire Taj +2" }
-    gear.Artifact_Body = { name="Foire Tobe +2" }
-    gear.Artifact_Hands = { name="Foire Dastanas +2" }
-    gear.Artifact_Legs = { name="Foire Churidars +2" }    
+    gear.Artifact_Head = { name="Foire Taj +3" }
+    gear.Artifact_Body = { name="Foire Tobe +3" }
+    gear.Artifact_Hands = { name="Foire Dastanas +3" }
+    gear.Artifact_Legs = { name="Foire Churidars +3" }    
     gear.Artifact_Feet = { name="Foire Babouches +3" }
 
     gear.Relic_Head = { name="Pitre Taj +3" }
@@ -176,7 +176,7 @@ function init_gear_sets()
     gear.Empyrean_Body = { name="Karagoz Farsetto +3" }
     gear.Empyrean_Hands = { name="Karagoz Guanti +3" }
     gear.Empyrean_Legs = { name="Karagoz Pantaloni +3" }
-    gear.Empyrean_Feet = { name="Karagoz Scarpe +2" }
+    gear.Empyrean_Feet = { name="Karagoz Scarpe +3" }
 
     gear.Taeon_PUP_Head = { name="Taeon Chapeau", augments={'Pet: Accuracy+21 Pet: Rng. Acc.+21','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}
     gear.Taeon_PUP_Body = { name="Taeon Tabard", augments={'Pet: Accuracy+24 Pet: Rng. Acc.+24','Pet: "Dbl. Atk."+5','Pet: Damage taken -4%',}}

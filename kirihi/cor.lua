@@ -94,7 +94,7 @@ function user_setup()
     gear.Artifact_Legs = { name= "Laksamana's Trews +2" }
     gear.Artifact_Feet = { name= "Laksamana's Bottes +2" }
 
-    gear.Relic_Head = { name= "Lanun Tricorne +3" }
+    gear.Relic_Head = { name= "Lanun Tricorne +4" }
     gear.Relic_Body = { name= "Lanun Frac +4" }
     gear.Relic_Hands = { name= "Lanun Gants +3" }
     gear.Relic_Legs = { name= "Lanun Trews +3" }
@@ -103,7 +103,7 @@ function user_setup()
     gear.Empyrean_Head = { name= "Chasseur's Tricorne +2" }
     gear.Empyrean_Body = { name= "Chasseur's Frac +2" }
     gear.Empyrean_Hands = { name= "Chasseur's Gants +3" }
-    gear.Empyrean_Legs = { name= "Chasseur's Culottes +2" }
+    gear.Empyrean_Legs = { name= "Chasseur's Culottes +3" }
     gear.Empyrean_Feet = { name= "Chasseur's Bottes +2" }
 
     gear.COR_SNP_Cape = { name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','"Snapshot"+10','Mag. Evasion+15',}} 

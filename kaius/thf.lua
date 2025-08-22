@@ -18,6 +18,7 @@ function get_sets()
     mote_include_version = 2
     include('Mote-Include.lua')
     include('lib/enchantments.lua')
+    include('Mote-TreasureHunter')
 end
 
 function job_setup()    
@@ -26,6 +27,11 @@ function job_setup()
     state.Buff['Feint'] = buffactive['feint'] or false
     state.Buff.Doom = false
     state.Buff.AM = false
+
+    -- JA IDs for actions that always have TH: Provoke, Animated Flourish
+    info.default_ja_ids = S{35, 204}
+    -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
+    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 end
 
 function user_setup()
@@ -35,13 +41,13 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT', 'TH', 'Evasion')
     state.IdleMode:options('Normal')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Mpu_Gleti', 'Mpu_Crep', 'Mpu_TP', 'Twashtar_Gleti', 'Twashtar_Crep', 'Twashtar_TP', 'Tauret_Gleti', 'Gandring', 'Savage'}
+    state.WeaponSet = M{['description']='Weapon Set',  'Mpu_TP', 'Mpu_Gleti', 'Mpu_Crep', 'Twashtar_Gleti', 'Twashtar_Crep', 'Twashtar_TP', 'Tauret_Gleti', 'Gandring', 'Savage'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
-    -- gear.Artifact_Head = { name="Pillager's Bonnet +2" }
-    gear.Artifact_Body = { name="Pillager's Vest +3" }
-    -- gear.Artifact_Hands = { name="Pillager's Armlets +1" }
-    -- gear.Artifact_Legs = { name="Pillager's Culottes +2" }
+    gear.Artifact_Head = { name="Pillager's Bonnet +3" }
+    gear.Artifact_Body = { name="Pillager's Vest +4" }
+    gear.Artifact_Hands = { name="Pillager's Armlets +3" }
+    gear.Artifact_Legs = { name="Pillager's Culottes +3" }
     gear.Artifact_Feet = { name="Pillager's Poulaines +3" }
 
     gear.Relic_Head = { name="Plunderer's Bonnet +3" }
@@ -53,7 +59,7 @@ function user_setup()
     gear.Empyrean_Head = { name="Skulker's Bonnet +3" }
     gear.Empyrean_Body = { name="Skulker's Vest +3" }
     gear.Empyrean_Hands = { name="Skulker's Armlets +2" }
-    gear.Empyrean_Legs = { name="Skulker's Culottes +2" }
+    gear.Empyrean_Legs = { name="Skulker's Culottes +3" }
     gear.Empyrean_Feet = { name="Skulker's Poulaines +3" }
 
     gear.THF_TP_Cape = { name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}} --X
@@ -61,6 +67,7 @@ function user_setup()
     gear.THF_CRIT_Cape = { name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10','Phys. dmg. taken-10%',}} --X
 
     include('Global-Binds.lua')
+    send_command('bind ^` gs c cycle treasuremode')
     send_command('bind @w gs c toggle WeaponLock')
 
     send_command('bind !F1 input /ja "Perfect Dodge" <me>')
@@ -75,9 +82,9 @@ function user_setup()
     
     if player.sub_job == 'WAR' then
         send_command('bind !t input /ja "Provoke" <t>')
-        send_command('bind ^numpad7 gs c set WeaponSet Mpu_Gleti;/input macro set 1;')
-        send_command('bind ^numpad8 gs c set WeaponSet Mpu_Crep;/input macro set 1;')
-        send_command('bind ^numpad9 gs c set WeaponSet Mpu_TP;/input macro set 1;')
+        send_command('bind ^numpad7 gs c set WeaponSet Mpu_TP;/input macro set 1;')
+        send_command('bind ^numpad8 gs c set WeaponSet Mpu_Gleti;/input macro set 1;')
+        send_command('bind ^numpad9 gs c set WeaponSet Mpu_Crep;/input macro set 1;')
         send_command('bind ^numpad4 gs c set WeaponSet Twashtar_Gleti;/input macro set 2;')
         send_command('bind ^numpad5 gs c set WeaponSet Twashtar_Crep;/input macro set 2;')
         send_command('bind ^numpad6 gs c set WeaponSet Twashtar_TP;/input macro set 2;')
@@ -87,9 +94,9 @@ function user_setup()
         set_macro_page(1, 6)
     elseif player.sub_job == 'DNC' then
         send_command('bind !t input /ja "Animated Flourish" <t>')
-        send_command('bind ^numpad7 gs c set WeaponSet Mpu_Gleti;/input macro set 4;')
-        send_command('bind ^numpad8 gs c set WeaponSet Mpu_Crep;/input macro set 4;')
-        send_command('bind ^numpad9 gs c set WeaponSet Mpu_TP;/input macro set 4;')
+        send_command('bind ^numpad7 gs c set WeaponSet Mpu_TP;/input macro set 4;')
+        send_command('bind ^numpad8 gs c set WeaponSet Mpu_Gleti;/input macro set 4;')
+        send_command('bind ^numpad9 gs c set WeaponSet Mpu_Crep;/input macro set 4;')
         send_command('bind ^numpad4 gs c set WeaponSet Twashtar_Gleti;/input macro set 5;')
         send_command('bind ^numpad5 gs c set WeaponSet Twashtar_Crep;/input macro set 5;')
         send_command('bind ^numpad6 gs c set WeaponSet Twashtar_TP;/input macro set 5;')
@@ -98,9 +105,9 @@ function user_setup()
         send_command('bind ^numpad3 gs c set WeaponSet Savage;/input macro set 6;')
         set_macro_page(4, 6)
     else
-        send_command('bind ^numpad7 gs c set WeaponSet Mpu_Gleti;/input macro set 4;')
-        send_command('bind ^numpad8 gs c set WeaponSet Mpu_Crep;/input macro set 4;')
-        send_command('bind ^numpad9 gs c set WeaponSet Mpu_TP;/input macro set 4;')
+        send_command('bind ^numpad7 gs c set WeaponSet Mpu_TP;/input macro set 4;')
+        send_command('bind ^numpad8 gs c set WeaponSet Mpu_Gleti;/input macro set 4;')
+        send_command('bind ^numpad9 gs c set WeaponSet Mpu_Crep;/input macro set 4;')
         send_command('bind ^numpad4 gs c set WeaponSet Twashtar_Gleti;/input macro set 5;')
         send_command('bind ^numpad5 gs c set WeaponSet Twashtar_Crep;/input macro set 5;')
         send_command('bind ^numpad6 gs c set WeaponSet Twashtar_TP;/input macro set 5;')
@@ -110,20 +117,21 @@ function user_setup()
         set_macro_page(1, 6)
     end
 
+    -- I put these in for farming abyssea
     
-    send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad9 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad4 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad1 input /equip Main "Irradiance Blade";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
-    send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad7 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Cyclone" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad8 input /equip Main "Ceremonial Dagger"; input /equip Sub "Ceremonial Dagger"; input /ws "Energy Drain" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad9 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Red Lotus Blade" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad4 input /equip Main "Fermion Sword"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Blade" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad5 input /equip Main "Ash Club"; input /equip Sub "Ceremonial Dagger"; input /ws "Seraph Strike" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad6 input /equip Main "Iapetus"; input /ws "Raiden Thrust" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad1 input /equip Main "Irradiance Blade";input /ws "Freezebite" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad2 input /equip Main "Chatoyant Staff"; input /ws "Earth Crusher" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad3 input /equip Main "Chatoyant Staff"; input /ws "Sunburst" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad0 input /equip Main "Lost Sickle"; input /ws "Shadow of Death" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad. input /equip Main "Debahocho +1"; input /equip sub empty; input /ws "Blade: Ei" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad+ input /equip Main "Mutsunokami"; input /ws "Tachi: Jinpu" <t>;gs c set WeaponLock true;')
+    -- send_command('bind !numpad- input /equip Main "Mutsunokami"; input /ws "Tachi: Koki" <t>;gs c set WeaponLock true;')
    
 
     send_command('wait 3; input /lockstyleset 6')
@@ -394,34 +402,22 @@ function init_gear_sets()
          ammo="Aurgelmir Orb +1",
         head=gear.Empyrean_Head,
         body=gear.Artifact_Body,
-        hands=gear.Gleti_Hands,
-        legs=gear.Gleti_Legs,
+        hands=gear.Malignance_Hands, --5
+        legs=gear.Gleti_Legs, --8
         feet=gear.Relic_Feet,
         neck="Asn. Gorget +2",
         ear1="Sherida Earring",
         ear2="Skulker's Earring +2",
         ring1="Gere Ring",
-        ring2=gear.Lehko_Or_Chirich2,
-        back=gear.THF_TP_Cape,
+        ring2=gear.Moonlight_2, --5
+        back=gear.THF_TP_Cape, --10
         waist="Reiki Yotai", 
-    }
-
-    sets.engaged.ExtraHaste = set_combine(sets.engaged.DW, {
-        hands=gear.Adhemar_A_Hands,
-    })
+    } --28% PDT
 
     sets.engaged.Hybrid = {
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands, --5/5
-        feet=gear.Malignance_Feet, --4/4
-        ring2=gear.Moonlight_2, --5/5
-    }
-
-    sets.engaged.Hybrid.ExtraHaste = {
-        body=gear.Malignance_Body, --9/9
-        hands=gear.Malignance_Hands,
-        feet=gear.Empyrean_Feet,
-    }
+        legs=gear.Empyrean_Legs, --13
+        feet=gear.Empyrean_Feet, --4/4
+    } -- 28 + 17 = 45% PDT
 
     sets.engaged.HybridEvasion = {
         ammo="Yamarang",
@@ -433,7 +429,6 @@ function init_gear_sets()
         neck="Asn. Gorget +2",
         ring1="Vengeful Ring", 
         ring2="Ilabrat Ring", 
-        -- waist="Sveltesse Gouriz +1",
         waist="Reiki Yotai",
         ear1="Eabani Earring",
         ear2="Balder Earring +1",
@@ -442,8 +437,6 @@ function init_gear_sets()
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.Evasion = set_combine(sets.engaged, sets.engaged.HybridEvasion)
     sets.engaged.TH = set_combine(sets.engaged, sets.TreasureHunter)
-
-    sets.engaged.DT.ExtraHaste = set_combine(sets.engaged.ExtraHaste, sets.engaged.Hybrid.ExtraHaste)
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -566,7 +559,7 @@ end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
-    -- th_update(cmdParams, eventArgs)
+    th_update(cmdParams, eventArgs)
 end
 
 
@@ -613,6 +606,10 @@ end
 
 function customize_melee_set(meleeSet)
     check_weaponset()
+
+     if state.TreasureMode.value == 'Fulltime' then
+        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
+    end
 
     if state.Buff.Doom then
         meleeSet = set_combine(meleeSet, sets.buff.Doom)
@@ -668,33 +665,15 @@ function display_current_job_state(eventArgs)
     eventArgs.handled = true
 end
 
-function check_gear_haste()
-    if player.equipment.sub == "Centovente" then
-        classes.CustomMeleeGroups:append('ExtraHaste')
-    else
-        classes.CustomMeleeGroups:clear()
-    end
-end
-
 function job_self_command(cmdParams, eventArgs)
     if (cmdParams[1]:lower() == 'enchantment') then
         handle_enchantment_command(cmdParams)
         eventArgs.handled = true
     end
     gearinfo(cmdParams, eventArgs)
-
-    -- if (player.target ~= nil and player.target.distance < 5.0) then
-    --     if state.Buff.AM == false and player.tp == 3000 then
-    --         send_command("input /ws 'Rudra's Storm' <t>")
-    --     elseif state.Buff.AM == true and player.tp > 1000 then
-    --         send_command("input /ws 'Rudra's Storm' <t>")
-    --     end
-    -- end
 end
 
 function gearinfo(cmdParams, eventArgs)
-    -- send_command('input /lastsynth')
-    -- send_command('input /item "Pluton Box" <me>')
     if cmdParams[1] == 'gearinfo' then
         if type(tonumber(cmdParams[2])) == 'number' then
             if tonumber(cmdParams[2]) ~= DW_needed then

@@ -35,7 +35,7 @@ function job_setup()
 end
 
 function user_setup()
-    state.OffenseMode:options('Normal')
+    state.OffenseMode:options('Normal', 'PDL')
     state.HybridMode:options('Normal', 'DT')
     state.WeaponskillMode:options('Normal')
     state.CastingMode:options('Normal')
@@ -110,6 +110,9 @@ function user_setup()
     set_macro_page(1, 13)
 
     send_command('wait 3; input /lockstyleset 13')
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    moving = false
 end
 
 function user_unload()
@@ -194,7 +197,7 @@ function init_gear_sets()
     }
 
     sets.precast.WS['Blade: Shun'] = {
-        ammo="Coiste Bodhar",
+       ammo="Coiste Bodhar",
         head="Mpaca's Cap",
         body=gear.Malignance_Body,
         hands=gear.Nyame_Hands,
@@ -206,6 +209,22 @@ function init_gear_sets()
         ear2="Hattori Earring +1",
         ring1="Gere Ring",
         ring2=gear.Cornelia_Or_Regal,
+    }
+
+    sets.precast.WS['Blade: Shun'].PDL = {
+        ammo="Coiste Bodhar",
+        -- head="Ken. Jinpachi +1",
+        head=gear.Nyame_Head,
+        body=gear.Malignance_Body,
+        hands=gear.Malignance_Hands,
+        legs=gear.Mpaca_Legs,
+        feet=gear.Nyame_Feet,
+        neck="Ninja Nodowa +2",
+        waist="Fotia Belt",
+        ear1="Moonshade Earring",
+        ear2="Hattori Earring +1",
+        ring1="Gere Ring",
+        ring2=gear.Ephramad_Or_Regal,
         back=gear.NIN_DA_Cape,
     }
 
@@ -299,7 +318,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Lugra Earring +1",
         ring1="Gere Ring",
-        ring2=gear.Cornelia_Or_Epaminondas,
+        ring2=gear.Ephramad_Or_Epaminondas,
         waist="Orpheus's Sash",
         back=gear.NIN_WS_Cape,
     }
@@ -460,9 +479,9 @@ function init_gear_sets()
         ammo="Seki Shuriken",
         head=gear.Malignance_Head,
         neck="Ninja Nodowa +2",
-        ear1="Dedition Earring",
+        ear1="Telos Earring",
         ear2="Hattori Earring +1",
-        body=gear.Mpaca_Body,
+        body=gear.Empyrean_Body,
         hands=gear.Mpaca_Hands,
         ring1="Gere Ring",
         ring2=gear.Lehko_Or_Chirich2,
@@ -684,6 +703,10 @@ end
 
 function get_custom_wsmode(spell, action, spellMap)
     local wsmode
+    if state.OffenseMode.value == 'PDL' then
+        wsmode = (wsmode or '') .. 'PDL'
+    end
+
     return wsmode
 end
 

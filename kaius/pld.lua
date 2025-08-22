@@ -37,12 +37,12 @@ function user_setup()
     
     state.PhalanxMode = M(false, 'Equip Phalanx Gear')
     state.EquipShield = M(true, 'Equip Shield w/Defense')
-    state.WeaponSet = M{['description']='Weapon Set', 'Burtgang', 'Naegling'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Burtgang', 'Naegling', 'Excalibur'}
     state.WeaponLock = M(false, 'Weapon Lock')
 
-    gear.Artifact_Head = { name="Reverence Coronet +2" }
+    gear.Artifact_Head = { name="Reverence Coronet +3" }
     gear.Artifact_Body = { name="Reverence Surcoat +3" }
-    gear.Artifact_Hands = { name="Reverence Gauntlets +2" }
+    gear.Artifact_Hands = { name="Reverence Gauntlets +3" }
     gear.Artifact_Legs = { name="Reverence Breeches +2" }    
     gear.Artifact_Feet = { name="Reverence Leggings +3" }
 
@@ -85,18 +85,28 @@ function user_setup()
 
     include('Global-Binds.lua')
 
+
     if player.sub_job == 'BLU' then
         send_command('lua l azureSets')
         send_command('bind ^numpad7 gs c set WeaponSet Burtgang;input /macro set 1')
-        send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Naegling;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Excalibur;input /macro set 2')
         set_macro_page(1, 7)
     elseif player.sub_job == 'SCH' then
-        send_command('bind ^numpad7 gs c set WeaponSet Burtgang;input /macro set 2')
-        send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 2')
-        set_macro_page(2, 7)
+        send_command('bind ^numpad7 gs c set WeaponSet Burtgang;input /macro set 3')
+        send_command('bind ^numpad8 gs c set WeaponSet Naegling;input /macro set 4')
+        send_command('bind ^numpad9 gs c set WeaponSet Excalibur;input /macro set 4')
+        send_command('bind !- gs c scholar light')
+        send_command('bind != gs c scholar dark')
+        send_command('bind ^; gs c scholar speed')   
+        send_command('bind ^[ gs c scholar aoe')
+        send_command('bind !; gs c scholar cost')
+        send_command('bind ![ gs c scholar power')
+        set_macro_page(3, 7)
     else
         send_command('bind ^numpad7 gs c set WeaponSet Burtgang;input /macro set 1')
-        send_command('bind ^numpad9 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad8 gs c set WeaponSet Naegling;input /macro set 1')
+        send_command('bind ^numpad9 gs c set WeaponSet Excalibur;input /macro set 1')
         set_macro_page(1, 7)
     end
     
@@ -215,6 +225,17 @@ function init_gear_sets()
     sets.precast.WS['Sanguine Blade'] = {
         ear1="Friomisi Earring",
         ring1="Shiva Ring +1",
+    }
+
+      sets.midcast['Stoneskin'] = {
+        neck={name="Unmoving Collar +1", priority=200},
+        hands="Stone Mufflers",
+        body=gear.Empyrean_Body, -- SIRD 20
+        legs="Haven Hose", 
+        neck="Stone Gorget",
+        ear1="Earthcry Earring",
+        ear2="Chev. Earring +1",                             --11/00/00/05
+        back=gear.PLD_SIRD_Cape, -- SIRD 10
     }
 
     sets.midcast.Flash = {
@@ -352,7 +373,7 @@ function init_gear_sets()
         hands=gear.Sakpata_Hands,
         legs=gear.Sakpata_Legs,
         feet=gear.Nyame_Feet,
-        neck="Bathy Choker +1",
+        neck="Vim Torque +1",
         waist="Sailfi Belt +1",
         ear1="Dedition Earring",
         ear2="Telos Earring",
@@ -384,7 +405,7 @@ function init_gear_sets()
     sets.defense.MDT = {
         ammo="Staunch Tathlum +1",
         head=gear.Sakpata_Head,
-        body=gear.Sakpata_Body,
+        body=gear.Sakpata_Body, 
         hands=gear.Sakpata_Hands,
         legs=gear.Sakpata_Legs,
         feet=gear.Sakpata_Feet,
@@ -441,6 +462,7 @@ function init_gear_sets()
 
     sets.Burtgang = { main="Burtgang", sub="Srivatsa"}
     sets.Naegling = { main="Naegling", sub="Srivatsa"}
+    sets.Excalibur = { main="Excalibur", sub="Srivatsa"}
 end
 
 function job_midcast(spell, action, spellMap, eventArgs)
@@ -574,7 +596,10 @@ function display_current_job_state(eventArgs)
 end
 
 function job_self_command(cmdParams, eventArgs)
-    if (cmdParams[1]:lower() == 'enchantment') then
+    if cmdParams[1]:lower() == 'scholar' then
+        handle_strategems(cmdParams)
+        eventArgs.handled = true
+    elseif (cmdParams[1]:lower() == 'enchantment') then
         handle_enchantment_command(cmdParams)
         eventArgs.handled = true
     end

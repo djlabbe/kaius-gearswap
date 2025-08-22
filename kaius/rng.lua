@@ -128,7 +128,7 @@ function user_setup()
     gear.Artifact_Hands = { name="Orion Bracers +3" }
     gear.Artifact_Feet = { name="Orion Socks +3" }
 
-    gear.Relic_Head = { name="Arcadian Beret +3" }
+    gear.Relic_Head = { name="Arcadian Beret +4" }
     gear.Relic_Body = { name="Arcadian Jerkin +3" }
     gear.Relic_Legs = { name="Arcadian Braccae +3" }
     gear.Relic_Hands = { name="Arcadian Bracers +3" }

@@ -45,8 +45,8 @@ function user_setup()
     gear.Relic_Feet = { name= "Horos Toe shoes +3" }
 
     gear.Empyrean_Head = { name= "Maculele Tiara +3" }
-    gear.Empyrean_Body = { name= "Maculele Casaque +2" }
-    gear.Empyrean_Hands = { name= "Maculele Bangles +2" }
+    gear.Empyrean_Body = { name= "Maculele Casaque +3" }
+    gear.Empyrean_Hands = { name= "Maculele Bangles +3" }
     gear.Empyrean_Legs = { name= "Maculele Tights +3" }
     gear.Empyrean_Feet = { name= "Maculele Toe shoes +3" }
 

@@ -500,6 +500,7 @@ function init_gear_sets()
         hands="Regal Cuffs",
         ear1="Halasz Earring",
         ear2="Magnetic Earring",
+        ring1="Freke Ring",
         waist="Emphatikos Rope",
     })
 
@@ -672,7 +673,7 @@ function init_gear_sets()
     })
 
     sets.MagicBurst = {
-        main="Daybreak",
+        main="Bunzi's Rod",
         sub="Ammurapi Shield",
         ammo="Ghastly Tathlum +1",
         head=gear.Empyrean_Head,
@@ -696,7 +697,7 @@ function init_gear_sets()
     })
 
     sets.MagicBurst_Helix = {
-        main="Daybreak",
+        main="Bunzi's Rod",
         sub="Culminus",
         ammo="Ghastly Tathlum +1",
         head=gear.Empyrean_Head, 

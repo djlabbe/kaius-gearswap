@@ -165,7 +165,7 @@ function user_setup()
     gear.Artifact_Legs = { name= "Totemic Trousers +3" }
     gear.Artifact_Feet = { name= "Totemic Gaiters +3" }
 
-    gear.Relic_Head = { name= "Ankusa Helm +3" }
+    gear.Relic_Head = gear.Nyame_Head
     gear.Relic_Body = { name= "Ankusa Jackcoat +3" }
     gear.Relic_Hands = { name= "Ankusa Gloves +3" }
     gear.Relic_Legs = { name= "Ankusa Trousers +3" }
@@ -500,7 +500,7 @@ function init_gear_sets()
     -- AXE WSs --
     sets.precast.WS = {
         ammo="Aurgelmir Orb +1",
-        head=gear.Nyame_Head,
+        head=gear.Relic_Head,
         body=gear.Nyame_Body,
         hands=gear.Nyame_Hands,
         legs=gear.Nyame_Legs,

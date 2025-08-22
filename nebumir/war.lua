@@ -36,10 +36,10 @@ function user_setup()
     -- gear.Artifact_Head = { name= "Pummeler's Mask +1" }
     -- gear.Artifact_Body = { name= "Pummeler's Lorica +1" }
     -- gear.Artifact_Hands = { name= "Pummeler's Mufflers +1" }
-    gear.Artifact_Legs = { name= "Pummeler's Cuisses +3" }
-    gear.Artifact_Feet = { name= "Pummeler's Calligae +3" }
+    gear.Artifact_Legs = { name= "Pummeler's Cuisses +4" }
+    gear.Artifact_Feet = { name= "Pummeler's Calligae" }
 
-    gear.Relic_Head = { name= "Agoge Mask +3" }
+    gear.Relic_Head = { name= "Agoge Mask +4" }
     gear.Relic_Body = { name= "Agoge Lorica +3" }
     gear.Relic_Hands = { name= "Agoge Mufflers +3" }
     gear.Relic_Legs = { name= "Agoge Cuisses +3" }
@@ -161,10 +161,10 @@ function init_gear_sets()
 
     sets.engaged = {
         ammo="Coiste Bodhar", --3
-        head=gear.Empyrean_Head, --7
+        head=gear.Sakpata_Head,
         body=gear.Empyrean_Body,
         hands=gear.Sakpata_Hands, --6
-        legs=gear.Sakpata_Legs, --7
+        legs=gear.Artifact_Legs, --7
         feet=gear.Artifact_Feet, --9
         neck="Warrior's Bead Necklace +1", --7
         ear1="Schere Earring", --6

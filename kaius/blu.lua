@@ -218,7 +218,14 @@ function user_setup()
         set_macro_page(1, 16)
     end
     
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    Haste = 0
+    DW_needed = 0
+    DW = false
+    moving = false
+
     send_command('wait 3; input /lockstyleset 16')
+    
 end
 
 function user_unload()
@@ -1020,6 +1027,7 @@ end
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
+    update_combat_form()
     check_moving()
 end
 
@@ -1047,7 +1055,6 @@ function job_get_spell_map(spell, default_spell_map)
         end
     end
 end
-
 
 
 function get_custom_wsmode(spell, action, spellMap)
@@ -1117,12 +1124,15 @@ end
 
 
 function job_self_command(cmdParams, eventArgs)
+   
     if not midaction() then
         job_update()
     end
     if (cmdParams[1]:lower() == 'enchantment') then
-        handle_enchantment_command(cmdParams[2], eventArgs)
+        handle_enchantment_command(cmdParams)
+        eventArgs.handled = true
     end
+    gearinfo(cmdParams, eventArgs)
 end
 
 
@@ -1153,5 +1163,36 @@ function check_weaponset()
     equip(sets[state.WeaponSet.current])
     if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
        equip(sets.DefaultShield)
+    end
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+                DW_needed = 0
+                DW = false
+            end
+        end
+        if type(tonumber(cmdParams[3])) == 'number' then
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
+            end
+        end
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
     end
 end

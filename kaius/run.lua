@@ -112,19 +112,19 @@ function user_setup()
 
 
     if player.sub_job == 'SCH' then
+        
+    end
+
+    if player.sub_job == 'SCH' then
+        send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 2')
+        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 2')
+        send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 5')
         send_command('bind !- gs c scholar light')
         send_command('bind != gs c scholar dark')
-
         send_command('bind ^; gs c scholar speed')   
         send_command('bind ^[ gs c scholar aoe')
         send_command('bind !; gs c scholar cost')
         send_command('bind ![ gs c scholar power')
-    end
-
-    if player.sub_job == 'SCH' then
-        send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 3')
-        send_command('bind ^numpad8 gs c set WeaponSet Helheim;input /macro set 4')
-        send_command('bind ^numpad9 gs c set WeaponSet Lycurgos;input /macro set 5')
         set_macro_page(2, 22)
     elseif player.sub_job == 'BLU' then 
         send_command('bind ^numpad7 gs c set WeaponSet Epeolatry;input /macro set 1')
@@ -142,9 +142,6 @@ function user_setup()
     send_command('wait 3; input /lockstyleset 22')
 
     state.Auto_Kite = M(false, 'Auto_Kite')
-    Haste = 0
-    DW_needed = 0
-    DW = false
     moving = false
 end
 

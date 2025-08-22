@@ -47,14 +47,14 @@ function user_setup()
     -- gear.Artifact_Feet = { name= "Wakido Sune-Ate +3" }
 
     gear.Relic_Head = { name= "Sakonji Kabuto +3" }
-    gear.Relic_Body = { name= "Sakonji Domaru +3" }
+    gear.Relic_Body = { name= "Sakonji Domaru +4" }
     gear.Relic_Hands = { name= "Sakonji Kote +3" }
     gear.Relic_Legs = { name= "Sakonji Haidate +3" }
     gear.Relic_Feet = { name= "Sakonji Sune-Ate +3" }
 
-    gear.Empyrean_Head = { name= "Kasuga Kabuto +3" }
-    gear.Empyrean_Body = { name= "Kasuga Domaru +3" }
-    gear.Empyrean_Hands = { name= "Kasuga Kote +3" }
+    gear.Empyrean_Head = { name= "Kasuga Kabuto +2" }
+    gear.Empyrean_Body = { name= "Kasuga Domaru +2" }
+    gear.Empyrean_Hands = { name= "Kasuga Kote +2" }
     gear.Empyrean_Legs = { name= "Kasuga Haidate +3" }
     gear.Empyrean_Feet = { name= "Kasuga Sune-Ate +3" }
 
@@ -145,7 +145,7 @@ function init_gear_sets()
     sets.AeolianEdge = { main=gear.Malevolence_A }
 
     sets.engaged = {
-        ammo="Aurgelmir Orb +1",
+        ammo="Aurgelmir Orb",
         head=gear.Empyrean_Head,
         body=gear.Empyrean_Body,
         hands=gear.Tatenashi_Hands,
@@ -154,7 +154,7 @@ function init_gear_sets()
         neck="Sam. Nodowa +2",
         waist="Sweordfaetels +1",
         ear1="Dedition Earring",
-        ear2="Kasuga Earring +1",
+        ear2="Telos Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
         back=gear.SAM_TP_Cape,
@@ -336,8 +336,8 @@ function init_gear_sets()
 
     sets.precast.WS['Impulse Drive'] = {
         ammo="Knobkierrie",
-        head=gear.Mpaca_Head,
-        body=gear.Nyame_Body,
+        head=gear.Nyame_Head,
+        body=gear.Relic_Body,
         hands=gear.Empyrean_Hands,
         legs=gear.Nyame_Legs,
         feet=gear.Nyame_Feet,
@@ -394,14 +394,14 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head=gear.Artifact_Head,
-        body="Sacro Breastplate",
-        hands=gear.Mpaca_Hands,
-        legs=gear.Mpaca_Legs,
-        feet=gear.Mpaca_Feet,
+        head=gear.Empyrean_Head,
+        body="Kendatsuba Samue +1",
+        hands=gear.Nyame_Hands,
+        legs=gear.Nyame_Legs,
+        feet=gear.Nyame_Feet,
         neck="Warder's Charm +1",
         waist="Platinum Moogle Belt",
-        ear1="Arete Del Luna +1",
+        -- ear1="Arete Del Luna +1",
         ear2="Eabani Earring",
         ring1=gear.Chirich_1,
         ring2=gear.Chirich_2,
@@ -417,7 +417,7 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
     })
 
-    sets.idle.Town = sets.engaged.DT
+    sets.idle.Town = sets.engaged
 
    
     if (item_available("Shneddick Ring")) then

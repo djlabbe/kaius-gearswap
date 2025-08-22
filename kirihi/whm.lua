@@ -49,24 +49,24 @@ function user_setup()
     state.WeaponSet = M{['description']='Weapon Set', 'Maxentius', 'Yagrush' }
 
     gear.Artifact_Head = { name="Theophany Cap +2", priority=64 }
-    gear.Artifact_Body = { name="Theophany Bliaut +2", priority=91 }
+    gear.Artifact_Body = { name="Theophany Bliaut +4", priority=91 }
     gear.Artifact_Hands = { name="Theophany Mitts +4", priority=43 }
     gear.Artifact_Legs = { name="Theophany Pantaloons +4", priority=74 }
     gear.Artifact_Feet = { name="Theophany Duckbills +4", priority=74 }
 
-    gear.Relic_Head = { name="Piety Cap +3" }
-    gear.Relic_Body = { name="Piety Bliaut +3" }
-    gear.Relic_Hands = { name="Piety Mitts +3" }
+    gear.Relic_Head = { name="Piety Cap +4" }
+    gear.Relic_Body = { name="Piety Bliaut +4" }
+    gear.Relic_Hands = { name="Piety Mitts +4" }
     gear.Relic_Legs = { name="Piety Pantaloons +4" }
     gear.Relic_Feet = { name="Piety Duckbills +4" }
 
     gear.Empyrean_Head = { name="Ebers Cap +2", priority=64 }
-    gear.Empyrean_Body = { name="Ebers Bliaut +2", priority=127 }
+    gear.Empyrean_Body = { name="Ebers Bliaut +3", priority=127 }
     gear.Empyrean_Hands = { name="Ebers Mitts +2", priority=65 }
-    gear.Empyrean_Legs = { name="Ebers Pantaloons +2", priority=71 }
-    gear.Empyrean_Feet = { name="Ebers Duckbills +1", priority=71 }
+    gear.Empyrean_Legs = { name="Ebers Pantaloons +3", priority=71 }
+    gear.Empyrean_Feet = { name="Ebers Duckbills +2", priority=71 }
 
-    gear.WHM_Cure_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
+    gear.WHM_Cure_Cape = { name="Alaunus's Cape", augments={'MND+20','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Phys. dmg. taken-10%',}} --X
     gear.WHM_DW_Cape = { name="Alaunus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Phys. dmg. taken-10%',}}
 
     include('Global-Binds.lua')
@@ -511,7 +511,13 @@ function init_gear_sets()
     } --50 (11 Refresh)
 
 
-    sets.idle.Town = sets.idle
+    sets.idle.Town = set_combine(sets.idle, {
+        head=gear.Relic_Head,
+        body=gear.Relic_Body,
+        hands=gear.Relic_Hands,
+        legs=gear.Relic_Legs,
+        feet=gear.Relic_Feet
+    })
 
     sets.defense.PDT = set_combine(sets.idle, {
 

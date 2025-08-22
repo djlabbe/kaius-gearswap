@@ -185,10 +185,10 @@ function user_setup()
     
     gear.perp_staff = {name="Gridarvor"}
 
-    gear.Artifact_Head = { name="Convoker's Horn +2" }
+    gear.Artifact_Head = { name="Convoker's Horn +3" }
     gear.Artifact_Body = { name="Convoker's Doublet +3" }
     gear.Artifact_Hands = { name="Convoker's Bracers +2" }
-    gear.Artifact_Legs = { name="Convoker's Spats +2" }
+    gear.Artifact_Legs = { name="Convoker's Spats +3" }
     gear.Artifact_Feet = { name="Convoker's Pigaches +3" }
 
     gear.Relic_Head = { name="Glyphic Horn +3" }
@@ -198,7 +198,7 @@ function user_setup()
     gear.Relic_Feet = { name="Glyphic Pigaches +3" }
 
     gear.Empyrean_Head = { name="Beckoner's Horn +3" }
-    gear.Empyrean_Body = { name="Beckoner's Doublet +2" }
+    gear.Empyrean_Body = { name="Beckoner's Doublet +3" }
     gear.Empyrean_Hands = { name="Beckoner's Bracers +3" }
     gear.Empyrean_Legs = { name="Beckoner's Spats +3" }
     gear.Empyrean_Feet = { name="Beckoner's Pigaches +3"}
@@ -363,13 +363,13 @@ function init_gear_sets()
     sets.midcast.Cure = {
         main="Chatoyant Staff",
         sub="Khonsu",
-        head="Vanya Hood",
+        head=gear.Nyame_Head,
         body="Inyanga Jubbah +2",
         hands="Inyanga Dastanas +2",
         legs=gear.Artifact_Legs,
-        feet="Vanya Clogs",
+        feet=gear.Nyame_Feet,
         neck="Incanter's Torque",
-        ring1=gear.Stikini_1,
+        ring1="Defending Ring",
         ring2=gear.Stikini_2,
         ear1="Meili Earring",
         ear2="Mendicant's Earring",
@@ -503,17 +503,17 @@ function init_gear_sets()
         sub="Khonsu",
         ammo="Epitaph",
         head=gear.Empyrean_Head,
+        body=gear.Bunzi_Body,
+        hands="Asteria Mitts +1",
+        legs="Assid. Pants +1",
+        feet="Baayami Sabots +1",
         neck="Summoner's Collar +2",
         ear1="Evans Earring",
         ear2="Beckoner's Earring +2",
-        body=gear.Bunzi_Body,
-        hands="Asteria Mitts +1",
         ring1=gear.Gerubu_Or_Stikini1,
         ring2="Defending Ring",
         back=gear.SMN_Magic_Cape,
         waist="Lucidity Sash",
-        legs="Assid. Pants +1",
-        feet="Baayami Sabots +1",
     }
         
     sets.idle.Pet = {
@@ -524,15 +524,15 @@ function init_gear_sets()
         body=gear.Empyrean_Body, --7 --(6)
         hands="Asteria Mitts +1", --2
         legs="Assid. Pants +1", --3
-        feet=gear.Nyame_Feet,
+        feet="Baayami Sabots +1", --(4)
         neck="Summoner's Collar +2", --(5) 
-        ear1="Lugalbanda Earring",
+        ear1="C. Palug Earring",
         ear2="Beckoner's Earring +2", --(6)
         ring1=gear.Gerubu_Or_Stikini1,
         ring2="Defending Ring", --(10)
-        back=gear.SMN_Magic_Cape,
-        waist="Regal Belt", --(3)
-    } -- +14 Refresh, -16 Perp, -41% DT, +25 PetRegain 
+        back="Null Shawl",
+        waist="Lucidity Sash", --(3)
+    }
 
     sets.idle.PDT.Avatar = {
         main="Gridarvor",
@@ -575,11 +575,11 @@ function init_gear_sets()
         head=gear.Empyrean_Head,
     }
 
-    sets.idle.Avatar_Melee = {
-        hands=gear.Relic_Hands,
-        waist="Incarnation Sash",
-        legs=gear.Empyrean_Legs
-    }
+    -- sets.idle.Avatar_Melee = {
+    --     hands=gear.Relic_Hands,
+    --     waist="Incarnation Sash",
+    --     legs=gear.Empyrean_Legs
+    -- }
 
     sets.idle.Town = sets.idle
   

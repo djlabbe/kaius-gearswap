@@ -67,15 +67,15 @@ function user_setup()
 
     gear.Artifact_Head = { name= "Atrophy Chapeau +3" }
     gear.Artifact_Body = { name="Atrophy Tabard +3" }
-    gear.Artifact_Hands = { name="Atrophy Gloves +3" }
+    gear.Artifact_Hands = { name="Atrophy Gloves +4" }
     gear.Artifact_Legs = { name="Atrophy Tights +3" }
     gear.Artifact_Feet = { name="Atrophy Boots +3" }
 
-    gear.Relic_Head = { name="Vitiation Chapeau +3" }
-    gear.Relic_Body = { name="Vitiation Tabard +3" }
-    gear.Relic_Hands = { name="Vitiation Gloves +3" }
-    gear.Relic_Legs = { name="Vitiation Tights +3" }
-    gear.Relic_Feet = { name="Vitiation Boots +3" }
+    gear.Relic_Head = { name="Vitiation Chapeau +4" }
+    gear.Relic_Body = { name="Vitiation Tabard +4" }
+    gear.Relic_Hands = { name="Vitiation Gloves +4" }
+    gear.Relic_Legs = { name="Vitiation Tights +4" }
+    gear.Relic_Feet = { name="Vitiation Boots +4" }
 
     gear.Empyrean_Head = { name="Lethargy Chappel +3" }
     gear.Empyrean_Body = { name="Lethargy Sayon +3" }
@@ -493,12 +493,13 @@ function init_gear_sets()
 
     sets.midcast.SpellInterrupt = {
         ammo="Staunch Tathlum +1", --11
-        body="Ros. Jaseran +1", --25
+        body="Ros.w Jaseran +1", --25
         -- hands=gear.Chironic_WSD_Hands, --20
         legs="Carmine Cuisses +1", --20
         neck="Loricate Torque +1", --5
         ear1="Halasz Earring", --5
         ear2="Magnetic Earring", --8
+        ring1="Defending Ring",
         ring2="Evanescence Ring", --5
         waist="Rumination Sash", --10
     }
@@ -611,7 +612,8 @@ function init_gear_sets()
         main="Pukulatmuj +1",
         sub="Pukulatmuj",
         ammo="Staunch Tathlum +1",
-        head="Befouled Crown",
+        -- head="Befouled Crown",
+        head=gear.Carmine_D_Head,
         body=gear.Relic_Body,
         hands=gear.Relic_Hands,
         legs=gear.Artifact_Legs,

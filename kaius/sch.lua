@@ -623,7 +623,7 @@ function init_gear_sets()
         neck="Argute Stole +2",
         ear1="Malignance Earring",
         ear2="Regal Earring",
-        ring1="Freke Ring",
+        ring1=gear.Medada_Or_Freke,
         ring2="Metamor. Ring +1",
         back=gear.SCH_MAB_Cape,
         waist="Acuity Belt +1",
@@ -675,7 +675,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         body=gear.Empyrean_Body,
         hands=gear.Agwu_Hands,
-        ring1="Freke Ring",
+        ring1=gear.Medada_Or_Freke,
         ring2="Metamorph Ring +1",
         back=gear.SCH_MAB_Cape,
         waist="Acuity Belt +1",
@@ -701,7 +701,7 @@ function init_gear_sets()
         neck="Argute Stole +2",
         ear1="Malignance Earring",
         ear2="Arbatel Earring +1",
-        ring1="Freke Ring",
+        ring1=gear.Medada_Or_Freke,
         ring2="Mujin Band",
         back=gear.SCH_MAB_Cape,
         waist="Skrymir Cord +1",
@@ -751,6 +751,7 @@ function init_gear_sets()
     else
         sets.Kiting = { feet="Herald's Gaiters" }
     end
+
     sets.latent_refresh = { waist="Fucho-no-obi" }
 
     sets.engaged = sets.idle -- For normal idle refresh when engaging with trusts
@@ -781,7 +782,7 @@ function init_gear_sets()
     sets.buff['Alacrity'] = {feet=gear.Relic_Feet}
     sets.buff['Klimaform'] = {feet=gear.Empyrean_Feet}
 
-    sets.buff.FullSublimation = {
+    sets.buff.Sublimation = {
        head=gear.Artifact_Head, --4
        body=gear.Relic_Body, --5
        ear1="Savant's Earring", --1
@@ -976,7 +977,7 @@ end
 
 function customize_idle_set(idleSet)
     if state.Buff['Sublimation: Activated'] then
-        idleSet = set_combine(idleSet, sets.buff.FullSublimation)
+        idleSet = set_combine(idleSet, sets.buff.Sublimation)
     end
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
@@ -1030,7 +1031,6 @@ function display_current_job_state(eventArgs)
 end
 
 function job_self_command(cmdParams, eventArgs)
-    gearinfo(cmdParams, eventArgs)
     if (cmdParams[1]:lower() == 'enchantment') then
         handle_enchantment_command(cmdParams)
         eventArgs.handled = true
@@ -1048,6 +1048,7 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1]:lower() == 'barstatus' then
         send_command('@input /ma '..state.BarStatus.value..' <me>')
     end
+     gearinfo(cmdParams, eventArgs)
 end
 
 function gearinfo(cmdParams, eventArgs)
